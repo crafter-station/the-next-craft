@@ -71,16 +71,21 @@ Escala: hero ~clamp(3.5rem→7rem), h2 ~clamp(2rem→3.5rem). Labels mono upperc
 - **Idioma**: español, tono directo estilo Platanus ("solo cracks", "a construir").
 - **CTA**: "Postular →" (link `#` placeholder)
 
-## Estructura de la página (one-pager + organizers)
+## Estructura de la página (one-pager)
 
-1. Nav sticky (mono, brackets) — anchors a secciones
-2. Hero — nombre gigante, tagline, countdown vivo, CTA, prompt terminal
-3. `[01]` ¿Qué es? — manifiesto
-4. `[02]` TL;DR — grid de specs (fecha/lugar/formato/equipos)
-5. `[03]` Tracks — 3 cards
-6. `[04]` Agenda — timeline de 36h
-7. `[05]` Premios
-8. `[06]` Sponsors — Next (headline) + Crafter Station + partners
-9. `[07]` FAQ — accordion
-10. `[08]` Organizers — cards del equipo
-11. Footer — stats, links, coordenadas, prompt final
+1. Nav sticky (mono, brackets) — anchors a secciones; CTA "Postular →" en header
+2. Hero (`#hero`) — nombre gigante, tagline, countdown vivo, CTAs (Postular + Ver tracks), prompt terminal
+3. `[01]` ¿Qué es? (`#que-es`) — manifiesto
+4. `[02]` TL;DR (`#tldr`) — grid de specs (fecha/lugar/formato/equipos)
+5. `[03]` Tracks (`#tracks`) — 3 cards
+6. `[04]` Agenda (`#agenda`) — timeline de 36h
+7. `[05]` Premios (`#premios`)
+8. `[06]` Sponsors (`#sponsors`) — Next (headline) + Crafter Station + partners
+9. `[07]` FAQ (`#faq`) — accordion (Base UI)
+10. `[08]` Organizers (`#organizers`) — cards del equipo (2 reales + 4 placeholder)
+11. FinalCta (`#postular`) — bloque azul sólido, CTA "Postular ahora →" con link real a forms.crafterstation.com/the-next-craft
+12. Footer — stats, links, coordenadas, prompt final
+
+## CTA canónico
+
+El botón de postulación apunta a `https://forms.crafterstation.com/the-next-craft` (link real, no placeholder). El link `#postular` en nav y hero lleva al bloque FinalCta donde está ese botón.
