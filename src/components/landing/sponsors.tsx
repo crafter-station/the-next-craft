@@ -38,16 +38,16 @@ export function Sponsors() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col justify-between gap-8 px-10 py-12 h-full
+                className="flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
                            bg-[var(--paper-dim)] hover:bg-[var(--blue)]
                            transition-colors duration-150 no-underline"
               >
                 {/* Wordmark */}
                 <span
-                  className="font-sans font-extrabold leading-none tracking-tight
+                  className="font-sans font-extrabold leading-tight tracking-tight
                              text-[var(--blue)] group-hover:text-white
-                             transition-colors duration-150 select-none"
-                  style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                             transition-colors duration-150 select-none break-words"
+                  style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
                 >
                   {wordmark}
                 </span>

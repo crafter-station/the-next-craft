@@ -78,7 +78,7 @@ export function Countdown() {
 
   return (
     <div
-      className="flex items-stretch gap-0"
+      className="grid grid-cols-4 w-full max-w-sm sm:max-w-none sm:flex sm:items-stretch gap-0"
       aria-label="Cuenta regresiva al evento"
       role="timer"
     >
@@ -86,7 +86,7 @@ export function Countdown() {
         <div
           // biome-ignore lint/suspicious/noArrayIndexKey: static ordered list, index is stable
           key={i}
-          className="flex flex-col items-center justify-center border border-[var(--blue)] px-4 py-3 min-w-[72px]"
+          className="flex flex-col items-center justify-center border border-[var(--blue)] px-2 sm:px-4 py-3 sm:min-w-[72px]"
           style={{ borderRight: i < cells.length - 1 ? "none" : undefined }}
         >
           <span

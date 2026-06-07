@@ -23,7 +23,7 @@ export function Prizes() {
         {/* Main composition — asymmetric 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-0 border border-[var(--blue)]">
           {/* ── Bloque protagonista 2/3 ── */}
-          <div className="lg:w-2/3 bg-[var(--blue)] flex flex-col justify-between gap-8 p-10 lg:p-14">
+          <div className="lg:w-2/3 bg-[var(--blue)] flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14">
             {/* Prize amount — display gigantesco */}
             <div className="flex flex-col gap-4">
               <span

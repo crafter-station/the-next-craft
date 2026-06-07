@@ -42,12 +42,12 @@ export function Hero() {
         </div>
 
         {/* Specs — debajo del countdown para jerarquia correcta */}
-        <p className="section-label text-[var(--ink-dim)] reveal reveal-d4">
+        <p className="section-label text-[var(--ink-dim)] reveal reveal-d4 break-words max-w-full">
           24–26 JUL 2026 · LIMA, PERÚ · 150 HACKERS
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 pt-1 reveal reveal-d5">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-1 reveal reveal-d5">
           <a
             href="#postular"
             className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"

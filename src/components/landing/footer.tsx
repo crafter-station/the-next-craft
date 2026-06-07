@@ -31,7 +31,7 @@ export function Footer() {
   return (
     <footer className="bg-[var(--paper)] border-t border-[var(--blue)]">
       {/* ── Stats row ── */}
-      <div className="grid grid-cols-4 gap-px bg-[var(--blue)]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--blue)]">
         {STATS.map(({ value, unit }) => (
           <div
             key={unit}

@@ -112,7 +112,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
 
   /* Selection: azul Klein + texto blanco */

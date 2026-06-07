@@ -116,7 +116,7 @@ export function Schedule() {
                   {day.events.map((event) => (
                     <li
                       key={`${day.header}-${event.time}`}
-                      className="schedule-row group relative flex items-baseline gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
+                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
                     >
                       {/* Square node on the vertical line */}
                       <span

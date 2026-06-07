@@ -48,7 +48,7 @@ export function Tracks() {
 
         {/* Cards grid — gap-px + blue bg = shared 1px borders */}
         <ul
-          className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--blue)] list-none m-0 p-0"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--blue)] list-none m-0 p-0"
           aria-label="Tracks del hackathon"
         >
           {TRACKS.map(({ number, name, description, ref }) => (
