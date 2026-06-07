@@ -49,8 +49,8 @@ Contraste: cuerpo siempre `--text`/`--text-dim` (AA garantizado en B&N).
 - **Script**: `Borel` — SOLO "the next craft" (wordmark nav, hero, footer).
   Lowercase siempre, como el "hello." de Apple.
 - **Display**: `Silkscreen` 400/700 — titulares pixel PETSCII, uppercase.
-- **Cuerpo**: `Archivo` 400/500/600 — párrafos y UI.
-- **Mono**: `IBM Plex Mono` — líneas BASIC, datos, countdown, botones.
+- **Cuerpo y todo lo demás**: `IBM Plex Mono` — párrafos, líneas BASIC,
+  datos, countdown, botones. "Coded" pero legible; no hay sans humanista.
 
 Escala: titulares pixel ~clamp(1.5rem→2.75rem) (la pixel font se ve enorme;
 no necesita tamaños gigantes), script hero ~clamp(2.75rem→5.5rem). Labels
@@ -59,6 +59,8 @@ mono 11px tracking 0.18em.
 ## Motivos recurrentes
 
 - **READY.** con cursor `█` parpadeante (hero y footer). Sin boot header.
+- **Sin dividers**: nada de hairlines horizontales entre labels y contenido;
+  la separación es espacio en blanco. (Bordes de cards y footer sí.)
 - **Líneas BASIC como labels de sección**: `10 PRINT "MANIFIESTO"`,
   `20 PRINT "TL;DR"`, … `80 PRINT "ORGANIZERS"` (numeración 10–80, mono).
 - **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
@@ -95,8 +97,9 @@ mono 11px tracking 0.18em.
 ## Estructura de la página (one-pager)
 
 1. Nav sticky (wordmark script + links mono + CTA keycap)
-2. Hero (`#hero`) — set C64 3D de frente con el wordmark en pantalla,
-   tagline, READY.█, countdown, CTAs keycap (h1 sr-only)
+2. Hero (`#hero`) — set C64 3D de frente con el wordmark en pantalla
+   (negrita, centrado), READY.█, countdown, CTAs keycap (h1 sr-only;
+   sin tagline visible)
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
 5. `30` Tracks (`#tracks`) — 3 cards

@@ -80,7 +80,7 @@ export function Sponsors() {
         </div>
 
         {/* Sponsor CTA */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--line)]/40 pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)]">
           {"¿Quieres ser sponsor? →"}{" "}
           <a
             href="mailto:sponsors@crafterstation.com"

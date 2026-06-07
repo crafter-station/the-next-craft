@@ -1,13 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
+import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
-
-const archivo = Archivo({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
 
 const silkscreen = Silkscreen({
   variable: "--font-pixel",
@@ -85,7 +78,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${archivo.variable} ${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} h-full antialiased scroll-pt-20`}
+      className={`${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} h-full antialiased scroll-pt-20`}
     >
       <body className="min-h-full flex flex-col">
         <a
