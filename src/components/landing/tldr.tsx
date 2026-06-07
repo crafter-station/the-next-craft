@@ -1,3 +1,5 @@
+import { SectionHeader } from "./section-header";
+
 const SPECS = [
   {
     label: "FECHA",
@@ -31,35 +33,29 @@ const SPECS = [
   },
 ] as const;
 
-import { CornerMarks } from "./corner-marks";
-
 export function Tldr() {
   return (
     <section
       id="tldr"
-      className="relative px-6 md:px-12 lg:px-24 py-16 bg-[var(--paper-dim)]"
+      className="relative px-6 md:px-12 lg:px-24 py-16 bg-[var(--void)]"
     >
-      <CornerMarks />
-
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[02] — TL;DR</p>
+        <SectionHeader line="20" name="TL;DR" />
 
-        {/* Specs grid — gap-px + blue bg = shared 1px borders */}
+        {/* Specs grid — paneles boot */}
         <ul
-          className="grid grid-cols-2 md:grid-cols-3 gap-px bg-[var(--blue)] list-none m-0 p-0"
+          className="grid grid-cols-2 md:grid-cols-3 gap-3 list-none m-0 p-0"
           aria-label="Especificaciones del evento"
         >
           {SPECS.map(({ label, value, sub }) => (
-            <li
-              key={label}
-              className="bg-[var(--paper)] px-6 py-8 flex flex-col gap-3"
-            >
-              <p className="section-label text-[var(--blue)]">{label}</p>
+            <li key={label} className="panel px-6 py-7 flex flex-col gap-3">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
+                {label}
+              </p>
               <p
-                className="font-sans font-extrabold leading-none tracking-tight text-[var(--ink)] tabular-nums"
+                className="font-pixel font-bold leading-tight text-[var(--text)] tabular-nums"
                 style={{
-                  fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                  fontSize: "clamp(0.875rem, 1.8vw, 1.25rem)",
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
@@ -67,7 +63,7 @@ export function Tldr() {
               </p>
               {sub !== null && (
                 <p
-                  className="font-mono text-xs text-[var(--ink-dim)] tracking-wide tabular-nums"
+                  className="font-mono text-xs text-[var(--text-dim)] tracking-wide tabular-nums"
                   style={{ fontVariantNumeric: "tabular-nums" }}
                 >
                   {sub}

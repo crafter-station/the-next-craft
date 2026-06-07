@@ -1,45 +1,28 @@
-import { CornerMarks } from "./corner-marks";
+import { SectionHeader } from "./section-header";
 
 export function About() {
   return (
     <section
       id="que-es"
-      className="relative px-6 md:px-12 lg:px-24 py-32 lg:py-40 bg-[var(--paper)] overflow-hidden"
+      className="relative px-6 md:px-12 lg:px-24 py-24 lg:py-32 bg-[var(--void)] overflow-hidden"
     >
-      <CornerMarks />
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 relative scroll-reveal">
+        <SectionHeader line="10" name="MANIFIESTO" />
 
-      {/* Section number — watermark tecnico en fondo */}
-      <span
-        className="absolute right-0 top-1/2 -translate-y-1/2 font-mono font-bold leading-none select-none pointer-events-none text-[var(--blue)] translate-x-1/4"
-        style={{ fontSize: "clamp(12rem, 30vw, 22rem)", opacity: 0.04 }}
-        aria-hidden="true"
-      >
-        01
-      </span>
+        {/* Headline pixel PETSCII */}
+        <h2
+          className="pixel-heading"
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
+        >
+          No es un evento.
+          <br />
+          Es 36 horas de construir.
+        </h2>
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 relative scroll-reveal">
-        {/* Label + headline group — relacionados, gap pequeño */}
-        <div className="flex flex-col gap-4">
-          <p className="section-label">[01] — ¿QUÉ ES?</p>
-          {/* Display headline — rompe el contenedor en desktop */}
-          <h2
-            className="font-sans font-extrabold leading-none text-[var(--blue)] lg:-mr-24"
-            style={{
-              fontSize: "clamp(2rem, 6vw, 4.5rem)",
-              letterSpacing: "-0.03em",
-              marginLeft: "-0.03em",
-            }}
-          >
-            No es un evento.
-            <br />
-            Es 36 horas de construir.
-          </h2>
-        </div>
-
-        {/* Body — columna izquierda, deja aire derecha */}
-        <div className="flex flex-col gap-5 max-w-xl">
+        {/* Body */}
+        <div className="flex flex-col gap-5 max-w-2xl">
           <p
-            className="font-sans text-[var(--ink)] leading-relaxed"
+            className="font-sans text-[var(--text)] leading-[1.75]"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
             The Next Craft es el hackathon presencial de Crafter Station × Next
@@ -47,7 +30,7 @@ export function About() {
             que vienen a resolver problemas de verdad.
           </p>
           <p
-            className="font-sans text-[var(--ink)] leading-relaxed"
+            className="font-sans text-[var(--text)] leading-[1.75]"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
             La admisión es selectiva. No hay cupo para espectadores ni espacio
@@ -56,8 +39,8 @@ export function About() {
           </p>
         </div>
 
-        {/* Closing line */}
-        <p className="font-mono text-[var(--blue)] text-xs tracking-[0.05em] leading-[1.4] border-l-2 border-[var(--blue)] pl-4">
+        {/* Cierre — output de programa */}
+        <p className="font-mono text-sm text-[var(--lav-bright)] tracking-[0.05em] leading-[1.4] border-l-2 border-[var(--lav)] pl-4">
           &gt; solo cracks. solo producto.
         </p>
       </div>

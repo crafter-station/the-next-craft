@@ -1,5 +1,4 @@
 import { About } from "@/components/landing/about";
-import { BlueprintRuler } from "@/components/landing/blueprint-ruler";
 import { Faq } from "@/components/landing/faq";
 import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
@@ -52,7 +51,6 @@ export default function Home() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: structured data JSON-LD requires dangerouslySetInnerHTML
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlueprintRuler />
       <Nav />
       <main id="main-content">
         <Hero />
