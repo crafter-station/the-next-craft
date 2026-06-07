@@ -2,7 +2,6 @@ const STATS = [
   { value: "36", unit: "HORAS" },
   { value: "150", unit: "HACKERS" },
   { value: "$5,000", unit: "USD" },
-  { value: "1", unit: "FIN DE SEMANA" },
 ] as const;
 
 const EVENTO_LINKS = [
@@ -31,7 +30,7 @@ export function Footer() {
   return (
     <footer className="bg-[var(--paper)] border-t border-[var(--blue)]">
       {/* ── Stats row ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--blue)]">
+      <div className="grid grid-cols-3 gap-px bg-[var(--blue)]">
         {STATS.map(({ value, unit }) => (
           <div
             key={unit}

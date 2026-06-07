@@ -71,7 +71,7 @@ export function Sponsors() {
         {/* Tour partners */}
         <div className="flex flex-col gap-4">
           <p className="font-mono text-xs font-medium tracking-[0.15em] uppercase text-[var(--ink-dim)]">
-            TOUR PARTNERS
+            PARTNERS
           </p>
           <ul
             className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--blue)] list-none m-0 p-0"

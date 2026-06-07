@@ -43,9 +43,8 @@ export function About() {
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
             The Next Craft es el hackathon presencial de Crafter Station × Next
-            en Lima. Setenta y dos horas acotadas a treinta y seis de trabajo
-            real, en un solo lugar, con cien cincuenta hackers que vienen a
-            resolver problemas de verdad.
+            en Lima. 36 horas de trabajo real, en un solo lugar, con 150 hackers
+            que vienen a resolver problemas de verdad.
           </p>
           <p
             className="font-sans text-[var(--ink)] leading-relaxed"
