@@ -19,8 +19,10 @@ export function Hero() {
           {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
           <h1 className="sr-only">the next craft</h1>
 
-          {/* Set Commodore 64 de frente, "the next craft" en la pantalla */}
-          <div className="w-full reveal reveal-d1">
+          {/* Set Commodore 64 de frente, "the next craft" en la pantalla.
+              Full-bleed: escapa del max-w con márgenes negativos para que
+              el canvas no recorte el set. */}
+          <div className="w-screen relative reveal reveal-d1">
             <C64Model />
           </div>
 
