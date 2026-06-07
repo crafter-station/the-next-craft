@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { Countdown } from "./countdown";
 
 export function Hero() {
@@ -51,12 +49,12 @@ export function Hero() {
 
         {/* CTAs */}
         <div className="flex flex-wrap items-center gap-4 pt-2">
-          <Link
-            href="/postular"
+          <a
+            href="#postular"
             className="font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
           >
             Postular →
-          </Link>
+          </a>
           <a
             href="#tracks"
             className="font-mono font-semibold text-sm tracking-widest uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"

@@ -39,12 +39,12 @@ export function Nav() {
         </ul>
 
         {/* CTA */}
-        <Link
-          href="/postular"
+        <a
+          href="#postular"
           className="font-mono text-xs font-semibold tracking-widest uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
         >
           Postular →
-        </Link>
+        </a>
       </nav>
     </header>
   );

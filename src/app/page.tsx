@@ -1,5 +1,7 @@
 import { About } from "@/components/landing/about";
 import { Faq } from "@/components/landing/faq";
+import { FinalCta } from "@/components/landing/final-cta";
+import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
 import { Organizers } from "@/components/landing/organizers";
@@ -23,7 +25,9 @@ export default function Home() {
         <Sponsors />
         <Faq />
         <Organizers />
+        <FinalCta />
       </main>
+      <Footer />
     </>
   );
 }

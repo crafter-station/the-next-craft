@@ -138,6 +138,14 @@
   background-size: 48px 48px;
 }
 
+/* Variante inversa: líneas blancas ~10% sobre fondo azul sólido */
+.blueprint-grid-inverse {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 10%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 10%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
 /* Label de sección: monospace uppercase 12px */
 .section-label {
   font-family: var(--font-mono);
