@@ -16,9 +16,9 @@ export function Prizes() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Section label */}
-        <h2 className="section-label">[05] — PREMIOS</h2>
+        <p className="section-label">[05] — PREMIOS</p>
 
         {/* Main composition — asymmetric 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-0 border border-[var(--blue)]">
@@ -83,7 +83,7 @@ export function Prizes() {
         </div>
 
         {/* Footer note — full width */}
-        <p className="font-mono text-xs tracking-wide text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.4] text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
           El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
           obligatoria.
         </p>

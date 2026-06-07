@@ -37,12 +37,16 @@ export function Footer() {
             key={unit}
             className="bg-[var(--paper)] flex flex-col items-center justify-center gap-1 py-6 px-4"
           >
-            <span className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] tabular-nums text-2xl md:text-3xl lg:text-4xl">
+            <span
+              className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] tabular-nums"
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+                fontVariantNumeric: "tabular-nums",
+              }}
+            >
               {value}
             </span>
-            <span className="font-mono text-[10px] font-medium tracking-[0.15em] uppercase text-[var(--ink-dim)]">
-              {unit}
-            </span>
+            <span className="section-label text-[var(--ink-dim)]">{unit}</span>
           </div>
         ))}
       </div>
@@ -54,7 +58,7 @@ export function Footer() {
           <p className="font-mono text-sm font-medium text-[var(--blue)]">
             the-next-craft$
           </p>
-          <p className="font-mono text-xs text-[var(--ink-dim)] leading-relaxed">
+          <p className="font-mono text-xs text-[var(--ink-dim)] leading-[1.65]">
             Hackathon por
             <br />
             Crafter Station × Next
@@ -65,9 +69,7 @@ export function Footer() {
 
         {/* EVENTO */}
         <div className="flex flex-col gap-4">
-          <p className="font-mono text-[10px] font-medium tracking-[0.15em] uppercase text-[var(--blue)]">
-            EVENTO
-          </p>
+          <p className="section-label text-[var(--blue)]">EVENTO</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             {EVENTO_LINKS.map(({ label, href }) => (
               <li key={href}>
@@ -84,9 +86,7 @@ export function Footer() {
 
         {/* COMUNIDAD */}
         <div className="flex flex-col gap-4">
-          <p className="font-mono text-[10px] font-medium tracking-[0.15em] uppercase text-[var(--blue)]">
-            COMUNIDAD
-          </p>
+          <p className="section-label text-[var(--blue)]">COMUNIDAD</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             {COMUNIDAD_LINKS.map(({ label, href }) => (
               <li key={href}>
@@ -105,9 +105,7 @@ export function Footer() {
 
         {/* CONTACTO */}
         <div className="flex flex-col gap-4">
-          <p className="font-mono text-[10px] font-medium tracking-[0.15em] uppercase text-[var(--blue)]">
-            CONTACTO
-          </p>
+          <p className="section-label text-[var(--blue)]">CONTACTO</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             <li>
               <a

@@ -32,19 +32,23 @@ export function Tracks() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[03] — TRACKS</p>
-
-        {/* Section headline */}
-        <h2
-          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)]"
-          style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-        >
-          Tres frentes.
-          <br />
-          Un fin de semana.
-        </h2>
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
+        {/* Label + headline group */}
+        <div className="flex flex-col gap-3">
+          <p className="section-label">[03] — TRACKS</p>
+          <h2
+            className="font-sans font-extrabold leading-none text-[var(--blue)]"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              letterSpacing: "-0.03em",
+              marginLeft: "-0.02em",
+            }}
+          >
+            Tres frentes.
+            <br />
+            Un fin de semana.
+          </h2>
+        </div>
 
         {/* Cards grid — gap-px + blue bg = shared 1px borders */}
         <ul
@@ -68,7 +72,7 @@ export function Tracks() {
 
                 {/* Track name */}
                 <h3
-                  className="font-sans font-extrabold leading-none tracking-tight text-[var(--ink)] group-hover:text-white transition-colors duration-150"
+                  className="font-sans font-extrabold leading-tight tracking-tight text-[var(--ink)] group-hover:text-white transition-colors duration-150"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
                 >
                   {name}
@@ -77,7 +81,7 @@ export function Tracks() {
                 {/* Description */}
                 <p
                   className="font-sans text-[var(--ink-dim)] group-hover:text-white/80 leading-relaxed transition-colors duration-150"
-                  style={{ fontSize: "clamp(0.875rem, 1.25vw, 1rem)" }}
+                  style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
                 >
                   {description}
                 </p>
@@ -85,7 +89,7 @@ export function Tracks() {
 
               {/* Footer ref — referencia de plano, sin prompt de terminal */}
               <div className="border-t border-[var(--blue)] group-hover:border-white/30 px-6 py-4 transition-colors duration-150">
-                <p className="font-mono text-xs tracking-wide text-[var(--blue)] group-hover:text-white/60 transition-colors duration-150">
+                <p className="font-mono text-xs tracking-[0.12em] text-[var(--blue)] group-hover:text-white/60 transition-colors duration-150">
                   {ref}
                 </p>
               </div>

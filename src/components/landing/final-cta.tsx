@@ -9,16 +9,28 @@ export function FinalCta() {
       {/* Corner marks — white on blue */}
       <CornerMarks color="#ffffff" opacity={0.25} />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Terminal prompt */}
-        <p className="font-mono text-xs text-white/50">
+        <p className="font-mono text-xs leading-[1.4] text-white/50">
           the-next-craft$ submit --application
         </p>
 
         {/* Display headline */}
+        {/*
+          Hanging punctuation: text-indent negativo para colgar el ¿
+          de modo que la C alinee con el P de Postula.
+          La C de Construyes y la P de Postula son ambas letras de cuerpo recto;
+          el ¿ es más estrecho y flota óptico sin el indent.
+        */}
         <h2
-          className="font-sans font-extrabold leading-none tracking-tight text-white"
-          style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)" }}
+          className="font-sans font-extrabold leading-none text-white"
+          style={{
+            fontSize: "clamp(3rem, 8vw, 6.5rem)",
+            letterSpacing: "-0.04em",
+            marginLeft: "-0.04em",
+            textIndent: "-0.4em",
+            paddingLeft: "0.4em",
+          }}
         >
           ¿Construyes?
           <br />
@@ -36,13 +48,13 @@ export function FinalCta() {
             href="https://forms.crafterstation.com/the-next-craft"
             target="_blank"
             rel="noopener noreferrer"
-            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
           >
             Postular ahora <span className="cta-arrow">→</span>
           </a>
 
           {/* Fine print */}
-          <p className="font-mono text-xs text-white/50">
+          <p className="font-mono text-xs leading-[1.4] text-white/50">
             150 cupos. Admisión selectiva. Gratis.
           </p>
         </div>

@@ -61,7 +61,7 @@ export function Faq() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Section label */}
         <p className="section-label">[07] — FAQ</p>
 
@@ -89,7 +89,7 @@ export function Faq() {
                 `}
               >
                 <span className="flex items-baseline gap-3 min-w-0">
-                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.1em] text-[var(--blue)] select-none">
+                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--blue)] select-none">
                     {id}
                   </span>
                   <span className="leading-snug">{question}</span>
@@ -97,7 +97,7 @@ export function Faq() {
               </AccordionTrigger>
 
               <AccordionContent className="pb-0">
-                <p className="max-w-prose pb-6 text-[var(--ink-dim)] text-sm leading-relaxed pl-[calc(2ch+0.75rem)]">
+                <p className="max-w-prose pb-6 text-[var(--ink-dim)] text-sm leading-[1.65] pl-[calc(2ch+0.75rem)]">
                   {answer}
                 </p>
               </AccordionContent>

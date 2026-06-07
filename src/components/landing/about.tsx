@@ -17,22 +17,27 @@ export function About() {
         01
       </span>
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 relative scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[01] — ¿QUÉ ES?</p>
-
-        {/* Display headline — rompe el contenedor en desktop */}
-        <h2
-          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] lg:-mr-24"
-          style={{ fontSize: "clamp(2rem, 6vw, 4.5rem)" }}
-        >
-          No es un evento.
-          <br />
-          Es 36 horas de construir.
-        </h2>
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 relative scroll-reveal">
+        {/* Label + headline group — relacionados, gap pequeño */}
+        <div className="flex flex-col gap-4">
+          <p className="section-label">[01] — ¿QUÉ ES?</p>
+          {/* Display headline — rompe el contenedor en desktop */}
+          <h2
+            className="font-sans font-extrabold leading-none text-[var(--blue)] lg:-mr-24"
+            style={{
+              fontSize: "clamp(2rem, 6vw, 4.5rem)",
+              letterSpacing: "-0.03em",
+              marginLeft: "-0.03em",
+            }}
+          >
+            No es un evento.
+            <br />
+            Es 36 horas de construir.
+          </h2>
+        </div>
 
         {/* Body — columna izquierda, deja aire derecha */}
-        <div className="flex flex-col gap-6 max-w-xl">
+        <div className="flex flex-col gap-5 max-w-xl">
           <p
             className="font-sans text-[var(--ink)] leading-relaxed"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
@@ -53,7 +58,7 @@ export function About() {
         </div>
 
         {/* Closing line */}
-        <p className="font-mono text-[var(--blue)] text-sm border-l-2 border-[var(--blue)] pl-4">
+        <p className="font-mono text-[var(--blue)] text-xs tracking-[0.05em] leading-[1.4] border-l-2 border-[var(--blue)] pl-4">
           &gt; solo cracks. solo producto.
         </p>
       </div>

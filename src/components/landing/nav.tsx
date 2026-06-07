@@ -35,7 +35,10 @@ export function Nav() {
                 The brackets are part of the text content so they
                 inherit the color change naturally.
               */}
-              <a href={href} className="nav-link font-mono text-xs px-2 py-1">
+              <a
+                href={href}
+                className="nav-link font-mono text-xs leading-[1.4] px-2 py-1"
+              >
                 [{label}]
               </a>
             </li>
@@ -45,7 +48,7 @@ export function Nav() {
         {/* CTA */}
         <a
           href="#postular"
-          className="cta-btn font-mono text-xs font-semibold tracking-widest uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
+          className="cta-btn font-mono text-xs font-semibold tracking-[0.12em] uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
         >
           Postular <span className="cta-arrow">→</span>
         </a>

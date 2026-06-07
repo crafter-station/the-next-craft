@@ -112,7 +112,7 @@
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 
   /* Selection: azul Klein + texto blanco */
@@ -226,6 +226,7 @@
 .section-label {
   font-family: var(--font-mono);
   font-size: 12px;
+  line-height: 1.4;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;

@@ -81,26 +81,30 @@ export function Schedule() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[04] — AGENDA</p>
-
-        {/* Headline */}
-        <h2
-          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)]"
-          style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-        >
-          36 horas.
-          <br />
-          Cero relleno.
-        </h2>
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
+        {/* Label + headline group */}
+        <div className="flex flex-col gap-3">
+          <p className="section-label">[04] — AGENDA</p>
+          <h2
+            className="font-sans font-extrabold leading-none text-[var(--blue)]"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              letterSpacing: "-0.03em",
+              marginLeft: "-0.02em",
+            }}
+          >
+            36 horas.
+            <br />
+            Cero relleno.
+          </h2>
+        </div>
 
         {/* Timeline */}
         <div className="flex flex-col gap-10">
           {DAYS.map((day) => (
             <div key={day.header} className="flex flex-col gap-0">
               {/* Day header */}
-              <p className="font-mono text-xs font-bold tracking-widest text-[var(--blue)] uppercase mb-4 select-none">
+              <p className="font-mono text-xs font-bold tracking-[0.15em] text-[var(--blue)] uppercase mb-4 select-none">
                 {day.header}
               </p>
 
@@ -136,8 +140,8 @@ export function Schedule() {
                       <span
                         className={
                           event.highlight
-                            ? "font-sans text-sm font-bold text-[var(--blue)]"
-                            : "font-sans text-sm text-[var(--ink)]"
+                            ? "font-sans text-sm font-bold leading-snug text-[var(--blue)]"
+                            : "font-sans text-sm leading-snug text-[var(--ink)]"
                         }
                       >
                         {event.description}

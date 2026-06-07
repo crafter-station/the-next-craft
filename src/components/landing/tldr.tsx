@@ -41,9 +41,9 @@ export function Tldr() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Section label */}
-        <h2 className="section-label">[02] — TL;DR</h2>
+        <p className="section-label">[02] — TL;DR</p>
 
         {/* Specs grid — gap-px + blue bg = shared 1px borders */}
         <ul
@@ -57,13 +57,19 @@ export function Tldr() {
             >
               <p className="section-label text-[var(--blue)]">{label}</p>
               <p
-                className="font-sans font-extrabold leading-none tracking-tight text-[var(--ink)]"
-                style={{ fontSize: "clamp(1.25rem, 2.5vw, 2rem)" }}
+                className="font-sans font-extrabold leading-none tracking-tight text-[var(--ink)] tabular-nums"
+                style={{
+                  fontSize: "clamp(1.25rem, 2.5vw, 2rem)",
+                  fontVariantNumeric: "tabular-nums",
+                }}
               >
                 {value}
               </p>
               {sub !== null && (
-                <p className="font-mono text-[10px] text-[var(--ink-dim)] tracking-wide">
+                <p
+                  className="font-mono text-xs text-[var(--ink-dim)] tracking-wide tabular-nums"
+                  style={{ fontVariantNumeric: "tabular-nums" }}
+                >
                   {sub}
                 </p>
               )}

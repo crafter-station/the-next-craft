@@ -23,9 +23,9 @@ export function Sponsors() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Section label */}
-        <h2 className="section-label">[06] — SPONSORS</h2>
+        <p className="section-label">[06] — SPONSORS</p>
 
         {/* Headline sponsors — 2 large cells side by side */}
         <ul
@@ -44,10 +44,13 @@ export function Sponsors() {
               >
                 {/* Wordmark */}
                 <span
-                  className="font-sans font-extrabold leading-tight tracking-tight
+                  className="font-sans font-extrabold leading-none
                              text-[var(--blue)] group-hover:text-white
                              transition-colors duration-150 select-none break-words"
-                  style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
+                  style={{
+                    fontSize: "clamp(2rem, 5vw, 4.5rem)",
+                    letterSpacing: "-0.03em",
+                  }}
                 >
                   {wordmark}
                 </span>
@@ -80,9 +83,9 @@ export function Sponsors() {
                 className="bg-[var(--paper-dim)] px-6 py-8 flex flex-col gap-3"
               >
                 <span
-                  className="font-mono font-bold leading-none tracking-tight
+                  className="font-mono font-bold leading-none tracking-[0.05em]
                              text-[var(--blue)] select-none"
-                  style={{ fontSize: "clamp(1rem, 2vw, 1.5rem)" }}
+                  style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}
                 >
                   {name}
                 </span>
@@ -92,7 +95,7 @@ export function Sponsors() {
         </div>
 
         {/* Sponsor CTA */}
-        <p className="font-mono text-xs tracking-wide text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.4] text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
           {"¿Quieres ser sponsor? →"}{" "}
           <a
             href="mailto:sponsors@crafterstation.com"

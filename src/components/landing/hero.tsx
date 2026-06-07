@@ -9,7 +9,7 @@ export function Hero() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-6">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-5">
         {/* Terminal prompt — first to appear */}
         <p className="font-mono text-xs text-[var(--ink-dim)] reveal reveal-d0">
           the-next-craft$ init --lima --36h
@@ -20,8 +20,12 @@ export function Hero() {
 
         {/* Hero name */}
         <h1
-          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] reveal reveal-d1"
-          style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}
+          className="font-sans font-extrabold leading-none text-[var(--blue)] reveal reveal-d1"
+          style={{
+            fontSize: "clamp(3.5rem, 9vw, 7rem)",
+            letterSpacing: "-0.04em",
+            marginLeft: "-0.04em",
+          }}
         >
           THE NEXT
           <br />
@@ -30,7 +34,7 @@ export function Hero() {
 
         {/* Tagline */}
         <p
-          className="font-sans font-medium text-[var(--ink)] reveal reveal-d2"
+          className="font-sans font-medium text-[var(--ink)] leading-[1.3] reveal reveal-d2"
           style={{ fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)" }}
         >
           De cero a producto en 36 horas.
@@ -50,13 +54,13 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-1 reveal reveal-d5">
           <a
             href="#postular"
-            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
           >
             Postular <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
-            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"
           >
             Ver tracks <span className="cta-arrow">↓</span>
           </a>

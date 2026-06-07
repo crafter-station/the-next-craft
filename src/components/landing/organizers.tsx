@@ -63,19 +63,24 @@ export function Organizers() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[08] — ORGANIZERS</p>
-
-        {/* Section headline */}
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
+        {/* Label + headline + subtext group */}
         <div className="flex flex-col gap-3">
+          <p className="section-label">[08] — ORGANIZERS</p>
           <h2
-            className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)]"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+            className="font-sans font-extrabold leading-none text-[var(--blue)]"
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              letterSpacing: "-0.03em",
+              marginLeft: "-0.02em",
+            }}
           >
             La gente detrás del plano.
           </h2>
-          <p className="font-sans text-[var(--ink-dim)] leading-relaxed max-w-xl">
+          <p
+            className="font-sans text-[var(--ink-dim)] leading-[1.65] max-w-xl mt-1"
+            style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
+          >
             El equipo de Crafter Station y Next que hace que las 36 horas
             funcionen.
           </p>
@@ -152,7 +157,7 @@ export function Organizers() {
         </ul>
 
         {/* Join CTA */}
-        <p className="font-mono text-xs tracking-wide text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.4] text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
           {"¿Quieres ayudar a organizarlo? →"}{" "}
           <a
             href="mailto:hola@crafterstation.com"
