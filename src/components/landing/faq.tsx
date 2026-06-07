@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { CornerMarks } from "./corner-marks";
+import { SectionHeader } from "./section-header";
 
 const FAQS = [
   {
@@ -57,13 +57,10 @@ export function Faq() {
   return (
     <section
       id="faq"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper)]"
+      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
-      <CornerMarks />
-
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[07] — FAQ</p>
+        <SectionHeader line="70" name="FAQ" />
 
         {/* Accordion */}
         <Accordion className="w-full" defaultValue={[]}>
@@ -71,27 +68,27 @@ export function Faq() {
             <AccordionItem
               key={id}
               value={id}
-              className="border-b border-[var(--blue)] border-t-0 border-l-0 border-r-0 first:border-t first:border-[var(--blue)]"
+              className="border-b border-[var(--lav)]/35 border-t-0 border-l-0 border-r-0 first:border-t first:border-[var(--lav)]/35"
             >
               <AccordionTrigger
                 className={`
                   group/faq-trigger
                   w-full flex items-center justify-between gap-4
                   py-5 px-0
-                  font-mono text-sm font-medium text-left
-                  text-[var(--ink)]
-                  hover:no-underline hover:text-[var(--blue)]
+                  font-sans text-sm font-medium text-left
+                  text-[var(--text)]
+                  hover:no-underline hover:text-[var(--lav-bright)]
                   focus-visible:ring-0 focus-visible:border-transparent
-                  focus-visible:text-[var(--blue)]
-                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--blue-bright)] focus-visible:outline-offset-2
+                  focus-visible:text-[var(--lav-bright)]
+                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--lav-bright)] focus-visible:outline-offset-2
                   transition-colors duration-150
                   rounded-none border-none bg-transparent
-                  [&_[data-slot=accordion-trigger-icon]]:text-[var(--blue)]
+                  [&_[data-slot=accordion-trigger-icon]]:text-[var(--lav-bright)]
                   [&_[data-slot=accordion-trigger-icon]]:shrink-0
                 `}
               >
                 <span className="flex items-baseline gap-3 min-w-0">
-                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--blue)] select-none">
+                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--lav-bright)] select-none">
                     {id}
                   </span>
                   <span className="leading-snug">{question}</span>
@@ -99,7 +96,7 @@ export function Faq() {
               </AccordionTrigger>
 
               <AccordionContent className="pb-0">
-                <p className="max-w-prose pb-6 text-[var(--ink-dim)] text-sm leading-[1.65] pl-[calc(2ch+0.75rem)]">
+                <p className="max-w-prose pb-6 text-[var(--text-dim)] text-sm leading-[1.65] pl-[calc(2ch+0.75rem)]">
                   {answer}
                 </p>
               </AccordionContent>

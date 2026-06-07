@@ -1,5 +1,3 @@
-import { CornerMarks } from "./corner-marks";
-
 // Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md)
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "51999999999";
@@ -11,62 +9,56 @@ export function FinalCta() {
   return (
     <section
       id="postular"
-      className="relative blueprint-grid-inverse px-6 md:px-12 lg:px-24 py-24 bg-[var(--blue)]"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-24 py-16 bg-[var(--void)]"
     >
-      {/* Corner marks — white on blue */}
-      <CornerMarks color="#ffffff" opacity={0.25} />
-
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Terminal prompt */}
-        <p
-          className="font-mono text-xs leading-[1.4] text-white/70"
+      {/* Pantalla C64 final */}
+      <div className="crt-frame relative mx-auto max-w-6xl overflow-hidden">
+        <div
+          className="scanlines absolute inset-0 pointer-events-none z-10"
           aria-hidden="true"
-        >
-          the-next-craft$ submit --application
-        </p>
+        />
 
-        {/* Display headline */}
-        {/*
-          Hanging punctuation: text-indent negativo para colgar el ¿
-          de modo que la C alinee con el P de Postula.
-          La C de Construyes y la P de Postula son ambas letras de cuerpo recto;
-          el ¿ es más estrecho y flota óptico sin el indent.
-        */}
-        <h2
-          className="font-sans font-extrabold leading-none text-white"
-          style={{
-            fontSize: "clamp(3rem, 8vw, 6.5rem)",
-            letterSpacing: "-0.04em",
-            marginLeft: "-0.04em",
-            textIndent: "-0.4em",
-            paddingLeft: "0.4em",
-          }}
-        >
-          ¿Construyes?
-          <br />
-          Postula.
-        </h2>
-
-        {/* Deadline */}
-        <p className="font-mono text-sm font-medium tracking-[0.15em] uppercase text-white/70">
-          DEADLINE: 10 JUL 2026 · 23:59 GMT-5
-        </p>
-
-        {/* CTA button */}
-        <div className="flex flex-col items-start gap-4 pt-2">
-          <a
-            href={WA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
+        <div className="relative flex flex-col gap-7 px-6 py-12 md:px-12 md:py-16 scroll-reveal">
+          {/* Comando de cierre */}
+          <p
+            className="font-mono text-sm leading-[1.4] text-[var(--lav-bright)]"
+            aria-hidden="true"
           >
-            Postular por WhatsApp <span className="cta-arrow">→</span>
-          </a>
-
-          {/* Fine print */}
-          <p className="font-mono text-xs leading-[1.4] text-white/70">
-            150 cupos. Admisión selectiva. Gratis. 7 preguntas, 90 segundos.
+            RUN POSTULAR
+            <span className="cursor-blink">█</span>
           </p>
+
+          {/* Headline pixel */}
+          <h2
+            className="pixel-heading"
+            style={{ fontSize: "clamp(1.75rem, 5vw, 3.5rem)" }}
+          >
+            ¿Construyes?
+            <br />
+            Postula.
+          </h2>
+
+          {/* Deadline */}
+          <p className="font-mono text-sm font-medium tracking-[0.15em] uppercase text-[var(--text-dim)]">
+            DEADLINE: 10 JUL 2026 · 23:59 GMT-5
+          </p>
+
+          {/* CTA — keycap */}
+          <div className="flex flex-col items-start gap-4 pt-1">
+            <a
+              href={WA_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-8 py-4 transition-colors duration-150"
+            >
+              Postular por WhatsApp <span className="cta-arrow">→</span>
+            </a>
+
+            {/* Fine print */}
+            <p className="font-mono text-xs leading-[1.5] text-[var(--text-dim)]">
+              150 cupos. Admisión selectiva. Gratis. 7 preguntas, 90 segundos.
+            </p>
+          </div>
         </div>
       </div>
     </section>

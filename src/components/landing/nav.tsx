@@ -1,27 +1,27 @@
 import Link from "next/link";
 
 const NAV_LINKS = [
-  { label: "qué es", href: "#que-es" },
-  { label: "tracks", href: "#tracks" },
-  { label: "agenda", href: "#agenda" },
-  { label: "premios", href: "#premios" },
-  { label: "faq", href: "#faq" },
-  { label: "organizers", href: "#organizers" },
+  { label: "Qué es", href: "#que-es" },
+  { label: "Tracks", href: "#tracks" },
+  { label: "Agenda", href: "#agenda" },
+  { label: "Premios", href: "#premios" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Organizers", href: "#organizers" },
 ] as const;
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--blue)]">
+    <header className="sticky top-0 z-50 bg-[var(--void)]/95 backdrop-blur-[2px] border-b border-[var(--lav)]/40">
       <nav
-        className="mx-auto max-w-7xl px-6 md:px-12 h-14 flex items-center justify-between"
+        className="mx-auto max-w-7xl px-6 md:px-12 h-14 flex items-center justify-between gap-4"
         aria-label="Navegación principal"
       >
-        {/* Wordmark */}
+        {/* Wordmark — script estilo "hello." */}
         <Link
           href="/"
-          className="font-mono text-sm font-medium text-[var(--blue)] hover:text-[var(--blue-bright)] transition-colors duration-150 shrink-0"
+          className="font-script text-base leading-none text-[var(--lav-bright)] hover:text-[var(--text)] transition-colors duration-150 shrink-0 pt-2"
         >
-          the-next-craft$
+          the next craft
         </Link>
 
         {/* Links centro — ocultos en mobile */}
@@ -29,26 +29,23 @@ export function Nav() {
           {NAV_LINKS.map(({ label, href }) => (
             <li key={href}>
               {/*
-                nav-link applies:
-                  - color transition to --blue-bright on hover
-                  - 1px underline that scaleX(0→1) from left on hover
-                The brackets are part of the text content so they
-                inherit the color change naturally.
+                nav-link: color → lavanda bright en hover + subrayado
+                1px que crece de izquierda a derecha (scaleX).
               */}
               <a
                 href={href}
-                className="nav-link font-mono text-xs leading-[1.4] px-2 py-1"
+                className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2 py-1"
               >
-                [{label}]
+                {label}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* CTA */}
+        {/* CTA — keycap beige */}
         <a
           href="#postular"
-          className="cta-btn font-mono text-xs font-semibold tracking-[0.12em] uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
+          className="cta-btn keycap font-mono text-xs font-semibold tracking-[0.12em] uppercase px-4 py-2 transition-colors duration-150 shrink-0"
         >
           Postular <span className="cta-arrow">→</span>
         </a>

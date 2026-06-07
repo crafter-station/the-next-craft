@@ -1,3 +1,5 @@
+import { SectionHeader } from "./section-header";
+
 const PERKS = [
   "Créditos de Vercel para desplegar",
   "Créditos de API de Anthropic",
@@ -6,30 +8,31 @@ const PERKS = [
   "Mentorías durante las 36 horas",
 ] as const;
 
-import { CornerMarks } from "./corner-marks";
-
 export function Prizes() {
   return (
     <section
       id="premios"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper)]"
+      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
-      <CornerMarks />
-
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Section label */}
-        <p className="section-label">[05] — PREMIOS</p>
+        <SectionHeader line="50" name="PREMIOS" />
 
-        {/* Main composition — asymmetric 2/3 + 1/3 */}
-        <div className="flex flex-col lg:flex-row gap-0 border border-[var(--blue)]">
-          {/* ── Bloque protagonista 2/3 ── */}
-          <div className="lg:w-2/3 bg-[var(--blue)] flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14">
-            {/* Prize amount — display gigantesco */}
-            <div className="flex flex-col gap-4">
+        {/* Composición asimétrica 2/3 + 1/3 */}
+        <div className="flex flex-col lg:flex-row gap-3">
+          {/* ── Bloque protagonista: pantalla boot encendida ── */}
+          <div className="relative lg:w-2/3 bg-[var(--boot)] border border-[var(--lav)] rounded-xl flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14 overflow-hidden">
+            {/* Scanlines del monitor */}
+            <div
+              className="scanlines absolute inset-0 pointer-events-none"
+              aria-hidden="true"
+            />
+
+            {/* Cifra pixel gigante */}
+            <div className="relative flex flex-col gap-4">
               <span
-                className="font-sans font-extrabold leading-none tracking-tighter text-white select-none tabular-nums"
+                className="font-pixel font-bold leading-none text-[var(--text)] select-none tabular-nums"
                 style={{
-                  fontSize: "clamp(4rem, 10vw, 8rem)",
+                  fontSize: "clamp(2.5rem, 7vw, 5.5rem)",
                   fontVariantNumeric: "tabular-nums",
                 }}
                 aria-hidden="true"
@@ -37,22 +40,25 @@ export function Prizes() {
                 $5,000
               </span>
               <span className="sr-only">Cinco mil dólares</span>
-              <p className="font-mono text-xs font-medium tracking-[0.15em] uppercase text-white/70">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
                 USD AL EQUIPO GANADOR
               </p>
             </div>
 
-            {/* Terminal hint */}
-            <p className="font-mono text-sm text-white/70" aria-hidden="true">
-              {">"} transferencia directa. sin vueltas.
+            {/* Output de programa */}
+            <p
+              className="relative font-mono text-sm text-[var(--text)]/80"
+              aria-hidden="true"
+            >
+              &gt; transferencia directa. sin vueltas.
             </p>
           </div>
 
-          {/* ── Columna secundaria 1/3 ── */}
-          <div className="lg:w-1/3 flex flex-col border-t lg:border-t-0 lg:border-l border-[var(--blue)]">
+          {/* ── Columna secundaria 1/3: perks ── */}
+          <div className="lg:w-1/3 panel flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="px-8 py-6 border-b border-[var(--blue)]">
-              <p className="font-mono text-xs font-medium tracking-[0.15em] uppercase text-[var(--blue)]">
+            <div className="px-7 py-5 border-b border-[var(--lav)]/40">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
                 PARA TODOS LOS QUE ENTRAN
               </p>
             </div>
@@ -65,15 +71,15 @@ export function Prizes() {
               {PERKS.map((perk) => (
                 <li
                   key={perk}
-                  className="flex items-start gap-3 px-8 py-4 border-b border-[var(--blue)] last:border-b-0"
+                  className="flex items-start gap-3 px-7 py-4 border-b border-[var(--lav)]/25 last:border-b-0"
                 >
                   <span
-                    className="font-mono text-sm text-[var(--blue)] shrink-0 mt-0.5"
+                    className="font-mono text-sm text-[var(--lav-bright)] shrink-0 mt-0.5"
                     aria-hidden="true"
                   >
                     →
                   </span>
-                  <span className="font-sans text-sm text-[var(--ink)] leading-snug">
+                  <span className="font-sans text-sm text-[var(--text)] leading-snug">
                     {perk}
                   </span>
                 </li>
@@ -82,8 +88,8 @@ export function Prizes() {
           </div>
         </div>
 
-        {/* Footer note — full width */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.4] text-[var(--ink-dim)] border-t border-[var(--blue)] pt-4">
+        {/* Nota del jurado */}
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--lav)]/40 pt-4">
           El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
           obligatoria.
         </p>

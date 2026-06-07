@@ -1,3 +1,5 @@
+import { SectionHeader } from "./section-header";
+
 type Event = {
   time: string;
   description: string;
@@ -12,7 +14,7 @@ type Day = {
 
 const DAYS: Day[] = [
   {
-    header: "── VIE 24 JUL ──",
+    header: "VIE 24 JUL",
     events: [
       { time: "17:00", description: "Registro y acreditación" },
       {
@@ -20,12 +22,12 @@ const DAYS: Day[] = [
         description: "Kickoff — reglas y formación de equipos",
         highlight: true,
       },
-      { time: "19:00", description: "Empieza el hacking" },
+      { time: "19:00", description: "Empieza el hacking", highlight: true },
       { time: "21:00", description: "Cena" },
     ],
   },
   {
-    header: "── SÁB 25 JUL ──",
+    header: "SÁB 25 JUL",
     events: [
       { time: "09:00", description: "Desayuno" },
       {
@@ -43,7 +45,7 @@ const DAYS: Day[] = [
     ],
   },
   {
-    header: "── DOM 26 JUL ──",
+    header: "DOM 26 JUL",
     events: [
       {
         time: "07:00",
@@ -71,48 +73,37 @@ const DAYS: Day[] = [
   },
 ] as const;
 
-import { CornerMarks } from "./corner-marks";
-
 export function Schedule() {
   return (
     <section
       id="agenda"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper-dim)]"
+      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
-      <CornerMarks />
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
+        <SectionHeader line="40" name="AGENDA" />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Label + headline group */}
-        <div className="flex flex-col gap-3">
-          <p className="section-label">[04] — AGENDA</p>
-          <h2
-            className="font-sans font-extrabold leading-none text-[var(--blue)]"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              letterSpacing: "-0.03em",
-              marginLeft: "-0.02em",
-            }}
-          >
-            36 horas.
-            <br />
-            Cero relleno.
-          </h2>
-        </div>
+        <h2
+          className="pixel-heading"
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
+        >
+          36 horas.
+          <br />
+          Cero relleno.
+        </h2>
 
         {/* Timeline */}
         <div className="flex flex-col gap-10">
           {DAYS.map((day) => (
             <div key={day.header} className="flex flex-col gap-0">
-              {/* Day header */}
-              <p className="font-mono text-xs font-bold tracking-[0.15em] text-[var(--blue)] uppercase mb-4 select-none">
-                {day.header}
+              {/* Day header — pixel */}
+              <p className="font-pixel text-xs font-bold tracking-[0.04em] text-[var(--lav-bright)] uppercase mb-4 select-none">
+                ── {day.header} ──
               </p>
 
-              {/* Events — vertical line via left border on the inner wrapper */}
+              {/* Events — línea vertical lavanda */}
               <div className="relative">
-                {/* Vertical 1px blue line */}
                 <div
-                  className="absolute top-0 bottom-0 left-0 w-px bg-[var(--blue)]"
+                  className="absolute top-0 bottom-0 left-0 w-px bg-[var(--lav)]"
                   aria-hidden="true"
                 />
 
@@ -120,35 +111,35 @@ export function Schedule() {
                   {day.events.map((event) => (
                     <li
                       key={`${day.header}-${event.time}`}
-                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
+                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 rounded-r-lg hover:bg-[var(--boot-dim)] transition-colors duration-100"
                     >
-                      {/* Square node on the vertical line */}
+                      {/* Nodo cuadrado pixel en la línea */}
                       <span
-                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--blue)] shrink-0"
+                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--lav-bright)] shrink-0"
                         aria-hidden="true"
                       />
 
-                      {/* Time — mono tabular-nums; weight increases on row hover via .schedule-time */}
+                      {/* Hora — mono tabular */}
                       <span
-                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--blue)] shrink-0 w-12"
+                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--lav-bright)] shrink-0 w-12"
                         style={{ fontVariantNumeric: "tabular-nums" }}
                       >
                         {event.time}
                       </span>
 
-                      {/* Description */}
+                      {/* Descripción */}
                       <span
                         className={
                           event.highlight
-                            ? "font-sans text-sm font-bold leading-snug text-[var(--blue)]"
-                            : "font-sans text-sm leading-snug text-[var(--ink)]"
+                            ? "font-sans text-sm font-semibold leading-snug text-[var(--text)]"
+                            : "font-sans text-sm leading-snug text-[var(--text-dim)]"
                         }
                       >
                         {event.description}
                         {event.mono && (
                           <>
                             {" "}
-                            <code className="font-mono text-xs text-[var(--blue)] bg-[var(--blue-grid)] px-1 py-0.5">
+                            <code className="font-mono text-xs text-[var(--lav-bright)] bg-[var(--boot-dim)] border border-[var(--lav)]/40 rounded px-1 py-0.5">
                               {event.mono}
                             </code>
                           </>

@@ -28,36 +28,38 @@ const COMUNIDAD_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--paper)] border-t border-[var(--blue)]">
+    <footer className="bg-[var(--void)] border-t border-[var(--lav)]/40">
       {/* ── Stats row ── */}
-      <div className="grid grid-cols-3 gap-px bg-[var(--blue)]">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 pt-10 grid grid-cols-3 gap-3">
         {STATS.map(({ value, unit }) => (
           <div
             key={unit}
-            className="bg-[var(--paper)] flex flex-col items-center justify-center gap-1 py-6 px-4"
+            className="panel flex flex-col items-center justify-center gap-2 py-6 px-4"
           >
             <span
-              className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] tabular-nums"
+              className="font-pixel font-bold leading-none text-[var(--text)] tabular-nums"
               style={{
-                fontSize: "clamp(1.5rem, 3vw, 2.5rem)",
+                fontSize: "clamp(1.125rem, 2.5vw, 1.75rem)",
                 fontVariantNumeric: "tabular-nums",
               }}
             >
               {value}
             </span>
-            <span className="section-label text-[var(--ink-dim)]">{unit}</span>
+            <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)]">
+              {unit}
+            </span>
           </div>
         ))}
       </div>
 
       {/* ── Middle row: wordmark + link columns ── */}
-      <div className="mx-auto max-w-7xl px-6 md:px-12 py-12 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[var(--blue)]">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 py-12 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[var(--lav)]/30">
         {/* Wordmark */}
         <div className="flex flex-col gap-3">
-          <p className="font-mono text-sm font-medium text-[var(--blue)]">
-            the-next-craft$
+          <p className="font-script text-xl leading-[1.6] text-[var(--lav-bright)]">
+            the next craft
           </p>
-          <p className="font-mono text-xs text-[var(--ink-dim)] leading-[1.65]">
+          <p className="font-mono text-xs text-[var(--text-dim)] leading-[1.65]">
             Hackathon por
             <br />
             Crafter Station × Next
@@ -68,13 +70,13 @@ export function Footer() {
 
         {/* EVENTO */}
         <div className="flex flex-col gap-4">
-          <p className="section-label text-[var(--blue)]">EVENTO</p>
+          <p className="section-label">EVENTO</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             {EVENTO_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
-                  className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150 py-1 inline-block"
+                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150 py-1 inline-block"
                 >
                   {label}
                 </a>
@@ -85,7 +87,7 @@ export function Footer() {
 
         {/* COMUNIDAD */}
         <div className="flex flex-col gap-4">
-          <p className="section-label text-[var(--blue)]">COMUNIDAD</p>
+          <p className="section-label">COMUNIDAD</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             {COMUNIDAD_LINKS.map(({ label, href }) => (
               <li key={href}>
@@ -93,7 +95,7 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150"
+                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150"
                 >
                   {label}
                 </a>
@@ -104,12 +106,12 @@ export function Footer() {
 
         {/* CONTACTO */}
         <div className="flex flex-col gap-4">
-          <p className="section-label text-[var(--blue)]">CONTACTO</p>
+          <p className="section-label">CONTACTO</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             <li>
               <a
                 href="mailto:hola@crafterstation.com"
-                className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150 py-1 inline-block"
+                className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150 py-1 inline-block"
               >
                 hola@crafterstation.com
               </a>
@@ -118,13 +120,16 @@ export function Footer() {
         </div>
       </div>
 
-      {/* ── Final row: copyright + tagline ── */}
+      {/* ── Final row: boot de despedida ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-        <p className="font-mono text-xs text-[var(--ink-dim)]">
+        <p className="font-mono text-xs text-[var(--text-dim)]">
           © 2026 Crafter Station × Next · Lima, Perú · -12.0464, -77.0428
         </p>
-        <p className="font-mono text-xs text-[var(--ink-dim)]">
-          hecho a mano, no vibecodeado.
+        <p className="font-mono text-xs text-[var(--text-dim)]">
+          hecho a mano, no vibecodeado.{" "}
+          <span className="text-[var(--lav-bright)]" aria-hidden="true">
+            READY.<span className="cursor-blink">█</span>
+          </span>
         </p>
       </div>
     </footer>
