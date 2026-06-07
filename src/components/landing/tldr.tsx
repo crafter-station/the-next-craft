@@ -49,7 +49,7 @@ export function Tldr() {
         >
           {SPECS.map(({ label, value, sub }) => (
             <li key={label} className="panel px-6 py-7 flex flex-col gap-3">
-              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 {label}
               </p>
               <p

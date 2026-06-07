@@ -21,7 +21,7 @@ export function FinalCta() {
         <div className="relative flex flex-col gap-7 px-6 py-12 md:px-12 md:py-16 scroll-reveal">
           {/* Comando de cierre */}
           <p
-            className="font-mono text-sm leading-[1.4] text-[var(--lav-bright)]"
+            className="font-mono text-sm leading-[1.4] text-[var(--bright)]"
             aria-hidden="true"
           >
             RUN POSTULAR

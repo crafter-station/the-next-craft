@@ -97,8 +97,8 @@ export function Organizers() {
                     className={[
                       "w-14 h-14 border rounded-lg flex items-center justify-center select-none shrink-0",
                       accent
-                        ? "bg-[var(--lav)] border-[var(--lav-bright)]"
-                        : "bg-[var(--boot)] border-[var(--lav)]/60",
+                        ? "bg-[var(--line)] border-[var(--bright)]"
+                        : "bg-[var(--screen)] border-[var(--line)]/60",
                     ].join(" ")}
                     aria-hidden="true"
                   >
@@ -134,7 +134,7 @@ export function Organizers() {
                       "font-mono text-[10px] font-semibold tracking-[0.16em] uppercase -mt-3",
                       placeholder
                         ? "text-[var(--text-dim)]"
-                        : "text-[var(--lav-bright)]",
+                        : "text-[var(--bright)]",
                     ].join(" ")}
                   >
                     {role}
@@ -151,11 +151,11 @@ export function Organizers() {
         </ul>
 
         {/* Join CTA */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--lav)]/40 pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--line)]/40 pt-4">
           {"¿Quieres ayudar a organizarlo? →"}{" "}
           <a
             href="mailto:hola@crafterstation.com"
-            className="text-[var(--lav-bright)] hover:text-[var(--text)] underline underline-offset-2 transition-colors duration-150"
+            className="text-[var(--bright)] hover:text-[var(--text)] underline underline-offset-2 transition-colors duration-150"
           >
             escríbenos
           </a>

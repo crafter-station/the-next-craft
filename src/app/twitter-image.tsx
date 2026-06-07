@@ -42,7 +42,7 @@ export default async function TwitterImage() {
       style={{
         width: "1200px",
         height: "630px",
-        backgroundColor: "#14102B",
+        backgroundColor: "#0D0D0B",
         display: "flex",
         padding: "28px",
       }}
@@ -56,15 +56,15 @@ export default async function TwitterImage() {
           alignItems: "center",
           justifyContent: "center",
           gap: "26px",
-          backgroundColor: "#40318D",
-          border: "18px solid #7869C4",
+          backgroundColor: "#1A1A17",
+          border: "18px solid #8C8A82",
           borderRadius: "16px",
         }}
       >
         {/* Boot header */}
         <div
           style={{
-            color: "#A99BE8",
+            color: "#E9E7DE",
             fontSize: "34px",
             fontFamily: "Silkscreen",
             display: "flex",
@@ -74,7 +74,7 @@ export default async function TwitterImage() {
         </div>
         <div
           style={{
-            color: "#CDC8E8",
+            color: "#A2A096",
             fontSize: "19px",
             fontFamily: "IBM Plex Mono",
             letterSpacing: "0.14em",
@@ -87,7 +87,7 @@ export default async function TwitterImage() {
         {/* Script — letras unidas */}
         <div
           style={{
-            color: "#EAE7F8",
+            color: "#F2F0E9",
             fontSize: "110px",
             fontFamily: "Borel",
             lineHeight: 1.3,
@@ -101,7 +101,7 @@ export default async function TwitterImage() {
         {/* Specs */}
         <div
           style={{
-            color: "#CDC8E8",
+            color: "#A2A096",
             fontSize: "21px",
             fontFamily: "IBM Plex Mono",
             letterSpacing: "0.14em",
@@ -114,7 +114,7 @@ export default async function TwitterImage() {
         {/* READY. + cursor */}
         <div
           style={{
-            color: "#A99BE8",
+            color: "#E9E7DE",
             fontSize: "22px",
             fontFamily: "IBM Plex Mono",
             display: "flex",

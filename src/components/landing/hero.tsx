@@ -18,7 +18,7 @@ export function Hero() {
         <div className="relative flex flex-col items-center text-center gap-5 px-5 py-10 md:px-12 md:py-14">
           {/* Boot header */}
           <div className="flex flex-col gap-2 reveal reveal-d0">
-            <p className="font-pixel text-[11px] sm:text-sm uppercase tracking-[0.04em] text-[var(--lav-bright)]">
+            <p className="font-pixel text-[11px] sm:text-sm uppercase tracking-[0.04em] text-[var(--bright)]">
               **** THE NEXT CRAFT 64 ****
             </p>
             <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--text-dim)]">
@@ -50,7 +50,7 @@ export function Hero() {
           {/* READY. + specs */}
           <div className="flex flex-col items-center gap-2 reveal reveal-d4">
             <p
-              className="font-mono text-sm font-semibold text-[var(--lav-bright)] self-start sm:self-center"
+              className="font-mono text-sm font-semibold text-[var(--bright)] self-start sm:self-center"
               aria-hidden="true"
             >
               READY.

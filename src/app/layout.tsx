@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#14102B",
+  themeColor: "#0D0D0B",
   colorScheme: "dark",
 };
 
@@ -90,7 +90,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--lav-bright)] focus:text-[var(--void)] focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--bright)] focus:text-[var(--void)] focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
         >
           Saltar al contenido
         </a>
