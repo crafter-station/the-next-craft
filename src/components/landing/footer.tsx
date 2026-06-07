@@ -63,7 +63,7 @@ export function Footer() {
             <br />
             Crafter Station × Next
             <br />
-            Lima, Perú · Jul 2026
+            Lima · Bogotá · Guatemala · Jul 2026
           </p>
         </div>
 
@@ -122,7 +122,7 @@ export function Footer() {
       {/* ── Final row: boot de despedida ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <p className="font-mono text-xs text-[var(--text-dim)]">
-          © 2026 Crafter Station × Next · Lima, Perú · -12.0464, -77.0428
+          © 2026 Crafter Station × Next · Lima · Bogotá · Guatemala
         </p>
         <p className="font-mono text-xs text-[var(--text-dim)]">
           hecho a mano, no vibecodeado.{" "}
