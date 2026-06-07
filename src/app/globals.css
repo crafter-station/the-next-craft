@@ -5,10 +5,12 @@
 @theme inline {
   /* Fuentes */
   --font-sans: var(--font-sans);
+  --font-pixel: var(--font-pixel);
   --font-mono: var(--font-mono);
-  --font-heading: var(--font-sans);
+  --font-script: var(--font-script);
+  --font-heading: var(--font-pixel);
 
-  /* Mapeo de tokens shadcn → paleta Blueprint Terminal */
+  /* Mapeo de tokens shadcn → paleta Commodore 64 Boot */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -41,65 +43,67 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
 
-  /* Radius: 0 — plano técnico, esquinas rectas */
-  --radius-sm: 0rem;
-  --radius-md: 0rem;
-  --radius-lg: 0rem;
-  --radius-xl: 0rem;
-  --radius-2xl: 0rem;
-  --radius-3xl: 0rem;
-  --radius-4xl: 0rem;
+  /* Radius: plástico moldeado suave */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* Paleta Blueprint Terminal */
-  --paper: #ffffff;
-  --paper-dim: #f4f7fe;
-  --blue: #002fa7;
-  --blue-bright: #1d4ed8;
-  --blue-grid: rgb(0 47 167 / 8%);
-  --ink: #0a1633;
-  --ink-dim: #5b6478;
+  /* Paleta Commodore 64 Boot */
+  --void: #14102b;
+  --boot: #40318d;
+  --boot-dim: #2a2160;
+  --lav: #7869c4;
+  --lav-bright: #a99be8;
+  --text: #eae7f8;
+  --text-dim: #a9a3cc;
+  --bone: #d9d0bc;
+  --key-shadow: #8f8670;
 
   /* Tokens shadcn mapeados a la paleta */
-  --background: #ffffff;
-  --foreground: #0a1633;
-  --card: #ffffff;
-  --card-foreground: #0a1633;
-  --popover: #ffffff;
-  --popover-foreground: #0a1633;
-  --primary: #002fa7;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f7fe;
-  --secondary-foreground: #0a1633;
-  --muted: #f4f7fe;
-  --muted-foreground: #5b6478;
-  --accent: #f4f7fe;
-  --accent-foreground: #002fa7;
-  --destructive: #dc2626;
-  --border: rgb(0 47 167 / 20%);
-  --input: rgb(0 47 167 / 12%);
-  --ring: #002fa7;
-  --radius: 0rem;
+  --background: #14102b;
+  --foreground: #eae7f8;
+  --card: #2a2160;
+  --card-foreground: #eae7f8;
+  --popover: #2a2160;
+  --popover-foreground: #eae7f8;
+  --primary: #d9d0bc;
+  --primary-foreground: #14102b;
+  --secondary: #2a2160;
+  --secondary-foreground: #eae7f8;
+  --muted: #2a2160;
+  --muted-foreground: #a9a3cc;
+  --accent: #40318d;
+  --accent-foreground: #eae7f8;
+  --destructive: #f87171;
+  --border: rgb(120 105 196 / 45%);
+  --input: rgb(120 105 196 / 30%);
+  --ring: #a99be8;
+  --radius: 0.5rem;
 
-  /* Charts — escala de azules */
-  --chart-1: #002fa7;
-  --chart-2: #1d4ed8;
-  --chart-3: #3b82f6;
-  --chart-4: #93c5fd;
-  --chart-5: #dbeafe;
+  /* Charts — escala lavanda */
+  --chart-1: #a99be8;
+  --chart-2: #7869c4;
+  --chart-3: #40318d;
+  --chart-4: #2a2160;
+  --chart-5: #d9d0bc;
 
   /* Sidebar */
-  --sidebar: #f4f7fe;
-  --sidebar-foreground: #0a1633;
-  --sidebar-primary: #002fa7;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #dbeafe;
-  --sidebar-accent-foreground: #002fa7;
-  --sidebar-border: rgb(0 47 167 / 15%);
-  --sidebar-ring: #002fa7;
+  --sidebar: #2a2160;
+  --sidebar-foreground: #eae7f8;
+  --sidebar-primary: #d9d0bc;
+  --sidebar-primary-foreground: #14102b;
+  --sidebar-accent: #40318d;
+  --sidebar-accent-foreground: #eae7f8;
+  --sidebar-border: rgb(120 105 196 / 35%);
+  --sidebar-ring: #a99be8;
 }
 
 @layer base {
@@ -115,157 +119,117 @@
     @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 
-  /* Selection: azul Klein + texto blanco */
+  /* Selection: lavanda sobre void */
   ::selection {
-    background-color: #002fa7;
-    color: #ffffff;
+    background-color: #a99be8;
+    color: #14102b;
   }
 
-  /* Focus visible: outline azul brillante, sin radius */
+  /* Focus visible: lavanda bright */
   :focus-visible {
-    outline: 2px solid #1d4ed8;
+    outline: 2px solid #a99be8;
     outline-offset: 2px;
   }
 }
 
-/* ─── Blueprint ruler — fixed left margin, desktop only ─────────── */
-/*
-  Regla vertical blueprint: línea 1px + marcas de referencia tipo plano técnico.
-  Se dibuja como pseudo-elemento en body. Desktop (lg+) únicamente.
-  CSS-only, sin JS, sin React. Azul Klein al 35% para ser sutil pero presente.
-*/
-@media (min-width: 1024px) {
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 2rem;
-    width: 1px;
-    height: 100vh;
-    background-color: var(--blue);
-    opacity: 0.18;
-    z-index: 40;
-    pointer-events: none;
-  }
+/* ─── Utilidades C64 ────────────────────────────────────────────── */
 
-  /* Counter de líneas: cada 96px (~2 módulos de 48px del grid blueprint) */
-  .blueprint-ruler {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 2rem;
-    height: 100vh;
-    z-index: 40;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .blueprint-ruler__ticks {
-    position: absolute;
-    top: 3.5rem; /* debajo del nav sticky */
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .blueprint-ruler__tick {
-    display: flex;
-    align-items: center;
-    height: 96px;
-    position: relative;
-  }
-
-  /* Marca corta cada 96px */
-  .blueprint-ruler__tick::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 6px;
-    height: 1px;
-    background-color: var(--blue);
-    opacity: 0.25;
-  }
-
-  /* Número de línea */
-  .blueprint-ruler__tick span {
-    font-family: var(--font-mono);
-    font-size: 8px;
-    line-height: 1;
-    color: var(--blue);
-    opacity: 0.3;
-    writing-mode: horizontal-tb;
-    padding-right: 10px;
-    padding-left: 2px;
-    letter-spacing: 0.05em;
-    user-select: none;
-  }
-}
-
-/* ─── Utilidades custom ─────────────────────────────────────────── */
-
-/* Grid técnico de blueprint: líneas 1px azul ~8% cada 48px */
-.blueprint-grid {
-  background-image:
-    linear-gradient(to right, var(--blue-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--blue-grid) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-/* Variante inversa: líneas blancas ~10% sobre fondo azul sólido */
-.blueprint-grid-inverse {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 10%) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 10%) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-/* Label de sección: monospace uppercase 12px */
+/* Label de sección: línea BASIC en mono */
 .section-label {
   font-family: var(--font-mono);
   font-size: 12px;
   line-height: 1.4;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--lav-bright);
 }
 
-.corner {
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1;
-  color: var(--blue);
-  opacity: 0.4;
-  pointer-events: none;
-  user-select: none;
+/* Titular pixel PETSCII */
+.pixel-heading {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--text);
 }
 
-.corner::before {
-  content: "+";
+/*
+  Marco de monitor C64: borde lavanda grueso alrededor de una
+  "pantalla" azul boot. Hero y FinalCta.
+*/
+.crt-frame {
+  background-color: var(--boot);
+  border: 10px solid var(--lav);
+  border-radius: 0.75rem;
 }
 
-.corner-tl {
-  top: -8px;
-  left: -8px;
+@media (min-width: 768px) {
+  .crt-frame {
+    border-width: 16px;
+  }
 }
 
-.corner-tr {
-  top: -8px;
-  right: -8px;
+/*
+  Scanlines sutiles SOLO dentro de pantallas. Decorativo, aria-hidden.
+*/
+.scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 14%) 0,
+    rgb(0 0 0 / 14%) 1px,
+    transparent 1px,
+    transparent 4px
+  );
 }
 
-.corner-bl {
-  bottom: -8px;
-  left: -8px;
+/*
+  Keycap: CTA como tecla beige del C64.
+  Extruida con sombra dura inferior; :active la hunde.
+*/
+.keycap {
+  background-color: var(--bone);
+  color: var(--void);
+  border: 1px solid var(--key-shadow);
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 0 var(--key-shadow);
+  transform: translateY(0);
 }
 
-.corner-br {
-  bottom: -8px;
-  right: -8px;
+.keycap:hover {
+  background-color: #e6dfcd;
+}
+
+.keycap:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--key-shadow);
+}
+
+/* Variante fantasma: tecla transparente con borde lavanda */
+.keycap-ghost {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--lav);
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 0 var(--lav);
+  transform: translateY(0);
+}
+
+.keycap-ghost:hover {
+  background-color: var(--boot-dim);
+}
+
+.keycap-ghost:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 0 var(--lav);
+}
+
+/* Panel de sección: card sobre void */
+.panel {
+  background-color: var(--boot-dim);
+  border: 1px solid var(--lav);
+  border-radius: 0.625rem;
 }
 
 /* ─── Motion & micro-interactions ───────────────────────────────── */
@@ -300,13 +264,15 @@
     }
   }
 
+  /* ── Cursor █ del boot screen ───────────────────────────────── */
+  .cursor-blink {
+    display: inline-block;
+    animation: blink-cursor 1s steps(1) infinite;
+    margin-left: 2px;
+    color: var(--lav-bright);
+  }
+
   /* ── Hero page-load: staggered reveal ──────────────────────── */
-  /*
-    Base class. Elements start hidden, animate to visible.
-    animation-delay is set via inline style or modifier classes.
-    animation-fill-mode: both → element starts at from-state
-    even before the animation runs.
-  */
   .reveal {
     animation: fade-up 500ms ease-out both;
   }
@@ -330,21 +296,11 @@
     animation-delay: 400ms;
   }
 
-  /* ── Terminal cursor blink ──────────────────────────────────── */
-  .cursor-blink {
-    display: inline-block;
-    animation: blink-cursor 1s steps(1) infinite;
-    margin-left: 1px;
-    color: var(--blue);
-  }
-
   /* ── Scroll-driven section reveals ─────────────────────────── */
   /*
     Uses CSS scroll-driven animations (animation-timeline: view()).
     Supported: Chrome 115+, Edge 115+. Firefox & Safari fallback via
-    @supports — elements are visible by default (no opacity:0 set
-    outside the @supports block), so unsupported browsers see content
-    immediately.
+    @supports — elements are visible by default.
   */
   @supports (animation-timeline: view()) {
     .scroll-reveal {
@@ -354,11 +310,7 @@
     }
   }
 
-  /* ── CTA button arrow → moves 4px right on hover ───────────── */
-  /*
-    Targets a <span> with class .cta-arrow inside the button/link.
-    The arrow itself shifts, not the whole button, for subtlety.
-  */
+  /* ── CTA keycap: flecha se desliza en hover ─────────────────── */
   .cta-btn .cta-arrow {
     display: inline-block;
     transition: transform 150ms ease-out;
@@ -368,20 +320,10 @@
     transform: translateX(4px);
   }
 
-  .cta-btn:active {
-    transform: translateY(1px);
-  }
-
-  /* ── Nav links: bracket glow + underline scale ──────────────── */
-  /*
-    The brackets [label] change color to --blue-bright on hover.
-    A 1px underline grows left-to-right via scaleX.
-    The <a> wraps both brackets and text; use a ::after pseudo for
-    the underline so we can use transform without touching layout.
-  */
+  /* ── Nav links: subrayado que crece ─────────────────────────── */
   .nav-link {
     position: relative;
-    color: var(--ink-dim);
+    color: var(--text-dim);
     transition: color 150ms ease-out;
   }
 
@@ -389,17 +331,17 @@
     content: "";
     position: absolute;
     bottom: -1px;
-    left: 0.5rem; /* align with inner text, inside the brackets */
+    left: 0.5rem;
     right: 0.5rem;
     height: 1px;
-    background-color: var(--blue-bright);
+    background-color: var(--lav-bright);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 200ms ease-out;
   }
 
   .nav-link:hover {
-    color: var(--blue-bright);
+    color: var(--lav-bright);
   }
 
   .nav-link:hover::after {
@@ -407,18 +349,10 @@
   }
 
   /* ── Schedule row: time weight on hover ─────────────────────── */
-  /*
-    The group hover already changes bg. We add font-weight transition
-    on the time <span>. Use font-variation-settings for smooth
-    interpolation on variable fonts; fallback to font-weight step.
-  */
   .schedule-time {
     transition: font-weight 100ms ease-out;
   }
 
-  /* Tailwind group-hover applies the class, but we need pure CSS here.
-     The parent <li> has class "group" already. We use a sibling
-     selector via .schedule-row:hover .schedule-time */
   .schedule-row:hover .schedule-time {
     font-weight: 600;
   }

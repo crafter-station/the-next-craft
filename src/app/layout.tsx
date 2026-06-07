@@ -1,11 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const archivo = Archivo({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const silkscreen = Silkscreen({
+  variable: "--font-pixel",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -13,6 +20,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const borel = Borel({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -59,8 +73,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#002FA7",
-  colorScheme: "light",
+  themeColor: "#14102B",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -71,12 +85,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${bricolage.variable} ${ibmPlexMono.variable} h-full antialiased scroll-pt-20`}
+      className={`${archivo.variable} ${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} h-full antialiased scroll-pt-20`}
     >
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--blue)] focus:text-white focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--lav-bright)] focus:text-[var(--void)] focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
         >
           Saltar al contenido
         </a>
