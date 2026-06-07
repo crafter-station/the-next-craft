@@ -13,7 +13,7 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative flex flex-col items-center text-center">
+      <div className="relative z-20 flex flex-col items-center text-center">
         {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
         <h1 className="sr-only">the next craft</h1>
 
@@ -23,7 +23,7 @@ export function Hero() {
         </div>
 
         {/* Subhead — qué es, dónde, cuándo. Legible sin scroll. */}
-        <div className="flex flex-col items-center gap-2 mt-6 md:mt-8 px-6 reveal reveal-d4">
+        <div className="flex flex-col items-center gap-2 mt-6 md:mt-8 px-6 reveal reveal-d2">
           <p
             className="font-mono text-sm font-semibold text-[var(--bright)]"
             aria-hidden="true"
@@ -35,20 +35,20 @@ export function Hero() {
             className="font-mono font-semibold uppercase tracking-[0.1em] text-[var(--text)]"
             style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
           >
-            Hackathon presencial · Lima, Perú
+            Hackathon presencial
           </p>
           <p className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full">
-            24–26 JUL 2026 · 36 HORAS · 150 HACKERS
+            LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36 HORAS
           </p>
         </div>
 
         {/* Countdown */}
-        <div className="mt-4 px-6 reveal reveal-d4">
+        <div className="mt-4 px-6 reveal reveal-d3">
           <Countdown />
         </div>
 
         {/* CTAs — keycaps */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d5">
+        <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d4">
           <a
             href="#postular"
             className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"

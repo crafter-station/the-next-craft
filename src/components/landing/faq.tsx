@@ -44,7 +44,8 @@ const FAQS = [
   {
     id: "Q07",
     question: "¿Es presencial?",
-    answer: "Sí, en Lima. No hay modalidad remota — la gracia es estar ahí.",
+    answer:
+      "Sí — en Lima, Bogotá o Guatemala, la sede que te quede. No hay modalidad remota: la gracia es estar ahí.",
   },
   {
     id: "Q08",

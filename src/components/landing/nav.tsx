@@ -33,7 +33,7 @@ export function Nav() {
               */}
               <a
                 href={href}
-                className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2 py-1"
+                className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3"
               >
                 {label}
               </a>

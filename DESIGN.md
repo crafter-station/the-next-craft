@@ -70,7 +70,6 @@ mono 11px tracking 0.18em.
   scanlines sutiles como textura de pantalla.
 - **3D**: `public/c64.glb` (Draco, ~2MB) — set completo de frente, estático
   (sin auto-rotate), drag para girar; wordmark en la pantalla vía drei <Html>.
-- Coordenadas de Lima `-12.0464, -77.0428` en footer.
 - Cierre del footer: "hecho a mano, no vibecodeado."
 
 ## Contenido canónico (NO inventar otros datos)
@@ -78,7 +77,8 @@ mono 11px tracking 0.18em.
 - **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
   (nextfellow.ai, "Next" en el naming corto)
 - **Tagline**: "De cero a producto en 36 horas."
-- **Fecha**: 24–26 de julio, 2026 · **Lugar**: Lima, Perú (presencial)
+- **Fecha**: 24–26 de julio, 2026 · **Lugar**: presencial en 3 sedes —
+  Lima, Bogotá y Ciudad de Guatemala
 - **Formato**: 36 horas · 150 hackers · equipos de 3–5
 - **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
 - **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)

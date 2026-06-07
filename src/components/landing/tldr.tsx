@@ -8,8 +8,8 @@ const SPECS = [
   },
   {
     label: "LUGAR",
-    value: "Lima, Perú",
-    sub: "-12.0464, -77.0428",
+    value: "Lima · Bogotá · Guatemala",
+    sub: "3 sedes presenciales",
   },
   {
     label: "FORMATO",
