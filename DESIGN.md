@@ -62,7 +62,7 @@ mono 11px tracking 0.18em.
 - **Sin dividers**: nada de hairlines horizontales entre labels y contenido;
   la separación es espacio en blanco. (Bordes de cards y footer sí.)
 - **Líneas BASIC como labels de sección**: `10 PRINT "MANIFIESTO"`,
-  `20 PRINT "TL;DR"`, … `80 PRINT "ORGANIZERS"` (numeración 10–80, mono).
+  `20 PRINT "TL;DR"`, … `70 PRINT "FAQ"` (numeración 10–70, mono).
 - **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
 - **Keycaps**: CTAs como teclas de marfil del C64 — extruidas, sombra dura
   `0 3px 0`, `:active` las hunde.
@@ -89,9 +89,6 @@ mono 11px tracking 0.18em.
   micro-SaaS donde al menos un usuario completa la acción principal;
   marketplace pequeño con publicaciones reales; herramienta de comunidad
   probada en vivo con otros participantes.
-- **Organizers**: Shiara Arauzo (Lead Organizer), Railly Hugo (Crafter
-  Station), + 4 cards placeholder con roles (Logistics, Partnerships,
-  Community, Design) marcadas con `// TODO: reemplazar con equipo real`.
 - **Idioma**: español, tono directo estilo Platanus ("solo cracks", "a
   construir").
 - **CTA**: registro por WhatsApp — `wa.me/$NEXT_PUBLIC_WHATSAPP_NUMBER` con
@@ -111,9 +108,8 @@ mono 11px tracking 0.18em.
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
 8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)
-10. `80` Organizers (`#organizers`) — equipo (2 reales + 4 placeholder)
-11. FinalCta (`#postular`) — pantalla C64 final, `RUN POSTULAR`, CTA WhatsApp
-12. Footer — boot screen de despedida: stats, links, coordenadas, READY.█
+10. FinalCta (`#postular`) — pantalla C64 final, `RUN POSTULAR`, CTA WhatsApp
+11. Footer — boot screen de despedida: stats, links, coordenadas, READY.█
 
 ## Accesibilidad (no regresionar)
 

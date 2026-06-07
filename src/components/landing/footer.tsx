@@ -10,7 +10,6 @@ const EVENTO_LINKS = [
   { label: "Agenda", href: "#agenda" },
   { label: "Premios", href: "#premios" },
   { label: "FAQ", href: "#faq" },
-  { label: "Organizers", href: "#organizers" },
 ] as const;
 
 const COMUNIDAD_LINKS = [

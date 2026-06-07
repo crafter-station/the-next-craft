@@ -4,7 +4,6 @@ import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
-import { Organizers } from "@/components/landing/organizers";
 import { Prizes } from "@/components/landing/prizes";
 import { Schedule } from "@/components/landing/schedule";
 import { Sponsors } from "@/components/landing/sponsors";
@@ -61,7 +60,6 @@ export default function Home() {
         <Prizes />
         <Sponsors />
         <Faq />
-        <Organizers />
         <FinalCta />
       </main>
       <Footer />
