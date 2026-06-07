@@ -10,9 +10,9 @@ roto. Fuente pixel PETSCII para titulares y el nombre del evento en script de
 letras unidas (el "hello." de Apple). En el header vive un **Commodore 64 en
 3D real** (react-three-fiber) que gira solo y se puede arrastrar.
 
-**Lo memorable**: el hero como boot screen full-bleed con el monitor
-Commodore 1702 en 3D gigante (estático, arrastrable), `READY.█` parpadeando,
-"the next craft" en script conectado encima, y botones marfil como las teclas
+**Lo memorable**: el set Commodore 64 completo en 3D visto DE FRENTE con
+"the next craft" en script escrito DENTRO de la pantalla del monitor (como el
+"hello." del Mac), `READY.█` parpadeando, y botones marfil como las teclas
 del hardware real.
 
 ## Reglas duras
@@ -66,8 +66,8 @@ mono 11px tracking 0.18em.
   `0 3px 0`, `:active` las hunde.
 - **Sin marcos**: hero y FinalCta full-bleed sobre el mismo negro; solo
   scanlines sutiles como textura de pantalla.
-- **3D**: `public/c64.glb` (Draco, ~800KB) — SOLO el monitor 1702, estático
-  (sin auto-rotate), drag para girar, lazy con fallback `LOADING…`.
+- **3D**: `public/c64.glb` (Draco, ~2MB) — set completo de frente, estático
+  (sin auto-rotate), drag para girar; wordmark en la pantalla vía drei <Html>.
 - Coordenadas de Lima `-12.0464, -77.0428` en footer.
 - Cierre del footer: "hecho a mano, no vibecodeado."
 
@@ -95,8 +95,8 @@ mono 11px tracking 0.18em.
 ## Estructura de la página (one-pager)
 
 1. Nav sticky (wordmark script + links mono + CTA keycap)
-2. Hero (`#hero`) — script "the next craft", monitor 3D gigante, READY.█,
-   countdown, CTAs keycap
+2. Hero (`#hero`) — set C64 3D de frente con el wordmark en pantalla,
+   tagline, READY.█, countdown, CTAs keycap (h1 sr-only)
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
 5. `30` Tracks (`#tracks`) — 3 cards

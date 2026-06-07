@@ -7,16 +7,35 @@ import { Canvas } from "@react-three/fiber";
 
 const MODEL_URL = "/c64.glb";
 
+/*
+  Posición del frente de la pantalla del monitor en coords del modelo
+  ya centrado por <Center>: la pantalla (Object_19) está en el mundo en
+  (0, 2.26, -0.35) y el centro de la escena en (-0.17, 1.9, -0.97).
+*/
+const SCREEN_POSITION: [number, number, number] = [0.17, 1.95, 0.65];
+
 function C64() {
   const { scene } = useGLTF(MODEL_URL);
   return (
     <Center>
       <primitive object={scene} />
+      {/* Wordmark dentro de la pantalla del monitor */}
+      <Html
+        transform
+        position={SCREEN_POSITION}
+        distanceFactor={2.6}
+        style={{ pointerEvents: "none" }}
+        aria-hidden="true"
+      >
+        <p className="font-script text-[42px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none">
+          the next craft
+        </p>
+      </Html>
     </Center>
   );
 }
 
-/** Fallback temático mientras carga el .glb (~800KB, Draco) */
+/** Fallback temático mientras carga el .glb (~2MB, Draco) */
 function LoadingFallback() {
   return (
     <Html center>
@@ -28,24 +47,24 @@ function LoadingFallback() {
 }
 
 /**
- * C64Model — el monitor Commodore 1702 en 3D dentro del hero.
- * Estático (sin auto-rotate); se puede girar con drag, sin zoom ni pan.
- * Decorativo: el wrapper lleva aria-hidden; el contenido real del
- * hero vive en el texto.
+ * C64Model — el set Commodore 64 completo (monitor, teclado, floppy,
+ * joystick) visto DE FRENTE, con "the next craft" dentro de la pantalla.
+ * Estático (sin auto-rotate); drag para girar, sin zoom ni pan.
+ * Decorativo: el wrapper lleva aria-hidden; el h1 real es sr-only en Hero.
  */
 export function C64Model() {
   return (
     <div
-      className="w-full h-[420px] sm:h-[520px] lg:h-[620px] cursor-grab active:cursor-grabbing"
+      className="w-full h-[420px] sm:h-[520px] lg:h-[640px] cursor-grab active:cursor-grabbing"
       aria-hidden="true"
     >
       <Canvas
         dpr={[1, 1.5]}
-        camera={{ position: [3.4, 1.3, 7.6], fov: 32 }}
+        camera={{ position: [0, 1.6, 13.5], fov: 35 }}
         gl={{ antialias: true, alpha: true }}
       >
         <ambientLight intensity={0.9} />
-        <directionalLight position={[6, 10, 6]} intensity={1.6} />
+        <directionalLight position={[4, 10, 8]} intensity={1.6} />
         <directionalLight
           position={[-6, 4, -4]}
           intensity={0.5}

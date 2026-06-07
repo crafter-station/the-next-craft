@@ -15,27 +15,22 @@ export function Hero() {
           aria-hidden="true"
         />
 
-        <div className="relative flex flex-col items-center text-center gap-5 px-5 py-10 md:px-12 md:py-14">
-          {/* Wordmark script — letras unidas como el "hello." */}
-          <h1
-            className="font-script leading-[1.4] text-[var(--text)] reveal reveal-d1"
-            style={{ fontSize: "clamp(2.75rem, 8vw, 5.5rem)" }}
-          >
-            the next craft
-          </h1>
+        <div className="relative flex flex-col items-center text-center gap-5 px-5 py-6 md:px-12 md:py-8">
+          {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
+          <h1 className="sr-only">the next craft</h1>
+
+          {/* Set Commodore 64 de frente, "the next craft" en la pantalla */}
+          <div className="w-full reveal reveal-d1">
+            <C64Model />
+          </div>
 
           {/* Tagline */}
           <p
-            className="font-sans font-medium text-[var(--text)]/90 leading-[1.3] -mt-2 reveal reveal-d2"
+            className="font-sans font-medium text-[var(--text)]/90 leading-[1.3] reveal reveal-d2"
             style={{ fontSize: "clamp(1.0625rem, 2.2vw, 1.375rem)" }}
           >
             De cero a producto en 36 horas.
           </p>
-
-          {/* Monitor Commodore en 3D — estático, arrastrable */}
-          <div className="w-full reveal reveal-d3">
-            <C64Model />
-          </div>
 
           {/* READY. + specs */}
           <div className="flex flex-col items-center gap-2 reveal reveal-d4">
