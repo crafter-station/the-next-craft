@@ -4,21 +4,21 @@ const TRACKS = [
     name: "AI CRAFT",
     description:
       "Agentes, copilots, productos AI-native que alguien usaría el lunes. Construidos con IA de verdad — no demos, no playgrounds.",
-    prompt: "$ git checkout ai-craft",
+    ref: "→ track/ai-craft",
   },
   {
     number: "02",
     name: "OPEN WEB",
     description:
       "Librerías, CLIs, infraestructura abierta que sobreviva al evento. Herramientas para la comunidad dev que sigan siendo útiles la semana siguiente.",
-    prompt: "$ git checkout open-web",
+    ref: "→ track/open-web",
   },
   {
     number: "03",
     name: "LOCAL IMPACT",
     description:
       "Fintech, logística, gobierno, educación — problemas de acá resueltos por gente de acá. Tecnología para LATAM, no adaptaciones de Silicon Valley.",
-    prompt: "$ git checkout local-impact",
+    ref: "→ track/local-impact",
   },
 ] as const;
 
@@ -51,7 +51,7 @@ export function Tracks() {
           className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--blue)] list-none m-0 p-0"
           aria-label="Tracks del hackathon"
         >
-          {TRACKS.map(({ number, name, description, prompt }) => (
+          {TRACKS.map(({ number, name, description, ref }) => (
             <li
               key={number}
               className="group bg-[var(--paper)] hover:bg-[var(--blue)] transition-colors duration-150 flex flex-col gap-0 overflow-hidden"
@@ -83,10 +83,10 @@ export function Tracks() {
                 </p>
               </div>
 
-              {/* Footer prompt — pinned to bottom with top border */}
+              {/* Footer ref — referencia de plano, sin prompt de terminal */}
               <div className="border-t border-[var(--blue)] group-hover:border-white/30 px-6 py-4 transition-colors duration-150">
                 <p className="font-mono text-xs tracking-wide text-[var(--blue)] group-hover:text-white/60 transition-colors duration-150">
-                  {prompt}
+                  {ref}
                 </p>
               </div>
             </li>

@@ -37,7 +37,7 @@ export function Tldr() {
   return (
     <section
       id="tldr"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper-dim)]"
+      className="relative px-6 md:px-12 lg:px-24 py-16 bg-[var(--paper-dim)]"
     >
       <CornerMarks />
 

@@ -9,7 +9,7 @@ export function Hero() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-6">
         {/* Terminal prompt */}
         <p className="font-mono text-xs text-[var(--ink-dim)]">
           the-next-craft$ init --lima --36h
@@ -33,19 +33,18 @@ export function Hero() {
           De cero a producto en 36 horas.
         </p>
 
-        {/* Specs */}
+        {/* Countdown — protagonista sin label verbal */}
+        <div className="pt-2">
+          <Countdown />
+        </div>
+
+        {/* Specs — debajo del countdown para jerarquia correcta */}
         <p className="section-label text-[var(--ink-dim)]">
           24–26 JUL 2026 · LIMA, PERÚ · 150 HACKERS
         </p>
 
-        {/* Countdown */}
-        <div className="flex flex-col gap-3">
-          <p className="section-label text-[var(--ink-dim)]">Faltan</p>
-          <Countdown />
-        </div>
-
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 pt-2">
+        <div className="flex flex-wrap items-center gap-4 pt-1">
           <a
             href="#postular"
             className="font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"

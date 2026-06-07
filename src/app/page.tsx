@@ -1,4 +1,5 @@
 import { About } from "@/components/landing/about";
+import { BlueprintRuler } from "@/components/landing/blueprint-ruler";
 import { Faq } from "@/components/landing/faq";
 import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
@@ -14,6 +15,7 @@ import { Tracks } from "@/components/landing/tracks";
 export default function Home() {
   return (
     <>
+      <BlueprintRuler />
       <Nav />
       <main>
         <Hero />

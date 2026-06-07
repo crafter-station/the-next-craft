@@ -128,6 +128,82 @@
   }
 }
 
+/* ─── Blueprint ruler — fixed left margin, desktop only ─────────── */
+/*
+  Regla vertical blueprint: línea 1px + marcas de referencia tipo plano técnico.
+  Se dibuja como pseudo-elemento en body. Desktop (lg+) únicamente.
+  CSS-only, sin JS, sin React. Azul Klein al 35% para ser sutil pero presente.
+*/
+@media (min-width: 1024px) {
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 2rem;
+    width: 1px;
+    height: 100vh;
+    background-color: var(--blue);
+    opacity: 0.18;
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  /* Counter de líneas: cada 96px (~2 módulos de 48px del grid blueprint) */
+  .blueprint-ruler {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2rem;
+    height: 100vh;
+    z-index: 40;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .blueprint-ruler__ticks {
+    position: absolute;
+    top: 3.5rem; /* debajo del nav sticky */
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .blueprint-ruler__tick {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    position: relative;
+  }
+
+  /* Marca corta cada 96px */
+  .blueprint-ruler__tick::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 1px;
+    background-color: var(--blue);
+    opacity: 0.25;
+  }
+
+  /* Número de línea */
+  .blueprint-ruler__tick span {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    line-height: 1;
+    color: var(--blue);
+    opacity: 0.3;
+    writing-mode: horizontal-tb;
+    padding-right: 10px;
+    padding-left: 2px;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+}
+
 /* ─── Utilidades custom ─────────────────────────────────────────── */
 
 /* Grid técnico de blueprint: líneas 1px azul ~8% cada 48px */

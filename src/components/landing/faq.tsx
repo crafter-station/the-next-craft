@@ -63,7 +63,7 @@ export function Faq() {
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
         {/* Section label */}
-        <h2 className="section-label">[07] — FAQ</h2>
+        <p className="section-label">[07] — FAQ</p>
 
         {/* Accordion */}
         <Accordion className="w-full" defaultValue={[]}>
