@@ -5,6 +5,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import { CornerMarks } from "./corner-marks";
+
 const FAQS = [
   {
     id: "Q01",
@@ -57,15 +59,11 @@ export function Faq() {
       id="faq"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper)]"
     >
-      {/* Corner marks */}
-      <span className="corner corner-tl" aria-hidden="true" />
-      <span className="corner corner-tr" aria-hidden="true" />
-      <span className="corner corner-bl" aria-hidden="true" />
-      <span className="corner corner-br" aria-hidden="true" />
+      <CornerMarks />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
         {/* Section label */}
-        <p className="section-label">[07] — FAQ</p>
+        <h2 className="section-label">[07] — FAQ</h2>
 
         {/* Accordion */}
         <Accordion className="w-full" defaultValue={[]}>

@@ -1,3 +1,4 @@
+import { CornerMarks } from "./corner-marks";
 import { Countdown } from "./countdown";
 
 export function Hero() {
@@ -6,11 +7,7 @@ export function Hero() {
       id="hero"
       className="blueprint-grid relative min-h-[calc(100svh-3.5rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 overflow-hidden"
     >
-      {/* Corner marks */}
-      <span className="corner corner-tl" aria-hidden="true" />
-      <span className="corner corner-tr" aria-hidden="true" />
-      <span className="corner corner-bl" aria-hidden="true" />
-      <span className="corner corner-br" aria-hidden="true" />
+      <CornerMarks />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8">
         {/* Terminal prompt */}

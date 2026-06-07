@@ -71,17 +71,15 @@ const DAYS: Day[] = [
   },
 ] as const;
 
+import { CornerMarks } from "./corner-marks";
+
 export function Schedule() {
   return (
     <section
       id="agenda"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper-dim)]"
     >
-      {/* Corner marks */}
-      <span className="corner corner-tl" aria-hidden="true" />
-      <span className="corner corner-tr" aria-hidden="true" />
-      <span className="corner corner-bl" aria-hidden="true" />
-      <span className="corner corner-br" aria-hidden="true" />
+      <CornerMarks />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
         {/* Section label */}

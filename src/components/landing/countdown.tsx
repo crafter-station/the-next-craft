@@ -41,6 +41,34 @@ export function Countdown() {
     return () => clearInterval(id);
   }, []);
 
+  // Estado "en vivo": cuando el countdown llega a 0 y ya se ha hidratado
+  const isLive =
+    timeLeft !== null &&
+    timeLeft.days === 0 &&
+    timeLeft.hours === 0 &&
+    timeLeft.minutes === 0 &&
+    timeLeft.seconds === 0;
+
+  if (isLive) {
+    return (
+      <div
+        className="inline-flex items-center gap-3 border border-[var(--blue)] px-6 py-4"
+        role="status"
+        aria-label="El evento está en curso"
+      >
+        <span
+          className="font-mono font-semibold text-[var(--blue)] leading-none"
+          style={{ fontSize: "clamp(1.25rem, 3vw, 2rem)" }}
+        >
+          EN VIVO
+        </span>
+        <span className="section-label" style={{ color: "var(--ink-dim)" }}>
+          — HACKATHON EN CURSO
+        </span>
+      </div>
+    );
+  }
+
   const cells: Cell[] = [
     { value: timeLeft !== null ? pad(timeLeft.days) : "--", label: "DÍAS" },
     { value: timeLeft !== null ? pad(timeLeft.hours) : "--", label: "HRS" },

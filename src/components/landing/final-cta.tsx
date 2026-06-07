@@ -1,3 +1,5 @@
+import { CornerMarks } from "./corner-marks";
+
 export function FinalCta() {
   return (
     <section
@@ -5,26 +7,7 @@ export function FinalCta() {
       className="relative blueprint-grid-inverse px-6 md:px-12 lg:px-24 py-24 bg-[var(--blue)]"
     >
       {/* Corner marks — white on blue */}
-      <span
-        className="corner corner-tl"
-        aria-hidden="true"
-        style={{ color: "#ffffff", opacity: 0.25 }}
-      />
-      <span
-        className="corner corner-tr"
-        aria-hidden="true"
-        style={{ color: "#ffffff", opacity: 0.25 }}
-      />
-      <span
-        className="corner corner-bl"
-        aria-hidden="true"
-        style={{ color: "#ffffff", opacity: 0.25 }}
-      />
-      <span
-        className="corner corner-br"
-        aria-hidden="true"
-        style={{ color: "#ffffff", opacity: 0.25 }}
-      />
+      <CornerMarks color="#ffffff" opacity={0.25} />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10">
         {/* Terminal prompt */}

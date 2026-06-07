@@ -6,21 +6,19 @@ const PERKS = [
   "Mentorías durante las 36 horas",
 ] as const;
 
+import { CornerMarks } from "./corner-marks";
+
 export function Prizes() {
   return (
     <section
       id="premios"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper)]"
     >
-      {/* Corner marks */}
-      <span className="corner corner-tl" aria-hidden="true" />
-      <span className="corner corner-tr" aria-hidden="true" />
-      <span className="corner corner-bl" aria-hidden="true" />
-      <span className="corner corner-br" aria-hidden="true" />
+      <CornerMarks />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
         {/* Section label */}
-        <p className="section-label">[05] — PREMIOS</p>
+        <h2 className="section-label">[05] — PREMIOS</h2>
 
         {/* Main composition — asymmetric 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-0 border border-[var(--blue)]">

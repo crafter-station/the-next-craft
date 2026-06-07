@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${bricolage.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${ibmPlexMono.variable} h-full antialiased scroll-pt-20`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
