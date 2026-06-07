@@ -58,7 +58,7 @@ function LoadingFallback() {
 export function C64Model() {
   return (
     <div
-      className="w-full h-[460px] sm:h-[580px] lg:h-[700px] cursor-grab active:cursor-grabbing"
+      className="w-full h-[380px] sm:h-[460px] lg:h-[540px] cursor-grab active:cursor-grabbing"
       aria-hidden="true"
     >
       <Canvas
