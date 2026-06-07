@@ -2,6 +2,7 @@ import { About } from "@/components/landing/about";
 import { Faq } from "@/components/landing/faq";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
+import { Organizers } from "@/components/landing/organizers";
 import { Prizes } from "@/components/landing/prizes";
 import { Schedule } from "@/components/landing/schedule";
 import { Sponsors } from "@/components/landing/sponsors";
@@ -21,6 +22,7 @@ export default function Home() {
         <Prizes />
         <Sponsors />
         <Faq />
+        <Organizers />
       </main>
     </>
   );
