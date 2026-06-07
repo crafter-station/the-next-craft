@@ -8,7 +8,7 @@ export function Hero() {
       className="relative px-4 sm:px-6 md:px-12 lg:px-24 py-8 md:py-12 bg-[var(--void)]"
     >
       {/* Pantalla C64 encendida: marco lavanda + boot screen azul */}
-      <div className="crt-frame relative mx-auto max-w-6xl overflow-hidden">
+      <div className="relative mx-auto max-w-6xl overflow-hidden">
         {/* Scanlines del monitor — decorativas */}
         <div
           className="scanlines absolute inset-0 pointer-events-none z-10"

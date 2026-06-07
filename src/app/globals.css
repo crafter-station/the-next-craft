@@ -57,9 +57,9 @@
   color-scheme: dark;
 
   /* Paleta B&N vintage — negro cálido tipo Apple '99 */
-  --void: #0d0d0b;
+  --void: #1a1a17;
   --screen: #1a1a17;
-  --screen-dim: #131311;
+  --screen-dim: #161613;
   --line: #8c8a82;
   --bright: #e9e7de;
   --text: #f2f0e9;
@@ -68,19 +68,19 @@
   --key-shadow: #8c8a82;
 
   /* Tokens shadcn mapeados a la paleta */
-  --background: #0d0d0b;
+  --background: #1a1a17;
   --foreground: #f2f0e9;
-  --card: #131311;
+  --card: #161613;
   --card-foreground: #f2f0e9;
-  --popover: #131311;
+  --popover: #161613;
   --popover-foreground: #f2f0e9;
   --primary: #e6e3d8;
-  --primary-foreground: #0d0d0b;
-  --secondary: #131311;
+  --primary-foreground: #1a1a17;
+  --secondary: #161613;
   --secondary-foreground: #f2f0e9;
-  --muted: #131311;
+  --muted: #161613;
   --muted-foreground: #a2a096;
-  --accent: #1a1a17;
+  --accent: #161613;
   --accent-foreground: #f2f0e9;
   --destructive: #f87171;
   --border: rgb(140 138 130 / 45%);
@@ -92,15 +92,15 @@
   --chart-1: #e9e7de;
   --chart-2: #a2a096;
   --chart-3: #8c8a82;
-  --chart-4: #1a1a17;
+  --chart-4: #161613;
   --chart-5: #e6e3d8;
 
   /* Sidebar */
-  --sidebar: #131311;
+  --sidebar: #161613;
   --sidebar-foreground: #f2f0e9;
   --sidebar-primary: #e6e3d8;
-  --sidebar-primary-foreground: #0d0d0b;
-  --sidebar-accent: #1a1a17;
+  --sidebar-primary-foreground: #1a1a17;
+  --sidebar-accent: #161613;
   --sidebar-accent-foreground: #f2f0e9;
   --sidebar-border: rgb(140 138 130 / 35%);
   --sidebar-ring: #e9e7de;
@@ -122,7 +122,7 @@
   /* Selection: blanco cálido sobre negro */
   ::selection {
     background-color: #e9e7de;
-    color: #0d0d0b;
+    color: #1a1a17;
   }
 
   /* Focus visible: blanco cálido */
@@ -153,22 +153,6 @@
   line-height: 1.15;
   letter-spacing: 0.01em;
   color: var(--text);
-}
-
-/*
-  Marco de monitor C64: borde gris platino alrededor de una
-  "pantalla" negra. Hero y FinalCta.
-*/
-.crt-frame {
-  background-color: var(--screen);
-  border: 10px solid var(--line);
-  border-radius: 0.75rem;
-}
-
-@media (min-width: 768px) {
-  .crt-frame {
-    border-width: 16px;
-  }
 }
 
 /*
