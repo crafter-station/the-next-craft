@@ -63,7 +63,7 @@ export function C64Model() {
     >
       <Canvas
         dpr={[1, 1.5]}
-        camera={{ position: [0, 1.4, 11], fov: 35 }}
+        camera={{ position: [0, 1.4, 12], fov: 35 }}
         gl={{ antialias: true, alpha: true }}
       >
         <ambientLight intensity={0.9} />
