@@ -1,5 +1,7 @@
+import { About } from "@/components/landing/about";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
+import { Tldr } from "@/components/landing/tldr";
 
 export default function Home() {
   return (
@@ -7,6 +9,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <About />
+        <Tldr />
       </main>
     </>
   );
