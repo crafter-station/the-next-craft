@@ -50,12 +50,12 @@ export function Tracks() {
           {TRACKS.map(({ number, name, description, ref }) => (
             <li
               key={number}
-              className="group panel hover:bg-[var(--boot)] transition-colors duration-150 flex flex-col gap-0 overflow-hidden"
+              className="group panel hover:bg-[var(--screen)] transition-colors duration-150 flex flex-col gap-0 overflow-hidden"
             >
               <div className="flex flex-col gap-4 px-6 pt-7 pb-6 flex-1">
                 {/* Número pixel gigante */}
                 <span
-                  className="font-pixel font-bold leading-none select-none text-[var(--lav)] group-hover:text-[var(--lav-bright)] transition-colors duration-150"
+                  className="font-pixel font-bold leading-none select-none text-[var(--line)] group-hover:text-[var(--bright)] transition-colors duration-150"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 3.5rem)" }}
                   aria-hidden="true"
                 >
@@ -80,8 +80,8 @@ export function Tracks() {
               </div>
 
               {/* Footer — comando LOAD */}
-              <div className="border-t border-[var(--lav)]/40 px-6 py-3">
-                <p className="font-mono text-[11px] tracking-[0.08em] text-[var(--lav-bright)]">
+              <div className="border-t border-[var(--line)]/40 px-6 py-3">
+                <p className="font-mono text-[11px] tracking-[0.08em] text-[var(--bright)]">
                   {ref}
                 </p>
               </div>

@@ -2,24 +2,24 @@
 
 > Fuente de verdad para todos los agentes. No desviarse sin actualizar este archivo.
 
-## Concepto: "COMMODORE 64 BOOT" (retro-computing '82)
+## Concepto: "COMMODORE 64 MONO" (retro-computing B&N, negro vintage Apple '99)
 
-La página es el **boot screen de un Commodore 64**: azul-violeta profundo con
-borde lavanda, fuente pixel PETSCII para titulares, y el nombre del evento en
-script de letras unidas (el "hello." de Apple, pero en lavanda C64). En el
-header vive un **Commodore 64 en 3D real** (react-three-fiber) que gira solo y
-se puede arrastrar.
+La página es el **boot screen de un Commodore 64 en monitor monocromo**:
+negro cálido vintage (tipo Apple de fines de los 90), grises platino y blanco
+roto. Fuente pixel PETSCII para titulares y el nombre del evento en script de
+letras unidas (el "hello." de Apple). En el header vive un **Commodore 64 en
+3D real** (react-three-fiber) que gira solo y se puede arrastrar.
 
-**Lo memorable**: el hero como pantalla C64 encendida (borde lavanda grueso,
+**Lo memorable**: el hero como pantalla C64 encendida (borde gris platino,
 `**** THE NEXT CRAFT 64 ****`, `READY.█` parpadeando), el C64 girando en 3D,
-"the next craft" en script conectado encima, y botones beige como las teclas
+"the next craft" en script conectado encima, y botones marfil como las teclas
 del hardware real.
 
 ## Reglas duras
 
 - **Dark mode ÚNICO** (es un monitor encendido). `color-scheme: dark`.
-- El acento es lavanda/azul C64. El beige hardware SOLO para keycaps/CTAs y
-  detalles. Ningún otro color.
+- **B&N ESTRICTO**: negro cálido, grises platino, blanco roto. NINGÚN color
+  (ni morado, ni azul, ni acentos). El marfil de keycaps es el único "tono".
 - **NUNCA**: degradados de color, glassmorphism, sombras difusas grandes,
   emojis decorativos, Inter/Roboto/Space Grotesk.
 - Pixel font (Silkscreen) SOLO en titulares y labels cortos — nunca párrafos.
@@ -32,18 +32,17 @@ del hardware real.
 
 | Token | Valor | Uso |
 |-------|-------|-----|
-| `--void` | `#14102B` | Fondo de página (apagado, alrededor del monitor) |
-| `--boot` | `#40318D` | Azul boot screen — hero, paneles, bloques |
-| `--boot-dim` | `#2A2160` | Variante oscura de paneles/secciones alternas |
-| `--lav` | `#7869C4` | Borde del monitor, acentos, bordes de cards |
-| `--lav-bright` | `#A99BE8` | Links, hover, script, labels sobre oscuro |
-| `--text` | `#EAE7F8` | Texto cuerpo sobre oscuro |
-| `--text-dim` | `#A9A3CC` | Texto secundario |
-| `--bone` | `#D9D0BC` | Keycaps/CTAs (beige hardware), texto sobre boot |
-| `--key-shadow` | `#8F8670` | Sombra dura de keycaps |
+| `--void` | `#0D0D0B` | Fondo de página (negro cálido vintage) |
+| `--screen` | `#1A1A17` | Pantalla del monitor — hero, paneles destacados |
+| `--screen-dim` | `#131311` | Paneles/cards |
+| `--line` | `#8C8A82` | Borde del monitor (gris platino), bordes de cards |
+| `--bright` | `#E9E7DE` | Acentos: script, labels, links, READY. |
+| `--text` | `#F2F0E9` | Texto cuerpo |
+| `--text-dim` | `#A2A096` | Texto secundario |
+| `--bone` | `#E6E3D8` | Keycaps/CTAs (marfil) |
+| `--key-shadow` | `#8C8A82` | Sombra dura de keycaps |
 
-Contraste: cuerpo siempre `--text`/`--text-dim`; lavanda solo para display
-grande, labels y bordes (AA en tamaños usados).
+Contraste: cuerpo siempre `--text`/`--text-dim` (AA garantizado en B&N).
 
 ## Tipografía (next/font/google)
 
@@ -64,9 +63,9 @@ mono 11px tracking 0.18em.
 - **Líneas BASIC como labels de sección**: `10 PRINT "MANIFIESTO"`,
   `20 PRINT "TL;DR"`, … `80 PRINT "ORGANIZERS"` (numeración 10–80, mono).
 - **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
-- **Keycaps**: CTAs como teclas beige del C64 — extruidas, sombra dura
+- **Keycaps**: CTAs como teclas de marfil del C64 — extruidas, sombra dura
   `0 3px 0`, `:active` las hunde.
-- **Marco de monitor**: secciones-pantalla con borde lavanda grueso y
+- **Marco de monitor**: secciones-pantalla con borde gris platino grueso y
   scanlines sutiles.
 - **3D**: `public/c64.glb` (Draco) — auto-rotate lento + drag, lazy con
   fallback `LOADING…`, estático con reduced-motion.
@@ -112,7 +111,7 @@ mono 11px tracking 0.18em.
 
 ## Accesibilidad (no regresionar)
 
-- Skip link "Saltar al contenido". Focus visible: outline 2px lavanda bright.
+- Skip link "Saltar al contenido". Focus visible: outline 2px blanco cálido.
 - Countdown: `role="timer"`, estado EN VIVO con `role="status"`.
 - 3D: `aria-hidden` en canvas (decorativo), fallback estático con
   reduced-motion; cursor █ y scanlines `aria-hidden`.

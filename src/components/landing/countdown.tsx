@@ -52,12 +52,12 @@ export function Countdown() {
   if (isLive) {
     return (
       <div
-        className="inline-flex items-center gap-3 border border-[var(--lav)] rounded-lg px-6 py-4 bg-[var(--boot-dim)]"
+        className="inline-flex items-center gap-3 border border-[var(--line)] rounded-lg px-6 py-4 bg-[var(--screen-dim)]"
         role="status"
         aria-label="El evento está en curso"
       >
         <span
-          className="font-pixel font-bold text-[var(--lav-bright)] leading-none uppercase"
+          className="font-pixel font-bold text-[var(--bright)] leading-none uppercase"
           style={{ fontSize: "clamp(1rem, 2.5vw, 1.5rem)" }}
         >
           EN VIVO
@@ -87,7 +87,7 @@ export function Countdown() {
         <div
           // biome-ignore lint/suspicious/noArrayIndexKey: static ordered list, index is stable
           key={i}
-          className="flex flex-col items-center justify-center bg-[var(--boot-dim)] border border-[var(--lav)] rounded-lg px-2 sm:px-4 py-3 sm:min-w-[84px]"
+          className="flex flex-col items-center justify-center bg-[var(--screen-dim)] border border-[var(--line)] rounded-lg px-2 sm:px-4 py-3 sm:min-w-[84px]"
         >
           {/* Dígitos pixel PETSCII */}
           <span

@@ -96,14 +96,14 @@ export function Schedule() {
           {DAYS.map((day) => (
             <div key={day.header} className="flex flex-col gap-0">
               {/* Day header — pixel */}
-              <p className="font-pixel text-xs font-bold tracking-[0.04em] text-[var(--lav-bright)] uppercase mb-4 select-none">
+              <p className="font-pixel text-xs font-bold tracking-[0.04em] text-[var(--bright)] uppercase mb-4 select-none">
                 ── {day.header} ──
               </p>
 
               {/* Events — línea vertical lavanda */}
               <div className="relative">
                 <div
-                  className="absolute top-0 bottom-0 left-0 w-px bg-[var(--lav)]"
+                  className="absolute top-0 bottom-0 left-0 w-px bg-[var(--line)]"
                   aria-hidden="true"
                 />
 
@@ -111,17 +111,17 @@ export function Schedule() {
                   {day.events.map((event) => (
                     <li
                       key={`${day.header}-${event.time}`}
-                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 rounded-r-lg hover:bg-[var(--boot-dim)] transition-colors duration-100"
+                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 rounded-r-lg hover:bg-[var(--screen-dim)] transition-colors duration-100"
                     >
                       {/* Nodo cuadrado pixel en la línea */}
                       <span
-                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--lav-bright)] shrink-0"
+                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--bright)] shrink-0"
                         aria-hidden="true"
                       />
 
                       {/* Hora — mono tabular */}
                       <span
-                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--lav-bright)] shrink-0 w-12"
+                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--bright)] shrink-0 w-12"
                         style={{ fontVariantNumeric: "tabular-nums" }}
                       >
                         {event.time}
@@ -139,7 +139,7 @@ export function Schedule() {
                         {event.mono && (
                           <>
                             {" "}
-                            <code className="font-mono text-xs text-[var(--lav-bright)] bg-[var(--boot-dim)] border border-[var(--lav)]/40 rounded px-1 py-0.5">
+                            <code className="font-mono text-xs text-[var(--bright)] bg-[var(--screen-dim)] border border-[var(--line)]/40 rounded px-1 py-0.5">
                               {event.mono}
                             </code>
                           </>

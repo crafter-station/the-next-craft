@@ -20,7 +20,7 @@ function C64() {
 function LoadingFallback() {
   return (
     <Html center>
-      <p className="font-mono text-sm text-[var(--lav-bright)] whitespace-nowrap">
+      <p className="font-mono text-sm text-[var(--bright)] whitespace-nowrap">
         LOAD &quot;C64&quot;,8,1 … LOADING
       </p>
     </Html>
@@ -60,7 +60,7 @@ export function C64Model() {
         <directionalLight
           position={[-6, 4, -4]}
           intensity={0.5}
-          color="#a99be8"
+          color="#e9e7de"
         />
         <Suspense fallback={<LoadingFallback />}>
           <C64 />

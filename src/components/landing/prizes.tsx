@@ -20,7 +20,7 @@ export function Prizes() {
         {/* Composición asimétrica 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-3">
           {/* ── Bloque protagonista: pantalla boot encendida ── */}
-          <div className="relative lg:w-2/3 bg-[var(--boot)] border border-[var(--lav)] rounded-xl flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14 overflow-hidden">
+          <div className="relative lg:w-2/3 bg-[var(--screen)] border border-[var(--line)] rounded-xl flex flex-col justify-between gap-8 p-6 md:p-10 lg:p-14 overflow-hidden">
             {/* Scanlines del monitor */}
             <div
               className="scanlines absolute inset-0 pointer-events-none"
@@ -40,7 +40,7 @@ export function Prizes() {
                 $5,000
               </span>
               <span className="sr-only">Cinco mil dólares</span>
-              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 USD AL EQUIPO GANADOR
               </p>
             </div>
@@ -57,8 +57,8 @@ export function Prizes() {
           {/* ── Columna secundaria 1/3: perks ── */}
           <div className="lg:w-1/3 panel flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="px-7 py-5 border-b border-[var(--lav)]/40">
-              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
+            <div className="px-7 py-5 border-b border-[var(--line)]/40">
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 PARA TODOS LOS QUE ENTRAN
               </p>
             </div>
@@ -71,10 +71,10 @@ export function Prizes() {
               {PERKS.map((perk) => (
                 <li
                   key={perk}
-                  className="flex items-start gap-3 px-7 py-4 border-b border-[var(--lav)]/25 last:border-b-0"
+                  className="flex items-start gap-3 px-7 py-4 border-b border-[var(--line)]/25 last:border-b-0"
                 >
                   <span
-                    className="font-mono text-sm text-[var(--lav-bright)] shrink-0 mt-0.5"
+                    className="font-mono text-sm text-[var(--bright)] shrink-0 mt-0.5"
                     aria-hidden="true"
                   >
                     →
@@ -89,7 +89,7 @@ export function Prizes() {
         </div>
 
         {/* Nota del jurado */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--lav)]/40 pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--line)]/40 pt-4">
           El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
           obligatoria.
         </p>

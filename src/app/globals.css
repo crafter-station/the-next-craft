@@ -10,7 +10,7 @@
   --font-script: var(--font-script);
   --font-heading: var(--font-pixel);
 
-  /* Mapeo de tokens shadcn → paleta Commodore 64 Boot */
+  /* Mapeo de tokens shadcn → paleta C64 B&N vintage */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -56,54 +56,54 @@
 :root {
   color-scheme: dark;
 
-  /* Paleta Commodore 64 Boot */
-  --void: #14102b;
-  --boot: #40318d;
-  --boot-dim: #2a2160;
-  --lav: #7869c4;
-  --lav-bright: #a99be8;
-  --text: #eae7f8;
-  --text-dim: #a9a3cc;
-  --bone: #d9d0bc;
-  --key-shadow: #8f8670;
+  /* Paleta B&N vintage — negro cálido tipo Apple '99 */
+  --void: #0d0d0b;
+  --screen: #1a1a17;
+  --screen-dim: #131311;
+  --line: #8c8a82;
+  --bright: #e9e7de;
+  --text: #f2f0e9;
+  --text-dim: #a2a096;
+  --bone: #e6e3d8;
+  --key-shadow: #8c8a82;
 
   /* Tokens shadcn mapeados a la paleta */
-  --background: #14102b;
-  --foreground: #eae7f8;
-  --card: #2a2160;
-  --card-foreground: #eae7f8;
-  --popover: #2a2160;
-  --popover-foreground: #eae7f8;
-  --primary: #d9d0bc;
-  --primary-foreground: #14102b;
-  --secondary: #2a2160;
-  --secondary-foreground: #eae7f8;
-  --muted: #2a2160;
-  --muted-foreground: #a9a3cc;
-  --accent: #40318d;
-  --accent-foreground: #eae7f8;
+  --background: #0d0d0b;
+  --foreground: #f2f0e9;
+  --card: #131311;
+  --card-foreground: #f2f0e9;
+  --popover: #131311;
+  --popover-foreground: #f2f0e9;
+  --primary: #e6e3d8;
+  --primary-foreground: #0d0d0b;
+  --secondary: #131311;
+  --secondary-foreground: #f2f0e9;
+  --muted: #131311;
+  --muted-foreground: #a2a096;
+  --accent: #1a1a17;
+  --accent-foreground: #f2f0e9;
   --destructive: #f87171;
-  --border: rgb(120 105 196 / 45%);
-  --input: rgb(120 105 196 / 30%);
-  --ring: #a99be8;
+  --border: rgb(140 138 130 / 45%);
+  --input: rgb(140 138 130 / 30%);
+  --ring: #e9e7de;
   --radius: 0.5rem;
 
-  /* Charts — escala lavanda */
-  --chart-1: #a99be8;
-  --chart-2: #7869c4;
-  --chart-3: #40318d;
-  --chart-4: #2a2160;
-  --chart-5: #d9d0bc;
+  /* Charts — escala de grises cálidos */
+  --chart-1: #e9e7de;
+  --chart-2: #a2a096;
+  --chart-3: #8c8a82;
+  --chart-4: #1a1a17;
+  --chart-5: #e6e3d8;
 
   /* Sidebar */
-  --sidebar: #2a2160;
-  --sidebar-foreground: #eae7f8;
-  --sidebar-primary: #d9d0bc;
-  --sidebar-primary-foreground: #14102b;
-  --sidebar-accent: #40318d;
-  --sidebar-accent-foreground: #eae7f8;
-  --sidebar-border: rgb(120 105 196 / 35%);
-  --sidebar-ring: #a99be8;
+  --sidebar: #131311;
+  --sidebar-foreground: #f2f0e9;
+  --sidebar-primary: #e6e3d8;
+  --sidebar-primary-foreground: #0d0d0b;
+  --sidebar-accent: #1a1a17;
+  --sidebar-accent-foreground: #f2f0e9;
+  --sidebar-border: rgb(140 138 130 / 35%);
+  --sidebar-ring: #e9e7de;
 }
 
 @layer base {
@@ -119,15 +119,15 @@
     @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 
-  /* Selection: lavanda sobre void */
+  /* Selection: blanco cálido sobre negro */
   ::selection {
-    background-color: #a99be8;
-    color: #14102b;
+    background-color: #e9e7de;
+    color: #0d0d0b;
   }
 
-  /* Focus visible: lavanda bright */
+  /* Focus visible: blanco cálido */
   :focus-visible {
-    outline: 2px solid #a99be8;
+    outline: 2px solid #e9e7de;
     outline-offset: 2px;
   }
 }
@@ -142,7 +142,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--lav-bright);
+  color: var(--bright);
 }
 
 /* Titular pixel PETSCII */
@@ -156,12 +156,12 @@
 }
 
 /*
-  Marco de monitor C64: borde lavanda grueso alrededor de una
-  "pantalla" azul boot. Hero y FinalCta.
+  Marco de monitor C64: borde gris platino alrededor de una
+  "pantalla" negra. Hero y FinalCta.
 */
 .crt-frame {
-  background-color: var(--boot);
-  border: 10px solid var(--lav);
+  background-color: var(--screen);
+  border: 10px solid var(--line);
   border-radius: 0.75rem;
 }
 
@@ -185,7 +185,7 @@
 }
 
 /*
-  Keycap: CTA como tecla beige del C64.
+  Keycap: CTA como tecla de marfil del C64.
   Extruida con sombra dura inferior; :active la hunde.
 */
 .keycap {
@@ -198,7 +198,7 @@
 }
 
 .keycap:hover {
-  background-color: #e6dfcd;
+  background-color: #f4f2ea;
 }
 
 .keycap:active {
@@ -206,29 +206,29 @@
   box-shadow: 0 0 0 var(--key-shadow);
 }
 
-/* Variante fantasma: tecla transparente con borde lavanda */
+/* Variante fantasma: tecla transparente con borde gris */
 .keycap-ghost {
   background-color: transparent;
   color: var(--text);
-  border: 1px solid var(--lav);
+  border: 1px solid var(--line);
   border-radius: 0.5rem;
-  box-shadow: 0 3px 0 var(--lav);
+  box-shadow: 0 3px 0 var(--line);
   transform: translateY(0);
 }
 
 .keycap-ghost:hover {
-  background-color: var(--boot-dim);
+  background-color: var(--screen-dim);
 }
 
 .keycap-ghost:active {
   transform: translateY(3px);
-  box-shadow: 0 0 0 var(--lav);
+  box-shadow: 0 0 0 var(--line);
 }
 
 /* Panel de sección: card sobre void */
 .panel {
-  background-color: var(--boot-dim);
-  border: 1px solid var(--lav);
+  background-color: var(--screen-dim);
+  border: 1px solid var(--line);
   border-radius: 0.625rem;
 }
 
@@ -269,7 +269,7 @@
     display: inline-block;
     animation: blink-cursor 1s steps(1) infinite;
     margin-left: 2px;
-    color: var(--lav-bright);
+    color: var(--bright);
   }
 
   /* ── Hero page-load: staggered reveal ──────────────────────── */
@@ -334,14 +334,14 @@
     left: 0.5rem;
     right: 0.5rem;
     height: 1px;
-    background-color: var(--lav-bright);
+    background-color: var(--bright);
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform 200ms ease-out;
   }
 
   .nav-link:hover {
-    color: var(--lav-bright);
+    color: var(--bright);
   }
 
   .nav-link:hover::after {

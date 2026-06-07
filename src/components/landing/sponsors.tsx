@@ -36,7 +36,7 @@ export function Sponsors() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="panel flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
-                           hover:bg-[var(--boot)] transition-colors duration-150 no-underline"
+                           hover:bg-[var(--screen)] transition-colors duration-150 no-underline"
               >
                 {/* Wordmark pixel */}
                 <span
@@ -48,7 +48,7 @@ export function Sponsors() {
                 </span>
 
                 {/* Role label */}
-                <span className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--lav-bright)]">
+                <span className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                   {role}
                 </span>
               </a>
@@ -69,7 +69,7 @@ export function Sponsors() {
               <li key={name} className="panel px-6 py-7 flex flex-col gap-3">
                 <span
                   className="font-mono font-bold leading-none tracking-[0.05em]
-                             text-[var(--lav-bright)] select-none"
+                             text-[var(--bright)] select-none"
                   style={{ fontSize: "clamp(0.9375rem, 1.4vw, 1.125rem)" }}
                 >
                   {name}
@@ -80,11 +80,11 @@ export function Sponsors() {
         </div>
 
         {/* Sponsor CTA */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--lav)]/40 pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--line)]/40 pt-4">
           {"¿Quieres ser sponsor? →"}{" "}
           <a
             href="mailto:sponsors@crafterstation.com"
-            className="text-[var(--lav-bright)] hover:text-[var(--text)] underline underline-offset-2 transition-colors duration-150"
+            className="text-[var(--bright)] hover:text-[var(--text)] underline underline-offset-2 transition-colors duration-150"
           >
             sponsors@crafterstation.com
           </a>

@@ -68,7 +68,7 @@ export function Faq() {
             <AccordionItem
               key={id}
               value={id}
-              className="border-b border-[var(--lav)]/35 border-t-0 border-l-0 border-r-0 first:border-t first:border-[var(--lav)]/35"
+              className="border-b border-[var(--line)]/35 border-t-0 border-l-0 border-r-0 first:border-t first:border-[var(--line)]/35"
             >
               <AccordionTrigger
                 className={`
@@ -77,18 +77,18 @@ export function Faq() {
                   py-5 px-0
                   font-sans text-sm font-medium text-left
                   text-[var(--text)]
-                  hover:no-underline hover:text-[var(--lav-bright)]
+                  hover:no-underline hover:text-[var(--bright)]
                   focus-visible:ring-0 focus-visible:border-transparent
-                  focus-visible:text-[var(--lav-bright)]
-                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--lav-bright)] focus-visible:outline-offset-2
+                  focus-visible:text-[var(--bright)]
+                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--bright)] focus-visible:outline-offset-2
                   transition-colors duration-150
                   rounded-none border-none bg-transparent
-                  [&_[data-slot=accordion-trigger-icon]]:text-[var(--lav-bright)]
+                  [&_[data-slot=accordion-trigger-icon]]:text-[var(--bright)]
                   [&_[data-slot=accordion-trigger-icon]]:shrink-0
                 `}
               >
                 <span className="flex items-baseline gap-3 min-w-0">
-                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--lav-bright)] select-none">
+                  <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--bright)] select-none">
                     {id}
                   </span>
                   <span className="leading-snug">{question}</span>

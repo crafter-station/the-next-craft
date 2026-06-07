@@ -28,7 +28,7 @@ const COMUNIDAD_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--void)] border-t border-[var(--lav)]/40">
+    <footer className="bg-[var(--void)] border-t border-[var(--line)]/40">
       {/* ── Stats row ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 pt-10 grid grid-cols-3 gap-3">
         {STATS.map(({ value, unit }) => (
@@ -53,10 +53,10 @@ export function Footer() {
       </div>
 
       {/* ── Middle row: wordmark + link columns ── */}
-      <div className="mx-auto max-w-7xl px-6 md:px-12 py-12 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[var(--lav)]/30">
+      <div className="mx-auto max-w-7xl px-6 md:px-12 py-12 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-[var(--line)]/30">
         {/* Wordmark */}
         <div className="flex flex-col gap-3">
-          <p className="font-script text-xl leading-[1.6] text-[var(--lav-bright)]">
+          <p className="font-script text-xl leading-[1.6] text-[var(--bright)]">
             the next craft
           </p>
           <p className="font-mono text-xs text-[var(--text-dim)] leading-[1.65]">
@@ -76,7 +76,7 @@ export function Footer() {
               <li key={href}>
                 <a
                   href={href}
-                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150 py-1 inline-block"
+                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
                 >
                   {label}
                 </a>
@@ -95,7 +95,7 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150"
+                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150"
                 >
                   {label}
                 </a>
@@ -111,7 +111,7 @@ export function Footer() {
             <li>
               <a
                 href="mailto:hola@crafterstation.com"
-                className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--lav-bright)] transition-colors duration-150 py-1 inline-block"
+                className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
               >
                 hola@crafterstation.com
               </a>
@@ -127,7 +127,7 @@ export function Footer() {
         </p>
         <p className="font-mono text-xs text-[var(--text-dim)]">
           hecho a mano, no vibecodeado.{" "}
-          <span className="text-[var(--lav-bright)]" aria-hidden="true">
+          <span className="text-[var(--bright)]" aria-hidden="true">
             READY.<span className="cursor-blink">█</span>
           </span>
         </p>

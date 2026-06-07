@@ -11,7 +11,7 @@ const NAV_LINKS = [
 
 export function Nav() {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--void)]/95 backdrop-blur-[2px] border-b border-[var(--lav)]/40">
+    <header className="sticky top-0 z-50 bg-[var(--void)]/95 backdrop-blur-[2px] border-b border-[var(--line)]/40">
       <nav
         className="mx-auto max-w-7xl px-6 md:px-12 h-14 flex items-center justify-between gap-4"
         aria-label="Navegación principal"
@@ -19,7 +19,7 @@ export function Nav() {
         {/* Wordmark — script estilo "hello." */}
         <Link
           href="/"
-          className="font-script text-base leading-none text-[var(--lav-bright)] hover:text-[var(--text)] transition-colors duration-150 shrink-0 pt-2"
+          className="font-script text-base leading-none text-[var(--bright)] hover:text-[var(--text)] transition-colors duration-150 shrink-0 pt-2"
         >
           the next craft
         </Link>
