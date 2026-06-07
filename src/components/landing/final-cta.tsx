@@ -1,5 +1,12 @@
 import { CornerMarks } from "./corner-marks";
 
+// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md)
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "51999999999";
+const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hola, quiero postular a The Next Craft",
+)}`;
+
 export function FinalCta() {
   return (
     <section
@@ -48,17 +55,17 @@ export function FinalCta() {
         {/* CTA button */}
         <div className="flex flex-col items-start gap-4 pt-2">
           <a
-            href="https://forms.crafterstation.com/the-next-craft"
+            href={WA_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
           >
-            Postular ahora <span className="cta-arrow">→</span>
+            Postular por WhatsApp <span className="cta-arrow">→</span>
           </a>
 
           {/* Fine print */}
           <p className="font-mono text-xs leading-[1.4] text-white/70">
-            150 cupos. Admisión selectiva. Gratis.
+            150 cupos. Admisión selectiva. Gratis. 7 preguntas, 90 segundos.
           </p>
         </div>
       </div>
