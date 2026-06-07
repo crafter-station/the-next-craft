@@ -2,9 +2,9 @@ import { SectionHeader } from "./section-header";
 
 const HEADLINE_SPONSORS = [
   {
-    wordmark: "NEXT",
-    role: "HEADLINE SPONSOR",
-    href: "https://nextjs.org",
+    wordmark: "NEXT FELLOW",
+    role: "CO-ORGANIZER",
+    href: "https://nextfellow.ai",
   },
   {
     wordmark: "CRAFTER STATION",

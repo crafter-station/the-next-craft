@@ -75,16 +75,20 @@ mono 11px tracking 0.18em.
 
 ## Contenido canónico (NO inventar otros datos)
 
-- **Evento**: The Next Craft — hackathon por Crafter Station × Next
+- **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
+  (nextfellow.ai, "Next" en el naming corto)
 - **Tagline**: "De cero a producto en 36 horas."
 - **Fecha**: 24–26 de julio, 2026 · **Lugar**: Lima, Perú (presencial)
 - **Formato**: 36 horas · 150 hackers · equipos de 3–5
 - **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
 - **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)
-- **Tracks**:
-  1. `AI CRAFT` — productos reales construidos con IA, no demos
-  2. `OPEN WEB` — herramientas open source para la comunidad dev
-  3. `LOCAL IMPACT` — tecnología para problemas de LATAM
+- **Track ÚNICO — el corazón de la hackathon**: que tu producto tenga
+  usuarios reales (o al menos UNO) antes del cierre. Sin categorías.
+  Ejemplos de qué cuenta: landing + MVP con signups durante el evento;
+  herramienta lanzada en un grupo de WhatsApp/Discord/colegio/comunidad;
+  micro-SaaS donde al menos un usuario completa la acción principal;
+  marketplace pequeño con publicaciones reales; herramienta de comunidad
+  probada en vivo con otros participantes.
 - **Organizers**: Shiara Arauzo (Lead Organizer), Railly Hugo (Crafter
   Station), + 4 cards placeholder con roles (Logistics, Partnerships,
   Community, Design) marcadas con `// TODO: reemplazar con equipo real`.
@@ -102,10 +106,10 @@ mono 11px tracking 0.18em.
    sin tagline visible)
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
-5. `30` Tracks (`#tracks`) — 3 cards
+5. `30` Track (`#tracks`) — track único: usuarios reales
 6. `40` Agenda (`#agenda`) — timeline 36h
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
-8. `60` Sponsors (`#sponsors`) — Next (headline) + Crafter Station + partners
+8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)
 10. `80` Organizers (`#organizers`) — equipo (2 reales + 4 placeholder)
 11. FinalCta (`#postular`) — pantalla C64 final, `RUN POSTULAR`, CTA WhatsApp

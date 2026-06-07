@@ -12,7 +12,7 @@ const MODEL_URL = "/c64.glb";
   ya centrado por <Center>: la pantalla (Object_19) está en el mundo en
   (0, 2.26, -0.35) y el centro de la escena en (-0.17, 1.9, -0.97).
 */
-const SCREEN_POSITION: [number, number, number] = [0.05, 1.95, 0.65];
+const SCREEN_POSITION: [number, number, number] = [0.0, 1.95, 0.65];
 
 function C64() {
   const { scene } = useGLTF(MODEL_URL);
@@ -28,8 +28,8 @@ function C64() {
         aria-hidden="true"
       >
         <p
-          className="font-script font-bold text-[58px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none"
-          style={{ WebkitTextStroke: "1.2px #26261f" }}
+          className="font-script font-bold text-[40px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none"
+          style={{ WebkitTextStroke: "0.9px #26261f" }}
         >
           the next craft
         </p>
@@ -58,12 +58,12 @@ function LoadingFallback() {
 export function C64Model() {
   return (
     <div
-      className="w-full h-[420px] sm:h-[520px] lg:h-[640px] cursor-grab active:cursor-grabbing"
+      className="w-full h-[460px] sm:h-[580px] lg:h-[700px] cursor-grab active:cursor-grabbing"
       aria-hidden="true"
     >
       <Canvas
         dpr={[1, 1.5]}
-        camera={{ position: [0, 1.6, 13.5], fov: 35 }}
+        camera={{ position: [0, 1.4, 11], fov: 35 }}
         gl={{ antialias: true, alpha: true }}
       >
         <ambientLight intensity={0.9} />
