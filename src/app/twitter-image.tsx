@@ -42,7 +42,7 @@ export default async function TwitterImage() {
       style={{
         width: "1200px",
         height: "630px",
-        backgroundColor: "#0D0D0B",
+        backgroundColor: "#1A1A17",
         display: "flex",
         padding: "28px",
       }}
@@ -56,9 +56,6 @@ export default async function TwitterImage() {
           alignItems: "center",
           justifyContent: "center",
           gap: "26px",
-          backgroundColor: "#1A1A17",
-          border: "18px solid #8C8A82",
-          borderRadius: "16px",
         }}
       >
         {/* Boot header */}

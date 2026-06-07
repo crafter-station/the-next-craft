@@ -10,7 +10,7 @@ roto. Fuente pixel PETSCII para titulares y el nombre del evento en script de
 letras unidas (el "hello." de Apple). En el header vive un **Commodore 64 en
 3D real** (react-three-fiber) que gira solo y se puede arrastrar.
 
-**Lo memorable**: el hero como pantalla C64 encendida (borde gris platino,
+**Lo memorable**: el hero como boot screen full-bleed (sin marcos:
 `**** THE NEXT CRAFT 64 ****`, `READY.█` parpadeando), el C64 girando en 3D,
 "the next craft" en script conectado encima, y botones marfil como las teclas
 del hardware real.
@@ -32,9 +32,9 @@ del hardware real.
 
 | Token | Valor | Uso |
 |-------|-------|-----|
-| `--void` | `#0D0D0B` | Fondo de página (negro cálido vintage) |
-| `--screen` | `#1A1A17` | Pantalla del monitor — hero, paneles destacados |
-| `--screen-dim` | `#131311` | Paneles/cards |
+| `--void` | `#1A1A17` | Fondo único de página (negro cálido vintage) |
+| `--screen` | `#1A1A17` | Igual al fondo — un solo negro, sin marcos |
+| `--screen-dim` | `#161613` | Paneles/cards (apenas más profundo) |
 | `--line` | `#8C8A82` | Borde del monitor (gris platino), bordes de cards |
 | `--bright` | `#E9E7DE` | Acentos: script, labels, links, READY. |
 | `--text` | `#F2F0E9` | Texto cuerpo |
@@ -65,8 +65,8 @@ mono 11px tracking 0.18em.
 - **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
 - **Keycaps**: CTAs como teclas de marfil del C64 — extruidas, sombra dura
   `0 3px 0`, `:active` las hunde.
-- **Marco de monitor**: secciones-pantalla con borde gris platino grueso y
-  scanlines sutiles.
+- **Sin marcos**: hero y FinalCta full-bleed sobre el mismo negro; solo
+  scanlines sutiles como textura de pantalla.
 - **3D**: `public/c64.glb` (Draco) — auto-rotate lento + drag, lazy con
   fallback `LOADING…`, estático con reduced-motion.
 - Coordenadas de Lima `-12.0464, -77.0428` en footer.

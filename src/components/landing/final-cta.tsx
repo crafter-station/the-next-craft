@@ -12,7 +12,7 @@ export function FinalCta() {
       className="relative px-4 sm:px-6 md:px-12 lg:px-24 py-16 bg-[var(--void)]"
     >
       {/* Pantalla C64 final */}
-      <div className="crt-frame relative mx-auto max-w-6xl overflow-hidden">
+      <div className="relative mx-auto max-w-6xl overflow-hidden">
         <div
           className="scanlines absolute inset-0 pointer-events-none z-10"
           aria-hidden="true"
