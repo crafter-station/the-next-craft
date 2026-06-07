@@ -81,6 +81,7 @@ export function Countdown() {
       className="grid grid-cols-4 w-full max-w-sm sm:max-w-none sm:flex sm:items-stretch gap-0"
       aria-label="Cuenta regresiva al evento"
       role="timer"
+      aria-live="off"
     >
       {cells.map(({ value, label }, i) => (
         <div

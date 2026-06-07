@@ -54,7 +54,7 @@ export default function Home() {
       />
       <BlueprintRuler />
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
         <About />
         <Tldr />

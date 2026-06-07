@@ -43,7 +43,7 @@ export function Prizes() {
             </div>
 
             {/* Terminal hint */}
-            <p className="font-mono text-sm text-white/50">
+            <p className="font-mono text-sm text-white/70" aria-hidden="true">
               {">"} transferencia directa. sin vueltas.
             </p>
           </div>

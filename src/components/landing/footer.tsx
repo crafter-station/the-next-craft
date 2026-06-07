@@ -75,7 +75,7 @@ export function Footer() {
               <li key={href}>
                 <a
                   href={href}
-                  className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150"
+                  className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150 py-1 inline-block"
                 >
                   {label}
                 </a>
@@ -110,7 +110,7 @@ export function Footer() {
             <li>
               <a
                 href="mailto:hola@crafterstation.com"
-                className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150"
+                className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150 py-1 inline-block"
               >
                 hola@crafterstation.com
               </a>

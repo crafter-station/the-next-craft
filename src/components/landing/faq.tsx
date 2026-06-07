@@ -81,7 +81,9 @@ export function Faq() {
                   font-mono text-sm font-medium text-left
                   text-[var(--ink)]
                   hover:no-underline hover:text-[var(--blue)]
-                  focus-visible:outline-none focus-visible:text-[var(--blue)]
+                  focus-visible:ring-0 focus-visible:border-transparent
+                  focus-visible:text-[var(--blue)]
+                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--blue-bright)] focus-visible:outline-offset-2
                   transition-colors duration-150
                   rounded-none border-none bg-transparent
                   [&_[data-slot=accordion-trigger-icon]]:text-[var(--blue)]

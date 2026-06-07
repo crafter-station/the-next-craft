@@ -492,4 +492,19 @@
   [data-slot="accordion-content"][data-closed] {
     animation: none;
   }
+
+  /* Suppress all micro-interaction transitions */
+  .nav-link,
+  .nav-link::after,
+  .cta-btn,
+  .cta-btn .cta-arrow,
+  .schedule-time,
+  .schedule-row {
+    transition: none;
+  }
+
+  /* Keep nav underline invisible (no animation) */
+  .nav-link::after {
+    transform: scaleX(0);
+  }
 }

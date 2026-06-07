@@ -11,7 +11,10 @@ export function FinalCta() {
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         {/* Terminal prompt */}
-        <p className="font-mono text-xs leading-[1.4] text-white/50">
+        <p
+          className="font-mono text-xs leading-[1.4] text-white/70"
+          aria-hidden="true"
+        >
           the-next-craft$ submit --application
         </p>
 
@@ -54,7 +57,7 @@ export function FinalCta() {
           </a>
 
           {/* Fine print */}
-          <p className="font-mono text-xs leading-[1.4] text-white/50">
+          <p className="font-mono text-xs leading-[1.4] text-white/70">
             150 cupos. Admisión selectiva. Gratis.
           </p>
         </div>
