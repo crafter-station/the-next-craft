@@ -3,8 +3,8 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  /* Fuentes */
-  --font-sans: var(--font-sans);
+  /* Fuentes — el cuerpo usa la mono: coded pero legible */
+  --font-sans: var(--font-mono);
   --font-pixel: var(--font-pixel);
   --font-mono: var(--font-mono);
   --font-script: var(--font-script);

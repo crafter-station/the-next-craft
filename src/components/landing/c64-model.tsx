@@ -12,7 +12,7 @@ const MODEL_URL = "/c64.glb";
   ya centrado por <Center>: la pantalla (Object_19) está en el mundo en
   (0, 2.26, -0.35) y el centro de la escena en (-0.17, 1.9, -0.97).
 */
-const SCREEN_POSITION: [number, number, number] = [0.17, 1.95, 0.65];
+const SCREEN_POSITION: [number, number, number] = [0.05, 1.95, 0.65];
 
 function C64() {
   const { scene } = useGLTF(MODEL_URL);
@@ -27,7 +27,10 @@ function C64() {
         style={{ pointerEvents: "none" }}
         aria-hidden="true"
       >
-        <p className="font-script text-[42px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none">
+        <p
+          className="font-script font-bold text-[58px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none"
+          style={{ WebkitTextStroke: "1.2px #26261f" }}
+        >
           the next craft
         </p>
       </Html>

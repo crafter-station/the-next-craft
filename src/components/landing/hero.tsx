@@ -24,14 +24,6 @@ export function Hero() {
             <C64Model />
           </div>
 
-          {/* Tagline */}
-          <p
-            className="font-sans font-medium text-[var(--text)]/90 leading-[1.3] reveal reveal-d2"
-            style={{ fontSize: "clamp(1.0625rem, 2.2vw, 1.375rem)" }}
-          >
-            De cero a producto en 36 horas.
-          </p>
-
           {/* READY. + specs */}
           <div className="flex flex-col items-center gap-2 reveal reveal-d4">
             <p

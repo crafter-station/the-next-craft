@@ -89,7 +89,7 @@ export function Prizes() {
         </div>
 
         {/* Nota del jurado */}
-        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)] border-t border-[var(--line)]/40 pt-4">
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)]">
           El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
           obligatoria.
         </p>
