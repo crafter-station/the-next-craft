@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative px-4 sm:px-6 md:px-12 lg:px-24 py-8 md:py-12 bg-[var(--void)]"
+      className="relative px-4 sm:px-6 md:px-12 lg:px-24 pt-0 pb-8 md:pb-10 bg-[var(--void)]"
     >
       {/* Boot screen full-bleed */}
       <div className="relative mx-auto max-w-6xl overflow-hidden">
@@ -15,7 +15,7 @@ export function Hero() {
           aria-hidden="true"
         />
 
-        <div className="relative flex flex-col items-center text-center gap-5 px-5 py-6 md:px-12 md:py-8">
+        <div className="relative flex flex-col items-center text-center gap-4 px-5 pt-0 pb-4 md:px-12">
           {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
           <h1 className="sr-only">the next craft</h1>
 
@@ -55,7 +55,7 @@ export function Hero() {
               href="#tracks"
               className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
             >
-              GOTO Tracks <span className="cta-arrow">↓</span>
+              GOTO Track <span className="cta-arrow">↓</span>
             </a>
           </div>
         </div>

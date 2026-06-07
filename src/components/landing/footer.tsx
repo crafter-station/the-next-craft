@@ -6,7 +6,7 @@ const STATS = [
 
 const EVENTO_LINKS = [
   { label: "¿Qué es?", href: "#que-es" },
-  { label: "Tracks", href: "#tracks" },
+  { label: "Track", href: "#tracks" },
   { label: "Agenda", href: "#agenda" },
   { label: "Premios", href: "#premios" },
   { label: "FAQ", href: "#faq" },
