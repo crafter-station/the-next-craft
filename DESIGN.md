@@ -10,8 +10,8 @@ roto. Fuente pixel PETSCII para titulares y el nombre del evento en script de
 letras unidas (el "hello." de Apple). En el header vive un **Commodore 64 en
 3D real** (react-three-fiber) que gira solo y se puede arrastrar.
 
-**Lo memorable**: el hero como boot screen full-bleed (sin marcos:
-`**** THE NEXT CRAFT 64 ****`, `READY.█` parpadeando), el C64 girando en 3D,
+**Lo memorable**: el hero como boot screen full-bleed con el monitor
+Commodore 1702 en 3D gigante (estático, arrastrable), `READY.█` parpadeando,
 "the next craft" en script conectado encima, y botones marfil como las teclas
 del hardware real.
 
@@ -58,8 +58,7 @@ mono 11px tracking 0.18em.
 
 ## Motivos recurrentes
 
-- **Boot header**: `**** THE NEXT CRAFT 64 ****` + `64K RAM SYSTEM · 36 HOURS
-  FREE` + `READY.` con cursor `█` parpadeante (hero y footer).
+- **READY.** con cursor `█` parpadeante (hero y footer). Sin boot header.
 - **Líneas BASIC como labels de sección**: `10 PRINT "MANIFIESTO"`,
   `20 PRINT "TL;DR"`, … `80 PRINT "ORGANIZERS"` (numeración 10–80, mono).
 - **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
@@ -67,8 +66,8 @@ mono 11px tracking 0.18em.
   `0 3px 0`, `:active` las hunde.
 - **Sin marcos**: hero y FinalCta full-bleed sobre el mismo negro; solo
   scanlines sutiles como textura de pantalla.
-- **3D**: `public/c64.glb` (Draco) — auto-rotate lento + drag, lazy con
-  fallback `LOADING…`, estático con reduced-motion.
+- **3D**: `public/c64.glb` (Draco, ~800KB) — SOLO el monitor 1702, estático
+  (sin auto-rotate), drag para girar, lazy con fallback `LOADING…`.
 - Coordenadas de Lima `-12.0464, -77.0428` en footer.
 - Cierre del footer: "hecho a mano, no vibecodeado."
 
@@ -96,8 +95,8 @@ mono 11px tracking 0.18em.
 ## Estructura de la página (one-pager)
 
 1. Nav sticky (wordmark script + links mono + CTA keycap)
-2. Hero (`#hero`) — pantalla C64: boot header, script "the next craft",
-   C64 3D, READY.█, countdown, CTAs keycap
+2. Hero (`#hero`) — script "the next craft", monitor 3D gigante, READY.█,
+   countdown, CTAs keycap
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
 5. `30` Tracks (`#tracks`) — 3 cards

@@ -24,17 +24,14 @@ async function loadGoogleFont(family: string, text: string) {
   throw new Error(`failed to load font: ${family}`);
 }
 
-const BOOT_HEADER = "**** THE NEXT CRAFT 64 ****";
-const BOOT_SUB = "64K RAM SYSTEM · 36 HORAS FREE · LIMA BASIC V2";
 const SCRIPT_TITLE = "the next craft";
 const SPECS = "24–26 JUL 2026 · LIMA, PERÚ · 150 HACKERS";
 const READY = "READY.";
 
 export default async function OgImage() {
-  const [silkscreen, borel, plexMono] = await Promise.all([
-    loadGoogleFont("Silkscreen:wght@700", BOOT_HEADER),
+  const [borel, plexMono] = await Promise.all([
     loadGoogleFont("Borel", SCRIPT_TITLE),
-    loadGoogleFont("IBM+Plex+Mono:wght@500", `${BOOT_SUB}${SPECS}${READY}█`),
+    loadGoogleFont("IBM+Plex+Mono:wght@500", `${SPECS}${READY}█`),
   ]);
 
   return new ImageResponse(
@@ -58,29 +55,6 @@ export default async function OgImage() {
           gap: "26px",
         }}
       >
-        {/* Boot header */}
-        <div
-          style={{
-            color: "#E9E7DE",
-            fontSize: "34px",
-            fontFamily: "Silkscreen",
-            display: "flex",
-          }}
-        >
-          {BOOT_HEADER}
-        </div>
-        <div
-          style={{
-            color: "#A2A096",
-            fontSize: "19px",
-            fontFamily: "IBM Plex Mono",
-            letterSpacing: "0.14em",
-            display: "flex",
-          }}
-        >
-          {BOOT_SUB}
-        </div>
-
         {/* Script — letras unidas */}
         <div
           style={{
@@ -127,12 +101,6 @@ export default async function OgImage() {
     {
       ...size,
       fonts: [
-        {
-          name: "Silkscreen",
-          data: silkscreen,
-          weight: 700,
-          style: "normal",
-        },
         {
           name: "Borel",
           data: borel,

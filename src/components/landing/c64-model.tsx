@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 
 import { Center, Html, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -16,7 +16,7 @@ function C64() {
   );
 }
 
-/** Fallback temático mientras carga el .glb (~2MB, Draco) */
+/** Fallback temático mientras carga el .glb (~800KB, Draco) */
 function LoadingFallback() {
   return (
     <Html center>
@@ -28,31 +28,20 @@ function LoadingFallback() {
 }
 
 /**
- * C64Model — el Commodore 64 en 3D dentro del hero.
- * Auto-rotate lento + drag para girarlo (sin zoom ni pan).
- * Con prefers-reduced-motion el auto-rotate se apaga (drag sigue).
+ * C64Model — el monitor Commodore 1702 en 3D dentro del hero.
+ * Estático (sin auto-rotate); se puede girar con drag, sin zoom ni pan.
  * Decorativo: el wrapper lleva aria-hidden; el contenido real del
  * hero vive en el texto.
  */
 export function C64Model() {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
   return (
     <div
-      className="w-full h-[300px] sm:h-[380px] lg:h-[440px] cursor-grab active:cursor-grabbing"
+      className="w-full h-[420px] sm:h-[520px] lg:h-[620px] cursor-grab active:cursor-grabbing"
       aria-hidden="true"
     >
       <Canvas
         dpr={[1, 1.5]}
-        camera={{ position: [7, 5, 11], fov: 30 }}
+        camera={{ position: [3.4, 1.3, 7.6], fov: 32 }}
         gl={{ antialias: true, alpha: true }}
       >
         <ambientLight intensity={0.9} />
@@ -66,8 +55,6 @@ export function C64Model() {
           <C64 />
         </Suspense>
         <OrbitControls
-          autoRotate={!reducedMotion}
-          autoRotateSpeed={0.9}
           enableZoom={false}
           enablePan={false}
           minPolarAngle={Math.PI / 4}

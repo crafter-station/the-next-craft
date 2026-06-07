@@ -7,7 +7,7 @@ export function Hero() {
       id="hero"
       className="relative px-4 sm:px-6 md:px-12 lg:px-24 py-8 md:py-12 bg-[var(--void)]"
     >
-      {/* Pantalla C64 encendida: marco lavanda + boot screen azul */}
+      {/* Boot screen full-bleed */}
       <div className="relative mx-auto max-w-6xl overflow-hidden">
         {/* Scanlines del monitor — decorativas */}
         <div
@@ -16,16 +16,6 @@ export function Hero() {
         />
 
         <div className="relative flex flex-col items-center text-center gap-5 px-5 py-10 md:px-12 md:py-14">
-          {/* Boot header */}
-          <div className="flex flex-col gap-2 reveal reveal-d0">
-            <p className="font-pixel text-[11px] sm:text-sm uppercase tracking-[0.04em] text-[var(--bright)]">
-              **** THE NEXT CRAFT 64 ****
-            </p>
-            <p className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--text-dim)]">
-              64K RAM SYSTEM · 36 HORAS FREE · LIMA BASIC V2
-            </p>
-          </div>
-
           {/* Wordmark script — letras unidas como el "hello." */}
           <h1
             className="font-script leading-[1.4] text-[var(--text)] reveal reveal-d1"
@@ -42,7 +32,7 @@ export function Hero() {
             De cero a producto en 36 horas.
           </p>
 
-          {/* Commodore 64 en 3D — gira solo, arrastrable */}
+          {/* Monitor Commodore en 3D — estático, arrastrable */}
           <div className="w-full reveal reveal-d3">
             <C64Model />
           </div>
