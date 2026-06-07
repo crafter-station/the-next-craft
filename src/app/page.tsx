@@ -1,65 +1,73 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="blueprint-grid min-h-screen bg-[var(--paper)] text-[var(--ink)] px-6 md:px-12 lg:px-24 py-24 flex flex-col gap-24">
+      {/* Smoke test: label de sección */}
+      <p className="section-label">[00] — DESIGN SYSTEM</p>
+
+      {/* Display gigante */}
+      <div className="flex flex-col gap-4">
+        <h1
+          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)]"
+          style={{
+            fontSize: "clamp(3.5rem, 10vw, 7rem)",
+          }}
+        >
+          The Next
+          <br />
+          Craft
+        </h1>
+        <p className="font-mono text-lg text-[var(--ink-dim)]">
+          De cero a producto en 36 horas.
+        </p>
+        <p className="section-label text-[var(--ink-dim)]">
+          24–26 jul, 2026 · Lima, Perú
+        </p>
+      </div>
+
+      {/* Bloque azul sólido con texto blanco */}
+      <div className="crosshair bg-[var(--blue)] text-white px-8 py-12 flex flex-col gap-3 max-w-xl">
+        <span className="section-label text-white/60">[PALETA]</span>
+        <p className="font-sans font-bold text-2xl">Azul Klein #002FA7</p>
+        <p className="font-mono text-sm text-white/70">
+          Color plano. Sin degradados. Sin glassmorphism.
+        </p>
+      </div>
+
+      {/* Tokens tipográficos */}
+      <div className="flex flex-col gap-6 border-l-2 border-[var(--blue)] pl-8">
+        <span className="section-label">[TIPOGRAFÍA]</span>
+        <p className="font-sans font-extrabold text-4xl text-[var(--blue)]">
+          Bricolage Grotesque 800
+        </p>
+        <p className="font-sans font-medium text-xl text-[var(--ink)]">
+          Bricolage Grotesque 500 — cuerpo
+        </p>
+        <p className="font-mono text-base text-[var(--ink-dim)]">
+          IBM Plex Mono — labels, datos, prompts
+        </p>
+        <p className="font-mono text-sm text-[var(--blue-bright)]">
+          the-next-craft$ _
+        </p>
+      </div>
+
+      {/* CTA */}
+      <div className="flex flex-col gap-4 items-start">
+        <span className="section-label">[CTA]</span>
+        <a
+          href="/postular"
+          className="font-mono font-semibold text-sm tracking-widest uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-[var(--blue-bright)]"
+        >
+          Postular →
+        </a>
+      </div>
+
+      {/* Grid spacing demo */}
+      <div className="flex flex-col gap-2">
+        <span className="section-label">[GRID — 48px]</span>
+        <p className="font-mono text-xs text-[var(--ink-dim)]">
+          Blueprint grid: 1px · rgb(0 47 167 / 8%) · 48px
+        </p>
+      </div>
+    </main>
   );
 }
