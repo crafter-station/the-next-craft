@@ -28,10 +28,14 @@ export function Nav() {
         <ul className="hidden md:flex items-center gap-1">
           {NAV_LINKS.map(({ label, href }) => (
             <li key={href}>
-              <a
-                href={href}
-                className="font-mono text-xs text-[var(--ink-dim)] hover:text-[var(--blue)] transition-colors duration-150 px-2 py-1"
-              >
+              {/*
+                nav-link applies:
+                  - color transition to --blue-bright on hover
+                  - 1px underline that scaleX(0→1) from left on hover
+                The brackets are part of the text content so they
+                inherit the color change naturally.
+              */}
+              <a href={href} className="nav-link font-mono text-xs px-2 py-1">
                 [{label}]
               </a>
             </li>
@@ -41,9 +45,9 @@ export function Nav() {
         {/* CTA */}
         <a
           href="#postular"
-          className="font-mono text-xs font-semibold tracking-widest uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
+          className="cta-btn font-mono text-xs font-semibold tracking-widest uppercase bg-[var(--blue)] text-white px-4 py-2 hover:bg-[var(--blue-bright)] transition-colors duration-150 shrink-0"
         >
-          Postular →
+          Postular <span className="cta-arrow">→</span>
         </a>
       </nav>
     </header>

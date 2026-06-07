@@ -9,7 +9,7 @@ export function FinalCta() {
       {/* Corner marks — white on blue */}
       <CornerMarks color="#ffffff" opacity={0.25} />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
         {/* Terminal prompt */}
         <p className="font-mono text-xs text-white/50">
           the-next-craft$ submit --application
@@ -36,9 +36,9 @@ export function FinalCta() {
             href="https://forms.crafterstation.com/the-next-craft"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono font-semibold text-sm tracking-widest uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
           >
-            Postular ahora →
+            Postular ahora <span className="cta-arrow">→</span>
           </a>
 
           {/* Fine print */}

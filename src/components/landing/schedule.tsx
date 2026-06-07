@@ -81,7 +81,7 @@ export function Schedule() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
         {/* Section label */}
         <p className="section-label">[04] — AGENDA</p>
 
@@ -116,7 +116,7 @@ export function Schedule() {
                   {day.events.map((event) => (
                     <li
                       key={`${day.header}-${event.time}`}
-                      className="group relative flex items-baseline gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
+                      className="schedule-row group relative flex items-baseline gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
                     >
                       {/* Square node on the vertical line */}
                       <span
@@ -124,9 +124,9 @@ export function Schedule() {
                         aria-hidden="true"
                       />
 
-                      {/* Time — mono tabular-nums */}
+                      {/* Time — mono tabular-nums; weight increases on row hover via .schedule-time */}
                       <span
-                        className="font-mono text-sm font-medium tabular-nums text-[var(--blue)] shrink-0 w-12"
+                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--blue)] shrink-0 w-12"
                         style={{ fontVariantNumeric: "tabular-nums" }}
                       >
                         {event.time}

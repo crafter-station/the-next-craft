@@ -312,3 +312,183 @@
   bottom: -8px;
   right: -8px;
 }
+
+/* ─── Motion & micro-interactions ───────────────────────────────── */
+
+/*
+  All animations are wrapped in prefers-reduced-motion: no-preference.
+  When the user prefers reduced motion, elements are immediately visible
+  (no animation, no delay) and micro-interactions are suppressed.
+*/
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ── Keyframes ──────────────────────────────────────────────── */
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes blink-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* ── Hero page-load: staggered reveal ──────────────────────── */
+  /*
+    Base class. Elements start hidden, animate to visible.
+    animation-delay is set via inline style or modifier classes.
+    animation-fill-mode: both → element starts at from-state
+    even before the animation runs.
+  */
+  .reveal {
+    animation: fade-up 500ms ease-out both;
+  }
+
+  .reveal-d0 {
+    animation-delay: 0ms;
+  }
+  .reveal-d1 {
+    animation-delay: 80ms;
+  }
+  .reveal-d2 {
+    animation-delay: 160ms;
+  }
+  .reveal-d3 {
+    animation-delay: 240ms;
+  }
+  .reveal-d4 {
+    animation-delay: 320ms;
+  }
+  .reveal-d5 {
+    animation-delay: 400ms;
+  }
+  .reveal-d6 {
+    animation-delay: 480ms;
+  }
+
+  /* ── Terminal cursor blink ──────────────────────────────────── */
+  .cursor-blink {
+    display: inline-block;
+    animation: blink-cursor 1s steps(1) infinite;
+    margin-left: 1px;
+    color: var(--blue);
+  }
+
+  /* ── Scroll-driven section reveals ─────────────────────────── */
+  /*
+    Uses CSS scroll-driven animations (animation-timeline: view()).
+    Supported: Chrome 115+, Edge 115+. Firefox & Safari fallback via
+    @supports — elements are visible by default (no opacity:0 set
+    outside the @supports block), so unsupported browsers see content
+    immediately.
+  */
+  @supports (animation-timeline: view()) {
+    .scroll-reveal {
+      animation: fade-up 500ms ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 25%;
+    }
+  }
+
+  /* ── CTA button arrow → moves 4px right on hover ───────────── */
+  /*
+    Targets a <span> with class .cta-arrow inside the button/link.
+    The arrow itself shifts, not the whole button, for subtlety.
+  */
+  .cta-btn .cta-arrow {
+    display: inline-block;
+    transition: transform 150ms ease-out;
+  }
+
+  .cta-btn:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .cta-btn:active {
+    transform: translateY(1px);
+  }
+
+  /* ── Nav links: bracket glow + underline scale ──────────────── */
+  /*
+    The brackets [label] change color to --blue-bright on hover.
+    A 1px underline grows left-to-right via scaleX.
+    The <a> wraps both brackets and text; use a ::after pseudo for
+    the underline so we can use transform without touching layout.
+  */
+  .nav-link {
+    position: relative;
+    color: var(--ink-dim);
+    transition: color 150ms ease-out;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0.5rem; /* align with inner text, inside the brackets */
+    right: 0.5rem;
+    height: 1px;
+    background-color: var(--blue-bright);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 200ms ease-out;
+  }
+
+  .nav-link:hover {
+    color: var(--blue-bright);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Schedule row: time weight on hover ─────────────────────── */
+  /*
+    The group hover already changes bg. We add font-weight transition
+    on the time <span>. Use font-variation-settings for smooth
+    interpolation on variable fonts; fallback to font-weight step.
+  */
+  .schedule-time {
+    transition: font-weight 100ms ease-out;
+  }
+
+  /* Tailwind group-hover applies the class, but we need pure CSS here.
+     The parent <li> has class "group" already. We use a sibling
+     selector via .schedule-row:hover .schedule-time */
+  .schedule-row:hover .schedule-time {
+    font-weight: 600;
+  }
+}
+
+/* ── Fallback: reduced-motion → everything visible, no animation ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-blink {
+    animation: none;
+  }
+
+  /* Disable accordion open/close animations from tw-animate-css.
+     Higher specificity (two attribute selectors) avoids !important. */
+  [data-slot="accordion-content"][data-open],
+  [data-slot="accordion-content"][data-closed] {
+    animation: none;
+  }
+}

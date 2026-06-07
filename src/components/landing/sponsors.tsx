@@ -23,7 +23,7 @@ export function Sponsors() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
         {/* Section label */}
         <h2 className="section-label">[06] — SPONSORS</h2>
 

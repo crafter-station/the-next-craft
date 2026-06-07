@@ -17,7 +17,7 @@ export function About() {
         01
       </span>
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 relative">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 relative scroll-reveal">
         {/* Section label */}
         <p className="section-label">[01] — ¿QUÉ ES?</p>
 

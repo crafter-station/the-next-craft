@@ -10,14 +10,17 @@ export function Hero() {
       <CornerMarks />
 
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-6">
-        {/* Terminal prompt */}
-        <p className="font-mono text-xs text-[var(--ink-dim)]">
+        {/* Terminal prompt — first to appear */}
+        <p className="font-mono text-xs text-[var(--ink-dim)] reveal reveal-d0">
           the-next-craft$ init --lima --36h
+          <span className="cursor-blink" aria-hidden="true">
+            ▌
+          </span>
         </p>
 
         {/* Hero name */}
         <h1
-          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)]"
+          className="font-sans font-extrabold leading-none tracking-tight text-[var(--blue)] reveal reveal-d1"
           style={{ fontSize: "clamp(3.5rem, 9vw, 7rem)" }}
         >
           THE NEXT
@@ -27,35 +30,35 @@ export function Hero() {
 
         {/* Tagline */}
         <p
-          className="font-sans font-medium text-[var(--ink)]"
+          className="font-sans font-medium text-[var(--ink)] reveal reveal-d2"
           style={{ fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)" }}
         >
           De cero a producto en 36 horas.
         </p>
 
         {/* Countdown — protagonista sin label verbal */}
-        <div className="pt-2">
+        <div className="pt-2 reveal reveal-d3">
           <Countdown />
         </div>
 
         {/* Specs — debajo del countdown para jerarquia correcta */}
-        <p className="section-label text-[var(--ink-dim)]">
+        <p className="section-label text-[var(--ink-dim)] reveal reveal-d4">
           24–26 JUL 2026 · LIMA, PERÚ · 150 HACKERS
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 pt-1">
+        <div className="flex flex-wrap items-center gap-4 pt-1 reveal reveal-d5">
           <a
             href="#postular"
-            className="font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
           >
-            Postular →
+            Postular <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
-            className="font-mono font-semibold text-sm tracking-widest uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"
+            className="cta-btn font-mono font-semibold text-sm tracking-widest uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"
           >
-            Ver tracks ↓
+            Ver tracks <span className="cta-arrow">↓</span>
           </a>
         </div>
       </div>

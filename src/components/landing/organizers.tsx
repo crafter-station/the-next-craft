@@ -63,7 +63,7 @@ export function Organizers() {
     >
       <CornerMarks />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-12 scroll-reveal">
         {/* Section label */}
         <p className="section-label">[08] — ORGANIZERS</p>
 
