@@ -10,7 +10,7 @@ export function About() {
 
       {/* Section number — watermark tecnico en fondo */}
       <span
-        className="absolute right-0 top-1/2 -translate-y-1/2 font-mono font-black leading-none select-none pointer-events-none text-[var(--blue)] translate-x-1/4"
+        className="absolute right-0 top-1/2 -translate-y-1/2 font-mono font-bold leading-none select-none pointer-events-none text-[var(--blue)] translate-x-1/4"
         style={{ fontSize: "clamp(12rem, 30vw, 22rem)", opacity: 0.04 }}
         aria-hidden="true"
       >

@@ -108,7 +108,7 @@ export function Organizers() {
                   >
                     <span
                       className={[
-                        "font-sans font-black leading-none tracking-tight",
+                        "font-sans font-extrabold leading-none tracking-tight",
                         placeholder
                           ? "text-[var(--ink-dim)]"
                           : accent

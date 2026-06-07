@@ -233,52 +233,6 @@
   color: var(--blue);
 }
 
-/*
-  Crosshair — marcas "+" de registro en las 4 esquinas.
-  Uso: <div class="crosshair relative"> ... </div>
-  El elemento padre debe tener position: relative (o absolute/fixed).
-  Las marcas se dibujan con spans inyectados, o con ::before/::after
-  en variantes de esquina específica.
-
-  Patrón con spans (recomendado para 4 esquinas):
-  <div class="relative">
-    <span class="corner corner-tl" aria-hidden="true" />
-    <span class="corner corner-tr" aria-hidden="true" />
-    <span class="corner corner-bl" aria-hidden="true" />
-    <span class="corner corner-br" aria-hidden="true" />
-    ...contenido...
-  </div>
-*/
-.crosshair {
-  position: relative;
-}
-
-.crosshair::before,
-.crosshair::after {
-  content: "+";
-  position: absolute;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1;
-  color: var(--blue);
-  opacity: 0.4;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* Esquina superior izquierda */
-.crosshair::before {
-  top: -8px;
-  left: -8px;
-}
-
-/* Esquina superior derecha */
-.crosshair::after {
-  top: -8px;
-  right: -8px;
-}
-
-/* Para las esquinas inferiores usar spans o una variante adicional */
 .corner {
   position: absolute;
   font-family: var(--font-mono);
@@ -374,9 +328,6 @@
   }
   .reveal-d5 {
     animation-delay: 400ms;
-  }
-  .reveal-d6 {
-    animation-delay: 480ms;
   }
 
   /* ── Terminal cursor blink ──────────────────────────────────── */
