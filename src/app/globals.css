@@ -2,14 +2,31 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
+  /* Fuentes */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+
+  /* Mapeo de tokens shadcn → paleta Blueprint Terminal */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -23,108 +40,422 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Radius: 0 — plano técnico, esquinas rectas */
+  --radius-sm: 0rem;
+  --radius-md: 0rem;
+  --radius-lg: 0rem;
+  --radius-xl: 0rem;
+  --radius-2xl: 0rem;
+  --radius-3xl: 0rem;
+  --radius-4xl: 0rem;
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  color-scheme: light;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Paleta Blueprint Terminal */
+  --paper: #ffffff;
+  --paper-dim: #f4f7fe;
+  --blue: #002fa7;
+  --blue-bright: #1d4ed8;
+  --blue-grid: rgb(0 47 167 / 8%);
+  --ink: #0a1633;
+  --ink-dim: #5b6478;
+
+  /* Tokens shadcn mapeados a la paleta */
+  --background: #ffffff;
+  --foreground: #0a1633;
+  --card: #ffffff;
+  --card-foreground: #0a1633;
+  --popover: #ffffff;
+  --popover-foreground: #0a1633;
+  --primary: #002fa7;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f7fe;
+  --secondary-foreground: #0a1633;
+  --muted: #f4f7fe;
+  --muted-foreground: #5b6478;
+  --accent: #f4f7fe;
+  --accent-foreground: #002fa7;
+  --destructive: #dc2626;
+  --border: rgb(0 47 167 / 20%);
+  --input: rgb(0 47 167 / 12%);
+  --ring: #002fa7;
+  --radius: 0rem;
+
+  /* Charts — escala de azules */
+  --chart-1: #002fa7;
+  --chart-2: #1d4ed8;
+  --chart-3: #3b82f6;
+  --chart-4: #93c5fd;
+  --chart-5: #dbeafe;
+
+  /* Sidebar */
+  --sidebar: #f4f7fe;
+  --sidebar-foreground: #0a1633;
+  --sidebar-primary: #002fa7;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #dbeafe;
+  --sidebar-accent-foreground: #002fa7;
+  --sidebar-border: rgb(0 47 167 / 15%);
+  --sidebar-ring: #002fa7;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden antialiased;
+  }
+
+  /* Selection: azul Klein + texto blanco */
+  ::selection {
+    background-color: #002fa7;
+    color: #ffffff;
+  }
+
+  /* Focus visible: outline azul brillante, sin radius */
+  :focus-visible {
+    outline: 2px solid #1d4ed8;
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Blueprint ruler — fixed left margin, desktop only ─────────── */
+/*
+  Regla vertical blueprint: línea 1px + marcas de referencia tipo plano técnico.
+  Se dibuja como pseudo-elemento en body. Desktop (lg+) únicamente.
+  CSS-only, sin JS, sin React. Azul Klein al 35% para ser sutil pero presente.
+*/
+@media (min-width: 1024px) {
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 2rem;
+    width: 1px;
+    height: 100vh;
+    background-color: var(--blue);
+    opacity: 0.18;
+    z-index: 40;
+    pointer-events: none;
+  }
+
+  /* Counter de líneas: cada 96px (~2 módulos de 48px del grid blueprint) */
+  .blueprint-ruler {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2rem;
+    height: 100vh;
+    z-index: 40;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .blueprint-ruler__ticks {
+    position: absolute;
+    top: 3.5rem; /* debajo del nav sticky */
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .blueprint-ruler__tick {
+    display: flex;
+    align-items: center;
+    height: 96px;
+    position: relative;
+  }
+
+  /* Marca corta cada 96px */
+  .blueprint-ruler__tick::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 1px;
+    background-color: var(--blue);
+    opacity: 0.25;
+  }
+
+  /* Número de línea */
+  .blueprint-ruler__tick span {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    line-height: 1;
+    color: var(--blue);
+    opacity: 0.3;
+    writing-mode: horizontal-tb;
+    padding-right: 10px;
+    padding-left: 2px;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+}
+
+/* ─── Utilidades custom ─────────────────────────────────────────── */
+
+/* Grid técnico de blueprint: líneas 1px azul ~8% cada 48px */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, var(--blue-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--blue-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Variante inversa: líneas blancas ~10% sobre fondo azul sólido */
+.blueprint-grid-inverse {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 10%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 10%) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Label de sección: monospace uppercase 12px */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.corner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--blue);
+  opacity: 0.4;
+  pointer-events: none;
+  user-select: none;
+}
+
+.corner::before {
+  content: "+";
+}
+
+.corner-tl {
+  top: -8px;
+  left: -8px;
+}
+
+.corner-tr {
+  top: -8px;
+  right: -8px;
+}
+
+.corner-bl {
+  bottom: -8px;
+  left: -8px;
+}
+
+.corner-br {
+  bottom: -8px;
+  right: -8px;
+}
+
+/* ─── Motion & micro-interactions ───────────────────────────────── */
+
+/*
+  All animations are wrapped in prefers-reduced-motion: no-preference.
+  When the user prefers reduced motion, elements are immediately visible
+  (no animation, no delay) and micro-interactions are suppressed.
+*/
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ── Keyframes ──────────────────────────────────────────────── */
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes blink-cursor {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* ── Hero page-load: staggered reveal ──────────────────────── */
+  /*
+    Base class. Elements start hidden, animate to visible.
+    animation-delay is set via inline style or modifier classes.
+    animation-fill-mode: both → element starts at from-state
+    even before the animation runs.
+  */
+  .reveal {
+    animation: fade-up 500ms ease-out both;
+  }
+
+  .reveal-d0 {
+    animation-delay: 0ms;
+  }
+  .reveal-d1 {
+    animation-delay: 80ms;
+  }
+  .reveal-d2 {
+    animation-delay: 160ms;
+  }
+  .reveal-d3 {
+    animation-delay: 240ms;
+  }
+  .reveal-d4 {
+    animation-delay: 320ms;
+  }
+  .reveal-d5 {
+    animation-delay: 400ms;
+  }
+
+  /* ── Terminal cursor blink ──────────────────────────────────── */
+  .cursor-blink {
+    display: inline-block;
+    animation: blink-cursor 1s steps(1) infinite;
+    margin-left: 1px;
+    color: var(--blue);
+  }
+
+  /* ── Scroll-driven section reveals ─────────────────────────── */
+  /*
+    Uses CSS scroll-driven animations (animation-timeline: view()).
+    Supported: Chrome 115+, Edge 115+. Firefox & Safari fallback via
+    @supports — elements are visible by default (no opacity:0 set
+    outside the @supports block), so unsupported browsers see content
+    immediately.
+  */
+  @supports (animation-timeline: view()) {
+    .scroll-reveal {
+      animation: fade-up 500ms ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 25%;
+    }
+  }
+
+  /* ── CTA button arrow → moves 4px right on hover ───────────── */
+  /*
+    Targets a <span> with class .cta-arrow inside the button/link.
+    The arrow itself shifts, not the whole button, for subtlety.
+  */
+  .cta-btn .cta-arrow {
+    display: inline-block;
+    transition: transform 150ms ease-out;
+  }
+
+  .cta-btn:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+
+  .cta-btn:active {
+    transform: translateY(1px);
+  }
+
+  /* ── Nav links: bracket glow + underline scale ──────────────── */
+  /*
+    The brackets [label] change color to --blue-bright on hover.
+    A 1px underline grows left-to-right via scaleX.
+    The <a> wraps both brackets and text; use a ::after pseudo for
+    the underline so we can use transform without touching layout.
+  */
+  .nav-link {
+    position: relative;
+    color: var(--ink-dim);
+    transition: color 150ms ease-out;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0.5rem; /* align with inner text, inside the brackets */
+    right: 0.5rem;
+    height: 1px;
+    background-color: var(--blue-bright);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 200ms ease-out;
+  }
+
+  .nav-link:hover {
+    color: var(--blue-bright);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ── Schedule row: time weight on hover ─────────────────────── */
+  /*
+    The group hover already changes bg. We add font-weight transition
+    on the time <span>. Use font-variation-settings for smooth
+    interpolation on variable fonts; fallback to font-weight step.
+  */
+  .schedule-time {
+    transition: font-weight 100ms ease-out;
+  }
+
+  /* Tailwind group-hover applies the class, but we need pure CSS here.
+     The parent <li> has class "group" already. We use a sibling
+     selector via .schedule-row:hover .schedule-time */
+  .schedule-row:hover .schedule-time {
+    font-weight: 600;
+  }
+}
+
+/* ── Fallback: reduced-motion → everything visible, no animation ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-blink {
+    animation: none;
+  }
+
+  /* Disable accordion open/close animations from tw-animate-css.
+     Higher specificity (two attribute selectors) avoids !important. */
+  [data-slot="accordion-content"][data-open],
+  [data-slot="accordion-content"][data-closed] {
+    animation: none;
+  }
+
+  /* Suppress all micro-interaction transitions */
+  .nav-link,
+  .nav-link::after,
+  .cta-btn,
+  .cta-btn .cta-arrow,
+  .schedule-time,
+  .schedule-row {
+    transition: none;
+  }
+
+  /* Keep nav underline invisible (no animation) */
+  .nav-link::after {
+    transform: scaleX(0);
   }
 }
