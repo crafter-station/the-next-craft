@@ -1,4 +1,5 @@
 import { About } from "@/components/landing/about";
+import { Faq } from "@/components/landing/faq";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
 import { Prizes } from "@/components/landing/prizes";
@@ -19,6 +20,7 @@ export default function Home() {
         <Schedule />
         <Prizes />
         <Sponsors />
+        <Faq />
       </main>
     </>
   );
