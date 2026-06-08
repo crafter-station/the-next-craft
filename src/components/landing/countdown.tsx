@@ -52,17 +52,17 @@ export function Countdown() {
   if (isLive) {
     return (
       <div
-        className="inline-flex items-center gap-3 border border-[var(--blue)] px-6 py-4"
+        className="inline-flex items-center gap-3 border border-[var(--line)] rounded-lg px-6 py-4 bg-[var(--screen-dim)]"
         role="status"
         aria-label="El evento está en curso"
       >
         <span
-          className="font-mono font-semibold text-[var(--blue)] leading-none"
-          style={{ fontSize: "clamp(1.25rem, 3vw, 2rem)" }}
+          className="font-pixel font-bold text-[var(--bright)] leading-none uppercase"
+          style={{ fontSize: "clamp(1rem, 2.5vw, 1.5rem)" }}
         >
           EN VIVO
         </span>
-        <span className="section-label" style={{ color: "var(--ink-dim)" }}>
+        <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--text-dim)]">
           — HACKATHON EN CURSO
         </span>
       </div>
@@ -78,7 +78,7 @@ export function Countdown() {
 
   return (
     <div
-      className="grid grid-cols-4 w-full max-w-sm sm:max-w-none sm:flex sm:items-stretch gap-0"
+      className="grid grid-cols-4 w-full max-w-sm sm:max-w-none sm:flex sm:items-stretch gap-2"
       aria-label="Cuenta regresiva al evento"
       role="timer"
       aria-live="off"
@@ -87,22 +87,19 @@ export function Countdown() {
         <div
           // biome-ignore lint/suspicious/noArrayIndexKey: static ordered list, index is stable
           key={i}
-          className="flex flex-col items-center justify-center border border-[var(--blue)] px-2 sm:px-4 py-3 sm:min-w-[72px]"
-          style={{ borderRight: i < cells.length - 1 ? "none" : undefined }}
+          className="flex flex-col items-center justify-center bg-[var(--screen-dim)] border border-[var(--line)] rounded-lg px-2 sm:px-4 py-3 sm:min-w-[84px]"
         >
+          {/* Dígitos pixel PETSCII */}
           <span
-            className="font-mono font-semibold text-[var(--blue)] leading-none tabular-nums"
+            className="font-pixel font-bold text-[var(--text)] leading-none tabular-nums"
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
               fontVariantNumeric: "tabular-nums",
             }}
           >
             {value}
           </span>
-          <span
-            className="section-label mt-1"
-            style={{ color: "var(--ink-dim)" }}
-          >
+          <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)] mt-1.5">
             {label}
           </span>
         </div>

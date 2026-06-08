@@ -1,101 +1,71 @@
-const TRACKS = [
-  {
-    number: "01",
-    name: "AI CRAFT",
-    description:
-      "Agentes, copilots, productos AI-native que alguien usaría el lunes. Construidos con IA de verdad — no demos, no playgrounds.",
-    ref: "→ track/ai-craft",
-  },
-  {
-    number: "02",
-    name: "OPEN WEB",
-    description:
-      "Librerías, CLIs, infraestructura abierta que sobreviva al evento. Herramientas para la comunidad dev que sigan siendo útiles la semana siguiente.",
-    ref: "→ track/open-web",
-  },
-  {
-    number: "03",
-    name: "LOCAL IMPACT",
-    description:
-      "Fintech, logística, gobierno, educación — problemas de acá resueltos por gente de acá. Tecnología para LATAM, no adaptaciones de Silicon Valley.",
-    ref: "→ track/local-impact",
-  },
-] as const;
+import { SectionHeader } from "./section-header";
 
-import { CornerMarks } from "./corner-marks";
+/*
+  Un solo track — el corazón de la hackathon: que tu producto tenga
+  usuarios reales (o al menos uno) antes de que acabe el reloj.
+*/
+const EXAMPLES = [
+  "Una landing + MVP funcionando que consigue signups durante la hackathon.",
+  "Una herramienta lanzada en un grupo de WhatsApp, Discord, colegio o comunidad.",
+  "Un micro-SaaS donde al menos un usuario completa la acción principal.",
+  "Un marketplace pequeño con publicaciones reales.",
+  "Una herramienta de comunidad probada en vivo con otros participantes.",
+] as const;
 
 export function Tracks() {
   return (
     <section
       id="tracks"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper)]"
+      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
-      <CornerMarks />
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
+        <SectionHeader line="30" name="TRACK" />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Label + headline group */}
-        <div className="flex flex-col gap-3">
-          <p className="section-label">[03] — TRACKS</p>
-          <h2
-            className="font-sans font-extrabold leading-none text-[var(--blue)]"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              letterSpacing: "-0.03em",
-              marginLeft: "-0.02em",
-            }}
-          >
-            Tres frentes.
-            <br />
-            Un fin de semana.
-          </h2>
-        </div>
-
-        {/* Cards grid — gap-px + blue bg = shared 1px borders */}
-        <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--blue)] list-none m-0 p-0"
-          aria-label="Tracks del hackathon"
+        <h2
+          className="pixel-heading"
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
         >
-          {TRACKS.map(({ number, name, description, ref }) => (
-            <li
-              key={number}
-              className="group bg-[var(--paper)] hover:bg-[var(--blue)] transition-colors duration-150 flex flex-col gap-0 overflow-hidden"
-            >
-              <div className="flex flex-col gap-4 px-6 pt-8 pb-6 flex-1">
-                {/* Track number — mono giant, decorative */}
+          Un solo track:
+          <br />
+          usuarios.
+        </h2>
+
+        <p
+          className="font-sans text-[var(--text)] leading-[1.75] max-w-2xl"
+          style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
+        >
+          No hay frentes ni categorías. Hay una sola vara: que lo que construyas
+          lo use alguien de verdad — aunque sea una persona — antes de que suene
+          la campana. Ese es el corazón de la hackathon.
+        </p>
+
+        {/* Panel único — qué cuenta como "tener usuarios" */}
+        <div className="panel flex flex-col overflow-hidden max-w-3xl">
+          <div className="px-7 py-5">
+            <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+              ¿QUÉ CUENTA?
+            </p>
+          </div>
+
+          <ul
+            className="flex flex-col list-none m-0 p-0"
+            aria-label="Ejemplos de productos con usuarios reales"
+          >
+            {EXAMPLES.map((example) => (
+              <li key={example} className="flex items-start gap-3 px-7 py-4">
                 <span
-                  className="font-mono font-bold leading-none select-none text-[var(--blue)] group-hover:text-white/20 transition-colors duration-150"
-                  style={{ fontSize: "clamp(4rem, 8vw, 6rem)" }}
+                  className="font-mono text-sm text-[var(--bright)] shrink-0 mt-0.5"
                   aria-hidden="true"
                 >
-                  {number}
+                  →
                 </span>
-
-                {/* Track name */}
-                <h3
-                  className="font-sans font-extrabold leading-tight tracking-tight text-[var(--ink)] group-hover:text-white transition-colors duration-150"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
-                >
-                  {name}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="font-sans text-[var(--ink-dim)] group-hover:text-white/80 leading-relaxed transition-colors duration-150"
-                  style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
-                >
-                  {description}
-                </p>
-              </div>
-
-              {/* Footer ref — referencia de plano, sin prompt de terminal */}
-              <div className="border-t border-[var(--blue)] group-hover:border-white/30 px-6 py-4 transition-colors duration-150">
-                <p className="font-mono text-xs tracking-[0.12em] text-[var(--blue)] group-hover:text-white/60 transition-colors duration-150">
-                  {ref}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <span className="font-sans text-[15px] text-[var(--text)] leading-relaxed">
+                  {example}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

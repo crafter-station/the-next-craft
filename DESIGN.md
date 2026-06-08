@@ -2,90 +2,119 @@
 
 > Fuente de verdad para todos los agentes. No desviarse sin actualizar este archivo.
 
-## Concepto: "Blueprint Terminal"
+## Concepto: "COMMODORE 64 MONO" (retro-computing B&N, negro vintage Apple '99)
 
-La página es el **plano de construcción** del evento. Papel blanco de blueprint
-(grid técnico azul muy sutil), tinta azul Klein, y acentos de terminal. Híbrido:
-editorial suizo (jerarquía tipográfica fuerte, grilla estricta, espacio negativo
-generoso) × cultura hacker (monospace, prompts, brackets, coordenadas).
+La página es el **boot screen de un Commodore 64 en monitor monocromo**:
+negro cálido vintage (tipo Apple de fines de los 90), grises platino y blanco
+roto. Fuente pixel PETSCII para titulares y el nombre del evento en script de
+letras unidas (el "hello." de Apple). En el header vive un **Commodore 64 en
+3D real** (react-three-fiber) que gira solo y se puede arrastrar.
 
-**Lo memorable**: blanco dominante + un solo azul eléctrico usado sin miedo
-(bloques sólidos, no degradados), marcas de registro (+) en las esquinas de cada
-sección como plano técnico, y labels monospace numerados (`01 — MANIFIESTO`).
+**Lo memorable**: el set Commodore 64 completo en 3D visto DE FRENTE con
+"the next craft" en script escrito DENTRO de la pantalla del monitor (como el
+"hello." del Mac), `READY.█` parpadeando, y botones marfil como las teclas
+del hardware real.
 
 ## Reglas duras
 
-- **Light mode ÚNICO.** No dark mode, no toggle. `color-scheme: light`.
-- **NUNCA**: degradados morados, glassmorphism, sombras blandas genéricas,
+- **Dark mode ÚNICO** (es un monitor encendido). `color-scheme: dark`.
+- **B&N ESTRICTO**: negro cálido, grises platino, blanco roto. NINGÚN color
+  (ni morado, ni azul, ni acentos). El marfil de keycaps es el único "tono".
+- **NUNCA**: degradados de color, glassmorphism, sombras difusas grandes,
   emojis decorativos, Inter/Roboto/Space Grotesk.
-- Bordes: 1px sólidos azules o dotted. Radius: 0 (esquinas rectas, es un plano).
-- Los degradados están prohibidos. Color plano siempre.
+- Pixel font (Silkscreen) SOLO en titulares y labels cortos — nunca párrafos.
+- Radius: 4–10px (plástico moldeado suave). Sombras duras tipo keycap
+  (`0 3px 0`), nunca blur.
+- Texturas permitidas: scanlines sutiles SOLO dentro de "pantallas"
+  (hero, paneles CRT). Decorativas, `aria-hidden`.
 
 ## Paleta (CSS vars en globals.css)
 
 | Token | Valor | Uso |
 |-------|-------|-----|
-| `--paper` | `#FFFFFF` | Fondo dominante |
-| `--paper-dim` | `#F4F7FE` | Fondos alternos de sección |
-| `--blue` | `#002FA7` (Klein) | Tinta principal: texto display, bloques sólidos, bordes |
-| `--blue-bright` | `#1D4ED8` | Interactivo: links, hover, focus |
-| `--blue-grid` | `#002FA7` al 8% | Grid de blueprint de fondo |
-| `--ink` | `#0A1633` | Texto cuerpo |
-| `--ink-dim` | `#5B6478` | Texto secundario |
+| `--void` | `#1A1A17` | Fondo único de página (negro cálido vintage) |
+| `--screen` | `#1A1A17` | Igual al fondo — un solo negro, sin marcos |
+| `--screen-dim` | `#161613` | Paneles/cards (apenas más profundo) |
+| `--line` | `#8C8A82` | Borde del monitor (gris platino), bordes de cards |
+| `--bright` | `#E9E7DE` | Acentos: script, labels, links, READY. |
+| `--text` | `#F2F0E9` | Texto cuerpo |
+| `--text-dim` | `#A2A096` | Texto secundario |
+| `--bone` | `#E6E3D8` | Keycaps/CTAs (marfil) |
+| `--key-shadow` | `#8C8A82` | Sombra dura de keycaps |
 
-Texto sobre azul sólido: blanco puro.
+Contraste: cuerpo siempre `--text`/`--text-dim` (AA garantizado en B&N).
 
 ## Tipografía (next/font/google)
 
-- **Display**: `Bricolage Grotesque` — titulares, pesos 700–800, tracking apretado.
-- **Mono**: `IBM Plex Mono` — labels, datos, countdown, prompts, botones.
-- **Cuerpo**: `Bricolage Grotesque` 400/500.
+- **Script**: `Borel` — SOLO "the next craft" (wordmark nav, hero, footer).
+  Lowercase siempre, como el "hello." de Apple.
+- **Display**: `Silkscreen` 400/700 — titulares pixel PETSCII, uppercase.
+- **Cuerpo y todo lo demás**: `IBM Plex Mono` — párrafos, líneas BASIC,
+  datos, countdown, botones. "Coded" pero legible; no hay sans humanista.
 
-Escala: hero ~clamp(3.5rem→7rem), h2 ~clamp(2rem→3.5rem). Labels mono uppercase
-12px tracking 0.15em.
+Escala: titulares pixel ~clamp(1.5rem→2.75rem) (la pixel font se ve enorme;
+no necesita tamaños gigantes), script hero ~clamp(2.75rem→5.5rem). Labels
+mono 11px tracking 0.18em.
 
 ## Motivos recurrentes
 
-- Marcas de registro `+` en esquinas de secciones (pseudo-elementos o spans).
-- Labels de sección numerados: `[01] — ¿QUÉ ES?` en mono.
-- Prompt de terminal: `the-next-craft$` en hero y footer.
-- Flechas `→` en links y CTAs. Brackets `[ ]` en nav.
-- Coordenadas de Lima `-12.0464, -77.0428` como detalle en footer/location.
-- Grid blueprint de fondo: líneas de 1px cada 48px, azul al 6–8%.
+- **READY.** con cursor `█` parpadeante (hero y footer). Sin boot header.
+- **Sin dividers**: nada de hairlines horizontales entre labels y contenido;
+  la separación es espacio en blanco. (Bordes de cards y footer sí.)
+- **Líneas BASIC como labels de sección**: `10 PRINT "MANIFIESTO"`,
+  `20 PRINT "TL;DR"`, … `70 PRINT "FAQ"` (numeración 10–70, mono).
+- **GOTO en CTAs secundarios**: `RUN POSTULAR` / `GOTO #tracks`.
+- **Keycaps**: CTAs como teclas de marfil del C64 — extruidas, sombra dura
+  `0 3px 0`, `:active` las hunde.
+- **Sin marcos**: hero y FinalCta full-bleed sobre el mismo negro; solo
+  scanlines sutiles como textura de pantalla.
+- **3D**: `public/c64.glb` (Draco, ~2MB) — set completo de frente, estático
+  (sin auto-rotate), drag para girar; wordmark en la pantalla vía drei <Html>.
+- Cierre del footer: "hecho a mano, no vibecodeado."
 
 ## Contenido canónico (NO inventar otros datos)
 
-- **Evento**: The Next Craft — hackathon por Crafter Station × Next
+- **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
+  (nextfellow.ai, "Next" en el naming corto)
 - **Tagline**: "De cero a producto en 36 horas."
-- **Fecha**: 24–26 de julio, 2026 · **Lugar**: Lima, Perú (presencial)
+- **Fecha**: 24–26 de julio, 2026 · **Lugar**: presencial en 3 sedes —
+  Lima, Bogotá y Ciudad de Guatemala
 - **Formato**: 36 horas · 150 hackers · equipos de 3–5
 - **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
 - **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)
-- **Tracks**:
-  1. `AI CRAFT` — productos reales construidos con IA, no demos
-  2. `OPEN WEB` — herramientas open source para la comunidad dev
-  3. `LOCAL IMPACT` — tecnología para problemas de LATAM
-- **Organizers** (sección propia): Shiara Arauzo (Lead Organizer), Railly Hugo
-  (Crafter Station), + 4 cards placeholder con roles (Logistics, Partnerships,
-  Community, Design) marcadas con comentario `// TODO: reemplazar con equipo real`.
-- **Idioma**: español, tono directo estilo Platanus ("solo cracks", "a construir").
-- **CTA**: "Postular →" (link `#` placeholder)
+- **Track ÚNICO — el corazón de la hackathon**: que tu producto tenga
+  usuarios reales (o al menos UNO) antes del cierre. Sin categorías.
+  Ejemplos de qué cuenta: landing + MVP con signups durante el evento;
+  herramienta lanzada en un grupo de WhatsApp/Discord/colegio/comunidad;
+  micro-SaaS donde al menos un usuario completa la acción principal;
+  marketplace pequeño con publicaciones reales; herramienta de comunidad
+  probada en vivo con otros participantes.
+- **Idioma**: español, tono directo pero no arrogante ("a construir",
+  "producto real"). Nada de frases excluyentes tipo "solo cracks".
+- **CTA**: registro por WhatsApp — `wa.me/$NEXT_PUBLIC_WHATSAPP_NUMBER` con
+  mensaje prellenado "Hola, quiero postular a The Next Craft" (trabajo de
+  feat/whatsapp-registration incorporado aquí para no perderlo).
 
 ## Estructura de la página (one-pager)
 
-1. Nav sticky (mono, brackets) — anchors a secciones; CTA "Postular →" en header
-2. Hero (`#hero`) — nombre gigante, tagline, countdown vivo, CTAs (Postular + Ver tracks), prompt terminal
-3. `[01]` ¿Qué es? (`#que-es`) — manifiesto
-4. `[02]` TL;DR (`#tldr`) — grid de specs (fecha/lugar/formato/equipos)
-5. `[03]` Tracks (`#tracks`) — 3 cards
-6. `[04]` Agenda (`#agenda`) — timeline de 36h
-7. `[05]` Premios (`#premios`)
-8. `[06]` Sponsors (`#sponsors`) — Next (headline) + Crafter Station + partners
-9. `[07]` FAQ (`#faq`) — accordion (Base UI)
-10. `[08]` Organizers (`#organizers`) — cards del equipo (2 reales + 4 placeholder)
-11. FinalCta (`#postular`) — bloque azul sólido, CTA "Postular ahora →" con link real a forms.crafterstation.com/the-next-craft
-12. Footer — stats, links, coordenadas, prompt final
+1. Nav sticky (wordmark script + links mono + CTA keycap)
+2. Hero (`#hero`) — set C64 3D de frente con el wordmark en pantalla
+   (negrita, centrado), READY.█, countdown, CTAs keycap (h1 sr-only;
+   sin tagline visible)
+3. `10` ¿Qué es? (`#que-es`) — manifiesto
+4. `20` TL;DR (`#tldr`) — specs grid
+5. `30` Track (`#tracks`) — track único: usuarios reales
+6. `40` Agenda (`#agenda`) — timeline 36h
+7. `50` Premios (`#premios`) — $5,000 en panel pantalla
+8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
+9. `70` FAQ (`#faq`) — accordion (Base UI)
+10. FinalCta (`#postular`) — pantalla C64 final, `RUN POSTULAR`, CTA WhatsApp
+11. Footer — boot screen de despedida: stats, links, coordenadas, READY.█
 
-## CTA canónico
+## Accesibilidad (no regresionar)
 
-El botón de postulación apunta a `https://forms.crafterstation.com/the-next-craft` (link real, no placeholder). El link `#postular` en nav y hero lleva al bloque FinalCta donde está ese botón.
+- Skip link "Saltar al contenido". Focus visible: outline 2px blanco cálido.
+- Countdown: `role="timer"`, estado EN VIVO con `role="status"`.
+- 3D: `aria-hidden` en canvas (decorativo), fallback estático con
+  reduced-motion; cursor █ y scanlines `aria-hidden`.
+- Contraste AA en todo texto de lectura.

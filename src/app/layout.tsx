@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
+import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-sans",
+const silkscreen = Silkscreen({
+  variable: "--font-pixel",
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -16,6 +16,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const borel = Borel({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://thenextcraft.crafter.run"),
   title: {
@@ -23,11 +30,14 @@ export const metadata: Metadata = {
     template: "%s · The Next Craft",
   },
   description:
-    "De cero a producto en 36 horas. Hackathon presencial en Lima, Perú — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+    "De cero a producto en 36 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
   keywords: [
     "hackathon",
     "Lima",
     "Perú",
+    "Bogotá",
+    "Colombia",
+    "Guatemala",
     "Crafter Station",
     "Next.js",
     "programación",
@@ -41,13 +51,13 @@ export const metadata: Metadata = {
     siteName: "The Next Craft",
     title: "The Next Craft — Hackathon por Crafter Station × Next",
     description:
-      "De cero a producto en 36 horas. Hackathon presencial en Lima, Perú — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+      "De cero a producto en 36 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
   },
   twitter: {
     card: "summary_large_image",
     title: "The Next Craft — Hackathon por Crafter Station × Next",
     description:
-      "De cero a producto en 36 horas. Hackathon presencial en Lima, Perú — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+      "De cero a producto en 36 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
   },
   robots: {
     index: true,
@@ -59,8 +69,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#002FA7",
-  colorScheme: "light",
+  themeColor: "#1A1A17",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -71,12 +81,12 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${bricolage.variable} ${ibmPlexMono.variable} h-full antialiased scroll-pt-20`}
+      className={`${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} h-full antialiased scroll-pt-20`}
     >
       <body className="min-h-full flex flex-col">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--blue)] focus:text-white focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[var(--bright)] focus:text-[var(--void)] focus:font-mono focus:text-sm focus:px-4 focus:py-2 focus:outline-none"
         >
           Saltar al contenido
         </a>
