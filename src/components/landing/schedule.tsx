@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { SectionHeader } from "./section-header";
 
-type Event = {
+type EventItem = {
   time: string;
   description: string;
   mono?: string;
@@ -12,82 +14,26 @@ type Event = {
 };
 
 type Day = {
-  id: string;
+  id: "fri" | "sat" | "sun";
   label: string;
   weekday: string;
-  events: Event[];
+  events: EventItem[];
 };
 
-const DAYS: Day[] = [
-  {
-    id: "vie",
-    label: "24 JUL",
-    weekday: "VIERNES",
-    events: [
-      { time: "17:00", description: "Registro y acreditación" },
-      {
-        time: "18:00",
-        description: "Kickoff — reglas y formación de equipos",
-        highlight: true,
-      },
-      { time: "19:00", description: "Empieza el hacking", highlight: true },
-      { time: "21:00", description: "Cena" },
-    ],
-  },
-  {
-    id: "sab",
-    label: "25 JUL",
-    weekday: "SÁBADO",
-    events: [
-      { time: "09:00", description: "Desayuno" },
-      {
-        time: "10:00",
-        description: "Mentorías con el equipo de Next y Crafter Station",
-      },
-      { time: "14:00", description: "Almuerzo" },
-      {
-        time: "19:00",
-        description: "Check-in de avances",
-        mono: "git status",
-      },
-      { time: "21:00", description: "Cena" },
-      { time: "23:59", description: "Mid-hack — quedan 10 horas" },
-    ],
-  },
-  {
-    id: "dom",
-    label: "26 JUL",
-    weekday: "DOMINGO",
-    events: [
-      {
-        time: "07:00",
-        description: "Code freeze warning",
-        mono: 'git commit -m "final"',
-        highlight: true,
-      },
-      {
-        time: "09:00",
-        description: "Code freeze + submit",
-        highlight: true,
-      },
-      {
-        time: "10:00",
-        description: "Demos — 3 minutos por equipo, producto en vivo",
-        highlight: true,
-      },
-      { time: "12:30", description: "Deliberación del jurado" },
-      {
-        time: "13:00",
-        description: "Premiación y cierre",
-        highlight: true,
-      },
-    ],
-  },
-] as const;
+const DAY_IDS = ["fri", "sat", "sun"] as const;
 
 export function Schedule() {
-  const [activeId, setActiveId] = useState<string>(DAYS[0].id);
-  const activeDay = DAYS.find((d) => d.id === activeId) ?? DAYS[0];
+  const t = useTranslations("schedule");
+
+  const days: Day[] = DAY_IDS.map((id) => ({
+    id,
+    label: t(`days.${id}.label`),
+    weekday: t(`days.${id}.weekday`),
+    events: t.raw(`days.${id}.events`) as EventItem[],
+  }));
+
+  const [activeId, setActiveId] = useState<Day["id"]>(days[0].id);
+  const activeDay = days.find((d) => d.id === activeId) ?? days[0];
 
   return (
     <section
@@ -95,15 +41,15 @@ export function Schedule() {
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
-        <SectionHeader line="40" name="AGENDA" />
+        <SectionHeader line="40" name={t("label")} />
 
         <h2
           className="pixel-heading"
           style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
         >
-          36 horas.
+          {t("headlineLine1")}
           <br />
-          Cero relleno.
+          {t("headlineLine2")}
         </h2>
 
         {/* Dos columnas: selector de día | agenda del día */}
@@ -111,11 +57,11 @@ export function Schedule() {
           {/* ── Selector de día — keycaps ── */}
           <div
             role="tablist"
-            aria-label="Días del evento"
+            aria-label={t("tablistAria")}
             aria-orientation="vertical"
             className="flex flex-row lg:flex-col gap-3 lg:gap-4 items-stretch"
           >
-            {DAYS.map((day) => {
+            {days.map((day) => {
               const selected = day.id === activeId;
               return (
                 <button
@@ -128,16 +74,16 @@ export function Schedule() {
                   tabIndex={selected ? 0 : -1}
                   onClick={() => setActiveId(day.id)}
                   onKeyDown={(e) => {
-                    const idx = DAYS.findIndex((d) => d.id === activeId);
+                    const idx = days.findIndex((d) => d.id === activeId);
                     if (e.key === "ArrowDown" || e.key === "ArrowRight") {
                       e.preventDefault();
-                      const next = DAYS[(idx + 1) % DAYS.length];
+                      const next = days[(idx + 1) % days.length];
                       setActiveId(next.id);
                       document.getElementById(`tab-${next.id}`)?.focus();
                     }
                     if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
                       e.preventDefault();
-                      const prev = DAYS[(idx - 1 + DAYS.length) % DAYS.length];
+                      const prev = days[(idx - 1 + days.length) % days.length];
                       setActiveId(prev.id);
                       document.getElementById(`tab-${prev.id}`)?.focus();
                     }

@@ -1,10 +1,4 @@
-const PERKS = [
-  "Créditos de Vercel para desplegar",
-  "Créditos de API de Anthropic",
-  "Swag oficial del evento",
-  "Acceso a la comunidad de Crafter Station",
-  "Mentorías durante las 36 horas",
-] as const;
+import { useTranslations } from "next-intl";
 
 /*
   Sección invertida: el único golpe de luz a mitad del scroll — fondo
@@ -16,6 +10,9 @@ const INK_DIM = "#6f6a5d";
 const RULE = "rgb(26 26 23 / 35%)";
 
 export function Prizes() {
+  const t = useTranslations("prizes");
+  const perks = t.raw("perks") as readonly string[];
+
   return (
     <section
       id="premios"
@@ -29,7 +26,7 @@ export function Prizes() {
             style={{ color: INK }}
           >
             <span style={{ color: INK_DIM }}>50 </span>
-            PRINT &quot;PREMIOS&quot;
+            PRINT &quot;{t("label")}&quot;
           </p>
         </div>
 
@@ -47,14 +44,14 @@ export function Prizes() {
                 }}
                 aria-hidden="true"
               >
-                $5,000
+                {t("amount")}
               </span>
-              <span className="sr-only">Cinco mil dólares</span>
+              <span className="sr-only">{t("amountAria")}</span>
               <p
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK_DIM }}
               >
-                USD AL EQUIPO GANADOR
+                {t("amountSub")}
               </p>
             </div>
           </div>
@@ -72,15 +69,15 @@ export function Prizes() {
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK }}
               >
-                PARA TODOS LOS QUE ENTRAN
+                {t("perksLabel")}
               </p>
             </div>
 
             <ul
               className="flex flex-col list-none m-0 p-0 flex-1"
-              aria-label="Beneficios para todos los participantes"
+              aria-label={t("perksAria")}
             >
-              {PERKS.map((perk) => (
+              {perks.map((perk) => (
                 <li key={perk} className="flex items-start gap-3 px-7 py-4">
                   <span
                     className="font-mono text-sm shrink-0 mt-0.5"
@@ -106,8 +103,7 @@ export function Prizes() {
           className="font-mono text-xs tracking-[0.05em] leading-[1.5]"
           style={{ color: INK_DIM }}
         >
-          El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
-          obligatoria.
+          {t("note")}
         </p>
       </div>
     </section>

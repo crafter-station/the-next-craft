@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import { Center, Html, OrbitControls, useGLTF } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useTranslations } from "next-intl";
 
 const MODEL_URL = "/c64.glb";
 
@@ -40,10 +41,11 @@ function C64() {
 
 /** Fallback temático mientras carga el .glb (~2MB, Draco) */
 function LoadingFallback() {
+  const t = useTranslations("hero");
   return (
     <Html center>
       <p className="font-mono text-sm text-[var(--bright)] whitespace-nowrap">
-        LOAD &quot;C64&quot;,8,1 … LOADING
+        {t("loading")}
       </p>
     </Html>
   );

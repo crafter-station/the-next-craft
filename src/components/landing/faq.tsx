@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import {
   Accordion,
   AccordionContent,
@@ -7,65 +9,27 @@ import {
 
 import { SectionHeader } from "./section-header";
 
-const FAQS = [
-  {
-    id: "Q01",
-    question: "¿Quién puede postular?",
-    answer:
-      "Cualquiera que construya: devs, diseñadores, PMs. La admisión es selectiva: importa lo que has hecho, no tu CV.",
-  },
-  {
-    id: "Q02",
-    question: "¿Cuánto cuesta?",
-    answer: "Nada. Entrar es gratis. Lo difícil es entrar.",
-  },
-  {
-    id: "Q03",
-    question: "¿Puedo postular sin equipo?",
-    answer: "Sí. Habrá formación de equipos en el kickoff. Equipos de 3 a 5.",
-  },
-  {
-    id: "Q04",
-    question: "¿Qué tengo que llevar?",
-    answer:
-      "Laptop, cargador y ganas. Comida, café y energía corren por nuestra cuenta.",
-  },
-  {
-    id: "Q05",
-    question: "¿Puedo usar IA?",
-    answer:
-      "Obvio. Es 2026. Pero el código se escribe durante las 36 horas — nada de proyectos precocinados.",
-  },
-  {
-    id: "Q06",
-    question: "¿De quién es la propiedad intelectual?",
-    answer: "Tuya. 100%. Nosotros solo queremos verte shippear.",
-  },
-  {
-    id: "Q07",
-    question: "¿Es presencial?",
-    answer:
-      "Sí — en Lima, Bogotá o Guatemala, la sede que te quede. No hay modalidad remota: la gracia es estar ahí.",
-  },
-  {
-    id: "Q08",
-    question: "¿Cómo evalúa el jurado?",
-    answer: "Demo en vivo de 3 minutos. Producto funcionando > pitch bonito.",
-  },
-] as const;
+type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
 
 export function Faq() {
+  const t = useTranslations("faq");
+  const items = t.raw("items") as readonly FaqItem[];
+
   return (
     <section
       id="faq"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        <SectionHeader line="70" name="FAQ" />
+        <SectionHeader line="70" name={t("label")} />
 
         {/* Accordion */}
         <Accordion className="w-full" defaultValue={[]}>
-          {FAQS.map(({ id, question, answer }) => (
+          {items.map(({ id, question, answer }) => (
             <AccordionItem
               key={id}
               value={id}
