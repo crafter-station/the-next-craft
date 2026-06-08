@@ -76,10 +76,11 @@ mono 11px tracking 0.18em.
 
 - **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
   (nextfellow.ai, "Next" en el naming corto)
-- **Tagline**: "De cero a producto en 36 horas."
-- **Fecha**: 24–26 de julio, 2026 · **Lugar**: presencial en 3 sedes —
+- **Tagline**: "De cero a producto en 12 horas."
+- **Fecha**: 25 de julio, 2026 (un solo día, 09:00–21:00) · **Lugar**:
+  presencial en 3 sedes —
   Lima, Bogotá y Ciudad de Guatemala
-- **Formato**: 36 horas · 150 hackers · equipos de 3–5
+- **Formato**: 12 horas · 150 hackers · equipos de 3–5
 - **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
 - **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)
 - **Track ÚNICO — el corazón de la hackathon**: que tu producto tenga
@@ -104,7 +105,7 @@ mono 11px tracking 0.18em.
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
 5. `30` Track (`#tracks`) — track único: usuarios reales
-6. `40` Agenda (`#agenda`) — timeline 36h
+6. `40` Agenda (`#agenda`) — timeline de un día
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
 8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)

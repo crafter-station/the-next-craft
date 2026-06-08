@@ -14,8 +14,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: "The Next Craft",
-  startDate: "2026-07-24T18:00:00-05:00",
-  endDate: "2026-07-26T13:00:00-05:00",
+  startDate: "2026-07-25T09:00:00-05:00",
+  endDate: "2026-07-25T21:00:00-05:00",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   location: [
@@ -53,7 +53,7 @@ const jsonLd = {
     url: "https://crafterstation.com",
   },
   description:
-    "De cero a producto en 36 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+    "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
   offers: {
     "@type": "Offer",
     price: 0,

@@ -3,7 +3,7 @@ import { SectionHeader } from "./section-header";
 const SPECS = [
   {
     label: "FECHA",
-    value: "24–26 JUL 2026",
+    value: "25 JUL 2026",
     sub: null,
   },
   {
@@ -13,7 +13,7 @@ const SPECS = [
   },
   {
     label: "FORMATO",
-    value: "36 horas presencial",
+    value: "12 horas presencial",
     sub: null,
   },
   {

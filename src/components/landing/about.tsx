@@ -16,7 +16,7 @@ export function About() {
         >
           No es un evento.
           <br />
-          Es 36 horas de construir.
+          Son 12 horas de construir.
         </h2>
 
         {/* Body */}
@@ -26,7 +26,7 @@ export function About() {
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
             The Next Craft es el hackathon presencial de Crafter Station × Next.
-            36 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala,
+            12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala,
             con 150 hackers que vienen a resolver problemas de verdad.
           </p>
           <p

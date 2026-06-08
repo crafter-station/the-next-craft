@@ -34,7 +34,7 @@ const FAQS = [
     id: "Q05",
     question: "¿Puedo usar IA?",
     answer:
-      "Obvio. Es 2026. Pero el código se escribe durante las 36 horas — nada de proyectos precocinados.",
+      "Obvio. Es 2026. Pero el código se escribe durante las 12 horas — nada de proyectos precocinados.",
   },
   {
     id: "Q06",

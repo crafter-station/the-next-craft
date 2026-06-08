@@ -38,9 +38,9 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
       Eres parte de los 150.
     </p>
     <table style="font-size: 13px; line-height: 1.8; border-collapse: collapse;">
-      <tr><td style="color: #5B6478; padding-right: 16px;">FECHA</td><td>24–26 JUL 2026</td></tr>
+      <tr><td style="color: #5B6478; padding-right: 16px;">FECHA</td><td>25 JUL 2026</td></tr>
       <tr><td style="color: #5B6478; padding-right: 16px;">LUGAR</td><td>Lima, Perú</td></tr>
-      <tr><td style="color: #5B6478; padding-right: 16px;">FORMATO</td><td>36 horas</td></tr>
+      <tr><td style="color: #5B6478; padding-right: 16px;">FORMATO</td><td>12 horas</td></tr>
       <tr><td style="color: #5B6478; padding-right: 16px;">CÓDIGO</td><td><strong>${reg.code}</strong> (guárdalo para el check-in)</td></tr>
     </table>
     <p style="margin: 24px 0 0;">
