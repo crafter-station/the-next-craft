@@ -38,11 +38,6 @@ export function About() {
             usuarios, con datos, con algo que funcione al final del reloj.
           </p>
         </div>
-
-        {/* Cierre — output de programa */}
-        <p className="font-mono text-sm text-[var(--bright)] tracking-[0.05em] leading-[1.4] border-l-2 border-[var(--line)] pl-4">
-          &gt; solo cracks. solo producto.
-        </p>
       </div>
     </section>
   );
