@@ -1,11 +1,15 @@
 import { CornerMarks } from "./corner-marks";
 
-// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md)
-const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "51999999999";
-const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hola, quiero postular a The Next Craft",
-)}`;
+// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md).
+// Mientras no exista el número de producción (env vacía), el CTA cae al form
+// viejo: el número de prueba de Meta solo atiende a 5 testers registrados.
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const CTA_HREF = WHATSAPP_NUMBER
+  ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      "Hola, quiero postular a The Next Craft",
+    )}`
+  : "https://forms.crafterstation.com/the-next-craft";
+const CTA_LABEL = WHATSAPP_NUMBER ? "Postular por WhatsApp" : "Postular ahora";
 
 export function FinalCta() {
   return (
@@ -55,17 +59,18 @@ export function FinalCta() {
         {/* CTA button */}
         <div className="flex flex-col items-start gap-4 pt-2">
           <a
-            href={WA_LINK}
+            href={CTA_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-white text-[var(--blue)] px-8 py-4 hover:bg-[var(--paper-dim)] transition-colors duration-150"
           >
-            Postular por WhatsApp <span className="cta-arrow">→</span>
+            {CTA_LABEL} <span className="cta-arrow">→</span>
           </a>
 
           {/* Fine print */}
           <p className="font-mono text-xs leading-[1.4] text-white/70">
-            150 cupos. Admisión selectiva. Gratis. 7 preguntas, 90 segundos.
+            150 cupos. Admisión selectiva. Gratis.
+            {WHATSAPP_NUMBER ? " 7 preguntas, 90 segundos." : ""}
           </p>
         </div>
       </div>
