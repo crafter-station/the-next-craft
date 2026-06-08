@@ -1,0 +1,275 @@
+{
+  "common": {
+    "skipToContent": "Skip to content",
+    "languageLabel": "Language",
+    "switchToSpanish": "Cambiar a español",
+    "switchToEnglish": "Switch to English"
+  },
+  "metadata": {
+    "title": "The Next Craft — Hackathon by Crafter Station × Next",
+    "titleTemplate": "%s · The Next Craft",
+    "description": "From zero to product in 36 hours. In-person hackathon in Lima, Bogotá and Guatemala — July 24–26, 2026. 150 hackers, teams of 3–5, $5,000 USD to the winner. Apply by July 10.",
+    "ogLocale": "en_US"
+  },
+  "nav": {
+    "ariaLabel": "Main navigation",
+    "links": {
+      "about": "About",
+      "tracks": "Track",
+      "schedule": "Schedule",
+      "prizes": "Prizes",
+      "faq": "FAQ"
+    },
+    "cta": "Apply"
+  },
+  "hero": {
+    "h1": "the next craft",
+    "subhead": "In-person hackathon",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36 HOURS",
+    "ctaApply": "RUN Apply",
+    "ctaTrack": "GOTO Track",
+    "loading": "LOAD \"C64\",8,1 … LOADING"
+  },
+  "countdown": {
+    "ariaLabel": "Countdown to the event",
+    "live": "LIVE",
+    "liveSub": "— HACKATHON IN PROGRESS",
+    "liveAria": "The event is in progress",
+    "units": {
+      "days": "DAYS",
+      "hours": "HRS",
+      "minutes": "MIN",
+      "seconds": "SEC"
+    }
+  },
+  "about": {
+    "label": "MANIFESTO",
+    "headlineLine1": "Not an event.",
+    "headlineLine2": "36 hours of building.",
+    "paragraph1": "The Next Craft is the in-person hackathon by Crafter Station × Next. 36 hours of real work, running simultaneously in Lima, Bogotá and Guatemala, with 150 hackers solving real problems.",
+    "paragraph2": "Admission is selective. No room for spectators, no space for pretty slides. You come to ship real product: with users, with data, with something that works when the clock runs out."
+  },
+  "tldr": {
+    "label": "TL;DR",
+    "ariaLabel": "Event specifications",
+    "specs": {
+      "date": { "label": "DATE", "value": "24–26 JUL 2026", "sub": "" },
+      "place": {
+        "label": "PLACE",
+        "value": "Lima · Bogotá · Guatemala",
+        "sub": "3 in-person hubs"
+      },
+      "format": {
+        "label": "FORMAT",
+        "value": "36 hours in-person",
+        "sub": ""
+      },
+      "hackers": { "label": "HACKERS", "value": "150", "sub": "" },
+      "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
+      "deadline": {
+        "label": "DEADLINE",
+        "value": "10 JUL 2026",
+        "sub": "23:59 GMT-5"
+      }
+    }
+  },
+  "tracks": {
+    "label": "TRACK",
+    "headlineLine1": "One track:",
+    "headlineLine2": "users.",
+    "intro": "No fronts, no categories. One bar: what you build has to be used by someone real — even just one person — before the bell rings. That's the heart of the hackathon.",
+    "whatCountsLabel": "WHAT COUNTS?",
+    "examplesAria": "Examples of products with real users",
+    "examples": [
+      "A landing + working MVP that gets signups during the hackathon.",
+      "A tool launched in a WhatsApp group, Discord, school or community.",
+      "A micro-SaaS where at least one user completes the main action.",
+      "A small marketplace with real listings.",
+      "A community tool tested live with other participants."
+    ]
+  },
+  "schedule": {
+    "label": "SCHEDULE",
+    "headlineLine1": "36 hours.",
+    "headlineLine2": "Zero filler.",
+    "tablistAria": "Event days",
+    "days": {
+      "fri": {
+        "weekday": "FRIDAY",
+        "label": "24 JUL",
+        "events": [
+          { "time": "17:00", "description": "Registration and check-in" },
+          {
+            "time": "18:00",
+            "description": "Kickoff — rules and team formation",
+            "highlight": true
+          },
+          {
+            "time": "19:00",
+            "description": "Hacking begins",
+            "highlight": true
+          },
+          { "time": "21:00", "description": "Dinner" }
+        ]
+      },
+      "sat": {
+        "weekday": "SATURDAY",
+        "label": "25 JUL",
+        "events": [
+          { "time": "09:00", "description": "Breakfast" },
+          {
+            "time": "10:00",
+            "description": "Mentorship with the Next and Crafter Station teams"
+          },
+          { "time": "14:00", "description": "Lunch" },
+          {
+            "time": "19:00",
+            "description": "Progress check-in",
+            "mono": "git status"
+          },
+          { "time": "21:00", "description": "Dinner" },
+          {
+            "time": "23:59",
+            "description": "Mid-hack — 10 hours left"
+          }
+        ]
+      },
+      "sun": {
+        "weekday": "SUNDAY",
+        "label": "26 JUL",
+        "events": [
+          {
+            "time": "07:00",
+            "description": "Code freeze warning",
+            "mono": "git commit -m \"final\"",
+            "highlight": true
+          },
+          {
+            "time": "09:00",
+            "description": "Code freeze + submit",
+            "highlight": true
+          },
+          {
+            "time": "10:00",
+            "description": "Demos — 3 minutes per team, live product",
+            "highlight": true
+          },
+          { "time": "12:30", "description": "Jury deliberation" },
+          {
+            "time": "13:00",
+            "description": "Awards and closing",
+            "highlight": true
+          }
+        ]
+      }
+    }
+  },
+  "prizes": {
+    "label": "PRIZES",
+    "amount": "$5,000",
+    "amountAria": "Five thousand dollars",
+    "amountSub": "USD TO THE WINNING TEAM",
+    "perksLabel": "FOR EVERYONE WHO GETS IN",
+    "perksAria": "Benefits for all participants",
+    "perks": [
+      "Vercel credits to deploy",
+      "Anthropic API credits",
+      "Official event swag",
+      "Access to the Crafter Station community",
+      "Mentorship throughout the 36 hours"
+    ],
+    "note": "Jury criteria: working product > idea. Live demo required."
+  },
+  "sponsors": {
+    "label": "SPONSORS",
+    "headlineAria": "Headline sponsors",
+    "headlineSponsors": [
+      {
+        "wordmark": "NEXT FELLOW",
+        "role": "CO-ORGANIZER",
+        "href": "https://nextfellow.ai"
+      },
+      {
+        "wordmark": "CRAFTER STATION",
+        "role": "ORGANIZER · COMMUNITY",
+        "href": "https://crafterstation.com"
+      }
+    ],
+    "partnersLabel": "PARTNERS",
+    "partnersAria": "Tour partners",
+    "ctaPrefix": "Want to sponsor? →"
+  },
+  "faq": {
+    "label": "FAQ",
+    "items": [
+      {
+        "id": "Q01",
+        "question": "Who can apply?",
+        "answer": "Anyone who builds: devs, designers, PMs. Admission is selective: what you've shipped matters, not your résumé."
+      },
+      {
+        "id": "Q02",
+        "question": "How much does it cost?",
+        "answer": "Nothing. Getting in is free. Getting in is the hard part."
+      },
+      {
+        "id": "Q03",
+        "question": "Can I apply without a team?",
+        "answer": "Yes. Team formation happens at the kickoff. Teams of 3 to 5."
+      },
+      {
+        "id": "Q04",
+        "question": "What should I bring?",
+        "answer": "Laptop, charger and energy. Food, coffee and power are on us."
+      },
+      {
+        "id": "Q05",
+        "question": "Can I use AI?",
+        "answer": "Obviously. It's 2026. But the code gets written during the 36 hours — no pre-baked projects."
+      },
+      {
+        "id": "Q06",
+        "question": "Who owns the IP?",
+        "answer": "You do. 100%. We just want to watch you ship."
+      },
+      {
+        "id": "Q07",
+        "question": "Is it in-person?",
+        "answer": "Yes — in Lima, Bogotá or Guatemala, whichever hub fits you. No remote option: the point is to be there."
+      },
+      {
+        "id": "Q08",
+        "question": "How does the jury evaluate?",
+        "answer": "Live 3-minute demo. Working product > pretty pitch."
+      }
+    ]
+  },
+  "finalCta": {
+    "runApply": "RUN APPLY",
+    "headlineLine1": "Do you build?",
+    "headlineLine2": "Apply.",
+    "deadline": "DEADLINE: 10 JUL 2026 · 23:59 GMT-5",
+    "ctaWhatsapp": "Apply via WhatsApp",
+    "ctaForm": "Apply now",
+    "whatsappMessage": "Hi, I want to apply to The Next Craft",
+    "finePrint": "150 seats. Selective admission. Free.",
+    "finePrintExtra": "7 questions, 90 seconds."
+  },
+  "footer": {
+    "stats": [
+      { "value": "36", "unit": "HOURS" },
+      { "value": "150", "unit": "HACKERS" },
+      { "value": "$5,000", "unit": "USD" }
+    ],
+    "wordmarkSubtitleLine1": "Hackathon by",
+    "wordmarkSubtitleLine2": "Crafter Station × Next",
+    "wordmarkSubtitleLine3": "Lima · Bogotá · Guatemala · Jul 2026",
+    "sections": {
+      "event": "EVENT",
+      "community": "COMMUNITY",
+      "contact": "CONTACT"
+    },
+    "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala",
+    "tagline": "hand-built, not vibe-coded."
+  }
+}
