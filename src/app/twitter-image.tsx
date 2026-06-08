@@ -25,7 +25,7 @@ async function loadGoogleFont(family: string, text: string) {
 }
 
 const SCRIPT_TITLE = "the next craft";
-const SPECS = "LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36H";
+const SPECS = "LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12H";
 const READY = "READY.";
 
 export default async function TwitterImage() {

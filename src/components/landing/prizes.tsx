@@ -3,7 +3,7 @@ const PERKS = [
   "Créditos de API de Anthropic",
   "Swag oficial del evento",
   "Acceso a la comunidad de Crafter Station",
-  "Mentorías durante las 36 horas",
+  "Mentorías durante las 12 horas",
 ] as const;
 
 /*

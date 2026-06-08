@@ -121,9 +121,9 @@ export function boardingPassImage(params: {
             color: INK,
           }}
         >
-          <span>24–26 JUL 2026</span>
+          <span>25 JUL 2026</span>
           <span>LIMA, PERÚ</span>
-          <span>36 HORAS</span>
+          <span>12 HORAS</span>
         </div>
       </div>
 

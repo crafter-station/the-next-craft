@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-// 2026-07-24T18:00:00-05:00 → UTC ms
-const DEADLINE = new Date("2026-07-24T18:00:00-05:00").getTime();
+// 2026-07-25T09:00:00-05:00 → UTC ms (arranque del evento)
+const DEADLINE = new Date("2026-07-25T09:00:00-05:00").getTime();
 
 type TimeLeft = {
   days: number;

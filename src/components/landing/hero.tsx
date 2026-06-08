@@ -38,7 +38,7 @@ export function Hero() {
             Hackathon presencial
           </p>
           <p className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full">
-            LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36 HORAS
+            LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS
           </p>
         </div>
 
