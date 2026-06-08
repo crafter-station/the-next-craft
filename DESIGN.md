@@ -89,8 +89,8 @@ mono 11px tracking 0.18em.
   micro-SaaS donde al menos un usuario completa la acción principal;
   marketplace pequeño con publicaciones reales; herramienta de comunidad
   probada en vivo con otros participantes.
-- **Idioma**: español, tono directo estilo Platanus ("solo cracks", "a
-  construir").
+- **Idioma**: español, tono directo pero no arrogante ("a construir",
+  "producto real"). Nada de frases excluyentes tipo "solo cracks".
 - **CTA**: registro por WhatsApp — `wa.me/$NEXT_PUBLIC_WHATSAPP_NUMBER` con
   mensaje prellenado "Hola, quiero postular a The Next Craft" (trabajo de
   feat/whatsapp-registration incorporado aquí para no perderlo).
