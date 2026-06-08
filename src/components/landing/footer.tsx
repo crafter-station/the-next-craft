@@ -1,18 +1,16 @@
-const STATS = [
-  { value: "36", unit: "HORAS" },
-  { value: "150", unit: "HACKERS" },
-  { value: "$5,000", unit: "USD" },
+import { useTranslations } from "next-intl";
+
+type Stat = { value: string; unit: string };
+
+const EVENT_LINKS = [
+  { key: "about", href: "#que-es" },
+  { key: "tracks", href: "#tracks" },
+  { key: "schedule", href: "#agenda" },
+  { key: "prizes", href: "#premios" },
+  { key: "faq", href: "#faq" },
 ] as const;
 
-const EVENTO_LINKS = [
-  { label: "¿Qué es?", href: "#que-es" },
-  { label: "Track", href: "#tracks" },
-  { label: "Agenda", href: "#agenda" },
-  { label: "Premios", href: "#premios" },
-  { label: "FAQ", href: "#faq" },
-] as const;
-
-const COMUNIDAD_LINKS = [
+const COMMUNITY_LINKS = [
   {
     label: "crafterstation.com",
     href: "https://crafterstation.com",
@@ -26,11 +24,15 @@ const COMUNIDAD_LINKS = [
 ] as const;
 
 export function Footer() {
+  const t = useTranslations("footer");
+  const tNav = useTranslations("nav.links");
+  const stats = t.raw("stats") as readonly Stat[];
+
   return (
     <footer className="bg-[var(--void)] border-t border-[var(--line)]/40">
       {/* ── Stats row ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 pt-10 grid grid-cols-3 gap-3">
-        {STATS.map(({ value, unit }) => (
+        {stats.map(({ value, unit }) => (
           <div
             key={unit}
             className="panel flex flex-col items-center justify-center gap-2 py-6 px-4"
@@ -59,36 +61,36 @@ export function Footer() {
             the next craft
           </p>
           <p className="font-mono text-xs text-[var(--text-dim)] leading-[1.65]">
-            Hackathon por
+            {t("wordmarkSubtitleLine1")}
             <br />
-            Crafter Station × Next
+            {t("wordmarkSubtitleLine2")}
             <br />
-            Lima · Bogotá · Guatemala · Jul 2026
+            {t("wordmarkSubtitleLine3")}
           </p>
         </div>
 
-        {/* EVENTO */}
+        {/* EVENT */}
         <div className="flex flex-col gap-4">
-          <p className="section-label">EVENTO</p>
+          <p className="section-label">{t("sections.event")}</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
-            {EVENTO_LINKS.map(({ label, href }) => (
+            {EVENT_LINKS.map(({ key, href }) => (
               <li key={href}>
                 <a
                   href={href}
                   className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
                 >
-                  {label}
+                  {tNav(key)}
                 </a>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* COMUNIDAD */}
+        {/* COMMUNITY */}
         <div className="flex flex-col gap-4">
-          <p className="section-label">COMUNIDAD</p>
+          <p className="section-label">{t("sections.community")}</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
-            {COMUNIDAD_LINKS.map(({ label, href }) => (
+            {COMMUNITY_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
@@ -103,9 +105,9 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* CONTACTO */}
+        {/* CONTACT */}
         <div className="flex flex-col gap-4">
-          <p className="section-label">CONTACTO</p>
+          <p className="section-label">{t("sections.contact")}</p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             <li>
               <a
@@ -122,10 +124,10 @@ export function Footer() {
       {/* ── Final row: boot de despedida ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <p className="font-mono text-xs text-[var(--text-dim)]">
-          © 2026 Crafter Station × Next · Lima · Bogotá · Guatemala
+          {t("copyright")}
         </p>
         <p className="font-mono text-xs text-[var(--text-dim)]">
-          hecho a mano, no vibecodeado.{" "}
+          {t("tagline")}{" "}
           <span className="text-[var(--bright)]" aria-hidden="true">
             READY.<span className="cursor-blink">█</span>
           </span>

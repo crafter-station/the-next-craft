@@ -1,7 +1,11 @@
+import { useTranslations } from "next-intl";
+
 import { C64Model } from "./c64-model";
 import { Countdown } from "./countdown";
 
 export function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section
       id="hero"
@@ -15,7 +19,7 @@ export function Hero() {
 
       <div className="relative z-20 flex flex-col items-center text-center">
         {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
-        <h1 className="sr-only">the next craft</h1>
+        <h1 className="sr-only">{t("h1")}</h1>
 
         {/* Set Commodore 64 de frente, "the next craft" en la pantalla */}
         <div className="w-full reveal reveal-d1">
@@ -35,10 +39,10 @@ export function Hero() {
             className="font-mono font-semibold uppercase tracking-[0.1em] text-[var(--text)]"
             style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
           >
-            Hackathon presencial
+            {t("subhead")}
           </p>
           <p className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full">
-            LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36 HORAS
+            {t("specs")}
           </p>
         </div>
 
@@ -53,13 +57,13 @@ export function Hero() {
             href="#postular"
             className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            RUN Postular <span className="cta-arrow">→</span>
+            {t("ctaApply")} <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
             className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            GOTO Track <span className="cta-arrow">↓</span>
+            {t("ctaTrack")} <span className="cta-arrow">↓</span>
           </a>
         </div>
       </div>
