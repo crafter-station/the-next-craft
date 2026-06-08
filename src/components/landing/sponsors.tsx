@@ -1,35 +1,33 @@
+import { useTranslations } from "next-intl";
+
 import { SectionHeader } from "./section-header";
 
-const HEADLINE_SPONSORS = [
-  {
-    wordmark: "NEXT FELLOW",
-    role: "CO-ORGANIZER",
-    href: "https://nextfellow.ai",
-  },
-  {
-    wordmark: "CRAFTER STATION",
-    role: "ORGANIZER · COMMUNITY",
-    href: "https://crafterstation.com",
-  },
-] as const;
+type Headline = {
+  wordmark: string;
+  role: string;
+  href: string;
+};
 
 const PARTNERS = ["VERCEL", "ANTHROPIC", "SUPABASE", "ELEVENLABS"] as const;
 
 export function Sponsors() {
+  const t = useTranslations("sponsors");
+  const headlineSponsors = t.raw("headlineSponsors") as readonly Headline[];
+
   return (
     <section
       id="sponsors"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        <SectionHeader line="60" name="SPONSORS" />
+        <SectionHeader line="60" name={t("label")} />
 
         {/* Headline sponsors */}
         <ul
           className="grid grid-cols-1 md:grid-cols-2 gap-3 list-none m-0 p-0"
-          aria-label="Headline sponsors"
+          aria-label={t("headlineAria")}
         >
-          {HEADLINE_SPONSORS.map(({ wordmark, role, href }) => (
+          {headlineSponsors.map(({ wordmark, role, href }) => (
             <li key={wordmark} className="group">
               <a
                 href={href}
@@ -59,11 +57,11 @@ export function Sponsors() {
         {/* Partners */}
         <div className="flex flex-col gap-4">
           <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)]">
-            PARTNERS
+            {t("partnersLabel")}
           </p>
           <ul
             className="grid grid-cols-2 md:grid-cols-4 gap-3 list-none m-0 p-0"
-            aria-label="Tour partners"
+            aria-label={t("partnersAria")}
           >
             {PARTNERS.map((name) => (
               <li key={name} className="panel px-6 py-7 flex flex-col gap-3">
@@ -81,7 +79,7 @@ export function Sponsors() {
 
         {/* Sponsor CTA */}
         <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)]">
-          {"¿Quieres ser sponsor? →"}{" "}
+          {t("ctaPrefix")}{" "}
           <a
             href="mailto:sponsors@crafterstation.com"
             className="text-[var(--bright)] hover:text-[var(--text)] underline underline-offset-2 transition-colors duration-150"
