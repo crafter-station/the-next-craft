@@ -65,13 +65,6 @@ export function Tracks() {
               </li>
             ))}
           </ul>
-
-          {/* Footer — comando LOAD */}
-          <div className="px-7 py-3 border-t border-[var(--line)]/40">
-            <p className="font-mono text-[11px] tracking-[0.08em] text-[var(--bright)]">
-              LOAD &quot;USUARIOS&quot;,8,1
-            </p>
-          </div>
         </div>
       </div>
     </section>
