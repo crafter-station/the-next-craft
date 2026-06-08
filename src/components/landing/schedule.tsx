@@ -1,3 +1,9 @@
+"use client";
+
+import { useState } from "react";
+
+import { SectionHeader } from "./section-header";
+
 type Event = {
   time: string;
   description: string;
@@ -6,13 +12,17 @@ type Event = {
 };
 
 type Day = {
-  header: string;
+  id: string;
+  label: string;
+  weekday: string;
   events: Event[];
 };
 
 const DAYS: Day[] = [
   {
-    header: "── VIE 24 JUL ──",
+    id: "vie",
+    label: "24 JUL",
+    weekday: "VIERNES",
     events: [
       { time: "17:00", description: "Registro y acreditación" },
       {
@@ -20,12 +30,14 @@ const DAYS: Day[] = [
         description: "Kickoff — reglas y formación de equipos",
         highlight: true,
       },
-      { time: "19:00", description: "Empieza el hacking" },
+      { time: "19:00", description: "Empieza el hacking", highlight: true },
       { time: "21:00", description: "Cena" },
     ],
   },
   {
-    header: "── SÁB 25 JUL ──",
+    id: "sab",
+    label: "25 JUL",
+    weekday: "SÁBADO",
     events: [
       { time: "09:00", description: "Desayuno" },
       {
@@ -43,7 +55,9 @@ const DAYS: Day[] = [
     ],
   },
   {
-    header: "── DOM 26 JUL ──",
+    id: "dom",
+    label: "26 JUL",
+    weekday: "DOMINGO",
     events: [
       {
         time: "07:00",
@@ -71,95 +85,137 @@ const DAYS: Day[] = [
   },
 ] as const;
 
-import { CornerMarks } from "./corner-marks";
-
 export function Schedule() {
+  const [activeId, setActiveId] = useState<string>(DAYS[0].id);
+  const activeDay = DAYS.find((d) => d.id === activeId) ?? DAYS[0];
+
   return (
     <section
       id="agenda"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--paper-dim)]"
+      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
     >
-      <CornerMarks />
+      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
+        <SectionHeader line="40" name="AGENDA" />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
-        {/* Label + headline group */}
-        <div className="flex flex-col gap-3">
-          <p className="section-label">[04] — AGENDA</p>
-          <h2
-            className="font-sans font-extrabold leading-none text-[var(--blue)]"
-            style={{
-              fontSize: "clamp(2rem, 5vw, 3.5rem)",
-              letterSpacing: "-0.03em",
-              marginLeft: "-0.02em",
-            }}
+        <h2
+          className="pixel-heading"
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
+        >
+          36 horas.
+          <br />
+          Cero relleno.
+        </h2>
+
+        {/* Dos columnas: selector de día | agenda del día */}
+        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-14">
+          {/* ── Selector de día — keycaps ── */}
+          <div
+            role="tablist"
+            aria-label="Días del evento"
+            aria-orientation="vertical"
+            className="flex flex-row lg:flex-col gap-3 lg:gap-4 items-stretch"
           >
-            36 horas.
-            <br />
-            Cero relleno.
-          </h2>
-        </div>
+            {DAYS.map((day) => {
+              const selected = day.id === activeId;
+              return (
+                <button
+                  key={day.id}
+                  type="button"
+                  role="tab"
+                  id={`tab-${day.id}`}
+                  aria-selected={selected}
+                  aria-controls={`panel-${day.id}`}
+                  tabIndex={selected ? 0 : -1}
+                  onClick={() => setActiveId(day.id)}
+                  onKeyDown={(e) => {
+                    const idx = DAYS.findIndex((d) => d.id === activeId);
+                    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+                      e.preventDefault();
+                      const next = DAYS[(idx + 1) % DAYS.length];
+                      setActiveId(next.id);
+                      document.getElementById(`tab-${next.id}`)?.focus();
+                    }
+                    if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                      e.preventDefault();
+                      const prev = DAYS[(idx - 1 + DAYS.length) % DAYS.length];
+                      setActiveId(prev.id);
+                      document.getElementById(`tab-${prev.id}`)?.focus();
+                    }
+                  }}
+                  className={[
+                    "flex-1 lg:flex-none flex flex-col items-start gap-1 px-5 py-4 text-left",
+                    selected ? "keycap" : "keycap-ghost",
+                  ].join(" ")}
+                >
+                  <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase opacity-70">
+                    {day.weekday}
+                  </span>
+                  <span
+                    className="font-pixel font-bold leading-none"
+                    style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)" }}
+                  >
+                    {day.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-        {/* Timeline */}
-        <div className="flex flex-col gap-10">
-          {DAYS.map((day) => (
-            <div key={day.header} className="flex flex-col gap-0">
-              {/* Day header */}
-              <p className="font-mono text-xs font-bold tracking-[0.15em] text-[var(--blue)] uppercase mb-4 select-none">
-                {day.header}
-              </p>
+          {/* ── Agenda del día seleccionado ── */}
+          <div
+            role="tabpanel"
+            id={`panel-${activeDay.id}`}
+            aria-labelledby={`tab-${activeDay.id}`}
+            className="relative"
+          >
+            {/* Línea vertical */}
+            <div
+              className="absolute top-0 bottom-0 left-0 w-px bg-[var(--line)]"
+              aria-hidden="true"
+            />
 
-              {/* Events — vertical line via left border on the inner wrapper */}
-              <div className="relative">
-                {/* Vertical 1px blue line */}
-                <div
-                  className="absolute top-0 bottom-0 left-0 w-px bg-[var(--blue)]"
-                  aria-hidden="true"
-                />
+            <ul className="list-none m-0 p-0 flex flex-col gap-0">
+              {activeDay.events.map((event) => (
+                <li
+                  key={`${activeDay.id}-${event.time}`}
+                  className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3.5 rounded-r-lg hover:bg-[var(--screen-dim)] transition-colors duration-100"
+                >
+                  {/* Nodo cuadrado pixel en la línea */}
+                  <span
+                    className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--bright)] shrink-0"
+                    aria-hidden="true"
+                  />
 
-                <ul className="list-none m-0 p-0 flex flex-col gap-0">
-                  {day.events.map((event) => (
-                    <li
-                      key={`${day.header}-${event.time}`}
-                      className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3 hover:bg-[var(--paper-dim)] transition-colors duration-100"
-                    >
-                      {/* Square node on the vertical line */}
-                      <span
-                        className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--blue)] shrink-0"
-                        aria-hidden="true"
-                      />
+                  {/* Hora — mono tabular */}
+                  <span
+                    className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--bright)] shrink-0 w-12"
+                    style={{ fontVariantNumeric: "tabular-nums" }}
+                  >
+                    {event.time}
+                  </span>
 
-                      {/* Time — mono tabular-nums; weight increases on row hover via .schedule-time */}
-                      <span
-                        className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--blue)] shrink-0 w-12"
-                        style={{ fontVariantNumeric: "tabular-nums" }}
-                      >
-                        {event.time}
-                      </span>
-
-                      {/* Description */}
-                      <span
-                        className={
-                          event.highlight
-                            ? "font-sans text-sm font-bold leading-snug text-[var(--blue)]"
-                            : "font-sans text-sm leading-snug text-[var(--ink)]"
-                        }
-                      >
-                        {event.description}
-                        {event.mono && (
-                          <>
-                            {" "}
-                            <code className="font-mono text-xs text-[var(--blue)] bg-[var(--blue-grid)] px-1 py-0.5">
-                              {event.mono}
-                            </code>
-                          </>
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
+                  {/* Descripción */}
+                  <span
+                    className={
+                      event.highlight
+                        ? "font-sans text-sm font-semibold leading-snug text-[var(--text)]"
+                        : "font-sans text-sm leading-snug text-[var(--text-dim)]"
+                    }
+                  >
+                    {event.description}
+                    {event.mono && (
+                      <>
+                        {" "}
+                        <code className="font-mono text-xs text-[var(--bright)] bg-[var(--screen-dim)] border border-[var(--line)]/40 rounded px-1 py-0.5">
+                          {event.mono}
+                        </code>
+                      </>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

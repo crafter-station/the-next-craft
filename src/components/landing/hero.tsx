@@ -1,68 +1,65 @@
-import { CornerMarks } from "./corner-marks";
+import { C64Model } from "./c64-model";
 import { Countdown } from "./countdown";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="blueprint-grid relative min-h-[calc(100svh-3.5rem)] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-16 overflow-hidden"
+      className="relative pt-0 pb-10 md:pb-14 bg-[var(--void)] overflow-hidden"
     >
-      <CornerMarks />
+      {/* Scanlines — cubren TODA la sección para que no se vea un "canvas" */}
+      <div
+        className="scanlines absolute inset-0 pointer-events-none z-10"
+        aria-hidden="true"
+      />
 
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-5">
-        {/* Terminal prompt — first to appear */}
-        <p className="font-mono text-xs text-[var(--ink-dim)] reveal reveal-d0">
-          the-next-craft$ init --lima --36h
-          <span className="cursor-blink" aria-hidden="true">
-            ▌
-          </span>
-        </p>
+      <div className="relative z-20 flex flex-col items-center text-center">
+        {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
+        <h1 className="sr-only">the next craft</h1>
 
-        {/* Hero name */}
-        <h1
-          className="font-sans font-extrabold leading-none text-[var(--blue)] reveal reveal-d1"
-          style={{
-            fontSize: "clamp(3.5rem, 9vw, 7rem)",
-            letterSpacing: "-0.04em",
-            marginLeft: "-0.04em",
-          }}
-        >
-          THE NEXT
-          <br />
-          CRAFT
-        </h1>
+        {/* Set Commodore 64 de frente, "the next craft" en la pantalla */}
+        <div className="w-full reveal reveal-d1">
+          <C64Model />
+        </div>
 
-        {/* Tagline */}
-        <p
-          className="font-sans font-medium text-[var(--ink)] leading-[1.3] reveal reveal-d2"
-          style={{ fontSize: "clamp(1.125rem, 2.5vw, 1.5rem)" }}
-        >
-          De cero a producto en 36 horas.
-        </p>
+        {/* Subhead — qué es, dónde, cuándo. Legible sin scroll. */}
+        <div className="flex flex-col items-center gap-2 mt-6 md:mt-8 px-6 reveal reveal-d2">
+          <p
+            className="font-mono text-sm font-semibold text-[var(--bright)]"
+            aria-hidden="true"
+          >
+            READY.
+            <span className="cursor-blink">█</span>
+          </p>
+          <p
+            className="font-mono font-semibold uppercase tracking-[0.1em] text-[var(--text)]"
+            style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
+          >
+            Hackathon presencial
+          </p>
+          <p className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full">
+            LIMA · BOGOTÁ · GUATEMALA · 24–26 JUL 2026 · 36 HORAS
+          </p>
+        </div>
 
-        {/* Countdown — protagonista sin label verbal */}
-        <div className="pt-2 reveal reveal-d3">
+        {/* Countdown */}
+        <div className="mt-4 px-6 reveal reveal-d3">
           <Countdown />
         </div>
 
-        {/* Specs — debajo del countdown para jerarquia correcta */}
-        <p className="section-label text-[var(--ink-dim)] reveal reveal-d4 break-words max-w-full">
-          24–26 JUL 2026 · LIMA, PERÚ · 150 HACKERS
-        </p>
-
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-1 reveal reveal-d5">
+        {/* CTAs — keycaps */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d4">
           <a
             href="#postular"
-            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase bg-[var(--blue)] text-white px-6 py-3 hover:bg-[var(--blue-bright)] transition-colors duration-150"
+            className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            Postular <span className="cta-arrow">→</span>
+            RUN Postular <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
-            className="cta-btn font-mono font-semibold text-sm tracking-[0.12em] uppercase border border-[var(--blue)] text-[var(--blue)] px-6 py-3 hover:bg-[var(--blue)] hover:text-white transition-colors duration-150"
+            className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            Ver tracks <span className="cta-arrow">↓</span>
+            GOTO Track <span className="cta-arrow">↓</span>
           </a>
         </div>
       </div>

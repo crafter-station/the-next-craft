@@ -1,11 +1,9 @@
 import { About } from "@/components/landing/about";
-import { BlueprintRuler } from "@/components/landing/blueprint-ruler";
 import { Faq } from "@/components/landing/faq";
 import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
-import { Organizers } from "@/components/landing/organizers";
 import { Prizes } from "@/components/landing/prizes";
 import { Schedule } from "@/components/landing/schedule";
 import { Sponsors } from "@/components/landing/sponsors";
@@ -20,22 +18,42 @@ const jsonLd = {
   endDate: "2026-07-26T13:00:00-05:00",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
-  location: {
-    "@type": "Place",
-    name: "Lima, Perú",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Lima",
-      addressCountry: "PE",
+  location: [
+    {
+      "@type": "Place",
+      name: "Lima, Perú",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Lima",
+        addressCountry: "PE",
+      },
     },
-  },
+    {
+      "@type": "Place",
+      name: "Bogotá, Colombia",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bogotá",
+        addressCountry: "CO",
+      },
+    },
+    {
+      "@type": "Place",
+      name: "Ciudad de Guatemala, Guatemala",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Ciudad de Guatemala",
+        addressCountry: "GT",
+      },
+    },
+  ],
   organizer: {
     "@type": "Organization",
     name: "Crafter Station",
     url: "https://crafterstation.com",
   },
   description:
-    "De cero a producto en 36 horas. Hackathon presencial en Lima, Perú — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+    "De cero a producto en 36 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 24–26 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
   offers: {
     "@type": "Offer",
     price: 0,
@@ -52,7 +70,6 @@ export default function Home() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: structured data JSON-LD requires dangerouslySetInnerHTML
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlueprintRuler />
       <Nav />
       <main id="main-content">
         <Hero />
@@ -63,7 +80,6 @@ export default function Home() {
         <Prizes />
         <Sponsors />
         <Faq />
-        <Organizers />
         <FinalCta />
       </main>
       <Footer />
