@@ -57,14 +57,6 @@ export function Prizes() {
                 USD AL EQUIPO GANADOR
               </p>
             </div>
-
-            <p
-              className="font-mono text-sm"
-              style={{ color: INK }}
-              aria-hidden="true"
-            >
-              &gt; transferencia directa. sin vueltas.
-            </p>
           </div>
 
           {/* ── Columna secundaria 1/3: perks ── */}
