@@ -84,13 +84,21 @@ mono 11px tracking 0.18em.
   contador `000→100` en pixel, barra de bloques `█`, y al llegar a 100 el
   overlay se levanta (`translateY -100%`) revelando la página. Solo 1ª carga de
   la sesión (sessionStorage) y sin reduced-motion; bloquea scroll mientras carga.
-- **Section dividers cinéticos** (`SectionDivider`): bandas de transición con
-  PETSCII GIGANTE (palabras alternando relleno/contorno) que hacen marquee +
-  parallax al scroll (view-timeline) + **skew según velocidad de scroll**
-  (`useScrollSkew`, un solo listener+rAF para todos). Colocados entre secciones:
-  `READY` · `A CONSTRUIR` · `$5,000` · `SHIP IT`. Decorativos (aria-hidden).
+- **Section titles** (`SectionTitle`): apertura de capítulo a pantalla
+  (`min-height 58vh`) — titular PETSCII GIGANTE que se decodea (scramble) y se
+  revela al entrar, con la línea BASIC como subtítulo y **skew según velocidad
+  de scroll** (`useScrollSkew`, un solo listener+rAF para todos). Es la forma de
+  pasar de una sección a otra (reemplaza los banners marquee). El titular es
+  decorativo (aria-hidden); cada sección conserva su heading real. Usados:
+  `10 MANIFIESTO` · `30 EL TRACK` · `50 PREMIOS`.
+- **Agenda cinemática** (`Schedule`, `#agenda`): sección "pinned" (sticky). Al
+  entrar, un titular `AGENDA` gigante ocupa la pantalla; al seguir scroll un
+  **backdrop** oscurece el fondo y la pantalla CRT con el timeline del día
+  (09:00–21:00) entra y se **construye fila por fila** según el progreso de
+  scroll (driver JS rAF-throttled; solo opacity/transform). Bajo reduced-motion
+  / sin JS es estática (sin pin, todo visible y legible).
 - **Grid blueprint** (`.grid-bg`): cuadrícula CRT sutil (líneas `--line` 9%,
-  máscara radial que desvanece bordes) detrás de los dividers. Decorativa.
+  máscara radial que desvanece bordes) detrás de títulos y de la agenda.
 - **Decode binario→texto** (`ScrambleText`, firma del look C64): titulares y
   el dateline del hero titilan como `0/1` y se resuelven izq→der. Termina
   SIEMPRE en el texto real (accesible, SSR-safe). Usado en hero, manifiesto,
@@ -146,7 +154,9 @@ mono 11px tracking 0.18em.
 5. `30` Track / "Work" (`#tracks`) — track único presentado estilo portfolio:
    headline decode `USUARIOS REALES`, ticker marquee, grid numerado `#0001…`
    con wipe (clip-path) en hover
-6. `40` Agenda (`#agenda`) — timeline de un día
+6. `40` Agenda (`#agenda`) — cinemática pinned: titular AGENDA gigante →
+   backdrop + pantalla CRT con el timeline del día (09:00–21:00) que se
+   construye al scrollear
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
 8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)
