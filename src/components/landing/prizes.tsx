@@ -22,17 +22,6 @@ export function Prizes() {
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--bone)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
-        {/* Label BASIC en tinta */}
-        <div className="flex items-center gap-4">
-          <p
-            className="font-mono text-xs font-semibold tracking-[0.12em] uppercase"
-            style={{ color: INK }}
-          >
-            <span style={{ color: INK_DIM }}>50 </span>
-            PRINT &quot;PREMIOS&quot;
-          </p>
-        </div>
-
         {/* Composición asimétrica 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-10">
           {/* ── Cifra protagonista en tinta ── */}

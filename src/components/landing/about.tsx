@@ -1,4 +1,4 @@
-import { SectionHeader } from "./section-header";
+import { ScrambleText } from "@/components/effects/scramble-text";
 
 export function About() {
   return (
@@ -7,17 +7,13 @@ export function About() {
       className="relative px-6 md:px-12 lg:px-24 py-24 lg:py-32 bg-[var(--void)] overflow-hidden"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 relative scroll-reveal">
-        <SectionHeader line="10" name="MANIFIESTO" />
-
-        {/* Headline pixel PETSCII */}
-        <h2
-          className="pixel-heading"
+        {/* Headline pixel PETSCII — decode binario→texto */}
+        <ScrambleText
+          as="h2"
+          text={"No es un evento.\nSon 12 horas de construir."}
+          className="pixel-heading whitespace-pre-line"
           style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
-        >
-          No es un evento.
-          <br />
-          Son 12 horas de construir.
-        </h2>
+        />
 
         {/* Body */}
         <div className="flex flex-col gap-5 max-w-2xl">

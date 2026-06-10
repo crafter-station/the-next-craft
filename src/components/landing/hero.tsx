@@ -1,3 +1,5 @@
+import { ScrambleText } from "@/components/effects/scramble-text";
+
 import { C64Model } from "./c64-model";
 import { Countdown } from "./countdown";
 
@@ -37,9 +39,13 @@ export function Hero() {
           >
             Hackathon presencial
           </p>
-          <p className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full">
-            LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS
-          </p>
+          <ScrambleText
+            as="p"
+            text="LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS"
+            trigger="mount"
+            delay={420}
+            className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full"
+          />
         </div>
 
         {/* Countdown */}
@@ -51,12 +57,14 @@ export function Hero() {
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d4">
           <a
             href="#postular"
+            data-magnetic
             className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
             RUN Postular <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
+            data-magnetic
             className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
             GOTO Track <span className="cta-arrow">↓</span>
