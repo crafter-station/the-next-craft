@@ -6,6 +6,7 @@ import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
 import { Prizes } from "@/components/landing/prizes";
 import { Schedule } from "@/components/landing/schedule";
+import { SectionDivider } from "@/components/landing/section-divider";
 import { Sponsors } from "@/components/landing/sponsors";
 import { Tldr } from "@/components/landing/tldr";
 import { Tracks } from "@/components/landing/tracks";
@@ -73,13 +74,17 @@ export default function Home() {
       <Nav />
       <main id="main-content">
         <Hero />
+        <SectionDivider word="READY" />
         <About />
         <Tldr />
+        <SectionDivider word="A CONSTRUIR" reverse />
         <Tracks />
         <Schedule />
+        <SectionDivider word="$5,000" />
         <Prizes />
         <Sponsors />
         <Faq />
+        <SectionDivider word="SHIP IT" reverse />
         <FinalCta />
       </main>
       <Footer />

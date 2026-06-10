@@ -58,6 +58,7 @@
 
   /* Easing curves — las built-in son débiles */
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Paleta B&N vintage — negro cálido tipo Apple '99 */
   --void: #1a1a17;
@@ -229,6 +230,194 @@
   border-radius: 0.625rem;
 }
 
+/* ─── Cursor C64 (custom) ───────────────────────────────────────── */
+/*
+  Ocultos por defecto; solo aparecen cuando CustomCursor monta (puntero
+  fino + sin reduced-motion → añade .has-custom-cursor a <html>).
+*/
+.cursor-dot,
+.cursor-ring {
+  display: none;
+}
+
+.has-custom-cursor .cursor-dot,
+.has-custom-cursor .cursor-ring {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+}
+
+.has-custom-cursor .cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--bright);
+  z-index: 9999;
+}
+
+.has-custom-cursor .cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  scale: 1;
+}
+
+/* Ocultar el cursor nativo cuando el custom está activo */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* ─── Work grid (sección Track) ─────────────────────────────────── */
+.work-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.work-card:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Relleno que barre de izquierda a derecha en hover */
+.work-card-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--screen-dim);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.work-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.work-card-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+/* ─── Boot loader (splash de arranque) ──────────────────────────── */
+.boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--void);
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.boot-loader.is-lifting {
+  transform: translateY(-100%);
+  transition: transform 900ms var(--ease-in-out-strong);
+}
+
+.boot-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.boot-log {
+  margin-bottom: 1.25rem;
+}
+
+.boot-meter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+}
+
+.boot-counter {
+  font-size: clamp(3.5rem, 15vw, 8rem);
+}
+
+/* ─── Grid blueprint (fondo CRT / papel cuadriculado) ───────────── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, rgb(140 138 130 / 9%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(140 138 130 / 9%) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    #000 35%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(ellipse at center, #000 35%, transparent 82%);
+}
+
+/* ─── Section divider (tipografía cinética gigante) ─────────────── */
+.section-divider {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--screen-dim);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding-block: clamp(1.25rem, 4.5vw, 3rem);
+}
+
+.divider-parallax {
+  position: relative;
+  z-index: 1;
+}
+
+.divider-skew {
+  will-change: transform;
+}
+
+.divider-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.25rem, 10vw, 7.5rem);
+  line-height: 0.9;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.divider-word {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text);
+}
+
+.divider-word--outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--line);
+}
+
+.divider-sep {
+  margin: 0 0.28em;
+  color: var(--bright);
+  -webkit-text-stroke: 0;
+}
+
 /* ─── Motion & micro-interactions ───────────────────────────────── */
 
 /*
@@ -371,15 +560,184 @@
   .schedule-row:hover .schedule-time {
     font-weight: 600;
   }
+
+  /* ── Cursor: transiciones de estado (lerp lo mueve por JS) ──────── */
+  .has-custom-cursor .cursor-ring {
+    transition:
+      scale 220ms var(--ease-out-strong),
+      opacity 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .has-custom-cursor .cursor-ring.is-hover {
+    scale: 1.9;
+    border-color: var(--bright);
+  }
+
+  .has-custom-cursor .cursor-ring.is-down {
+    scale: 0.7;
+  }
+
+  .has-custom-cursor .cursor-ring.is-out {
+    opacity: 0;
+  }
+
+  /* Magnetic: el elemento vuelve suave a su sitio al salir */
+  [data-magnetic] {
+    transition: translate 350ms var(--ease-out-strong);
+  }
+
+  /* ── Reveal de titulares: wipe vertical con clip-path ──────────── */
+  @keyframes heading-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* ── Reveal de items (cards, filas, celdas) ────────────────────── */
+  @keyframes parallax-drift {
+    from {
+      transform: translateY(var(--parallax-from, 28px));
+    }
+    to {
+      transform: translateY(var(--parallax-to, -28px));
+    }
+  }
+
+  /* ── Marquee infinito (ticker de la sección Work) ──────────────── */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+    will-change: transform;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .heading-reveal {
+      animation: heading-in 600ms var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 38%;
+    }
+
+    .reveal-item {
+      animation: fade-up 520ms var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 26%;
+    }
+
+    /* Parallax sutil ligado al scroll (off main thread) */
+    .parallax-slow {
+      animation: parallax-drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+      will-change: transform;
+    }
+  }
+
+  /* ── Work card: hover wipe + flecha + índice ───────────────────── */
+  .work-card-fill {
+    transition: clip-path 420ms var(--ease-out-strong);
+  }
+
+  .work-card-index,
+  .work-card-title {
+    transition: color 200ms ease;
+  }
+
+  .work-card-arrow {
+    transition:
+      opacity 220ms ease-out,
+      transform 260ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work-card:hover .work-card-fill {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .work-card:hover .work-card-index,
+    .work-card:hover .work-card-title {
+      color: var(--bright);
+    }
+
+    .work-card:hover .work-card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ── Section divider: marquee + parallax al scroll ─────────────── */
+  .divider-track {
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+
+  .divider-track--reverse {
+    animation-direction: reverse;
+  }
+
+  @supports (animation-timeline: view()) {
+    @keyframes divider-parallax {
+      from {
+        transform: translateX(4%);
+      }
+      to {
+        transform: translateX(-4%);
+      }
+    }
+
+    .divider-parallax {
+      animation: divider-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
 }
 
 /* ── Fallback: reduced-motion → everything visible, no animation ── */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .scroll-reveal {
+  .scroll-reveal,
+  .heading-reveal,
+  .reveal-item,
+  .parallax-slow {
     animation: none;
     opacity: 1;
     transform: none;
+    clip-path: none;
+  }
+
+  /* Marquee estático: solo se ve la primera copia (overflow hidden) */
+  .marquee-track,
+  .divider-track,
+  .divider-parallax {
+    animation: none;
+    transform: none;
+  }
+
+  /* Sin movimiento magnético */
+  [data-magnetic] {
+    transition: none;
   }
 
   .cursor-blink {
