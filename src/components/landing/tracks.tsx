@@ -1,7 +1,5 @@
 import { ScrambleText } from "@/components/effects/scramble-text";
 
-import { SectionHeader } from "./section-header";
-
 /*
   Un solo track — el corazón de la hackathon: que tu producto tenga
   usuarios reales (o al menos uno) antes de que acabe el reloj.
@@ -35,14 +33,6 @@ const WORK = [
   },
 ] as const;
 
-// Frases del ticker — repetidas 2x en el track para loop continuo.
-const TICKER = [
-  "DE CERO A PRODUCTO",
-  "SHIP REAL",
-  "12 HORAS",
-  "A CONSTRUIR",
-] as const;
-
 export function Tracks() {
   return (
     <section
@@ -51,8 +41,6 @@ export function Tracks() {
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-12">
         <div className="flex flex-col gap-6">
-          <SectionHeader line="30" name="TRACK" />
-
           <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)]">
             UN SOLO TRACK
           </p>
@@ -75,25 +63,6 @@ export function Tracks() {
             construyas lo use alguien de verdad — aunque sea una persona — antes
             de que suene la campana. Ese es el corazón de la hackathon.
           </p>
-        </div>
-
-        {/* Ticker marquee — energía de transición a la lista */}
-        <div
-          className="marquee relative overflow-hidden border-y border-[var(--border)] py-3"
-          aria-hidden="true"
-        >
-          <div className="marquee-track flex w-max items-center gap-6">
-            {[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((phrase, i) => (
-              <span
-                // biome-ignore lint/suspicious/noArrayIndexKey: lista decorativa estática
-                key={i}
-                className="flex shrink-0 items-center gap-6 font-mono text-sm font-semibold tracking-[0.2em] uppercase text-[var(--text-dim)]"
-              >
-                {phrase}
-                <span className="text-[var(--bright)]">█</span>
-              </span>
-            ))}
-          </div>
         </div>
 
         {/* Grid numerado — qué cuenta como "tener usuarios" */}

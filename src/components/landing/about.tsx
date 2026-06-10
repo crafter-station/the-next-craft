@@ -1,7 +1,5 @@
 import { ScrambleText } from "@/components/effects/scramble-text";
 
-import { SectionHeader } from "./section-header";
-
 export function About() {
   return (
     <section
@@ -9,8 +7,6 @@ export function About() {
       className="relative px-6 md:px-12 lg:px-24 py-24 lg:py-32 bg-[var(--void)] overflow-hidden"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 relative scroll-reveal">
-        <SectionHeader line="10" name="MANIFIESTO" />
-
         {/* Headline pixel PETSCII — decode binario→texto */}
         <ScrambleText
           as="h2"

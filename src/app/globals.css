@@ -369,53 +369,169 @@
   mask-image: radial-gradient(ellipse at center, #000 35%, transparent 82%);
 }
 
-/* ─── Section divider (tipografía cinética gigante) ─────────────── */
-.section-divider {
+/* ─── Section title (apertura de capítulo gigante) ──────────────── */
+.section-title-block {
   position: relative;
   overflow: hidden;
-  background-color: var(--screen-dim);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding-block: clamp(1.25rem, 4.5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58vh;
+  padding: 4rem 1.5rem;
+  background-color: var(--void);
 }
 
-.divider-parallax {
+.section-title-inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: center;
 }
 
-.divider-skew {
+.section-title-skew {
   will-change: transform;
 }
 
-.divider-track {
-  display: flex;
-  width: max-content;
-  align-items: center;
+.section-title-giant {
   font-family: var(--font-pixel);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: clamp(2.25rem, 10vw, 7.5rem);
-  line-height: 0.9;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.divider-word {
-  display: inline-flex;
-  align-items: center;
+  font-size: clamp(2.5rem, 11vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
   color: var(--text);
 }
 
-.divider-word--outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--line);
+/* ─── Agenda cinemática (pinned + backdrop) ─────────────────────── */
+.agenda {
+  position: relative;
+  background-color: var(--void);
 }
 
-.divider-sep {
-  margin: 0 0.28em;
-  color: var(--bright);
-  -webkit-text-stroke: 0;
+.agenda[data-pinned="true"] {
+  height: 300vh;
+}
+
+.agenda-sticky {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2rem 1.25rem;
+}
+
+.agenda[data-pinned="true"] .agenda-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.agenda-giant-wrap {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  will-change: transform, opacity;
+}
+
+.agenda-giant {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(3rem, 17vw, 12rem);
+  line-height: 0.9;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.agenda-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgb(0 0 0 / 55%);
+  opacity: 0;
+}
+
+.agenda-panel {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  overflow: hidden;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.agenda-panel-inner {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 0 0.55rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.agenda-row.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 320ms var(--ease-out-strong),
+    transform 320ms var(--ease-out-strong);
+}
+
+.agenda-row:last-child {
+  border-bottom: 0;
+}
+
+.agenda-node {
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 6px;
+  height: 6px;
+  background-color: var(--bright);
+}
+
+.agenda-time {
+  flex-shrink: 0;
+  width: 3.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Estado estático (reduced-motion / sin JS): todo visible, sin pin */
+.agenda:not([data-pinned="true"]) .agenda-giant-wrap,
+.agenda:not([data-pinned="true"]) .agenda-backdrop {
+  display: none;
+}
+
+.agenda:not([data-pinned="true"]) .agenda-panel {
+  opacity: 1;
+  transform: none;
+  max-height: none;
+}
+
+.agenda:not([data-pinned="true"]) .agenda-row {
+  opacity: 1;
+  transform: none;
 }
 
 /* ─── Motion & micro-interactions ───────────────────────────────── */
@@ -611,27 +727,6 @@
     }
   }
 
-  /* ── Marquee infinito (ticker de la sección Work) ──────────────── */
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  .marquee-track {
-    animation: marquee 32s linear infinite;
-    will-change: transform;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .marquee:hover .marquee-track {
-      animation-play-state: paused;
-    }
-  }
-
   @supports (animation-timeline: view()) {
     .heading-reveal {
       animation: heading-in 600ms var(--ease-out-strong) both;
@@ -685,33 +780,6 @@
       transform: translateX(0);
     }
   }
-
-  /* ── Section divider: marquee + parallax al scroll ─────────────── */
-  .divider-track {
-    animation: marquee 28s linear infinite;
-    will-change: transform;
-  }
-
-  .divider-track--reverse {
-    animation-direction: reverse;
-  }
-
-  @supports (animation-timeline: view()) {
-    @keyframes divider-parallax {
-      from {
-        transform: translateX(4%);
-      }
-      to {
-        transform: translateX(-4%);
-      }
-    }
-
-    .divider-parallax {
-      animation: divider-parallax linear both;
-      animation-timeline: view();
-      animation-range: cover;
-    }
-  }
 }
 
 /* ── Fallback: reduced-motion → everything visible, no animation ── */
@@ -725,14 +793,6 @@
     opacity: 1;
     transform: none;
     clip-path: none;
-  }
-
-  /* Marquee estático: solo se ve la primera copia (overflow hidden) */
-  .marquee-track,
-  .divider-track,
-  .divider-parallax {
-    animation: none;
-    transform: none;
   }
 
   /* Sin movimiento magnético */
