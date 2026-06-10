@@ -1,3 +1,5 @@
+import { ScrambleText } from "@/components/effects/scramble-text";
+
 // Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md)
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "51999999999";
@@ -28,15 +30,14 @@ export function FinalCta() {
             <span className="cursor-blink">█</span>
           </p>
 
-          {/* Headline pixel */}
-          <h2
-            className="pixel-heading"
+          {/* Headline pixel — decode binario→texto */}
+          <ScrambleText
+            as="h2"
+            text={"¿Construyes?\nPostula."}
+            className="pixel-heading whitespace-pre-line"
             style={{ fontSize: "clamp(1.75rem, 5vw, 3.5rem)" }}
-          >
-            ¿Construyes?
-            <br />
-            Postula.
-          </h2>
+            noise="glitch"
+          />
 
           {/* Deadline */}
           <p className="font-mono text-sm font-medium tracking-[0.15em] uppercase text-[var(--text-dim)]">
@@ -49,6 +50,7 @@ export function FinalCta() {
               href={WA_LINK}
               target="_blank"
               rel="noopener noreferrer"
+              data-magnetic
               className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-8 py-4 transition-colors duration-150"
             >
               Postular por WhatsApp <span className="cta-arrow">→</span>

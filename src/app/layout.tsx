@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
+
+import { BootLoader } from "@/components/effects/boot-loader";
+import { CustomCursor } from "@/components/effects/custom-cursor";
+import { SmoothScroll } from "@/components/effects/smooth-scroll";
 import "./globals.css";
 
 const silkscreen = Silkscreen({
@@ -90,6 +94,9 @@ export default function RootLayout({
         >
           Saltar al contenido
         </a>
+        <BootLoader />
+        <SmoothScroll />
+        <CustomCursor />
         {children}
       </body>
     </html>

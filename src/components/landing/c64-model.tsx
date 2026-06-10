@@ -1,9 +1,10 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 
 import { Center, Html, OrbitControls, useGLTF } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
+import type { Group } from "three";
 
 const MODEL_URL = "/c64.glb";
 
@@ -14,27 +15,41 @@ const MODEL_URL = "/c64.glb";
 */
 const SCREEN_POSITION: [number, number, number] = [0.0, 1.95, 0.65];
 
-function C64() {
+function C64({ parallax }: { parallax: boolean }) {
   const { scene } = useGLTF(MODEL_URL);
+  const group = useRef<Group>(null);
+
+  // Parallax sutil: el set inclina hacia el puntero (lerp suave). Compone
+  // con el drag de OrbitControls (que mueve la cámara, no el objeto).
+  useFrame((state) => {
+    if (!parallax || !group.current) return;
+    const targetY = state.pointer.x * 0.16;
+    const targetX = -state.pointer.y * 0.07;
+    group.current.rotation.y += (targetY - group.current.rotation.y) * 0.05;
+    group.current.rotation.x += (targetX - group.current.rotation.x) * 0.05;
+  });
+
   return (
-    <Center>
-      <primitive object={scene} />
-      {/* Wordmark dentro de la pantalla del monitor */}
-      <Html
-        transform
-        position={SCREEN_POSITION}
-        distanceFactor={2.6}
-        style={{ pointerEvents: "none" }}
-        aria-hidden="true"
-      >
-        <p
-          className="font-script font-bold text-[40px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none"
-          style={{ WebkitTextStroke: "0.9px #26261f" }}
+    <group ref={group}>
+      <Center>
+        <primitive object={scene} />
+        {/* Wordmark dentro de la pantalla del monitor */}
+        <Html
+          transform
+          position={SCREEN_POSITION}
+          distanceFactor={2.6}
+          style={{ pointerEvents: "none" }}
+          aria-hidden="true"
         >
-          the next craft
-        </p>
-      </Html>
-    </Center>
+          <p
+            className="font-script font-bold text-[40px] leading-[1.4] text-[#26261f] whitespace-nowrap select-none"
+            style={{ WebkitTextStroke: "0.9px #26261f" }}
+          >
+            the next craft
+          </p>
+        </Html>
+      </Center>
+    </group>
   );
 }
 
@@ -56,6 +71,12 @@ function LoadingFallback() {
  * Decorativo: el wrapper lleva aria-hidden; el h1 real es sr-only en Hero.
  */
 export function C64Model() {
+  const parallax = useRef(true);
+  if (typeof window !== "undefined") {
+    parallax.current = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
+  }
+
   return (
     <div
       className="w-full h-[380px] sm:h-[460px] lg:h-[540px] cursor-grab active:cursor-grabbing"
@@ -74,7 +95,7 @@ export function C64Model() {
           color="#e9e7de"
         />
         <Suspense fallback={<LoadingFallback />}>
-          <C64 />
+          <C64 parallax={parallax.current} />
         </Suspense>
         <OrbitControls
           enableZoom={false}
