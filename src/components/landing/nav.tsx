@@ -44,6 +44,7 @@ export function Nav() {
         {/* CTA — keycap beige */}
         <a
           href="#postular"
+          data-magnetic
           className="cta-btn keycap font-mono text-xs font-semibold tracking-[0.12em] uppercase px-4 py-2 transition-colors duration-150 shrink-0"
         >
           Postular <span className="cta-arrow">→</span>

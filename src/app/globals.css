@@ -58,6 +58,7 @@
 
   /* Easing curves — las built-in son débiles */
   --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 
   /* Paleta B&N vintage — negro cálido tipo Apple '99 */
   --void: #1a1a17;
@@ -229,6 +230,310 @@
   border-radius: 0.625rem;
 }
 
+/* ─── Cursor C64 (custom) ───────────────────────────────────────── */
+/*
+  Ocultos por defecto; solo aparecen cuando CustomCursor monta (puntero
+  fino + sin reduced-motion → añade .has-custom-cursor a <html>).
+*/
+.cursor-dot,
+.cursor-ring {
+  display: none;
+}
+
+.has-custom-cursor .cursor-dot,
+.has-custom-cursor .cursor-ring {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+}
+
+.has-custom-cursor .cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--bright);
+  z-index: 9999;
+}
+
+.has-custom-cursor .cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  scale: 1;
+}
+
+/* Ocultar el cursor nativo cuando el custom está activo */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* ─── Work grid (sección Track) ─────────────────────────────────── */
+.work-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.work-card:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Relleno que barre de izquierda a derecha en hover */
+.work-card-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--screen-dim);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.work-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.work-card-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+/* ─── Boot loader (splash de arranque) ──────────────────────────── */
+.boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--void);
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.boot-loader.is-lifting {
+  transform: translateY(-100%);
+  transition: transform 900ms var(--ease-in-out-strong);
+}
+
+.boot-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.boot-log {
+  margin-bottom: 1.25rem;
+}
+
+.boot-meter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.15em;
+}
+
+.boot-counter {
+  font-size: clamp(3.5rem, 15vw, 8rem);
+}
+
+/* ─── Grid blueprint (fondo CRT / papel cuadriculado) ───────────── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, rgb(140 138 130 / 9%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(140 138 130 / 9%) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    #000 35%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(ellipse at center, #000 35%, transparent 82%);
+}
+
+/* ─── Section title (apertura de capítulo gigante) ──────────────── */
+.section-title-block {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58vh;
+  padding: 4rem 1.5rem;
+  background-color: var(--void);
+}
+
+.section-title-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  text-align: center;
+}
+
+.section-title-skew {
+  will-change: transform;
+}
+
+.section-title-giant {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 11vw, 8rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+/* ─── Agenda cinemática (pinned + backdrop) ─────────────────────── */
+.agenda {
+  position: relative;
+  background-color: var(--void);
+}
+
+.agenda[data-pinned="true"] {
+  height: 300vh;
+}
+
+.agenda-sticky {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 2rem 1.25rem;
+}
+
+.agenda[data-pinned="true"] .agenda-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.agenda-giant-wrap {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  will-change: transform, opacity;
+}
+
+.agenda-giant {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(3rem, 17vw, 12rem);
+  line-height: 0.9;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.agenda-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgb(0 0 0 / 55%);
+  opacity: 0;
+}
+
+.agenda-panel {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  overflow: hidden;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.agenda-panel-inner {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-row {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.55rem 0 0.55rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.agenda-row.is-in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 320ms var(--ease-out-strong),
+    transform 320ms var(--ease-out-strong);
+}
+
+.agenda-row:last-child {
+  border-bottom: 0;
+}
+
+.agenda-node {
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 6px;
+  height: 6px;
+  background-color: var(--bright);
+}
+
+.agenda-time {
+  flex-shrink: 0;
+  width: 3.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Estado estático (reduced-motion / sin JS): todo visible, sin pin */
+.agenda:not([data-pinned="true"]) .agenda-giant-wrap,
+.agenda:not([data-pinned="true"]) .agenda-backdrop {
+  display: none;
+}
+
+.agenda:not([data-pinned="true"]) .agenda-panel {
+  opacity: 1;
+  transform: none;
+  max-height: none;
+}
+
+.agenda:not([data-pinned="true"]) .agenda-row {
+  opacity: 1;
+  transform: none;
+}
+
 /* ─── Motion & micro-interactions ───────────────────────────────── */
 
 /*
@@ -371,15 +676,128 @@
   .schedule-row:hover .schedule-time {
     font-weight: 600;
   }
+
+  /* ── Cursor: transiciones de estado (lerp lo mueve por JS) ──────── */
+  .has-custom-cursor .cursor-ring {
+    transition:
+      scale 220ms var(--ease-out-strong),
+      opacity 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .has-custom-cursor .cursor-ring.is-hover {
+    scale: 1.9;
+    border-color: var(--bright);
+  }
+
+  .has-custom-cursor .cursor-ring.is-down {
+    scale: 0.7;
+  }
+
+  .has-custom-cursor .cursor-ring.is-out {
+    opacity: 0;
+  }
+
+  /* Magnetic: el elemento vuelve suave a su sitio al salir */
+  [data-magnetic] {
+    transition: translate 350ms var(--ease-out-strong);
+  }
+
+  /* ── Reveal de titulares: wipe vertical con clip-path ──────────── */
+  @keyframes heading-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* ── Reveal de items (cards, filas, celdas) ────────────────────── */
+  @keyframes parallax-drift {
+    from {
+      transform: translateY(var(--parallax-from, 28px));
+    }
+    to {
+      transform: translateY(var(--parallax-to, -28px));
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    .heading-reveal {
+      animation: heading-in 600ms var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 38%;
+    }
+
+    .reveal-item {
+      animation: fade-up 520ms var(--ease-out-strong) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 26%;
+    }
+
+    /* Parallax sutil ligado al scroll (off main thread) */
+    .parallax-slow {
+      animation: parallax-drift linear both;
+      animation-timeline: view();
+      animation-range: cover;
+      will-change: transform;
+    }
+  }
+
+  /* ── Work card: hover wipe + flecha + índice ───────────────────── */
+  .work-card-fill {
+    transition: clip-path 420ms var(--ease-out-strong);
+  }
+
+  .work-card-index,
+  .work-card-title {
+    transition: color 200ms ease;
+  }
+
+  .work-card-arrow {
+    transition:
+      opacity 220ms ease-out,
+      transform 260ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work-card:hover .work-card-fill {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .work-card:hover .work-card-index,
+    .work-card:hover .work-card-title {
+      color: var(--bright);
+    }
+
+    .work-card:hover .work-card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 }
 
 /* ── Fallback: reduced-motion → everything visible, no animation ── */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .scroll-reveal {
+  .scroll-reveal,
+  .heading-reveal,
+  .reveal-item,
+  .parallax-slow {
     animation: none;
     opacity: 1;
     transform: none;
+    clip-path: none;
+  }
+
+  /* Sin movimiento magnético */
+  [data-magnetic] {
+    transition: none;
   }
 
   .cursor-blink {
