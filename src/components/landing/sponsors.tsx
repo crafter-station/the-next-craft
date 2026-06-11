@@ -3,12 +3,12 @@ import { SectionHeader } from "./section-header";
 const HEADLINE_SPONSORS = [
   {
     wordmark: "NEXT FELLOW",
-    role: "CO-ORGANIZER",
+    role: "ORGANIZER",
     href: "https://nextfellow.ai",
   },
   {
     wordmark: "CRAFTER STATION",
-    role: "ORGANIZER · COMMUNITY",
+    role: "ORGANIZER",
     href: "https://crafterstation.com",
   },
 ] as const;
@@ -22,9 +22,9 @@ export function Sponsors() {
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         <SectionHeader line="60" name="SPONSORS" />
 
-        {/* Headline sponsors */}
+        {/* Headline sponsors — tabla fusionada, bordes compartidos sin radius */}
         <ul
-          className="grid grid-cols-1 md:grid-cols-2 gap-3 list-none m-0 p-0"
+          className="grid grid-cols-1 md:grid-cols-2 list-none m-0 p-0 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]"
           aria-label="Headline sponsors"
         >
           {HEADLINE_SPONSORS.map(({ wordmark, role, href }) => (
@@ -33,7 +33,8 @@ export function Sponsors() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="panel flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
+                className="flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
+                           border-r border-b border-[var(--line)]
                            hover:bg-[var(--screen)] transition-colors duration-150 no-underline"
               >
                 {/* Wordmark pixel */}
