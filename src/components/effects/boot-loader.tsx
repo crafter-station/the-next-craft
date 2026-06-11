@@ -2,32 +2,63 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { CircularText } from "@/components/effects/circular-text";
+
 /*
-  BootLoader — splash de arranque estilo Commodore 64: secuencia de boot en
-  mono, contador 000→100 en pixel, barra de bloques █, y al llegar a 100 el
-  overlay se levanta (translateY) revelando la página.
+  BootLoader v2 — splash de arranque: un grid deformado (distorsión de
+  barril, como si la pantalla CRT empujara desde el centro) que respira,
+  un núcleo circular negro con el porcentaje en pixel, y un anillo de
+  texto girando alrededor. Al llegar a 100 el overlay se levanta.
 
   - Solo en la primera carga de la sesión (sessionStorage) y sin reduced-motion.
   - Bloquea el scroll mientras carga; lo restaura al terminar.
   - aria-hidden: es decorativo y no atrapa foco (sin elementos focusables).
 */
 
-const DURATION = 1600;
-const BAR_SLOTS = 18;
+const DURATION = 1800;
 
-const BOOT_LINES = [
-  "**** THE NEXT CRAFT BASIC V2 ****",
-  "64K RAM SYSTEM · 38911 BYTES FREE",
-  "",
-  'LOAD "THE NEXT CRAFT",8,1',
-  "SEARCHING FOR THE NEXT CRAFT",
-  "LOADING",
-] as const;
+/* ── Grid deformado (determinista → mismo SVG en server y client) ───── */
+const GRID_SIZE = 1000;
+const GRID_LINES = 14;
+const GRID_SEGMENTS = 36;
+const BULGE = 0.16; // fuerza de la distorsión de barril
+const RADIUS = 480; // alcance de la distorsión
+
+function warp(x: number, y: number): [number, number] {
+  const c = GRID_SIZE / 2;
+  const dx = x - c;
+  const dy = y - c;
+  const d = Math.hypot(dx, dy);
+  const g = Math.exp(-((d / RADIUS) ** 2));
+  const f = 1 + BULGE * g;
+  return [c + dx * f, c + dy * f];
+}
+
+function warpedGridPaths(): string[] {
+  const paths: string[] = [];
+  const step = GRID_SIZE / (GRID_LINES - 1);
+  const seg = GRID_SIZE / GRID_SEGMENTS;
+  for (let i = 0; i < GRID_LINES; i++) {
+    const fixed = i * step;
+    let h = "";
+    let v = "";
+    for (let s = 0; s <= GRID_SEGMENTS; s++) {
+      const t = s * seg;
+      const [hx, hy] = warp(t, fixed);
+      const [vx, vy] = warp(fixed, t);
+      h += `${s === 0 ? "M" : "L"}${hx.toFixed(1)} ${hy.toFixed(1)}`;
+      v += `${s === 0 ? "M" : "L"}${vx.toFixed(1)} ${vy.toFixed(1)}`;
+    }
+    paths.push(h, v);
+  }
+  return paths;
+}
+
+const GRID_PATHS = warpedGridPaths();
 
 export function BootLoader() {
   const [phase, setPhase] = useState<"loading" | "lifting" | "done">("loading");
   const counterRef = useRef<HTMLSpanElement>(null);
-  const barRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const reduced = window.matchMedia(
@@ -51,11 +82,6 @@ export function BootLoader() {
       const pct = Math.round(eased * 100);
       if (counterRef.current) {
         counterRef.current.textContent = String(pct).padStart(3, "0");
-      }
-      if (barRef.current) {
-        const filled = Math.round(eased * BAR_SLOTS);
-        barRef.current.textContent =
-          "█".repeat(filled) + "·".repeat(BAR_SLOTS - filled);
       }
       if (t < 1) {
         raf = requestAnimationFrame(tick);
@@ -85,41 +111,45 @@ export function BootLoader() {
       className={`boot-loader${phase === "lifting" ? " is-lifting" : ""}`}
       aria-hidden="true"
     >
+      {/* Grid deformado de fondo (respira) */}
+      <svg
+        className="boot-grid"
+        viewBox={`0 0 ${GRID_SIZE} ${GRID_SIZE}`}
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        {GRID_PATHS.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </svg>
+
       <div className="scanlines absolute inset-0 pointer-events-none" />
+
       <div className="boot-inner">
-        <div className="boot-log">
-          {BOOT_LINES.map((line, i) => (
-            <p
-              // biome-ignore lint/suspicious/noArrayIndexKey: log estático ordenado
-              key={i}
-              className="font-mono text-[11px] sm:text-xs leading-[1.7] text-[var(--text-dim)] uppercase tracking-[0.08em]"
+        {/* Núcleo: porcentaje dentro del círculo, texto orbitando fuera */}
+        <div className="boot-core">
+          <div className="boot-orbit">
+            <CircularText text="THE NEXT CRAFT · LOADING · THE NEXT CRAFT · LOADING · " />
+          </div>
+          <div className="boot-meter">
+            <span
+              ref={counterRef}
+              className="boot-counter-sm font-pixel font-bold text-[var(--text)] tabular-nums leading-none"
             >
-              {line || " "}
-            </p>
-          ))}
+              000
+            </span>
+            <span className="font-pixel font-bold text-[var(--text-dim)] leading-none text-lg">
+              %
+            </span>
+          </div>
+          <p className="font-mono text-xs font-semibold text-[var(--bright)]">
+            RUN<span className="cursor-blink">█</span>
+          </p>
         </div>
 
-        <div className="boot-meter">
-          <span
-            ref={counterRef}
-            className="boot-counter font-pixel font-bold text-[var(--text)] tabular-nums leading-none"
-          >
-            000
-          </span>
-          <span className="font-pixel font-bold text-[var(--text-dim)] leading-none text-2xl sm:text-4xl">
-            %
-          </span>
-        </div>
-
-        <span
-          ref={barRef}
-          className="boot-bar font-mono text-sm sm:text-base text-[var(--bright)] tracking-[0.1em]"
-        >
-          {"·".repeat(BAR_SLOTS)}
-        </span>
-
-        <p className="font-mono text-sm font-semibold text-[var(--bright)] mt-1">
-          RUN<span className="cursor-blink">█</span>
+        {/* Línea de boot al pie */}
+        <p className="font-mono text-[11px] sm:text-xs leading-[1.7] text-[var(--text-dim)] uppercase tracking-[0.08em] mt-10">
+          LOAD &quot;THE NEXT CRAFT&quot;,8,1
         </p>
       </div>
     </div>
