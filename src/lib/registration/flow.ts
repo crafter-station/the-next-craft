@@ -115,7 +115,7 @@ export const WELCOME: Reply = {
   kind: "text",
   body:
     "Hola, soy el bot de registro de *THE NEXT CRAFT* — The First User Challenge.\n" +
-    "25 JUL 2026 · Lima · 12 horas · 150 cupos.\n\n" +
+    "25 JUL 2026 · Lima · 12 horas · 120 cupos.\n\n" +
     "Son 7 preguntas, ~90 segundos. Escribe *cancelar* en cualquier momento para salir.\n\n" +
     "Primero: ¿cuál es tu nombre completo?",
 };

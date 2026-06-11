@@ -17,8 +17,8 @@ const SPECS = [
     sub: null,
   },
   {
-    label: "HACKERS",
-    value: "150",
+    label: "CUPOS",
+    value: "120",
     sub: null,
   },
   {
