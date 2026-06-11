@@ -1,4 +1,5 @@
 import { About } from "@/components/landing/about";
+import { C64Stage } from "@/components/landing/c64-stage";
 import { Faq } from "@/components/landing/faq";
 import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
@@ -54,7 +55,7 @@ const jsonLd = {
     url: "https://crafterstation.com",
   },
   description:
-    "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+    "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 10 de julio.",
   offers: {
     "@type": "Offer",
     price: 0,
@@ -71,13 +72,15 @@ export default function Home() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: structured data JSON-LD requires dangerouslySetInnerHTML
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* Canvas fijo: la computadora viaja entre los [data-c64-anchor] */}
+      <C64Stage />
       <Nav />
       <main id="main-content">
         <Hero />
         <SectionTitle line="10" name="MANIFIESTO" />
         <About />
         <Tldr />
-        <SectionTitle line="30" name="EL TRACK" />
+        {/* Tracks abre con su propio takeover tipográfico (sin SectionTitle) */}
         <Tracks />
         <Schedule />
         <SectionTitle line="50" name="PREMIOS" />
