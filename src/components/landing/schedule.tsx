@@ -39,6 +39,20 @@ const EVENTS: Event[] = [
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const ramp = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 
+/* Pared tipográfica de fondo: AGENDA AGENDA AGENDA en marquees alternos
+   (mismo lenguaje visual que la pared de TRACKS) */
+const WALL_ROWS = [
+  { variant: "tracks-row--ghost", dir: "l", dur: "52s" },
+  { variant: "tracks-row--dim", dir: "r", dur: "40s" },
+  { variant: "tracks-row--ghost", dir: "l", dur: "60s" },
+  { variant: "tracks-row--dim", dir: "r", dur: "46s" },
+  { variant: "tracks-row--ghost", dir: "l", dur: "38s" },
+  { variant: "tracks-row--dim", dir: "r", dur: "56s" },
+  { variant: "tracks-row--ghost", dir: "l", dur: "44s" },
+] as const;
+
+const ROW_TEXT = "AGENDA ✦ AGENDA ✦ AGENDA ✦ AGENDA ✦ AGENDA ✦ AGENDA ✦ ";
+
 /*
   Schedule — agenda cinemática "pinned": al entrar, un titular AGENDA gigante
   ocupa la pantalla; al seguir scrolleando, un backdrop oscurece el fondo y la
@@ -122,6 +136,22 @@ export function Schedule() {
     <section ref={sectionRef} id="agenda" className="agenda">
       <div className="agenda-sticky">
         <div className="grid-bg" />
+
+        {/* Pared AGENDA AGENDA AGENDA — corre detrás de todo el pin */}
+        <div className="agenda-wall" aria-hidden="true">
+          {WALL_ROWS.map(({ variant, dir, dur }, i) => (
+            <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: filas decorativas estáticas
+              key={i}
+              className={`tracks-row ${variant}`}
+              data-dir={dir}
+              style={{ "--marquee-dur": dur } as React.CSSProperties}
+            >
+              <span>{ROW_TEXT}</span>
+              <span>{ROW_TEXT}</span>
+            </div>
+          ))}
+        </div>
 
         {/* Titular gigante */}
         <div ref={titleRef} className="agenda-giant-wrap" aria-hidden="true">

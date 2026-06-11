@@ -13,8 +13,6 @@ const HEADLINE_SPONSORS = [
   },
 ] as const;
 
-const PARTNERS = ["VERCEL", "ANTHROPIC", "SUPABASE", "ELEVENLABS"] as const;
-
 export function Sponsors() {
   return (
     <section
@@ -55,29 +53,6 @@ export function Sponsors() {
             </li>
           ))}
         </ul>
-
-        {/* Partners */}
-        <div className="flex flex-col gap-4">
-          <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)]">
-            PARTNERS
-          </p>
-          <ul
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 list-none m-0 p-0"
-            aria-label="Tour partners"
-          >
-            {PARTNERS.map((name) => (
-              <li key={name} className="panel px-6 py-7 flex flex-col gap-3">
-                <span
-                  className="font-mono font-bold leading-none tracking-[0.05em]
-                             text-[var(--bright)] select-none"
-                  style={{ fontSize: "clamp(0.9375rem, 1.4vw, 1.125rem)" }}
-                >
-                  {name}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
 
         {/* Sponsor CTA */}
         <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)]">
