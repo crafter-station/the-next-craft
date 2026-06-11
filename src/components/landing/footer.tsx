@@ -12,6 +12,10 @@ const COMUNIDAD_LINKS = [
     href: "https://crafterstation.com",
   },
   {
+    label: "nextfellow.ai",
+    href: "https://nextfellow.ai",
+  },
+  {
     label: "GitHub crafter-station",
     href: "https://github.com/crafter-station",
   },

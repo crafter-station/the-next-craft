@@ -108,8 +108,7 @@ export function Tracks() {
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
             La vara sigue siendo una sola: que lo que construyas lo use alguien
-            de verdad antes de que suene la campana. El track solo decide en qué
-            cancha juegas.
+            de verdad antes de que suene la campana.
           </p>
         </div>
       </div>

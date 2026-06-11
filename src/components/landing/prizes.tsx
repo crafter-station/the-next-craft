@@ -11,7 +11,7 @@ const PERKS = [
   marfil con tinta oscura, como prender la pantalla. Colores locales
   (tinta sobre bone) en vez de los tokens de dark.
 
-  El premio aún no se anuncia → "SOON" como cifra protagonista; lo
+  El premio aún no se anuncia → "PRONTO" como cifra protagonista; lo
   garantizado para todos vive en la columna de perks.
 */
 const INK = "#1a1a17";
@@ -38,7 +38,7 @@ export function Prizes() {
                 }}
                 aria-hidden="true"
               >
-                SOON
+                PRONTO
               </span>
               <span className="sr-only">Premio por anunciar</span>
               <p
@@ -97,8 +97,8 @@ export function Prizes() {
           className="font-mono text-xs tracking-[0.05em] leading-[1.5]"
           style={{ color: INK_DIM }}
         >
-          El jurado evalúa: producto funcionando {">"} idea. Demo en vivo
-          obligatoria.
+          El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos
+          subiendo la rúbrica.
         </p>
       </div>
     </section>
