@@ -230,48 +230,6 @@
   border-radius: 0.625rem;
 }
 
-/* ─── Cursor C64 (custom) ───────────────────────────────────────── */
-/*
-  Ocultos por defecto; solo aparecen cuando CustomCursor monta (puntero
-  fino + sin reduced-motion → añade .has-custom-cursor a <html>).
-*/
-.cursor-dot,
-.cursor-ring {
-  display: none;
-}
-
-.has-custom-cursor .cursor-dot,
-.has-custom-cursor .cursor-ring {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9998;
-  will-change: transform;
-}
-
-.has-custom-cursor .cursor-dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--bright);
-  z-index: 9999;
-}
-
-.has-custom-cursor .cursor-ring {
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  scale: 1;
-}
-
-/* Ocultar el cursor nativo cuando el custom está activo */
-.has-custom-cursor,
-.has-custom-cursor * {
-  cursor: none !important;
-}
-
 /* ─── Work grid (sección Track) ─────────────────────────────────── */
 .work-card {
   position: relative;
@@ -406,17 +364,46 @@
 }
 
 /* ─── Agenda cinemática (pinned + backdrop) ─────────────────────── */
-/* Pared AGENDA de fondo: reusa .tracks-row; el backdrop la atenúa */
+/* Pared AGENDA de fondo: AGENDA en vertical (una letra por fila); con el
+   scroll (--wall-p 0→1) cada fila viaja en horizontal a su velocidad */
 .agenda-wall {
   position: absolute;
   inset: 0;
   z-index: 0;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   justify-content: center;
-  gap: clamp(0.4rem, 1.6vh, 1.25rem);
   overflow: hidden;
   pointer-events: none;
+}
+
+/* Fila: una letra repetida; --vx (vw) = velocidad/dirección horizontal */
+.agenda-wall-row {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 11vh, 7rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  transform: translateX(calc(var(--wall-p, 0) * var(--vx) * 1vw));
+  will-change: transform;
+}
+
+/* Letra: la central (--d 0) vive desde el inicio — AGENDA se lee en
+   vertical — y las copias aparecen hacia ambos lados mientras cada una
+   gira a su propio ritmo (--rot) conforme avanza el scroll */
+.agenda-wall-letter {
+  display: inline-block;
+  opacity: calc(clamp(0, var(--wall-p, 0) * 10 + 1 - var(--d), 1) * 0.16);
+  transform: rotate(calc(var(--wall-p, 0) * var(--rot) * 4deg));
+  will-change: transform, opacity;
 }
 
 .agenda {
@@ -532,7 +519,8 @@
 
 /* Estado estático (reduced-motion / sin JS): todo visible, sin pin */
 .agenda:not([data-pinned="true"]) .agenda-giant-wrap,
-.agenda:not([data-pinned="true"]) .agenda-backdrop {
+.agenda:not([data-pinned="true"]) .agenda-backdrop,
+.agenda:not([data-pinned="true"]) .agenda-wall {
   display: none;
 }
 
@@ -688,32 +676,6 @@
 
   .schedule-row:hover .schedule-time {
     font-weight: 600;
-  }
-
-  /* ── Cursor: transiciones de estado (lerp lo mueve por JS) ──────── */
-  .has-custom-cursor .cursor-ring {
-    transition:
-      scale 220ms var(--ease-out-strong),
-      opacity 220ms ease,
-      border-color 220ms ease;
-  }
-
-  .has-custom-cursor .cursor-ring.is-hover {
-    scale: 1.9;
-    border-color: var(--bright);
-  }
-
-  .has-custom-cursor .cursor-ring.is-down {
-    scale: 0.7;
-  }
-
-  .has-custom-cursor .cursor-ring.is-out {
-    opacity: 0;
-  }
-
-  /* Magnetic: el elemento vuelve suave a su sitio al salir */
-  [data-magnetic] {
-    transition: translate 350ms var(--ease-out-strong);
   }
 
   /* ── Reveal de titulares: wipe vertical con clip-path ──────────── */
@@ -1076,11 +1038,27 @@
 /* ─── Terminal CTA (postular) — sesión a pantalla completa ─────────── */
 .terminal-cta {
   position: relative;
+  background-color: var(--void);
+}
+
+/* Pinned: la sección mide 280vh; la pantalla queda sticky y el scroll
+   tipea la sesión. Sin pin (reduced-motion / sin JS) es estática. */
+.terminal-cta[data-pinned="true"] {
+  height: 280vh;
+}
+
+.terminal-sticky {
+  position: relative;
   min-height: 100svh;
   display: flex;
   align-items: center;
-  background-color: var(--void);
   overflow: hidden;
+}
+
+.terminal-cta[data-pinned="true"] .terminal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
 }
 
 /*
@@ -1093,6 +1071,8 @@
   width: 100%;
   min-height: 100svh;
   padding: clamp(2rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 4.5rem);
+  /* El nav fijo (h-14 = 3.5rem) tapa el inicio de la pantalla sticky */
+  padding-top: calc(3.5rem + clamp(1.25rem, 3vh, 2rem));
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1165,7 +1145,8 @@
     transition-duration: 50ms;
   }
 
-  /* Estados ocultos SOLO cuando JS armó la secuencia (data-armed) */
+  /* Estados ocultos SOLO cuando JS armó la secuencia (data-armed);
+     cada elemento se tipea cuando el scroll cruza su umbral (.is-typed) */
   .terminal-cta[data-armed="true"] .term-line {
     clip-path: inset(0 100% 0 0);
   }
@@ -1185,12 +1166,12 @@
     }
   }
 
-  .terminal-cta[data-armed="true"][data-run="true"] .term-line {
-    animation: term-type 420ms steps(28) var(--d, 0ms) forwards;
+  .terminal-cta[data-armed="true"] .term-line.is-typed {
+    animation: term-type 420ms steps(28) forwards;
   }
 
-  .terminal-cta[data-armed="true"][data-run="true"] .term-fade {
-    animation: fade-up 480ms var(--ease-out-strong) var(--d, 0ms) forwards;
+  .terminal-cta[data-armed="true"] .term-fade.is-typed {
+    animation: fade-up 480ms var(--ease-out-strong) forwards;
   }
 }
 
