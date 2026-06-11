@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { label: "Qué es", href: "#que-es" },
-  { label: "Track", href: "#tracks" },
+  { label: "Tracks", href: "#tracks" },
   { label: "Agenda", href: "#agenda" },
   { label: "Premios", href: "#premios" },
   { label: "FAQ", href: "#faq" },
