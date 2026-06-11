@@ -1,57 +1,51 @@
-import { useTranslations } from "next-intl";
+const PERKS = [
+  "Mentorías durante las 12 horas",
+  "Swag oficial del evento",
+  "Acceso a la comunidad de Crafter Station",
+  "Créditos de herramientas",
+  "Comida durante el evento",
+] as const;
 
 /*
   Sección invertida: el único golpe de luz a mitad del scroll — fondo
   marfil con tinta oscura, como prender la pantalla. Colores locales
   (tinta sobre bone) en vez de los tokens de dark.
+
+  El premio aún no se anuncia → "PRONTO" como cifra protagonista; lo
+  garantizado para todos vive en la columna de perks.
 */
 const INK = "#1a1a17";
 const INK_DIM = "#6f6a5d";
 const RULE = "rgb(26 26 23 / 35%)";
 
 export function Prizes() {
-  const t = useTranslations("prizes");
-  const perks = t.raw("perks") as readonly string[];
-
   return (
     <section
       id="premios"
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--bone)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
-        {/* Label BASIC en tinta */}
-        <div className="flex items-center gap-4">
-          <p
-            className="font-mono text-xs font-semibold tracking-[0.12em] uppercase"
-            style={{ color: INK }}
-          >
-            <span style={{ color: INK_DIM }}>50 </span>
-            PRINT &quot;{t("label")}&quot;
-          </p>
-        </div>
-
         {/* Composición asimétrica 2/3 + 1/3 */}
         <div className="flex flex-col lg:flex-row gap-10">
           {/* ── Cifra protagonista en tinta ── */}
-          <div className="lg:w-2/3 flex flex-col justify-between gap-8">
+          <div className="lg:w-2/3 flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <span
-                className="font-pixel font-bold leading-none select-none tabular-nums"
+                className="font-pixel font-bold leading-none select-none"
                 style={{
                   color: INK,
                   fontSize: "clamp(3rem, 9vw, 7rem)",
-                  fontVariantNumeric: "tabular-nums",
                 }}
                 aria-hidden="true"
               >
-                {t("amount")}
+                PRONTO
               </span>
-              <span className="sr-only">{t("amountAria")}</span>
+              <span className="sr-only">Premio por anunciar</span>
               <p
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK_DIM }}
               >
-                {t("amountSub")}
+                PREMIO PRINCIPAL POR ANUNCIAR
               </p>
             </div>
           </div>
@@ -69,15 +63,15 @@ export function Prizes() {
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK }}
               >
-                {t("perksLabel")}
+                PARA TODOS LOS QUE ENTRAN
               </p>
             </div>
 
             <ul
               className="flex flex-col list-none m-0 p-0 flex-1"
-              aria-label={t("perksAria")}
+              aria-label="Beneficios para todos los participantes"
             >
-              {perks.map((perk) => (
+              {PERKS.map((perk) => (
                 <li key={perk} className="flex items-start gap-3 px-7 py-4">
                   <span
                     className="font-mono text-sm shrink-0 mt-0.5"
@@ -103,7 +97,8 @@ export function Prizes() {
           className="font-mono text-xs tracking-[0.05em] leading-[1.5]"
           style={{ color: INK_DIM }}
         >
-          {t("note")}
+          El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos
+          subiendo la rúbrica.
         </p>
       </div>
     </section>
