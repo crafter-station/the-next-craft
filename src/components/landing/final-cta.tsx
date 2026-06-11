@@ -17,12 +17,18 @@ import { ScrambleText } from "@/components/effects/scramble-text";
   va tipeando cada elemento según su umbral (data-thr, 0→1).
 */
 
-// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md)
-const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "51999999999";
-const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hola, quiero postular a The Next Craft",
-)}`;
+// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md).
+// Mientras no exista el número de producción (env vacía), el CTA cae al form:
+// nunca shippear un placeholder.
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+const CTA_HREF = WHATSAPP_NUMBER
+  ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      "Hola, quiero postular a The Next Craft",
+    )}`
+  : "https://forms.crafterstation.com/the-next-craft";
+const CTA_LABEL = WHATSAPP_NUMBER
+  ? "[ POSTULAR POR WHATSAPP → ]"
+  : "[ POSTULAR → ]";
 
 const HEADER_LINES = [
   { text: "**** THE NEXT CRAFT BASIC V2 ****", thr: 0.03 },
@@ -189,13 +195,13 @@ export function FinalCta() {
               PRESS RETURN ↵
             </p>
             <a
-              href={WA_LINK}
+              href={CTA_HREF}
               target="_blank"
               rel="noopener noreferrer"
               data-magnetic
               className="term-btn"
             >
-              [ POSTULAR POR WHATSAPP → ]
+              {CTA_LABEL}
             </a>
             <p
               className="font-mono text-sm text-[var(--bright)]"
