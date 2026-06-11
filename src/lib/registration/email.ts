@@ -35,7 +35,7 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
     </h1>
     <p style="font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
       Tu postulación <strong>${reg.code}</strong> a <strong>The First User Challenge</strong> fue aprobada.
-      Eres parte de los 150.
+      Eres parte de los 120.
     </p>
     <table style="font-size: 13px; line-height: 1.8; border-collapse: collapse;">
       <tr><td style="color: #5B6478; padding-right: 16px;">FECHA</td><td>25 JUL 2026</td></tr>

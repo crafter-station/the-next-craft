@@ -17,7 +17,7 @@ const FAQS = [
   {
     id: "Q02",
     question: "¿Cuánto cuesta?",
-    answer: "Nada. Entrar es gratis. Lo difícil es entrar.",
+    answer: "Es gratis.",
   },
   {
     id: "Q03",
@@ -34,7 +34,7 @@ const FAQS = [
     id: "Q05",
     question: "¿Puedo usar IA?",
     answer:
-      "Obvio. Es 2026. Pero el código se escribe durante las 12 horas — nada de proyectos precocinados.",
+      "Sí, pueden usar IA. Pero el código debe construirse durante las horas de la hackathon — no se recibirá código antiguo.",
   },
   {
     id: "Q06",
@@ -45,12 +45,13 @@ const FAQS = [
     id: "Q07",
     question: "¿Es presencial?",
     answer:
-      "Sí — en Lima, Bogotá o Guatemala, la sede que te quede. No hay modalidad remota: la gracia es estar ahí.",
+      "Sí, será presencial en Lima, Bogotá o Guatemala — la sede que te quede. No hay modalidad remota.",
   },
   {
     id: "Q08",
     question: "¿Cómo evalúa el jurado?",
-    answer: "Demo en vivo de 3 minutos. Producto funcionando > pitch bonito.",
+    answer:
+      "Demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica.",
   },
 ] as const;
 
@@ -92,7 +93,9 @@ export function Faq() {
                   <span className="shrink-0 font-mono text-xs font-semibold tracking-[0.12em] text-[var(--bright)] select-none">
                     {id}
                   </span>
-                  <span className="leading-snug">{question}</span>
+                  <span className="leading-snug whitespace-nowrap overflow-hidden text-ellipsis">
+                    {question}
+                  </span>
                 </span>
               </AccordionTrigger>
 

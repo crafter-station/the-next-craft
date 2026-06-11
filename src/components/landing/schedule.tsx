@@ -39,6 +39,22 @@ const EVENTS: Event[] = [
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const ramp = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 
+/* Pared tipográfica de fondo (estilo Generous Branding): AGENDA se lee
+   vertical al centro — una letra por fila — y con el scroll cada fila se
+   desliza horizontalmente a una velocidad distinta (--vx, en vw) mientras
+   las copias de cada letra aparecen del centro hacia ambos lados y giran
+   cada una a su propio ritmo (--rot, en deg). */
+const WALL_WORD = "AGENDA";
+
+/* Velocidad horizontal por fila: signo = dirección, magnitud = qué tan
+   rápido viaja respecto al scroll */
+const ROW_SPEEDS = [-26, 18, -34, 26, -16, 30] as const;
+
+/* Copias por fila: 0 es la letra central, negativos a la izquierda */
+const LETTER_OFFSETS = [
+  -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8,
+] as const;
+
 /*
   Schedule — agenda cinemática "pinned": al entrar, un titular AGENDA gigante
   ocupa la pantalla; al seguir scrolleando, un backdrop oscurece el fondo y la
@@ -54,6 +70,7 @@ export function Schedule() {
   const titleRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const wallRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -81,6 +98,13 @@ export function Schedule() {
       const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
       const p = total > 0 ? scrolled / total : 0;
 
+      // Pared: las filas viajan en horizontal durante todo el pin (0 → 0.9)
+      if (wallRef.current) {
+        wallRef.current.style.setProperty(
+          "--wall-p",
+          ramp(p, 0, 0.9).toFixed(4),
+        );
+      }
       // Titular gigante se va (0.02 → 0.2)
       const hide = ramp(p, 0.02, 0.2);
       if (titleRef.current) {
@@ -122,6 +146,34 @@ export function Schedule() {
     <section ref={sectionRef} id="agenda" className="agenda">
       <div className="agenda-sticky">
         <div className="grid-bg" />
+
+        {/* Pared AGENDA — vertical en reposo, filas horizontales al scrollear */}
+        <div ref={wallRef} className="agenda-wall" aria-hidden="true">
+          {WALL_WORD.split("").map((letter, row) => (
+            <div
+              // biome-ignore lint/suspicious/noArrayIndexKey: filas decorativas estáticas
+              key={row}
+              className="agenda-wall-row"
+              style={{ "--vx": ROW_SPEEDS[row] } as React.CSSProperties}
+            >
+              {LETTER_OFFSETS.map((d) => (
+                <span
+                  key={d}
+                  className="agenda-wall-letter"
+                  style={
+                    {
+                      "--d": Math.abs(d),
+                      /* pseudo-aleatorio determinista: cada letra gira a su ritmo */
+                      "--rot": ((d * 7 + row * 5 + 99) % 13) - 6,
+                    } as React.CSSProperties
+                  }
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
 
         {/* Titular gigante */}
         <div ref={titleRef} className="agenda-giant-wrap" aria-hidden="true">

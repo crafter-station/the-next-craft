@@ -17,8 +17,8 @@ const SPECS = [
     sub: null,
   },
   {
-    label: "HACKERS",
-    value: "150",
+    label: "CUPOS",
+    value: "120",
     sub: null,
   },
   {
@@ -42,13 +42,16 @@ export function Tldr() {
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         <SectionHeader line="20" name="TL;DR" />
 
-        {/* Specs grid — paneles boot */}
+        {/* Specs — tabla 3×2 fusionada, bordes compartidos sin radius */}
         <ul
-          className="grid grid-cols-2 md:grid-cols-3 gap-3 list-none m-0 p-0"
+          className="grid grid-cols-2 md:grid-cols-3 list-none m-0 p-0 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]"
           aria-label="Especificaciones del evento"
         >
           {SPECS.map(({ label, value, sub }) => (
-            <li key={label} className="panel px-6 py-7 flex flex-col gap-3">
+            <li
+              key={label}
+              className="border-r border-b border-[var(--line)] px-6 py-7 flex flex-col gap-3"
+            >
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 {label}
               </p>

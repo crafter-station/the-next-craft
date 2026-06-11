@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 
 import { BootLoader } from "@/components/effects/boot-loader";
-import { CustomCursor } from "@/components/effects/custom-cursor";
 import { SmoothScroll } from "@/components/effects/smooth-scroll";
 import "./globals.css";
 
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s · The Next Craft",
   },
   description:
-    "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+    "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 10 de julio.",
   keywords: [
     "hackathon",
     "Lima",
@@ -55,13 +54,13 @@ export const metadata: Metadata = {
     siteName: "The Next Craft",
     title: "The Next Craft — Hackathon por Crafter Station × Next",
     description:
-      "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+      "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 10 de julio.",
   },
   twitter: {
     card: "summary_large_image",
     title: "The Next Craft — Hackathon por Crafter Station × Next",
     description:
-      "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 150 hackers, equipos de 3–5, $5,000 USD al ganador. Postula hasta el 10 de julio.",
+      "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 10 de julio.",
   },
   robots: {
     index: true,
@@ -96,7 +95,6 @@ export default function RootLayout({
         </a>
         <BootLoader />
         <SmoothScroll />
-        <CustomCursor />
         {children}
       </body>
     </html>

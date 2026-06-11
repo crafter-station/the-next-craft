@@ -1,6 +1,6 @@
+import { CircularText } from "@/components/effects/circular-text";
 import { ScrambleText } from "@/components/effects/scramble-text";
 
-import { C64Model } from "./c64-model";
 import { Countdown } from "./countdown";
 
 export function Hero() {
@@ -19,9 +19,19 @@ export function Hero() {
         {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
         <h1 className="sr-only">the next craft</h1>
 
-        {/* Set Commodore 64 de frente, "the next craft" en la pantalla */}
-        <div className="w-full reveal reveal-d1">
-          <C64Model />
+        {/*
+          Escenario del C64: el modelo vive en el canvas fijo (C64Stage) y se
+          estaciona sobre este anchor. Alrededor, un anillo de texto orbita
+          la computadora.
+        */}
+        <div className="hero-stage reveal reveal-d1" aria-hidden="true">
+          <div className="hero-orbit">
+            <CircularText text="LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS · DE CERO A PRODUCTO · " />
+          </div>
+          <div
+            data-c64-anchor="hero"
+            className="h-[380px] sm:h-[460px] lg:h-[540px] w-full"
+          />
         </div>
 
         {/* Subhead — qué es, dónde, cuándo. Legible sin scroll. */}
@@ -67,7 +77,7 @@ export function Hero() {
             data-magnetic
             className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            GOTO Track <span className="cta-arrow">↓</span>
+            GOTO Tracks <span className="cta-arrow">↓</span>
           </a>
         </div>
       </div>
