@@ -23,7 +23,7 @@ export function About() {
           >
             The Next Craft es el hackathon presencial de Crafter Station × Next.
             12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala,
-            con 150 hackers que vienen a resolver problemas de verdad.
+            con 120 hackers que vienen a resolver problemas de verdad.
           </p>
           <p
             className="font-sans text-[var(--text)] leading-[1.75]"

@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/landing/section-header";
 export const metadata: Metadata = {
   title: "Brand Book",
   description:
-    "Sistema visual de The Next Craft — concepto Commodore 64 Mono: paleta, tipografía, logo, elementos y voz.",
+    "Sistema visual de The Next Craft — concepto Commodore 64 Mono: paleta, tipografía, logo, elementos, motion y voz.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/brand" },
 };
@@ -15,7 +15,12 @@ export const metadata: Metadata = {
 
 const PALETTE = [
   { token: "--void", hex: "#1A1A17", uso: "Fondo único de página", dark: true },
-  { token: "--screen-dim", hex: "#161613", uso: "Paneles / cards", dark: true },
+  {
+    token: "--screen-dim",
+    hex: "#161613",
+    uso: "Paneles / tablas",
+    dark: true,
+  },
   { token: "--line", hex: "#8C8A82", uso: "Bordes (gris platino)", dark: true },
   { token: "--text-dim", hex: "#A2A096", uso: "Texto secundario", dark: true },
   {
@@ -93,6 +98,25 @@ const TYPE = [
   },
 ] as const;
 
+const MOTION = [
+  {
+    name: "Paredes tipográficas",
+    rule: "TRACKS: marquees alternos pixel hueco/sólido detrás del deck. AGENDA: la palabra se lee vertical en reposo (una letra por fila) y con el scroll cada fila viaja en horizontal a su velocidad mientras cada letra gira a su propio ritmo.",
+  },
+  {
+    name: "Secciones pinneadas",
+    rule: "Agenda y terminal final: la pantalla queda sticky y el scroll construye el contenido por umbrales. Todo cargado antes de soltar hacia la siguiente sección.",
+  },
+  {
+    name: "Terminal que se tipea",
+    rule: "Las líneas aparecen con wipe a pasos (clip-path + steps), como tipeo C64. El headline usa scramble binario→texto.",
+  },
+  {
+    name: "Reglas duras",
+    rule: "Solo transform y opacity (nunca layout). prefers-reduced-motion / sin JS = todo visible y estático, sin pins. Nada de cursor custom: estorba la selección.",
+  },
+] as const;
+
 const VOICE_DO = [
   "Español, tono directo: «a construir», «producto real».",
   "Labels y comandos en MAYÚSCULA (BASIC).",
@@ -114,10 +138,17 @@ const NEVER = [
   "Inter / Roboto / Space Grotesk",
   "Cualquier color (morado, azul, acentos)",
   "Pixel font en párrafos",
+  "Border radius en contenedores",
+  "Cursor custom que tape el nativo",
   "Hairlines entre label y contenido",
 ];
 
 /* ─── Bloques reutilizables ──────────────────────────────────────────── */
+
+/* Tabla fusionada: contenedor con borde superior/izquierdo; cada celda
+   aporta el derecho/inferior → retícula de 1px compartido, sin radius */
+const TABLE = "border-t border-l border-[var(--line)] bg-[var(--screen-dim)]";
+const CELL = "border-r border-b border-[var(--line)]";
 
 function Section({
   line,
@@ -178,6 +209,8 @@ export default function BrandBook() {
               El sistema visual de The Next Craft: el boot screen de un
               Commodore 64 en monitor monocromo. Negro cálido vintage, grises
               platino, blanco roto. Cero color salvo el marfil de las teclas.
+              Todo contenedor es una tabla: bordes de 1px compartidos, sin
+              radius.
             </p>
             <p className="font-mono text-[var(--bright)] text-sm">
               READY.<span className="cursor-blink">█</span>
@@ -187,52 +220,57 @@ export default function BrandBook() {
 
         {/* ── 20 · Logo / Wordmark ─────────────────────────────────── */}
         <Section line="20" name="LOGO / WORDMARK">
-          <div className="panel px-6 md:px-10 py-12 flex items-center justify-center">
-            <span
-              className="font-script text-[var(--bright)] leading-none pt-2"
-              style={{ fontSize: "clamp(2.5rem, 9vw, 5rem)" }}
+          <div className={TABLE}>
+            <div
+              className={`${CELL} px-6 md:px-10 py-12 flex items-center justify-center`}
             >
-              the next craft
-            </span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="panel px-6 py-6 flex flex-col gap-3">
-              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
-                Reglas
-              </p>
-              <ul className="font-mono text-sm text-[var(--text-dim)] flex flex-col gap-2 leading-relaxed list-none p-0 m-0">
-                <li>· Fuente Borel (script), siempre minúsculas.</li>
-                <li>· Color --bright sobre fondo --void.</li>
-                <li>
-                  · Área de respeto: la altura de una «t» en todos los lados.
-                </li>
-                <li>· Centrado óptico con pt-2 (la script cuelga alto).</li>
-              </ul>
+              <span
+                className="font-script text-[var(--bright)] leading-none pt-2"
+                style={{ fontSize: "clamp(2.5rem, 9vw, 5rem)" }}
+              >
+                the next craft
+              </span>
             </div>
 
-            <div className="panel px-6 py-6 flex flex-col gap-3">
-              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
-                Usos incorrectos
-              </p>
-              <ul className="font-mono text-sm text-[var(--text-dim)] flex flex-col gap-2 leading-relaxed list-none p-0 m-0">
-                <li>
-                  <span className="text-[var(--text)]">✗</span> Title Case:{" "}
-                  <span className="line-through">The Next Craft</span>
-                </li>
-                <li>
-                  <span className="text-[var(--text)]">✗</span> En pixel o mono:{" "}
-                  <span className="font-pixel text-xs">THE NEXT CRAFT</span>
-                </li>
-                <li>
-                  <span className="text-[var(--text)]">✗</span> Con color o
-                  degradado.
-                </li>
-                <li>
-                  <span className="text-[var(--text)]">✗</span> Estirado, rotado
-                  o con sombra blur.
-                </li>
-              </ul>
+            <div className="grid md:grid-cols-2">
+              <div className={`${CELL} px-6 py-6 flex flex-col gap-3`}>
+                <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                  Reglas
+                </p>
+                <ul className="font-mono text-sm text-[var(--text-dim)] flex flex-col gap-2 leading-relaxed list-none p-0 m-0">
+                  <li>· Fuente Borel (script), siempre minúsculas.</li>
+                  <li>· Color --bright sobre fondo --void.</li>
+                  <li>
+                    · Área de respeto: la altura de una «t» en todos los lados.
+                  </li>
+                  <li>· Centrado óptico con pt-2 (la script cuelga alto).</li>
+                </ul>
+              </div>
+
+              <div className={`${CELL} px-6 py-6 flex flex-col gap-3`}>
+                <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                  Usos incorrectos
+                </p>
+                <ul className="font-mono text-sm text-[var(--text-dim)] flex flex-col gap-2 leading-relaxed list-none p-0 m-0">
+                  <li>
+                    <span className="text-[var(--text)]">✗</span> Title Case:{" "}
+                    <span className="line-through">The Next Craft</span>
+                  </li>
+                  <li>
+                    <span className="text-[var(--text)]">✗</span> En pixel o
+                    mono:{" "}
+                    <span className="font-pixel text-xs">THE NEXT CRAFT</span>
+                  </li>
+                  <li>
+                    <span className="text-[var(--text)]">✗</span> Con color o
+                    degradado.
+                  </li>
+                  <li>
+                    <span className="text-[var(--text)]">✗</span> Estirado,
+                    rotado o con sombra blur.
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </Section>
@@ -244,9 +282,11 @@ export default function BrandBook() {
             marfil de keycaps es el único «tono». Ningún color de acento.
           </p>
 
-          <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 list-none p-0 m-0">
+          <ul
+            className={`grid grid-cols-2 md:grid-cols-3 list-none p-0 m-0 ${TABLE}`}
+          >
             {PALETTE.map(({ token, hex, uso, dark }) => (
-              <li key={token} className="panel overflow-hidden flex flex-col">
+              <li key={token} className={`${CELL} flex flex-col`}>
                 <div
                   className="h-24 w-full flex items-end p-3"
                   style={{ backgroundColor: `var(${token})` }}
@@ -268,37 +308,43 @@ export default function BrandBook() {
                 </div>
               </li>
             ))}
+            {/* Rellenos para cerrar la retícula: 7 colores → 8 celdas en
+                2 cols (mobile) y 9 en 3 cols (md) */}
+            <li className={CELL} aria-hidden="true" />
+            <li className={`${CELL} hidden md:block`} aria-hidden="true" />
           </ul>
 
-          <div className="panel px-6 py-5 flex flex-col gap-3">
-            <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
-              Contraste (WCAG)
-            </p>
-            <ul className="flex flex-col gap-2 list-none p-0 m-0">
-              {CONTRAST.map(({ pair, ratio, grade, note }) => (
-                <li
-                  key={pair}
-                  className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-sm"
-                >
-                  <span className="text-[var(--text)]">{pair}</span>
-                  <span className="text-[var(--text-dim)] tabular-nums">
-                    {ratio}
-                  </span>
-                  <span className="text-[var(--bright)] text-xs font-semibold">
-                    {grade}
-                  </span>
-                  <span className="text-[var(--text-dim)] text-xs">
-                    — {note}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <div className={TABLE}>
+            <div className={`${CELL} px-6 py-5 flex flex-col gap-3`}>
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                Contraste (WCAG)
+              </p>
+              <ul className="flex flex-col gap-2 list-none p-0 m-0">
+                {CONTRAST.map(({ pair, ratio, grade, note }) => (
+                  <li
+                    key={pair}
+                    className="flex flex-wrap items-baseline gap-x-3 gap-y-1 font-mono text-sm"
+                  >
+                    <span className="text-[var(--text)]">{pair}</span>
+                    <span className="text-[var(--text-dim)] tabular-nums">
+                      {ratio}
+                    </span>
+                    <span className="text-[var(--bright)] text-xs font-semibold">
+                      {grade}
+                    </span>
+                    <span className="text-[var(--text-dim)] text-xs">
+                      — {note}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Section>
 
         {/* ── 40 · Tipografía ──────────────────────────────────────── */}
         <Section line="40" name="TIPOGRAFÍA">
-          <div className="flex flex-col gap-4">
+          <div className={TABLE}>
             {TYPE.map(
               ({
                 name,
@@ -314,7 +360,7 @@ export default function BrandBook() {
               }) => (
                 <div
                   key={name}
-                  className="panel px-6 md:px-8 py-7 flex flex-col gap-5"
+                  className={`${CELL} px-6 md:px-8 py-7 flex flex-col gap-5`}
                 >
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <p className="font-mono text-sm font-semibold text-[var(--text)]">
@@ -349,9 +395,9 @@ export default function BrandBook() {
 
         {/* ── 50 · Elementos ───────────────────────────────────────── */}
         <Section line="50" name="ELEMENTOS">
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className={`grid md:grid-cols-2 ${TABLE}`}>
             {/* READY. */}
-            <div className="panel px-6 py-7 flex flex-col gap-3">
+            <div className={`${CELL} px-6 py-7 flex flex-col gap-3`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Cursor de boot
               </p>
@@ -364,7 +410,7 @@ export default function BrandBook() {
             </div>
 
             {/* Labels BASIC */}
-            <div className="panel px-6 py-7 flex flex-col gap-3">
+            <div className={`${CELL} px-6 py-7 flex flex-col gap-3`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Labels de sección
               </p>
@@ -373,12 +419,12 @@ export default function BrandBook() {
                 &quot;TRACK&quot;
               </p>
               <p className="font-mono text-[11px] text-[var(--text-dim)]">
-                Líneas BASIC numeradas 10–70 como apertura de cada sección.
+                Líneas BASIC numeradas 10–110 como apertura de cada sección.
               </p>
             </div>
 
             {/* Keycaps */}
-            <div className="panel px-6 py-7 flex flex-col gap-4">
+            <div className={`${CELL} px-6 py-7 flex flex-col gap-4`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Keycaps (CTAs)
               </p>
@@ -392,12 +438,12 @@ export default function BrandBook() {
               </div>
               <p className="font-mono text-[11px] text-[var(--text-dim)]">
                 Teclas marfil extruidas, sombra dura 0 3px 0. :active las hunde.
-                Variante ghost para secundarios.
+                El radius vive SOLO aquí (plástico moldeado).
               </p>
             </div>
 
             {/* Scanlines */}
-            <div className="panel overflow-hidden flex flex-col">
+            <div className={`${CELL} flex flex-col`}>
               <div className="relative h-28 bg-[var(--screen-dim)]">
                 <div
                   className="scanlines absolute inset-0"
@@ -414,13 +460,79 @@ export default function BrandBook() {
                 </p>
               </div>
             </div>
+
+            {/* Tablas fusionadas */}
+            <div className={`${CELL} px-6 py-7 flex flex-col gap-3`}>
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                Tablas fusionadas
+              </p>
+              <div className="grid grid-cols-3 border-t border-l border-[var(--line)]">
+                {["FECHA", "LUGAR", "CUPOS", "25 JUL", "3 SEDES", "120"].map(
+                  (t) => (
+                    <span
+                      key={t}
+                      className="border-r border-b border-[var(--line)] px-2 py-2 font-mono text-[10px] text-[var(--text-dim)]"
+                    >
+                      {t}
+                    </span>
+                  ),
+                )}
+              </div>
+              <p className="font-mono text-[11px] text-[var(--text-dim)]">
+                Contenedores = tablas: bordes 1px compartidos (border-t/l en el
+                contenedor, border-r/b en cada celda). Sin gap, sin radius.
+              </p>
+            </div>
+
+            {/* Paredes tipográficas */}
+            <div className={`${CELL} px-6 py-7 flex flex-col gap-3`}>
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                Paredes tipográficas
+              </p>
+              <p
+                className="font-pixel font-bold text-[var(--text)] opacity-30 leading-none select-none"
+                style={{ fontSize: "clamp(1.25rem, 3vw, 1.75rem)" }}
+                aria-hidden="true"
+              >
+                AGENDA AGENDA AG
+              </p>
+              <p className="font-mono text-[11px] text-[var(--text-dim)]">
+                La palabra de la sección repetida como fondo, pixel font tenue
+                (opacidad 16–30%). Siempre aria-hidden, siempre detrás del
+                contenido.
+              </p>
+            </div>
           </div>
         </Section>
 
-        {/* ── 60 · Voz y tono ──────────────────────────────────────── */}
-        <Section line="60" name="VOZ Y TONO">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="panel px-6 py-6 flex flex-col gap-3">
+        {/* ── 60 · Motion ──────────────────────────────────────────── */}
+        <Section line="60" name="MOTION / SCROLL">
+          <p className="font-mono text-[var(--text-dim)] max-w-2xl leading-relaxed">
+            El scroll es el playhead: las secciones cinemáticas se pinnean y el
+            progreso construye el contenido. Nada se mueve solo si el usuario no
+            scrollea.
+          </p>
+          <div className={`grid md:grid-cols-2 ${TABLE}`}>
+            {MOTION.map(({ name, rule }) => (
+              <div
+                key={name}
+                className={`${CELL} px-6 py-7 flex flex-col gap-3`}
+              >
+                <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                  {name}
+                </p>
+                <p className="font-mono text-[11px] text-[var(--text-dim)] leading-relaxed">
+                  {rule}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        {/* ── 70 · Voz y tono ──────────────────────────────────────── */}
+        <Section line="70" name="VOZ Y TONO">
+          <div className={`grid md:grid-cols-2 ${TABLE}`}>
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-3`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Sí
               </p>
@@ -432,7 +544,7 @@ export default function BrandBook() {
                 ))}
               </ul>
             </div>
-            <div className="panel px-6 py-6 flex flex-col gap-3">
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-3`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 No
               </p>
@@ -447,16 +559,16 @@ export default function BrandBook() {
           </div>
         </Section>
 
-        {/* ── 70 · Imágenes ────────────────────────────────────────── */}
-        <Section line="70" name="IMÁGENES">
+        {/* ── 80 · Imágenes ────────────────────────────────────────── */}
+        <Section line="80" name="IMÁGENES">
           <p className="font-mono text-[var(--text-dim)] max-w-2xl leading-relaxed">
             La imagen central es el set Commodore 64 completo en 3D
             (public/c64.glb), visto de frente, con el wordmark escrito dentro de
             la pantalla del monitor. Estático, drag para girar.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="panel px-6 py-6 flex flex-col gap-2">
+          <div className={`grid md:grid-cols-3 ${TABLE}`}>
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-2`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Sujeto
               </p>
@@ -465,7 +577,7 @@ export default function BrandBook() {
                 Sin marcos.
               </p>
             </div>
-            <div className="panel px-6 py-6 flex flex-col gap-2">
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-2`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Tratamiento
               </p>
@@ -474,31 +586,33 @@ export default function BrandBook() {
                 Iluminación tibia (#E9E7DE).
               </p>
             </div>
-            <div className="panel px-6 py-6 flex flex-col gap-2">
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-2`}>
               <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
                 Radius / sombra
               </p>
               <p className="font-mono text-sm text-[var(--text-dim)] leading-relaxed">
-                Plástico moldeado: radius 4–10px. Sombras duras tipo keycap,
-                nunca blur.
+                Contenedores sin radius — tablas de bordes compartidos. El
+                radius queda solo en keycaps. Sombras duras, nunca blur.
               </p>
             </div>
           </div>
 
-          <div className="panel px-6 py-6 flex flex-col gap-3">
-            <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
-              Nunca
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 list-none p-0 m-0">
-              {NEVER.map((t) => (
-                <li
-                  key={t}
-                  className="font-mono text-sm text-[var(--text-dim)]"
-                >
-                  <span className="text-[var(--text)]">✗</span> {t}
-                </li>
-              ))}
-            </ul>
+          <div className={TABLE}>
+            <div className={`${CELL} px-6 py-6 flex flex-col gap-3`}>
+              <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
+                Nunca
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 list-none p-0 m-0">
+                {NEVER.map((t) => (
+                  <li
+                    key={t}
+                    className="font-mono text-sm text-[var(--text-dim)]"
+                  >
+                    <span className="text-[var(--text)]">✗</span> {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Section>
 

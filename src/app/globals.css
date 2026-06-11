@@ -230,48 +230,6 @@
   border-radius: 0.625rem;
 }
 
-/* ─── Cursor C64 (custom) ───────────────────────────────────────── */
-/*
-  Ocultos por defecto; solo aparecen cuando CustomCursor monta (puntero
-  fino + sin reduced-motion → añade .has-custom-cursor a <html>).
-*/
-.cursor-dot,
-.cursor-ring {
-  display: none;
-}
-
-.has-custom-cursor .cursor-dot,
-.has-custom-cursor .cursor-ring {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9998;
-  will-change: transform;
-}
-
-.has-custom-cursor .cursor-dot {
-  width: 6px;
-  height: 6px;
-  background-color: var(--bright);
-  z-index: 9999;
-}
-
-.has-custom-cursor .cursor-ring {
-  width: 30px;
-  height: 30px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  scale: 1;
-}
-
-/* Ocultar el cursor nativo cuando el custom está activo */
-.has-custom-cursor,
-.has-custom-cursor * {
-  cursor: none !important;
-}
-
 /* ─── Work grid (sección Track) ─────────────────────────────────── */
 .work-card {
   position: relative;
@@ -406,6 +364,48 @@
 }
 
 /* ─── Agenda cinemática (pinned + backdrop) ─────────────────────── */
+/* Pared AGENDA de fondo: AGENDA en vertical (una letra por fila); con el
+   scroll (--wall-p 0→1) cada fila viaja en horizontal a su velocidad */
+.agenda-wall {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Fila: una letra repetida; --vx (vw) = velocidad/dirección horizontal */
+.agenda-wall-row {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 11vh, 7rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+  transform: translateX(calc(var(--wall-p, 0) * var(--vx) * 1vw));
+  will-change: transform;
+}
+
+/* Letra: la central (--d 0) vive desde el inicio — AGENDA se lee en
+   vertical — y las copias aparecen hacia ambos lados mientras cada una
+   gira a su propio ritmo (--rot) conforme avanza el scroll */
+.agenda-wall-letter {
+  display: inline-block;
+  opacity: calc(clamp(0, var(--wall-p, 0) * 10 + 1 - var(--d), 1) * 0.16);
+  transform: rotate(calc(var(--wall-p, 0) * var(--rot) * 4deg));
+  will-change: transform, opacity;
+}
+
 .agenda {
   position: relative;
   background-color: var(--void);
@@ -519,7 +519,8 @@
 
 /* Estado estático (reduced-motion / sin JS): todo visible, sin pin */
 .agenda:not([data-pinned="true"]) .agenda-giant-wrap,
-.agenda:not([data-pinned="true"]) .agenda-backdrop {
+.agenda:not([data-pinned="true"]) .agenda-backdrop,
+.agenda:not([data-pinned="true"]) .agenda-wall {
   display: none;
 }
 
@@ -677,32 +678,6 @@
     font-weight: 600;
   }
 
-  /* ── Cursor: transiciones de estado (lerp lo mueve por JS) ──────── */
-  .has-custom-cursor .cursor-ring {
-    transition:
-      scale 220ms var(--ease-out-strong),
-      opacity 220ms ease,
-      border-color 220ms ease;
-  }
-
-  .has-custom-cursor .cursor-ring.is-hover {
-    scale: 1.9;
-    border-color: var(--bright);
-  }
-
-  .has-custom-cursor .cursor-ring.is-down {
-    scale: 0.7;
-  }
-
-  .has-custom-cursor .cursor-ring.is-out {
-    opacity: 0;
-  }
-
-  /* Magnetic: el elemento vuelve suave a su sitio al salir */
-  [data-magnetic] {
-    transition: translate 350ms var(--ease-out-strong);
-  }
-
   /* ── Reveal de titulares: wipe vertical con clip-path ──────────── */
   @keyframes heading-in {
     from {
@@ -782,6 +757,545 @@
   }
 }
 
+/* ─── C64 stage — canvas fijo: la computadora viaja por toda la página ── */
+.c64-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+/*
+  Cinturón y tirantes: r3f marca su wrapper/canvas con pointer-events:auto
+  inline; si llegara a ganar, el canvas fijo bloquearía los clicks de toda
+  la página (FAQ, botones). Todo el subtree debe ser transparente al click.
+*/
+.c64-stage div,
+.c64-stage canvas {
+  pointer-events: none !important;
+}
+
+/* Anchor: caja invisible donde la compu se "estaciona" en cada sección */
+[data-c64-anchor] {
+  pointer-events: none;
+}
+
+/* ─── Hero: anillo de texto orbitando la computadora ───────────────── */
+.hero-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-orbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orbit-svg {
+  overflow: visible;
+  transform-origin: 50% 50%;
+}
+
+.orbit-svg text {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  fill: var(--text-dim);
+}
+
+.hero-orbit .orbit-svg {
+  width: min(78vw, 560px);
+  height: auto;
+}
+
+/* ─── Boot loader v2 — grid deformado + núcleo circular ────────────── */
+.boot-grid {
+  position: absolute;
+  inset: -6%;
+  width: 112%;
+  height: 112%;
+  transform-origin: 50% 50%;
+}
+
+.boot-grid path {
+  fill: none;
+  stroke: rgb(140 138 130 / 26%);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.boot-core {
+  position: relative;
+  width: clamp(140px, 26vw, 190px);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  background-color: var(--screen-dim);
+  border: 1px solid var(--line);
+  box-shadow: 0 0 0 6px rgb(26 26 23 / 85%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.boot-orbit {
+  position: absolute;
+  inset: clamp(-72px, -13vw, -52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.boot-orbit .orbit-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.boot-orbit .orbit-svg text {
+  fill: var(--bright);
+}
+
+.boot-counter-sm {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+}
+
+/* ─── Tracks: pared tipográfica + deck de cards apiladas ───────────── */
+.tracks-zone {
+  position: relative;
+  background-color: var(--void);
+}
+
+/* Pared sticky de TRACKS TRACKS TRACKS detrás de todo */
+.tracks-wall {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+
+.tracks-wall-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.4rem, 1.6vh, 1.25rem);
+  overflow: hidden;
+}
+
+.tracks-row {
+  display: flex;
+  white-space: nowrap;
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(2.75rem, 9vw, 7.5rem);
+  user-select: none;
+}
+
+.tracks-row > span {
+  flex-shrink: 0;
+  padding-right: 0.45em;
+}
+
+/* Fila contorneada (letra hueca) */
+.tracks-row--ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(140 138 130 / 42%);
+}
+
+/* Fila sólida brillante */
+.tracks-row--solid {
+  color: var(--bright);
+}
+
+/* Fila tenue */
+.tracks-row--dim {
+  color: var(--text-dim);
+  opacity: 0.28;
+}
+
+/* Intro de la sección: flota sobre la pared */
+.tracks-intro {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+}
+
+.tracks-intro-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+  max-width: 46rem;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  background: radial-gradient(
+    closest-side,
+    rgb(26 26 23 / 96%) 55%,
+    rgb(26 26 23 / 0%)
+  );
+}
+
+/* Deck: cada card es sticky y la siguiente se apila encima */
+.tracks-deck {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16vh;
+  padding: 4vh 1.25rem 20vh;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.track-slot {
+  position: sticky;
+  top: calc(8vh + var(--stack-i) * 2.75rem);
+}
+
+.track-card {
+  background-color: var(--screen-dim);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 -20px 60px rgb(0 0 0 / 50%);
+}
+
+.track-card-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.25rem, 3.5vw, 2.5rem) 1.25rem;
+}
+
+.track-card-name {
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  text-wrap: balance;
+}
+
+.track-idea {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.85rem clamp(1.25rem, 3.5vw, 2.5rem);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.track-idea-fill {
+  position: absolute;
+  inset: 0;
+  background-color: var(--screen);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+}
+
+.track-idea > * {
+  position: relative;
+}
+
+.track-idea-arrow {
+  margin-left: auto;
+  opacity: 0;
+  transform: translateX(-6px);
+  color: var(--bright);
+}
+
+.track-why {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.1rem clamp(1.25rem, 3.5vw, 2.5rem) 1.35rem;
+  border-top: 1px dashed rgb(140 138 130 / 45%);
+}
+
+/* ─── Terminal CTA (postular) — sesión a pantalla completa ─────────── */
+.terminal-cta {
+  position: relative;
+  background-color: var(--void);
+}
+
+/* Pinned: la sección mide 280vh; la pantalla queda sticky y el scroll
+   tipea la sesión. Sin pin (reduced-motion / sin JS) es estática. */
+.terminal-cta[data-pinned="true"] {
+  height: 280vh;
+}
+
+.terminal-sticky {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.terminal-cta[data-pinned="true"] .terminal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+/*
+  La sesión ocupa la PANTALLA ENTERA: header de boot arriba, headline+specs
+  al centro, prompt+botón abajo (space-between sobre 100svh).
+*/
+.terminal-inner {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  min-height: 100svh;
+  padding: clamp(2rem, 5vh, 3.5rem) clamp(1.5rem, 5vw, 4.5rem);
+  /* El nav fijo (h-14 = 3.5rem) tapa el inicio de la pantalla sticky */
+  padding-top: calc(3.5rem + clamp(1.25rem, 3vh, 2rem));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(1.5rem, 3.5vh, 2.5rem);
+}
+
+.terminal-block {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vh, 2rem);
+}
+
+/* Línea de terminal: se revela con wipe a pasos (efecto tipeo) */
+.term-line {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.term-headline {
+  font-size: clamp(1.9rem, 8.5vw, 6.5rem);
+  line-height: 1.02;
+}
+
+/* Specs: tipografía fluida para que la línea entera quepa en mobile */
+.term-spec {
+  font-size: clamp(0.65rem, 3vw, 0.875rem);
+  letter-spacing: 0.01em;
+}
+
+/* Botón modo terminal: bloque en video inverso, presionable como tecla */
+.term-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(0.875rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--void);
+  background-color: var(--bright);
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--bright);
+  box-shadow: 0 4px 0 var(--key-shadow);
+  transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .term-btn:hover {
+    background-color: var(--text);
+  }
+}
+
+.term-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--key-shadow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .term-btn {
+    transition:
+      background-color 150ms ease-out,
+      color 150ms ease-out,
+      transform 130ms var(--ease-out-strong),
+      box-shadow 130ms var(--ease-out-strong);
+  }
+
+  .term-btn:active {
+    transition-duration: 50ms;
+  }
+
+  /* Estados ocultos SOLO cuando JS armó la secuencia (data-armed);
+     cada elemento se tipea cuando el scroll cruza su umbral (.is-typed) */
+  .terminal-cta[data-armed="true"] .term-line {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .terminal-cta[data-armed="true"] .term-fade {
+    opacity: 0;
+  }
+
+  /* Si el teclado llega antes que la animación, se muestra */
+  .terminal-cta[data-armed="true"] .term-fade:focus-within {
+    opacity: 1;
+  }
+
+  @keyframes term-type {
+    to {
+      clip-path: inset(0 -2% 0 0);
+    }
+  }
+
+  .terminal-cta[data-armed="true"] .term-line.is-typed {
+    animation: term-type 420ms steps(28) forwards;
+  }
+
+  .terminal-cta[data-armed="true"] .term-fade.is-typed {
+    animation: fade-up 480ms var(--ease-out-strong) forwards;
+  }
+}
+
+/* ─── Footer: wordmark gigante con letras ondeando ─────────────────── */
+.wave-word {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.45em;
+  row-gap: 0.15em;
+  font-family: var(--font-pixel);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--text);
+  font-size: clamp(2.25rem, 8vw, 6rem);
+  user-select: none;
+}
+
+/* Palabra: nunca se parte; las letras ondean dentro */
+.wave-word-unit {
+  display: flex;
+  white-space: nowrap;
+}
+
+.wave-word-unit span {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Orbitas de texto girando */
+  @keyframes orbit-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .hero-orbit .orbit-svg {
+    animation: orbit-spin 48s linear infinite;
+  }
+
+  .boot-orbit .orbit-svg {
+    animation: orbit-spin 14s linear infinite;
+  }
+
+  /* Grid del loader respira */
+  @keyframes grid-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.045);
+    }
+  }
+
+  .boot-grid {
+    animation: grid-breathe 3.2s ease-in-out infinite;
+  }
+
+  /* Marquees de la pared TRACKS */
+  @keyframes marquee-l {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee-r {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .tracks-row > span {
+    animation: marquee-l var(--marquee-dur, 40s) linear infinite;
+    will-change: transform;
+  }
+
+  .tracks-row[data-dir="r"] > span {
+    animation-name: marquee-r;
+  }
+
+  /* Ideas de track: wipe en hover */
+  .track-idea-fill {
+    transition: clip-path 380ms var(--ease-out-strong);
+  }
+
+  .track-idea-arrow {
+    transition:
+      opacity 200ms ease-out,
+      transform 240ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .track-idea:hover .track-idea-fill {
+      clip-path: inset(0 0 0 0);
+    }
+
+    .track-idea:hover .track-idea-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Letras del wordmark ondeando */
+  @keyframes letter-bob {
+    0%,
+    100% {
+      transform: translateY(0.11em);
+    }
+    50% {
+      transform: translateY(-0.11em);
+    }
+  }
+
+  .wave-word-unit span {
+    animation: letter-bob 2s ease-in-out infinite;
+    animation-delay: calc(var(--li) * -90ms);
+  }
+}
+
 /* ── Fallback: reduced-motion → everything visible, no animation ── */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
@@ -824,5 +1338,18 @@
   /* Keep nav underline invisible (no animation) */
   .nav-link::after {
     transform: scaleX(0);
+  }
+
+  /* v2: órbitas, marquees, olas y letras quietas */
+  .orbit-svg,
+  .boot-grid,
+  .tracks-row > span,
+  .wave-word-unit span {
+    animation: none;
+  }
+
+  .track-idea-fill,
+  .track-idea-arrow {
+    transition: none;
   }
 }

@@ -3,17 +3,15 @@ import { SectionHeader } from "./section-header";
 const HEADLINE_SPONSORS = [
   {
     wordmark: "NEXT FELLOW",
-    role: "CO-ORGANIZER",
+    role: "ORGANIZER",
     href: "https://nextfellow.ai",
   },
   {
     wordmark: "CRAFTER STATION",
-    role: "ORGANIZER · COMMUNITY",
+    role: "ORGANIZER",
     href: "https://crafterstation.com",
   },
 ] as const;
-
-const PARTNERS = ["VERCEL", "ANTHROPIC", "SUPABASE", "ELEVENLABS"] as const;
 
 export function Sponsors() {
   return (
@@ -24,9 +22,9 @@ export function Sponsors() {
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-8 scroll-reveal">
         <SectionHeader line="60" name="SPONSORS" />
 
-        {/* Headline sponsors */}
+        {/* Headline sponsors — tabla fusionada, bordes compartidos sin radius */}
         <ul
-          className="grid grid-cols-1 md:grid-cols-2 gap-3 list-none m-0 p-0"
+          className="grid grid-cols-1 md:grid-cols-2 list-none m-0 p-0 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]"
           aria-label="Headline sponsors"
         >
           {HEADLINE_SPONSORS.map(({ wordmark, role, href }) => (
@@ -35,7 +33,8 @@ export function Sponsors() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="panel flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
+                className="flex flex-col justify-between gap-8 px-6 py-8 md:px-10 md:py-12 h-full
+                           border-r border-b border-[var(--line)]
                            hover:bg-[var(--screen)] transition-colors duration-150 no-underline"
               >
                 {/* Wordmark pixel */}
@@ -55,29 +54,6 @@ export function Sponsors() {
             </li>
           ))}
         </ul>
-
-        {/* Partners */}
-        <div className="flex flex-col gap-4">
-          <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)]">
-            PARTNERS
-          </p>
-          <ul
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 list-none m-0 p-0"
-            aria-label="Tour partners"
-          >
-            {PARTNERS.map((name) => (
-              <li key={name} className="panel px-6 py-7 flex flex-col gap-3">
-                <span
-                  className="font-mono font-bold leading-none tracking-[0.05em]
-                             text-[var(--bright)] select-none"
-                  style={{ fontSize: "clamp(0.9375rem, 1.4vw, 1.125rem)" }}
-                >
-                  {name}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
 
         {/* Sponsor CTA */}
         <p className="font-mono text-xs tracking-[0.05em] leading-[1.5] text-[var(--text-dim)]">
