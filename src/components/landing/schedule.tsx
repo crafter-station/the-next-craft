@@ -1,146 +1,213 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
-import { useTranslations } from "next-intl";
-
-import { SectionHeader } from "./section-header";
-
-type EventItem = {
+type Event = {
   time: string;
   description: string;
   mono?: string;
   highlight?: boolean;
 };
 
-type Day = {
-  id: "fri" | "sat" | "sun";
-  label: string;
-  weekday: string;
-  events: EventItem[];
-};
+// Un solo día — sábado 25 de julio, 2026. Jornada de 12 horas.
+const EVENTS: Event[] = [
+  { time: "08:30", description: "Registro y acreditación" },
+  {
+    time: "09:00",
+    description: "Kickoff — reglas y formación de equipos",
+    highlight: true,
+  },
+  { time: "09:30", description: "Empieza el hacking", highlight: true },
+  { time: "11:00", description: "Mentorías con Next Fellow y Crafter Station" },
+  { time: "13:00", description: "Almuerzo" },
+  { time: "16:00", description: "Check-in de avances", mono: "git status" },
+  { time: "18:30", description: "Merienda — quedan 3 horas" },
+  {
+    time: "20:00",
+    description: "Code freeze + submit",
+    mono: 'git commit -m "final"',
+    highlight: true,
+  },
+  {
+    time: "20:15",
+    description: "Demos — 3 minutos por equipo, producto en vivo",
+    highlight: true,
+  },
+  { time: "21:00", description: "Premiación y cierre", highlight: true },
+] as const;
 
-const DAY_IDS = ["fri", "sat", "sun"] as const;
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+const ramp = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 
+/* Pared tipográfica de fondo (estilo Generous Branding): AGENDA se lee
+   vertical al centro — una letra por fila — y con el scroll cada fila se
+   desliza horizontalmente a una velocidad distinta (--vx, en vw) mientras
+   las copias de cada letra aparecen del centro hacia ambos lados y giran
+   cada una a su propio ritmo (--rot, en deg). */
+const WALL_WORD = "AGENDA";
+
+/* Velocidad horizontal por fila: signo = dirección, magnitud = qué tan
+   rápido viaja respecto al scroll */
+const ROW_SPEEDS = [-26, 18, -34, 26, -16, 30] as const;
+
+/* Copias por fila: 0 es la letra central, negativos a la izquierda */
+const LETTER_OFFSETS = [
+  -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8,
+] as const;
+
+/*
+  Schedule — agenda cinemática "pinned": al entrar, un titular AGENDA gigante
+  ocupa la pantalla; al seguir scrolleando, un backdrop oscurece el fondo y la
+  pantalla CRT con el timeline del día (09:00–21:00) aparece y se construye
+  fila por fila según el progreso de scroll.
+
+  Accesible: el timeline vive en el DOM (solo opacity/transform, nunca
+  visibility) → lo lee el lector de pantalla. Bajo reduced-motion / sin JS la
+  sección es estática (sin pin, todo visible).
+*/
 export function Schedule() {
-  const t = useTranslations("schedule");
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const wallRef = useRef<HTMLDivElement>(null);
 
-  const days: Day[] = DAY_IDS.map((id) => ({
-    id,
-    label: t(`days.${id}.label`),
-    weekday: t(`days.${id}.weekday`),
-    events: t.raw(`days.${id}.events`) as EventItem[],
-  }));
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
 
-  const [activeId, setActiveId] = useState<Day["id"]>(days[0].id);
-  const activeDay = days.find((d) => d.id === activeId) ?? days[0];
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduced) {
+      section.dataset.pinned = "false";
+      return;
+    }
+    section.dataset.pinned = "true";
+
+    const rows = Array.from(
+      section.querySelectorAll<HTMLElement>(".agenda-row"),
+    );
+    const n = rows.length;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      const total = section.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      const p = total > 0 ? scrolled / total : 0;
+
+      // Pared: las filas viajan en horizontal durante todo el pin (0 → 0.9)
+      if (wallRef.current) {
+        wallRef.current.style.setProperty(
+          "--wall-p",
+          ramp(p, 0, 0.9).toFixed(4),
+        );
+      }
+      // Titular gigante se va (0.02 → 0.2)
+      const hide = ramp(p, 0.02, 0.2);
+      if (titleRef.current) {
+        titleRef.current.style.opacity = String(1 - hide);
+        titleRef.current.style.transform = `translateY(${hide * -28}px) scale(${1 - hide * 0.07})`;
+      }
+      // Backdrop + panel entran (0.08 → 0.28)
+      const show = ramp(p, 0.08, 0.28);
+      if (backdropRef.current) backdropRef.current.style.opacity = String(show);
+      if (panelRef.current) {
+        panelRef.current.style.opacity = String(show);
+        panelRef.current.style.transform = `translateY(${(1 - show) * 28}px)`;
+      }
+      // Filas se construyen (0.3 → 0.95)
+      for (let i = 0; i < n; i++) {
+        const thr = 0.3 + (0.95 - 0.3) * (i / Math.max(1, n - 1));
+        rows[i].classList.toggle("is-in", p >= thr);
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
 
   return (
-    <section
-      id="agenda"
-      className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--void)]"
-    >
-      <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
-        <SectionHeader line="40" name={t("label")} />
+    <section ref={sectionRef} id="agenda" className="agenda">
+      <div className="agenda-sticky">
+        <div className="grid-bg" />
 
-        <h2
-          className="pixel-heading"
-          style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
-        >
-          {t("headlineLine1")}
-          <br />
-          {t("headlineLine2")}
-        </h2>
-
-        {/* Dos columnas: selector de día | agenda del día */}
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 lg:gap-14">
-          {/* ── Selector de día — keycaps ── */}
-          <div
-            role="tablist"
-            aria-label={t("tablistAria")}
-            aria-orientation="vertical"
-            className="flex flex-row lg:flex-col gap-3 lg:gap-4 items-stretch"
-          >
-            {days.map((day) => {
-              const selected = day.id === activeId;
-              return (
-                <button
-                  key={day.id}
-                  type="button"
-                  role="tab"
-                  id={`tab-${day.id}`}
-                  aria-selected={selected}
-                  aria-controls={`panel-${day.id}`}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActiveId(day.id)}
-                  onKeyDown={(e) => {
-                    const idx = days.findIndex((d) => d.id === activeId);
-                    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-                      e.preventDefault();
-                      const next = days[(idx + 1) % days.length];
-                      setActiveId(next.id);
-                      document.getElementById(`tab-${next.id}`)?.focus();
-                    }
-                    if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-                      e.preventDefault();
-                      const prev = days[(idx - 1 + days.length) % days.length];
-                      setActiveId(prev.id);
-                      document.getElementById(`tab-${prev.id}`)?.focus();
-                    }
-                  }}
-                  className={[
-                    "flex-1 lg:flex-none flex flex-col items-start gap-1 px-5 py-4 text-left",
-                    selected ? "keycap" : "keycap-ghost",
-                  ].join(" ")}
-                >
-                  <span className="font-mono text-[10px] font-semibold tracking-[0.18em] uppercase opacity-70">
-                    {day.weekday}
-                  </span>
-                  <span
-                    className="font-pixel font-bold leading-none"
-                    style={{ fontSize: "clamp(1rem, 1.8vw, 1.375rem)" }}
-                  >
-                    {day.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ── Agenda del día seleccionado ── */}
-          <div
-            role="tabpanel"
-            id={`panel-${activeDay.id}`}
-            aria-labelledby={`tab-${activeDay.id}`}
-            className="relative"
-          >
-            {/* Línea vertical */}
+        {/* Pared AGENDA — vertical en reposo, filas horizontales al scrollear */}
+        <div ref={wallRef} className="agenda-wall" aria-hidden="true">
+          {WALL_WORD.split("").map((letter, row) => (
             <div
-              className="absolute top-0 bottom-0 left-0 w-px bg-[var(--line)]"
-              aria-hidden="true"
-            />
-
-            <ul className="list-none m-0 p-0 flex flex-col gap-0">
-              {activeDay.events.map((event) => (
-                <li
-                  key={`${activeDay.id}-${event.time}`}
-                  className="schedule-row group relative flex items-baseline gap-3 sm:gap-6 pl-6 pr-4 py-3.5 rounded-r-lg hover:bg-[var(--screen-dim)] transition-colors duration-100"
+              // biome-ignore lint/suspicious/noArrayIndexKey: filas decorativas estáticas
+              key={row}
+              className="agenda-wall-row"
+              style={{ "--vx": ROW_SPEEDS[row] } as React.CSSProperties}
+            >
+              {LETTER_OFFSETS.map((d) => (
+                <span
+                  key={d}
+                  className="agenda-wall-letter"
+                  style={
+                    {
+                      "--d": Math.abs(d),
+                      /* pseudo-aleatorio determinista: cada letra gira a su ritmo */
+                      "--rot": ((d * 7 + row * 5 + 99) % 13) - 6,
+                    } as React.CSSProperties
+                  }
                 >
-                  {/* Nodo cuadrado pixel en la línea */}
-                  <span
-                    className="absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] bg-[var(--bright)] shrink-0"
-                    aria-hidden="true"
-                  />
+                  {letter}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
 
-                  {/* Hora — mono tabular */}
-                  <span
-                    className="schedule-time font-mono text-sm font-medium tabular-nums text-[var(--bright)] shrink-0 w-12"
-                    style={{ fontVariantNumeric: "tabular-nums" }}
-                  >
+        {/* Titular gigante */}
+        <div ref={titleRef} className="agenda-giant-wrap" aria-hidden="true">
+          <span className="agenda-giant">AGENDA</span>
+          <span className="agenda-giant-sub font-mono text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[var(--bright)]">
+            SÁBADO 25 JUL 2026 · 09:00–21:00
+          </span>
+        </div>
+
+        {/* Backdrop que oscurece */}
+        <div ref={backdropRef} className="agenda-backdrop" aria-hidden="true" />
+
+        {/* Pantalla CRT con el timeline */}
+        <div ref={panelRef} className="agenda-panel panel">
+          <div
+            className="scanlines absolute inset-0 pointer-events-none z-10"
+            aria-hidden="true"
+          />
+          <div className="agenda-panel-inner relative z-20">
+            <h2 className="sr-only">
+              Agenda — sábado 25 de julio 2026, de 09:00 a 21:00
+            </h2>
+            <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)] mb-5">
+              <span className="text-[var(--bright)]">40 PRINT</span>{" "}
+              &quot;AGENDA&quot; · 12 HORAS
+            </p>
+
+            <ul className="agenda-list" aria-label="Agenda del día">
+              {EVENTS.map((event) => (
+                <li key={event.time} className="agenda-row">
+                  <span className="agenda-node" aria-hidden="true" />
+                  <span className="agenda-time font-mono text-sm font-medium tabular-nums text-[var(--bright)]">
                     {event.time}
                   </span>
-
-                  {/* Descripción */}
                   <span
                     className={
                       event.highlight
@@ -152,7 +219,7 @@ export function Schedule() {
                     {event.mono && (
                       <>
                         {" "}
-                        <code className="font-mono text-xs text-[var(--bright)] bg-[var(--screen-dim)] border border-[var(--line)]/40 rounded px-1 py-0.5">
+                        <code className="font-mono text-xs text-[var(--bright)] bg-[var(--void)] border border-[var(--line)]/40 rounded px-1 py-0.5">
                           {event.mono}
                         </code>
                       </>

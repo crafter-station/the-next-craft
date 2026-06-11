@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { useTranslations } from "next-intl";
-
-// 2026-07-24T18:00:00-05:00 → UTC ms
-const DEADLINE = new Date("2026-07-24T18:00:00-05:00").getTime();
+// 2026-07-25T09:00:00-05:00 → UTC ms (arranque del evento)
+const DEADLINE = new Date("2026-07-25T09:00:00-05:00").getTime();
 
 type TimeLeft = {
   days: number;
@@ -34,7 +32,6 @@ function pad(n: number): string {
 }
 
 export function Countdown() {
-  const t = useTranslations("countdown");
   // null until client hydrates — avoids hydration mismatch
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
@@ -57,44 +54,32 @@ export function Countdown() {
       <div
         className="inline-flex items-center gap-3 border border-[var(--line)] rounded-lg px-6 py-4 bg-[var(--screen-dim)]"
         role="status"
-        aria-label={t("liveAria")}
+        aria-label="El evento está en curso"
       >
         <span
           className="font-pixel font-bold text-[var(--bright)] leading-none uppercase"
           style={{ fontSize: "clamp(1rem, 2.5vw, 1.5rem)" }}
         >
-          {t("live")}
+          EN VIVO
         </span>
         <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[var(--text-dim)]">
-          {t("liveSub")}
+          — HACKATHON EN CURSO
         </span>
       </div>
     );
   }
 
   const cells: Cell[] = [
-    {
-      value: timeLeft !== null ? pad(timeLeft.days) : "--",
-      label: t("units.days"),
-    },
-    {
-      value: timeLeft !== null ? pad(timeLeft.hours) : "--",
-      label: t("units.hours"),
-    },
-    {
-      value: timeLeft !== null ? pad(timeLeft.minutes) : "--",
-      label: t("units.minutes"),
-    },
-    {
-      value: timeLeft !== null ? pad(timeLeft.seconds) : "--",
-      label: t("units.seconds"),
-    },
+    { value: timeLeft !== null ? pad(timeLeft.days) : "--", label: "DÍAS" },
+    { value: timeLeft !== null ? pad(timeLeft.hours) : "--", label: "HRS" },
+    { value: timeLeft !== null ? pad(timeLeft.minutes) : "--", label: "MIN" },
+    { value: timeLeft !== null ? pad(timeLeft.seconds) : "--", label: "SEG" },
   ];
 
   return (
     <div
       className="grid grid-cols-4 w-full max-w-sm sm:max-w-none sm:flex sm:items-stretch gap-2"
-      aria-label={t("ariaLabel")}
+      aria-label="Cuenta regresiva al evento"
       role="timer"
       aria-live="off"
     >

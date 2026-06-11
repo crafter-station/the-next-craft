@@ -68,18 +68,66 @@ mono 11px tracking 0.18em.
   `0 3px 0`, `:active` las hunde.
 - **Sin marcos**: hero y FinalCta full-bleed sobre el mismo negro; solo
   scanlines sutiles como textura de pantalla.
-- **3D**: `public/c64.glb` (Draco, ~2MB) — set completo de frente, estático
-  (sin auto-rotate), drag para girar; wordmark en la pantalla vía drei <Html>.
+- **3D**: `public/c64.glb` (Draco, ~2MB) — set completo de frente. Drag para
+  girar (OrbitControls) + **parallax sutil al puntero** (el set inclina hacia
+  el cursor, lerp suave; off bajo reduced-motion). Wordmark en la pantalla vía
+  drei <Html>.
 - Cierre del footer: "hecho a mano, no vibecodeado."
+
+## Motion / Animaciones (sistema)
+
+> Objetivo: calidad "awwwards" SIN romper el B&N estricto. Toda animación es
+> transform / opacity / clip-path / scale (compositor-friendly, off main
+> thread cuando se puede) y va envuelta en `prefers-reduced-motion`.
+
+- **Boot loader** (`BootLoader`): splash de arranque C64 — log de boot en mono,
+  contador `000→100` en pixel, barra de bloques `█`, y al llegar a 100 el
+  overlay se levanta (`translateY -100%`) revelando la página. Solo 1ª carga de
+  la sesión (sessionStorage) y sin reduced-motion; bloquea scroll mientras carga.
+- **Section titles** (`SectionTitle`): apertura de capítulo a pantalla
+  (`min-height 58vh`) — titular PETSCII GIGANTE que se decodea (scramble) y se
+  revela al entrar, con la línea BASIC como subtítulo y **skew según velocidad
+  de scroll** (`useScrollSkew`, un solo listener+rAF para todos). Es la forma de
+  pasar de una sección a otra (reemplaza los banners marquee). El titular es
+  decorativo (aria-hidden); cada sección conserva su heading real. Usados:
+  `10 MANIFIESTO` · `30 EL TRACK` · `50 PREMIOS`.
+- **Agenda cinemática** (`Schedule`, `#agenda`): sección "pinned" (sticky). Al
+  entrar, un titular `AGENDA` gigante ocupa la pantalla; al seguir scroll un
+  **backdrop** oscurece el fondo y la pantalla CRT con el timeline del día
+  (09:00–21:00) entra y se **construye fila por fila** según el progreso de
+  scroll (driver JS rAF-throttled; solo opacity/transform). Bajo reduced-motion
+  / sin JS es estática (sin pin, todo visible y legible).
+- **Grid blueprint** (`.grid-bg`): cuadrícula CRT sutil (líneas `--line` 9%,
+  máscara radial que desvanece bordes) detrás de títulos y de la agenda.
+- **Decode binario→texto** (`ScrambleText`, firma del look C64): titulares y
+  el dateline del hero titilan como `0/1` y se resuelven izq→der. Termina
+  SIEMPRE en el texto real (accesible, SSR-safe). Usado en hero, manifiesto,
+  Work, FinalCta. `noise="glitch"` añade bloques PETSCII.
+- **Cursor custom** (`CustomCursor`): punto marfil + anillo cuadrado que
+  persigue con lag (lerp). Crece sobre interactivos; `[data-magnetic]` tira
+  del elemento hacia el cursor vía la propiedad CSS `translate` (no pisa el
+  `:active translateY` de los keycaps). Solo puntero fino + sin reduced-motion;
+  oculta el cursor nativo (`.has-custom-cursor`).
+- **Smooth scroll** (Lenis): interpolación de rueda; anchors con scrollTo +
+  offset del nav sticky y foco al destino (a11y). Off bajo reduced-motion.
+- **Reveals**: `.heading-reveal` (wipe clip-path vertical), `.reveal-item`
+  (fade-up por item) y `.parallax-slow` corren con `animation-timeline: view()`
+  (scroll-driven, off main thread). Fallback visible vía `@supports`/reduce.
+- **Easing**: `--ease-out-strong` (entradas), `--ease-in-out-strong` (movs).
+  UI < 300ms; reveals de scroll pueden llegar a ~600ms.
+- **3D**: parallax al puntero (ver Motivos). Nunca auto-rotate.
+- Excepción a "solo transform/opacity": se permite `clip-path` y `scale`/
+  `translate` (props independientes), por ser composited y libres de blur.
 
 ## Contenido canónico (NO inventar otros datos)
 
 - **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
   (nextfellow.ai, "Next" en el naming corto)
-- **Tagline**: "De cero a producto en 36 horas."
-- **Fecha**: 24–26 de julio, 2026 · **Lugar**: presencial en 3 sedes —
+- **Tagline**: "De cero a producto en 12 horas."
+- **Fecha**: 25 de julio, 2026 (un solo día, 09:00–21:00) · **Lugar**:
+  presencial en 3 sedes —
   Lima, Bogotá y Ciudad de Guatemala
-- **Formato**: 36 horas · 150 hackers · equipos de 3–5
+- **Formato**: 12 horas · 150 hackers · equipos de 3–5
 - **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
 - **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)
 - **Track ÚNICO — el corazón de la hackathon**: que tu producto tenga
@@ -103,8 +151,12 @@ mono 11px tracking 0.18em.
    sin tagline visible)
 3. `10` ¿Qué es? (`#que-es`) — manifiesto
 4. `20` TL;DR (`#tldr`) — specs grid
-5. `30` Track (`#tracks`) — track único: usuarios reales
-6. `40` Agenda (`#agenda`) — timeline 36h
+5. `30` Track / "Work" (`#tracks`) — track único presentado estilo portfolio:
+   headline decode `USUARIOS REALES`, ticker marquee, grid numerado `#0001…`
+   con wipe (clip-path) en hover
+6. `40` Agenda (`#agenda`) — cinemática pinned: titular AGENDA gigante →
+   backdrop + pantalla CRT con el timeline del día (09:00–21:00) que se
+   construye al scrollear
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
 8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)
