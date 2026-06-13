@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+import { useTranslations } from "next-intl";
 
 import { ScrambleText } from "@/components/effects/scramble-text";
 
@@ -21,37 +23,14 @@ import { ScrambleText } from "@/components/effects/scramble-text";
 // Mientras no exista el número de producción (env vacía), el CTA cae al form:
 // nunca shippear un placeholder.
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-const CTA_HREF = WHATSAPP_NUMBER
-  ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      "Hola, quiero postular a The Next Craft",
-    )}`
-  : "https://forms.crafterstation.com/the-next-craft";
-const CTA_LABEL = WHATSAPP_NUMBER
-  ? "[ POSTULAR POR WHATSAPP → ]"
-  : "[ POSTULAR → ]";
 
-const HEADER_LINES = [
-  { text: "**** THE NEXT CRAFT BASIC V2 ****", thr: 0.03 },
-  { text: "64K RAM SYSTEM · 38911 BASIC BYTES FREE", thr: 0.07 },
-] as const;
-
-const BOOT_LINES = [
-  { text: 'LOAD "POSTULAR",8,1', thr: 0.11 },
-  { text: "SEARCHING FOR POSTULAR", thr: 0.15 },
-  { text: "LOADING ... OK", thr: 0.19 },
-  { text: "READY.", thr: 0.23 },
-  { text: "RUN POSTULAR", thr: 0.27 },
-] as const;
+const HEADER_THRESHOLDS = [0.03, 0.07] as const;
+const BOOT_THRESHOLDS = [0.11, 0.15, 0.19, 0.23, 0.27] as const;
 
 /* El headline (scramble) entra aquí */
 const HEADLINE_THR = 0.33;
 
-const SPEC_LINES = [
-  { text: "DEADLINE ........ 10 JUL 2026 · 23:59 GMT-5", thr: 0.46 },
-  { text: "CUPOS ........... 120 · ADMISIÓN SELECTIVA", thr: 0.54 },
-  { text: "COSTO ........... GRATIS", thr: 0.62 },
-  { text: "FORMULARIO ...... 7 PREGUNTAS · 90 SEGUNDOS", thr: 0.7 },
-] as const;
+const SPEC_THRESHOLDS = [0.46, 0.54, 0.62, 0.7] as const;
 
 /* Prompt + botón: lo último en cargar; después queda ~15% de scroll con
    todo visible antes de que la sección suelte */
@@ -60,6 +39,43 @@ const PROMPT_THR = 0.8;
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 
 export function FinalCta() {
+  const t = useTranslations("finalCta");
+  const headerLines = t.raw("headerLines") as readonly string[];
+  const bootLines = t.raw("bootLines") as readonly string[];
+  const specLines = t.raw("specs") as readonly string[];
+
+  const headerItems = useMemo(
+    () =>
+      headerLines.map((text, i) => ({
+        text,
+        thr: HEADER_THRESHOLDS[i] ?? HEADER_THRESHOLDS[HEADER_THRESHOLDS.length - 1],
+      })),
+    [headerLines],
+  );
+  const bootItems = useMemo(
+    () =>
+      bootLines.map((text, i) => ({
+        text,
+        thr: BOOT_THRESHOLDS[i] ?? BOOT_THRESHOLDS[BOOT_THRESHOLDS.length - 1],
+      })),
+    [bootLines],
+  );
+  const specItems = useMemo(
+    () =>
+      specLines.map((text, i) => ({
+        text,
+        thr: SPEC_THRESHOLDS[i] ?? SPEC_THRESHOLDS[SPEC_THRESHOLDS.length - 1],
+      })),
+    [specLines],
+  );
+
+  const ctaHref = WHATSAPP_NUMBER
+    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+        t("whatsappMessage"),
+      )}`
+    : "https://forms.crafterstation.com/the-next-craft";
+  const ctaLabel = WHATSAPP_NUMBER ? t("ctaWhatsapp") : t("ctaForm");
+
   const sectionRef = useRef<HTMLElement>(null);
   const [armed, setArmed] = useState(false);
   const [run, setRun] = useState(false);
@@ -128,7 +144,7 @@ export function FinalCta() {
         <div className="terminal-inner">
           {/* ── Arriba: header + boot de la sesión ── */}
           <div aria-hidden="true">
-            {HEADER_LINES.map(({ text, thr }) => (
+            {headerItems.map(({ text, thr }) => (
               <p
                 key={text}
                 className="term-line text-xs sm:text-sm leading-[1.9] text-[var(--bright)] tracking-[0.08em] font-semibold"
@@ -138,7 +154,7 @@ export function FinalCta() {
               </p>
             ))}
             <div className="pt-3">
-              {BOOT_LINES.map(({ text, thr }) => (
+              {bootItems.map(({ text, thr }) => (
                 <p
                   key={text}
                   className="term-line text-xs sm:text-sm leading-[1.9] text-[var(--text-dim)] tracking-[0.06em]"
@@ -156,7 +172,7 @@ export function FinalCta() {
               <ScrambleText
                 key={run ? "run" : "idle"}
                 as="h2"
-                text={"¿CONSTRUYES?\nPOSTULA."}
+                text={t("headline")}
                 className="pixel-heading term-headline whitespace-pre-line"
                 noise="glitch"
                 trigger="mount"
@@ -165,12 +181,9 @@ export function FinalCta() {
             </div>
 
             <div>
-              <p className="sr-only">
-                Deadline: 10 de julio de 2026, 23:59 GMT-5. 120 cupos, admisión
-                selectiva. Gratis. El formulario son 7 preguntas, 90 segundos.
-              </p>
+              <p className="sr-only">{t("specsSr")}</p>
               <div aria-hidden="true">
-                {SPEC_LINES.map(({ text, thr }) => (
+                {specItems.map(({ text, thr }) => (
                   <p
                     key={text}
                     className="term-line term-spec leading-[2] text-[var(--text)]"
@@ -192,16 +205,16 @@ export function FinalCta() {
               className="font-mono text-sm text-[var(--bright)]"
               aria-hidden="true"
             >
-              PRESS RETURN ↵
+              {t("pressReturn")}
             </p>
             <a
-              href={CTA_HREF}
+              href={ctaHref}
               target="_blank"
               rel="noopener noreferrer"
               data-magnetic
               className="term-btn"
             >
-              {CTA_LABEL}
+              {ctaLabel}
             </a>
             <p
               className="font-mono text-sm text-[var(--bright)]"

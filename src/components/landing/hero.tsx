@@ -1,9 +1,13 @@
+import { useTranslations } from "next-intl";
+
 import { CircularText } from "@/components/effects/circular-text";
 import { ScrambleText } from "@/components/effects/scramble-text";
 
 import { Countdown } from "./countdown";
 
 export function Hero() {
+  const t = useTranslations("hero");
+
   return (
     <section
       id="hero"
@@ -17,7 +21,7 @@ export function Hero() {
 
       <div className="relative z-20 flex flex-col items-center text-center">
         {/* H1 accesible — el wordmark visible vive dentro de la pantalla 3D */}
-        <h1 className="sr-only">the next craft</h1>
+        <h1 className="sr-only">{t("h1")}</h1>
 
         {/*
           Escenario del C64: el modelo vive en el canvas fijo (C64Stage) y se
@@ -26,7 +30,7 @@ export function Hero() {
         */}
         <div className="hero-stage reveal reveal-d1" aria-hidden="true">
           <div className="hero-orbit">
-            <CircularText text="LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS · DE CERO A PRODUCTO · " />
+            <CircularText text={t("circular")} />
           </div>
           <div
             data-c64-anchor="hero"
@@ -47,11 +51,11 @@ export function Hero() {
             className="font-mono font-semibold uppercase tracking-[0.1em] text-[var(--text)]"
             style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}
           >
-            Hackathon presencial
+            {t("subhead")}
           </p>
           <ScrambleText
             as="p"
-            text="LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS"
+            text={t("specs")}
             trigger="mount"
             delay={420}
             className="font-mono text-xs tracking-[0.18em] uppercase text-[var(--text-dim)] break-words max-w-full"
@@ -70,14 +74,14 @@ export function Hero() {
             data-magnetic
             className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            RUN Postular <span className="cta-arrow">→</span>
+            {t("ctaApply")} <span className="cta-arrow">→</span>
           </a>
           <a
             href="#tracks"
             data-magnetic
             className="cta-btn keycap-ghost font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
-            GOTO Tracks <span className="cta-arrow">↓</span>
+            {t("ctaTracks")} <span className="cta-arrow">↓</span>
           </a>
         </div>
       </div>
