@@ -1,10 +1,4 @@
-const PERKS = [
-  "Mentorías durante las 12 horas",
-  "Swag oficial del evento",
-  "Acceso a la comunidad de Crafter Station",
-  "Créditos de herramientas",
-  "Comida durante el evento",
-] as const;
+import { useTranslations } from "next-intl";
 
 /*
   Sección invertida: el único golpe de luz a mitad del scroll — fondo
@@ -19,6 +13,9 @@ const INK_DIM = "#6f6a5d";
 const RULE = "rgb(26 26 23 / 35%)";
 
 export function Prizes() {
+  const t = useTranslations("prizes");
+  const perks = t.raw("perks") as readonly string[];
+
   return (
     <section
       id="premios"
@@ -38,14 +35,14 @@ export function Prizes() {
                 }}
                 aria-hidden="true"
               >
-                PRONTO
+                {t("amount")}
               </span>
-              <span className="sr-only">Premio por anunciar</span>
+              <span className="sr-only">{t("amountAria")}</span>
               <p
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK_DIM }}
               >
-                PREMIO PRINCIPAL POR ANUNCIAR
+                {t("amountSub")}
               </p>
             </div>
           </div>
@@ -63,15 +60,15 @@ export function Prizes() {
                 className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
                 style={{ color: INK }}
               >
-                PARA TODOS LOS QUE ENTRAN
+                {t("perksLabel")}
               </p>
             </div>
 
             <ul
               className="flex flex-col list-none m-0 p-0 flex-1"
-              aria-label="Beneficios para todos los participantes"
+              aria-label={t("perksAria")}
             >
-              {PERKS.map((perk) => (
+              {perks.map((perk) => (
                 <li key={perk} className="flex items-start gap-3 px-7 py-4">
                   <span
                     className="font-mono text-sm shrink-0 mt-0.5"
@@ -97,8 +94,7 @@ export function Prizes() {
           className="font-mono text-xs tracking-[0.05em] leading-[1.5]"
           style={{ color: INK_DIM }}
         >
-          El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos
-          subiendo la rúbrica.
+          {t("note")}
         </p>
       </div>
     </section>
