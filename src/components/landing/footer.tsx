@@ -1,20 +1,16 @@
-const EVENTO_LINKS = [
-  { label: "¿Qué es?", href: "#que-es" },
-  { label: "Tracks", href: "#tracks" },
-  { label: "Agenda", href: "#agenda" },
-  { label: "Premios", href: "#premios" },
-  { label: "FAQ", href: "#faq" },
+import { useTranslations } from "next-intl";
+
+const EVENT_LINKS = [
+  { key: "about", href: "#que-es" },
+  { key: "tracks", href: "#tracks" },
+  { key: "schedule", href: "#agenda" },
+  { key: "prizes", href: "#premios" },
+  { key: "faq", href: "#faq" },
 ] as const;
 
-const COMUNIDAD_LINKS = [
-  {
-    label: "crafterstation.com",
-    href: "https://crafterstation.com",
-  },
-  {
-    label: "nextfellow.ai",
-    href: "https://nextfellow.ai",
-  },
+const COMMUNITY_LINKS = [
+  { label: "crafterstation.com", href: "https://crafterstation.com" },
+  { label: "nextfellow.ai", href: "https://nextfellow.ai" },
   {
     label: "GitHub crafter-station",
     href: "https://github.com/crafter-station",
@@ -53,6 +49,9 @@ function WaveWordmark() {
   de sección de toda la página, y el END + READY. final.
 */
 export function Footer() {
+  const t = useTranslations("footer");
+  const bylineLines = t("byline").split("\n");
+
   return (
     <footer className="bg-[var(--void)] border-t border-[var(--line)]/40 overflow-hidden">
       {/* ── Wordmark gigante ondeando ── */}
@@ -68,40 +67,44 @@ export function Footer() {
             the next craft
           </p>
           <p className="font-mono text-xs text-[var(--text-dim)] leading-[1.65]">
-            Hackathon por
-            <br />
-            Crafter Station × Next
-            <br />
-            Lima · Bogotá · Guatemala · Jul 2026
+            {bylineLines.map((line, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: ordered static byline
+              <span key={i}>
+                {line}
+                {i < bylineLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
           </p>
         </div>
 
-        {/* EVENTO */}
+        {/* EVENT */}
         <div className="flex flex-col gap-4">
           <p className="section-label">
-            <span className="text-[var(--text-dim)]">80 </span>EVENTO
+            <span className="text-[var(--text-dim)]">80 </span>
+            {t("sections.event")}
           </p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
-            {EVENTO_LINKS.map(({ label, href }) => (
+            {EVENT_LINKS.map(({ key, href }) => (
               <li key={href}>
                 <a
                   href={href}
                   className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
                 >
-                  {label}
+                  {t(`links.${key}`)}
                 </a>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* COMUNIDAD */}
+        {/* COMMUNITY */}
         <div className="flex flex-col gap-4">
           <p className="section-label">
-            <span className="text-[var(--text-dim)]">90 </span>COMUNIDAD
+            <span className="text-[var(--text-dim)]">90 </span>
+            {t("sections.community")}
           </p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
-            {COMUNIDAD_LINKS.map(({ label, href }) => (
+            {COMMUNITY_LINKS.map(({ label, href }) => (
               <li key={href}>
                 <a
                   href={href}
@@ -116,10 +119,11 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* CONTACTO */}
+        {/* CONTACT */}
         <div className="flex flex-col gap-4">
           <p className="section-label">
-            <span className="text-[var(--text-dim)]">100 </span>CONTACTO
+            <span className="text-[var(--text-dim)]">100 </span>
+            {t("sections.contact")}
           </p>
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             <li>
@@ -137,10 +141,10 @@ export function Footer() {
       {/* ── Final row: el programa termina ── */}
       <div className="mx-auto max-w-7xl px-6 md:px-12 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <p className="font-mono text-xs text-[var(--text-dim)]">
-          © 2026 Crafter Station × Next · Lima · Bogotá · Guatemala
+          {t("copyright")}
         </p>
         <p className="font-mono text-xs" aria-hidden="true">
-          <span className="text-[var(--text-dim)]">110 END · </span>
+          <span className="text-[var(--text-dim)]">{t("endLabel")}</span>
           <span className="text-[var(--bright)]">
             READY.<span className="cursor-blink">█</span>
           </span>

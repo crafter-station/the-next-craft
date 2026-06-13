@@ -2,49 +2,23 @@
 
 import { useEffect, useRef } from "react";
 
-type Event = {
+import { useTranslations } from "next-intl";
+
+type EventItem = {
   time: string;
   description: string;
   mono?: string;
   highlight?: boolean;
 };
 
-// Un solo día — sábado 25 de julio, 2026. Jornada de 12 horas.
-const EVENTS: Event[] = [
-  { time: "08:30", description: "Registro y acreditación" },
-  {
-    time: "09:00",
-    description: "Kickoff — reglas y formación de equipos",
-    highlight: true,
-  },
-  { time: "09:30", description: "Empieza el hacking", highlight: true },
-  { time: "11:00", description: "Mentorías con Next Fellow y Crafter Station" },
-  { time: "13:00", description: "Almuerzo" },
-  { time: "16:00", description: "Check-in de avances", mono: "git status" },
-  { time: "18:30", description: "Merienda — quedan 3 horas" },
-  {
-    time: "20:00",
-    description: "Code freeze + submit",
-    mono: 'git commit -m "final"',
-    highlight: true,
-  },
-  {
-    time: "20:15",
-    description: "Demos — 3 minutos por equipo, producto en vivo",
-    highlight: true,
-  },
-  { time: "21:00", description: "Premiación y cierre", highlight: true },
-] as const;
-
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const ramp = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 
-/* Pared tipográfica de fondo (estilo Generous Branding): AGENDA se lee
-   vertical al centro — una letra por fila — y con el scroll cada fila se
-   desliza horizontalmente a una velocidad distinta (--vx, en vw) mientras
-   las copias de cada letra aparecen del centro hacia ambos lados y giran
-   cada una a su propio ritmo (--rot, en deg). */
-const WALL_WORD = "AGENDA";
+/* Pared tipográfica de fondo (estilo Generous Branding): la palabra del
+   título se lee vertical al centro — una letra por fila — y con el scroll
+   cada fila se desliza horizontalmente a una velocidad distinta (--vx, en
+   vw) mientras las copias de cada letra aparecen del centro hacia ambos
+   lados y giran cada una a su propio ritmo (--rot, en deg). */
 
 /* Velocidad horizontal por fila: signo = dirección, magnitud = qué tan
    rápido viaja respecto al scroll */
@@ -56,8 +30,8 @@ const LETTER_OFFSETS = [
 ] as const;
 
 /*
-  Schedule — agenda cinemática "pinned": al entrar, un titular AGENDA gigante
-  ocupa la pantalla; al seguir scrolleando, un backdrop oscurece el fondo y la
+  Schedule — agenda cinemática "pinned": al entrar, un titular gigante ocupa
+  la pantalla; al seguir scrolleando, un backdrop oscurece el fondo y la
   pantalla CRT con el timeline del día (09:00–21:00) aparece y se construye
   fila por fila según el progreso de scroll.
 
@@ -66,6 +40,10 @@ const LETTER_OFFSETS = [
   sección es estática (sin pin, todo visible).
 */
 export function Schedule() {
+  const t = useTranslations("schedule");
+  const events = t.raw("events") as readonly EventItem[];
+  const wallWord = t("headline");
+
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -147,14 +125,18 @@ export function Schedule() {
       <div className="agenda-sticky">
         <div className="grid-bg" />
 
-        {/* Pared AGENDA — vertical en reposo, filas horizontales al scrollear */}
+        {/* Pared — vertical en reposo, filas horizontales al scrollear */}
         <div ref={wallRef} className="agenda-wall" aria-hidden="true">
-          {WALL_WORD.split("").map((letter, row) => (
+          {wallWord.split("").map((letter, row) => (
             <div
               // biome-ignore lint/suspicious/noArrayIndexKey: filas decorativas estáticas
               key={row}
               className="agenda-wall-row"
-              style={{ "--vx": ROW_SPEEDS[row] } as React.CSSProperties}
+              style={
+                {
+                  "--vx": ROW_SPEEDS[row % ROW_SPEEDS.length],
+                } as React.CSSProperties
+              }
             >
               {LETTER_OFFSETS.map((d) => (
                 <span
@@ -177,9 +159,9 @@ export function Schedule() {
 
         {/* Titular gigante */}
         <div ref={titleRef} className="agenda-giant-wrap" aria-hidden="true">
-          <span className="agenda-giant">AGENDA</span>
+          <span className="agenda-giant">{t("headline")}</span>
           <span className="agenda-giant-sub font-mono text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase text-[var(--bright)]">
-            SÁBADO 25 JUL 2026 · 09:00–21:00
+            {t("subtitle")}
           </span>
         </div>
 
@@ -193,16 +175,14 @@ export function Schedule() {
             aria-hidden="true"
           />
           <div className="agenda-panel-inner relative z-20">
-            <h2 className="sr-only">
-              Agenda — sábado 25 de julio 2026, de 09:00 a 21:00
-            </h2>
+            <h2 className="sr-only">{t("srHeading")}</h2>
             <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)] mb-5">
               <span className="text-[var(--bright)]">40 PRINT</span>{" "}
-              &quot;AGENDA&quot; · 12 HORAS
+              &quot;{t("printLine")}&quot; · {t("printLineSub")}
             </p>
 
-            <ul className="agenda-list" aria-label="Agenda del día">
-              {EVENTS.map((event) => (
+            <ul className="agenda-list" aria-label={t("ariaLabel")}>
+              {events.map((event) => (
                 <li key={event.time} className="agenda-row">
                   <span className="agenda-node" aria-hidden="true" />
                   <span className="agenda-time font-mono text-sm font-medium tabular-nums text-[var(--bright)]">

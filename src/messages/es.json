@@ -1,0 +1,296 @@
+{
+  "common": {
+    "skipToContent": "Saltar al contenido",
+    "languageLabel": "Idioma",
+    "switchToSpanish": "Cambiar a español",
+    "switchToEnglish": "Switch to English"
+  },
+  "metadata": {
+    "title": "The Next Craft — Hackathon por Crafter Station × Next",
+    "titleTemplate": "%s · The Next Craft",
+    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 25 de julio, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 10 de julio.",
+    "ogLocale": "es_PE"
+  },
+  "nav": {
+    "ariaLabel": "Navegación principal",
+    "links": {
+      "about": "Qué es",
+      "tracks": "Tracks",
+      "schedule": "Agenda",
+      "prizes": "Premios",
+      "faq": "FAQ"
+    },
+    "cta": "Postular"
+  },
+  "bootLoader": {
+    "circular": "THE NEXT CRAFT · LOADING · THE NEXT CRAFT · LOADING · ",
+    "loadLine": "LOAD \"THE NEXT CRAFT\",8,1"
+  },
+  "hero": {
+    "h1": "the next craft",
+    "circular": "LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS · DE CERO A PRODUCTO · ",
+    "subhead": "Hackathon presencial",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HORAS",
+    "ctaApply": "RUN Postular",
+    "ctaTracks": "GOTO Tracks"
+  },
+  "countdown": {
+    "ariaLabel": "Cuenta regresiva al evento",
+    "live": "EN VIVO",
+    "liveSub": "— HACKATHON EN CURSO",
+    "liveAria": "El evento está en curso",
+    "units": {
+      "days": "DÍAS",
+      "hours": "HRS",
+      "minutes": "MIN",
+      "seconds": "SEG"
+    }
+  },
+  "sections": {
+    "manifesto": "MANIFIESTO",
+    "tldr": "TL;DR",
+    "tracks": "TRACKS",
+    "schedule": "AGENDA",
+    "prizes": "PREMIOS",
+    "sponsors": "SPONSORS",
+    "faq": "FAQ"
+  },
+  "about": {
+    "headline": "No es un evento.\nSon 12 horas de construir.",
+    "paragraph1": "The Next Craft es el hackathon presencial de Crafter Station × Next. 12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala, con 120 hackers que vienen a resolver problemas de verdad.",
+    "paragraph2": "La admisión es selectiva. No hay cupo para espectadores ni espacio para slides bonitas. Se viene a shippear producto real: con usuarios, con datos, con algo que funcione al final del reloj."
+  },
+  "tldr": {
+    "ariaLabel": "Especificaciones del evento",
+    "specs": {
+      "date": { "label": "FECHA", "value": "25 JUL 2026", "sub": "" },
+      "place": {
+        "label": "LUGAR",
+        "value": "Lima · Bogotá · Guatemala",
+        "sub": "3 sedes presenciales"
+      },
+      "format": {
+        "label": "FORMATO",
+        "value": "12 horas presencial",
+        "sub": ""
+      },
+      "seats": { "label": "CUPOS", "value": "120", "sub": "" },
+      "teams": { "label": "EQUIPOS", "value": "3–5 personas", "sub": "" },
+      "deadline": {
+        "label": "DEADLINE",
+        "value": "10 JUL 2026",
+        "sub": "23:59 GMT-5"
+      }
+    }
+  },
+  "tracks": {
+    "label": "TRACKS",
+    "headline": "3 TRACKS.\nELIGE TU ARMA.",
+    "intro": "La vara sigue siendo una sola: que lo que construyas lo use alguien de verdad antes de que suene la campana.",
+    "ideasLabel": "IDEAS PARA ARRANCAR ↓",
+    "ideasAriaPrefix": "Ideas de ejemplo para",
+    "items": [
+      {
+        "id": "01",
+        "name": "CONTENT MACHINE",
+        "tagline": "CREAR · PUBLICAR · DISTRIBUIR",
+        "desc": "Construye herramientas que ayuden a crear, editar, publicar, reutilizar o distribuir contenido. Para creadores, founders, estudiantes, comunidades, negocios pequeños o builders que documentan lo que hacen.",
+        "ideas": [
+          "Notas de voz → posts de LinkedIn, TikToks, tweets o newsletters",
+          "Asistente build-in-public: tus commits de GitHub → updates sociales",
+          "Generador de calendario de contenido para negocios pequeños",
+          "Videos largos → clips cortos, captions, hooks y thumbnails",
+          "IA que ayuda a estudiantes a contar lo que aprendieron en short-form"
+        ],
+        "why": "Así crecen los productos hoy. Y deja brillar a los perfiles no técnicos: storytelling, growth, diseño, distribución."
+      },
+      {
+        "id": "02",
+        "name": "OUT OF THE BOX",
+        "tagline": "RARO · EXPERIMENTAL · INCLASIFICABLE",
+        "desc": "Construye algo raro, experimental, juguetón, sorprendente o imposible de categorizar. Puede ser útil, gracioso, artístico, caótico — o todo a la vez. La única regla: que haga reaccionar a la gente.",
+        "ideas": [
+          "Generador de memes para pitches de startups",
+          "Un juego donde peleas contra tu monstruo de la procrastinación",
+          "Una interfaz de voz rarísima para manejar tus tareas",
+          "Extensión de navegador que rostea tus tabs",
+          "Tu calendario convertido en historia estilo Spotify Wrapped",
+          "Una app «broma pero útil» para equipos de hackathon"
+        ],
+        "why": "De aquí salen los proyectos virales. Permiso para crear en vez de construir otro SaaS de productividad."
+      },
+      {
+        "id": "03",
+        "name": "LEARNING BY SHIPPING",
+        "tagline": "APRENDER HACIENDO · NO MIRANDO",
+        "desc": "Construye herramientas que ayuden a aprender más rápido creando, practicando, poniéndose a prueba o recibiendo feedback. Nada de educación pasiva: el producto tiene que lograr que el usuario haga.",
+        "ideas": [
+          "Un tutor IA que enseña con proyectos, no con clases",
+          "Entrevistas de práctica para becas, prácticas o trabajos",
+          "Flashcards que se adaptan a lo que olvidas",
+          "Tareas con feedback socrático en vez de respuestas",
+          "Asistente «aprende a programar construyendo clones»",
+          "Matching de mentores para estudiantes y builders jóvenes"
+        ],
+        "why": "El track de educación, pero con mejor ángulo: menos escuela, más agencia."
+      }
+    ]
+  },
+  "schedule": {
+    "label": "AGENDA",
+    "headline": "AGENDA",
+    "subtitle": "SÁBADO 25 JUL 2026 · 09:00–21:00",
+    "srHeading": "Agenda — sábado 25 de julio 2026, de 09:00 a 21:00",
+    "printLine": "AGENDA",
+    "printLineSub": "12 HORAS",
+    "ariaLabel": "Agenda del día",
+    "events": [
+      { "time": "08:30", "description": "Registro y acreditación" },
+      {
+        "time": "09:00",
+        "description": "Kickoff — reglas y formación de equipos",
+        "highlight": true
+      },
+      {
+        "time": "09:30",
+        "description": "Empieza el hacking",
+        "highlight": true
+      },
+      {
+        "time": "11:00",
+        "description": "Mentorías con Next Fellow y Crafter Station"
+      },
+      { "time": "13:00", "description": "Almuerzo" },
+      {
+        "time": "16:00",
+        "description": "Check-in de avances",
+        "mono": "git status"
+      },
+      { "time": "18:30", "description": "Merienda — quedan 3 horas" },
+      {
+        "time": "20:00",
+        "description": "Code freeze + submit",
+        "mono": "git commit -m \"final\"",
+        "highlight": true
+      },
+      {
+        "time": "20:15",
+        "description": "Demos — 3 minutos por equipo, producto en vivo",
+        "highlight": true
+      },
+      {
+        "time": "21:00",
+        "description": "Premiación y cierre",
+        "highlight": true
+      }
+    ]
+  },
+  "prizes": {
+    "label": "PREMIOS",
+    "amount": "PRONTO",
+    "amountAria": "Premio por anunciar",
+    "amountSub": "PREMIO PRINCIPAL POR ANUNCIAR",
+    "perksLabel": "PARA TODOS LOS QUE ENTRAN",
+    "perksAria": "Beneficios para todos los participantes",
+    "perks": [
+      "Mentorías durante las 12 horas",
+      "Swag oficial del evento",
+      "Acceso a la comunidad de Crafter Station",
+      "Créditos de herramientas",
+      "Comida durante el evento"
+    ],
+    "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
+  },
+  "sponsors": {
+    "label": "SPONSORS",
+    "headlineAria": "Headline sponsors",
+    "ctaPrefix": "¿Quieres ser sponsor? →"
+  },
+  "faq": {
+    "label": "FAQ",
+    "items": [
+      {
+        "id": "Q01",
+        "question": "¿Quién puede postular?",
+        "answer": "Cualquiera que construya: devs, diseñadores, PMs. La admisión es selectiva: importa lo que has hecho, no tu CV."
+      },
+      {
+        "id": "Q02",
+        "question": "¿Cuánto cuesta?",
+        "answer": "Es gratis."
+      },
+      {
+        "id": "Q03",
+        "question": "¿Puedo postular sin equipo?",
+        "answer": "Sí. Habrá formación de equipos en el kickoff. Equipos de 3 a 5."
+      },
+      {
+        "id": "Q04",
+        "question": "¿Qué tengo que llevar?",
+        "answer": "Laptop, cargador y ganas. Comida, café y energía corren por nuestra cuenta."
+      },
+      {
+        "id": "Q05",
+        "question": "¿Puedo usar IA?",
+        "answer": "Sí, pueden usar IA. Pero el código debe construirse durante las horas de la hackathon — no se recibirá código antiguo."
+      },
+      {
+        "id": "Q06",
+        "question": "¿De quién es la propiedad intelectual?",
+        "answer": "Tuya. 100%. Nosotros solo queremos verte shippear."
+      },
+      {
+        "id": "Q07",
+        "question": "¿Es presencial?",
+        "answer": "Sí, será presencial en Lima, Bogotá o Guatemala — la sede que te quede. No hay modalidad remota."
+      },
+      {
+        "id": "Q08",
+        "question": "¿Cómo evalúa el jurado?",
+        "answer": "Demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
+      }
+    ]
+  },
+  "finalCta": {
+    "headerLines": [
+      "**** THE NEXT CRAFT BASIC V2 ****",
+      "64K RAM SYSTEM · 38911 BASIC BYTES FREE"
+    ],
+    "bootLines": [
+      "LOAD \"POSTULAR\",8,1",
+      "SEARCHING FOR POSTULAR",
+      "LOADING ... OK",
+      "READY.",
+      "RUN POSTULAR"
+    ],
+    "headline": "¿CONSTRUYES?\nPOSTULA.",
+    "specs": [
+      "DEADLINE ........ 10 JUL 2026 · 23:59 GMT-5",
+      "CUPOS ........... 120 · ADMISIÓN SELECTIVA",
+      "COSTO ........... GRATIS",
+      "FORMULARIO ...... 7 PREGUNTAS · 90 SEGUNDOS"
+    ],
+    "specsSr": "Deadline: 10 de julio de 2026, 23:59 GMT-5. 120 cupos, admisión selectiva. Gratis. El formulario son 7 preguntas, 90 segundos.",
+    "pressReturn": "PRESS RETURN ↵",
+    "ctaWhatsapp": "[ POSTULAR POR WHATSAPP → ]",
+    "ctaForm": "[ POSTULAR → ]",
+    "whatsappMessage": "Hola, quiero postular a The Next Craft"
+  },
+  "footer": {
+    "links": {
+      "about": "¿Qué es?",
+      "tracks": "Tracks",
+      "schedule": "Agenda",
+      "prizes": "Premios",
+      "faq": "FAQ"
+    },
+    "sections": {
+      "event": "EVENTO",
+      "community": "COMUNIDAD",
+      "contact": "CONTACTO"
+    },
+    "byline": "Hackathon por\nCrafter Station × Next\nLima · Bogotá · Guatemala · Jul 2026",
+    "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala",
+    "endLabel": "110 END · "
+  }
+}

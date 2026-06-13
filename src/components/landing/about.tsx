@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
+
 import { ScrambleText } from "@/components/effects/scramble-text";
 
 export function About() {
+  const t = useTranslations("about");
+
   return (
     <section
       id="que-es"
@@ -10,7 +14,7 @@ export function About() {
         {/* Headline pixel PETSCII — decode binario→texto */}
         <ScrambleText
           as="h2"
-          text={"No es un evento.\nSon 12 horas de construir."}
+          text={t("headline")}
           className="pixel-heading whitespace-pre-line"
           style={{ fontSize: "clamp(1.5rem, 4vw, 2.75rem)" }}
         />
@@ -21,17 +25,13 @@ export function About() {
             className="font-sans text-[var(--text)] leading-[1.75]"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
-            The Next Craft es el hackathon presencial de Crafter Station × Next.
-            12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala,
-            con 120 hackers que vienen a resolver problemas de verdad.
+            {t("paragraph1")}
           </p>
           <p
             className="font-sans text-[var(--text)] leading-[1.75]"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
           >
-            La admisión es selectiva. No hay cupo para espectadores ni espacio
-            para slides bonitas. Se viene a shippear producto real: con
-            usuarios, con datos, con algo que funcione al final del reloj.
+            {t("paragraph2")}
           </p>
         </div>
       </div>
