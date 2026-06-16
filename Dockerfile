@@ -14,6 +14,14 @@ RUN npm install --no-fund --no-audit --legacy-peer-deps
 FROM node:22-bookworm-slim AS builder
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Las NEXT_PUBLIC_* se inlinean en `next build` → deben existir en BUILD, no
+# solo en runtime. docker-compose las pasa como build args.
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_WHATSAPP_NUMBER
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ENV NEXT_PUBLIC_WHATSAPP_NUMBER=${NEXT_PUBLIC_WHATSAPP_NUMBER}
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN node ./node_modules/next/dist/bin/next build
