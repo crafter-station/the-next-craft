@@ -52,8 +52,13 @@ async function accessToken(): Promise<string> {
       exp: now + 3600,
     }),
   );
-  // La key llega con \n escapados desde la env var
-  const privateKey = env("GOOGLE_PRIVATE_KEY").replace(/\\n/g, "\n");
+  // La key viaja como base64 (una sola línea) para sobrevivir el .env que
+  // Dokploy materializa: los \n escapados se expandían a saltos reales y
+  // rompían el parser del .env (línea suelta = nombre de variable inválido).
+  const privateKey = Buffer.from(
+    env("GOOGLE_PRIVATE_KEY_B64"),
+    "base64",
+  ).toString("utf8");
   const signature = createSign("RSA-SHA256")
     .update(`${header}.${claims}`)
     .sign(privateKey, "base64url");
