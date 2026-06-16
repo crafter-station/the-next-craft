@@ -3,32 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      # NEXT_PUBLIC_* se inlinean en `next build`; Dokploy provee estas vars
-      # para interpolación ${VAR} y docker-compose las pasa como build args.
-      args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
-        NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER}
-    # Secretos de runtime. OJO: NO usar `env_file: .env` — .env está gitignored
-    # y no existe en el repo que Dokploy clona (rompe el parseo del compose).
-    # Dokploy provee las vars para interpolación ${VAR}; se inyectan explícitas.
     environment:
       NODE_ENV: "production"
       HOSTNAME: "0.0.0.0"
       PORT: "3000"
-      WHATSAPP_TOKEN: ${WHATSAPP_TOKEN}
-      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID}
-      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET}
-      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN}
-      DATABASE_URL: ${DATABASE_URL}
-      GOOGLE_SERVICE_ACCOUNT_EMAIL: ${GOOGLE_SERVICE_ACCOUNT_EMAIL}
-      GOOGLE_PRIVATE_KEY: ${GOOGLE_PRIVATE_KEY}
-      GOOGLE_SHEET_ID: ${GOOGLE_SHEET_ID}
-      GOOGLE_SHEET_NAME: ${GOOGLE_SHEET_NAME}
-      EMAIL_FROM: ${EMAIL_FROM}
-      CRON_SECRET: ${CRON_SECRET}
-      RESEND_API_KEY: ${RESEND_API_KEY:-}
-      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
-      NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER}
     expose:
       - "3000"
     restart: unless-stopped
