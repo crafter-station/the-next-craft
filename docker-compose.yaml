@@ -3,10 +3,32 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      # NEXT_PUBLIC_* se inlinean en `next build`; Dokploy provee las vars
+      # (vía el .env que materializa) para interpolación ${VAR}.
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+        NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER}
+    # Secretos de runtime inyectados por interpolación (Dokploy provee las vars).
+    # OJO: GOOGLE_PRIVATE_KEY va en base64 (una línea) — la versión con \n
+    # rompía el parser del .env que Dokploy materializa. No usar env_file aquí.
     environment:
       NODE_ENV: "production"
       HOSTNAME: "0.0.0.0"
       PORT: "3000"
+      WHATSAPP_TOKEN: ${WHATSAPP_TOKEN}
+      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID}
+      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET}
+      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN}
+      DATABASE_URL: ${DATABASE_URL}
+      GOOGLE_SERVICE_ACCOUNT_EMAIL: ${GOOGLE_SERVICE_ACCOUNT_EMAIL}
+      GOOGLE_PRIVATE_KEY_B64: ${GOOGLE_PRIVATE_KEY_B64}
+      GOOGLE_SHEET_ID: ${GOOGLE_SHEET_ID}
+      GOOGLE_SHEET_NAME: ${GOOGLE_SHEET_NAME}
+      EMAIL_FROM: ${EMAIL_FROM}
+      CRON_SECRET: ${CRON_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+      NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER}
     expose:
       - "3000"
     restart: unless-stopped
