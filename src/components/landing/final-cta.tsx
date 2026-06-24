@@ -19,10 +19,8 @@ import { ScrambleText } from "@/components/effects/scramble-text";
   va tipeando cada elemento según su umbral (data-thr, 0→1).
 */
 
-// Registro por WhatsApp — único canal (ver docs/whatsapp-registration.md).
-// Mientras no exista el número de producción (env vacía), el CTA cae al form:
-// nunca shippear un placeholder.
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+// Registro por Luma — único canal. El CTA abre el evento en Luma.
+const LUMA_URL = "https://luma.com/b6hqjpzd";
 
 const HEADER_THRESHOLDS = [0.03, 0.07] as const;
 const BOOT_THRESHOLDS = [0.11, 0.15, 0.19, 0.23, 0.27] as const;
@@ -69,12 +67,8 @@ export function FinalCta() {
     [specLines],
   );
 
-  const ctaHref = WHATSAPP_NUMBER
-    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-        t("whatsappMessage"),
-      )}`
-    : "https://forms.crafterstation.com/the-next-craft";
-  const ctaLabel = WHATSAPP_NUMBER ? t("ctaWhatsapp") : t("ctaForm");
+  const ctaHref = LUMA_URL;
+  const ctaLabel = t("ctaForm");
 
   const sectionRef = useRef<HTMLElement>(null);
   const [armed, setArmed] = useState(false);
