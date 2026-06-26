@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon by Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá and Guatemala — July 25, 2026. 120 seats, teams of 3–5, prizes TBA. Apply by July 10.",
+    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá and Guatemala — August 8, 2026. 120 seats, teams of 3–5, prizes TBA. Apply by July 24.",
     "ogLocale": "en_US"
   },
   "nav": {
@@ -28,9 +28,9 @@
   },
   "hero": {
     "h1": "the next craft",
-    "circular": "LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HOURS · ZERO TO PRODUCT · ",
+    "circular": "LIMA · BOGOTÁ · GUATEMALA · 8 AUG 2026 · 12 HOURS · ZERO TO PRODUCT · ",
     "subhead": "In-person hackathon",
-    "specs": "LIMA · BOGOTÁ · GUATEMALA · 25 JUL 2026 · 12 HOURS",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · 8 AUG 2026 · 12 HOURS",
     "ctaApply": "RUN Apply",
     "ctaTracks": "GOTO Tracks"
   },
@@ -63,7 +63,7 @@
   "tldr": {
     "ariaLabel": "Event specifications",
     "specs": {
-      "date": { "label": "DATE", "value": "25 JUL 2026", "sub": "" },
+      "date": { "label": "DATE", "value": "8 AUG 2026", "sub": "" },
       "place": {
         "label": "PLACE",
         "value": "Lima · Bogotá · Guatemala",
@@ -78,7 +78,7 @@
       "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
-        "value": "10 JUL 2026",
+        "value": "24 JUL 2026",
         "sub": "23:59 GMT-5"
       }
     }
@@ -139,8 +139,8 @@
   "schedule": {
     "label": "SCHEDULE",
     "headline": "SCHEDULE",
-    "subtitle": "SATURDAY 25 JUL 2026 · 09:00–21:00",
-    "srHeading": "Schedule — Saturday July 25, 2026, from 09:00 to 21:00",
+    "subtitle": "SATURDAY 8 AUG 2026 · 09:00–21:00",
+    "srHeading": "Schedule — Saturday August 8, 2026, from 09:00 to 21:00",
     "printLine": "SCHEDULE",
     "printLineSub": "12 HOURS",
     "ariaLabel": "Day schedule",
@@ -265,12 +265,12 @@
     ],
     "headline": "DO YOU BUILD?\nAPPLY.",
     "specs": [
-      "DEADLINE ........ 10 JUL 2026 · 23:59 GMT-5",
+      "DEADLINE ........ 24 JUL 2026 · 23:59 GMT-5",
       "SEATS ........... 120 · SELECTIVE ADMISSION",
       "COST ............ FREE",
       "FORM ............ 7 QUESTIONS · 90 SECONDS"
     ],
-    "specsSr": "Deadline: July 10, 2026, 23:59 GMT-5. 120 seats, selective admission. Free. The form is 7 questions, 90 seconds.",
+    "specsSr": "Deadline: July 24, 2026, 23:59 GMT-5. 120 seats, selective admission. Free. The form is 7 questions, 90 seconds.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ APPLY VIA WHATSAPP → ]",
     "ctaForm": "[ APPLY → ]",
@@ -289,7 +289,7 @@
       "community": "COMMUNITY",
       "contact": "CONTACT"
     },
-    "byline": "Hackathon by\nCrafter Station × Next\nLima · Bogotá · Guatemala · Jul 2026",
+    "byline": "Hackathon by\nCrafter Station × Next\nLima · Bogotá · Guatemala · Aug 2026",
     "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala",
     "endLabel": "110 END · "
   }
