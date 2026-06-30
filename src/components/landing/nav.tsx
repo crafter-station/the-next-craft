@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
-
 import { LanguageToggle } from "./language-toggle";
 
 const NAV_LINKS = [

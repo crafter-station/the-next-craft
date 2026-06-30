@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon por Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 8 de agosto, 2026. 120 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 24 de julio.",
+    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá y Guatemala — 8 de agosto, 2026. 200 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 31 de julio.",
     "ogLocale": "es_PE"
   },
   "nav": {
@@ -57,7 +57,7 @@
   },
   "about": {
     "headline": "No es un evento.\nSon 12 horas de construir.",
-    "paragraph1": "The Next Craft es el hackathon presencial de Crafter Station × Next. 12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala, con 120 hackers que vienen a resolver problemas de verdad.",
+    "paragraph1": "The Next Craft es el hackathon presencial de Crafter Station × Next. 12 horas de trabajo real, en simultáneo en Lima, Bogotá y Guatemala, con 200 hackers que vienen a resolver problemas de verdad.",
     "paragraph2": "La admisión es selectiva. No hay cupo para espectadores ni espacio para slides bonitas. Se viene a shippear producto real: con usuarios, con datos, con algo que funcione al final del reloj."
   },
   "tldr": {
@@ -74,11 +74,11 @@
         "value": "12 horas presencial",
         "sub": ""
       },
-      "seats": { "label": "CUPOS", "value": "120", "sub": "" },
+      "seats": { "label": "CUPOS", "value": "200", "sub": "" },
       "teams": { "label": "EQUIPOS", "value": "3–5 personas", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
-        "value": "24 JUL 2026",
+        "value": "31 JUL 2026",
         "sub": "23:59 GMT-5"
       }
     }
@@ -201,6 +201,22 @@
     ],
     "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
   },
+  "trackRecord": {
+    "label": "TRAYECTORIA",
+    "headline": "Ya hicimos esto\nantes. Muchas veces.",
+    "paragraph": "No es nuestro primer build. Crafter Station × Next ha organizado hackathons por toda Latinoamérica y el mundo — desde AI Hackathon y Colombia Tech Week hasta el Peru AI Hackathon y SheShips, el hackathon global para mujeres del 8 de marzo. Sabemos cómo sacar un evento adelante.",
+    "statsAria": "Estadísticas de trayectoria",
+    "backedBy": "RESPALDADOS POR",
+    "sponsorsAria": "Sponsors y partners anteriores",
+    "stats": {
+      "events": { "value": "3+", "label": "Eventos realizados" },
+      "hackers": { "value": "2,300+", "label": "Hackers" },
+      "submissions": { "value": "127", "label": "Proyectos enviados" },
+      "funds": { "value": "$30.5K", "label": "Fondos recaudados" },
+      "countries": { "value": "10+", "label": "Países" },
+      "sponsors": { "value": "30+", "label": "Sponsors y partners" }
+    }
+  },
   "sponsors": {
     "label": "SPONSORS",
     "headlineAria": "Headline sponsors",
@@ -265,12 +281,12 @@
     ],
     "headline": "¿CONSTRUYES?\nPOSTULA.",
     "specs": [
-      "DEADLINE ........ 24 JUL 2026 · 23:59 GMT-5",
-      "CUPOS ........... 120 · ADMISIÓN SELECTIVA",
+      "DEADLINE ........ 31 JUL 2026 · 23:59 GMT-5",
+      "CUPOS ........... 200 · ADMISIÓN SELECTIVA",
       "COSTO ........... GRATIS",
       "FORMULARIO ...... 7 PREGUNTAS · 90 SEGUNDOS"
     ],
-    "specsSr": "Deadline: 24 de julio de 2026, 23:59 GMT-5. 120 cupos, admisión selectiva. Gratis. El formulario son 7 preguntas, 90 segundos.",
+    "specsSr": "Deadline: 31 de julio de 2026, 23:59 GMT-5. 200 cupos, admisión selectiva. Gratis. El formulario son 7 preguntas, 90 segundos.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ POSTULAR POR WHATSAPP → ]",
     "ctaForm": "[ POSTULAR → ]",
