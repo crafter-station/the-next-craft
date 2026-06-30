@@ -1,8 +1,10 @@
-# Decks
+# The Next Craft
+
+Landing + WhatsApp registration bot for the The Next Craft hackathon, plus sponsor/partner pitch decks. This glossary defines the project's ubiquitous language.
+
+## Decks
 
 Static sponsor/partner pitch decks rendered from MDX, styled like the landing (Commodore 64 Mono). Each deck is a self-contained, single-language artifact served at `/deck/<slug>` and built from a folder of MDX slides.
-
-## Language
 
 **Deck**:
 A presentation sent to one sponsor/partner. Physically a folder under `src/content/decks/<slug>/`. The folder name is the deck slug and the URL is `/deck/<slug>`.
