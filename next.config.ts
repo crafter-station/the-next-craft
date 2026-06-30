@@ -6,6 +6,9 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  outputFileTracingIncludes: {
+    "/deck/[slug]": ["./src/content/decks/**/*"],
+  },
 };
 
 export default withNextIntl(nextConfig);

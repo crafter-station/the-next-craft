@@ -177,8 +177,8 @@ export function Schedule() {
           <div className="agenda-panel-inner relative z-20">
             <h2 className="sr-only">{t("srHeading")}</h2>
             <p className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--text-dim)] mb-5">
-              <span className="text-[var(--bright)]">40 PRINT</span>{" "}
-              &quot;{t("printLine")}&quot; · {t("printLineSub")}
+              <span className="text-[var(--bright)]">40 PRINT</span> &quot;
+              {t("printLine")}&quot; · {t("printLineSub")}
             </p>
 
             <ul className="agenda-list" aria-label={t("ariaLabel")}>
