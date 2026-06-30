@@ -46,7 +46,9 @@ export function FinalCta() {
     () =>
       headerLines.map((text, i) => ({
         text,
-        thr: HEADER_THRESHOLDS[i] ?? HEADER_THRESHOLDS[HEADER_THRESHOLDS.length - 1],
+        thr:
+          HEADER_THRESHOLDS[i] ??
+          HEADER_THRESHOLDS[HEADER_THRESHOLDS.length - 1],
       })),
     [headerLines],
   );

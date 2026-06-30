@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon by Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá and Guatemala — August 8, 2026. 120 seats, teams of 3–5, prizes TBA. Apply by July 24.",
+    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá and Guatemala — August 8, 2026. 200 seats, teams of 3–5, prizes TBA. Apply by July 31.",
     "ogLocale": "en_US"
   },
   "nav": {
@@ -57,7 +57,7 @@
   },
   "about": {
     "headline": "Not an event.\n12 hours of building.",
-    "paragraph1": "The Next Craft is the in-person hackathon by Crafter Station × Next. 12 hours of real work, running simultaneously in Lima, Bogotá and Guatemala, with 120 hackers solving real problems.",
+    "paragraph1": "The Next Craft is the in-person hackathon by Crafter Station × Next. 12 hours of real work, running simultaneously in Lima, Bogotá and Guatemala, with 200 hackers solving real problems.",
     "paragraph2": "Admission is selective. No room for spectators, no space for pretty slides. You come to ship real product: with users, with data, with something that works when the clock runs out."
   },
   "tldr": {
@@ -74,11 +74,11 @@
         "value": "12 hours in-person",
         "sub": ""
       },
-      "seats": { "label": "SEATS", "value": "120", "sub": "" },
+      "seats": { "label": "SEATS", "value": "200", "sub": "" },
       "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
-        "value": "24 JUL 2026",
+        "value": "31 JUL 2026",
         "sub": "23:59 GMT-5"
       }
     }
@@ -265,12 +265,12 @@
     ],
     "headline": "DO YOU BUILD?\nAPPLY.",
     "specs": [
-      "DEADLINE ........ 24 JUL 2026 · 23:59 GMT-5",
-      "SEATS ........... 120 · SELECTIVE ADMISSION",
+      "DEADLINE ........ 31 JUL 2026 · 23:59 GMT-5",
+      "SEATS ........... 200 · SELECTIVE ADMISSION",
       "COST ............ FREE",
       "FORM ............ 7 QUESTIONS · 90 SECONDS"
     ],
-    "specsSr": "Deadline: July 24, 2026, 23:59 GMT-5. 120 seats, selective admission. Free. The form is 7 questions, 90 seconds.",
+    "specsSr": "Deadline: July 31, 2026, 23:59 GMT-5. 200 seats, selective admission. Free. The form is 7 questions, 90 seconds.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ APPLY VIA WHATSAPP → ]",
     "ctaForm": "[ APPLY → ]",
