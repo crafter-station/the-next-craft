@@ -1358,6 +1358,8 @@
 /* ─── Deck pager (sponsor pitch decks at /deck/<slug>) ───────────────── */
 
 .deck-pager {
+  --deck-stage-padding-x: clamp(1.25rem, 6vw, 4rem);
+  --deck-stage-padding-y: clamp(4.5rem, 9svh, 6rem);
   position: relative;
   background-color: var(--void);
   color: var(--text);
@@ -1441,7 +1443,8 @@
   position: relative;
   inset: auto;
   min-height: 100svh;
-  padding: 5rem 1.25rem 6rem;
+  padding: var(--deck-stage-padding-y) var(--deck-stage-padding-x)
+    calc(var(--deck-stage-padding-y) + 1rem);
   border-bottom: 1px solid var(--border);
   opacity: 1;
   transform: none;
@@ -1452,10 +1455,14 @@
 .deck-slide-inner {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding: var(--deck-stage-padding-y) var(--deck-stage-padding-x)
+    calc(var(--deck-stage-padding-y) + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .deck-slide-content {
@@ -1470,8 +1477,8 @@
 /* Controls: prev/next keycaps bottom-right */
 .deck-controls {
   position: fixed;
-  right: 1rem;
-  bottom: 1rem;
+  right: calc(1rem + env(safe-area-inset-right));
+  bottom: calc(1rem + env(safe-area-inset-bottom));
   z-index: 50;
 }
 

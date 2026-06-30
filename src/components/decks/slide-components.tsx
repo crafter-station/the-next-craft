@@ -43,7 +43,9 @@ export function Lead({ children }: { children: ReactNode }) {
 
 export function DataGrid({ children }: { children: ReactNode }) {
   return (
-    <div className={`grid grid-cols-2 md:grid-cols-3 ${TABLE}`}>{children}</div>
+    <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${TABLE}`}>
+      {children}
+    </div>
   );
 }
 
@@ -55,7 +57,7 @@ export function DataCell({
   value: ReactNode;
 }) {
   return (
-    <div className={`${CELL} px-5 py-4 flex flex-col gap-1`}>
+    <div className={`${CELL} px-4 py-3 md:px-5 md:py-4 flex flex-col gap-1`}>
       <span className="font-mono text-[11px] font-semibold tracking-[0.14em] uppercase text-[var(--text-dim)]">
         {label}
       </span>
@@ -74,7 +76,7 @@ export function TrackCard({
   tagline: string;
 }) {
   return (
-    <div className="bg-[var(--screen-dim)] border border-[var(--line)] p-5 md:p-6 flex flex-col gap-2">
+    <div className="bg-[var(--screen-dim)] border border-[var(--line)] p-4 md:p-6 flex flex-col gap-2">
       <span className="font-mono text-[11px] text-[var(--text-dim)]">
         TRACK {number}
       </span>
@@ -150,7 +152,7 @@ export function StatRow({ children }: { children: ReactNode }) {
 
 export function LogoWall({ children }: { children: ReactNode }) {
   return (
-    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 ${TABLE}`}>
+    <div className={`grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 ${TABLE}`}>
       {children}
     </div>
   );
@@ -183,12 +185,12 @@ export function Logo({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center h-20 md:h-24 px-5 no-underline"
+          className="flex items-center justify-center h-16 md:h-24 px-4 md:px-5 no-underline"
         >
           {inner}
         </a>
       ) : (
-        <span className="flex items-center justify-center h-20 md:h-24 px-5">
+        <span className="flex items-center justify-center h-16 md:h-24 px-4 md:px-5">
           {inner}
         </span>
       )}
@@ -247,7 +249,7 @@ export function SponsorTier({
   covers: string[];
 }) {
   return (
-    <div className={`${CELL} p-5 md:p-6 flex flex-col gap-3 h-full`}>
+    <div className={`${CELL} p-4 md:p-6 flex flex-col gap-3 h-full`}>
       <div className="flex items-baseline justify-between gap-3">
         <span className="font-pixel font-bold text-[var(--text)] text-lg uppercase">
           {name}
@@ -378,7 +380,7 @@ export function MdxBlockquote({ children }: { children?: ReactNode }) {
 
 export function MdxTable({ children }: { children?: ReactNode }) {
   return (
-    <div className={TABLE}>
+    <div className={`${TABLE} overflow-x-auto`}>
       <table className="w-full border-collapse">{children}</table>
     </div>
   );
