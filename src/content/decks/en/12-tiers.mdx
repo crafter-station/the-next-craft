@@ -1,0 +1,53 @@
+---
+title: Sponsorship tiers
+---
+
+<SlideTitle line="90">SPONSORSHIPS</SlideTitle>
+
+<div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)]">
+  <SponsorTier
+    name="Title"
+    price="$5,000"
+    slots="1"
+    covers={[
+      "Event naming",
+      "Primary logo on all material",
+      "5 minutes at the opening",
+      "Booth at the main hub",
+      "Access to the talent pool",
+    ]}
+  />
+  <SponsorTier
+    name="Gold"
+    price="$2,500"
+    slots="2"
+    available="1"
+    covers={[
+      "Logo in communications",
+      "Mention at the opening",
+      "Shared booth",
+      "Access to the talent pool",
+    ]}
+  />
+  <SponsorTier
+    name="Silver"
+    price="$500"
+    slots="5"
+    available="2"
+    covers={[
+      "Logo in communications",
+      "Mention at the closing",
+      "Access to winning demos",
+    ]}
+  />
+  <SponsorTier
+    name="In-kind"
+    price="Let's talk"
+    slots="∞"
+    covers={[
+      "Credits in APIs, tools or cloud",
+      "Swag or special prizes",
+      "Technical mentorship",
+    ]}
+  />
+</div>
