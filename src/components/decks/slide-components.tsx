@@ -236,12 +236,14 @@ export function SponsorTier({
   price,
   slots,
   available,
+  availableLabel = "disponible",
   covers,
 }: {
   name: string;
   price: string;
   slots: string;
   available?: string;
+  availableLabel?: string;
   covers: string[];
 }) {
   return (
@@ -253,7 +255,7 @@ export function SponsorTier({
         <span className="font-mono text-xs text-[var(--text-dim)]">
           ×{slots}
           {available
-            ? ` · ${available} disponible${available === "1" ? "" : "s"}`
+            ? ` · ${available} ${availableLabel}${available === "1" ? "" : "s"}`
             : ""}
         </span>
       </div>
