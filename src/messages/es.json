@@ -201,22 +201,6 @@
     ],
     "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
   },
-  "trackRecord": {
-    "label": "TRAYECTORIA",
-    "headline": "Ya hicimos esto\nantes. Muchas veces.",
-    "paragraph": "No es nuestro primer build. Crafter Station × Next ha organizado hackathons por toda Latinoamérica y el mundo — desde AI Hackathon y Colombia Tech Week hasta el Peru AI Hackathon y SheShips, el hackathon global para mujeres del 8 de marzo. Sabemos cómo sacar un evento adelante.",
-    "statsAria": "Estadísticas de trayectoria",
-    "backedBy": "RESPALDADOS POR",
-    "sponsorsAria": "Sponsors y partners anteriores",
-    "stats": {
-      "events": { "value": "3+", "label": "Eventos realizados" },
-      "hackers": { "value": "2,300+", "label": "Hackers" },
-      "submissions": { "value": "127", "label": "Proyectos enviados" },
-      "funds": { "value": "$30.5K", "label": "Fondos recaudados" },
-      "countries": { "value": "10+", "label": "Países" },
-      "sponsors": { "value": "30+", "label": "Sponsors y partners" }
-    }
-  },
   "sponsors": {
     "label": "SPONSORS",
     "headlineAria": "Headline sponsors",

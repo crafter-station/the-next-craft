@@ -140,6 +140,62 @@ export function Stat({
   );
 }
 
+export function StatRow({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex flex-wrap gap-x-10 gap-y-6 md:gap-x-16">
+      {children}
+    </div>
+  );
+}
+
+export function LogoWall({ children }: { children: ReactNode }) {
+  return (
+    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 ${TABLE}`}>
+      {children}
+    </div>
+  );
+}
+
+export function Logo({
+  name,
+  src,
+  href,
+}: {
+  name: string;
+  src: string;
+  href?: string;
+}) {
+  const inner = (
+    // biome-ignore lint/performance/noImgElement: external sponsor logos from many domains, not worth next/image remotePatterns config
+    <img
+      src={src}
+      alt={name}
+      title={name}
+      loading="lazy"
+      className="max-h-9 md:max-h-10 max-w-full w-auto object-contain opacity-70 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-150"
+    />
+  );
+
+  return (
+    <div className={`${CELL} group`}>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center h-20 md:h-24 px-5 no-underline"
+        >
+          {inner}
+        </a>
+      ) : (
+        <span className="flex items-center justify-center h-20 md:h-24 px-5">
+          {inner}
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function BulletList({ children }: { children: ReactNode }) {
   return (
     <ul className="flex flex-col gap-2 list-none p-0 m-0 font-mono text-sm md:text-base text-[var(--text-dim)]">
@@ -179,11 +235,13 @@ export function SponsorTier({
   name,
   price,
   slots,
+  available,
   covers,
 }: {
   name: string;
   price: string;
   slots: string;
+  available?: string;
   covers: string[];
 }) {
   return (
@@ -194,6 +252,9 @@ export function SponsorTier({
         </span>
         <span className="font-mono text-xs text-[var(--text-dim)]">
           ×{slots}
+          {available
+            ? ` · ${available} disponible${available === "1" ? "" : "s"}`
+            : ""}
         </span>
       </div>
       <span className="font-mono text-2xl md:text-3xl font-semibold text-[var(--bright)]">
