@@ -7,6 +7,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { BootLoader } from "@/components/effects/boot-loader";
 import { SmoothScroll } from "@/components/effects/smooth-scroll";
+
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";

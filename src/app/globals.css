@@ -772,6 +772,7 @@
 */
 .c64-stage div,
 .c64-stage canvas {
+  /* biome-ignore lint/complexity/noImportantStyles: r3f sets pointer-events:auto inline on the canvas wrapper; we need to force the fixed C64 stage to be click-transparent. */
   pointer-events: none !important;
 }
 
@@ -1350,6 +1351,240 @@
 
   .track-idea-fill,
   .track-idea-arrow {
+    transition: none;
+  }
+}
+
+/* ─── Deck pager (sponsor pitch decks at /deck/<slug>) ───────────────── */
+
+.deck-pager {
+  position: relative;
+  background-color: var(--void);
+  color: var(--text);
+  min-height: 100svh;
+  overflow: hidden;
+  height: 100svh;
+}
+
+/* Chrome: fixed top bar with INDEX keycap */
+.deck-chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.deck-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.deck-topbar > * {
+  pointer-events: auto;
+}
+
+.deck-deck-title {
+  max-width: 60vw;
+}
+
+/* Stage: absolute fullscreen single-slide deck by default. The vertical
+ * stacked layout is only a no-JS fallback (see .deck-no-js overrides below). */
+.deck-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.deck-slide {
+  position: absolute;
+  inset: 0;
+  min-height: auto;
+  padding: 0;
+  border-bottom: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+/* Only animate transitions once the client component has mounted, so the
+ * first painted (active) slide appears instantly without a fade-in. */
+.deck-pager[data-mounted="true"] .deck-slide {
+  transition:
+    opacity 200ms var(--ease-out-strong),
+    transform 200ms var(--ease-out-strong);
+}
+
+.deck-slide[data-active="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* No-JS fallback: stack every slide vertically and reveal them all. */
+.deck-no-js .deck-pager {
+  overflow: visible;
+  height: auto;
+}
+
+.deck-no-js .deck-stage {
+  position: relative;
+  inset: auto;
+}
+
+.deck-no-js .deck-slide {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
+  padding: 5rem 1.25rem 6rem;
+  border-bottom: 1px solid var(--border);
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: none;
+}
+
+.deck-slide-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.deck-slide-content {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Controls: prev/next keycaps bottom-right */
+.deck-controls {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+}
+
+.deck-keycaps {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.keycap-sm {
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 0 var(--key-shadow);
+}
+
+.keycap-sm:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--key-shadow);
+}
+
+/* Index overlay */
+.deck-index {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.deck-index-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(26 26 23 / 92%);
+}
+
+.deck-index-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  max-height: 80svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--screen-dim);
+  border: 1px solid var(--line);
+}
+
+.deck-index-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.deck-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem;
+  overflow-y: auto;
+}
+
+.deck-index-button {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-align: left;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    color 150ms ease-out,
+    background-color 150ms ease-out,
+    border-color 150ms ease-out;
+}
+
+.deck-index-button:hover,
+.deck-index-button:focus-visible {
+  color: var(--text);
+  background-color: var(--void);
+  border-color: var(--line);
+}
+
+.deck-index-button[aria-current="true"] {
+  color: var(--bright);
+  background-color: var(--void);
+  border-color: var(--bright);
+}
+
+.deck-index-number {
+  flex-shrink: 0;
+  width: 1.5rem;
+  color: var(--text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.deck-index-button[aria-current="true"] .deck-index-number {
+  color: var(--bright);
+}
+
+/* Reduced motion: instant cuts, disable pager transforms */
+@media (prefers-reduced-motion: reduce) {
+  .deck-pager[data-mounted="true"] .deck-slide {
+    transition: none;
+    transform: none;
+  }
+
+  .deck-index-button {
     transition: none;
   }
 }
