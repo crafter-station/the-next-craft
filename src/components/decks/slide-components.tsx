@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -195,6 +196,41 @@ export function Logo({
         </span>
       )}
     </div>
+  );
+}
+
+export function PhotoGrid({ children }: { children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+      {children}
+    </div>
+  );
+}
+
+export function PhotoCard({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="border border-[var(--line)] bg-[var(--screen-dim)] p-2">
+      <div className="relative h-44 overflow-hidden border border-[var(--line)] bg-[var(--screen)] md:h-56">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="h-full w-full object-cover grayscale contrast-125 saturate-0"
+        />
+      </div>
+      <figcaption className="pt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
+        {caption}
+      </figcaption>
+    </figure>
   );
 }
 
