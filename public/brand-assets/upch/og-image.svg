@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">The Next Craft x UPCH</title>
-  <desc id="desc">Venue sponsor deck for Universidad Peruana Cayetano Heredia and the Learning by Shipping track.</desc>
+  <desc id="desc">Venue sponsor deck for Universidad Peruana Cayetano Heredia and The Next Craft hackathon.</desc>
   <defs>
     <pattern id="scan" width="12" height="12" patternUnits="userSpaceOnUse">
       <path d="M0 11.5H12" stroke="#8C8A82" stroke-opacity="0.16" stroke-width="1"/>
@@ -28,9 +28,9 @@
     <text x="104" y="128" fill="#A2A096" font-size="21" font-weight="600" letter-spacing="4">PROPUESTA PARA UPCH</text>
     <text x="104" y="210" fill="#F2F0E9" font-size="86" font-weight="700" letter-spacing="-4">the next craft</text>
     <text x="104" y="286" fill="#E9E7DE" font-size="58" font-weight="700" letter-spacing="-2">x UPCH</text>
-    <text x="104" y="356" fill="#F2F0E9" font-size="30" font-weight="500">Venue sponsor para Learning</text>
-    <text x="104" y="398" fill="#F2F0E9" font-size="30" font-weight="500">by Shipping.</text>
-    <text x="104" y="482" fill="#A2A096" font-size="22" font-weight="600" letter-spacing="3">APRENDER CONSTRUYENDO · IA · LIMA · 2026</text>
+    <text x="104" y="356" fill="#F2F0E9" font-size="30" font-weight="500">Venue sponsor y universidad</text>
+    <text x="104" y="398" fill="#F2F0E9" font-size="30" font-weight="500">anfitriona del hackathon.</text>
+    <text x="104" y="482" fill="#A2A096" font-size="22" font-weight="600" letter-spacing="3">3 TRACKS · PREMIOS · IA · LIMA · 2026</text>
     <text x="104" y="528" fill="#E9E7DE" font-size="24" font-weight="600">READY.█</text>
   </g>
   <g transform="translate(854 118)">
