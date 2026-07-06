@@ -4,50 +4,20 @@ title: Tiers de patrocinio
 
 <SlideTitle line="90">PATROCINIOS</SlideTitle>
 
-<div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)]">
-  <SponsorTier
-    name="Title"
-    price="$5,000"
-    slots="1"
-    covers={[
-      "Naming del evento",
-      "Logo principal en todo el material",
-      "5 minutos en apertura",
-      "Stand en sede principal",
-      "Acceso a base de talento",
-    ]}
-  />
-  <SponsorTier
-    name="Gold"
-    price="$2,500"
-    slots="2"
-    available="1"
-    covers={[
-      "Logo en comunicaciones",
-      "Mención en apertura",
-      "Stand compartido",
-      "Acceso a base de talento",
-    ]}
-  />
-  <SponsorTier
-    name="Silver"
-    price="$500"
-    slots="5"
-    available="2"
-    covers={[
-      "Logo en comunicaciones",
-      "Mención en cierre",
-      "Acceso a demos ganadoras",
-    ]}
-  />
-  <SponsorTier
-    name="In-kind"
-    price="A convenir"
-    slots="∞"
-    covers={[
-      "Créditos en APIs, herramientas o cloud",
-      "Swag o premios especiales",
-      "Mentorías técnicas",
-    ]}
-  />
-</div>
+<StatRow>
+  <Stat value="$5K" label="Title · x1" />
+  <Stat value="$2.5K" label="Gold · x2" />
+  <Stat value="$500" label="Silver · x5" />
+</StatRow>
+
+<MiniMatrix
+  columns={["Title", "Gold", "Silver", "In-kind"]}
+  rows={[
+    { label: "Naming", values: ["YES", "-", "-", "-"] },
+    { label: "Main logo", values: ["YES", "YES", "-", "-"] },
+    { label: "Opening", values: ["5 min", "Mention", "-", "-"] },
+    { label: "Stand", values: ["Main", "Shared", "-", "-"] },
+    { label: "Talent", values: ["YES", "YES", "-", "-"] },
+    { label: "Demos", values: ["YES", "YES", "YES", "YES"] },
+  ]}
+/>

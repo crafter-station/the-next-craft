@@ -8,11 +8,12 @@ title: Activaciones
   La alianza puede sentirse viva dentro del evento, no solo en un logo.
 </Lead>
 
-<DataGrid>
-  <DataCell label="Apertura" value="Bienvenida institucional de UPCH." />
-  <DataCell label="Host" value="UPCH como universidad anfitriona de The Next Craft." />
-  <DataCell label="Afinidad" value="Learning by Shipping como track naturalmente alineado a universidad e innovacion educativa." />
-  <DataCell label="Mentoria" value="Docente, egresado o representante UPCH como mentor." />
-  <DataCell label="Jurado" value="Representante UPCH evaluando proyectos finalistas." />
-  <DataCell label="Follow-up" value="Invitacion posterior a equipos destacados para conversar con UPCH/Bioincuba." />
-</DataGrid>
+<FlowMap
+  items={[
+    { label: "Antes", value: "Host + comunicacion" },
+    { label: "Durante", value: "Mentoria + jurado" },
+    { label: "Despues", value: "Follow-up con destacados" },
+  ]}
+/>
+
+<ChipGrid items={["Bienvenida UPCH", "Learning by Shipping", "Bioincuba follow-up"]} />

@@ -4,12 +4,14 @@ title: The audience
 
 <SlideTitle line="50">WHO'S IN THE ROOM</SlideTitle>
 
-<BulletList>
-  <li>Full-stack, frontend and AI engineers who pick the APIs their teams adopt.</li>
-  <li>Product designers and UX engineers building with generative media daily.</li>
-  <li>Early-stage technical founders choosing their first infra bets.</li>
-  <li>Top students and new grads hungry to ship — and loud about what they use.</li>
-</BulletList>
+<PersonaGrid
+  items={[
+    { title: "Engineers", caption: "Pick APIs their teams adopt" },
+    { title: "Designers", caption: "Build with gen media daily" },
+    { title: "Founders", caption: "Choose first infra bets" },
+    { title: "Students", caption: "Ship early, share loudly" },
+  ]}
+/>
 
 <Lead>
   The people who try a model first, ship with it, and tell everyone. This is how fal starts with the next wave of LATAM builders.

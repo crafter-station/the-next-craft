@@ -4,10 +4,12 @@ title: Capacidad por sede
 
 <SlideTitle line="40">CAPACIDAD POR SEDE</SlideTitle>
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  <Stat value="100" label="Lima, Perú" />
-  <Stat value="60" label="Bogotá, Colombia" />
-  <Stat value="40" label="Guatemala" />
-</div>
+<BarStack
+  items={[
+    { label: "Lima, Perú", value: "100", percent: 50 },
+    { label: "Bogotá, Colombia", value: "60", percent: 30 },
+    { label: "Guatemala", value: "40", percent: 20 },
+  ]}
+/>
 
 <Lead>200 hackers en total, distribuidos en tres hubs simultáneos.</Lead>
