@@ -468,7 +468,7 @@ export default function BrandBook() {
                 Tablas fusionadas
               </p>
               <div className="grid grid-cols-3 border-t border-l border-[var(--line)]">
-                {["FECHA", "LUGAR", "CUPOS", "8 AGO", "3 SEDES", "200"].map(
+                {["FECHA", "LUGAR", "CUPOS", "1 AGO", "3 SEDES", "200"].map(
                   (t) => (
                     <span
                       key={t}

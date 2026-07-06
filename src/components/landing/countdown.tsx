@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-// 2026-08-08T09:00:00-05:00 → UTC ms (arranque del evento)
-const DEADLINE = new Date("2026-08-08T09:00:00-05:00").getTime();
+// 2026-08-01T09:00:00-05:00 → UTC ms (arranque del evento)
+const DEADLINE = new Date("2026-08-01T09:00:00-05:00").getTime();
 
 type TimeLeft = {
   days: number;
