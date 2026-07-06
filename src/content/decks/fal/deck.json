@@ -1,4 +1,8 @@
 {
   "title": "The Next Craft ft. Fal — Title Partner Deck",
-  "description": "Become the title partner of the hackathon where 200 LATAM builders ship creative tools on fal. From prompt to product in 12 hours."
+  "description": "Become the title partner of the hackathon where 200 LATAM builders ship creative tools on fal. From prompt to product in 12 hours.",
+  "image": "/brand-assets/fal/og-image.png",
+  "icon": "/brand-assets/fal/favicon.ico",
+  "appleIcon": "/brand-assets/fal/apple-touch-icon.png",
+  "manifest": "/brand-assets/fal/site.webmanifest"
 }

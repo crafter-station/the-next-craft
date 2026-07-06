@@ -8,6 +8,10 @@ const DECKS_DIR = join(process.cwd(), "src", "content", "decks");
 export type DeckMeta = {
   title: string;
   description: string;
+  image?: string;
+  icon?: string;
+  appleIcon?: string;
+  manifest?: string;
 } & Record<string, unknown>;
 
 export type SlideMeta = {
