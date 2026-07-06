@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">The Next Craft x UPCH</title>
+  <desc id="desc">Icon for The Next Craft UPCH venue sponsor deck.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#C92127"/>
+      <stop offset="0.55" stop-color="#F79339"/>
+      <stop offset="1" stop-color="#FEC60C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="#1A1A17"/>
+  <rect x="38" y="38" width="436" height="436" rx="72" fill="#161613" stroke="#8C8A82" stroke-width="8"/>
+  <rect x="88" y="88" width="336" height="174" rx="32" fill="#F2F0E9"/>
+  <image href="/brand-assets/upch/upch-logotipo.svg" x="122" y="125" width="268" height="81" preserveAspectRatio="xMidYMid meet"/>
+  <text x="256" y="338" text-anchor="middle" fill="#F2F0E9" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="46" font-weight="800">TNC</text>
+  <text x="256" y="391" text-anchor="middle" fill="url(#g)" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="38" font-weight="800">UPCH</text>
+</svg>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">The Next Craft x UPCH</title>
+  <desc id="desc">Venue sponsor deck for Universidad Peruana Cayetano Heredia and the Learning by Shipping track.</desc>
+  <defs>
+    <pattern id="scan" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M0 11.5H12" stroke="#8C8A82" stroke-opacity="0.16" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#8C8A82" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="upchGlow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#C92127"/>
+      <stop offset="0.55" stop-color="#F79339"/>
+      <stop offset="1" stop-color="#FEC60C"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#1A1A17"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#scan)"/>
+  <rect x="52" y="52" width="1096" height="526" rx="34" fill="#161613" stroke="#8C8A82" stroke-width="2" filter="url(#soft)"/>
+  <rect x="78" y="78" width="1044" height="474" rx="18" fill="none" stroke="#8C8A82" stroke-opacity="0.45" stroke-width="2"/>
+  <circle cx="1012" cy="162" r="94" fill="url(#upchGlow)" opacity="0.18"/>
+  <g font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" text-rendering="geometricPrecision">
+    <text x="104" y="128" fill="#A2A096" font-size="21" font-weight="600" letter-spacing="4">PROPUESTA PARA UPCH</text>
+    <text x="104" y="210" fill="#F2F0E9" font-size="86" font-weight="700" letter-spacing="-4">the next craft</text>
+    <text x="104" y="286" fill="#E9E7DE" font-size="58" font-weight="700" letter-spacing="-2">x UPCH</text>
+    <text x="104" y="356" fill="#F2F0E9" font-size="30" font-weight="500">Venue sponsor para Learning</text>
+    <text x="104" y="398" fill="#F2F0E9" font-size="30" font-weight="500">by Shipping.</text>
+    <text x="104" y="482" fill="#A2A096" font-size="22" font-weight="600" letter-spacing="3">APRENDER CONSTRUYENDO · IA · LIMA · 2026</text>
+    <text x="104" y="528" fill="#E9E7DE" font-size="24" font-weight="600">READY.█</text>
+  </g>
+  <g transform="translate(854 118)">
+    <rect width="236" height="112" rx="24" fill="#F2F0E9"/>
+    <image href="/brand-assets/upch/upch-logotipo.svg" x="24" y="25" width="188" height="57" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+</svg>

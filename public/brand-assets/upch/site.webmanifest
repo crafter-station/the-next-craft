@@ -1,0 +1,20 @@
+{
+  "name": "The Next Craft x UPCH",
+  "short_name": "TNC x UPCH",
+  "description": "Venue sponsor deck for Universidad Peruana Cayetano Heredia and Learning by Shipping.",
+  "icons": [
+    {
+      "src": "/brand-assets/upch/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand-assets/upch/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#C92127",
+  "background_color": "#1A1A17",
+  "display": "standalone"
+}
