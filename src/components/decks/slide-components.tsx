@@ -234,6 +234,79 @@ export function PhotoCard({
   );
 }
 
+type HackathonPhoto = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
+export function PhotoRail({ photos }: { photos: HackathonPhoto[] }) {
+  return (
+    <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
+      {photos.map((photo) => (
+        <DeckPhoto key={photo.src} photo={photo} className="h-28 md:h-36" />
+      ))}
+    </div>
+  );
+}
+
+export function PhotoFeature({ photo }: { photo: HackathonPhoto }) {
+  return <DeckPhoto photo={photo} className="h-44 md:h-64" prominent />;
+}
+
+export function PhotoMosaic({ photos }: { photos: HackathonPhoto[] }) {
+  return (
+    <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+      {photos.map((photo, index) => (
+        <DeckPhoto
+          key={photo.src}
+          photo={photo}
+          className={cn(
+            "h-28 md:h-36",
+            index === 0 && "col-span-2 h-40 md:col-span-1 md:h-36",
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
+function DeckPhoto({
+  photo,
+  className,
+  prominent = false,
+}: {
+  photo: HackathonPhoto;
+  className?: string;
+  prominent?: boolean;
+}) {
+  return (
+    <figure className="border border-[var(--line)] bg-[var(--screen-dim)] p-1.5">
+      <div
+        className={cn(
+          "relative overflow-hidden border border-[var(--line)] bg-[var(--screen)]",
+          className,
+        )}
+      >
+        <Image
+          src={photo.src}
+          alt={photo.alt}
+          fill
+          sizes={
+            prominent
+              ? "(min-width: 768px) 70vw, 100vw"
+              : "(min-width: 768px) 25vw, 50vw"
+          }
+          className="h-full w-full object-cover grayscale contrast-125 saturate-0"
+        />
+      </div>
+      <figcaption className="pt-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
+        {photo.caption}
+      </figcaption>
+    </figure>
+  );
+}
+
 export function BulletList({ children }: { children: ReactNode }) {
   return (
     <ul className="flex flex-col gap-2 list-none p-0 m-0 font-mono text-sm md:text-base text-[var(--text-dim)]">
