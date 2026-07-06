@@ -4,14 +4,14 @@ title: Agenda
 
 <SlideTitle line="60">AGENDA</SlideTitle>
 
-<Timeline>
-  <TimelineRow time="08:30">Registro y acreditación</TimelineRow>
-  <TimelineRow time="09:00">Kickoff — reglas y formación de equipos</TimelineRow>
-  <TimelineRow time="09:30">Empieza el hacking</TimelineRow>
-  <TimelineRow time="11:00">Mentorías con Next Fellow y Crafter Station</TimelineRow>
-  <TimelineRow time="13:00">Almuerzo</TimelineRow>
-  <TimelineRow time="16:00">Check-in de avances git status</TimelineRow>
-  <TimelineRow time="18:30">Merienda — quedan 3 horas</TimelineRow>
-  <TimelineRow time="20:00">Code freeze + submit git commit -m "final"</TimelineRow>
-  <TimelineRow time="20:15">Demos — 3 minutos por equipo, producto en vivo</TimelineRow>
-</Timeline>
+<PhaseTimeline
+  items={[
+    { time: "08:30", label: "Onboard" },
+    { time: "09:30", label: "Build" },
+    { time: "11:00", label: "Mentors" },
+    { time: "20:00", label: "Submit" },
+    { time: "20:15", label: "Demo" },
+  ]}
+/>
+
+<Lead>De cero a demo pública en una sola jornada.</Lead>

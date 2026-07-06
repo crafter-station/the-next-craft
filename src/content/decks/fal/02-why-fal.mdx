@@ -9,11 +9,12 @@ title: Why fal
   The Next Craft puts 200 builders in a room for 12 hours to build with it.
 </Lead>
 
-- Your customer is the developer who turns a model into a product.
-- That's exactly who's in this room — and most of them haven't tried fal **yet**.
-- One weekend turns first-time calls into shipped tools, repos and advocates.
-- We already use fal to generate participant badges for our hackathons and events.
+<FlowMap
+  items={[
+    { label: "Developer", value: "Turns models into products" },
+    { label: "Room", value: "200 builders, many new to fal" },
+    { label: "Outcome", value: "Calls → repos → advocates" },
+  ]}
+/>
 
-<p className="font-mono text-sm text-[var(--text-dim)] mt-2">
-  {"This isn't a cold sponsorship pitch. fal is already part of how we make the event feel creative."}
-</p>
+<ChipGrid items={["Already using fal", "Participant badges", "Creative event layer"]} />

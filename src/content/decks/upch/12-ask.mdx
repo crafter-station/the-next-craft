@@ -10,11 +10,12 @@ title: Lo que necesitamos
   el desarrollo principal del hackathon.
 </Lead>
 
-<DataGrid>
-  <DataCell label="Coworking" value="Coworking 1-2, el mismo espacio usado en IA Hackathon Peru." />
-  <DataCell label="Auditorio" value="Bienvenida, demos finales, cierre y agradecimientos." />
-  <DataCell label="Acceso general" value="7:00 a.m. a 10:30 p.m. el dia del evento." />
-  <DataCell label="Operacion" value="Participantes y staff solo en espacios asignados." />
-  <DataCell label="Seguridad" value="Lista completa de asistentes enviada dias antes." />
-  <DataCell label="Salida total" value="Para las 10:30 p.m. no quedara nadie dentro." />
-</DataGrid>
+<MiniMatrix
+  columns={["Uso", "Control"]}
+  rows={[
+    { label: "Coworking 1-2", values: ["Build principal", "Espacio asignado"] },
+    { label: "Auditorio", values: ["Bienvenida + demos", "Apertura/cierre"] },
+    { label: "Acceso", values: ["7:00–22:30", "Lista previa"] },
+    { label: "Operacion", values: ["Staff + participantes", "Sin circulacion libre"] },
+  ]}
+/>

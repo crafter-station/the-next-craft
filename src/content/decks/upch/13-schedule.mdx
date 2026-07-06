@@ -4,11 +4,14 @@ title: Uso de espacios
 
 <SlideTitle line="110">USO DE ESPACIOS</SlideTitle>
 
-<Timeline>
-  <TimelineRow time="7:00">Ingreso de staff para montaje, senaletica, registro y preparacion.</TimelineRow>
-  <TimelineRow time="9:00">Llegada de participantes y bienvenida en auditorio.</TimelineRow>
-  <TimelineRow time="10:30">Inicio del trabajo principal en Coworking 1-2.</TimelineRow>
-  <TimelineRow time="20:00">Demos finales, cierre y agradecimientos en auditorio.</TimelineRow>
-  <TimelineRow time="22:00">Finaliza el evento y empieza salida ordenada.</TimelineRow>
-  <TimelineRow time="22:30">Salida total de participantes y staff.</TimelineRow>
-</Timeline>
+<PhaseTimeline
+  items={[
+    { time: "7:00", label: "Montaje" },
+    { time: "9:00", label: "Bienvenida" },
+    { time: "10:30", label: "Coworking" },
+    { time: "20:00", label: "Demos" },
+    { time: "22:30", label: "Salida" },
+  ]}
+/>
+
+<Lead>Auditorio para momentos publicos. Coworking 1-2 para construccion.</Lead>

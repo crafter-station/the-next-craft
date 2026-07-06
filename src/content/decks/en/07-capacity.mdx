@@ -4,10 +4,12 @@ title: Capacity per hub
 
 <SlideTitle line="40">CAPACITY PER HUB</SlideTitle>
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  <Stat value="100" label="Lima, Peru" />
-  <Stat value="60" label="Bogotá, Colombia" />
-  <Stat value="40" label="Guatemala" />
-</div>
+<BarStack
+  items={[
+    { label: "Lima, Peru", value: "100", percent: 50 },
+    { label: "Bogotá, Colombia", value: "60", percent: 30 },
+    { label: "Guatemala", value: "40", percent: 20 },
+  ]}
+/>
 
 <Lead>200 hackers in total, spread across three simultaneous hubs.</Lead>

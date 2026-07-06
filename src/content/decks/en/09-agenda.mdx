@@ -4,14 +4,14 @@ title: Schedule
 
 <SlideTitle line="60">SCHEDULE</SlideTitle>
 
-<Timeline>
-  <TimelineRow time="08:30">Registration and check-in</TimelineRow>
-  <TimelineRow time="09:00">Kickoff — rules and team formation</TimelineRow>
-  <TimelineRow time="09:30">Hacking begins</TimelineRow>
-  <TimelineRow time="11:00">Mentorship with Next Fellow and Crafter Station</TimelineRow>
-  <TimelineRow time="13:00">Lunch</TimelineRow>
-  <TimelineRow time="16:00">Progress check-in git status</TimelineRow>
-  <TimelineRow time="18:30">Snack break — 3 hours left</TimelineRow>
-  <TimelineRow time="20:00">Code freeze + submit git commit -m "final"</TimelineRow>
-  <TimelineRow time="20:15">Demos — 3 minutes per team, live product</TimelineRow>
-</Timeline>
+<PhaseTimeline
+  items={[
+    { time: "08:30", label: "Onboard" },
+    { time: "09:30", label: "Build" },
+    { time: "11:00", label: "Mentors" },
+    { time: "20:00", label: "Submit" },
+    { time: "20:15", label: "Demo" },
+  ]}
+/>
+
+<Lead>From zero to public demo in a single day.</Lead>

@@ -242,6 +242,269 @@ export function BulletList({ children }: { children: ReactNode }) {
   );
 }
 
+export function ContrastGrid({
+  leftTitle,
+  rightTitle,
+  leftItems,
+  rightItems,
+}: {
+  leftTitle: string;
+  rightTitle: string;
+  leftItems: string[];
+  rightItems: string[];
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+      <ContrastColumn title={leftTitle} items={leftItems} muted />
+      <ContrastColumn title={rightTitle} items={rightItems} />
+    </div>
+  );
+}
+
+function ContrastColumn({
+  title,
+  items,
+  muted = false,
+}: {
+  title: string;
+  items: string[];
+  muted?: boolean;
+}) {
+  return (
+    <div className={`${CELL} p-4 md:p-6 flex flex-col gap-4`}>
+      <span
+        className={cn(
+          "font-mono text-[11px] font-semibold tracking-[0.14em] uppercase",
+          muted ? "text-[var(--text-dim)]" : "text-[var(--bright)]",
+        )}
+      >
+        {title}
+      </span>
+      <div className="grid gap-2">
+        {items.map((item) => (
+          <div
+            key={item}
+            className={cn(
+              "border border-[var(--line)] px-3 py-2 font-mono text-sm uppercase tracking-[0.06em]",
+              muted
+                ? "text-[var(--text-dim)] opacity-70"
+                : "text-[var(--text)] bg-[var(--screen)]",
+            )}
+          >
+            {item}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function FlowMap({
+  items,
+}: {
+  items: { label: string; value: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+      {items.map((item, index) => (
+        <div key={item.label} className="relative">
+          <div className="border border-[var(--line)] bg-[var(--screen-dim)] p-4 md:p-6 min-h-36 flex flex-col justify-between">
+            <span className="font-mono text-[11px] text-[var(--bright)] tabular-nums">
+              0{index + 1}
+            </span>
+            <div className="flex flex-col gap-2">
+              <span className="font-pixel font-bold text-xl md:text-2xl uppercase leading-tight text-[var(--text)]">
+                {item.label}
+              </span>
+              <span className="font-mono text-sm text-[var(--text-dim)]">
+                {item.value}
+              </span>
+            </div>
+          </div>
+          {index < items.length - 1 ? (
+            <span className="hidden md:block absolute -right-3 top-1/2 z-10 -translate-y-1/2 font-mono text-[var(--bright)]">
+              &gt;
+            </span>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function BarStack({
+  items,
+}: {
+  items: { label: string; value: string; percent: number }[];
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex h-16 border border-[var(--line)] bg-[var(--screen-dim)] overflow-hidden">
+        {items.map((item) => (
+          <div
+            key={item.label}
+            className="flex items-center justify-center border-r border-[var(--line)] last:border-r-0 bg-[var(--screen)] font-pixel font-bold text-[var(--text)]"
+            style={{ width: `${item.percent}%` }}
+          >
+            {item.value}
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {items.map((item) => (
+          <div key={item.label} className="font-mono text-sm">
+            <div className="flex items-baseline justify-between gap-3 border-b border-[var(--line)] pb-1">
+              <span className="text-[var(--text)]">{item.label}</span>
+              <span className="text-[var(--bright)] tabular-nums">
+                {item.percent}%
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ChipGrid({ items }: { items: string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <span
+          key={item}
+          className="border border-[var(--line)] bg-[var(--screen-dim)] px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] text-[var(--text)]"
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export function PersonaGrid({
+  items,
+}: {
+  items: { title: string; caption: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+      {items.map((item, index) => (
+        <div
+          key={item.title}
+          className={`${CELL} p-4 md:p-5 flex flex-col gap-4`}
+        >
+          <span className="font-mono text-[11px] text-[var(--bright)] tabular-nums">
+            P{index + 1}
+          </span>
+          <div className="flex flex-col gap-2">
+            <span className="font-pixel font-bold text-lg uppercase leading-tight text-[var(--text)]">
+              {item.title}
+            </span>
+            <span className="font-mono text-sm text-[var(--text-dim)]">
+              {item.caption}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function PhaseTimeline({
+  items,
+}: {
+  items: { time: string; label: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-5 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+      {items.map((item) => (
+        <div
+          key={item.time}
+          className={`${CELL} p-4 md:p-5 flex md:min-h-36 md:flex-col md:justify-between gap-3`}
+        >
+          <span className="font-mono text-[var(--bright)] tabular-nums text-sm">
+            {item.time}
+          </span>
+          <span className="font-pixel font-bold text-lg md:text-xl uppercase leading-tight text-[var(--text)]">
+            {item.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function BenefitGrid({
+  items,
+}: {
+  items: { label: string; value: string }[];
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className={`${CELL} p-4 md:p-5 flex flex-col gap-3 min-h-32`}
+        >
+          <span className="font-pixel font-bold text-lg uppercase leading-tight text-[var(--text)]">
+            {item.label}
+          </span>
+          <span className="font-mono text-sm text-[var(--text-dim)]">
+            {item.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function MiniMatrix({
+  columns,
+  rows,
+}: {
+  columns: string[];
+  rows: { label: string; values: string[] }[];
+}) {
+  return (
+    <div className={`${TABLE} overflow-x-auto`}>
+      <table className="w-full border-collapse font-mono text-sm">
+        <thead className="text-[11px] uppercase tracking-[0.12em] text-[var(--bright)]">
+          <tr>
+            <th className={`${CELL} px-3 py-2 text-left font-semibold`}>
+              Tier
+            </th>
+            {columns.map((column) => (
+              <th
+                key={column}
+                className={`${CELL} px-3 py-2 text-center font-semibold`}
+              >
+                {column}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="text-[var(--text-dim)]">
+          {rows.map((row) => (
+            <tr key={row.label}>
+              <td className={`${CELL} px-3 py-2 text-[var(--text)]`}>
+                {row.label}
+              </td>
+              {row.values.map((value, index) => (
+                <td
+                  key={`${row.label}-${columns[index]}`}
+                  className={`${CELL} px-3 py-2 text-center`}
+                >
+                  {value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function Keycap({ children }: { children: ReactNode }) {
   return (
     <span className="keycap inline-block font-mono text-xs font-semibold tracking-[0.12em] uppercase px-3 py-1.5">

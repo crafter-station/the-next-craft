@@ -4,34 +4,21 @@ title: Title partnership
 
 <SlideTitle line="70">TITLE PARTNER</SlideTitle>
 
-<div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)]">
-  <SponsorTier
-    name="Title — fal"
-    price="$5,000"
-    slots="1"
-    available="1"
-    availableLabel="available"
-    covers={[
-      "Event named \"The Next Craft ft. Fal\" — all media + printed assets",
-      "Primary logo on every asset, all 3 cities",
-      "The fal Creative Track as the flagship challenge",
-      "Up to 2 pre-event workshops to our 20k Luma audience",
-      "We distribute your merch to every hacker, 3 cities",
-      "5 min on the opening stage + judge seats",
-      "Booth in the main hub + full access to the talent base",
-    ]}
-  />
-  <SponsorTier
-    name="Gold"
-    price="$2,500"
-    slots="2"
-    available="1"
-    availableLabel="available"
-    covers={[
-      "Logo across communications, all 3 cities",
-      "Mention at the opening + judge seat",
-      "Shared booth + access to the talent base",
-      "Great fit if Title isn't the right scope",
-    ]}
-  />
-</div>
+<StatRow>
+  <Stat value="$5K" label="Title · x1" />
+  <Stat value="$2.5K" label="Gold · x2" />
+  <Stat value="20K" label="Luma audience" />
+</StatRow>
+
+<MiniMatrix
+  columns={["Title", "Gold"]}
+  rows={[
+    { label: "Naming", values: ["ft. Fal", "-"] },
+    { label: "Main logo", values: ["All assets", "Comms"] },
+    { label: "Creative track", values: ["Flagship", "-"] },
+    { label: "Workshops", values: ["Up to 2", "-"] },
+    { label: "Merch", values: ["200 hackers", "-"] },
+    { label: "Stage", values: ["5 min + judges", "Mention + judge"] },
+    { label: "Talent", values: ["Full access", "Shared access"] },
+  ]}
+/>
