@@ -94,45 +94,45 @@
         "id": "01",
         "name": "CONTENT MACHINE",
         "tagline": "CREATE · PUBLISH · DISTRIBUTE",
-        "desc": "Build tools that help create, edit, publish, repurpose or distribute content. For creators, founders, students, communities, small businesses or builders who document what they do.",
+        "desc": "Build tools that create, edit, publish or distribute content — designed as a real product, not a demo. Something people actually use and that runs on its own.",
         "ideas": [
-          "Voice notes → LinkedIn posts, TikToks, tweets or newsletters",
-          "Build-in-public assistant: your GitHub commits → social updates",
-          "Content calendar generator for small businesses",
-          "Long videos → short clips, captions, hooks and thumbnails",
-          "AI that helps students share what they learned in short-form"
+          "An assistant that turns your work into content and publishes it for you",
+          "Long-form → clips, picking the best moments instead of random cuts",
+          "A tool that repurposes your old content in a smart way",
+          "Publish to several platforms at once, without it breaking",
+          "Not just generating content: measuring whether it actually lands"
         ],
-        "why": "This is how products grow today. And it lets non-technical profiles shine: storytelling, growth, design, distribution."
+        "why": "This is how products grow today. The challenge is making it work for real and at scale, not just in the demo."
       },
       {
         "id": "02",
         "name": "OUT OF THE BOX",
         "tagline": "WEIRD · EXPERIMENTAL · UNCLASSIFIABLE",
-        "desc": "Build something weird, experimental, playful, surprising or impossible to categorize. It can be useful, funny, artistic, chaotic — or all of the above. The one rule: make people react.",
+        "desc": "Build something weird, experimental or unclassifiable — but with a technical spark. Real-time, novel interfaces, generative, hardware. The rule: make people react.",
         "ideas": [
-          "Meme generator for startup pitches",
-          "A game where you fight your procrastination monster",
-          "A really weird voice interface to manage your tasks",
-          "Browser extension that roasts your tabs",
-          "Your calendar turned into a Spotify-Wrapped-style story",
-          "A 'joke but useful' app for hackathon teams"
+          "A voice interface that responds instantly",
+          "Something generative and live that reacts to whoever uses it",
+          "A game with characters that actually think",
+          "Something that mixes hardware or sensors with AI",
+          "An extension that does something unexpected with the page",
+          "A 'joke but useful' app with a good trick behind it"
         ],
-        "why": "Viral projects come from here. Permission to create instead of building another productivity SaaS."
+        "why": "Viral projects come from here. Permission to experiment instead of building another SaaS — but done well."
       },
       {
         "id": "03",
         "name": "LEARNING BY SHIPPING",
         "tagline": "LEARN BY DOING · NOT WATCHING",
-        "desc": "Build tools that help people learn faster by creating, practicing, testing themselves or getting feedback. No passive education: the product has to make the user do.",
+        "desc": "Build tools to learn by doing: that adapt, give real feedback and evaluate your work. No passive education — the product has to make you do.",
         "ideas": [
-          "An AI tutor that teaches with projects, not lectures",
-          "Practice interviews for scholarships, internships or jobs",
-          "Flashcards that adapt to what you forget",
-          "Assignments with Socratic feedback instead of answers",
-          "'Learn to code by building clones' assistant",
-          "Mentor matching for students and young builders"
+          "A tutor that teaches with projects and gives you real feedback",
+          "Feedback that adapts to what you already know and what you're missing",
+          "Practice that adjusts to what you tend to forget",
+          "Practice interviews that actually evaluate you",
+          "An environment that runs and tests your code while you learn",
+          "Mentor matching that connects the right people"
         ],
-        "why": "The education track, but with a better angle: less school, more agency."
+        "why": "The education track, but with a better angle: less school, more doing."
       }
     ]
   },
