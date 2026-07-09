@@ -2,7 +2,7 @@
 
 **In-person hackathon · Crafter Station × Next**  
 Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 — simultaneous · Jul 25, 2026 · 9:00–21:00 (12 h)  
-200 hackers (Lima 100 · Bogotá 60 · Guatemala 40) · Base currency: USD
+300 hackers across Lima, Bogotá, Guatemala, Arequipa and El Salvador · Base currency: USD
 
 ---
 
