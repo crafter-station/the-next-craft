@@ -190,7 +190,7 @@ Use direct, builder-first language.
 
 Good:
 
-- `200 builders shipping real products in 12 hours.`
+- `300 builders shipping real products in 12 hours.`
 - `The rule is simple: someone should be able to use it and get something done.`
 - `No inflated promises. Just real usage signals.`
 - `Sponsorship buys a banner. Main partnership buys the narrative.`
@@ -215,11 +215,11 @@ Stay within canonical event facts from `DESIGN.md`:
 
 - The Next Craft.
 - Organized by Crafter Station x Next Fellow.
-- July 25, 2026.
+- August 1, 2026.
 - 12 hours, 09:00-21:00.
-- 200 hackers.
+- 300 hackers.
 - Teams of 3-5.
-- Three cities: Lima, Bogota, Ciudad de Guatemala.
+- Five cities: Lima, Bogota, Ciudad de Guatemala, Arequipa, El Salvador.
 - Core bar: a real product used by someone before the close.
 
 Do not invent sponsors, venues, confirmed speakers, confirmed mentors, or hard attendance beyond the canonical facts. The official cash prize pool is $2,200: $1,000, $800, and $400.
