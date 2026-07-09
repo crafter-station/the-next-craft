@@ -5,6 +5,7 @@ export type Step =
   | "name"
   | "email"
   | "email_confirm"
+  | "city"
   | "role"
   | "team"
   | "team_name"
@@ -17,6 +18,7 @@ export type Step =
 export interface Answers {
   name?: string;
   email?: string;
+  city?: string;
   role?: string;
   teamStatus?: "tengo" | "busco" | "solo";
   teamName?: string;
@@ -59,6 +61,14 @@ export const ROLES: Record<string, string> = {
   role_designer: "Designer",
   role_pm: "PM",
   role_marketer: "Marketer",
+};
+
+export const CITIES: Record<string, string> = {
+  city_lima: "Lima, Peru",
+  city_bogota: "Bogota, Colombia",
+  city_guatemala: "Guatemala City",
+  city_arequipa: "Arequipa, Peru",
+  city_el_salvador: "El Salvador",
 };
 
 export const SOURCES: Record<string, string> = {
@@ -115,8 +125,8 @@ export const WELCOME: Reply = {
   kind: "text",
   body:
     "Hola, soy el bot de registro de *THE NEXT CRAFT* — The First User Challenge.\n" +
-    "1 AGO 2026 · Lima · 12 horas · 200 cupos.\n\n" +
-    "Son 7 preguntas, ~90 segundos. Escribe *cancelar* en cualquier momento para salir.\n\n" +
+    "1 AGO 2026 · 5 sedes · 12 horas · 300 cupos.\n\n" +
+    "Son 8 preguntas, ~90 segundos. Escribe *cancelar* en cualquier momento para salir.\n\n" +
     "Primero: ¿cuál es tu nombre completo?",
 };
 
@@ -150,6 +160,13 @@ export function promptFor(step: Step, answers: Answers): Reply {
           { id: "email_yes", title: "Sí, correcto" },
           { id: "email_no", title: "No, corregir" },
         ],
+      };
+    case "city":
+      return {
+        kind: "list",
+        body: "¿En qué sede quieres participar?",
+        button: "Elegir sede",
+        rows: Object.entries(CITIES).map(([id, title]) => ({ id, title })),
       };
     case "role":
       return {
@@ -239,6 +256,7 @@ export function summaryText(a: Answers): string {
     "Revisa tu postulación:\n\n" +
     `Nombre: ${a.name}\n` +
     `Correo: ${a.email}\n` +
+    `Sede: ${a.city ?? "—"}\n` +
     `Rol: ${a.role}\n` +
     `${team}\n` +
     `Mayor de 18: ${a.adult ? "Sí" : "No"}\n` +
@@ -265,7 +283,7 @@ export function completionReplies(
       kind: "text",
       body:
         "La admisión es selectiva: te confirmamos *por correo* antes del evento. " +
-        "Comparte tu pase y nos vemos en Lima. 🔵\n\n" +
+        "Comparte tu pase y nos vemos en tu sede. 🔵\n\n" +
         "— THE NEXT CRAFT · 1 AGO 2026",
     },
   ];

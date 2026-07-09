@@ -423,7 +423,7 @@ export function BarStack({
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
         {items.map((item) => (
           <div key={item.label} className="font-mono text-sm">
             <div className="flex items-baseline justify-between gap-3 border-b border-[var(--line)] pb-1">

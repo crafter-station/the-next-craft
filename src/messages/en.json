@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon by Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá and Guatemala — August 1, 2026. 200 seats, teams of 3–5, prizes TBA. Apply by July 31.",
+    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá, Guatemala, Arequipa and El Salvador — August 1, 2026. 300 seats, teams of 3–5, prizes TBA. Apply by July 31.",
     "ogLocale": "en_US"
   },
   "nav": {
@@ -28,9 +28,9 @@
   },
   "hero": {
     "h1": "the next craft",
-    "circular": "LIMA · BOGOTÁ · GUATEMALA · 1 AUG 2026 · 12 HOURS · ZERO TO PRODUCT · ",
+    "circular": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AUG 2026 · 12 HOURS · ZERO TO PRODUCT · ",
     "subhead": "In-person hackathon",
-    "specs": "LIMA · BOGOTÁ · GUATEMALA · 1 AUG 2026 · 12 HOURS",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AUG 2026 · 12 HOURS",
     "ctaApply": "RUN Apply",
     "ctaTracks": "GOTO Tracks"
   },
@@ -57,7 +57,7 @@
   },
   "about": {
     "headline": "Not an event.\n12 hours of building.",
-    "paragraph1": "The Next Craft is the in-person hackathon by Crafter Station × Next. 12 hours of real work, running simultaneously in Lima, Bogotá and Guatemala, with 200 hackers solving real problems.",
+    "paragraph1": "The Next Craft is the in-person hackathon by Crafter Station × Next. 12 hours of real work, running simultaneously in Lima, Bogotá, Guatemala, Arequipa and El Salvador, with 300 hackers solving real problems.",
     "paragraph2": "Admission is selective. No room for spectators, no space for pretty slides. You come to ship real product: with users, with data, with something that works when the clock runs out."
   },
   "tldr": {
@@ -66,15 +66,15 @@
       "date": { "label": "DATE", "value": "1 AUG 2026", "sub": "" },
       "place": {
         "label": "PLACE",
-        "value": "Lima · Bogotá · Guatemala",
-        "sub": "3 in-person hubs"
+        "value": "Lima · Bogotá · Guatemala · Arequipa · El Salvador",
+        "sub": "5 in-person hubs"
       },
       "format": {
         "label": "FORMAT",
         "value": "12 hours in-person",
         "sub": ""
       },
-      "seats": { "label": "SEATS", "value": "200", "sub": "" },
+      "seats": { "label": "SEATS", "value": "300", "sub": "" },
       "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
@@ -237,7 +237,7 @@
       {
         "id": "Q07",
         "question": "Is it in-person?",
-        "answer": "Yes, it'll be in-person in Lima, Bogotá or Guatemala — whichever hub fits you. No remote option."
+        "answer": "Yes, it'll be in-person in Lima, Bogotá, Guatemala, Arequipa or El Salvador — whichever hub fits you. No remote option."
       },
       {
         "id": "Q08",
@@ -261,11 +261,11 @@
     "headline": "DO YOU BUILD?\nAPPLY.",
     "specs": [
       "DEADLINE ........ 31 JUL 2026 · 23:59 GMT-5",
-      "SEATS ........... 200 · SELECTIVE ADMISSION",
+      "SEATS ........... 300 · SELECTIVE ADMISSION",
       "COST ............ FREE",
       "FORM ............ 7 QUESTIONS · 90 SECONDS"
     ],
-    "specsSr": "Deadline: July 31, 2026, 23:59 GMT-5. 200 seats, selective admission. Free. The form is 7 questions, 90 seconds.",
+    "specsSr": "Deadline: July 31, 2026, 23:59 GMT-5. 300 seats, selective admission. Free. The form is 8 questions, 90 seconds.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ APPLY VIA WHATSAPP → ]",
     "ctaForm": "[ APPLY → ]",
@@ -284,8 +284,8 @@
       "community": "COMMUNITY",
       "contact": "CONTACT"
     },
-    "byline": "Hackathon by\nCrafter Station × Next\nLima · Bogotá · Guatemala · Aug 2026",
-    "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala",
+    "byline": "Hackathon by\nCrafter Station × Next\nLima · Bogotá · Guatemala · Arequipa · El Salvador · Aug 2026",
+    "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala · Arequipa · El Salvador",
     "endLabel": "110 END · "
   }
 }

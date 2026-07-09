@@ -124,19 +124,14 @@ mono 11px tracking 0.18em.
 - **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
   (nextfellow.ai, "Next" en el naming corto)
 - **Tagline**: "De cero a producto en 12 horas."
-- **Fecha**: 25 de julio, 2026 (un solo día, 09:00–21:00) · **Lugar**:
-  presencial en 3 sedes —
-  Lima, Bogotá y Ciudad de Guatemala
-- **Formato**: 12 horas · 150 hackers · equipos de 3–5
-- **Premios**: $5,000 USD al equipo ganador + créditos de partners para todos
-- **Deadline postulación**: 10 de julio, 2026 (23:59 GMT-5)
-- **Track ÚNICO — el corazón de la hackathon**: que tu producto tenga
-  usuarios reales (o al menos UNO) antes del cierre. Sin categorías.
-  Ejemplos de qué cuenta: landing + MVP con signups durante el evento;
-  herramienta lanzada en un grupo de WhatsApp/Discord/colegio/comunidad;
-  micro-SaaS donde al menos un usuario completa la acción principal;
-  marketplace pequeño con publicaciones reales; herramienta de comunidad
-  probada en vivo con otros participantes.
+- **Fecha**: 1 de agosto, 2026 (un solo día, 09:00–21:00) · **Lugar**:
+  presencial en 5 sedes —
+  Lima, Bogotá, Ciudad de Guatemala, Arequipa y El Salvador
+- **Formato**: 12 horas · 300 hackers · equipos de 3–5
+- **Premios**: por anunciar + créditos de partners para todos
+- **Deadline postulación**: 31 de julio, 2026 (23:59 GMT-5)
+- **Tracks**: Content Machine, Out of the Box y Learning by Shipping. La vara
+  central sigue siendo producto real usado por alguien antes del cierre.
 - **Idioma**: español, tono directo pero no arrogante ("a construir",
   "producto real"). Nada de frases excluyentes tipo "solo cracks".
 - **CTA**: registro por WhatsApp — `wa.me/$NEXT_PUBLIC_WHATSAPP_NUMBER` con
