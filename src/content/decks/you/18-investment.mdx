@@ -8,23 +8,10 @@ title: Investment
   The clean ask is $5K for Main Partner: You.com owns the Real-Time AI Agents track and becomes the real-time layer for teams building with current information.
 </Lead>
 
-<StatRow>
-  <Stat value="$5K" label="Main Partner · preferred" size="lg" />
-  <Stat value="$2.5K" label="Track Partner" />
-  <Stat value="$500" label="Builder Support" />
-</StatRow>
+<DataGrid>
+  <DataCell label="Preferred" value="$5K Main Partner · Own the real-time AI layer" />
+  <DataCell label="Fallback" value="$2.5K Track Partner · Dedicated You.com challenge" />
+  <DataCell label="Lightweight" value="$500 Builder Support · Credits, swag, or visibility" />
+</DataGrid>
 
-<MiniMatrix
-  columns={["Main", "Track", "Support"]}
-  rows={[
-    { label: "Position", values: ["Real-time layer of the hackathon", "Dedicated You.com challenge", "Lightweight support"] },
-    { label: "Naming", values: ["The Next Craft ft. You.com", "You.com Track", "Supporter mention"] },
-    { label: "Activation", values: ["Workshop + credits + templates + judging + prize", "Credits + prize + judging", "Credits or swag"] },
-    { label: "Visibility", values: ["Opening, track intro, submissions, demos, recap", "Track surfaces + winner", "Sponsor wall"] },
-    { label: "Content", values: ["Built with You.com recap assets", "Winner content", "Mention in recap"] },
-  ]}
-/>
-
-<p className="font-mono text-sm text-[var(--text-dim)] mt-4">
-  {"API credits, mentor/judge participation, prizes, and swag can be added as in-kind support on top of the cash sponsorship."}
-</p>
+<Lead>Cash sponsorship is the base. API credits, mentors, prizes, and swag can be added as in-kind support.</Lead>
