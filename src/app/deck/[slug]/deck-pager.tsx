@@ -11,6 +11,26 @@ type Slide = {
 
 const SWIPE_THRESHOLD = 56;
 const SWIPE_VELOCITY = 0.35;
+const WHEEL_THRESHOLD = 80;
+const WHEEL_COOLDOWN_MS = 450;
+
+function clampSlideIndex(index: number, slideCount: number) {
+  return Math.max(0, Math.min(slideCount - 1, index));
+}
+
+function canScrollWithinSlide(target: EventTarget | null, deltaY: number) {
+  if (!(target instanceof HTMLElement) || deltaY === 0) return false;
+
+  const scrollable = target.closest<HTMLElement>(".deck-slide-inner");
+  if (!scrollable) return false;
+
+  const canScrollDown =
+    scrollable.scrollTop + scrollable.clientHeight <
+    scrollable.scrollHeight - 1;
+  const canScrollUp = scrollable.scrollTop > 0;
+
+  return deltaY > 0 ? canScrollDown : canScrollUp;
+}
 
 export function DeckPager({
   slug,
@@ -27,17 +47,23 @@ export function DeckPager({
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number; t: number } | null>(null);
+  const wheelDelta = useRef(0);
+  const lastWheelMoveAt = useRef(0);
 
   const goTo = useCallback(
     (index: number) => {
-      const next = Math.max(0, Math.min(slides.length - 1, index));
-      if (next !== activeIndex) setActiveIndex(next);
+      setActiveIndex(clampSlideIndex(index, slides.length));
     },
-    [activeIndex, slides.length],
+    [slides.length],
   );
 
-  const prev = useCallback(() => goTo(activeIndex - 1), [activeIndex, goTo]);
-  const next = useCallback(() => goTo(activeIndex + 1), [activeIndex, goTo]);
+  const prev = useCallback(() => {
+    setActiveIndex((current) => clampSlideIndex(current - 1, slides.length));
+  }, [slides.length]);
+
+  const next = useCallback(() => {
+    setActiveIndex((current) => clampSlideIndex(current + 1, slides.length));
+  }, [slides.length]);
 
   useEffect(() => {
     setMounted(true);
@@ -55,11 +81,13 @@ export function DeckPager({
 
       switch (event.key) {
         case "ArrowLeft":
+        case "ArrowUp":
         case "PageUp":
           prev();
           event.preventDefault();
           break;
         case "ArrowRight":
+        case "ArrowDown":
         case "PageDown":
         case " ":
           next();
@@ -113,6 +141,33 @@ export function DeckPager({
     touchStart.current = null;
   }
 
+  function onWheel(event: React.WheelEvent) {
+    if (indexOpen || canScrollWithinSlide(event.target, event.deltaY)) return;
+
+    const dominantDelta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        ? event.deltaX
+        : event.deltaY;
+    if (dominantDelta === 0) return;
+
+    wheelDelta.current += dominantDelta;
+
+    const now = Date.now();
+    if (
+      Math.abs(wheelDelta.current) < WHEEL_THRESHOLD ||
+      now - lastWheelMoveAt.current < WHEEL_COOLDOWN_MS
+    ) {
+      return;
+    }
+
+    if (wheelDelta.current > 0) next();
+    else prev();
+
+    wheelDelta.current = 0;
+    lastWheelMoveAt.current = now;
+    event.preventDefault();
+  }
+
   return (
     <div
       ref={containerRef}
@@ -121,6 +176,7 @@ export function DeckPager({
       data-index-open={indexOpen}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onWheel={onWheel}
     >
       <a
         href={`/deck/${slug}`}
