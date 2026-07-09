@@ -1,196 +1,88 @@
 # The Next Craft — Budget Planning (Sponsors)
 
-**Evento:** Hackathon presencial · Crafter Station × Next
-**Sedes:** Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 · Arequipa 🇵🇪 · El Salvador 🇸🇻 (simultáneo)
-**Fecha:** 1 ago 2026 · **Formato:** full day 9:00 – 21:00 (12 h)
-**Asistentes:** 300 hackers (Lima 100 · Bogotá 60 · Guatemala 40 · Arequipa 50 · El Salvador 50)
-**Moneda base:** USD · *Ejecución local en PEN / COP / GTQ*
+**Event:** In-person hackathon · Crafter Station × Next  
+**Hubs:** Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 (simultaneous)  
+**Date:** Jul 25, 2026 · **Time:** 09:00–21:00 (12 h)  
+**Participants:** 200 hackers (Lima 100 · Bogotá 60 · Guatemala 40)  
+**Base currency:** USD
 
-> Documento de planificación para sponsors. Las cifras son estimados de referencia
-> (rango de mercado 2026). Ajustar al cerrar cotizaciones reales de venue y catering.
+> Sponsor cash supports the full operation of the hackathon and the official cash prizes for participants.
+> Partners may also add track-specific prizes in-kind, such as licenses, devices, credits, swag, or services.
 
 ---
 
-## 1. Resumen ejecutivo
+## 1. Executive Summary
 
-> La tabla presupuestal es la base original de sedes iniciales. Arequipa y El Salvador requieren cotizaciones locales de venue/catering antes de cerrar el total final.
-
-| Concepto | Monto (USD) |
+| Item | USD |
 |---|---:|
-| Operación Lima (100 pax) | $9,020 |
-| Operación Bogotá (60 pax) | $6,290 |
-| Operación Guatemala (40 pax) | $5,090 |
-| Costos compartidos (marketing, tooling, coordinación) | $2,000 |
-| **Subtotal operación** | **$22,400** |
-| Premio (1 ganador) | $1,500 |
-| **TOTAL con premio** | **≈ $23,900** |
+| Lima operations (100 pax) | $5,115 |
+| Bogotá operations (60 pax) | $3,256 |
+| Guatemala operations (40 pax) | $2,409 |
+| Shared costs | $2,000 |
+| **Operations subtotal** | **$12,780** |
+| Official prize pool (3 winners) | $2,200 |
+| **Total to fund** | **≈ $14,980** |
 
-**Costo all-in por hacker:** ~$112 (sin premio) · ~$120 (con premio).
-
-> **Meta de recaudación sugerida: USD $24,000 – $26,000** (incluye colchón).
-> Mínimo viable base para correr las primeras sedes con dignidad: **~$22,400**.
+**Core message for sponsors:** their contribution funds the participant experience, on-site operations, printed materials, food, swag, coordination, and the official hackathon prizes.
 
 ---
 
-## 2. Supuestos clave
+## 2. What Each Hacker Gets
 
-- Jornada de 12 h ⇒ **3 comidas** (desayuno, almuerzo, cena) + 2 coffee breaks + snacks.
-- Venue tipo coworking / auditorio / campus, alquilado por el día.
-- Swag kit por hacker: polo + stickers + lanyard + credencial + tote.
-- Staff/mentores comen del mismo catering (líneas separadas en cada sede).
-- Contingencia del **10%** por sede (imprevistos, sobre-asistencia, tipo de cambio).
-- Premios listados aparte para que el sponsor decida si los cubre.
-
----
-
-## 3. Qué recibe cada hacker (perks)
-
-Esto es lo que el sponsor **le da directamente a cada participante** — el valor tangible.
-Lo demás (venue, AV, seguridad, foto) es costo de producción, no perk.
-
-| Perk tangible | Valor aprox (USD) |
+| Perk | Approx. value |
 |---|---:|
-| 🍳 Desayuno | $4 |
-| 🍽️ Almuerzo | $8 |
-| 🌮 Cena | $8 |
-| ☕ 2 coffee breaks + snacks + bebidas (agua, café, energizantes) todo el día | $5 |
-| 🎁 Swag kit (polo, stickers, lanyard, credencial, tote) | $15 |
-| **Total perks por hacker** | **≈ $40** |
+| Breakfast | $5 |
+| Lunch | $8 |
+| Dinner | $8 |
+| Coffee breaks + snacks + drinks | $5 |
+| Swag kit (t-shirt, stickers, lanyard, badge, tote) | $10 |
+| **Total perks per hacker** | **≈ $36** |
 
-**Perks incluidos sin costo cash extra por cabeza** (los cubre el overhead compartido):
-acceso al venue 12 h · wifi · soporte AV · mentoría · cobertura de foto/video ·
-networking · opción a premio · certificado/credencial digital.
+---
 
-> **Costo por cabeza por sede** (perks + prorrateo de producción):
-> Lima **$90** · Bogotá **$105** · Guatemala **$127**.
-> La diferencia es puro prorrateo: los costos fijos se reparten entre menos gente
-> en las sedes chicas, no es que reciban más.
+## 3. Operations By Hub
 
-### Costo variable por hacker (resumen)
-
-| Ítem | Lima | Bogotá | Guatemala |
+| Category | Lima | Bogotá | Guatemala |
 |---|---:|---:|---:|
-| Catering 3 comidas + snacks | $22 | $20 | $20 |
-| Bebidas (café, agua, energizantes) | $5 | $5 | $5 |
-| Swag kit (polo, stickers, lanyard, credencial, tote) | $15 | $15 | $15 |
-| **Total por hacker** | **$42** | **$40** | **$40** |
+| Participant variable cost | $3,600 | $2,160 | $1,440 |
+| Signage / printing | $300 | $300 | $300 |
+| Photo & video | $400 | $400 | $400 |
+| Branding / decor | $200 | — | — |
+| Staff & mentor catering | $150 | $100 | $50 |
+| Contingency 10% | $465 | $296 | $219 |
+| **Total** | **$5,115** | **$3,256** | **$2,409** |
 
 ---
 
-## 4. Desglose por sede
+## 4. Official Prize Pool
 
-### 🇵🇪 Lima — 100 hackers
-
-| Categoría | USD |
+| Place | Cash prize |
 |---|---:|
-| Variable (100 × $42) | $4,200 |
-| Venue (12 h, cap. 100) | $1,200 |
-| AV (proyector, pantalla, sonido, micros, luces) | $700 |
-| Internet / refuerzo wifi | $200 |
-| Señalética, banners, impresión | $300 |
-| Foto y video | $400 |
-| Branding / decoración del espacio | $250 |
-| Energía (extensiones, regletas, backup) | $200 |
-| Limpieza y seguridad | $300 |
-| Botiquín / primeros auxilios | $150 |
-| Catering staff y mentores (15 pax) | $300 |
-| **Subtotal** | **$8,200** |
-| Contingencia 10% | $820 |
-| **Total Lima** | **$9,020** |
+| 1st place winner | $1,000 |
+| 2nd place | $800 |
+| 3rd place | $400 |
+| **Total** | **$2,200** |
 
-*≈ S/ 33,800 (TC 3.75)*
-
-### 🇨🇴 Bogotá — 60 hackers
-
-| Categoría | USD |
-|---|---:|
-| Variable (60 × $40) | $2,400 |
-| Venue | $1,000 |
-| AV | $600 |
-| Internet / wifi | $200 |
-| Señalética / impresión | $250 |
-| Foto y video | $350 |
-| Branding / decoración | $200 |
-| Energía | $150 |
-| Limpieza y seguridad | $250 |
-| Botiquín | $120 |
-| Catering staff y mentores (10 pax) | $200 |
-| **Subtotal** | **$5,720** |
-| Contingencia 10% | $572 |
-| **Total Bogotá** | **$6,292** |
-
-*≈ COP 25,170,000 (TC 4,000)*
-
-### 🇬🇹 Guatemala — 40 hackers
-
-| Categoría | USD |
-|---|---:|
-| Variable (40 × $40) | $1,600 |
-| Venue | $900 |
-| AV | $500 |
-| Internet / wifi | $200 |
-| Señalética / impresión | $250 |
-| Foto y video | $300 |
-| Branding / decoración | $200 |
-| Energía | $150 |
-| Limpieza y seguridad | $250 |
-| Botiquín | $120 |
-| Catering staff y mentores (8 pax) | $160 |
-| **Subtotal** | **$4,630** |
-| Contingencia 10% | $463 |
-| **Total Guatemala** | **$5,093** |
-
-*≈ Q 39,700 (TC 7.8)*
+The official prizes are part of the hackathon budget. Partner-added track prizes are optional and additive.
 
 ---
 
-## 5. Costos compartidos (globales)
+## 5. Sponsorship Tiers
 
-| Ítem | USD |
-|---|---:|
-| Marketing y ads (5 ciudades) | $1,000 |
-| Tooling (Luma, email, dominio, hosting) | $200 |
-| Diseño de swag y assets | $300 |
-| Coordinación / buffer organización | $500 |
-| **Total compartido** | **$2,000** |
-
----
-
-## 6. Premio
-
-| Concepto | USD |
-|---|---:|
-| Gran premio único — 1 ganador (mejor proyecto global) | $1,500 |
-
-> Un solo ganador a nivel de las 5 sedes. El reconocimiento (no el monto) es el gancho:
-> exposición, créditos de sponsors y mentoría pueden sumarse como premio in-kind sin costo cash.
-
----
-
-## 7. Cómo se traduce en sponsorship (sugerencia de tiers)
-
-Total a cubrir ≈ **$24,000**. Estructura de ejemplo:
-
-| Tier | Aporte | Cupos | Cubre |
+| Tier | Contribution | Slots | Covers |
 |---|---:|:---:|---|
-| 🥇 Title / Presenting | $10,000 | 1 | Nombre en el evento, branding dominante, premios |
-| 🥈 Gold | $5,000 | 2 | Una sede completa, logo destacado, stand |
-| 🥉 Silver | $2,500 | 3 | Catering o swag, logo, menciones |
-| 🤝 Community / In-kind | producto/servicio | ∞ | Créditos, comida, espacio, mentores |
-
-> Con 1 Title + 2 Gold + 1 Silver = **$22,500** en cash + in-kind (venue donado, créditos
-> cloud, bebidas, comida) cierras la base operativa con holgura sobre la meta de $24,000.
+| Title / Presenting | $5,000 | 1 | Lead presence across 3 countries, participant database, presenting slots, 2 workshops, kickoff speech, and category track |
+| Gold | $2,500 | 2 | Physical stand during hackathon, dedicated post, demos, and participant visibility |
+| Silver | $500 | 3 | Logo on website, social media post, and lightweight support |
+| In-kind | Product/service | ∞ | Venue, cloud credits, food, mentors, swag, licenses, devices, or optional track prizes |
 
 ---
 
-## 8. Palancas para bajar el costo
+## 6. Prize Language To Use In Decks
 
-- **Venue in-kind:** universidad/coworking aliado → ahorro $3,000+ (base multi-sede).
-- **Catering sponsor:** una marca de comida/bebida cubre líneas → ahorro $4,000+.
-- **Cloud credits:** AWS/Vercel/Supabase como premio/herramienta (in-kind, $0 cash).
-- **Foto/video:** voluntarios de comunidad audiovisual → ahorro $1,000.
-- **Swag:** producción en una sola ciudad y envío → economía de escala.
+Use this distinction consistently:
 
----
+- **Official hackathon prizes:** $1,000, $800, and $400, funded through sponsor support.
+- **Partner track prizes:** optional add-ons chosen by each partner, such as Claude Code licenses, AirPods, credits, or other relevant rewards.
 
-*Última actualización: 2026-06-26 · Cifras en USD salvo donde se indique moneda local.*
+*Last updated: 2026-07-08 · Figures in USD.*

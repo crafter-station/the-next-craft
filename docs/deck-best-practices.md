@@ -35,10 +35,10 @@ Recommended flow:
 - Capacity and city footprint.
 - Tracks.
 - Agenda.
-- Prizes.
+- Official prize pool.
 - Audience.
 - Sponsorship tiers.
-- What the money covers.
+- What cash sponsorship covers: operations + official prizes.
 - Why sponsor.
 - Close.
 
@@ -60,7 +60,7 @@ Recommended flow:
 - Example builds teams could ship.
 - Product stack / starter kits / integration paths.
 - Activation plan.
-- Workshop, mentor, judge, prize, or office-hours plan.
+- Workshop, mentor, judge, optional bonus prize, or office-hours plan.
 - Outcomes and success metrics.
 - Investment.
 - What is included.
@@ -92,15 +92,15 @@ Preferred structure:
 
 - Preferred: `$5K Main Partner` or `$5K Title Partner`.
 - Alternative: `$2.5K Track Partner`.
-- In-kind: credits, tools, mentors, judges, swag, prizes, venues, workshops, amplification.
+- In-kind: credits, tools, mentors, judges, swag, venues, workshops, amplification, or optional track-specific prizes.
 
 Canonical wording:
 
 ```mdx
 <DataGrid>
   <DataCell label="Preferred" value="$5K Main Partner - Own the [category] track across the full hackathon" />
-  <DataCell label="Alternative" value="$2.5K Track Partner - Dedicated [Partner] challenge, credits, prize and judging" />
-  <DataCell label="In-kind" value="Credits, tools, mentors and swag make the builder activation stronger" />
+  <DataCell label="Alternative" value="$2.5K Track Partner - Dedicated [Partner] challenge, credits and judging" />
+  <DataCell label="In-kind" value="Credits, tools, mentors, swag or bonus prizes make the activation stronger" />
 </DataGrid>
 ```
 
@@ -130,7 +130,7 @@ Example:
   items={[
     { label: "Position", value: "Fast path for the [Partner] track" },
     { label: "Naming", value: "Featured naming across the track, kickoff, demos and recap" },
-    { label: "Activation", value: "Workshop, credits, office hours, judging, prize" },
+    { label: "Activation", value: "Workshop, credits, office hours, judging, optional bonus prize" },
     { label: "Visibility", value: "Opening, track intro, submissions, demos, recap" },
     { label: "Content", value: "Built with [Partner] recap assets" },
   ]}
@@ -148,14 +148,14 @@ Always specify:
 - Starter kits or ready-to-fork examples.
 - Workshop or onboarding session.
 - Mentor, judge, or office-hours guest.
-- Prize or recognition.
+- Optional partner bonus prize or recognition.
 - Content outputs after the event.
 - Pipeline or follow-up path for promising teams.
 
 Strong wording:
 
 - `Crafter Station can handle the track page, starter kits, builder instructions and recap content so [Partner] can plug in with credits, one workshop, one mentor or judge, and amplification.`
-- `Cash funds the multi-city production. Credits, mentors, prizes and swag strengthen the builder activation.`
+- `Cash funds the multi-city production and official prize pool. Credits, mentors, bonus prizes and swag strengthen the builder activation.`
 
 ## Success Metrics
 
@@ -190,7 +190,7 @@ Use direct, builder-first language.
 
 Good:
 
-- `300 builders shipping real products in 12 hours.`
+- `200 builders shipping real products in 12 hours.`
 - `The rule is simple: someone should be able to use it and get something done.`
 - `No inflated promises. Just real usage signals.`
 - `Sponsorship buys a banner. Main partnership buys the narrative.`
@@ -215,14 +215,14 @@ Stay within canonical event facts from `DESIGN.md`:
 
 - The Next Craft.
 - Organized by Crafter Station x Next Fellow.
-- August 1, 2026.
+- July 25, 2026.
 - 12 hours, 09:00-21:00.
-- 300 hackers.
+- 200 hackers.
 - Teams of 3-5.
-- Five cities: Lima, Bogota, Ciudad de Guatemala, Arequipa, El Salvador.
+- Three cities: Lima, Bogota, Ciudad de Guatemala.
 - Core bar: a real product used by someone before the close.
 
-Do not invent prizes, sponsors, venues, confirmed speakers, confirmed mentors, or hard attendance beyond the canonical facts.
+Do not invent sponsors, venues, confirmed speakers, confirmed mentors, or hard attendance beyond the canonical facts. The official cash prize pool is $2,200: $1,000, $800, and $400.
 
 ## Slide Component Rules
 
@@ -264,7 +264,7 @@ For partner decks:
 ```json
 {
   "title": "The Next Craft ft. [Partner] - Main Partner Deck",
-  "description": "A Main Partner proposal for [Partner] to [specific outcome] for 300 LatAm builders.",
+  "description": "A Main Partner proposal for [Partner] to [specific outcome] for 200 LatAm builders.",
   "icon": "/brand-assets/[partner]/[asset]"
 }
 ```
