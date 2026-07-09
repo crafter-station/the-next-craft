@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Children, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -43,8 +43,16 @@ export function Lead({ children }: { children: ReactNode }) {
 }
 
 export function DataGrid({ children }: { children: ReactNode }) {
+  const count = Children.count(children);
+
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${TABLE}`}>
+    <div
+      className={cn(
+        "grid grid-cols-1 sm:grid-cols-2",
+        count === 2 ? "md:grid-cols-2" : "md:grid-cols-3",
+        TABLE,
+      )}
+    >
       {children}
     </div>
   );
@@ -62,8 +70,35 @@ export function DataCell({
       <span className="font-mono text-[11px] font-semibold tracking-[0.14em] uppercase text-[var(--text-dim)]">
         {label}
       </span>
-      <span className="font-mono text-sm text-[var(--text)]">{value}</span>
+      {renderDataCellValue(value)}
     </div>
+  );
+}
+
+function renderDataCellValue(value: ReactNode) {
+  if (typeof value !== "string") {
+    return (
+      <span className="font-mono text-sm text-[var(--text)]">{value}</span>
+    );
+  }
+
+  const priceMatch = value.match(/^(\$[\d.]+K?)(.*)$/);
+
+  if (!priceMatch) {
+    return (
+      <span className="font-mono text-sm text-[var(--text)]">{value}</span>
+    );
+  }
+
+  const [, price, rest] = priceMatch;
+
+  return (
+    <span className="flex flex-col gap-1 font-mono text-[var(--text)]">
+      <span className="text-2xl font-semibold leading-none tracking-[-0.04em] text-[var(--bright)] md:text-3xl">
+        {price}
+      </span>
+      <span className="text-sm leading-snug">{rest.trim()}</span>
+    </span>
   );
 }
 
