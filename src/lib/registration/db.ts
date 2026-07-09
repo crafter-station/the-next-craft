@@ -17,6 +17,7 @@ export interface Registration {
   phone: string;
   name: string;
   email: string;
+  city: string | null;
   role: string;
   team_status: string | null;
   team_name: string | null;
@@ -84,16 +85,17 @@ export async function getRegistrationByCode(
  */
 export async function saveRegistration(
   phone: string,
-  a: Answers & { name: string; email: string; role: string },
+  a: Answers & { name: string; email: string; city: string; role: string },
 ): Promise<Registration> {
   const rows = await sql()`
     INSERT INTO registrations
-      (phone, name, email, role, team_status, team_name, adult, github, source)
+      (phone, name, email, city, role, team_status, team_name, adult, github, source)
     VALUES
-      (${phone}, ${a.name}, ${a.email}, ${a.role}, ${a.teamStatus ?? null},
+      (${phone}, ${a.name}, ${a.email}, ${a.city}, ${a.role}, ${a.teamStatus ?? null},
        ${a.teamName ?? null}, ${a.adult ?? false}, ${a.github ?? null}, ${a.source ?? null})
     ON CONFLICT (phone) DO UPDATE SET
-      name = EXCLUDED.name, email = EXCLUDED.email, role = EXCLUDED.role,
+      name = EXCLUDED.name, email = EXCLUDED.email, city = EXCLUDED.city,
+      role = EXCLUDED.role,
       team_status = EXCLUDED.team_status, team_name = EXCLUDED.team_name,
       adult = EXCLUDED.adult, github = EXCLUDED.github, source = EXCLUDED.source,
       status = 'pending', notified_at = NULL, updated_at = now()

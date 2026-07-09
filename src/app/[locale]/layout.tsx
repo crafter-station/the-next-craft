@@ -57,6 +57,8 @@ export async function generateMetadata({
       "Bogotá",
       "Colombia",
       "Guatemala",
+      "Arequipa",
+      "El Salvador",
       "Crafter Station",
       "Next.js",
       locale === "es" ? "programación" : "programming",

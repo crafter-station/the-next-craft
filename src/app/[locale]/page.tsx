@@ -57,6 +57,23 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
           addressCountry: "GT",
         },
       },
+      {
+        "@type": "Place",
+        name: "Arequipa, Perú",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Arequipa",
+          addressCountry: "PE",
+        },
+      },
+      {
+        "@type": "Place",
+        name: "El Salvador",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "SV",
+        },
+      },
     ],
     organizer: [
       {

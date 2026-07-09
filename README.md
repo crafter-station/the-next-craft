@@ -16,7 +16,7 @@
 
 ## About
 
-Landing page del hackathon **The Next Craft**, organizado por Crafter Station × Next. Evento presencial en Lima, Perú — 24–26 de julio 2026. De cero a producto en 36 horas: 150 hackers, equipos de 3–5, $5,000 USD al ganador. La página cubre presentación del evento, tracks, agenda, premios, sponsors, FAQ, equipo organizador y CTA de postulación. Desplegado en [thenextcraft.crafter.run](https://thenextcraft.crafter.run).
+Landing page del hackathon **The Next Craft**, organizado por Crafter Station × Next. Evento presencial simultáneo en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 1 de agosto de 2026. De cero a producto en 12 horas: 300 hackers, equipos de 3–5, premios por anunciar. La página cubre presentación del evento, tracks, agenda, premios, sponsors, FAQ, equipo organizador y CTA de postulación. Desplegado en [thenextcraft.crafter.run](https://thenextcraft.crafter.run).
 
 ## Tech Stack
 

@@ -1,9 +1,9 @@
 # The Next Craft — Budget Planning (Sponsors)
 
 **Evento:** Hackathon presencial · Crafter Station × Next
-**Sedes:** Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 (simultáneo)
-**Fecha:** 25 jul 2026 · **Formato:** full day 9:00 – 21:00 (12 h)
-**Asistentes:** 200 hackers (Lima 100 · Bogotá 60 · Guatemala 40)
+**Sedes:** Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 · Arequipa 🇵🇪 · El Salvador 🇸🇻 (simultáneo)
+**Fecha:** 1 ago 2026 · **Formato:** full day 9:00 – 21:00 (12 h)
+**Asistentes:** 300 hackers (Lima 100 · Bogotá 60 · Guatemala 40 · Arequipa 50 · El Salvador 50)
 **Moneda base:** USD · *Ejecución local en PEN / COP / GTQ*
 
 > Documento de planificación para sponsors. Las cifras son estimados de referencia
@@ -12,6 +12,8 @@
 ---
 
 ## 1. Resumen ejecutivo
+
+> La tabla presupuestal es la base original de sedes iniciales. Arequipa y El Salvador requieren cotizaciones locales de venue/catering antes de cerrar el total final.
 
 | Concepto | Monto (USD) |
 |---|---:|
@@ -26,7 +28,7 @@
 **Costo all-in por hacker:** ~$112 (sin premio) · ~$120 (con premio).
 
 > **Meta de recaudación sugerida: USD $24,000 – $26,000** (incluye colchón).
-> Mínimo viable para correr las 3 sedes con dignidad: **~$22,400**.
+> Mínimo viable base para correr las primeras sedes con dignidad: **~$22,400**.
 
 ---
 
@@ -146,7 +148,7 @@ networking · opción a premio · certificado/credencial digital.
 
 | Ítem | USD |
 |---|---:|
-| Marketing y ads (3 ciudades) | $1,000 |
+| Marketing y ads (5 ciudades) | $1,000 |
 | Tooling (Luma, email, dominio, hosting) | $200 |
 | Diseño de swag y assets | $300 |
 | Coordinación / buffer organización | $500 |
@@ -160,7 +162,7 @@ networking · opción a premio · certificado/credencial digital.
 |---|---:|
 | Gran premio único — 1 ganador (mejor proyecto global) | $1,500 |
 
-> Un solo ganador a nivel de las 3 sedes. El reconocimiento (no el monto) es el gancho:
+> Un solo ganador a nivel de las 5 sedes. El reconocimiento (no el monto) es el gancho:
 > exposición, créditos de sponsors y mentoría pueden sumarse como premio in-kind sin costo cash.
 
 ---
@@ -177,13 +179,13 @@ Total a cubrir ≈ **$24,000**. Estructura de ejemplo:
 | 🤝 Community / In-kind | producto/servicio | ∞ | Créditos, comida, espacio, mentores |
 
 > Con 1 Title + 2 Gold + 1 Silver = **$22,500** en cash + in-kind (venue donado, créditos
-> cloud, bebidas, comida) cierras las 3 sedes con holgura sobre la meta de $24,000.
+> cloud, bebidas, comida) cierras la base operativa con holgura sobre la meta de $24,000.
 
 ---
 
 ## 8. Palancas para bajar el costo
 
-- **Venue in-kind:** universidad/coworking aliado → ahorro $3,000+ (las 3 sedes).
+- **Venue in-kind:** universidad/coworking aliado → ahorro $3,000+ (base multi-sede).
 - **Catering sponsor:** una marca de comida/bebida cubre líneas → ahorro $4,000+.
 - **Cloud credits:** AWS/Vercel/Supabase como premio/herramienta (in-kind, $0 cash).
 - **Foto/video:** voluntarios de comunidad audiovisual → ahorro $1,000.

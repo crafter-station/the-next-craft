@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS registrations (
   phone       text UNIQUE NOT NULL,
   name        text NOT NULL,
   email       text NOT NULL,
+  city        text,
   role        text NOT NULL,
   team_status text,                           -- tengo | busco | solo
   team_name   text,
@@ -32,3 +33,5 @@ CREATE TABLE IF NOT EXISTS registrations (
   created_at  timestamptz NOT NULL DEFAULT now(),
   updated_at  timestamptz NOT NULL DEFAULT now()
 );
+
+ALTER TABLE registrations ADD COLUMN IF NOT EXISTS city text;

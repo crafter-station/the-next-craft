@@ -11,6 +11,7 @@ function env(name: string): string {
 
 export async function sendApprovalEmail(reg: Registration): Promise<void> {
   const firstName = reg.name.split(/\s+/)[0];
+  const city = reg.city ?? "Tu sede";
   const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.crafter.run";
 
@@ -35,11 +36,11 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
     </h1>
     <p style="font-size: 14px; line-height: 1.6; margin: 0 0 24px;">
       Tu postulación <strong>${reg.code}</strong> a <strong>The First User Challenge</strong> fue aprobada.
-      Eres parte de los 200.
+      Eres parte de los 300.
     </p>
     <table style="font-size: 13px; line-height: 1.8; border-collapse: collapse;">
       <tr><td style="color: #5B6478; padding-right: 16px;">FECHA</td><td>1 AGO 2026</td></tr>
-      <tr><td style="color: #5B6478; padding-right: 16px;">LUGAR</td><td>Lima, Perú</td></tr>
+      <tr><td style="color: #5B6478; padding-right: 16px;">LUGAR</td><td>${city}</td></tr>
       <tr><td style="color: #5B6478; padding-right: 16px;">FORMATO</td><td>12 horas</td></tr>
       <tr><td style="color: #5B6478; padding-right: 16px;">CÓDIGO</td><td><strong>${reg.code}</strong> (guárdalo para el check-in)</td></tr>
     </table>
@@ -50,7 +51,7 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
     </p>
   </div>
   <p style="font-size: 11px; color: #5B6478; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-top: 16px;">
-    Crafter Station × Next · Lima, Perú
+    Crafter Station × Next · ${city}
   </p>
 </div>`,
     }),

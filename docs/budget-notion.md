@@ -1,12 +1,14 @@
 # 💰 The Next Craft — Budget Planning
 
 **In-person hackathon · Crafter Station × Next**
-Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 — simultaneous · Jul 25, 2026 · 9:00–21:00 (12 h)
-200 hackers (Lima 100 · Bogotá 60 · Guatemala 40) · Base currency: USD
+Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 · Arequipa 🇵🇪 · El Salvador 🇸🇻 — simultaneous · Aug 1, 2026 · 9:00–21:00 (12 h)
+300 hackers (Lima 100 · Bogotá 60 · Guatemala 40 · Arequipa 50 · El Salvador 50) · Base currency: USD
 
 ---
 
 ## 📊 Executive summary
+
+> Budget table below is the original three-hub baseline. Arequipa and El Salvador need local venue/catering quotes before the total is final.
 
 | Item | USD |
 | --- | --- |
@@ -111,7 +113,7 @@ Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 — simultaneous · Jul 
 
 | Item | USD |
 | --- | --- |
-| Marketing & ads (3 cities) | $1,000 |
+| Marketing & ads (5 cities) | $1,000 |
 | Tooling (Luma, email, domain, hosting) | $200 |
 | Swag & asset design | $300 |
 | Coordination / buffer | $500 |

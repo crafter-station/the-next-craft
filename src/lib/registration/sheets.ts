@@ -12,6 +12,7 @@ export const HEADERS = [
   "name",
   "email",
   "phone",
+  "city",
   "role",
   "team_status",
   "team_name",
@@ -109,6 +110,7 @@ function toRow(r: Registration): (string | boolean)[] {
     r.name,
     r.email,
     r.phone,
+    r.city ?? "",
     r.role,
     r.team_status ?? "",
     r.team_name ?? "",
@@ -130,14 +132,14 @@ export async function upsertRow(reg: Registration): Promise<void> {
 
   const values = [toRow(reg)];
   if (rowIndex === -1) {
-    await api(`/values/${sheetName()}!A:L:append?valueInputOption=RAW`, {
+    await api(`/values/${sheetName()}!A:M:append?valueInputOption=RAW`, {
       method: "POST",
       body: JSON.stringify({ values }),
     });
   } else {
     const rowNum = rowIndex + 1; // a notación 1-based de A1
     await api(
-      `/values/${sheetName()}!A${rowNum}:L${rowNum}?valueInputOption=RAW`,
+      `/values/${sheetName()}!A${rowNum}:M${rowNum}?valueInputOption=RAW`,
       {
         method: "PUT",
         body: JSON.stringify({ values }),
@@ -150,7 +152,7 @@ export async function upsertRow(reg: Registration): Promise<void> {
 export async function readStatuses(): Promise<
   { code: string; status: string }[]
 > {
-  const data = (await api(`/values/${sheetName()}!A:L`)) as {
+  const data = (await api(`/values/${sheetName()}!A:M`)) as {
     values?: string[][];
   };
   const rows = data.values ?? [];

@@ -37,6 +37,7 @@ const happy = run([
   { text: "Shiara Arauzo" },
   { text: "shiara@gmail.com" },
   { buttonId: "email_yes" },
+  { buttonId: "city_arequipa" },
   { buttonId: "role_designer" },
   { buttonId: "team_yes" },
   { text: "Los Crafters" },
@@ -50,6 +51,7 @@ if (happy.effect.type === "save") {
   const a = happy.effect.answers;
   check("nombre capturado", a.name === "Shiara Arauzo");
   check("correo capturado", a.email === "shiara@gmail.com");
+  check("sede capturada", a.city === "Arequipa, Peru");
   check("rol capturado", a.role === "Designer");
   check(
     "equipo capturado",
@@ -81,6 +83,7 @@ const seek = run([
   { text: "Ana" },
   { text: "ana@gmail.com" },
   { buttonId: "email_yes" },
+  { buttonId: "city_lima" },
   { buttonId: "role_pm" },
   { buttonId: "team_seek" },
 ]);
@@ -106,7 +109,12 @@ check("correo inválido incrementa tries", invalid.session?.tries === 1);
 const existing: ExistingRegistration = {
   code: "CRAFTER-007",
   status: "pending",
-  answers: { name: "Ana", email: "ana@gmail.com", role: "PM" },
+  answers: {
+    name: "Ana",
+    email: "ana@gmail.com",
+    city: "Lima, Peru",
+    role: "PM",
+  },
 };
 const menu = run([{ text: "hola" }], existing);
 check("registrado ve el menú", menu.session?.step === "registered_menu");

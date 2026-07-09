@@ -4,6 +4,7 @@
 import {
   type Answers,
   CANCELLED,
+  CITIES,
   type Input,
   MAX_TRIES,
   promptFor,
@@ -23,7 +24,8 @@ export type Effect =
   // Guardar registro (upsert por teléfono). El caller envía completionReplies().
   | {
       type: "save";
-      answers: Required<Pick<Answers, "name" | "email" | "role">> & Answers;
+      answers: Required<Pick<Answers, "name" | "email" | "city" | "role">> &
+        Answers;
     }
   // Borrar la sesión (cancelación o flujo terminado).
   | { type: "clear" };
@@ -150,10 +152,16 @@ function handleStep(
     }
 
     case "email_confirm": {
-      if (input.buttonId === "email_yes") return next(session, "role", a);
+      if (input.buttonId === "email_yes") return next(session, "city", a);
       if (input.buttonId === "email_no")
         return next(session, "email", { ...a, email: undefined });
       return "invalid";
+    }
+
+    case "city": {
+      const city = input.buttonId ? CITIES[input.buttonId] : undefined;
+      if (!city) return "invalid";
+      return next(session, "role", { ...a, city });
     }
 
     case "role": {
@@ -216,13 +224,19 @@ function handleStep(
         ]);
       }
       if (input.buttonId === "confirm_yes") {
-        if (!a.name || !a.email || !a.role) return "invalid"; // no debería pasar
+        if (!a.name || !a.email || !a.city || !a.role) return "invalid"; // no debería pasar
         return {
           session: null,
           replies: [], // el caller envía completionReplies() con el código real
           effect: {
             type: "save",
-            answers: { ...a, name: a.name, email: a.email, role: a.role },
+            answers: {
+              ...a,
+              name: a.name,
+              email: a.email,
+              city: a.city,
+              role: a.role,
+            },
           },
         };
       }
@@ -248,7 +262,7 @@ function handleStep(
         return next(session, "name", {}, [
           {
             kind: "text",
-            body: "Vamos a actualizar tu postulación (conservas tu código). Mismas 7 preguntas:",
+            body: "Vamos a actualizar tu postulación (conservas tu código). Mismas 8 preguntas:",
           },
         ]);
       }

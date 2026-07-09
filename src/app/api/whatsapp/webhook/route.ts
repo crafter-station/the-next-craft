@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
             answers: {
               name: registration.name,
               email: registration.email,
+              city: registration.city ?? undefined,
               role: registration.role,
               teamStatus: (registration.team_status ?? undefined) as
                 | "tengo"
