@@ -44,6 +44,21 @@ There is **no test runner** configured. Use `bun simulate` to manually exercise 
 - Global styles and custom design tokens in `src/app/globals.css` (C64/B&W vintage palette, custom easings, scroll-driven animations).
 - `cn()` helper lives in `src/lib/utils.ts`.
 
+## Static assets (`public/`)
+
+Deck assets are **self-contained** under `public/deck/**` so slide decks own
+their own files and don't share ambiguous top-level folders with the rest of
+the site:
+
+- `public/deck/brand-assets/<partner>/**` — per-deck logos, favicons, og-images
+  (referenced by `src/content/decks/**/*.mdx` and `deck.json`).
+- `public/deck/photos/**` — event photos used in decks.
+
+Decks reference assets as URL strings in MDX (`<Logo src="/deck/...">`,
+`"icon": "/deck/..."` in `deck.json`), so they **must** live in `public/`;
+they can't be co-located under `src/content/`. When adding a deck asset, put it
+under `public/deck/**` and reference it with the `/deck/...` prefix.
+
 ## Linting / formatting
 
 - Biome (`biome.json`):

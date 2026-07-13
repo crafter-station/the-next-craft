@@ -1,8 +1,8 @@
 {
   "title": "The Next Craft x UPCH",
   "description": "Propuesta para que UPCH sea la sede anfitriona del hub Lima de The Next Craft: 100 participantes y 5 staff, dentro de una red de 300 builders en cinco ciudades.",
-  "image": "/brand-assets/upch/og-image.png",
-  "icon": "/brand-assets/upch/favicon.ico",
-  "appleIcon": "/brand-assets/upch/apple-touch-icon.png",
-  "manifest": "/brand-assets/upch/site.webmanifest"
+  "image": "/deck/brand-assets/upch/og-image.png",
+  "icon": "/deck/brand-assets/upch/favicon.ico",
+  "appleIcon": "/deck/brand-assets/upch/apple-touch-icon.png",
+  "manifest": "/deck/brand-assets/upch/site.webmanifest"
 }
