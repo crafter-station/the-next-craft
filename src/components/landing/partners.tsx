@@ -14,7 +14,7 @@ import { useTranslations } from "next-intl";
 const IMG_LOGOS = [
   {
     name: "Clerk",
-    src: "/sponsors/clerk.svg",
+    src: "/landing/partners/clerk.svg",
     href: "https://clerk.com",
     width: 441,
     height: 128,
@@ -22,7 +22,7 @@ const IMG_LOGOS = [
   },
   {
     name: "ElevenLabs",
-    src: "/sponsors/elevenlabs.svg",
+    src: "/brands/elevenlabs.svg",
     href: "https://elevenlabs.io",
     width: 694,
     height: 90,

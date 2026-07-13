@@ -14,7 +14,7 @@ const HEADLINE_SPONSORS = [
     wordmark: "CRAFTER STATION",
     href: "https://crafterstation.com",
     logo: {
-      src: "/organizadores/crafter-logotipo.svg",
+      src: "/landing/organizers/crafter-logotipo.svg",
       width: 707,
       height: 96,
     },

@@ -1,8 +1,8 @@
 {
   "title": "The Next Craft x UPCH",
   "description": "Propuesta de colaboración para que UPCH sea venue sponsor y universidad anfitriona de The Next Craft.",
-  "image": "/brand-assets/upch/og-image.png",
-  "icon": "/brand-assets/upch/favicon.ico",
-  "appleIcon": "/brand-assets/upch/apple-touch-icon.png",
-  "manifest": "/brand-assets/upch/site.webmanifest"
+  "image": "/deck/brand-assets/upch/og-image.png",
+  "icon": "/deck/brand-assets/upch/favicon.ico",
+  "appleIcon": "/deck/brand-assets/upch/apple-touch-icon.png",
+  "manifest": "/deck/brand-assets/upch/site.webmanifest"
 }
