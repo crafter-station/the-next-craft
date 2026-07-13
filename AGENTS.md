@@ -44,6 +44,26 @@ There is **no test runner** configured. Use `bun simulate` to manually exercise 
 - Global styles and custom design tokens in `src/app/globals.css` (C64/B&W vintage palette, custom easings, scroll-driven animations).
 - `cn()` helper lives in `src/lib/utils.ts`.
 
+## Static assets (`public/`)
+
+`public/` is partitioned **by surface** so deck and landing assets never get
+confused (they used to share `public/sponsors/`, and deleting a "landing" logo
+silently broke deck slides). The layout:
+
+- `public/landing/**` — assets used **only** by the marketing landing
+  (`src/components/landing/**`). E.g. `landing/partners/`, `landing/organizers/`.
+- `public/deck/**` — assets used **only** by the slide decks
+  (`src/content/decks/**`). E.g. `deck/sponsors/`, `deck/photos/`,
+  `deck/brand-assets/`.
+- `public/brands/**` — brand logos genuinely used by **both** surfaces (single
+  source of truth, no duplication). Currently `brands/elevenlabs.svg`.
+
+Rule: before deleting or moving a file, `grep` its path — a logo under
+`deck/**` may still be referenced by MDX, and a `brands/**` logo by both.
+Decks reference assets as URL strings in MDX (`<Logo src="/deck/...">`), so
+they **must** live in `public/`; they can't be co-located under `src/content/`.
+The root-level files (`c64.glb`, `*.svg` from `create-next-app`) are legacy/global.
+
 ## Linting / formatting
 
 - Biome (`biome.json`):
