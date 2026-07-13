@@ -34,6 +34,10 @@
     "ctaApply": "RUN Apply",
     "ctaTracks": "GOTO Tracks"
   },
+  "partners": {
+    "label": "Powered by",
+    "ariaLabel": "Technology partners"
+  },
   "countdown": {
     "ariaLabel": "Countdown to the event",
     "live": "LIVE",
@@ -199,6 +203,7 @@
   "sponsors": {
     "label": "SPONSORS",
     "headlineAria": "Headline sponsors",
+    "organizerRole": "ORGANIZING COMMUNITY",
     "ctaPrefix": "Want to sponsor? →"
   },
   "faq": {

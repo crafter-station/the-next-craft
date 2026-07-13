@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { useTranslations } from "next-intl";
 
 import { SectionHeader } from "./section-header";
@@ -5,13 +7,17 @@ import { SectionHeader } from "./section-header";
 const HEADLINE_SPONSORS = [
   {
     wordmark: "NEXT FELLOW",
-    role: "ORGANIZER",
     href: "https://nextfellow.ai",
+    logo: null,
   },
   {
     wordmark: "CRAFTER STATION",
-    role: "ORGANIZER",
     href: "https://crafterstation.com",
+    logo: {
+      src: "/organizadores/crafter-logotipo.svg",
+      width: 707,
+      height: 96,
+    },
   },
 ] as const;
 
@@ -31,7 +37,7 @@ export function Sponsors() {
           className="grid grid-cols-1 md:grid-cols-2 list-none m-0 p-0 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]"
           aria-label={t("headlineAria")}
         >
-          {HEADLINE_SPONSORS.map(({ wordmark, role, href }) => (
+          {HEADLINE_SPONSORS.map(({ wordmark, href, logo }) => (
             <li key={wordmark} className="group">
               <a
                 href={href}
@@ -41,18 +47,28 @@ export function Sponsors() {
                            border-r border-b border-[var(--line)]
                            hover:bg-[var(--screen)] transition-colors duration-150 no-underline"
               >
-                {/* Wordmark pixel */}
-                <span
-                  className="font-pixel font-bold uppercase leading-tight
-                             text-[var(--text)] select-none break-words"
-                  style={{ fontSize: "clamp(1.25rem, 3vw, 2.25rem)" }}
-                >
-                  {wordmark}
-                </span>
+                {/* Logotipo (imagen) o wordmark pixel según el sponsor */}
+                {logo ? (
+                  <Image
+                    src={logo.src}
+                    alt={wordmark}
+                    width={logo.width}
+                    height={logo.height}
+                    className="h-9 md:h-11 w-auto select-none"
+                  />
+                ) : (
+                  <span
+                    className="font-pixel font-bold uppercase leading-tight
+                               text-[var(--text)] select-none break-words"
+                    style={{ fontSize: "clamp(1.25rem, 3vw, 2.25rem)" }}
+                  >
+                    {wordmark}
+                  </span>
+                )}
 
                 {/* Role label */}
                 <span className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-[var(--bright)]">
-                  {role}
+                  {t("organizerRole")}
                 </span>
               </a>
             </li>

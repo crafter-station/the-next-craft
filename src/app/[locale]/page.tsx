@@ -7,6 +7,7 @@ import { FinalCta } from "@/components/landing/final-cta";
 import { Footer } from "@/components/landing/footer";
 import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
+import { Partners } from "@/components/landing/partners";
 import { Prizes } from "@/components/landing/prizes";
 import { Schedule } from "@/components/landing/schedule";
 import { SectionTitle } from "@/components/landing/section-title";
@@ -91,6 +92,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Nav />
       <main id="main-content">
         <Hero />
+        <Partners />
         <SectionTitle line="10" name={tSections("manifesto")} />
         <About />
         <Tldr />
