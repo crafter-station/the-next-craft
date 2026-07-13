@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-import { Codex } from "@lobehub/icons";
+import CodexIcon from "@lobehub/icons/es/Codex/components/Mono";
+import CodexText from "@lobehub/icons/es/Codex/components/Text";
 import { useTranslations } from "next-intl";
 
 /*
@@ -84,8 +85,8 @@ export function Partners() {
               aria-label="Codex"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <Codex size={34} />
-              <Codex.Text size={28} />
+              <CodexIcon size={34} />
+              <CodexText size={28} />
             </a>
           </li>
         </ul>
