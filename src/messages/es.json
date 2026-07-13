@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon por Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 1 de agosto, 2026. 300 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 31 de julio.",
+    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto, 2026. 300 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 31 de julio.",
     "ogLocale": "es_PE"
   },
   "nav": {
@@ -28,9 +28,9 @@
   },
   "hero": {
     "h1": "the next craft",
-    "circular": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AGO 2026 · 12 HORAS · DE CERO A PRODUCTO · ",
+    "circular": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 29 AGO 2026 · 12 HORAS · DE CERO A PRODUCTO · ",
     "subhead": "Hackathon presencial",
-    "specs": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AGO 2026 · 12 HORAS",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 29 AGO 2026 · 12 HORAS",
     "ctaApply": "RUN Postular",
     "ctaTracks": "GOTO Tracks"
   },
@@ -67,7 +67,7 @@
   "tldr": {
     "ariaLabel": "Especificaciones del evento",
     "specs": {
-      "date": { "label": "FECHA", "value": "1 AGO 2026", "sub": "" },
+      "date": { "label": "FECHA", "value": "29 AGO 2026", "sub": "" },
       "place": {
         "label": "LUGAR",
         "value": "Lima · Bogotá · Guatemala · Arequipa · El Salvador",
@@ -143,8 +143,8 @@
   "schedule": {
     "label": "AGENDA",
     "headline": "AGENDA",
-    "subtitle": "SÁBADO 1 AGO 2026 · 09:00–21:00",
-    "srHeading": "Agenda — sábado 1 de agosto 2026, de 09:00 a 21:00",
+    "subtitle": "SÁBADO 29 AGO 2026 · 09:00–21:00",
+    "srHeading": "Agenda — sábado 29 de agosto 2026, de 09:00 a 21:00",
     "printLine": "AGENDA",
     "printLineSub": "12 HORAS",
     "ariaLabel": "Agenda del día",

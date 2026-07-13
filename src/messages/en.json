@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon by Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá, Guatemala, Arequipa and El Salvador — August 1, 2026. 300 seats, teams of 3–5, prizes TBA. Apply by July 31.",
+    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá, Guatemala, Arequipa and El Salvador — August 29, 2026. 300 seats, teams of 3–5, prizes TBA. Apply by July 31.",
     "ogLocale": "en_US"
   },
   "nav": {
@@ -28,9 +28,9 @@
   },
   "hero": {
     "h1": "the next craft",
-    "circular": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AUG 2026 · 12 HOURS · ZERO TO PRODUCT · ",
+    "circular": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 29 AUG 2026 · 12 HOURS · ZERO TO PRODUCT · ",
     "subhead": "In-person hackathon",
-    "specs": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 1 AUG 2026 · 12 HOURS",
+    "specs": "LIMA · BOGOTÁ · GUATEMALA · AREQUIPA · EL SALVADOR · 29 AUG 2026 · 12 HOURS",
     "ctaApply": "RUN Apply",
     "ctaTracks": "GOTO Tracks"
   },
@@ -67,7 +67,7 @@
   "tldr": {
     "ariaLabel": "Event specifications",
     "specs": {
-      "date": { "label": "DATE", "value": "1 AUG 2026", "sub": "" },
+      "date": { "label": "DATE", "value": "29 AUG 2026", "sub": "" },
       "place": {
         "label": "PLACE",
         "value": "Lima · Bogotá · Guatemala · Arequipa · El Salvador",
@@ -143,8 +143,8 @@
   "schedule": {
     "label": "SCHEDULE",
     "headline": "SCHEDULE",
-    "subtitle": "SATURDAY 1 AUG 2026 · 09:00–21:00",
-    "srHeading": "Schedule — Saturday August 1, 2026, from 09:00 to 21:00",
+    "subtitle": "SATURDAY 29 AUG 2026 · 09:00–21:00",
+    "srHeading": "Schedule — Saturday August 29, 2026, from 09:00 to 21:00",
     "printLine": "SCHEDULE",
     "printLineSub": "12 HOURS",
     "ariaLabel": "Day schedule",
