@@ -17,7 +17,7 @@ export function LanguageToggle() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const activeIndex = routing.locales.indexOf(locale);
+  const activeIndex = routing.locales.findIndex((l) => l === locale);
 
   function switchTo(next: (typeof routing.locales)[number]) {
     if (next === locale) return;
