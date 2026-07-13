@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/deck/[slug]": ["./src/content/decks/**/*"],
   },
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 export default withNextIntl(nextConfig);

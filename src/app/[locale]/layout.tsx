@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -123,7 +124,10 @@ export default async function LocaleLayout({
         </a>
         <BootLoader />
         <SmoothScroll />
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {/* Crossfade en vez de flash duro al cambiar de locale (mismo pathname, distinto [locale]) */}
+          <ViewTransition default="auto">{children}</ViewTransition>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
