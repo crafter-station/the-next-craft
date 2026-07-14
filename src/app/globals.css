@@ -1459,7 +1459,7 @@
   padding: var(--deck-stage-padding-y) var(--deck-stage-padding-x)
     calc(var(--deck-stage-padding-y) + env(safe-area-inset-bottom));
   display: flex;
-  align-items: center;
+  align-items: safe center;
   justify-content: center;
   overflow-y: auto;
   overflow-x: hidden;
