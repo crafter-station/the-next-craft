@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon por Crafter Station × Next",
     "titleTemplate": "%s · The Next Craft",
-    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto, 2026. 300 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 31 de julio.",
+    "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto, 2026. 300 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 15 de agosto.",
     "ogLocale": "es_PE"
   },
   "nav": {
@@ -82,7 +82,7 @@
       "teams": { "label": "EQUIPOS", "value": "3–5 personas", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
-        "value": "31 JUL 2026",
+        "value": "15 AGO 2026",
         "sub": "23:59 GMT-5"
       }
     }
@@ -265,12 +265,12 @@
     ],
     "headline": "¿CONSTRUYES?\nPOSTULA.",
     "specs": [
-      "DEADLINE ........ 31 JUL 2026 · 23:59 GMT-5",
+      "DEADLINE ........ 15 AGO 2026 · 23:59 GMT-5",
       "CUPOS ........... 300 · ADMISIÓN SELECTIVA",
       "COSTO ........... GRATIS",
       "FORMULARIO ...... 7 PREGUNTAS · 90 SEGUNDOS"
     ],
-    "specsSr": "Deadline: 31 de julio de 2026, 23:59 GMT-5. 300 cupos, admisión selectiva. Gratis. El formulario son 8 preguntas, 90 segundos.",
+    "specsSr": "Deadline: 15 de agosto de 2026, 23:59 GMT-5. 300 cupos, admisión selectiva. Gratis. El formulario son 8 preguntas, 90 segundos.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ POSTULAR POR WHATSAPP → ]",
     "ctaForm": "[ POSTULAR → ]",

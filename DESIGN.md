@@ -129,7 +129,7 @@ mono 11px tracking 0.18em.
   Lima, Bogotá, Ciudad de Guatemala, Arequipa y El Salvador
 - **Formato**: 12 horas · 300 hackers · equipos de 3–5
 - **Premios**: por anunciar + créditos de partners para todos
-- **Deadline postulación**: 31 de julio, 2026 (23:59 GMT-5)
+- **Deadline postulación**: 15 de agosto, 2026 (23:59 GMT-5)
 - **Tracks**: Content Machine, Out of the Box y Learning by Shipping. La vara
   central sigue siendo producto real usado por alguien antes del cierre.
 - **Idioma**: español, tono directo pero no arrogante ("a construir",
