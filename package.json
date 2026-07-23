@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "biome check .",
     "format": "biome format --write .",
+    "font:setup": "node scripts/setup-brand-font.mjs",
+    "generate:sponsor-assets": "node scripts/generate-sponsor-assets.mjs",
     "simulate": "bun scripts/simulate.ts"
   },
   "dependencies": {
