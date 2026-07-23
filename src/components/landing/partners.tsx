@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 /*
   Partners — banda que remata el hero antes del manifiesto. Muestra los
   logos de los sponsors tecnológicos en grande, en blanco sobre el void,
-  con un dim vintage que se aclara al hover. Clerk y ElevenLabs son SVGs
+  con un dim vintage que se aclara al hover. Los wordmarks son SVGs
   locales; Codex viene del set de @lobehub/icons (mono → currentColor,
   por eso hereda el color bone del enlace).
 */
@@ -28,6 +28,14 @@ const IMG_LOGOS = [
     width: 694,
     height: 90,
     className: "h-6 md:h-8",
+  },
+  {
+    name: "Tavily",
+    src: "/sponsors/tavily.svg",
+    href: "https://tavily.com",
+    width: 186,
+    height: 56,
+    className: "h-8 md:h-10",
   },
 ] as const;
 
