@@ -12,14 +12,33 @@ import { useTranslations } from "next-intl";
   por eso hereda el color bone del enlace).
 */
 
-const IMG_LOGOS = [
+const FEATURED_LOGOS = [
   {
     name: "Clerk",
     src: "/sponsors/clerk.svg",
     href: "https://clerk.com",
     width: 441,
     height: 128,
-    className: "h-8 md:h-11",
+    className: "h-9 md:h-16",
+  },
+  {
+    name: "CloudForge AI",
+    src: "/sponsors/cloudforge/imagotipo_cloudforge.svg",
+    href: "https://www.cloud-forge-ai.com/",
+    width: 120,
+    height: 32,
+    className: "h-11 md:h-20 grayscale brightness-0 invert",
+  },
+] as const;
+
+const IMG_LOGOS = [
+  {
+    name: "Exa",
+    src: "/sponsors/exa.svg",
+    href: "https://exa.ai",
+    width: 278,
+    height: 100,
+    className: "h-6 md:h-8",
   },
   {
     name: "ElevenLabs",
@@ -27,7 +46,7 @@ const IMG_LOGOS = [
     href: "https://elevenlabs.io",
     width: 694,
     height: 90,
-    className: "h-6 md:h-8",
+    className: "h-4 md:h-6",
   },
   {
     name: "Tavily",
@@ -35,15 +54,7 @@ const IMG_LOGOS = [
     href: "https://tavily.com",
     width: 186,
     height: 56,
-    className: "h-8 md:h-10",
-  },
-  {
-    name: "Exa",
-    src: "/sponsors/exa.svg",
-    href: "https://exa.ai",
-    width: 278,
-    height: 100,
-    className: "h-8 md:h-10",
+    className: "h-6 md:h-8",
   },
 ] as const;
 
@@ -63,8 +74,32 @@ export function Partners() {
           {t("label")}
         </p>
 
+        <ul className="flex items-center justify-center gap-x-6 md:gap-x-24 list-none m-0 p-0">
+          {FEATURED_LOGOS.map(
+            ({ name, src, href, width, height, className }) => (
+              <li key={name}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={name}
+                  className={`${LINK_BASE} block`}
+                >
+                  <Image
+                    src={src}
+                    alt={name}
+                    width={width}
+                    height={height}
+                    className={`${className} w-auto`}
+                  />
+                </a>
+              </li>
+            ),
+          )}
+        </ul>
+
         <ul
-          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 md:gap-x-16 list-none m-0 p-0"
+          className="flex flex-wrap items-center justify-center gap-x-10 gap-y-7 md:gap-x-14 list-none m-0 p-0"
           aria-label={t("ariaLabel")}
         >
           {IMG_LOGOS.map(({ name, src, href, width, height, className }) => (
@@ -101,8 +136,8 @@ export function Partners() {
               aria-label="Codex"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <CodexIcon size={34} />
-              <CodexText size={28} />
+              <CodexIcon size={26} />
+              <CodexText size={21} />
             </a>
           </li>
         </ul>
