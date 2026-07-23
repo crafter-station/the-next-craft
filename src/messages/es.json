@@ -196,25 +196,56 @@
       "Swag oficial del evento",
       "Acceso a la comunidad de Crafter Station",
       "1,000 créditos de Tavily (8 USD en créditos del partner)",
+      "50 USD en créditos de Exa",
       "Comida durante el evento"
     ],
-    "winnersLabel": "CRÉDITOS DE TAVILY PARA GANADORES",
-    "winnersAria": "Premios en créditos de Tavily para los tres primeros puestos",
+    "winnersLabel": "CRÉDITOS DE PARTNERS PARA GANADORES",
+    "winnersAria": "Premios en créditos de partners para los tres equipos ganadores",
     "winners": [
       {
         "place": "GANADOR #1",
-        "credits": "10,000 CRÉDITOS",
-        "value": "80 USD en créditos del partner"
+        "rewards": [
+          {
+            "partner": "TAVILY",
+            "credits": "10,000 CRÉDITOS",
+            "value": "80 USD en créditos del partner"
+          },
+          {
+            "partner": "EXA",
+            "credits": "500 USD",
+            "value": "en créditos del partner"
+          }
+        ]
       },
       {
         "place": "GANADOR #2",
-        "credits": "5,000 CRÉDITOS",
-        "value": "40 USD en créditos del partner"
+        "rewards": [
+          {
+            "partner": "TAVILY",
+            "credits": "5,000 CRÉDITOS",
+            "value": "40 USD en créditos del partner"
+          },
+          {
+            "partner": "EXA",
+            "credits": "500 USD",
+            "value": "en créditos del partner"
+          }
+        ]
       },
       {
         "place": "GANADOR #3",
-        "credits": "3,000 CRÉDITOS",
-        "value": "24 USD en créditos del partner"
+        "rewards": [
+          {
+            "partner": "TAVILY",
+            "credits": "3,000 CRÉDITOS",
+            "value": "24 USD en créditos del partner"
+          },
+          {
+            "partner": "EXA",
+            "credits": "500 USD",
+            "value": "en créditos del partner"
+          }
+        ]
       }
     ],
     "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."

@@ -37,6 +37,14 @@ const IMG_LOGOS = [
     height: 56,
     className: "h-8 md:h-10",
   },
+  {
+    name: "Exa",
+    src: "/sponsors/exa.svg",
+    href: "https://exa.ai",
+    width: 278,
+    height: 100,
+    className: "h-8 md:h-10",
+  },
 ] as const;
 
 const LINK_BASE =
