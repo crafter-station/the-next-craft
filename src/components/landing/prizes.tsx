@@ -17,8 +17,11 @@ export function Prizes() {
   const perks = t.raw("perks") as readonly string[];
   const winners = t.raw("winners") as readonly {
     place: string;
-    credits: string;
-    value: string;
+    rewards: readonly {
+      partner: string;
+      credits: string;
+      value: string;
+    }[];
   }[];
 
   return (
@@ -63,10 +66,10 @@ export function Prizes() {
                 style={{ borderColor: RULE }}
                 aria-label={t("winnersAria")}
               >
-                {winners.map(({ place, credits, value }) => (
+                {winners.map(({ place, rewards }) => (
                   <li
                     key={place}
-                    className="flex flex-col gap-2 px-5 py-5 border-r border-b"
+                    className="flex flex-col gap-4 px-5 py-5 border-r border-b"
                     style={{ borderColor: RULE }}
                   >
                     <span
@@ -75,18 +78,30 @@ export function Prizes() {
                     >
                       {place}
                     </span>
-                    <span
-                      className="font-pixel text-lg leading-tight"
-                      style={{ color: INK }}
-                    >
-                      {credits}
-                    </span>
-                    <span
-                      className="font-sans text-sm leading-snug"
-                      style={{ color: INK_DIM }}
-                    >
-                      {value}
-                    </span>
+                    <div className="flex flex-col gap-4">
+                      {rewards.map(({ partner, credits, value }) => (
+                        <div key={partner} className="flex flex-col gap-1">
+                          <span
+                            className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase"
+                            style={{ color: INK_DIM }}
+                          >
+                            {partner}
+                          </span>
+                          <span
+                            className="font-pixel text-lg leading-tight"
+                            style={{ color: INK }}
+                          >
+                            {credits}
+                          </span>
+                          <span
+                            className="font-sans text-sm leading-snug"
+                            style={{ color: INK_DIM }}
+                          >
+                            {value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </li>
                 ))}
               </ul>
