@@ -195,8 +195,27 @@
       "Mentorship throughout the 12 hours",
       "Official event swag",
       "Access to the Crafter Station community",
-      "Tool credits",
+      "1,000 Tavily credits (8 USD in partner credits)",
       "Food during the event"
+    ],
+    "winnersLabel": "TAVILY CREDITS FOR WINNERS",
+    "winnersAria": "Tavily credit prizes for the top three winners",
+    "winners": [
+      {
+        "place": "WINNER #1",
+        "credits": "10,000 CREDITS",
+        "value": "80 USD in partner credits"
+      },
+      {
+        "place": "WINNER #2",
+        "credits": "5,000 CREDITS",
+        "value": "40 USD in partner credits"
+      },
+      {
+        "place": "WINNER #3",
+        "credits": "3,000 CREDITS",
+        "value": "24 USD in partner credits"
+      }
     ],
     "note": "Jury evaluates with live demo + pitch. We'll publish the rubric soon."
   },
