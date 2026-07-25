@@ -116,8 +116,9 @@ function artwork({ width, height }) {
   const scale = width / 1080;
   const center = width / 2;
   const headerNudge = Math.round(40 * scale);
-  const dateY = height - Math.round(200 * scale);
-  const citiesY = height - Math.round(158 * scale);
+  const wordmarkY = height - Math.round(244 * scale);
+  const dateY = height - Math.round(188 * scale);
+  const citiesY = height - Math.round(140 * scale);
 
   return Buffer.from(`
     <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
@@ -125,29 +126,11 @@ function artwork({ width, height }) {
         <text x="${center}" y="${Math.round(126 * scale) + headerNudge}" fill="${colors.dim}" font-size="${Math.round(22 * scale)}" font-weight="700" letter-spacing="5" text-anchor="middle">WELCOME TO OUR</text>
         <text x="${center}" y="${Math.round(230 * scale) + headerNudge}" fill="${colors.text}" font-size="${Math.round(76 * scale)}" font-weight="700" letter-spacing="4" text-anchor="middle">SPONSOR</text>
       </g>
+      <text x="${center}" y="${wordmarkY}" fill="${colors.bright}" font-family="${scriptFontFamily}" font-size="${Math.round(31 * scale)}" text-anchor="middle">the next craft</text>
       <g font-family="${fontFamily}">
-        <text x="${center}" y="${dateY}" fill="${colors.text}" font-size="${Math.round(28 * scale)}" font-weight="700" letter-spacing="3" text-anchor="middle">29 AUGUST 2026</text>
-        <text x="${center}" y="${citiesY}" fill="${colors.dim}" font-size="${Math.round(18 * scale)}" font-weight="500" letter-spacing="1.5" text-anchor="middle">LIMA · AREQUIPA · BOGOTA · GUATEMALA · EL SALVADOR</text>
+        <text x="${center}" y="${dateY}" fill="${colors.text}" font-size="${Math.round(34 * scale)}" font-weight="700" letter-spacing="3.5" text-anchor="middle">29 AUGUST 2026</text>
+        <text x="${center}" y="${citiesY}" fill="${colors.dim}" font-size="${Math.round(12 * scale)}" font-weight="500" letter-spacing="1.5" text-anchor="middle">LIMA · AREQUIPA · BOGOTA · GUATEMALA · EL SALVADOR</text>
       </g>
-    </svg>
-  `);
-}
-
-function wordmarkMosaic({ width, height }) {
-  const scale = width / 1080;
-  const columns = [0.05, 0.275, 0.5, 0.725, 0.95];
-  const rows = [0.05, 0.3, 0.7, 0.95];
-  const tiles = rows.flatMap((row, rowIndex) =>
-    columns.flatMap((column, columnIndex) => {
-      if ((rowIndex + columnIndex) % 2 !== 0) return [];
-
-      return `<text x="${Math.round(column * width)}" y="${Math.round(row * height)}" fill="${colors.bright}" fill-opacity="0.04" font-family="${scriptFontFamily}" font-size="${Math.round(29 * scale)}" text-anchor="middle" dominant-baseline="middle">the next craft</text>`;
-    }),
-  );
-
-  return Buffer.from(`
-    <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      ${tiles.join("\n")}
     </svg>
   `);
 }
@@ -226,7 +209,6 @@ async function render(sponsor, format) {
       background: colors.void,
     },
   }).composite([
-    { input: wordmarkMosaic(format), left: 0, top: 0 },
     {
       input: computer,
       left: computerLeft,
