@@ -25,7 +25,8 @@ async function loadGoogleFont(family: string, text: string) {
 }
 
 const SCRIPT_TITLE = "the next craft";
-const SPECS = "LIMA · BOGOTÁ · GUATEMALA · 29 AGO 2026 · 12H";
+const SPECS =
+  "LIMA · AREQUIPA · BOGOTÁ · GUATEMALA · EL SALVADOR · 29 AGO 2026 · 12H";
 const READY = "READY.";
 
 export default async function TwitterImage() {
@@ -73,9 +74,9 @@ export default async function TwitterImage() {
         <div
           style={{
             color: "#A2A096",
-            fontSize: "21px",
+            fontSize: "17px",
             fontFamily: "IBM Plex Mono",
-            letterSpacing: "0.14em",
+            letterSpacing: "0.08em",
             display: "flex",
           }}
         >

@@ -18,5 +18,10 @@ export async function GET(
   const reg = await getRegistrationByCode(normalized);
   if (!reg) return new Response("Not found", { status: 404 });
 
-  return boardingPassImage({ code: reg.code, name: reg.name, role: reg.role });
+  return boardingPassImage({
+    code: reg.code,
+    name: reg.name,
+    role: reg.role,
+    city: reg.city ?? "SEDE POR CONFIRMAR",
+  });
 }
