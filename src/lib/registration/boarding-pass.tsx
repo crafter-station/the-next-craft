@@ -11,8 +11,9 @@ export function boardingPassImage(params: {
   code: string;
   name: string;
   role: string;
+  city: string;
 }): ImageResponse {
-  const { code, name, role } = params;
+  const { code, name, role, city } = params;
   return new ImageResponse(
     <div
       style={{
@@ -122,7 +123,7 @@ export function boardingPassImage(params: {
           }}
         >
           <span>29 AGO 2026</span>
-          <span>LIMA, PERÚ</span>
+          <span>{city}</span>
           <span>12 HORAS</span>
         </div>
       </div>
