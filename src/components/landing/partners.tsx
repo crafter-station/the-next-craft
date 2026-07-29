@@ -74,6 +74,22 @@ export function Partners() {
           {t("label")}
         </p>
 
+        <a
+          href="https://www.convex.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Convex"
+          className="block w-full max-w-xl border border-[var(--line)] bg-[var(--bone)] opacity-90 transition-opacity duration-200 hover:opacity-100"
+        >
+          <Image
+            src="/sponsors/convex.svg"
+            alt="Convex"
+            width={382}
+            height={146}
+            className="h-auto w-full select-none"
+          />
+        </a>
+
         <ul className="flex items-center justify-center gap-x-6 md:gap-x-24 list-none m-0 p-0">
           {FEATURED_LOGOS.map(
             ({ name, src, href, width, height, className }) => (
