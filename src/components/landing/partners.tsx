@@ -79,14 +79,14 @@ export function Partners() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Convex"
-          className="block w-full max-w-xl border border-[var(--line)] bg-[var(--bone)] opacity-90 transition-opacity duration-200 hover:opacity-100"
+          className="-my-6 block w-full max-w-xl opacity-80 transition-opacity duration-200 hover:opacity-100 md:-my-10"
         >
           <Image
             src="/sponsors/convex.svg"
             alt="Convex"
             width={382}
             height={146}
-            className="h-auto w-full select-none"
+            className="h-auto w-full select-none grayscale"
           />
         </a>
 
