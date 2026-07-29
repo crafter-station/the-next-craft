@@ -20,7 +20,7 @@ import { ScrambleText } from "@/components/effects/scramble-text";
 */
 
 // Registro por Luma — único canal. El CTA abre el evento en Luma.
-const LUMA_URL = "https://luma.com/b6hqjpzd";
+const LUMA_URL = "https://luma.com/hack0?tag=the%20next%20craft";
 
 const HEADER_THRESHOLDS = [0.03, 0.07] as const;
 const BOOT_THRESHOLDS = [0.11, 0.15, 0.19, 0.23, 0.27] as const;
