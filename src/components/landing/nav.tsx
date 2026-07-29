@@ -51,7 +51,7 @@ export function Nav() {
 
           {/* CTA — keycap beige */}
           <a
-            href="#postular"
+            href="https://luma.com/hack0?tag=the%20next%20craft"
             data-magnetic
             className="cta-btn keycap font-mono text-xs font-semibold tracking-[0.12em] uppercase px-4 py-2 transition-colors duration-150"
           >
