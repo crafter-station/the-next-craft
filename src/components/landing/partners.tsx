@@ -2,6 +2,10 @@ import Image from "next/image";
 
 import CodexIcon from "@lobehub/icons/es/Codex/components/Mono";
 import CodexText from "@lobehub/icons/es/Codex/components/Text";
+import N8nIcon from "@lobehub/icons/es/N8n/components/Mono";
+import N8nText from "@lobehub/icons/es/N8n/components/Text";
+import ReplitIcon from "@lobehub/icons/es/Replit/components/Mono";
+import ReplitText from "@lobehub/icons/es/Replit/components/Text";
 import { useTranslations } from "next-intl";
 
 /*
@@ -139,11 +143,36 @@ export function Partners() {
           ))}
 
           <li>
+            <a
+              href="https://replit.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Replit"
+              className={`${LINK_BASE} inline-flex items-center gap-2`}
+            >
+              <ReplitIcon size={26} />
+              <ReplitText size={21} />
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://n8n.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="n8n"
+              className={`${LINK_BASE} inline-flex items-center gap-2`}
+            >
+              <N8nIcon size={26} />
+              <N8nText size={21} />
+            </a>
+          </li>
+
+          <li>
             {/*
-              Lockup horizontal armado a mano: el Codex.Combine de lobehub
-              depende del Flexbox CSS-in-JS de @lobehub/ui (que no se inyecta
-              aquí) y termina apilando ícono sobre texto. Componemos el ícono
-              (viewBox 24×24) + wordmark (Codex.Text) en un flex propio.
+              Los Combine de lobehub dependen del Flexbox CSS-in-JS de
+              @lobehub/ui (que no se inyecta aquí) y terminan apilando ícono
+              sobre texto. Componemos los lockups en flex propios.
             */}
             <a
               href="https://openai.com/codex"
