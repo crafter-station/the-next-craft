@@ -46,6 +46,7 @@ const sponsors = [
     logo: "public/sponsors/tavily.svg",
     width: 700,
   },
+  { slug: "vapi", logo: "public/sponsors/vapi.svg", width: 680 },
 ];
 
 const formats = [

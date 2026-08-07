@@ -68,6 +68,14 @@ const IMG_LOGOS = [
     height: 100,
     className: "h-6 md:h-8",
   },
+  {
+    name: "Vapi",
+    src: "/sponsors/vapi.svg",
+    href: "https://vapi.ai",
+    width: 101,
+    height: 33,
+    className: "h-5 md:h-7",
+  },
 ] as const;
 
 const LINK_BASE =
