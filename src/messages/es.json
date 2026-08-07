@@ -198,6 +198,8 @@
       "1,000 créditos de Tavily",
       "50 USD en créditos de Exa",
       "50 USD en créditos de Vapi por participante",
+      "Un mes de n8n Cloud Pro por participante",
+      "Plan Replit Core + 20 USD en créditos de desarrollo",
       "Comida durante el evento"
     ],
     "winnersLabel": "EFECTIVO + CRÉDITOS DE PARTNERS PARA GANADORES",
@@ -220,6 +222,16 @@
             "partner": "EXA",
             "credits": "500 USD",
             "value": "en créditos del partner"
+          },
+          {
+            "partner": "N8N",
+            "credits": "CLOUD PRO",
+            "value": "para cada integrante del equipo"
+          },
+          {
+            "partner": "SWAG DE N8N",
+            "credits": "SWAG BOX",
+            "value": "para cada integrante del equipo"
           }
         ]
       },
@@ -240,6 +252,11 @@
             "partner": "EXA",
             "credits": "500 USD",
             "value": "en créditos del partner"
+          },
+          {
+            "partner": "SWAG DE N8N",
+            "credits": "SWAG BOX",
+            "value": "para cada integrante del equipo"
           }
         ]
       },
@@ -255,6 +272,11 @@
             "partner": "EXA",
             "credits": "500 USD",
             "value": "en créditos del partner"
+          },
+          {
+            "partner": "SWAG DE N8N",
+            "credits": "SWAG BOX",
+            "value": "para cada integrante del equipo"
           }
         ]
       }
