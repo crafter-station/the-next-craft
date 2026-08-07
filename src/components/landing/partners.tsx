@@ -37,11 +37,11 @@ const FEATURED_LOGOS = [
 
 const IMG_LOGOS = [
   {
-    name: "Exa",
-    src: "/sponsors/exa.svg",
-    href: "https://exa.ai",
-    width: 278,
-    height: 100,
+    name: "Tavily",
+    src: "/sponsors/tavily.svg",
+    href: "https://tavily.com",
+    width: 186,
+    height: 56,
     className: "h-6 md:h-8",
   },
   {
@@ -53,11 +53,19 @@ const IMG_LOGOS = [
     className: "h-4 md:h-6",
   },
   {
-    name: "Tavily",
-    src: "/sponsors/tavily.svg",
-    href: "https://tavily.com",
-    width: 186,
-    height: 56,
+    name: "3DevLabs",
+    src: "/sponsors/3DevLabs.svg",
+    href: "https://3devlabs.app",
+    width: 1295,
+    height: 1251,
+    className: "h-8 md:h-10",
+  },
+  {
+    name: "Exa",
+    src: "/sponsors/exa.svg",
+    href: "https://exa.ai",
+    width: 278,
+    height: 100,
     className: "h-6 md:h-8",
   },
 ] as const;
