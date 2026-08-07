@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
   marfil con tinta oscura, como prender la pantalla. Colores locales
   (tinta sobre bone) en vez de los tokens de dark.
 
-  El premio aún no se anuncia → "PRONTO" como cifra protagonista; lo
-  garantizado para todos vive en la columna de perks.
+  El premio en efectivo es la cifra protagonista; lo garantizado para todos
+  vive en la columna de perks.
 */
 const INK = "#1a1a17";
 const INK_DIM = "#6f6a5d";

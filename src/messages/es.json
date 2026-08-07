@@ -186,26 +186,31 @@
   },
   "prizes": {
     "label": "PREMIOS",
-    "amount": "PRONTO",
-    "amountAria": "Premio por anunciar",
-    "amountSub": "PREMIO PRINCIPAL POR ANUNCIAR",
+    "amount": "$1,500",
+    "amountAria": "1,500 USD en premios en efectivo",
+    "amountSub": "TOTAL EN PREMIOS EN EFECTIVO",
     "perksLabel": "PARA TODOS LOS QUE ENTRAN",
     "perksAria": "Beneficios para todos los participantes",
     "perks": [
       "Mentorías durante las 12 horas",
       "Swag oficial del evento",
       "Acceso a la comunidad de Crafter Station",
-      "1,000 créditos de Tavily (8 USD en créditos del partner)",
+      "1,000 créditos de Tavily",
       "50 USD en créditos de Exa",
       "50 USD en créditos de Vapi por participante",
       "Comida durante el evento"
     ],
-    "winnersLabel": "CRÉDITOS DE PARTNERS PARA GANADORES",
-    "winnersAria": "Premios en créditos de partners para los tres equipos ganadores",
+    "winnersLabel": "EFECTIVO + CRÉDITOS DE PARTNERS PARA GANADORES",
+    "winnersAria": "Premios en efectivo y créditos de partners para los tres equipos ganadores",
     "winners": [
       {
         "place": "GANADOR #1",
         "rewards": [
+          {
+            "partner": "PREMIO EN EFECTIVO",
+            "credits": "$1,000 USD",
+            "value": "en efectivo"
+          },
           {
             "partner": "TAVILY",
             "credits": "10,000 CRÉDITOS",
@@ -221,6 +226,11 @@
       {
         "place": "GANADOR #2",
         "rewards": [
+          {
+            "partner": "PREMIO EN EFECTIVO",
+            "credits": "$500 USD",
+            "value": "en efectivo"
+          },
           {
             "partner": "TAVILY",
             "credits": "5,000 CRÉDITOS",
