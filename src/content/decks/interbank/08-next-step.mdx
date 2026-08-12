@@ -1,0 +1,35 @@
+---
+title: Mejor ajuste
+---
+
+<div className="ib-header">
+  <SlideTitle line="70">TALENT AND TRACK PARTNER</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">MEJOR AJUSTE PARA INTERBANK</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 2,500</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">ACTIVACIÓN + TALENTO</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Visibilidad regional con profundidad en Lima.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Conserva el núcleo de activación, talento y contenido.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p>
+    <Lead>El mejor equilibrio entre alcance y participación.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Marca", "Logo prioritario en sitio y materiales de activación"],
+        ["Social", "Una publicación dedicada para LinkedIn e Instagram y recap"],
+        ["Activación", "Track o premio Interbank; hasta dos mentores o jurados en Lima"],
+        ["Talento", "Conexiones autorizadas y reporte regional"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Talent and Track Partner</span><span>Sin exclusividad</span><span>USD 2,500</span></div>
+<p className="ib-note">Inversión en dólares estadounidenses. Facturación, impuestos y condiciones de pago se formalizan en el acuerdo comercial.</p>

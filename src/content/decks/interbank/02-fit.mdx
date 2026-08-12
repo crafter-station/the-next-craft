@@ -1,0 +1,33 @@
+---
+title: La oportunidad
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">UNA PROMESA DE MARCA CONVERTIDA EN EVIDENCIA</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">Interbank ya prioriza</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>Mejor talento global</span><span>Capacidades digitales clave</span><span>Innovación continua y colaboración</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft lo vuelve visible</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>Admisión selectiva</span><span>Producto real en 12 horas</span><span>Demos en vivo y craft observable</span>
+    </div>
+  </div>
+</div>
+
+<Lead>Interbank no solo dice que invierte en talento. Lo hace visible.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Marca", "Posición regional"], ["Talento", "Ejecución observable"], ["Contenido", "Historias con producto"], ["Medición", "Resultados verificables"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="font-mono text-[10px] text-[var(--text-dim)]">Fuentes: Reporte de Sostenibilidad Interbank 2025, pp. 11 a 13 y 72 a 75 · Información oficial de The Next Craft</p>

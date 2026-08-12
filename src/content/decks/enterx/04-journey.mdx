@@ -1,0 +1,26 @@
+---
+title: La campaña
+---
+
+<div className="ib-header">
+  <SlideTitle line="30">UNA CAMPAÑA, NO UNA APARICIÓN</SlideTitle>
+  <img src="/deck/brand-assets/enterx/logo-enterx.png" alt="EnterX" className="ib-logo" />
+</div>
+
+<Lead>EnterX gana atención antes del hackathon, presencia física durante y contenido reutilizable después.</Lead>
+
+<div className="ib-cluster md:grid-cols-3">
+  {[
+    ["01", "Antes", "Talks o workshops online de EnterX, enviados por Luma y publicados en redes para generar registros."],
+    ["02", "Durante", "Logo en activos de todas las sedes, stickers y merchandising para participantes; mentoría en Lima."],
+    ["03", "Después", "Fotografías, clips, videos y recap para extender la asociación con builders y productos reales."],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-56 grid-rows-[auto_auto_1fr] gap-4">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.02em] text-[var(--text)]">{title}</h3>
+      <p className="font-mono text-sm text-[var(--text-dim)]">{copy}</p>
+    </div>
+  ))}
+</div>
+
+<div className="ib-feature"><p className="section-label">POSICIONAMIENTO</p><p className="mt-3 font-mono text-lg leading-relaxed text-[var(--text)]">La marca peruana que ayuda a equipos y empresas a pasar de usar IA a construir con ella.</p></div>

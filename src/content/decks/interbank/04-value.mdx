@@ -1,0 +1,33 @@
+---
+title: El valor
+---
+
+<div className="ib-header">
+  <SlideTitle line="30">NO ES LOGO. ES UNA POSICIÓN ACTIVADA</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<Lead>Lo que Interbank gana antes, durante y después.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[
+    ["01", "Convoca", "Una historia co branded distribuida desde los canales del organizador."],
+    ["02", "Activa", "Reto o premio Interbank, mentorías, jurado y presencia en cinco sedes."],
+    ["03", "Observa", "Builders seleccionados colaborando y tomando decisiones bajo presión real."],
+    ["04", "Extiende", "Demos, conexiones con talento, contenido y reporte."],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-48 grid-rows-[auto_auto_1fr] gap-4">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.02em] text-[var(--text)]">{title}</h3>
+      <p className="font-mono text-sm text-[var(--text-dim)]">{copy}</p>
+    </div>
+  ))}
+</div>
+
+<div className="ib-cluster md:grid-cols-3">
+  {[["Marca empleadora", "Asociar a Interbank con desarrollo real de talento tech"], ["Innovación regional", "Aparecer junto a productos funcionando, no a promesas"], ["Acceso de alta señal", "Conocer craft, colaboración y ejecución antes de una entrevista"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Las conexiones con talento se coordinan con autorización de cada participante.</p>

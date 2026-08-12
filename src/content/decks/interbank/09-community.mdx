@@ -1,0 +1,40 @@
+---
+title: Opción de entrada
+---
+
+<div className="ib-header">
+  <SlideTitle line="80">COMMUNITY SUPPORTER</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">ENTRADA</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 500</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">VISIBILIDAD INTENCIONALMENTE LIMITADA</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Asociación ligera con la comunidad.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Una presencia esencial en los puntos colectivos de marca.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p>
+    <Lead>Presencia esencial, sin activación.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Marca", "Logo en el grid de sponsors de activos impresos y digitales"],
+        ["Recap", "Logo en el cierre y recap público"],
+        ["Mención", "Agradecimiento colectivo"],
+        ["Alcance", "Sin activación, acceso a talento ni exclusividad"],
+      ].map(([label, value]) => (
+        <div key={label} className="ib-tier-benefit">
+          <span className="ib-label">{label}</span>
+          <span className="ib-copy">{value}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Community Supporter</span><span>Presencia esencial</span><span>USD 500</span></div>
+<p className="ib-note">Inversión en dólares estadounidenses. Facturación, impuestos y condiciones de pago se formalizan en el acuerdo comercial.</p>

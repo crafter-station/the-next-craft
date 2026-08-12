@@ -4,7 +4,7 @@ import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
 import "../globals.css";
 
 const silkscreen = Silkscreen({
-  variable: "--font-pixel",
+  variable: "--font-marker",
   subsets: ["latin"],
   weight: ["400", "700"],
   display: "swap",

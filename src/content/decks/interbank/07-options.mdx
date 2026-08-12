@@ -1,0 +1,23 @@
+---
+title: Activación regional
+---
+
+<div className="ib-header">
+  <SlideTitle line="60">UNA POSICIÓN QUE SE ACTIVA</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<Lead>La alianza regional conecta visibilidad, participación directa, contenido y resultados verificables.</Lead>
+
+<div className="ib-cluster md:grid-cols-5">
+  {[["Lima", "Breve saludo ejecutivo y hasta dos mentores o jurados"], ["Social", "Tres apariciones en LinkedIn e Instagram: lanzamiento, llamado final y recap"], ["Contenido", "Video showcase de finalistas y kit de recap co branded"], ["Talento", "Conexiones autorizadas con talento seleccionado en Lima"], ["Medición", "Reporte completo de resultados regionales"]].map(([label, value]) => (
+    <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+  ))}
+</div>
+
+<div className="ib-feature w-full">
+  <p className="section-label">EXCLUSIVIDAD BANCARIA</p>
+  <p className="mt-3 font-mono text-sm leading-relaxed text-[var(--text-dim)]">Interbank será el único patrocinador con licencia bancaria en las cinco sedes, desde la firma hasta 30 días después del evento. La categoría se limita a banca y no se extiende a fintech, seguros, pagos o inversiones.</p>
+</div>
+
+<p className="ib-note">Los equipos conservan toda su propiedad intelectual.</p>

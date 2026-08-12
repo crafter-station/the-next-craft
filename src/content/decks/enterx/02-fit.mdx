@@ -1,0 +1,33 @@
+---
+title: El encaje
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">LA TESIS DE ENTERX, CONVERTIDA EN EVIDENCIA</SlideTitle>
+  <img src="/deck/brand-assets/enterx/logo-enterx.png" alt="EnterX" className="ib-logo" />
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">EnterX plantea el salto</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>N1 · Preguntar a la IA</span><span>N2 · Contexto y prompts</span><span>N3 · Delegar a agentes</span><span>N4 · IA como propuesta de valor</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft lo hace visible</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>Problemas reales</span><span>Equipos multidisciplinarios</span><span>Producto en 12 horas</span><span>Demos y decisiones observables</span>
+    </div>
+  </div>
+</div>
+
+<Lead>EnterX no solo explica cómo generar valor con IA. Se posiciona junto a quienes lo construyen.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Autoridad", "Voz experta antes del evento"], ["Prueba", "Productos y agentes en acción"], ["Presencia", "Marca visible en todas las ciudades"], ["Pipeline", "Comunidad tech y conexiones opt-in"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Fuente de posicionamiento: enterx.pe y LinkedIn oficial de EnterX.</p>

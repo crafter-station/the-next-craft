@@ -1,0 +1,23 @@
+---
+title: Activos de marca
+---
+
+<div className="ib-header">
+  <SlideTitle line="40">LA MARCA VIAJA A CADA CIUDAD</SlideTitle>
+  <img src="/deck/brand-assets/enterx/logo-enterx.png" alt="EnterX" className="ib-logo" />
+</div>
+
+<div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
+  <div className="ib-feature-inverse flex min-h-80 flex-col justify-between">
+    <p className="ib-label">NO SOLO LIMA O AREQUIPA</p>
+    <p className="font-mono text-4xl font-semibold uppercase leading-tight tracking-[-0.05em] text-[var(--void)]">El logo de EnterX impreso en las cinco sedes.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Producción centralizada por The Next Craft para mantener consistencia de marca.</p>
+  </div>
+  <div className="ib-cluster md:grid-cols-2">
+    {[["Stickers", "Marca que permanece en laptops y equipos"], ["Merch", "Artículos para participantes y momentos de entrega"], ["Señalética", "Logo en piezas impresas y puntos colectivos"], ["Digital", "Sitio, anuncios, imágenes, videos y recap"]].map(([label, value]) => (
+      <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+    ))}
+  </div>
+</div>
+
+<p className="ib-note">Diseños sujetos a aprobación de ambas partes. Cantidades, formatos y tiempos de producción se cierran en el acuerdo.</p>
