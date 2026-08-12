@@ -1,0 +1,56 @@
+---
+title: Siguiente paso
+---
+
+<div className="ib-header">
+  <SlideTitle line="110">CERRAMOS EL CÍRCULO</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<Lead>Empezar por el mejor ajuste. Escalar si Interbank quiere liderar la región.</Lead>
+
+<div className="ib-feature-inverse grid gap-8 md:grid-cols-[1.25fr_0.75fr] md:gap-12">
+  <div className="flex flex-col justify-between gap-6">
+    <p className="ib-label">RECOMENDACIÓN</p>
+    <div>
+      <p className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 2,500</p>
+      <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">TALENT AND TRACK PARTNER</p>
+    </div>
+    <p className="max-w-xl font-mono text-xl font-medium leading-snug text-[var(--void)]">Activación, talento y contenido con profundidad en Lima y visibilidad regional.</p>
+  </div>
+  <div className="flex flex-col justify-between gap-5 border-t border-[rgb(26_26_23_/_0.18)] pt-5 md:border-l md:border-t-0 md:pl-10 md:pt-0">
+    <p className="ib-label">ESCALAR A LIDERAZGO</p>
+    <div>
+      <p className="font-mono text-3xl font-semibold tracking-[-0.05em] text-[var(--void)]">USD 5,000</p>
+      <p className="mt-2 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">REGIONAL LEAD PARTNER</p>
+    </div>
+    <p className="font-mono text-sm leading-relaxed text-[rgb(26_26_23_/_0.65)]">Suma el lockup oficial regional, máxima jerarquía y exclusividad bancaria.</p>
+  </div>
+</div>
+
+<div className="grid gap-5 md:grid-cols-3">
+  {[
+    ["01", "Confirmar", "Nivel y responsable interno"],
+    ["02", "Definir", "Reto, mentores y marca"],
+    ["03", "Activar", "Ejecutar y medir"],
+  ].map(([number, label, value]) => (
+    <div key={number} className="grid grid-cols-[2.25rem_1fr] gap-x-3 border-t border-[rgb(230_227_216_/_0.16)] pt-3">
+      <span className="ib-marker row-span-2 text-xs text-[var(--bright)]">{number}</span>
+      <span className="font-mono text-sm font-semibold uppercase text-[var(--text)]">{label}</span>
+      <span className="mt-1 font-mono text-xs text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
+
+<div className="flex flex-wrap items-end justify-between gap-5">
+  <div>
+    <p className="ib-label">20 MINUTOS PARA ALINEARLO</p>
+    <p className="mt-2 font-mono text-xl text-[var(--bright)]">cal.com/crafter/community</p>
+  </div>
+  <div className="text-right font-mono text-xs leading-relaxed text-[var(--text-dim)]">
+    <p>sponsors@crafterstation.com</p>
+    <p>thenextcraft.org</p>
+  </div>
+</div>
+
+<p className="ib-note text-[9px]">Fuentes principales: thenextcraft.org/es · thenextcraft.org/deck/main · interbank.pe/nosotros/sostenibilidad · Interbank Merco Talento 2026 · Interbank innovación.</p>

@@ -18,8 +18,12 @@ export function SlideTitle({
   return (
     <div className="flex flex-col gap-3">
       <p className="section-label">
-        <span className="text-[var(--text-dim)]">{line} </span>PRINT &quot;
-        {typeof children === "string" ? children : "SLIDE"}&quot;
+        <span className="slide-title-line text-[var(--text-dim)]">{line}</span>
+        <span className="slide-title-context">
+          {" "}
+          PRINT &quot;
+          {typeof children === "string" ? children : "SLIDE"}&quot;
+        </span>
       </p>
       <h1
         className="pixel-heading"
@@ -365,7 +369,7 @@ export function ContrastGrid({
   rightItems: string[];
 }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+    <div className="deck-contrast-grid grid grid-cols-1 md:grid-cols-2 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
       <ContrastColumn title={leftTitle} items={leftItems} muted />
       <ContrastColumn title={rightTitle} items={rightItems} />
     </div>
@@ -382,7 +386,9 @@ function ContrastColumn({
   muted?: boolean;
 }) {
   return (
-    <div className={`${CELL} p-4 md:p-6 flex flex-col gap-4`}>
+    <div
+      className={`deck-contrast-column ${CELL} p-4 md:p-6 flex flex-col gap-4`}
+    >
       <span
         className={cn(
           "font-mono text-[11px] font-semibold tracking-[0.14em] uppercase",
@@ -480,11 +486,11 @@ export function BarStack({
 
 export function ChipGrid({ items }: { items: string[] }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="deck-chip-grid flex flex-wrap gap-2">
       {items.map((item) => (
         <span
           key={item}
-          className="border border-[var(--line)] bg-[var(--screen-dim)] px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] text-[var(--text)]"
+          className="deck-chip border border-[var(--line)] bg-[var(--screen-dim)] px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] text-[var(--text)]"
         >
           {item}
         </span>
@@ -552,11 +558,11 @@ export function BenefitGrid({
   items: { label: string; value: string }[];
 }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+    <div className="deck-benefit-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
       {items.map((item) => (
         <div
           key={item.label}
-          className={`${CELL} p-4 md:p-5 flex flex-col gap-3 min-h-32`}
+          className={`deck-benefit-item ${CELL} p-4 md:p-5 flex flex-col gap-3 min-h-32`}
         >
           <span className="font-pixel font-bold text-lg uppercase leading-tight text-[var(--text)]">
             {item.label}

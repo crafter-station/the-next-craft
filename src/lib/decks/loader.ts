@@ -10,7 +10,7 @@ const DECKS_DIR = join(process.cwd(), "src", "content", "decks");
  * fuente (IBM Plex Mono) en vez del par pixel/mono, y listas sin recuadros.
  * Se opta por deck desde su deck.json; el resto mantiene el look C64.
  */
-export type DeckStyle = "plain";
+export type DeckStyle = "plain" | "editorial";
 
 export type DeckMeta = {
   title: string;

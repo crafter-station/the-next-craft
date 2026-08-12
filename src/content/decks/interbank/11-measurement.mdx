@@ -1,0 +1,27 @@
+---
+title: Medición
+---
+
+<div className="ib-header">
+  <SlideTitle line="100">MEDICIÓN CLARA</SlideTitle>
+  <img src="/deck/brand-assets/interbank/logo-grayscale.svg" alt="Interbank" className="ib-logo" />
+</div>
+
+<Lead>Un reporte diseñado para evaluar ejecución, participación y valor después del evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Distribución", "Entregas, aperturas, clics y registros atribuidos en los canales de campaña."],
+    ["Funnel", "Postulaciones, aprobaciones, registros y check ins reportados por separado."],
+    ["Evento", "Asistencia por sede, demos, entradas al reto y sesiones de mentoría."],
+    ["Talento", "Perfiles autorizados, portfolios revisados y conexiones coordinadas."],
+    ["Contenido", "Activos entregados, alcance, vistas e interacción registrada."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3 last:md:col-span-2 last:md:min-h-0 last:md:flex-row last:md:items-center">
+      <span className="section-label">{label}</span>
+      <span className="font-mono text-sm text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
+
+<p className="ib-note">Privacidad por diseño: resultados agregados y conexiones autorizadas por cada participante.</p>
