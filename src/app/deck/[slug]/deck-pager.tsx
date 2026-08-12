@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import type { DeckStyle } from "@/lib/decks/loader";
+
 type Slide = {
   id: string;
   title: string;
@@ -36,11 +38,13 @@ export function DeckPager({
   slug,
   title,
   slides,
+  deckStyle,
 }: {
   slug: string;
   title: string;
   description?: string;
   slides: Slide[];
+  deckStyle?: DeckStyle;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [indexOpen, setIndexOpen] = useState(false);
@@ -174,6 +178,7 @@ export function DeckPager({
       className="deck-pager"
       data-mounted={mounted}
       data-index-open={indexOpen}
+      data-deck-style={deckStyle}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onWheel={onWheel}
