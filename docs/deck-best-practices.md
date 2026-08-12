@@ -215,7 +215,7 @@ Stay within canonical event facts from `DESIGN.md`:
 
 - The Next Craft.
 - Organized by Crafter Station x Next Fellow.
-- August 1, 2026.
+- August 29, 2026.
 - 12 hours, 09:00-21:00.
 - 300 hackers.
 - Teams of 3-5.

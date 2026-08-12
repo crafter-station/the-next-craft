@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
   marfil con tinta oscura, como prender la pantalla. Colores locales
   (tinta sobre bone) en vez de los tokens de dark.
 
-  El premio aún no se anuncia → "PRONTO" como cifra protagonista; lo
-  garantizado para todos vive en la columna de perks.
+  El premio en efectivo es la cifra protagonista; lo garantizado para todos
+  vive en la columna de perks.
 */
 const INK = "#1a1a17";
 const INK_DIM = "#6f6a5d";
@@ -15,6 +15,14 @@ const RULE = "rgb(26 26 23 / 35%)";
 export function Prizes() {
   const t = useTranslations("prizes");
   const perks = t.raw("perks") as readonly string[];
+  const winners = t.raw("winners") as readonly {
+    place: string;
+    rewards: readonly {
+      partner: string;
+      credits: string;
+      value: string;
+    }[];
+  }[];
 
   return (
     <section
@@ -44,6 +52,59 @@ export function Prizes() {
               >
                 {t("amountSub")}
               </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <p
+                className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase"
+                style={{ color: INK_DIM }}
+              >
+                {t("winnersLabel")}
+              </p>
+              <ul
+                className="grid grid-cols-1 sm:grid-cols-3 list-none m-0 p-0 border-t border-l"
+                style={{ borderColor: RULE }}
+                aria-label={t("winnersAria")}
+              >
+                {winners.map(({ place, rewards }) => (
+                  <li
+                    key={place}
+                    className="flex flex-col gap-4 px-5 py-5 border-r border-b"
+                    style={{ borderColor: RULE }}
+                  >
+                    <span
+                      className="font-mono text-[11px] font-bold tracking-[0.12em] uppercase"
+                      style={{ color: INK_DIM }}
+                    >
+                      {place}
+                    </span>
+                    <div className="flex flex-col gap-4">
+                      {rewards.map(({ partner, credits, value }) => (
+                        <div key={partner} className="flex flex-col gap-1">
+                          <span
+                            className="font-mono text-[10px] font-bold tracking-[0.14em] uppercase"
+                            style={{ color: INK_DIM }}
+                          >
+                            {partner}
+                          </span>
+                          <span
+                            className="font-pixel text-lg leading-tight"
+                            style={{ color: INK }}
+                          >
+                            {credits}
+                          </span>
+                          <span
+                            className="font-sans text-sm leading-snug"
+                            style={{ color: INK_DIM }}
+                          >
+                            {value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
