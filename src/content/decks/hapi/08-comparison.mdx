@@ -1,0 +1,39 @@
+---
+title: Comparación
+---
+
+<div className="ib-header">
+  <SlideTitle line="70">DOS NIVELES. UNA DIFERENCIA CLARA.</SlideTitle>
+  <img src="/deck/brand-assets/hapi/logo-hapi.svg" alt="Hapi" className="ib-logo" />
+</div>
+
+<table className="w-full table-fixed border-separate border-spacing-y-1 font-mono text-[11px] leading-snug text-[var(--text-dim)]">
+  <colgroup><col className="w-[46%]" /><col className="w-[27%]" /><col className="w-[27%]" /></colgroup>
+  <thead>
+    <tr className="text-left align-bottom">
+      <th className="px-4 py-3 ib-label">Activo / beneficio</th>
+      <th className="bg-[var(--bone)] px-4 py-3 text-[var(--void)]"><span className="block text-[10px] font-semibold uppercase tracking-[0.1em]">Lead Activation</span><span className="mt-1 block text-sm">USD 2,500</span></th>
+      <th className="px-4 py-3"><span className="ib-label">Activation</span><span className="mt-1 block text-sm text-[var(--text)]">USD 500</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ["Talks o workshops", "2 pre-eventos", "1 pre-evento"],
+      ["Campañas a 18K contactos de Luma", "2 campañas", "1 campaña"],
+      ["Logo impreso en las cinco ciudades", "Ubicación prioritaria", "Grid colectivo"],
+      ["Stickers y merch en las cinco ciudades", "Logo de Hapi aplicado", "No incluido"],
+      ["Contenido en redes", "1 post dedicado + colectivos", "Posts colectivos"],
+      ["Participación presencial en Lima", "Mentor + Piero juez/mentor", "1 mentor"],
+      ["Lista opt-in de las cinco ciudades", "Incluida", "No incluida"],
+      ["Reporte final de campaña y evento", "Incluido", "No incluido"],
+    ].map(([benefit, lead, activation]) => (
+      <tr key={benefit} className="bg-[var(--ib-surface)] align-middle">
+        <th scope="row" className="px-4 py-2 text-left font-semibold text-[var(--text)]">{benefit}</th>
+        <td className="bg-[rgb(230_227_216_/_0.1)] px-4 py-2 text-[var(--text)]">{lead}</td>
+        <td className="px-4 py-2">{activation}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<p className="ib-note">Lead Activation Partner agrega una segunda campaña, prioridad de marca, merch, contenido dedicado, un segundo rol presencial, datos opt-in y reporte. Esos son los USD 2,000 de diferencia.</p>

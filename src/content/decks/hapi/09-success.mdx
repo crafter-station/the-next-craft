@@ -1,0 +1,26 @@
+---
+title: Medición
+---
+
+<div className="ib-header">
+  <SlideTitle line="80">ÉXITO QUE SE PUEDE REPORTAR</SlideTitle>
+  <img src="/deck/brand-assets/hapi/logo-hapi.svg" alt="Hapi" className="ib-logo" />
+</div>
+
+<Lead>El reporte del paquete de USD 2,500 reúne métricas específicas de campaña y evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Distribución", "Envíos, aperturas, clics y registros de las campañas pre-evento."],
+    ["Pre-eventos", "Registros, asistentes y permanencia en cada talk o workshop."],
+    ["Hackathon", "Check-ins por ciudad y participación del mentor y juez o segundo mentor."],
+    ["Contenido", "Post dedicado, posts colectivos, fotos y video entregados; alcance e interacción disponible."],
+    ["Participantes", "Nombre, email, perfil y ciudad de quienes autoricen compartir sus datos con Hapi."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3 last:md:col-span-2 last:md:min-h-0 last:md:flex-row last:md:items-center">
+      <span className="section-label">{label}</span><span className="font-mono text-sm text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
+
+<p className="ib-note">Métricas de terceros sujetas a disponibilidad de cada plataforma. Datos personales compartidos únicamente con consentimiento.</p>
