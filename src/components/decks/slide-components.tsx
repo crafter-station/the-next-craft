@@ -396,6 +396,7 @@ function ContrastColumn({
           <div
             key={item}
             className={cn(
+              "deck-contrast-item",
               "border border-[var(--line)] px-3 py-2 font-mono text-sm uppercase tracking-[0.06em]",
               muted
                 ? "text-[var(--text-dim)] opacity-70"

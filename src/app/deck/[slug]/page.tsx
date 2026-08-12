@@ -96,6 +96,7 @@ export default async function DeckPage({
       title={deck.meta.title}
       description={deck.meta.description}
       slides={compiledSlides}
+      deckStyle={deck.meta.style}
     />
   );
 }

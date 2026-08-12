@@ -5,6 +5,13 @@ import matter from "gray-matter";
 
 const DECKS_DIR = join(process.cwd(), "src", "content", "decks");
 
+/**
+ * `style: "plain"` activa la variante tipográfica plana del deck: una sola
+ * fuente (IBM Plex Mono) en vez del par pixel/mono, y listas sin recuadros.
+ * Se opta por deck desde su deck.json; el resto mantiene el look C64.
+ */
+export type DeckStyle = "plain";
+
 export type DeckMeta = {
   title: string;
   description: string;
@@ -12,6 +19,7 @@ export type DeckMeta = {
   icon?: string;
   appleIcon?: string;
   manifest?: string;
+  style?: DeckStyle;
 } & Record<string, unknown>;
 
 export type SlideMeta = {

@@ -1368,6 +1368,30 @@
   height: 100svh;
 }
 
+/*
+  Variante "plain" (opt-in por deck vía `"style": "plain"` en deck.json).
+  Una sola familia en todo el deck: redefinir --font-pixel dentro del subárbol
+  basta, porque .pixel-heading y compañía la leen por variable. Silkscreen es
+  pixel-art y a tamaños de heading obliga a leer letra por letra; Plex Mono
+  sostiene la jerarquía con peso y escala.
+*/
+.deck-pager[data-deck-style="plain"] {
+  --font-pixel: var(--font-mono);
+}
+
+.deck-pager[data-deck-style="plain"] .pixel-heading {
+  /* Plex Mono ya viene espaciada; el tracking de Silkscreen la abre de más. */
+  letter-spacing: -0.02em;
+}
+
+/* Listas de contraste sin recuadros: el borde por ítem competía con el texto. */
+.deck-pager[data-deck-style="plain"] .deck-contrast-item {
+  border: 0;
+  padding: 0;
+  background: none;
+  opacity: 1;
+}
+
 /* Chrome: fixed top bar with INDEX keycap */
 .deck-chrome {
   position: fixed;
