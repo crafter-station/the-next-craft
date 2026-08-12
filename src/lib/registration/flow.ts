@@ -125,7 +125,7 @@ export const WELCOME: Reply = {
   kind: "text",
   body:
     "Hola, soy el bot de registro de *THE NEXT CRAFT* — The First User Challenge.\n" +
-    "1 AGO 2026 · 5 sedes · 12 horas · 300 cupos.\n\n" +
+    "29 AGO 2026 · 5 sedes · 12 horas · 300 cupos.\n\n" +
     "Son 8 preguntas, ~90 segundos. Escribe *cancelar* en cualquier momento para salir.\n\n" +
     "Primero: ¿cuál es tu nombre completo?",
 };
@@ -284,7 +284,7 @@ export function completionReplies(
       body:
         "La admisión es selectiva: te confirmamos *por correo* antes del evento. " +
         "Comparte tu pase y nos vemos en tu sede. 🔵\n\n" +
-        "— THE NEXT CRAFT · 1 AGO 2026",
+        "— THE NEXT CRAFT · 29 AGO 2026",
     },
   ];
 }

@@ -70,7 +70,7 @@ export function Hero() {
         {/* CTAs — keycaps */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d4">
           <a
-            href="#postular"
+            href="https://luma.com/hack0?tag=the%20next%20craft"
             data-magnetic
             className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
           >
