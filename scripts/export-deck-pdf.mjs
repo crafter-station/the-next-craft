@@ -16,7 +16,11 @@ if (!url || !output) {
 }
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1600, height: 900 } });
+const context = await browser.newContext({
+  viewport: { width: 1600, height: 900 },
+  deviceScaleFactor: 2,
+});
+const page = await context.newPage();
 const renderDir = await mkdtemp(join(tmpdir(), "interbank-deck-"));
 
 await page.goto(url, { waitUntil: "networkidle" });
@@ -38,7 +42,14 @@ for (let index = 0; index < slideCount; index += 1) {
   }
 }
 
-await execFileAsync("magick", [...images, "-density", "150", output]);
+await execFileAsync("magick", [
+  ...images,
+  "-units",
+  "PixelsPerInch",
+  "-density",
+  "300",
+  output,
+]);
 
 await browser.close();
 await rm(renderDir, { recursive: true, force: true });
