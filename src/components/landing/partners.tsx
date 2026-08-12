@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import CodexIcon from "@lobehub/icons/es/Codex/components/Mono";
 import CodexText from "@lobehub/icons/es/Codex/components/Text";
+import CursorIcon from "@lobehub/icons/es/Cursor/components/Mono";
+import CursorText from "@lobehub/icons/es/Cursor/components/Text";
 import N8nIcon from "@lobehub/icons/es/N8n/components/Mono";
 import N8nText from "@lobehub/icons/es/N8n/components/Text";
 import ReplitIcon from "@lobehub/icons/es/Replit/components/Mono";
@@ -74,6 +76,14 @@ const IMG_LOGOS = [
     href: "https://vapi.ai",
     width: 101,
     height: 33,
+    className: "h-5 md:h-7",
+  },
+  {
+    name: "Apify",
+    src: "/sponsors/apify.svg",
+    href: "https://apify.com",
+    width: 512,
+    height: 141,
     className: "h-5 md:h-7",
   },
 ] as const;
@@ -157,6 +167,19 @@ export function Partners() {
               </a>
             </li>
           ))}
+
+          <li>
+            <a
+              href="https://cursor.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Cursor"
+              className={`${LINK_BASE} inline-flex items-center gap-2`}
+            >
+              <CursorIcon size={26} />
+              <CursorText size={21} />
+            </a>
+          </li>
 
           <li>
             <a
