@@ -1,0 +1,35 @@
+---
+title: Opción recomendada
+---
+
+<div className="ib-header">
+  <SlideTitle line="50">LEAD ACTIVATION PARTNER</SlideTitle>
+  <img src="/deck/brand-assets/hapi/logo-hapi.svg" alt="Hapi" className="ib-logo" />
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">RECOMENDADO PARA HAPI</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 2,500</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">MÁXIMA PRESENCIA EN LAS 5 CIUDADES</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Más frecuencia, mejor ubicación de marca y acceso a participantes.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">La opción para activar toda la relación, con Piero invitado como juez en Lima.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p>
+    <Lead>Entregables concretos antes, durante y después.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["2 pre-eventos", "Dos talks o workshops; una campaña a 18K contactos para cada uno"],
+        ["5 ciudades", "Logo prioritario en señalética, piezas impresas, stickers y merch"],
+        ["Participación", "Un mentor en Lima más Piero como juez o un segundo mentor"],
+        ["Datos + media", "Lista opt-in de las 5 ciudades, 1 post dedicado y reporte final"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Lead Activation Partner</span><span>Lima</span><span>Arequipa</span><span>Bogotá</span><span>Guatemala</span><span>El Salvador</span><span>USD 2,500</span></div>
+<p className="ib-note">La lista incluye únicamente participantes de las cinco ciudades que autoricen compartir sus datos con Hapi. Roles sujetos a disponibilidad. Impuestos y pago se formalizan en el acuerdo.</p>

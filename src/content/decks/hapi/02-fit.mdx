@@ -1,0 +1,33 @@
+---
+title: El encaje
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">UNA FINTECH LATINOAMERICANA FRENTE A QUIENES CONSTRUYEN LA REGIÓN</SlideTitle>
+  <img src="/deck/brand-assets/hapi/logo-hapi.svg" alt="Hapi" className="ib-logo" />
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">Hapi abre el acceso</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>Acciones y ETFs de EE.UU.</span><span>Criptomonedas</span><span>Trading 24/5</span><span>Inversión desde US$5</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft reúne a quienes crean</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>Developers</span><span>Diseñadores de producto y UX</span><span>Founders técnicos</span><span>Talento emergente</span>
+    </div>
+  </div>
+</div>
+
+<Lead>Hapi puede mostrar cómo se construye un producto financiero regional y ayudar a una nueva generación a tomar mejores decisiones.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Producto", "Una app fintech nacida para LATAM"], ["Aprendizaje", "Talks prácticos antes del evento"], ["Presencia", "Marca impresa en cinco ciudades"], ["Conexión", "Builders y contactos opt-in"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Fuente de producto y cifras: hapi.trade, consultado el 12 de agosto de 2026. Toda inversión implica riesgos.</p>

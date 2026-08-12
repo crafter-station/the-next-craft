@@ -1,0 +1,26 @@
+---
+title: La campaña
+---
+
+<div className="ib-header">
+  <SlideTitle line="40">UNA CAMPAÑA, NO UNA APARICIÓN</SlideTitle>
+  <img src="/deck/brand-assets/hapi/logo-hapi.svg" alt="Hapi" className="ib-logo" />
+</div>
+
+<Lead>Hapi gana atención antes del hackathon, presencia física durante y contenido reutilizable después.</Lead>
+
+<div className="ib-cluster md:grid-cols-3">
+  {[
+    ["01", "Antes", "Talks o workshops online sobre inversión, producto fintech o cómo construir confianza en finanzas; campañas a 18K contactos."],
+    ["02", "Durante", "Logo impreso en las cinco sedes; stickers y merch en el paquete principal; mentoría y jurado en Lima."],
+    ["03", "Después", "Fotografías, clips, recap y métricas para extender la asociación con builders y productos reales."],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-56 grid-rows-[auto_auto_1fr] gap-4">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.02em] text-[var(--text)]">{title}</h3>
+      <p className="font-mono text-sm text-[var(--text-dim)]">{copy}</p>
+    </div>
+  ))}
+</div>
+
+<div className="ib-feature"><p className="section-label">ENCAJE NATURAL</p><p className="mt-3 font-mono text-lg leading-relaxed text-[var(--text)]">Learning by Shipping: aprendizaje práctico, feedback y productos que convierten temas complejos en experiencias útiles.</p></div>
