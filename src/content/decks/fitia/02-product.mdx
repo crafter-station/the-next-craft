@@ -1,0 +1,20 @@
+---
+title: El producto
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">UN PRODUCTO LATINOAMERICANO A ESCALA GLOBAL</SlideTitle>
+  <img src="/deck/brand-assets/fitia/logo-fitia.svg" alt="Fitia" className="ib-logo" />
+</div>
+
+<Lead>Fitia ya resuelve un problema cotidiano para millones. La oportunidad es hacer visible el oficio técnico detrás de esa experiencia.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["10M+", "Usuarios en todo el mundo"], ["4.9 ★", "Calificación publicada"], ["150+", "Países alcanzados"], ["1B+", "Comidas registradas"]].map(([value, label]) => (
+    <div key={value} className="ib-item"><p className="font-mono text-3xl font-semibold tracking-[-0.06em] text-[var(--text)]">{value}</p><p className="ib-copy mt-3">{label}</p></div>
+  ))}
+</div>
+
+<div className="ib-feature"><p className="ib-label">LO QUE LOS BUILDERS PUEDEN APRENDER</p><p className="mt-3 font-mono text-lg leading-relaxed text-[var(--text)]">Cómo combinar producto móvil, personalización, datos verificados y una suscripción de consumo en una experiencia simple.</p></div>
+
+<p className="ib-note">Fuente de cifras y producto: fitia.app/es/nosotros. Métricas publicadas por Fitia; consultadas el 12 de agosto de 2026.</p>

@@ -1,0 +1,23 @@
+---
+title: Opción de entrada
+---
+
+<div className="ib-header"><SlideTitle line="60">ACTIVATION PARTNER</SlideTitle><img src="/deck/brand-assets/fitia/logo-fitia.svg" alt="Fitia" className="ib-logo" /></div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">ENTRADA</p>
+    <div className="flex flex-col gap-2"><span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 500</span><span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">1 PRE-EVENTO + MARCA COMPARTIDA</span></div>
+    <p className="font-mono text-2xl font-medium leading-snug">Una activación puntual con logo impreso en las cinco ciudades.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Sin merch dedicado, post propio, datos de participantes ni reporte.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p><Lead>Lo necesario para participar sin liderar la campaña.</Lead>
+    <div className="ib-tier-benefits">
+      {[["1 pre-evento", "Un talk o workshop; una campaña a los 18K contactos de Luma"], ["5 ciudades", "Logo en el grid colectivo de señalética y piezas impresas"], ["Lima presencial", "Un mentor de Fitia"], ["Contenido", "Posts colectivos y acceso al recap general de fotos y video"]].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Activation Partner</span><span>Logo impreso en 5 ciudades</span><span>1 mentor en Lima</span><span>USD 500</span></div>
+<p className="ib-note">No incluye logo prioritario, merch dedicado, post dedicado, jurado, segundo mentor, datos de participantes ni reporte final. Impuestos y condiciones de pago se formalizan en el acuerdo.</p>
