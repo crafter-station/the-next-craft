@@ -82,7 +82,9 @@ function renderDataCellValue(value: ReactNode) {
     );
   }
 
-  const priceMatch = value.match(/^(\$[\d.]+K?)(.*)$/);
+  // Los miles van con coma ("$1,000"), así que la coma es parte del precio:
+  // sin ella el match cortaba en "$1" y dejaba ",000" como texto suelto.
+  const priceMatch = value.match(/^(\$[\d.,]+K?)(.*)$/);
 
   if (!priceMatch) {
     return (
@@ -91,13 +93,14 @@ function renderDataCellValue(value: ReactNode) {
   }
 
   const [, price, rest] = priceMatch;
+  const detail = rest.trim();
 
   return (
     <span className="flex flex-col gap-1 font-mono text-[var(--text)]">
       <span className="text-2xl font-semibold leading-none tracking-[-0.04em] text-[var(--bright)] md:text-3xl">
         {price}
       </span>
-      <span className="text-sm leading-snug">{rest.trim()}</span>
+      {detail ? <span className="text-sm leading-snug">{detail}</span> : null}
     </span>
   );
 }
