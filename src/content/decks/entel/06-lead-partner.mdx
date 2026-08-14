@@ -1,0 +1,32 @@
+---
+title: Opción recomendada
+---
+
+<div className="ib-header">
+  <SlideTitle line="50">LEAD ACTIVATION PARTNER</SlideTitle>
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">RECOMENDADO PARA ENTEL EMPRESAS</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 2,500</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">PROFUNDIDAD EN PERÚ, MARCA EN LAS 5 SEDES</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Marca de Entel en las cinco sedes y presencia en piso en Perú.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">El nivel que corresponde al mercado real de Entel Empresas.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p>
+    <Lead>Entregables concretos antes, durante y después.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Charla Entel", "Una charla de Entel, transmitida o presencial en Arequipa, con campaña a nuestra red de 18K"],
+        ["5 sedes", "Logo prioritario en señalética, impresos, stickers y merch"],
+        ["Datos + media", "Lista opt-in de las cinco sedes, 1 post dedicado y reporte final"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Lead Activation Partner</span><span>USD 2,500</span></div>
