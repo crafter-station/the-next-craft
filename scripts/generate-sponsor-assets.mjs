@@ -26,6 +26,11 @@ for (const family of [fontFamily, pixelFontFamily, scriptFontFamily]) {
 
 const sponsors = [
   {
+    slug: "3devlabs",
+    logo: "public/sponsors/3DevLabs.svg",
+    width: 600,
+  },
+  {
     slug: "clerk",
     logo: "public/sponsors/clerk.svg",
     width: 830,

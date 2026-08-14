@@ -7,6 +7,16 @@
     "bright": "#e9e7de"
   },
   "files": {
+    "events/vapi-luma-square.png": "1080x1080",
+    "events/vapi-luma-square.webp": "1080x1080",
+    "events/cloudforge-luma-square.png": "1080x1080",
+    "events/cloudforge-luma-square.webp": "1080x1080",
+    "social/sponsors/3devlabs-instagram.png": "1080x1350",
+    "social/sponsors/3devlabs-instagram.webp": "1080x1350",
+    "social/sponsors/3devlabs-linkedin.png": "1080x1350",
+    "social/sponsors/3devlabs-linkedin.webp": "1080x1350",
+    "social/sponsors/3devlabs-x.png": "1200x1500",
+    "social/sponsors/3devlabs-x.webp": "1200x1500",
     "social/sponsors/clerk-instagram.png": "1080x1350",
     "social/sponsors/clerk-instagram.webp": "1080x1350",
     "social/sponsors/clerk-linkedin.png": "1080x1350",
@@ -42,10 +52,6 @@
     "social/sponsors/vapi-linkedin.png": "1080x1350",
     "social/sponsors/vapi-linkedin.webp": "1080x1350",
     "social/sponsors/vapi-x.png": "1200x1500",
-    "social/sponsors/vapi-x.webp": "1200x1500",
-    "events/vapi-luma-square.png": "1080x1080",
-    "events/vapi-luma-square.webp": "1080x1080",
-    "events/cloudforge-luma-square.png": "1080x1080",
-    "events/cloudforge-luma-square.webp": "1080x1080"
+    "social/sponsors/vapi-x.webp": "1200x1500"
   }
 }
