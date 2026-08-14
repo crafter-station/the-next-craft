@@ -42,6 +42,10 @@
     "social/sponsors/vapi-linkedin.png": "1080x1350",
     "social/sponsors/vapi-linkedin.webp": "1080x1350",
     "social/sponsors/vapi-x.png": "1200x1500",
-    "social/sponsors/vapi-x.webp": "1200x1500"
+    "social/sponsors/vapi-x.webp": "1200x1500",
+    "events/vapi-luma-square.png": "1080x1080",
+    "events/vapi-luma-square.webp": "1080x1080",
+    "events/cloudforge-luma-square.png": "1080x1080",
+    "events/cloudforge-luma-square.webp": "1080x1080"
   }
 }
