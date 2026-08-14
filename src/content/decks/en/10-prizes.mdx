@@ -2,17 +2,30 @@
 title: Prizes
 ---
 
-<SlideTitle line="70">PRIZES + OPERATIONS</SlideTitle>
+<div className="ib-header"><SlideTitle line="70">PRIZES + OPERATIONS</SlideTitle></div>
 
 <Lead>
-  Sponsorship helps us reach more builders and give them the chance to create.
+  A meaningful finish line for the teams that turn one intense day into a working product.
 </Lead>
 
-<DataGrid>
-  <DataCell label="1st place" value="$1,000" />
-  <DataCell label="2nd place" value="$800" />
-  <DataCell label="3rd place" value="$400" />
-  <DataCell label="Operations" value="Hubs, food, materials, check-in and media" />
-  <DataCell label="Content" value="Photos, clips, demos and post-event recap" />
-  <DataCell label="Bonus" value="Partners can add track-specific prizes" />
-</DataGrid>
+<div className="grid items-stretch gap-6 md:grid-cols-[1.3fr_0.7fr]">
+  <PrizePodium
+    prizes={[
+      { rank: '01', place: '1st place', amount: '$1,000' },
+      { rank: '02', place: '2nd place', amount: '$800' },
+      { rank: '03', place: '3rd place', amount: '$400' },
+    ]}
+    total="$2,200"
+    totalLabel="Main prize pool"
+  />
+  <div className="flex flex-col gap-3">
+    <div className="ib-feature flex flex-1 flex-col justify-between gap-8">
+      <p className="ib-label">SPONSOR-LED BONUS</p>
+      <div><p className="font-mono text-2xl font-semibold uppercase leading-tight tracking-[-0.04em] text-[var(--text)]">Add a prize to your track.</p><p className="ib-copy mt-3">Reward the strongest use of your product, API or challenge brief.</p></div>
+    </div>
+    <div className="grid grid-cols-2 gap-3">
+      <div className="ib-item"><p className="ib-label">Operations</p><p className="ib-copy mt-2">Hubs · food · materials · check-in</p></div>
+      <div className="ib-item"><p className="ib-label">Media</p><p className="ib-copy mt-2">Photos · clips · demos · recap</p></div>
+    </div>
+  </div>
+</div>

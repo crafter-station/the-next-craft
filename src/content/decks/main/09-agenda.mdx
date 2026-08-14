@@ -2,16 +2,22 @@
 title: Agenda
 ---
 
-<SlideTitle line="60">AGENDA</SlideTitle>
+<div className="ib-header"><SlideTitle line="60">AGENDA</SlideTitle></div>
 
-<PhaseTimeline
-  items={[
-    { time: "08:30", label: "Onboard" },
-    { time: "09:30", label: "Build" },
-    { time: "11:00", label: "Mentors" },
-    { time: "20:00", label: "Submit" },
-    { time: "20:15", label: "Demo" },
-  ]}
-/>
+<div className="grid gap-3 md:grid-cols-5">
+  {[
+    ['08:30', 'Onboard', 'Puertas, equipos y briefing'],
+    ['09:30', 'Build', 'Empieza el reloj'],
+    ['11:00', 'Mentores', 'Office hours técnicos'],
+    ['20:00', 'Entrega', 'Cierre de productos'],
+    ['20:15', 'Demo', 'Meta pública'],
+  ].map(([time, label, copy], index) => (
+    <div key={time} className={index === 4 ? 'ib-feature-inverse grid min-h-48 grid-rows-[auto_1fr_auto_3rem] !px-5 !py-[1.15rem]' : 'ib-item grid min-h-48 grid-rows-[auto_1fr_auto_3rem]'}>
+      <span className={index === 4 ? 'font-mono text-lg font-semibold text-[var(--void)]' : 'font-mono text-lg font-semibold text-[var(--bright)]'}>{time}</span>
+      <h3 className={index === 4 ? 'row-start-3 font-mono text-xl font-semibold uppercase text-[var(--void)]' : 'row-start-3 font-mono text-xl font-semibold uppercase text-[var(--text)]'}>{label}</h3>
+      <p className={index === 4 ? 'row-start-4 pt-2 font-mono text-xs text-[rgb(26_26_23_/_0.65)]' : 'ib-copy row-start-4 pt-2'}>{copy}</p>
+    </div>
+  ))}
+</div>
 
 <Lead>De cero a demo pública en una sola jornada.</Lead>

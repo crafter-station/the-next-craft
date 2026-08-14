@@ -2,11 +2,17 @@
 title: Cierre
 ---
 
-<div className="flex flex-col items-center justify-center text-center gap-6 min-h-[60svh]">
-  <h2 className="pixel-heading" style={{ fontSize: "clamp(1.75rem, 5vw, 3rem)" }}>
-    {"NOS VEMOS EL 29 DE AGOSTO"}
-  </h2>
-  <Lead>Elige tier. Confirmamos disponibilidad, factura y plan de activación.</Lead>
-  <Wordmark />
-  <Ready />
+<div className="grid items-stretch gap-6 md:grid-cols-2 md:gap-8">
+  <div className="flex flex-col gap-4">
+    <p className="section-label"><span className="ib-marker text-[var(--text-dim)]">100 </span>SIGUIENTE PASO</p>
+    <h1 className="ib-title !text-[clamp(1.75rem,4.2vw,2.75rem)]">Pon tu producto en manos de la próxima generación de builders de Latinoamérica.</h1>
+    <div className="mt-auto flex flex-wrap items-end justify-between gap-3"><Wordmark className="!text-[clamp(2rem,5vw,2.75rem)] text-[var(--text)]" /><div className="ib-inline-list !text-[0.625rem]"><span>29 AGO 2026</span><span>5 SEDES</span><span>300 BUILDERS</span></div></div>
+  </div>
+  <div className="flex flex-col justify-center">
+    <div className="ib-photo aspect-[4/3] w-full"><img style={{ objectPosition: "50% 56%" }} src="/deck/photos/hackathons/pe-organizers.jpg" alt="Organizadores y colaboradores de IA Hackathon Perú reunidos al cierre del evento" /></div>
+    <div className="ib-feature-inverse grid !p-4 gap-5 md:grid-cols-[1.1fr_0.9fr]">
+      <div><p className="ib-label">LA DECISIÓN</p><p className="mt-3 max-w-xl font-mono text-xl font-medium leading-snug text-[var(--void)]">Elige un nivel. Confirmamos disponibilidad, facturación y plan de activación.</p></div>
+      <div><p className="ib-label">CONTACTO</p><p className="mt-3 font-mono text-base text-[var(--void)]">sponsors@crafterstation.com</p><p className="mt-1 font-mono text-xs text-[rgb(26_26_23_/_0.65)]">thenextcraft.org</p></div>
+    </div>
+  </div>
 </div>

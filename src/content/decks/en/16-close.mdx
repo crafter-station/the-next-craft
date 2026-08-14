@@ -2,11 +2,17 @@
 title: Closing
 ---
 
-<div className="flex flex-col items-center justify-center text-center gap-6 min-h-[60svh]">
-  <h2 className="pixel-heading" style={{ fontSize: "clamp(1.75rem, 5vw, 3rem)" }}>
-    {"SEE YOU ON AUGUST 29"}
-  </h2>
-  <Lead>Pick a tier. We confirm availability, invoice and activation plan.</Lead>
-  <Wordmark />
-  <Ready />
+<div className="grid items-stretch gap-6 md:grid-cols-2 md:gap-8">
+  <div className="flex flex-col gap-4">
+    <p className="section-label"><span className="ib-marker text-[var(--text-dim)]">100 </span>NEXT STEP</p>
+    <h1 className="ib-title !text-[clamp(1.75rem,4.2vw,2.75rem)]">Put your product in the hands of Latin America's next generation of builders.</h1>
+    <div className="mt-auto flex flex-wrap items-end justify-between gap-3"><Wordmark className="!text-[clamp(2rem,5vw,2.75rem)] text-[var(--text)]" /><div className="ib-inline-list !text-[0.625rem]"><span>29 AUG 2026</span><span>5 HUBS</span><span>300 BUILDERS</span></div></div>
+  </div>
+  <div className="flex flex-col justify-center">
+    <div className="ib-photo aspect-[4/3] w-full"><img style={{ objectPosition: "50% 56%" }} src="/deck/photos/hackathons/pe-organizers.jpg" alt="IA Hackathon Peru organizers and collaborators gathered at the end of the event" /></div>
+    <div className="ib-feature-inverse grid !p-4 gap-5 md:grid-cols-[1.1fr_0.9fr]">
+      <div><p className="ib-label">THE DECISION</p><p className="mt-3 max-w-xl font-mono text-xl font-medium leading-snug text-[var(--void)]">Pick a tier. We confirm availability, invoice and activation plan.</p></div>
+      <div><p className="ib-label">CONTACT</p><p className="mt-3 font-mono text-base text-[var(--void)]">sponsors@crafterstation.com</p><p className="mt-1 font-mono text-xs text-[rgb(26_26_23_/_0.65)]">thenextcraft.org</p></div>
+    </div>
+  </div>
 </div>

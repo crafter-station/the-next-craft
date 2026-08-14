@@ -2,15 +2,23 @@
 title: Tiers de patrocinio
 ---
 
-<SlideTitle line="90">PATROCINIOS</SlideTitle>
+<div className="ib-header"><SlideTitle line="90">PATROCINIOS</SlideTitle></div>
 
 <Lead>
-  Elige el nivel de ownership: narrativa completa, track dedicado o apoyo de comunidad.
+  Elige el nivel de participación. Gold selecciona un módulo principal; Title combina los elementos más fuertes en un programa regional.
 </Lead>
 
-<DataGrid>
-  <DataCell label="Title · x1" value="$5K · Own the flagship narrative, opening, demos and recap" />
-  <DataCell label="Gold · x2" value="$2.5K · Track challenge, credits, judging and demo visibility" />
-  <DataCell label="Silver · x5" value="$500 · Community support, logo and recap mention" />
-  <DataCell label="In-kind" value="Créditos, herramientas, mentores, judges, swag o bonus prizes" />
-</DataGrid>
+<div className="grid gap-3 md:grid-cols-3">
+  {[
+    ['TITLE · X1', '$5K', 'Lockup regional, máxima jerarquía, exclusividad de categoría y activación a medida'],
+    ['GOLD · X2', '$2.5K', 'Logo prioritario más un módulo principal de activación'],
+    ['SILVER · X5', '$500', 'Logo en grid de sponsors, agradecimiento colectivo y logo en el recap'],
+  ].map(([tier, price, value], index) => (
+    <div key={tier} className={index === 0 ? 'ib-feature-inverse flex min-h-64 flex-col justify-between' : 'ib-item flex min-h-64 flex-col justify-between'}>
+      <p className="ib-label">{tier}</p>
+      <div><p className={index === 0 ? 'font-mono text-5xl font-semibold tracking-[-0.07em] text-[var(--void)]' : 'font-mono text-5xl font-semibold tracking-[-0.07em] text-[var(--text)]'}>{price}</p><p className={index === 0 ? 'mt-4 font-mono text-sm leading-relaxed text-[rgb(26_26_23_/_0.65)]' : 'ib-copy mt-4'}>{value}</p></div>
+    </div>
+  ))}
+</div>
+
+<div className="ib-inline-list"><span>In-kind · alcance a medida</span><span>Créditos</span><span>Herramientas</span><span>Mentores</span><span>Jurado</span><span>Swag</span><span>Premios extra</span></div>

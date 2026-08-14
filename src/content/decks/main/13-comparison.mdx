@@ -1,0 +1,43 @@
+---
+title: Comparación de patrocinios
+---
+
+<div className="ib-header"><SlideTitle line="95">QUÉ INCLUYE CADA PATROCINIO</SlideTitle></div>
+
+<table className="w-full table-fixed border-separate border-spacing-y-1 font-mono text-[9px] leading-snug text-[var(--text-dim)] md:text-[10px]">
+  <colgroup><col className="w-[28%]" /><col className="w-[18%]" /><col className="w-[18%]" /><col className="w-[18%]" /><col className="w-[18%]" /></colgroup>
+  <thead>
+    <tr className="text-left align-bottom">
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Activo / beneficio</span></th>
+      <th className="bg-[var(--bone)] px-2 py-2 text-[var(--void)] md:px-3"><span className="block text-[9px] font-semibold uppercase tracking-[0.1em] md:text-[10px]">Title · x1</span><span className="mt-1 block text-xs">$5K</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Gold · x2</span><span className="mt-1 block text-xs text-[var(--text)]">$2.5K</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Silver · x5</span><span className="mt-1 block text-xs text-[var(--text)]">$500</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">In-kind</span><span className="mt-1 block text-xs text-[var(--text)]">A medida</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['Lockup regional del evento', '✓ Oficial', '—', '—', '—'],
+      ['Web + impresos + digital', '✓ Máxima jerarquía', '✓ Prioritario', '✓ Grid logos', 'A acordar'],
+      ['Exclusividad de categoría', '✓ Definida', '—', '—', '—'],
+      ['Talks / workshops', '✓ Hasta 2', 'Módulo', '—', 'A acordar'],
+      ['Campañas a comunidad', '✓ Hasta 2', 'Módulo', '—', 'A acordar'],
+      ['Reto / track / premio', '✓ Principal', 'Módulo', '—', 'Opcional'],
+      ['Mentores / jurado en Lima', '✓ Hasta 2', 'Módulo', '—', 'A acordar'],
+      ['Contenido social', '✓ 3 momentos', '✓ 1 dedicado', '✓ Colectivo', 'A acordar'],
+      ['Media de recap', '✓ Co-branded', '✓ Logo + builds', '✓ Logo', 'A acordar'],
+      ['Acceso opt-in a talento', '✓ Seleccionado', 'Módulo', '—', '—'],
+      ['Reporte final', '✓ Regional completo', '✓ Regional', '—', 'A acordar'],
+    ].map(([benefit, title, gold, silver, inKind]) => (
+      <tr key={benefit} className="bg-[var(--ib-surface)] align-middle">
+        <th scope="row" className="px-2 py-1.5 text-left font-semibold text-[var(--text)] md:px-3">{benefit}</th>
+        <td className="bg-[rgb(230_227_216_/_0.1)] px-2 py-1.5 text-[var(--text)] md:px-3">{title}</td>
+        <td className="px-2 py-1.5 md:px-3">{gold}</td>
+        <td className="px-2 py-1.5 md:px-3">{silver}</td>
+        <td className="px-2 py-1.5 md:px-3">{inKind}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<p className="ib-note">Gold incluye un módulo principal. Las campañas son envíos a una lista elegible, no alcance garantizado. El acceso a talento requiere consentimiento y no garantiza volumen. El alcance in-kind depende del valor comercial y la utilidad del aporte.</p>

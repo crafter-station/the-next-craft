@@ -2,19 +2,16 @@
 title: Nuestra trayectoria
 ---
 
-<SlideTitle line="35">NUESTRA TRAYECTORIA</SlideTitle>
+<div className="ib-header"><SlideTitle line="35">NUESTRA TRAYECTORIA</SlideTitle></div>
 
 <Lead>
   Tenemos historial produciendo hackathons con builders reales y sponsors de herramientas developer.
 </Lead>
 
-<StatRow>
-  <Stat value="2,300+" label="Hackers" />
-  <Stat value="127" label="Proyectos" />
-  <Stat value="$30.5K" label="Recaudado" />
-  <Stat value="30+" label="Sponsors" />
-</StatRow>
+<div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+  {[['2,300+', 'Hackers'], ['127', 'Proyectos'], ['30+', 'Sponsors']].map(([value, label]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between"><span className="font-mono text-3xl font-semibold tracking-[-0.06em] text-[var(--text)] md:text-4xl">{value}</span><span className="ib-label">{label}</span></div>
+  ))}
+</div>
 
-<ChipGrid
-  items={["Supabase", "Lovable", "v0", "n8n", "ElevenLabs", "Cursor", "Firecrawl", "Make"]}
-/>
+<div><p className="ib-label mb-3">MARCAS CON LAS QUE HEMOS COLABORADO</p><CollaboratorLogoWall /></div>

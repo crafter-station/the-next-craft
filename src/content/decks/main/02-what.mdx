@@ -2,17 +2,19 @@
 title: Qué es
 ---
 
-<SlideTitle line="10">QUÉ ES</SlideTitle>
+<div className="ib-header"><SlideTitle line="10">QUÉ ES</SlideTitle></div>
 
 <Lead>
   Una hackathon de un día para construir producto real desde cero.
 </Lead>
 
-<ContrastGrid
-  leftTitle="No venimos a"
-  rightTitle="Venimos a"
-  leftItems={["Pitch decks", "Slides de venta", "Demo theatre"]}
-  rightItems={["Código funcional", "Usuarios reales", "Craft visible"]}
-/>
+<div className="grid gap-5 md:grid-cols-[0.8fr_1.2fr]">
+  <div className="ib-item-plain"><p className="ib-label">NO ES OTRA CONFERENCIA</p><p className="ib-copy mt-3">Sin audiencia pasiva, pitch decks especulativos ni teatro de demos. Cada equipo empieza de cero y termina en público.</p></div>
+  <div className="ib-feature"><p className="ib-label">EL RESULTADO</p><p className="mt-4 font-mono text-2xl font-semibold uppercase leading-snug tracking-[-0.04em] text-[var(--text)] md:text-3xl">Código funcional. Usuarios reales. Craft visible.</p></div>
+</div>
 
-<Ready />
+<div className="ib-cluster md:grid-cols-3">
+  {[['01', 'Construir', 'Los equipos convierten una idea útil en software funcional.'], ['02', 'Mostrar', 'Cada entrega termina con una demo de producto, no una promesa.'], ['03', 'Continuar', 'Los mejores productos y relaciones sobreviven al evento.']].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-40 grid-rows-[auto_auto_1fr] gap-3"><span className="ib-marker text-sm text-[var(--bright)]">{number}</span><h3 className="font-mono text-xl font-semibold uppercase text-[var(--text)]">{title}</h3><p className="ib-copy">{copy}</p></div>
+  ))}
+</div>

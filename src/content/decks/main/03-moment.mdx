@@ -2,25 +2,18 @@
 title: El momento
 ---
 
-<SlideTitle line="20">EL MOMENTO</SlideTitle>
+<div className="ib-header"><SlideTitle line="20">EL MOMENTO</SlideTitle></div>
 
 <Lead>
   Latinoamérica tiene talento técnico de clase mundial. Falta ponerlo frente a
   las empresas que más lo necesitan.
 </Lead>
 
-<FlowMap
-  items={[
-    { label: "Talento", value: "Builders listos para shippear" },
-    { label: "Plataforma", value: "12 horas de producto en vivo" },
-    { label: "Marca", value: "Acceso directo a adopters" },
-  ]}
-/>
-
-<PhotoFeature
-  photo={{
-    src: "/deck/photos/hackathons/co-003.jpg",
-    alt: "Hackers reunidos en una edición anterior construyendo durante el evento",
-    caption: "Comunidad en vivo · ediciones anteriores",
-  }}
-/>
+<div className="grid items-start gap-7 md:grid-cols-[1.35fr_0.65fr]">
+  <div className="ib-photo h-64 md:h-80"><img src="/deck/photos/hackathons/pe-004.jpg" alt="Hackers colaborando durante una edición anterior en Perú" /><span className="ib-photo-caption">Builders en movimiento · Perú</span></div>
+  <div className="grid gap-3">
+    {[['01', 'Talento', 'Builders listos para lanzar'], ['02', 'Plataforma', '12 horas de producto en vivo'], ['03', 'Marca', 'Acceso directo a adopters']].map(([number, label, value]) => (
+      <div key={number} className="ib-item"><span className="ib-marker text-xs text-[var(--bright)]">{number}</span><p className="mt-3 font-mono text-lg font-semibold uppercase text-[var(--text)]">{label}</p><p className="ib-copy mt-1">{value}</p></div>
+    ))}
+  </div>
+</div>

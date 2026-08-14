@@ -1,0 +1,23 @@
+---
+title: Módulos de activación
+---
+
+<div className="ib-header"><SlideTitle line="97">MÓDULOS DE ACTIVACIÓN</SlideTitle></div>
+
+<Lead>Gold selecciona un módulo principal. Title combina módulos en un programa regional a medida.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ['01', 'Track + Producto', 'Reto dedicado o premio financiado por el sponsor · créditos o integración de producto · hasta dos roles de mentor o jurado en Lima · visibilidad en demos'],
+    ['02', 'Campaña + Educación', 'Hasta dos talks o workshops prácticos · hasta dos envíos a una lista elegible de la comunidad · una publicación social dedicada'],
+    ['03', 'Talento + Medición', 'Lista de talento con consentimiento o introducciones seleccionadas · funnel de registro y asistencia · reporte de activación, contenido y engagement'],
+    ['04', 'Marca Física', 'Ubicación prioritaria en cinco sedes · inserción de stickers o merch provisto por el sponsor · producción y cantidades definidas en el acuerdo'],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-44 grid-cols-[2.5rem_1fr] gap-x-4">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <div><h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--text)]">{title}</h3><p className="ib-copy mt-3">{copy}</p></div>
+    </div>
+  ))}
+</div>
+
+<p className="ib-note">Fechas, canales, cantidades de assets, derechos de uso, geografía y responsabilidades de entrega se confirman en el acuerdo comercial. Las métricas describen actividad entregada, no resultados garantizados.</p>
