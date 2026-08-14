@@ -1,0 +1,30 @@
+---
+title: El encaje
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">LA MISMA IA. OTRO FORMATO.</SlideTitle>
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">Entel Empresas ya lo explica</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>La Ruta · 670 empresarios en junio</span><span>Empower Summit · 500+ asistentes</span><span>Aprende Emprendedor · cursos de IA</span><span>Blog y Comunidad Entel Empresas</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft lo construye</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>300 builders seleccionados</span><span>Producto real en 12 horas</span><span>Demos y decisiones observables</span><span>Todo corriendo sobre conectividad</span>
+    </div>
+  </div>
+</div>
+
+<Lead>Entel enseña IA en auditorios. Acá la IA se construye.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Autoridad", "Voz de Entel antes del evento"], ["Prueba", "Productos funcionando, no slides"], ["Contenido", "Demos de productos funcionando, grabadas en piso"], ["Comunidad", "Los que digitalizan a las empresas"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>

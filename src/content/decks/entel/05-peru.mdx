@@ -1,0 +1,20 @@
+---
+title: El límite honesto
+---
+
+<div className="ib-header">
+  <SlideTitle line="40">DOS DE LAS CINCO SEDES SON SU MERCADO</SlideTitle>
+</div>
+
+<div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
+  <div className="ib-feature-inverse flex min-h-80 flex-col justify-between">
+    <p className="ib-label">LO DECIMOS ANTES DE QUE LO PREGUNTEN</p>
+    <p className="font-mono text-4xl font-semibold uppercase leading-tight tracking-[-0.05em] text-[var(--void)]">Lima y Arequipa se venden. Las otras tres son marca.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Por eso el nivel recomendado es USD 2,500.</p>
+  </div>
+  <div className="ib-cluster md:grid-cols-2">
+    {[["Lima", "Sede principal. Mentor y jurado de Entel en piso"], ["Arequipa", "Segunda sede peruana. Misma marca, mismo material impreso"], ["Bogotá · Guatemala · El Salvador", "Alcance de marca y contenido regional"], ["Perfil", "Developers, diseño de producto, founders técnicos y talento emergente"]].map(([label, value]) => (
+      <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+    ))}
+  </div>
+</div>

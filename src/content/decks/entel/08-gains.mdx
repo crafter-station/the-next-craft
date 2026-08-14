@@ -1,0 +1,21 @@
+---
+title: Qué gana Entel
+---
+
+<div className="ib-header">
+  <SlideTitle line="75">QUÉ SE LLEVA ENTEL</SlideTitle>
+</div>
+
+<Lead>Cinco cosas concretas, todas verificables después del evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Audiencia", "La comunidad técnica peruana en un solo día, con presencia física en Lima y Arequipa."],
+    ["Registros", "Una campaña a nuestra red de 18K con enlace propio de Entel: los registros caen en su panel."],
+    ["Datos", "Nombre, correo, perfil y ciudad de quienes autoricen compartirlos con Entel."],
+    ["Contenido", "Demos, fotos y recap de los productos construidos, listos para Blog y Comunidad Entel."],
+    ["Posicionamiento", "La marca que acerca la tecnología a las empresas peruanas, parada donde esa tecnología se fabrica."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+  ))}
+</div>

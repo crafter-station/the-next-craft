@@ -278,6 +278,33 @@ Avoid:
 survive losing half their copy. The partner is not reading for completeness, they are reading
 for whether this is worth a call.
 
+## The Close Slide
+
+Every deck ends on the same shape. Reference implementation: `src/content/decks/lemon/11-close.mdx`.
+
+```mdx
+<div className="flex min-h-[60svh] flex-col items-center justify-center gap-6 text-center">
+  <h2 className="pixel-heading max-w-5xl" style={{ fontSize: "clamp(1.5rem, 5vw, 2.75rem)" }}>
+    {"HEADLINE"}
+  </h2>
+  <Lead>El siguiente paso es [one concrete action].</Lead>
+  <Wordmark />
+  <p className="font-mono text-sm text-[var(--text-dim)]">{"29 AGO 2026 · CITIES"}</p>
+  <Ready />
+</div>
+```
+
+Rules for the close:
+
+- **Centered, no cards, no grid.** The close is the one slide that is looked at, not read.
+- **One headline, one next step.** Not a summary of the offer — that already happened on
+  the investment slide. Repeating it here reads as a lack of confidence.
+- **The headline states the shift, never a promised outcome.** "De explicar la IA a
+  construirla" works. "EA tendrá el mejor talento de Bogotá" does not: it promises
+  something the sender cannot deliver, and a senior reader discounts the whole deck for it.
+- **No footnotes, no sources, no contact grid, no disclaimers.** Put the booking link
+  inside the next-step line if one is needed.
+
 ## Visual Rules
 
 Decks should preserve the project design direction from `DESIGN.md`.
