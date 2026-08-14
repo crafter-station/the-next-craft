@@ -1,0 +1,25 @@
+---
+title: Medición
+---
+
+<div className="ib-header">
+  <SlideTitle line="80">LA CONVERSIÓN LA VEN USTEDES</SlideTitle>
+</div>
+
+<Lead>Cada campaña usa un enlace que entrega Entel. Los registros aparecen en su panel, no en nuestro reporte.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Distribución", "Envíos, aperturas, clics y registros de las campañas pre-evento."],
+    ["Pre-eventos", "Registros, asistentes y permanencia en cada charla o workshop."],
+    ["Hackathon", "Check-ins por sede y participación de mentor y jurado."],
+    ["Contenido", "Post dedicado, fotos y video entregados; alcance e interacción disponible."],
+    ["Participantes", "Nombre, correo, perfil y ciudad de quienes autoricen compartir sus datos con Entel."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3 last:md:col-span-2 last:md:min-h-0 last:md:flex-row last:md:items-center">
+      <span className="section-label">{label}</span><span className="font-mono text-sm text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
+
+<p className="ib-note">Garantizamos acceso y ejecución, no conversión. Métricas de terceros sujetas a disponibilidad de cada plataforma.</p>
