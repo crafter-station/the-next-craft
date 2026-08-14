@@ -241,6 +241,43 @@ Use the existing vocabulary:
 
 Keep each slide focused. If a slide needs more than one `Lead`, one grid, and one closing sentence, split it.
 
+## Density Rules
+
+A deck is read standing up, in thirty seconds, by someone deciding whether to forward it.
+Density is the difference between a deck that gets forwarded and one that gets closed.
+
+**The budget: 40 words of prose per slide, maximum.** Title and number labels do not count.
+If a slide needs more, the slide is doing two jobs and must be split.
+
+**Numbers carry the slide. Prose labels the numbers.** Reach for `Stat` / `StatRow` first and
+write the sentence second. A slide whose argument is a paragraph is a slide whose argument
+has not been found yet.
+
+Good:
+
+```mdx
+<SlideTitle line="90">CUÁNTO SALE CADA CUENTA</SlideTitle>
+
+<StatRow>
+  <Stat value="$28" label="si abre el 30%" />
+  <Stat value="$17" label="si abre el 50%" />
+  <Stat value="$12" label="si abre el 70%" />
+</StatRow>
+
+<Lead>Escenarios sobre $2.5K, no promesas.</Lead>
+```
+
+Avoid:
+
+- Two prose blocks on one slide (a `Lead` plus a full paragraph below it).
+- Sentences with subordinate clauses. If it has a `porque` or a `así que`, it is two sentences.
+- Explaining the reasoning behind an offer. State the offer; the reasoning belongs in the email.
+- Restating in prose what the numbers already say.
+
+**Cut test:** delete every sentence and see which ones the slide actually misses. Most decks
+survive losing half their copy. The partner is not reading for completeness, they are reading
+for whether this is worth a call.
+
 ## Visual Rules
 
 Decks should preserve the project design direction from `DESIGN.md`.
@@ -264,7 +301,7 @@ For partner decks:
 ```json
 {
   "title": "The Next Craft ft. [Partner] - Main Partner Deck",
-  "description": "A Main Partner proposal for [Partner] to [specific outcome] for 200 LatAm builders.",
+  "description": "A Main Partner proposal for [Partner] to [specific outcome] for 300 LatAm builders.",
   "icon": "/brand-assets/[partner]/[asset]"
 }
 ```
@@ -285,3 +322,5 @@ Before shipping a partner deck, verify:
 - The copy says `builder adoption with proof`, not just `brand visibility`.
 - Slides use existing MDX deck components.
 - The deck can be understood without a live narrator.
+- No slide carries more than 40 words of prose.
+- Every slide that can lead with a number does.
