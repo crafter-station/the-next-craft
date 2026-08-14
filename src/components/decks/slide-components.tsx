@@ -1,6 +1,14 @@
 import Image from "next/image";
 import { Children, type ReactNode } from "react";
 
+import CursorMark from "@lobehub/icons/es/Cursor/components/Mono";
+import CursorWordmark from "@lobehub/icons/es/Cursor/components/Text";
+import ElevenLabsLogo from "@lobehub/icons/es/ElevenLabs/components/Combine";
+import LovableMark from "@lobehub/icons/es/Lovable/components/Mono";
+import LovableWordmark from "@lobehub/icons/es/Lovable/components/Text";
+import N8nLogo from "@lobehub/icons/es/N8n/components/Combine";
+import V0Logo from "@lobehub/icons/es/V0/components/Mono";
+
 import { cn } from "@/lib/utils";
 
 /* ── Tabla fusionada: contenedor con borde superior/izquierdo; cada celda
@@ -75,6 +83,70 @@ export function DataCell({
         {label}
       </span>
       {renderDataCellValue(value)}
+    </div>
+  );
+}
+
+export function PrizePodium({
+  prizes,
+  total,
+  totalLabel,
+}: {
+  prizes: { rank: string; place: string; amount: string }[];
+  total: string;
+  totalLabel: string;
+}) {
+  const orderedPrizes = [prizes[1], prizes[0], prizes[2]];
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="grid min-h-56 grid-cols-3 items-end gap-2 md:min-h-64 md:gap-3">
+        {orderedPrizes.map((prize) => {
+          const isWinner = prize.rank === "01";
+          const height =
+            prize.rank === "01"
+              ? "min-h-56 md:min-h-64"
+              : prize.rank === "02"
+                ? "min-h-44 md:min-h-52"
+                : "min-h-36 md:min-h-44";
+
+          return (
+            <div
+              key={prize.rank}
+              className={cn(
+                "flex flex-col justify-between p-4 md:p-5",
+                height,
+                isWinner
+                  ? "bg-[var(--bone)] text-[var(--void)]"
+                  : "bg-[var(--ib-surface-strong)] text-[var(--text)]",
+              )}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <span
+                  className={cn(
+                    "font-mono text-[10px] font-semibold uppercase tracking-[0.12em]",
+                    isWinner
+                      ? "text-[rgb(26_26_23_/_0.6)]"
+                      : "text-[var(--text-dim)]",
+                  )}
+                >
+                  {prize.place}
+                </span>
+                <span className="ib-marker text-xs">{prize.rank}</span>
+              </div>
+              <span className="font-mono text-[clamp(1.5rem,4vw,2.5rem)] font-semibold leading-none tracking-[-0.07em]">
+                {prize.amount}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex items-baseline justify-between gap-4 bg-[var(--ib-surface)] px-4 py-3 font-mono md:px-5">
+        <span className="ib-label">{totalLabel}</span>
+        <span className="text-xl font-semibold tracking-[-0.05em] text-[var(--text)]">
+          {total}
+        </span>
+      </div>
     </div>
   );
 }
@@ -237,6 +309,81 @@ export function Logo({
           {inner}
         </span>
       )}
+    </div>
+  );
+}
+
+export function CollaboratorLogoWall() {
+  return (
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <BrandLogo name="Supabase">
+        <svg viewBox="0 0 109 113" aria-hidden="true" className="h-8 w-8">
+          <path
+            d="M63.7 110.3c-2.8 3.6-8.6 1.6-8.7-3l-1-39.8h44.2c8 0 12.5 9.2 7.6 15.4l-42.1 27.4Z"
+            fill="currentColor"
+          />
+          <path
+            d="M45.3 2.7c2.8-3.6 8.6-1.6 8.7 3l.4 39.8H10.8c-8 0-12.5-9.2-7.6-15.4L45.3 2.7Z"
+            fill="currentColor"
+            opacity="0.55"
+          />
+        </svg>
+        <span>supabase</span>
+      </BrandLogo>
+      <BrandLogo name="Lovable">
+        <span className="flex items-center gap-2">
+          <LovableMark size={24} />
+          <LovableWordmark size={21} />
+        </span>
+      </BrandLogo>
+      <BrandLogo name="v0">
+        <V0Logo size={50} />
+      </BrandLogo>
+      <BrandLogo name="n8n">
+        <N8nLogo size={30} type="mono" />
+      </BrandLogo>
+      <BrandLogo name="ElevenLabs">
+        <ElevenLabsLogo size={27} />
+      </BrandLogo>
+      <BrandLogo name="Cursor">
+        <span className="flex items-center gap-2">
+          <CursorMark size={24} />
+          <CursorWordmark size={20} />
+        </span>
+      </BrandLogo>
+      <BrandLogo name="Firecrawl">
+        <Image
+          src="/deck/brand-assets/firecrawl/logo-white.svg"
+          alt=""
+          aria-hidden="true"
+          width={200}
+          height={284}
+          className="h-8 w-auto"
+        />
+        <span>firecrawl</span>
+      </BrandLogo>
+      <BrandLogo name="Plenti">
+        <Image
+          src="/deck/brand-assets/plenti/logo-wordmark-grayscale.svg"
+          alt=""
+          aria-hidden="true"
+          width={200}
+          height={71}
+          className="h-8 w-auto"
+        />
+      </BrandLogo>
+    </div>
+  );
+}
+
+function BrandLogo({ name, children }: { name: string; children: ReactNode }) {
+  return (
+    <div
+      role="img"
+      aria-label={name}
+      className="flex min-h-24 items-center justify-center gap-2 bg-[var(--ib-surface)] px-3 font-mono text-lg font-semibold tracking-[-0.04em] text-[var(--text)] opacity-75 md:px-4"
+    >
+      {children}
     </div>
   );
 }

@@ -1,0 +1,43 @@
+---
+title: Sponsorship comparison
+---
+
+<div className="ib-header"><SlideTitle line="95">WHAT EACH SPONSORSHIP INCLUDES</SlideTitle></div>
+
+<table className="w-full table-fixed border-separate border-spacing-y-1 font-mono text-[9px] leading-snug text-[var(--text-dim)] md:text-[10px]">
+  <colgroup><col className="w-[28%]" /><col className="w-[18%]" /><col className="w-[18%]" /><col className="w-[18%]" /><col className="w-[18%]" /></colgroup>
+  <thead>
+    <tr className="text-left align-bottom">
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Asset / benefit</span></th>
+      <th className="bg-[var(--bone)] px-2 py-2 text-[var(--void)] md:px-3"><span className="block text-[9px] font-semibold uppercase tracking-[0.1em] md:text-[10px]">Title · x1</span><span className="mt-1 block text-xs">$5K</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Gold · x2</span><span className="mt-1 block text-xs text-[var(--text)]">$2.5K</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">Silver · x5</span><span className="mt-1 block text-xs text-[var(--text)]">$500</span></th>
+      <th className="px-2 py-2 md:px-3"><span className="ib-label">In-kind</span><span className="mt-1 block text-xs text-[var(--text)]">Custom</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {[
+      ['Regional event lockup', '✓ Official', '—', '—', '—'],
+      ['Website + print + digital', '✓ Top billing', '✓ Priority', '✓ Logo grid', 'As agreed'],
+      ['Category exclusivity', '✓ Scoped', '—', '—', '—'],
+      ['Talks / workshops', '✓ Up to 2', 'Module', '—', 'As agreed'],
+      ['Community campaigns', '✓ Up to 2', 'Module', '—', 'As agreed'],
+      ['Challenge / track / prize', '✓ Flagship', 'Module', '—', 'Optional'],
+      ['Mentors / judges in Lima', '✓ Up to 2', 'Module', '—', 'As agreed'],
+      ['Social content', '✓ 3 moments', '✓ 1 dedicated', '✓ Collective', 'As agreed'],
+      ['Recap media', '✓ Co-branded', '✓ Logo + builds', '✓ Logo', 'As agreed'],
+      ['Opt-in talent access', '✓ Selected', 'Module', '—', '—'],
+      ['Final report', '✓ Full regional', '✓ Regional', '—', 'As agreed'],
+    ].map(([benefit, title, gold, silver, inKind]) => (
+      <tr key={benefit} className="bg-[var(--ib-surface)] align-middle">
+        <th scope="row" className="px-2 py-1.5 text-left font-semibold text-[var(--text)] md:px-3">{benefit}</th>
+        <td className="bg-[rgb(230_227_216_/_0.1)] px-2 py-1.5 text-[var(--text)] md:px-3">{title}</td>
+        <td className="px-2 py-1.5 md:px-3">{gold}</td>
+        <td className="px-2 py-1.5 md:px-3">{silver}</td>
+        <td className="px-2 py-1.5 md:px-3">{inKind}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<p className="ib-note">Gold includes one primary activation module. Community campaigns are sends to an eligible list, not guaranteed reach. Talent access is consent-based with no guaranteed volume. In-kind scope depends on the commercial value and usefulness of the contribution.</p>

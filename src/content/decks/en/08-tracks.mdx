@@ -2,14 +2,23 @@
 title: Tracks
 ---
 
-<SlideTitle line="50">TRACKS</SlideTitle>
+<div className="ib-header"><SlideTitle line="50">TRACKS</SlideTitle></div>
 
 <Lead>
   Each track can become a sponsor-owned challenge with credits, mentors, judging, bonus prizes and recap assets.
 </Lead>
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-  <TrackCard number="01" title="Content Machine" tagline="CREATE · PUBLISH · DISTRIBUTE" />
-  <TrackCard number="02" title="Out of the Box" tagline="WEIRD · EXPERIMENTAL · UNCLASSIFIABLE" />
-  <TrackCard number="03" title="Learning by Shipping" tagline="LEARN BY DOING · NOT WATCHING" />
+<div className="ib-cluster md:grid-cols-3">
+  {[
+    ['01', 'Content Machine', 'Create · publish · distribute'],
+    ['02', 'Out of the Box', 'Weird · experimental · unclassifiable'],
+    ['03', 'Learning by Shipping', 'Learn by doing · not watching'],
+  ].map(([number, title, tagline]) => (
+    <div key={number} className="ib-item flex min-h-52 flex-col justify-between">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <div><h3 className="font-mono text-xl font-semibold uppercase leading-tight tracking-[-0.03em] text-[var(--text)]">{title}</h3><p className="ib-copy mt-3 uppercase tracking-[0.08em]">{tagline}</p></div>
+    </div>
+  ))}
 </div>
+
+<div className="ib-inline-list"><span>Credits</span><span>Mentors</span><span>Judging</span><span>Bonus prizes</span><span>Recap assets</span></div>

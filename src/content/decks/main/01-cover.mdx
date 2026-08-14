@@ -2,11 +2,17 @@
 title: Portada
 ---
 
-<div className="flex flex-col items-center justify-center text-center gap-6 min-h-[60svh]">
-  <Wordmark />
-  <h2 className="pixel-heading" style={{ fontSize: "clamp(1.75rem, 5vw, 3rem)" }}>
-    {"HACKATHON 2026"}
-  </h2>
-  <Lead>300 hackers · cinco sedes · 12 horas · producto real</Lead>
-  <Ready />
+<div className="grid min-h-[62svh] items-center gap-12 md:grid-cols-[1.2fr_0.8fr]">
+  <div className="flex flex-col gap-5">
+    <p className="section-label mb-4"><span className="text-[var(--text-dim)]">HACKATHON REGIONAL </span>2026</p>
+    <Wordmark className="text-[var(--text)]" />
+    <h1 className="max-w-2xl font-mono text-xl font-semibold uppercase leading-snug tracking-[0.02em] text-[var(--text)] md:text-2xl">300 BUILDERS. CINCO SEDES. UN DÍA PARA LANZAR ALGO REAL.</h1>
+    <p className="max-w-2xl font-mono text-lg leading-relaxed text-[var(--text-dim)] md:text-xl">Una plataforma builder-first donde productos, talento y empresas tecnológicas ambiciosas se encuentran a través de software funcionando.</p>
+    <div className="ib-inline-list pt-2"><span>29 AGO 2026</span><span>12 HORAS</span><span>5 SEDES</span><span>LATINOAMÉRICA</span></div>
+  </div>
+  <div className="flex flex-col gap-7">
+    <div className="ib-photo h-72 md:h-80"><img src="/deck/photos/hackathons/co-003.jpg" alt="Builders trabajando juntos en una hackathon anterior en Bogotá" /><span className="ib-photo-caption">IA Hackathon · Bogotá · 2025</span></div>
+  </div>
 </div>
+
+<p className="ib-note">DECK PARA PATROCINADORES · THE NEXT CRAFT 2026</p>

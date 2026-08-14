@@ -2,23 +2,24 @@
 title: Audience
 ---
 
-<SlideTitle line="80">BUILDER PROFILE</SlideTitle>
+<div className="ib-header"><SlideTitle line="80">BUILDER PROFILE</SlideTitle></div>
 
-<PersonaGrid
-  items={[
-    { title: "Developers", caption: "Full-stack, frontend, backend, mobile" },
-    { title: "Designers", caption: "Product, UX, prototypes" },
-    { title: "Founders", caption: "Technical, early stage" },
-    { title: "Students", caption: "Advanced, recent grads" },
-  ]}
-/>
+<div className="ib-cluster md:grid-cols-4">
+  {[
+    ['01', 'Developers', 'Full-stack, frontend, backend, mobile'],
+    ['02', 'Designers', 'Product, UX, prototypes'],
+    ['03', 'Founders', 'Technical, early stage'],
+    ['04', 'Students', 'Advanced, recent grads'],
+  ].map(([number, title, caption]) => (
+    <div key={number} className="ib-item-plain"><span className="ib-marker text-xs text-[var(--bright)]">{number}</span><h3 className="mt-4 font-mono text-lg font-semibold uppercase text-[var(--text)]">{title}</h3><p className="ib-copy mt-2">{caption}</p></div>
+  ))}
+</div>
 
-<BenefitGrid
-  items={[
-    { label: "Usage", value: "Teams trying tools while they build" },
-    { label: "Demos", value: "Real products to review and share" },
-    { label: "Feedback", value: "Technical signals from active builders" },
-    { label: "Hiring", value: "Talent visible under real pressure" },
-    { label: "Content", value: "Post-event assets with concrete builds" },
-  ]}
-/>
+<div className="ib-feature">
+  <p className="ib-label mb-5">WHAT PARTNERS GET</p>
+  <div className="grid gap-5 md:grid-cols-5">
+    {[['Usage', 'Tools used while teams build'], ['Demos', 'Products to review and share'], ['Feedback', 'Signals from active builders'], ['Hiring', 'Talent visible under pressure'], ['Content', 'Assets anchored in real builds']].map(([label, value]) => (
+      <div key={label}><p className="font-mono text-base font-semibold uppercase text-[var(--text)]">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+    ))}
+  </div>
+</div>

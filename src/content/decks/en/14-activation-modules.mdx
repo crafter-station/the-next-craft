@@ -1,0 +1,23 @@
+---
+title: Activation modules
+---
+
+<div className="ib-header"><SlideTitle line="97">ACTIVATION MODULES</SlideTitle></div>
+
+<Lead>Gold selects one primary module. Title combines modules into a custom regional program.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ['01', 'Track + Product', 'Dedicated challenge or sponsor-funded prize · product credits or tool integration · up to two mentor/judge roles in Lima · demo visibility'],
+    ['02', 'Campaign + Education', 'Up to two practitioner talks or workshops · up to two sends to an eligible community list · one dedicated social publication'],
+    ['03', 'Talent + Measurement', 'Consent-based talent list or selected introductions · registration and attendance funnel · activation, content and engagement report'],
+    ['04', 'Physical Brand', 'Priority placement across five venues · sponsor-supplied stickers or merch insertion · production and quantities scoped in the agreement'],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-44 grid-cols-[2.5rem_1fr] gap-x-4">
+      <span className="ib-marker text-sm text-[var(--bright)]">{number}</span>
+      <div><h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.03em] text-[var(--text)]">{title}</h3><p className="ib-copy mt-3">{copy}</p></div>
+    </div>
+  ))}
+</div>
+
+<p className="ib-note">Exact dates, channels, asset counts, usage rights, geography and delivery responsibilities are confirmed in the commercial agreement. Metrics describe delivered activity, not guaranteed outcomes.</p>

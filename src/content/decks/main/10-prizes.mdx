@@ -2,17 +2,30 @@
 title: Premios
 ---
 
-<SlideTitle line="70">PREMIOS + OPERACIÓN</SlideTitle>
+<div className="ib-header"><SlideTitle line="70">PREMIOS + OPERACIÓN</SlideTitle></div>
 
 <Lead>
-  El sponsorship nos ayuda a llegar a más builders y darles la oportunidad de crear.
+  Una meta que reconoce a los equipos que convierten un día intenso en un producto funcional.
 </Lead>
 
-<DataGrid>
-  <DataCell label="1er lugar" value="$1,000" />
-  <DataCell label="2do lugar" value="$800" />
-  <DataCell label="3er lugar" value="$400" />
-  <DataCell label="Operación" value="Sedes, comida, materiales, check-in y media" />
-  <DataCell label="Contenido" value="Fotos, clips, demos y recap post-evento" />
-  <DataCell label="Bonus" value="Partners pueden sumar premios por track" />
-</DataGrid>
+<div className="grid items-stretch gap-6 md:grid-cols-[1.3fr_0.7fr]">
+  <PrizePodium
+    prizes={[
+      { rank: '01', place: '1er lugar', amount: '$1,000' },
+      { rank: '02', place: '2do lugar', amount: '$800' },
+      { rank: '03', place: '3er lugar', amount: '$400' },
+    ]}
+    total="$2,200"
+    totalLabel="Bolsa principal de premios"
+  />
+  <div className="flex flex-col gap-3">
+    <div className="ib-feature flex flex-1 flex-col justify-between gap-8">
+      <p className="ib-label">BONUS DEL SPONSOR</p>
+      <div><p className="font-mono text-2xl font-semibold uppercase leading-tight tracking-[-0.04em] text-[var(--text)]">Suma un premio a tu track.</p><p className="ib-copy mt-3">Reconoce el mejor uso de tu producto, API o brief del challenge.</p></div>
+    </div>
+    <div className="grid grid-cols-2 gap-3">
+      <div className="ib-item"><p className="ib-label">Operación</p><p className="ib-copy mt-2">Sedes · comida · materiales · check-in</p></div>
+      <div className="ib-item"><p className="ib-label">Media</p><p className="ib-copy mt-2">Fotos · clips · demos · recap</p></div>
+    </div>
+  </div>
+</div>
