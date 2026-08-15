@@ -1,0 +1,33 @@
+---
+title: Opción recomendada
+---
+
+<div className="ib-header">
+  <SlideTitle line="50">GOLD PARTNER</SlideTitle>
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">RECOMENDADO PARA LENOVO</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 2,500</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">MARCA EN LAS CINCO SEDES</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Lenovo es la máquina sobre la que se construye el día.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">El resto del deal no cuesta: enlace, préstamo y nombre del premio.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">INCLUYE</p>
+    <Lead>Cuatro entregables concretos.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Enlace", "Código y enlace de Lenovo para los 300 y para la red de 18K"],
+        ["Préstamo", "Máquinas de demo en piso en la sede elegida, usadas las doce horas"],
+        ["Premio", "El premio en efectivo del día lleva el nombre de Lenovo"],
+        ["5 sedes", "Logo en señalética, kits de participante, stickers y recap"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Gold Partner</span><span>USD 2,500</span></div>

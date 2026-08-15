@@ -1,0 +1,28 @@
+---
+title: La plataforma
+---
+
+<div className="ib-header">
+  <div className="flex max-w-3xl flex-col gap-3">
+    <p className="section-label"><span className="ib-marker text-[var(--text-dim)]">20 </span>LA PLATAFORMA</p>
+    <h1 className="ib-title">Cinco sedes, cuatro países, un solo día.</h1>
+  </div>
+</div>
+
+<div className="grid items-start gap-7 md:grid-cols-[1.15fr_0.85fr]">
+  <div className="ib-photo h-64 md:h-72">
+    <img src="/deck/photos/hackathons/co-002.jpg" alt="Equipos construyendo durante un hackathon en Colombia" />
+    <span className="ib-photo-caption">Producto real · Un mismo día · Cinco sedes</span>
+  </div>
+  <div className="grid gap-3">
+    {[["300", "Builders seleccionados"], ["12", "Horas sobre la máquina"], ["18K", "Contactos en nuestra red"], ["2,300+", "Hackers en ediciones previas"]].map(([value, label]) => (
+      <div key={value} className="ib-item grid grid-cols-[6.5rem_1fr] items-baseline gap-4 py-3">
+        <span className="font-mono text-2xl font-semibold tracking-[-0.06em] text-[var(--text)]">{value}</span>
+        <span className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.1em] text-[var(--text-dim)]">{label}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Lima</span><span>Arequipa</span><span>Bogotá</span><span>Guatemala</span><span>El Salvador</span></div>
+<p className="ib-note">Cifras de nuestra red y de ediciones previas provistas por The Next Craft.</p>
