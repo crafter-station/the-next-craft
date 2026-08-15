@@ -1,0 +1,32 @@
+---
+title: Escalar a liderazgo
+---
+
+<div className="ib-header">
+  <SlideTitle line="60">TITLE PARTNER</SlideTitle>
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">1 DISPONIBLE</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">USD 5,000</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">LA NARRATIVA COMPLETA</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">Yape encabeza el evento en las cinco sedes.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">La opción si el objetivo es marca regional y no solo Perú.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">SUMA AL PAQUETE ANTERIOR</p>
+    <Lead>Todo lo de USD 2,500, más el lugar principal.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Apertura", "Palabras de Yape en el kickoff de las cinco sedes"],
+        ["Workshop", "Un workshop propio de Yape dentro del programa"],
+        ["Marca", "Lockup oficial junto a The Next Craft en todos los activos"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Title Partner</span><span>5 sedes</span><span>USD 5,000</span></div>

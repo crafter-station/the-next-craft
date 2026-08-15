@@ -1,0 +1,21 @@
+---
+title: Qué gana Yape
+---
+
+<div className="ib-header">
+  <SlideTitle line="75">QUÉ SE LLEVA YAPE</SlideTitle>
+</div>
+
+<Lead>Cinco cosas concretas, todas verificables después del evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Integraciones", "Productos nuevos que salen del evento cobrando con Yape."],
+    ["Founders", "Doce horas con los founders de los comercios que van a facturar en dos años."],
+    ["Alcance", "18K contactos con enlace de Yape: los registros caen en su panel."],
+    ["Contenido", "Demos, fotos y recap de los productos construidos, listos para sus canales."],
+    ["Posicionamiento", "El método de pago por defecto de los comercios y las startups que vienen."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+  ))}
+</div>
