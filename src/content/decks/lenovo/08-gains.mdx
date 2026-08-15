@@ -1,0 +1,21 @@
+---
+title: Qué gana Lenovo
+---
+
+<div className="ib-header">
+  <SlideTitle line="75">QUÉ SE LLEVA LENOVO</SlideTitle>
+</div>
+
+<Lead>Cinco cosas concretas, todas verificables después del evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Prueba", "Un AI PC trabajando doce horas seguidas, grabado en cuatro países."],
+    ["Feedback", "Qira en español, usado por el perfil que más rápido encuentra los límites."],
+    ["Contenido", "Fotos y clips en español de builders reales, listos para sus canales."],
+    ["Registros", "Lenovo Pro y Lenovo Educación, con el enlace que entrega Lenovo."],
+    ["Audiencia", "La comunidad técnica de PE, CO, GT y SV en un solo día."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+  ))}
+</div>

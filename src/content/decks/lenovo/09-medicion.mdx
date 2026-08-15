@@ -1,0 +1,23 @@
+---
+title: Medición
+---
+
+<div className="ib-header">
+  <SlideTitle line="80">LO QUE SE PUEDE CONTAR DESPUÉS</SlideTitle>
+</div>
+
+<Lead>Garantizamos acceso y ejecución. Cualquier pieza con enlace usa uno que entrega Lenovo, y la conversión la ven en su panel.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Registros", "Altas en Lenovo Pro y Lenovo Educación por el enlace de Lenovo."],
+    ["Préstamo", "Horas de uso y número de equipos que trabajaron sobre las máquinas."],
+    ["Sedes", "Check-ins por sede y material de marca desplegado en las cinco."],
+    ["Contenido", "Fotos, clips y recap entregados; alcance disponible por plataforma."],
+    ["Participantes", "Nombre, correo, perfil y ciudad de quienes autoricen compartirlos con Lenovo."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3 last:md:col-span-2 last:md:min-h-0 last:md:flex-row last:md:items-center">
+      <span className="section-label">{label}</span><span className="font-mono text-sm text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
