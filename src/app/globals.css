@@ -1133,6 +1133,86 @@
   box-shadow: 0 0 0 var(--key-shadow);
 }
 
+/* Variante por sede: son 5 en fila, así que bajan de escala para que el bloque
+   completo siga leyéndose como una sola unidad y no como 5 CTAs compitiendo */
+.term-btn-city {
+  font-size: clamp(0.75rem, 1.1vw, 0.875rem);
+  letter-spacing: 0.1em;
+  padding: 0.7rem 1.1rem;
+  box-shadow: 0 3px 0 var(--key-shadow);
+}
+
+.term-btn-city:active {
+  transform: translateY(3px);
+}
+
+/* Hover de sede: video inverso real (fondo negro, texto marfil). El hover
+   heredado de .term-btn va de --bright a --text, dos marfiles casi idénticos:
+   no se percibía. Acá se invierte el bloque y la flecha avanza. */
+@media (hover: hover) and (pointer: fine) {
+  .term-btn-city:hover {
+    background-color: var(--void);
+    color: var(--bright);
+    border-color: var(--bright);
+  }
+
+  .term-btn-city:hover .cta-arrow {
+    transform: translateX(4px);
+  }
+}
+
+.term-btn-city .cta-arrow {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .term-btn-city .cta-arrow {
+    transition: transform 150ms var(--ease-out-strong);
+  }
+}
+
+/* Fila del menú de sedes (CityPicker): video inverso al enfocar/apuntar,
+   como una opción seleccionada en un menú de arranque */
+.city-option {
+  color: var(--text);
+}
+
+.city-option:hover,
+.city-option:focus-visible {
+  background-color: var(--bright);
+  color: var(--void);
+  outline: none;
+}
+
+.city-option:focus-visible .cta-arrow,
+.city-option:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+.city-option .cta-arrow {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .city-option {
+    transition:
+      background-color 130ms var(--ease-out-strong),
+      color 130ms var(--ease-out-strong);
+  }
+
+  .city-option .cta-arrow {
+    transition: transform 150ms var(--ease-out-strong);
+  }
+}
+
+/* Foco visible: mismo lenguaje que el hover, con anillo para teclado */
+.term-btn-city:focus-visible {
+  background-color: var(--void);
+  color: var(--bright);
+  outline: 2px solid var(--bright);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .term-btn {
     transition:

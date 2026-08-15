@@ -355,9 +355,25 @@
     ],
     "specsSr": "Deadline: 20 de agosto de 2026, 23:59 GMT-5. 300 cupos, admisión selectiva. Gratis. El formulario son 8 preguntas, 90 segundos.",
     "pressReturn": "PRESS RETURN ↵",
+    "selectCity": "SELECT SEDE ↵",
+    "selectCityHint": "Cada sede tiene su propio registro. Elige la ciudad donde vas a hackear.",
     "ctaWhatsapp": "[ POSTULAR POR WHATSAPP → ]",
     "ctaForm": "[ POSTULAR → ]",
     "whatsappMessage": "Hola, quiero postular a The Next Craft"
+  },
+  "cities": {
+    "lima": "Lima",
+    "bogota": "Bogotá",
+    "guatemala": "Ciudad de Guatemala",
+    "arequipa": "Arequipa",
+    "salvador": "El Salvador"
+  },
+  "cityPicker": {
+    "loadLine": "LOAD \"SEDE\",8,1",
+    "title": "ELIGE TU SEDE",
+    "hint": "Cada sede tiene su propio registro en Luma. Elige la ciudad donde vas a hackear.",
+    "close": "[ CERRAR ]",
+    "keyHint": "PRESIONA 1–5 · ESC PARA SALIR"
   },
   "footer": {
     "links": {

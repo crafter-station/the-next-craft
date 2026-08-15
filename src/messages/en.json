@@ -355,9 +355,25 @@
     ],
     "specsSr": "Deadline: August 20, 2026, 23:59 GMT-5. 300 seats, selective admission. Free. The form is 8 questions, 90 seconds.",
     "pressReturn": "PRESS RETURN ↵",
+    "selectCity": "SELECT CITY ↵",
+    "selectCityHint": "Each city has its own registration. Pick where you are hacking.",
     "ctaWhatsapp": "[ APPLY VIA WHATSAPP → ]",
     "ctaForm": "[ APPLY → ]",
     "whatsappMessage": "Hi, I want to apply to The Next Craft"
+  },
+  "cities": {
+    "lima": "Lima",
+    "bogota": "Bogotá",
+    "guatemala": "Guatemala City",
+    "arequipa": "Arequipa",
+    "salvador": "El Salvador"
+  },
+  "cityPicker": {
+    "loadLine": "LOAD \"CITY\",8,1",
+    "title": "PICK YOUR CITY",
+    "hint": "Each city has its own Luma registration. Pick where you're hacking.",
+    "close": "[ CLOSE ]",
+    "keyHint": "PRESS 1–5 · ESC TO EXIT"
   },
   "footer": {
     "links": {

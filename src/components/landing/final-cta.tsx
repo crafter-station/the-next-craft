@@ -4,6 +4,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
+import { CITIES } from "@/lib/cities";
+
 import { ScrambleText } from "@/components/effects/scramble-text";
 
 /*
@@ -19,8 +21,8 @@ import { ScrambleText } from "@/components/effects/scramble-text";
   va tipeando cada elemento según su umbral (data-thr, 0→1).
 */
 
-// Registro por Luma — único canal. El CTA abre el evento en Luma.
-const LUMA_URL = "https://luma.com/hack0?tag=the%20next%20craft";
+/* Registro por Luma — único canal, pero un evento por sede: el CTA final no es
+   un botón sino la lista de ciudades (ver `@/lib/cities`). */
 
 const HEADER_THRESHOLDS = [0.03, 0.07] as const;
 const BOOT_THRESHOLDS = [0.11, 0.15, 0.19, 0.23, 0.27] as const;
@@ -69,8 +71,7 @@ export function FinalCta() {
     [specLines],
   );
 
-  const ctaHref = LUMA_URL;
-  const ctaLabel = t("ctaForm");
+  const tCity = useTranslations("cities");
 
   const sectionRef = useRef<HTMLElement>(null);
   const [armed, setArmed] = useState(false);
@@ -201,17 +202,33 @@ export function FinalCta() {
               className="font-mono text-sm text-[var(--bright)]"
               aria-hidden="true"
             >
-              {t("pressReturn")}
+              {t("selectCity")}
             </p>
-            <a
-              href={ctaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-magnetic
-              className="term-btn"
+
+            {/* Un registro por sede: cada ciudad abre su propio evento en Luma */}
+            <ul
+              className="flex flex-wrap gap-3 list-none m-0 p-0"
+              aria-label={t("selectCityHint")}
             >
-              {ctaLabel}
-            </a>
+              {CITIES.map(({ key, luma }) => (
+                <li key={key}>
+                  <a
+                    href={luma}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-magnetic
+                    className="term-btn term-btn-city"
+                  >
+                    {tCity(key)} <span className="cta-arrow">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <p className="font-mono text-xs text-[var(--text-dim)] max-w-md leading-[1.6]">
+              {t("selectCityHint")}
+            </p>
+
             <p
               className="font-mono text-sm text-[var(--bright)]"
               aria-hidden="true"
