@@ -1,0 +1,20 @@
+---
+title: El límite honesto
+---
+
+<div className="ib-header">
+  <SlideTitle line="30">ACÁ NO HAY SELL-THROUGH QUE VENDERLES</SlideTitle>
+</div>
+
+<div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
+  <div className="ib-feature-inverse flex min-h-80 flex-col justify-between">
+    <p className="ib-label">LO DECIMOS ANTES DE QUE LO PREGUNTEN</p>
+    <p className="font-mono text-4xl font-semibold uppercase leading-tight tracking-[-0.05em] text-[var(--void)]">300 builders no son 300 ventas.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">Son 300 registros posibles a Lenovo Pro y Educación, y la máquina en uso doce horas.</p>
+  </div>
+  <div className="ib-cluster md:grid-cols-2">
+    {[["Lima · Arequipa", "Dos sedes en Perú. Equipos en piso en la que elija Lenovo"], ["Bogotá", "Sede colombiana. Marca en piso y en el kit"], ["Guatemala · El Salvador", "Centroamérica, mismo material impreso"], ["Perfil", "Product engineers, indie hackers, founders técnicos y talento emergente"]].map(([label, value]) => (
+      <div key={label} className="ib-item"><p className="ib-label">{label}</p><p className="ib-copy mt-3">{value}</p></div>
+    ))}
+  </div>
+</div>

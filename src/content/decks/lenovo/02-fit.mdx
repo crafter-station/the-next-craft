@@ -1,0 +1,30 @@
+---
+title: El encaje
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">EL ESTADIO DA MARCA. ESTO DA PRUEBA.</SlideTitle>
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">Lenovo ya lo comunica</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>Mundial 2026 · Official FIFA Technology Partner</span><span>Qira · español de Latinoamérica en la primera ola</span><span>Yoga · IdeaPad · Legion · ThinkPad</span><span>Tienda propia en PE, CO, GT y SV</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft lo demuestra</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>300 builders seleccionados</span><span>12 horas seguidas sobre la máquina</span><span>Producto real al cierre del día</span><span>Cuatro países, un mismo día</span>
+    </div>
+  </div>
+</div>
+
+<Lead>El AI PC se anuncia. Acá se usa.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Prueba", "Producto funcionando, no specs"], ["Contenido", "Gente construyendo, grabada en piso"], ["Idioma", "Español, el mismo de la primera ola"], ["Audiencia", "Los que deciden con qué se construye"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
