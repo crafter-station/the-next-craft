@@ -1,0 +1,23 @@
+---
+title: La propuesta
+---
+
+<div className="ib-header">
+  <SlideTitle line="30">PONEN UNA COMIDA. SE LLEVAN CUATRO COSAS.</SlideTitle>
+  <img src="/deck/brand-assets/bigboy/logo-bigboy.png" alt="Big Boy Burgers" className="ib-logo" />
+</div>
+
+<div className="ib-feature"><p className="ib-label">LO QUE PONEN</p><p className="mt-3 font-mono text-lg leading-relaxed text-[var(--text)]">Cien combos, una sola entrega, a la hora que coordinemos. No es logo en un banner, es su producto en la mesa.</p></div>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["01", "Cien pruebas en un día", "Todas dentro del radio que ya despachan sus locales de San Isidro, Miraflores, Surco y San Miguel."],
+    ["02", "Tráfico a su canal", "QR en cada mesa y en cada caja hacia bigboy.com.pe/pedir, con un enlace suyo."],
+    ["03", "Micrófono", "Cinco minutos al momento de repartir, si los quieren tomar."],
+    ["04", "Marca", "Señalética de la sede de Lima y presencia en el recap de fotos y video."],
+  ].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-40 grid-rows-[auto_auto_1fr] gap-4"><span className="ib-marker text-sm text-[var(--bright)]">{number}</span><h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.02em] text-[var(--text)]">{title}</h3><p className="font-mono text-sm text-[var(--text-dim)]">{copy}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">La conversión del QR la ven en su propio panel, con el enlace que ustedes nos entregan.</p>
