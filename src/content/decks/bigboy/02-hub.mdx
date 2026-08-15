@@ -1,0 +1,18 @@
+---
+title: El hub de Lima
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">CIEN SELECCIONADOS QUE NO SE MUEVEN DE LA SEDE</SlideTitle>
+  <img src="/deck/brand-assets/bigboy/logo-bigboy.png" alt="Big Boy Burgers" className="ib-logo" />
+</div>
+
+<Lead>The Next Craft es un hackathon presencial de doce horas. Esta propuesta es por la sede de Lima.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["100", "Builders seleccionados en Lima"], ["12 h", "De 9 a.m. a 9 p.m., sábado 29"], ["4", "Comidas cubiertas por el evento"], ["1", "La comida que pondría Big Boy"]].map(([value, label]) => (
+    <div key={value} className="ib-item"><p className="font-mono text-3xl font-semibold tracking-[-0.06em] text-[var(--text)]">{value}</p><p className="ib-copy mt-3">{label}</p></div>
+  ))}
+</div>
+
+<div className="ib-feature"><p className="ib-label">QUIÉN ESTÁ EN LA SALA</p><p className="mt-3 font-mono text-lg leading-relaxed text-[var(--text)]">Developers, diseñadores de producto y founders. Gente que decide qué come desde el celular y no se levanta de la mesa.</p></div>

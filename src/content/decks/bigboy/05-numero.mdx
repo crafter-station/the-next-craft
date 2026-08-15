@@ -1,0 +1,33 @@
+---
+title: El número
+---
+
+<div className="ib-header">
+  <SlideTitle line="40">EL NÚMERO, SIN HACERLOS ADIVINAR</SlideTitle>
+  <img src="/deck/brand-assets/bigboy/logo-bigboy.png" alt="Big Boy Burgers" className="ib-logo" />
+</div>
+
+<div className="ib-tier-layout">
+  <div className="ib-tier-price">
+    <p className="ib-label">RECOMENDADO PARA BIG BOY</p>
+    <div className="flex flex-col gap-2">
+      <span className="font-mono text-5xl font-semibold tracking-[-0.06em] text-[var(--void)]">100 COMBOS</span>
+      <span className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(26_26_23_/_0.6)]">UNA COMIDA COMPLETA DE LA SEDE DE LIMA</span>
+    </div>
+    <p className="font-mono text-2xl font-medium leading-snug">En nuestro presupuesto esa comida vale USD 800: USD 8 por persona.</p>
+    <p className="font-mono text-sm text-[rgb(26_26_23_/_0.65)]">A precio de lista son S/ 4,190 en Combos Big Boy. En costo de insumos es bastante menos. Compárenlo con lo que les cuesta hoy traer un pedido nuevo a su canal.</p>
+  </div>
+  <div className="ib-tier-details">
+    <p className="ib-label">SI PREFIEREN ALGO MÁS CHICO</p>
+    <Lead>Dos caminos más, para que la conversación no dependa del monto.</Lead>
+    <div className="ib-tier-benefits">
+      {[
+        ["Break de la noche", "Papas y bebidas para el tramo final, con el mismo QR en mesa y en caja"],
+        ["Sumar alcance", "Tier Silver, USD 500: logo en la web del evento y un post dedicado"],
+      ].map(([label, value]) => <div key={label} className="ib-tier-benefit"><span className="ib-label">{label}</span><span className="ib-copy">{value}</span></div>)}
+    </div>
+  </div>
+</div>
+
+<div className="ib-inline-list"><span>Aporte en especie</span><span>Sede Lima</span><span>100 combos</span><span>USD 800 en presupuesto</span></div>
+<p className="ib-note">Precio de lista tomado de bigboy.com.pe el 14 de agosto de 2026. Condiciones de facturación y horario de entrega se cierran en el acuerdo.</p>
