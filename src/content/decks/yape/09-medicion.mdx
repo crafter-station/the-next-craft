@@ -1,0 +1,22 @@
+---
+title: Medición
+---
+
+<div className="ib-header">
+  <SlideTitle line="80">LA CONVERSIÓN LA VEN USTEDES</SlideTitle>
+</div>
+
+<Lead>La campaña usa un enlace que entrega Yape. Los registros aparecen en su panel, no en nuestro reporte.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[
+    ["Distribución", "Envíos, aperturas, clics y registros de la campaña pre-evento."],
+    ["Charla", "Registros, asistentes y permanencia."],
+    ["Track", "Equipos que entraron a Cobra con Yape y productos entregados cobrando."],
+    ["Contenido", "Post dedicado, fotos y video entregados."],
+  ].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3">
+      <span className="section-label">{label}</span><span className="font-mono text-sm text-[var(--text-dim)]">{value}</span>
+    </div>
+  ))}
+</div>
