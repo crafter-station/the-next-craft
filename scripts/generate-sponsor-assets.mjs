@@ -40,6 +40,11 @@ const sponsors = [
     logo: "public/sponsors/cloudforge/imagotipo_cloudforge.svg",
     width: 780,
   },
+  {
+    slug: "cursor",
+    logo: "public/sponsors/cursor.svg",
+    width: 780,
+  },
   { slug: "exa", logo: "public/sponsors/exa.svg", width: 660 },
   {
     slug: "elevenlabs",

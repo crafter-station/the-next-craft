@@ -1,6 +1,6 @@
 # 💰 The Next Craft hackathon: Budget Planning
 
-**In-person hackathon · Crafter Station × Next**  
+**In-person hackathon · Crafter Station**  
 Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 — simultaneous · Jul 25, 2026 · 9:00–21:00 (12 h)  
 300 hackers across Lima, Bogotá, Guatemala, Arequipa and El Salvador · Base currency: USD
 

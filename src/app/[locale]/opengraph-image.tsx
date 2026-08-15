@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "The Next Craft — Hackathon por Crafter Station × Next";
+export const alt = "The Next Craft — Hackathon por Crafter Station";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

@@ -82,11 +82,6 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         name: "Crafter Station",
         url: "https://crafterstation.com",
       },
-      {
-        "@type": "Organization",
-        name: "Next Fellow",
-        url: "https://nextfellow.ai",
-      },
     ],
     description: t("description"),
     offers: {

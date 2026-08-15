@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { CircularText } from "@/components/effects/circular-text";
 import { ScrambleText } from "@/components/effects/scramble-text";
 
+import { CityPicker } from "./city-picker";
 import { Countdown } from "./countdown";
 
 export function Hero() {
@@ -69,13 +70,9 @@ export function Hero() {
 
         {/* CTAs — keycaps */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-5 px-6 reveal reveal-d4">
-          <a
-            href="https://luma.com/hack0?tag=the%20next%20craft"
-            data-magnetic
-            className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150"
-          >
+          <CityPicker className="cta-btn keycap font-mono font-semibold text-sm tracking-[0.12em] uppercase px-6 py-3 transition-colors duration-150">
             {t("ctaApply")} <span className="cta-arrow">→</span>
-          </a>
+          </CityPicker>
           <a
             href="#tracks"
             data-magnetic
