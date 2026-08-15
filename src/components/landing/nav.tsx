@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { CityPicker } from "./city-picker";
 import { LanguageToggle } from "./language-toggle";
 
 const NAV_LINKS = [
@@ -49,14 +50,11 @@ export function Nav() {
         <div className="flex items-stretch gap-2 shrink-0">
           <LanguageToggle />
 
-          {/* CTA — keycap beige */}
-          <a
-            href="https://luma.com/hack0?tag=the%20next%20craft"
-            data-magnetic
-            className="cta-btn keycap font-mono text-xs font-semibold tracking-[0.12em] uppercase px-4 py-2 transition-colors duration-150"
-          >
+          {/* CTA — keycap beige. Abre el selector de sede: el registro son 5
+              eventos de Luma, uno por ciudad. */}
+          <CityPicker className="cta-btn keycap font-mono text-xs font-semibold tracking-[0.12em] uppercase px-4 py-2 transition-colors duration-150">
             {t("cta")} <span className="cta-arrow">→</span>
-          </a>
+          </CityPicker>
         </div>
       </nav>
     </header>

@@ -8,9 +8,12 @@ const EVENT_LINKS = [
   { key: "faq", href: "#faq" },
 ] as const;
 
+/* Comunidad = las organizaciones detrás del evento + el repo */
 const COMMUNITY_LINKS = [
   { label: "crafterstation.com", href: "https://crafterstation.com" },
-  { label: "nextfellow.ai", href: "https://nextfellow.ai" },
+  { label: "Open2", href: "https://www.the502project.com/en" },
+  { label: "AI Labs", href: "https://ailabs.sv/" },
+  { label: "Nucleo Labs", href: "https://nucleo.la/" },
   {
     label: "GitHub crafter-station",
     href: "https://github.com/crafter-station",

@@ -5,8 +5,10 @@ import { useTranslations } from "next-intl";
   marfil con tinta oscura, como prender la pantalla. Colores locales
   (tinta sobre bone) en vez de los tokens de dark.
 
-  El premio en efectivo es la cifra protagonista; lo garantizado para todos
-  vive en la columna de perks.
+  El premio en efectivo es la cifra protagonista. Lo garantizado para todos
+  va debajo, a lo ancho y repartido en celdas: como columna lateral la lista
+  crecía en vertical cada vez que entraba un partner nuevo y desbalanceaba
+  la sección.
 */
 const INK = "#1a1a17";
 const INK_DIM = "#6f6a5d";
@@ -30,10 +32,9 @@ export function Prizes() {
       className="relative px-6 md:px-12 lg:px-24 py-24 bg-[var(--bone)]"
     >
       <div className="mx-auto max-w-7xl w-full flex flex-col gap-10 scroll-reveal">
-        {/* Composición asimétrica 2/3 + 1/3 */}
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col gap-10">
           {/* ── Cifra protagonista en tinta ── */}
-          <div className="lg:w-2/3 flex flex-col gap-8">
+          <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <span
                 className="font-pixel font-bold leading-none select-none"
@@ -108,13 +109,16 @@ export function Prizes() {
             </div>
           </div>
 
-          {/* ── Columna secundaria 1/3: perks ── */}
+          {/* ── Perks: banda a lo ancho, dividida en celdas ──
+              Los bordes de las celdas del borde derecho e inferior se salen
+              1px (los márgenes negativos) y los recorta el overflow-hidden,
+              así no se duplican con el borde de la caja. */}
           <div
-            className="lg:w-1/3 flex flex-col overflow-hidden rounded-[0.625rem] border"
+            className="flex flex-col overflow-hidden rounded-[0.625rem] border"
             style={{ borderColor: RULE }}
           >
             <div
-              className="px-7 py-5"
+              className="px-6 py-5 md:px-7"
               style={{ borderBottom: `1px solid ${RULE}` }}
             >
               <p
@@ -126,11 +130,15 @@ export function Prizes() {
             </div>
 
             <ul
-              className="flex flex-col list-none m-0 p-0 flex-1"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 list-none m-0 p-0 -mr-px -mb-px"
               aria-label={t("perksAria")}
             >
               {perks.map((perk) => (
-                <li key={perk} className="flex items-start gap-3 px-7 py-4">
+                <li
+                  key={perk}
+                  className="flex items-start gap-3 px-6 py-4 md:px-7 border-r border-b"
+                  style={{ borderColor: RULE }}
+                >
                   <span
                     className="font-mono text-sm shrink-0 mt-0.5"
                     style={{ color: INK }}

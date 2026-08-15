@@ -214,7 +214,7 @@ Use Spanish for local sponsor decks and event-facing fundraising unless the deck
 Stay within canonical event facts from `DESIGN.md`:
 
 - The Next Craft.
-- Organized by Crafter Station x Next Fellow.
+- Organized by Crafter Station.
 - August 29, 2026.
 - 12 hours, 09:00-21:00.
 - 300 hackers.

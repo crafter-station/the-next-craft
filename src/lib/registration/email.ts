@@ -51,7 +51,7 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
     </p>
   </div>
   <p style="font-size: 11px; color: #5B6478; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; margin-top: 16px;">
-    Crafter Station × Next · ${city}
+    Crafter Station · ${city}
   </p>
 </div>`,
     }),
