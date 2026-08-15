@@ -1,14 +1,13 @@
 # syntax=docker/dockerfile:1.7
 
-# Bun's NAPI compat layer can't load Next 16's Turbopack worker pool +
-# next-intl/plugin native modules, so we build with Node end-to-end.
-# bookworm-slim (glibc) gives prebuilts for sharp / unrs-resolver.
+# Bun installs the locked dependencies; Node runs the Next build because Bun's
+# NAPI layer can't load the Turbopack worker pool + next-intl native modules.
 
 # ── deps ──────────────────────────────────────────────────────────────────
-FROM node:22-bookworm-slim AS deps
+FROM oven/bun:1.3.14 AS deps
 WORKDIR /app
-COPY package.json ./
-RUN npm install --no-fund --no-audit --legacy-peer-deps
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 # ── builder ───────────────────────────────────────────────────────────────
 FROM node:22-bookworm-slim AS builder
