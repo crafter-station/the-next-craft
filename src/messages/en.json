@@ -8,7 +8,7 @@
   "metadata": {
     "title": "The Next Craft — Hackathon by Crafter Station",
     "titleTemplate": "%s · The Next Craft",
-    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá, Guatemala, Arequipa and El Salvador — August 29, 2026. 300 seats, teams of 3–5, prizes TBA. Apply by August 15.",
+    "description": "From zero to product in 12 hours. In-person hackathon in Lima, Bogotá, Guatemala, Arequipa and El Salvador — August 29, 2026. 300 seats, teams of 3–5, prizes TBA. Apply by August 20.",
     "ogLocale": "en_US"
   },
   "nav": {
@@ -82,7 +82,7 @@
       "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
       "deadline": {
         "label": "DEADLINE",
-        "value": "15 AUG 2026",
+        "value": "20 AUG 2026",
         "sub": "23:59 GMT-5"
       }
     }
@@ -348,12 +348,12 @@
     ],
     "headline": "DO YOU BUILD?\nAPPLY.",
     "specs": [
-      "DEADLINE ........ 15 AUG 2026 · 23:59 GMT-5",
+      "DEADLINE ........ 20 AUG 2026 · 23:59 GMT-5",
       "SEATS ........... 300 · SELECTIVE ADMISSION",
       "COST ............ FREE",
       "FORM ............ 7 QUESTIONS · 90 SECONDS"
     ],
-    "specsSr": "Deadline: August 15, 2026, 23:59 GMT-5. 300 seats, selective admission. Free. The form is 8 questions, 90 seconds.",
+    "specsSr": "Deadline: August 20, 2026, 23:59 GMT-5. 300 seats, selective admission. Free. The form is 8 questions, 90 seconds.",
     "pressReturn": "PRESS RETURN ↵",
     "ctaWhatsapp": "[ APPLY VIA WHATSAPP → ]",
     "ctaForm": "[ APPLY → ]",
