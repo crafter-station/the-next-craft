@@ -121,8 +121,8 @@ mono 11px tracking 0.18em.
 
 ## Contenido canónico (NO inventar otros datos)
 
-- **Evento**: The Next Craft — hackathon por Crafter Station × Next Fellow
-  (nextfellow.ai, "Next" en el naming corto)
+- **Evento**: The Next Craft — hackathon por Crafter Station
+  (crafterstation.com)
 - **Tagline**: "De cero a producto en 12 horas."
 - **Fecha**: 29 de agosto, 2026 (un solo día, 09:00–21:00) · **Lugar**:
   presencial en 5 sedes —
@@ -153,7 +153,7 @@ mono 11px tracking 0.18em.
    backdrop + pantalla CRT con el timeline del día (09:00–21:00) que se
    construye al scrollear
 7. `50` Premios (`#premios`) — $5,000 en panel pantalla
-8. `60` Sponsors (`#sponsors`) — Next Fellow (co-organizer) + Crafter Station + partners
+8. `60` Organizadores (`#sponsors`) — Crafter Station (organizador) + partners
 9. `70` FAQ (`#faq`) — accordion (Base UI)
 10. FinalCta (`#postular`) — pantalla C64 final, `RUN POSTULAR`, CTA WhatsApp
 11. Footer — boot screen de despedida: stats, links, coordenadas, READY.█

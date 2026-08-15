@@ -6,7 +6,7 @@
     "switchToEnglish": "Cambiar a inglés"
   },
   "metadata": {
-    "title": "The Next Craft — Hackathon por Crafter Station × Next",
+    "title": "The Next Craft — Hackathon por Crafter Station",
     "titleTemplate": "%s · The Next Craft",
     "description": "De cero a producto en 12 horas. Hackathon presencial en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto, 2026. 300 cupos, equipos de 3–5, premios por anunciar. Postula hasta el 15 de agosto.",
     "ogLocale": "es_PE"
@@ -61,7 +61,7 @@
   },
   "about": {
     "headline": "No es un evento.\nSon 12 horas de construir.",
-    "paragraph1": "The Next Craft es el hackathon presencial de Crafter Station × Next. 12 horas de trabajo real, en simultáneo en Lima, Bogotá, Guatemala, Arequipa y El Salvador, con 300 hackers que vienen a resolver problemas de verdad.",
+    "paragraph1": "The Next Craft es el hackathon presencial de Crafter Station. 12 horas de trabajo real, en simultáneo en Lima, Bogotá, Guatemala, Arequipa y El Salvador, con 300 hackers que vienen a resolver problemas de verdad.",
     "paragraph2": "La admisión es selectiva. No hay cupo para espectadores ni espacio para slides bonitas. Se viene a shippear producto real: con usuarios, con datos, con algo que funcione al final del reloj."
   },
   "tldr": {
@@ -162,7 +162,7 @@
       },
       {
         "time": "11:00",
-        "description": "Mentorías con Next Fellow y Crafter Station"
+        "description": "Mentorías con Crafter Station"
       },
       { "time": "13:00", "description": "Almuerzo" },
       {
@@ -284,8 +284,8 @@
     "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
   },
   "sponsors": {
-    "label": "SPONSORS",
-    "headlineAria": "Headline sponsors",
+    "label": "ORGANIZADORES",
+    "headlineAria": "Organizadores del evento",
     "organizerRole": "COMUNIDAD ORGANIZADORA",
     "ctaPrefix": "¿Quieres ser sponsor? →"
   },
@@ -372,8 +372,8 @@
       "community": "COMUNIDAD",
       "contact": "CONTACTO"
     },
-    "byline": "Hackathon por\nCrafter Station × Next\nLima · Bogotá · Guatemala · Arequipa · El Salvador · Ago 2026",
-    "copyright": "© 2026 Crafter Station × Next · Lima · Bogotá · Guatemala · Arequipa · El Salvador",
+    "byline": "Hackathon por\nCrafter Station\nLima · Bogotá · Guatemala · Arequipa · El Salvador · Ago 2026",
+    "copyright": "© 2026 Crafter Station · Lima · Bogotá · Guatemala · Arequipa · El Salvador",
     "endLabel": "110 END · "
   }
 }

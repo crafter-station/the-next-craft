@@ -1,6 +1,6 @@
 # The Next Craft — Budget Planning (Sponsors)
 
-**Event:** In-person hackathon · Crafter Station × Next  
+**Event:** In-person hackathon · Crafter Station  
 **Hubs:** Lima 🇵🇪 · Bogotá 🇨🇴 · Guatemala 🇬🇹 (simultaneous)  
 **Date:** Jul 25, 2026 · **Time:** 09:00–21:00 (12 h)  
 **Participants:** 300 hackers across Lima, Bogotá, Guatemala, Arequipa and El Salvador  
