@@ -25,7 +25,7 @@ const FEATURED_LOGOS = [
     href: "https://clerk.com",
     width: 441,
     height: 128,
-    className: "h-9 md:h-16",
+    className: "h-8 md:h-12",
   },
   {
     name: "CloudForge AI",
@@ -33,7 +33,7 @@ const FEATURED_LOGOS = [
     href: "https://www.cloud-forge-ai.com/",
     width: 120,
     height: 32,
-    className: "h-11 md:h-20 grayscale brightness-0 invert",
+    className: "h-12 grayscale brightness-0 invert md:h-[4.5rem]",
   },
 ] as const;
 
@@ -44,7 +44,7 @@ const IMG_LOGOS = [
     href: "https://tavily.com",
     width: 186,
     height: 56,
-    className: "h-6 md:h-8",
+    className: "h-5 md:h-6",
   },
   {
     name: "ElevenLabs",
@@ -52,7 +52,7 @@ const IMG_LOGOS = [
     href: "https://elevenlabs.io",
     width: 694,
     height: 90,
-    className: "h-4 md:h-6",
+    className: "h-3 md:h-5",
   },
   {
     name: "3DevLabs",
@@ -60,7 +60,7 @@ const IMG_LOGOS = [
     href: "https://3devlabs.app",
     width: 1295,
     height: 1251,
-    className: "h-8 md:h-10",
+    className: "h-6 md:h-8",
   },
   {
     name: "Exa",
@@ -68,7 +68,7 @@ const IMG_LOGOS = [
     href: "https://exa.ai",
     width: 278,
     height: 100,
-    className: "h-6 md:h-8",
+    className: "h-5 md:h-6",
   },
   {
     name: "Vapi",
@@ -76,7 +76,7 @@ const IMG_LOGOS = [
     href: "https://vapi.ai",
     width: 101,
     height: 33,
-    className: "h-5 md:h-7",
+    className: "h-4 md:h-5",
   },
   {
     name: "Apify",
@@ -84,7 +84,31 @@ const IMG_LOGOS = [
     href: "https://apify.com",
     width: 512,
     height: 141,
-    className: "h-5 md:h-7",
+    className: "h-4 md:h-5",
+  },
+  {
+    name: "INNICIA UCSM",
+    src: "/sponsors/innicia-ucsm.png",
+    href: "https://investigacion.ucsm.edu.pe/innicia-vri/",
+    width: 1008,
+    height: 321,
+    className: "h-4 md:h-5",
+  },
+  {
+    name: "Universidad Católica de Santa María",
+    src: "/sponsors/ucsm.png",
+    href: "https://ucsm.edu.pe/",
+    width: 4082,
+    height: 943,
+    className: "h-4 md:h-5",
+  },
+  {
+    name: "Universidad Peruana Cayetano Heredia",
+    src: "/sponsors/upch.svg",
+    href: "https://www.cayetano.edu.pe/",
+    width: 207,
+    height: 63,
+    className: "h-4 grayscale md:h-5",
   },
 ] as const;
 
@@ -117,6 +141,22 @@ export function Partners() {
             width={382}
             height={146}
             className="h-auto w-full select-none grayscale"
+          />
+        </a>
+
+        <a
+          href="https://www.yalo.ai/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Yalo"
+          className={`${LINK_BASE} block w-24 md:w-36`}
+        >
+          <Image
+            src="/sponsors/yalo.svg"
+            alt="Yalo"
+            width={76}
+            height={36}
+            className="h-auto w-full select-none"
           />
         </a>
 
@@ -181,9 +221,9 @@ export function Partners() {
                 alt=""
                 width={79}
                 height={32}
-                className="h-5 w-auto md:h-7"
+                className="h-4 w-auto md:h-5"
               />
-              <span className="font-sans text-xl font-bold leading-none tracking-tight text-white md:text-2xl">
+              <span className="font-sans text-base font-bold leading-none tracking-tight text-white md:text-xl">
                 visagente
               </span>
             </a>
@@ -197,8 +237,8 @@ export function Partners() {
               aria-label="Cursor"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <CursorIcon size={26} />
-              <CursorText size={21} />
+              <CursorIcon size={21} />
+              <CursorText size={17} />
             </a>
           </li>
 
@@ -210,8 +250,8 @@ export function Partners() {
               aria-label="Replit"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <ReplitIcon size={26} />
-              <ReplitText size={21} />
+              <ReplitIcon size={21} />
+              <ReplitText size={17} />
             </a>
           </li>
 
@@ -223,8 +263,8 @@ export function Partners() {
               aria-label="n8n"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <N8nIcon size={26} />
-              <N8nText size={21} />
+              <N8nIcon size={21} />
+              <N8nText size={17} />
             </a>
           </li>
 
@@ -241,8 +281,8 @@ export function Partners() {
               aria-label="Codex"
               className={`${LINK_BASE} inline-flex items-center gap-2`}
             >
-              <CodexIcon size={26} />
-              <CodexText size={21} />
+              <CodexIcon size={21} />
+              <CodexText size={17} />
             </a>
           </li>
         </ul>
