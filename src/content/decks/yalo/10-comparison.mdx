@@ -1,0 +1,20 @@
+---
+title: Comparacion de opciones
+---
+
+<div className="ib-header">
+  <SlideTitle line="90">QUE INCLUYE CADA OPCION</SlideTitle>
+  <img src="/deck/brand-assets/yalo/logo-white.svg" alt="Yalo" className="ib-logo" />
+</div>
+
+<table className="w-full table-fixed border-separate border-spacing-y-1 font-mono text-[10px] leading-snug text-[var(--text-dim)]">
+  <colgroup><col className="w-[34%]" /><col className="w-[22%]" /><col className="w-[22%]" /><col className="w-[22%]" /></colgroup>
+  <thead><tr className="text-left align-bottom"><th className="ib-label px-3 py-2">Activo / beneficio</th><th className="px-3 py-2"><span className="ib-label">Lead</span><span className="mt-1 block text-xs text-[var(--text)]">USD 5,000</span></th><th className="bg-[var(--bone)] px-3 py-2 text-[var(--void)]"><span className="block text-[10px] font-semibold uppercase tracking-[0.1em]">Talent + Track</span><span className="mt-1 block text-xs">USD 2,500</span></th><th className="px-3 py-2"><span className="ib-label">Community</span><span className="mt-1 block text-xs text-[var(--text)]">USD 500</span></th></tr></thead>
+  <tbody>
+    {[["Marca oficial del evento", "✓ Lockup regional", "—", "—"], ["Activos impresos", "✓ Lockup en todos", "✓ Logo prioritario", "✓ Grid sponsors"], ["Activos digitales", "✓ Lockup en todos", "✓ Logo prioritario", "✓ Grid sponsors"], ["Sitio web", "✓ Jerarquia principal", "✓ Logo prioritario", "✓ Grid sponsors"], ["Publicaciones LinkedIn", "✓ 3 apariciones", "✓ 1 dedicada", "—"], ["Publicaciones Instagram", "✓ 3 apariciones", "✓ 1 dedicada", "—"], ["Video de finalistas", "✓ Co branded", "—", "—"], ["Recap publico", "✓ Kit co branded", "✓ Presencia de logo", "✓ Logo en cierre"], ["Track de agentes", "✓ Regional", "✓ Track Yalo", "—"], ["Mentores / jurado en Lima", "✓ Hasta 2", "✓ Hasta 2", "—"], ["Conexiones con talento", "✓ Seleccionado", "✓ Seleccionado", "—"], ["Reporte de resultados", "✓ Regional completo", "✓ Regional", "—"], ["Exclusividad de categoria", "✓ Cinco sedes", "—", "—"]].map(([benefit, lead, talent, community]) => (
+      <tr key={benefit} className="bg-[var(--ib-surface)] align-middle"><th scope="row" className="px-3 py-1.5 text-left font-semibold text-[var(--text)]">{benefit}</th><td className="px-3 py-1.5">{lead}</td><td className="bg-[rgb(230_227_216_/_0.1)] px-3 py-1.5 text-[var(--text)]">{talent}</td><td className="px-3 py-1.5">{community}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p className="ib-note">“Todos” comprende los activos oficiales de todas las ciudades y paises participantes. Conexiones con talento sujetas a autorizacion.</p>

@@ -170,6 +170,27 @@ export function Partners() {
 
           <li>
             <a
+              href="https://www.visagente.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visagente"
+              className={`${LINK_BASE} inline-flex items-center gap-2`}
+            >
+              <Image
+                src="/sponsors/visagente.svg"
+                alt=""
+                width={79}
+                height={32}
+                className="h-5 w-auto md:h-7"
+              />
+              <span className="font-sans text-xl font-bold leading-none tracking-tight text-white md:text-2xl">
+                visagente
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a
               href="https://cursor.com"
               target="_blank"
               rel="noopener noreferrer"

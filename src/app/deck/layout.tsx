@@ -25,7 +25,7 @@ const borel = Borel({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thenextcraft.crafter.run"),
+  metadataBase: new URL("https://thenextcraft.org"),
   title: {
     default: "The Next Craft — Deck para patrocinadores",
     template: "%s — The Next Craft",

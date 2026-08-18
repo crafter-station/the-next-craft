@@ -1,0 +1,33 @@
+---
+title: La oportunidad
+---
+
+<div className="ib-header">
+  <SlideTitle line="10">DE AI-FIRST A BUILT-IN-PUBLIC</SlideTitle>
+  <img src="/deck/brand-assets/yalo/logo-white.svg" alt="Yalo" className="ib-logo" />
+</div>
+
+<div className="ib-cluster md:grid-cols-2">
+  <div className="ib-feature">
+    <p className="ib-label">Yalo ya construye</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text-dim)]">
+      <span>Agentes inteligentes de ventas</span><span>Experiencias en WhatsApp, app y voz</span><span>Personalizacion con datos e IA</span>
+    </div>
+  </div>
+  <div className="ib-feature">
+    <p className="ib-label">The Next Craft lo activa</p>
+    <div className="mt-5 flex flex-col gap-3 font-mono text-sm uppercase tracking-[0.06em] text-[var(--text)]">
+      <span>Builders seleccionados</span><span>Agentes funcionando en 12 horas</span><span>Demos, decisiones y craft observables</span>
+    </div>
+  </div>
+</div>
+
+<Lead>Yalo no solo habla del futuro de las ventas. Invita a construirlo.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[['Producto', 'Casos de uso reales'], ['Talento', 'Ejecucion observable'], ['Marca', 'Liderazgo AI-first'], ['Contenido', 'Agentes en accion']].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Fuentes: yalo.ai, Plataforma, Oris y Compania · Informacion oficial de The Next Craft</p>

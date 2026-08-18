@@ -16,7 +16,7 @@
 
 ## About
 
-Landing page del hackathon **The Next Craft**, organizado por Crafter Station × Next. Evento presencial simultáneo en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto de 2026. De cero a producto en 12 horas: 300 hackers, equipos de 3–5, premios por anunciar. La página cubre presentación del evento, tracks, agenda, premios, sponsors, FAQ, equipo organizador y CTA de postulación. Desplegado en [thenextcraft.crafter.run](https://thenextcraft.crafter.run).
+Landing page del hackathon **The Next Craft**, organizado por Crafter Station × Next. Evento presencial simultáneo en Lima, Bogotá, Guatemala, Arequipa y El Salvador — 29 de agosto de 2026. De cero a producto en 12 horas: 300 hackers, equipos de 3–5, premios por anunciar. La página cubre presentación del evento, tracks, agenda, premios, sponsors, FAQ, equipo organizador y CTA de postulación. Desplegado en [thenextcraft.org](https://thenextcraft.org).
 
 ## Tech Stack
 
@@ -47,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployment
 
-Deployed on [Vercel](https://vercel.com) at [thenextcraft.crafter.run](https://thenextcraft.crafter.run)
+Deployed on [Vercel](https://vercel.com) at [thenextcraft.org](https://thenextcraft.org)
 
 ## Contributing
 

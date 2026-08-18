@@ -13,6 +13,10 @@
 # testing
 /coverage
 
+# generated role invitation previews
+/.invitation-output/
+/.email-output/
+
 # next.js
 /.next/
 /out/
