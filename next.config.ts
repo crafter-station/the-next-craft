@@ -6,6 +6,15 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  async redirects() {
+    return [
+      {
+        source: "/discord",
+        destination: "https://discord.gg/SvwR4Pkyn",
+        permanent: false,
+      },
+    ];
+  },
   outputFileTracingIncludes: {
     "/deck/[slug]": ["./src/content/decks/**/*"],
   },
