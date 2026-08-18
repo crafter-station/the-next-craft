@@ -83,8 +83,7 @@ export async function POST(request: NextRequest) {
       if (result.effect.type === "save") {
         const reg = await saveRegistration(msg.phone, result.effect.answers);
         const siteUrl =
-          process.env.NEXT_PUBLIC_SITE_URL ??
-          "https://thenextcraft.crafter.run";
+          process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.org";
         await sendReplies(
           msg.phone,
           completionReplies(

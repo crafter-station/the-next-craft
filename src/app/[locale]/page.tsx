@@ -88,7 +88,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       "@type": "Offer",
       price: 0,
       priceCurrency: "USD",
-      url: `https://thenextcraft.crafter.run/${locale}`,
+      url: `https://thenextcraft.org/${locale}`,
     },
   };
 

@@ -81,7 +81,7 @@ while (true) {
     completionReplies(
       a.name,
       code,
-      `https://thenextcraft.crafter.run/api/boarding-pass/${code}`,
+      `https://thenextcraft.org/api/boarding-pass/${code}`,
     ).forEach(render);
     console.log("\n   ✓ effect: save →", JSON.stringify(a));
   }

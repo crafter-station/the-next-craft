@@ -13,7 +13,7 @@ export async function sendApprovalEmail(reg: Registration): Promise<void> {
   const firstName = reg.name.split(/\s+/)[0];
   const city = reg.city ?? "Tu sede";
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.crafter.run";
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.org";
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",

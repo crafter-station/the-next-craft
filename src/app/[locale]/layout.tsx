@@ -45,7 +45,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    metadataBase: new URL("https://thenextcraft.crafter.run"),
+    metadataBase: new URL("https://thenextcraft.org"),
     title: {
       default: t("title"),
       template: t("titleTemplate"),
@@ -69,7 +69,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: t("ogLocale"),
-      url: "https://thenextcraft.crafter.run",
+      url: "https://thenextcraft.org",
       siteName: "The Next Craft",
       title: t("title"),
       description: t("description"),

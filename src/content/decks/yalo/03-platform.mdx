@@ -1,0 +1,35 @@
+---
+title: La plataforma
+---
+
+<div className="ib-header">
+  <div className="flex max-w-3xl flex-col gap-3">
+    <p className="section-label"><span className="ib-marker text-[var(--text-dim)]">20 </span>LA PLATAFORMA</p>
+    <h1 className="ib-title">Una senal intensa de talento, producto y velocidad.</h1>
+  </div>
+  <img src="/deck/brand-assets/yalo/logo-white.svg" alt="Yalo" className="ib-logo" />
+</div>
+
+<div className="grid items-start gap-7 md:grid-cols-[1.35fr_0.65fr]">
+  <div className="ib-photo h-64 md:h-72">
+    <img src="/deck/photos/hackathons/co-003.jpg" alt="Participantes de IA Hackathon 2025 en Bogota" />
+    <span className="ib-photo-caption">IA Hackathon · Bogota · 23 y 24 AGO 2025</span>
+  </div>
+  <div className="grid gap-3">
+    {[["5", "Sedes presenciales"], ["12H", "De cero a una demo"], ["29 AGO", "Un mismo dia regional"]].map(([value, label]) => (
+      <div key={value} className="ib-item grid grid-cols-[6.5rem_1fr] items-baseline gap-4 py-3">
+        <span className="font-mono text-2xl font-semibold tracking-[-0.06em] text-[var(--text)]">{value}</span>
+        <span className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.1em] text-[var(--text-dim)]">{label}</span>
+      </div>
+    ))}
+    <div className="ib-item-plain pt-2"><p className="ib-label">Latinoamerica</p><p className="mt-2 font-mono text-sm leading-relaxed text-[var(--text)]">Lima · Arequipa · Bogota<br />Guatemala · El Salvador</p></div>
+  </div>
+</div>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["Developers", "Full stack, backend, mobile e IA"], ["Diseno de producto", "UX conversacional y prototipos"], ["Founders", "Tecnicos, early stage"], ["Talento emergente", "Estudiantes avanzados y recien graduados"]].map(([title, caption]) => (
+    <div key={title} className="ib-item-plain"><h3 className="font-mono text-sm font-semibold uppercase tracking-[0.06em] text-[var(--text)]">{title}</h3><p className="mt-2 font-mono text-xs leading-relaxed text-[var(--text-dim)]">{caption}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Fuente: The Next Craft · thenextcraft.org/es</p>

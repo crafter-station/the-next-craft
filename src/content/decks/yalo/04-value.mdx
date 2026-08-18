@@ -1,0 +1,24 @@
+---
+title: El valor
+---
+
+<div className="ib-header">
+  <SlideTitle line="30">NO ES LOGO. ES PRODUCTO EN ACCION</SlideTitle>
+  <img src="/deck/brand-assets/yalo/logo-white.svg" alt="Yalo" className="ib-logo" />
+</div>
+
+<Lead>Lo que Yalo gana antes, durante y despues.</Lead>
+
+<div className="ib-cluster md:grid-cols-4">
+  {[["01", "Convoca", "Una historia co branded sobre agentes que hacen crecer negocios."], ["02", "Activa", "Track Yalo, mentores, jurado y presencia en cinco sedes."], ["03", "Observa", "Builders resolviendo experiencias de venta bajo presion real."], ["04", "Extiende", "Demos, conexiones con talento, contenido y reporte."]].map(([number, title, copy]) => (
+    <div key={number} className="ib-item grid min-h-48 grid-rows-[auto_auto_1fr] gap-4"><span className="ib-marker text-sm text-[var(--bright)]">{number}</span><h3 className="font-mono text-xl font-semibold uppercase tracking-[-0.02em] text-[var(--text)]">{title}</h3><p className="font-mono text-sm text-[var(--text-dim)]">{copy}</p></div>
+  ))}
+</div>
+
+<div className="ib-cluster md:grid-cols-3">
+  {[["Innovacion aplicada", "Nuevos casos de uso para agentes, comercio y servicio"], ["Marca empleadora", "Asociar Yalo con el mejor talento AI-native de la region"], ["Acceso de alta senal", "Conocer craft, colaboracion y ejecucion antes de una entrevista"]].map(([label, value]) => (
+    <div key={label} className="ib-item-plain"><p className="ib-label">{label}</p><p className="ib-copy mt-2">{value}</p></div>
+  ))}
+</div>
+
+<p className="ib-note">Las conexiones con talento se coordinan con autorizacion de cada participante.</p>

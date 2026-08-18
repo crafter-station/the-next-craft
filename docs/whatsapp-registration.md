@@ -83,7 +83,7 @@ done                    → guarda como pending, asigna CRAFTER-NNN,
 1. **Meta Business** (días, empezar ya): cuenta verificada + app en
    developers.facebook.com tipo Business + producto WhatsApp.
 2. **Número dedicado** que no esté registrado en WhatsApp personal.
-3. Configurar webhook: URL `https://thenextcraft.crafter.run/api/whatsapp/webhook`,
+3. Configurar webhook: URL `https://thenextcraft.org/api/whatsapp/webhook`,
    verify token = `WHATSAPP_VERIFY_TOKEN`, suscribirse al campo `messages`.
 4. **Neon**: crear DB (marketplace de Vercel), correr `scripts/schema.sql`.
 5. **Google Sheet**: crear, compartir con el service account (editor),

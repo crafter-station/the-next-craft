@@ -1,0 +1,18 @@
+---
+title: Medicion
+---
+
+<div className="ib-header">
+  <SlideTitle line="100">MEDICION CLARA</SlideTitle>
+  <img src="/deck/brand-assets/yalo/logo-white.svg" alt="Yalo" className="ib-logo" />
+</div>
+
+<Lead>Un reporte para evaluar alcance, ejecucion y valor despues del evento.</Lead>
+
+<div className="ib-cluster md:grid-cols-2">
+  {[["Distribucion", "Entregas, aperturas, clics y registros atribuidos en los canales de campana."], ["Funnel", "Postulaciones, aprobaciones, registros y check ins reportados por separado."], ["Track Yalo", "Equipos participantes, agentes presentados, criterios y demos finalistas."], ["Talento", "Perfiles autorizados, portfolios revisados y conexiones coordinadas."], ["Contenido", "Activos entregados, alcance, vistas e interaccion registrada."]].map(([label, value]) => (
+    <div key={label} className="ib-item flex min-h-28 flex-col justify-between gap-3 last:md:col-span-2 last:md:min-h-0 last:md:flex-row last:md:items-center"><span className="section-label">{label}</span><span className="font-mono text-sm text-[var(--text-dim)]">{value}</span></div>
+  ))}
+</div>
+
+<p className="ib-note">Privacidad por diseno: resultados agregados y conexiones autorizadas por cada participante.</p>
