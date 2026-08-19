@@ -97,6 +97,12 @@ const roleConfigs = {
         slug: "josue-hernandez",
       },
       {
+        firstName: "NAHUEL",
+        image: "nahuel-alberti.png",
+        lastName: "ALBERTI",
+        slug: "nahuel-alberti",
+      },
+      {
         firstName: "YAKKO",
         image: "yakko-majuri.png",
         lastName: "MAJURI",
