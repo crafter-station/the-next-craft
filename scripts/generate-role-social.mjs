@@ -73,6 +73,12 @@ const roleConfigs = {
         slug: "arturo-barrantes",
       },
       {
+        firstName: "DANIEL",
+        image: "daniel-lesage.png",
+        lastName: "LESAGE",
+        slug: "daniel-lesage",
+      },
+      {
         firstName: "FAUSTO",
         image: "fausto-rolandi.png",
         lastName: "ROLANDI",
