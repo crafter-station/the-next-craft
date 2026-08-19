@@ -57,6 +57,14 @@ const sponsors = [
     width: 700,
   },
   { slug: "vapi", logo: "public/sponsors/vapi.svg", width: 680 },
+  {
+    slug: "upch",
+    logo: "public/deck/brand-assets/upch/upch-logotipo-deck.svg",
+    width: 720,
+    platforms: ["linkedin"],
+    preserveLogoColor: true,
+    grayscaleLogo: true,
+  },
 ];
 
 const formats = [
@@ -183,26 +191,31 @@ async function render(sponsor, format) {
     .png()
     .toBuffer();
   const computerMetadata = await sharp(computer).metadata();
-  const resizedLogo = await sharp(await readFile(path.join(root, sponsor.logo)))
-    .resize({ width: Math.round(sponsor.width * scale) })
-    .png()
-    .toBuffer();
+  const resizedLogoImage = sharp(
+    await readFile(path.join(root, sponsor.logo)),
+  ).resize({ width: Math.round(sponsor.width * scale) });
+  if (sponsor.grayscaleLogo) {
+    resizedLogoImage.grayscale();
+  }
+  const resizedLogo = await resizedLogoImage.png().toBuffer();
   const metadata = await sharp(resizedLogo).metadata();
   const alpha = await sharp(resizedLogo)
     .ensureAlpha()
     .extractChannel("alpha")
     .toBuffer();
-  const logo = await sharp({
-    create: {
-      width: metadata.width,
-      height: metadata.height,
-      channels: 3,
-      background: colors.text,
-    },
-  })
-    .joinChannel(alpha)
-    .png()
-    .toBuffer();
+  const logo = sponsor.preserveLogoColor
+    ? resizedLogo
+    : await sharp({
+        create: {
+          width: metadata.width,
+          height: metadata.height,
+          channels: 3,
+          background: colors.text,
+        },
+      })
+        .joinChannel(alpha)
+        .png()
+        .toBuffer();
   const logoLeft = Math.round((format.width - (metadata.width ?? 0)) / 2);
   const logoTop = Math.round((format.height - (metadata.height ?? 0)) / 2);
   const computerLeft = Math.round(
@@ -255,7 +268,12 @@ await mkdir(outputDirectory, { recursive: true });
 
 const generated = await Promise.all(
   sponsors.flatMap((sponsor) =>
-    formats.map((format) => render(sponsor, format)),
+    formats
+      .filter(
+        (format) =>
+          !sponsor.platforms || sponsor.platforms.includes(format.platform),
+      )
+      .map((format) => render(sponsor, format)),
   ),
 );
 const files = Object.assign({}, ...generated);
@@ -268,15 +286,13 @@ try {
   // This generator can initialize the manifest in a fresh checkout.
 }
 
-manifest.palette = colors;
-manifest.files = {
-  ...Object.fromEntries(
-    Object.entries(manifest.files).filter(
-      ([name]) => !name.startsWith("social/sponsors/"),
-    ),
-  ),
-  ...files,
-};
+manifest.palette = { ...manifest.palette, ...colors };
+for (const name of Object.keys(manifest.files)) {
+  if (name.startsWith("social/sponsors/") && !(name in files)) {
+    delete manifest.files[name];
+  }
+}
+Object.assign(manifest.files, files);
 
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(
