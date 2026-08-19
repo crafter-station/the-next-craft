@@ -573,7 +573,7 @@ export function FlowMap({
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
       {items.map((item, index) => (
         <div key={item.label} className="relative">
-          <div className="border border-[var(--line)] bg-[var(--screen-dim)] p-4 md:p-6 min-h-36 flex flex-col justify-between">
+          <div className="flex h-full min-h-36 flex-col justify-between border border-[var(--line)] bg-[var(--screen-dim)] p-4 md:p-6">
             <span className="font-mono text-[11px] text-[var(--bright)] tabular-nums">
               0{index + 1}
             </span>

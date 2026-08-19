@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
+import Script from "next/script";
 
 import "../globals.css";
 
@@ -48,20 +49,13 @@ export default function DeckRootLayout({
       suppressHydrationWarning
       className={`${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} deck-no-js h-full antialiased`}
     >
-      <head>
-        {/* Runs before first paint: drop the no-JS fallback class so the deck
-         * renders as a single fullscreen slide immediately (no flash of all
-         * slides). If JS is disabled this never runs and the stacked fallback
-         * remains. */}
-        <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: required to run synchronously before paint
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.remove("deck-no-js");`,
-          }}
-        />
-      </head>
       <body className="min-h-full bg-[var(--void)] text-[var(--text)]">
         {children}
+        {/* Runs before hydration so JavaScript clients start in pager mode;
+         * without JavaScript, the stacked fallback remains available. */}
+        <Script id="enable-deck-pager" strategy="beforeInteractive">
+          {`document.documentElement.classList.remove("deck-no-js");`}
+        </Script>
       </body>
     </html>
   );
