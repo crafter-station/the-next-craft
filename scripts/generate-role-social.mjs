@@ -43,6 +43,18 @@ const roleConfigs = {
         lastName: "ORTEGA",
         slug: "juan-ortega",
       },
+      {
+        firstName: "MARIA CRISTINA",
+        image: "maria-cristina-ruelas.png",
+        lastName: "RUELAS",
+        slug: "maria-cristina-ruelas",
+      },
+      {
+        firstName: "VICTOR",
+        image: "victor-galvez.png",
+        lastName: "GALVEZ",
+        slug: "victor-galvez",
+      },
     ],
   },
   judges: {
@@ -77,18 +89,6 @@ const roleConfigs = {
         image: "josue-hernandez.png",
         lastName: "HERNANDEZ",
         slug: "josue-hernandez",
-      },
-      {
-        firstName: "MARIA CRISTINA",
-        image: "maria-cristina-ruelas.png",
-        lastName: "RUELAS",
-        slug: "maria-cristina-ruelas",
-      },
-      {
-        firstName: "VICTOR",
-        image: "victor-galvez.png",
-        lastName: "GALVEZ",
-        slug: "victor-galvez",
       },
       {
         firstName: "YAKKO",
