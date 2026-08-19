@@ -9,6 +9,7 @@ type InvitationRecipient = {
   to: readonly string[];
   cc: readonly string[];
   personalization: string;
+  socialImage?: string;
 };
 
 const recipients = {
@@ -32,6 +33,18 @@ const recipients = {
     personalization:
       "Tu experiencia organizando Vibe a Startup, construyendo comunidades de jóvenes founders y creando experiencias donde niños y jóvenes pasan de consumir tecnología a construir con IA puede aportar una perspectiva excepcional para reconocer productos con intención, creatividad y ejecución real.",
   },
+  daniel: {
+    fullName: "Daniel LeSage",
+    firstName: "Daniel",
+    role: "judge",
+    slug: "daniel-lesage",
+    to: ["me@daniellesage.com"],
+    cc: ["shiara@crafterstation.com", "anthony@crafterstation.com"],
+    personalization:
+      "Tus más de 15 años construyendo software, liderando equipos y definiendo arquitecturas, junto con tu trabajo en Deverr conectando talento latinoamericano con equipos globales, te dan una perspectiva excepcional para reconocer productos técnicamente sólidos, útiles y construidos por equipos con verdadero sentido de propiedad.",
+    socialImage:
+      "public/brand-assets/social/roles/judges/daniel-lesage-linkedin-4x5.png",
+  },
 } as const satisfies Record<string, InvitationRecipient>;
 
 function argument(name: string) {
@@ -41,10 +54,15 @@ function argument(name: string) {
 
 const recipientKey = argument("--recipient");
 if (!recipientKey || !(recipientKey in recipients)) {
-  throw new Error('Provide --recipient "terry" or --recipient "fausto".');
+  throw new Error(
+    `Provide --recipient ${Object.keys(recipients)
+      .map((key) => `"${key}"`)
+      .join(", ")}.`,
+  );
 }
 
-const recipient = recipients[recipientKey as keyof typeof recipients];
+const recipient: InvitationRecipient =
+  recipients[recipientKey as keyof typeof recipients];
 const shouldSend = process.argv.includes("--send");
 const role =
   recipient.role === "mentor"
@@ -90,6 +108,16 @@ try {
   );
 }
 
+const socialImagePath = recipient.socialImage
+  ? path.resolve(recipient.socialImage)
+  : undefined;
+const socialImageContent = socialImagePath
+  ? await readFile(socialImagePath)
+  : undefined;
+const socialInvitation = socialImageContent
+  ? "\n\nTambién adjuntamos tu imagen oficial como jurado. Si te provoca, nos encantaría que la compartas en tus redes. Nosotros también la publicaremos desde Crafter Station y te etiquetaremos."
+  : "";
+
 const text = `Hola ${recipient.firstName},
 
 Queremos invitarte formalmente a participar como ${role.noun} oficial de The Next Craft, la hackathon presencial de Crafter Station que reunirá a 300 builders trabajando en simultáneo desde cinco ciudades de Latinoamérica.
@@ -101,7 +129,7 @@ Sábado 29 de agosto de 2026
 Sede Lima · ubicación final por confirmar
 ${role.schedule}
 
-Adjuntamos la invitación formal con los detalles del rol. Por favor, responde a este correo para confirmar tu participación. ${role.logistics}
+Adjuntamos la invitación formal con los detalles del rol. Por favor, responde a este correo para confirmar tu participación. ${role.logistics}${socialInvitation}
 
 Más información: ${siteUrl}
 
@@ -132,6 +160,7 @@ const html = `<!doctype html>
         </section>
 
         <p style="margin:0 0 20px;font-size:15px;line-height:1.65">Adjuntamos la invitación formal con los detalles del rol. Por favor, responde a este correo para confirmar tu participación. ${role.logistics}</p>
+        ${socialImageContent ? '<p style="margin:0 0 20px;font-size:15px;line-height:1.65">También adjuntamos tu imagen oficial como jurado. Si te provoca, nos encantaría que la compartas en tus redes. Nosotros también la publicaremos desde Crafter Station y te etiquetaremos.</p>' : ""}
         <p style="margin:0 0 28px"><a href="${siteUrl}" style="display:inline-block;padding:13px 18px;background:#1a1a17;color:#ffffff;font-family:'Courier New',monospace;font-size:12px;font-weight:700;letter-spacing:1px;text-decoration:none">VER THE NEXT CRAFT</a></p>
 
         <p style="margin:0;font-size:15px;line-height:1.65">${role.closing}</p>
@@ -154,6 +183,14 @@ const resendPayload = {
       filename: attachmentFilename,
       content: attachmentContent.toString("base64"),
     },
+    ...(socialImageContent
+      ? [
+          {
+            filename: `${recipient.slug}-jurado-oficial.png`,
+            content: socialImageContent.toString("base64"),
+          },
+        ]
+      : []),
   ],
 };
 
@@ -176,6 +213,9 @@ console.log(`Cc: ${recipient.cc.join(", ")}`);
 console.log(`Reply-To: ${replyTo}`);
 console.log(`Subject: ${subject}`);
 console.log(`Attachment: ${attachmentFilename}`);
+if (socialImageContent) {
+  console.log(`Attachment: ${recipient.slug}-jurado-oficial.png`);
+}
 console.log(
   `Preview: ${path.relative(process.cwd(), outputDirectory)}/email.html`,
 );

@@ -10,6 +10,7 @@
     "format": "biome format --write .",
     "font:setup": "node scripts/setup-brand-font.mjs",
     "email:fausto:dry": "bun scripts/send-role-invitation.ts --recipient fausto",
+    "email:daniel:dry": "bun scripts/send-role-invitation.ts --recipient daniel",
     "email:terry:dry": "bun scripts/send-role-invitation.ts --recipient terry",
     "invitation:generate": "bun scripts/generate-role-invitation.tsx",
     "generate:clerk-luma-banner": "node scripts/generate-clerk-luma-banner.mjs",
