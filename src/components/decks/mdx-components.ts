@@ -1,3 +1,5 @@
+import { VapiCountdown } from "@/components/events/vapi-countdown";
+
 import {
   BarStack,
   BenefitGrid,
@@ -81,6 +83,7 @@ export const mdxComponents = {
   Ready,
   Wordmark,
   SponsorTier,
+  VapiCountdown,
   h1: MdxH1,
   h2: MdxH2,
   h3: MdxH3,

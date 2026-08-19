@@ -75,7 +75,7 @@ export function VapiCountdown({ locale }: VapiCountdownProps) {
 
   return (
     <div className="flex flex-col items-start">
-      <p className="section-label reveal reveal-d1">VAPI x THE NEXT CRAFT</p>
+      <p className="section-label">VAPI x THE NEXT CRAFT</p>
       <p
         className="pixel-heading mt-4 text-[clamp(2rem,5vw,5.5rem)]"
         role="status"
