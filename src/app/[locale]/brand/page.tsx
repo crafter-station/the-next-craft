@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Download } from "lucide-react";
+
 import { SectionHeader } from "@/components/landing/section-header";
 
 import { Link } from "@/i18n/navigation";
@@ -144,6 +146,31 @@ const NEVER = [
   "Hairlines entre label y contenido",
 ];
 
+const ASSET_FORMATS = ["svg", "png", "webp", "jpeg"] as const;
+
+const BRAND_ASSETS = [
+  {
+    name: "icon",
+    title: "Ícono",
+    description: "Monitor C64 simplificado para avatares y espacios cuadrados.",
+    square: true,
+  },
+  {
+    name: "wordmark",
+    title: "Wordmark",
+    description:
+      "Nombre en Borel convertido a vectores. No requiere instalar la fuente.",
+    square: false,
+  },
+  {
+    name: "logo-wordmark",
+    title: "Lockup",
+    description:
+      "Ícono y wordmark en una composición horizontal lista para usar.",
+    square: false,
+  },
+] as const;
+
 /* ─── Bloques reutilizables ──────────────────────────────────────────── */
 
 /* Tabla fusionada: contenedor con borde superior/izquierdo; cada celda
@@ -167,6 +194,78 @@ function Section({
         {children}
       </div>
     </section>
+  );
+}
+
+function AssetCard({
+  name,
+  title,
+  variant,
+  square,
+}: {
+  name: (typeof BRAND_ASSETS)[number]["name"];
+  title: string;
+  variant: "light" | "dark";
+  square: boolean;
+}) {
+  const basename = `the-next-craft-${name}-${variant}`;
+  const isDark = variant === "dark";
+  const modeLabel = isDark ? "Fondo oscuro" : "Fondo claro";
+
+  return (
+    <article className={TABLE}>
+      <div
+        className={`${CELL} relative flex h-64 items-center justify-center overflow-hidden p-8 md:h-72 md:p-10 ${
+          isDark ? "bg-[#1A1A17]" : "bg-[#F2F0E9]"
+        }`}
+      >
+        <div
+          className="scanlines pointer-events-none absolute inset-0 opacity-40"
+          aria-hidden="true"
+        />
+        {/* SVG previews must be served unchanged so their outlined wordmark
+            paths keep their native aspect ratio in every browser. */}
+        {/* biome-ignore lint/performance/noImgElement: local downloadable SVGs should bypass image optimization */}
+        <img
+          src={`/brand/${basename}.svg`}
+          alt={`${title} de The Next Craft para ${modeLabel.toLowerCase()}`}
+          width={square ? 1024 : name === "wordmark" ? 1600 : 1800}
+          height={square ? 1024 : name === "wordmark" ? 480 : 600}
+          className={
+            square
+              ? "relative h-36 w-36 md:h-40 md:w-40"
+              : "relative h-auto w-full max-w-[42rem]"
+          }
+        />
+      </div>
+      <div className={`${CELL} p-5 md:p-6`}>
+        <div className="flex items-baseline justify-between gap-3">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--text)]">
+            {title}
+          </p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-dim)]">
+            {modeLabel}
+          </p>
+        </div>
+        <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {ASSET_FORMATS.map((format) => (
+            <a
+              key={format}
+              href={`/brand/${basename}.${format}`}
+              download
+              aria-label={`Descargar ${title}, ${modeLabel}, en formato ${format.toUpperCase()}`}
+              className="group flex h-10 items-center justify-between border border-[var(--line)] px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--text-dim)] transition-colors duration-150 hover:bg-[var(--bright)] hover:text-[var(--void)]"
+            >
+              {format}
+              <Download
+                className="size-3.5 opacity-60 transition-opacity group-hover:opacity-100"
+                aria-hidden="true"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -216,6 +315,12 @@ export default function BrandBook() {
             <p className="font-mono text-[var(--bright)] text-sm">
               READY.<span className="cursor-blink">█</span>
             </p>
+            <a
+              href="#downloads"
+              className="cta-btn keycap mt-3 self-start px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-[0.12em]"
+            >
+              GOTO Descargas <span className="cta-arrow">↓</span>
+            </a>
           </div>
         </section>
 
@@ -272,6 +377,51 @@ export default function BrandBook() {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          <div id="downloads" className="scroll-mt-20 pt-8">
+            <div className="mb-7 max-w-2xl">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--bright)]">
+                Assets oficiales
+              </p>
+              <h2 className="pixel-heading mt-3 text-xl md:text-2xl">
+                Descargas
+              </h2>
+              <p className="mt-4 font-mono text-sm leading-relaxed text-[var(--text-dim)]">
+                Cada marca está disponible para fondos claros y oscuros. SVG,
+                PNG y WebP conservan transparencia; JPEG incluye el fondo
+                correspondiente.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-9">
+              {BRAND_ASSETS.map((asset) => (
+                <div key={asset.name}>
+                  <div className="mb-4 flex flex-col gap-1">
+                    <h3 className="font-mono text-sm font-semibold text-[var(--text)]">
+                      {asset.title}
+                    </h3>
+                    <p className="font-mono text-[11px] leading-relaxed text-[var(--text-dim)]">
+                      {asset.description}
+                    </p>
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <AssetCard
+                      name={asset.name}
+                      title={asset.title}
+                      variant="light"
+                      square={asset.square}
+                    />
+                    <AssetCard
+                      name={asset.name}
+                      title={asset.title}
+                      variant="dark"
+                      square={asset.square}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </Section>
