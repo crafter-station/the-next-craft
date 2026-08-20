@@ -1,0 +1,33 @@
+---
+title: CloudForge AI
+---
+
+<div className="flex items-center justify-between gap-8">
+  <SlideTitle line="20">CLOUDFORGE AI</SlideTitle>
+  <img
+    src="/deck/brand-assets/cloudforge-workshop/cloudforge-logo.svg"
+    alt="CloudForge AI"
+    className="hidden h-16 w-auto brightness-0 invert sm:block"
+  />
+</div>
+
+<Lead>Sistemas de IA y arquitectura cloud hechos para operar, escalar y generar resultados reales.</Lead>
+
+<div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
+  {[
+    ["1M+", "operaciones al mes"],
+    ["99.9%", "uptime"],
+    ["40–70%", "reducción de costos"],
+  ].map(([value, label]) => (
+    <div className="flex min-w-0 flex-col gap-2" key={label}>
+      <span className="whitespace-nowrap font-mono text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-none tracking-[-0.07em] text-[var(--text)]">
+        {value}
+      </span>
+      <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-dim)]">
+        {label}
+      </span>
+    </div>
+  ))}
+</div>
+
+<p>Producción en salud, seguros, educación y SaaS con Lambda, Step Functions, DynamoDB, Bedrock y agentes de IA.</p>

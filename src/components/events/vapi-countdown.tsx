@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-const START_TIME = new Date("2026-08-19T19:05:00-05:00").getTime();
-
 type TimeLeft = {
   days: number;
   hours: number;
@@ -18,8 +16,8 @@ const EMPTY_TIME: TimeLeft = {
   seconds: 0,
 };
 
-function getTimeLeft(): TimeLeft {
-  const difference = Math.max(0, START_TIME - Date.now());
+function getTimeLeft(targetTime: number): TimeLeft {
+  const difference = Math.max(0, targetTime - Date.now());
 
   return {
     days: Math.floor(difference / 86_400_000),
@@ -37,29 +35,42 @@ type VapiCountdownProps = {
   locale: string;
 };
 
-export function VapiCountdown({ locale }: VapiCountdownProps) {
+type EventCountdownProps = {
+  target: string;
+  eyebrow: string;
+  locale: string;
+  eventName: string;
+};
+
+export function EventCountdown({
+  target,
+  eyebrow,
+  locale,
+  eventName,
+}: EventCountdownProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+  const targetTime = new Date(target).getTime();
 
   useEffect(() => {
-    const update = () => setTimeLeft(getTimeLeft());
+    const update = () => setTimeLeft(getTimeLeft(targetTime));
     update();
 
     const interval = window.setInterval(update, 1_000);
     return () => window.clearInterval(interval);
-  }, []);
+  }, [targetTime]);
 
   const copy =
     locale === "en"
       ? {
           heading: "We start in",
           live: "We have started",
-          aria: "Countdown to the Vapi event",
+          aria: `Countdown to ${eventName}`,
           units: ["Days", "Hours", "Min", "Sec"],
         }
       : {
           heading: "Empezamos en",
           live: "Ya empezamos",
-          aria: "Cuenta regresiva para el evento de Vapi",
+          aria: `Cuenta regresiva para ${eventName}`,
           units: ["Días", "Horas", "Min", "Seg"],
         };
 
@@ -75,7 +86,7 @@ export function VapiCountdown({ locale }: VapiCountdownProps) {
 
   return (
     <div className="flex flex-col items-start">
-      <p className="section-label">VAPI x THE NEXT CRAFT</p>
+      <p className="section-label">{eyebrow}</p>
       <p
         className="pixel-heading mt-4 text-[clamp(2rem,5vw,5.5rem)]"
         role="status"
@@ -106,5 +117,16 @@ export function VapiCountdown({ locale }: VapiCountdownProps) {
         </div>
       )}
     </div>
+  );
+}
+
+export function VapiCountdown({ locale }: VapiCountdownProps) {
+  return (
+    <EventCountdown
+      target="2026-08-19T19:05:00-05:00"
+      eyebrow="VAPI x THE NEXT CRAFT"
+      locale={locale}
+      eventName="Vapi x The Next Craft"
+    />
   );
 }
