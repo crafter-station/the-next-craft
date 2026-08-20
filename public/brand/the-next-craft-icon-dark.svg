@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="The Next Craft"><g fill="#e9e7de" transform="translate(72 72) scale(0.859375)">
+    <path fill-rule="evenodd" d="M170 104h684c39 0 70 31 70 70v494c0 39-31 70-70 70H170c-39 0-70-31-70-70V174c0-39 31-70 70-70Zm20 90v454h644V194H190Z"/>
+    <path d="M150 790h724l96 104c18 20 4 52-23 52H77c-27 0-41-32-23-52l96-104Zm111 43-30 58h562l-30-58H261Z"/>
+    <rect x="230" y="238" width="564" height="366" rx="16" opacity=".12"/>
+    <rect x="451" y="680" width="122" height="18" rx="9"/>
+  </g></svg>
