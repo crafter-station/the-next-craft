@@ -1,4 +1,7 @@
-import { VapiCountdown } from "@/components/events/vapi-countdown";
+import {
+  EventCountdown,
+  VapiCountdown,
+} from "@/components/events/vapi-countdown";
 
 import {
   BarStack,
@@ -83,6 +86,7 @@ export const mdxComponents = {
   Ready,
   Wordmark,
   SponsorTier,
+  EventCountdown,
   VapiCountdown,
   h1: MdxH1,
   h2: MdxH2,
