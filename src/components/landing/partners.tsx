@@ -35,6 +35,14 @@ const FEATURED_LOGOS = [
     height: 32,
     className: "h-12 grayscale brightness-0 invert md:h-[4.5rem]",
   },
+  {
+    name: "Dapta",
+    src: "/sponsors/dapta.png",
+    href: "https://dapta.ai",
+    width: 865,
+    height: 288,
+    className: "h-8 md:h-12",
+  },
 ] as const;
 
 const IMG_LOGOS = [
