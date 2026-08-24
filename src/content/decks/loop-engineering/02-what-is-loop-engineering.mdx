@@ -1,0 +1,27 @@
+---
+title: Qué es Loop Engineering
+---
+
+<div className="flex items-center justify-between gap-8">
+  <SlideTitle line="10">¿QUÉ ES LOOP ENGINEERING?</SlideTitle>
+  <div className="hidden shrink-0 items-center gap-2 opacity-55 sm:flex">
+    <img
+      src="/deck/brand-assets/loop-engineering/visagente-logo.svg"
+      alt=""
+      className="h-6 w-auto object-contain md:h-8"
+    />
+    <span className="font-sans text-xl font-bold leading-none tracking-tight text-[var(--text)] md:text-2xl">
+      {"visagente"}
+    </span>
+  </div>
+</div>
+
+<Lead>La práctica de construir agentes que corren en bucle: observan, deciden y actúan sin que nadie apriete un botón.</Lead>
+
+<FlowMap
+  items={[
+    { label: "Observa", value: "El agente monitorea el sistema 24/7 y detecta el cambio." },
+    { label: "Decide", value: "Evalúa el contexto y elige la siguiente acción." },
+    { label: "Actúa", value: "Ejecuta, verifica el resultado y vuelve a empezar el loop." },
+  ]}
+/>
