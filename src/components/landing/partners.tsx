@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import CodexIcon from "@lobehub/icons/es/Codex/components/Mono";
-import CodexText from "@lobehub/icons/es/Codex/components/Text";
 import CursorIcon from "@lobehub/icons/es/Cursor/components/Mono";
 import CursorText from "@lobehub/icons/es/Cursor/components/Text";
 import N8nIcon from "@lobehub/icons/es/N8n/components/Mono";
@@ -13,9 +11,8 @@ import { useTranslations } from "next-intl";
 /*
   Partners — banda que remata el hero antes del manifiesto. Muestra los
   logos de los sponsors tecnológicos en grande, en blanco sobre el void,
-  con un dim vintage que se aclara al hover. Los wordmarks son SVGs
-  locales; Codex viene del set de @lobehub/icons (mono → currentColor,
-  por eso hereda el color bone del enlace).
+  con un dim vintage que se aclara al hover. Los wordmarks combinan SVGs
+  locales e iconos de @lobehub/icons.
 */
 
 const FEATURED_LOGOS = [
@@ -273,24 +270,6 @@ export function Partners() {
             >
               <N8nIcon size={21} />
               <N8nText size={17} />
-            </a>
-          </li>
-
-          <li>
-            {/*
-              Los Combine de lobehub dependen del Flexbox CSS-in-JS de
-              @lobehub/ui (que no se inyecta aquí) y terminan apilando ícono
-              sobre texto. Componemos los lockups en flex propios.
-            */}
-            <a
-              href="https://openai.com/codex"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Codex"
-              className={`${LINK_BASE} inline-flex items-center gap-2`}
-            >
-              <CodexIcon size={21} />
-              <CodexText size={17} />
             </a>
           </li>
         </ul>
