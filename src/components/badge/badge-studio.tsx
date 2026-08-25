@@ -749,6 +749,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
           <ProfileForm
             locale={locale}
             fullName={state.fullName}
+            vehiclePlate={state.vehiclePlate}
             pending={isPending}
             onSubmit={createProfile}
           />
@@ -848,6 +849,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
             key={state.profile.updatedAt}
             locale={locale}
             fullName={state.fullName}
+            vehiclePlate={state.vehiclePlate}
             profile={state.profile}
             pending={isPending}
             onSubmit={updateProfile}

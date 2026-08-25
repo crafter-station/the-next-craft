@@ -117,6 +117,7 @@ export const badgeParticipants = pgTable(
     email: text("email").notNull(),
     lumaGuestId: text("luma_guest_id").notNull(),
     fullName: text("full_name").notNull(),
+    vehiclePlate: text("vehicle_plate"),
     documentType: documentType("document_type").notNull(),
     encryptedDocument: text("encrypted_document").notNull(),
     termsVersion: text("terms_version").notNull(),
