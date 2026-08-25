@@ -41,6 +41,16 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# Next standalone tracing keeps sharp's JS/.node binding but drops
+# @img/sharp-libvips-*, so runtime dlopen fails with:
+#   libvips-cpp.so.8.18.3: cannot open shared object file
+# Badge generate/profile routes also need @takumi-rs natives and
+# brand + fonts from process.cwd().
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/sharp ./node_modules/sharp
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@img ./node_modules/@img
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/@takumi-rs ./node_modules/@takumi-rs
+COPY --from=builder --chown=nextjs:nodejs /app/assets ./assets
+
 USER nextjs
 EXPOSE 3000
 
