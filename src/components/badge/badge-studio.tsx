@@ -11,6 +11,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { authClient } from "@/lib/auth-client";
 import {
   formatParticipantNumber,
+  galleryPath,
   participantProfilePath,
 } from "@/lib/badge/profile";
 import type { BadgeStudioState } from "@/lib/badge/state";
@@ -78,6 +79,7 @@ const copy = {
     download: "Descargar badge",
     downloadPortrait: "Descargar retrato PNG",
     open: "Abrir pagina publica",
+    gallery: "Ver galeria de participantes",
     socialTitle: "Comparte que estarás en The Next Craft.",
     socialPost:
       "¡Ya soy parte de The Next Craft!\n\nEste sábado 29 de agosto tendré 12 horas para convertir una idea en un producto real, junto a 300 hackers construyendo en simultáneo desde cinco ciudades de Latinoamérica.\n\nUn día para crear, probar y llevar una idea hasta el final.\n\nNos vemos en el hackathon.\n\n#TheNextCraft",
@@ -143,6 +145,7 @@ const copy = {
     download: "Download badge",
     downloadPortrait: "Download transparent PNG",
     open: "Open public page",
+    gallery: "View participant gallery",
     socialTitle: "Share that you are joining The Next Craft.",
     socialPost:
       "I'm joining The Next Craft!\n\nThis Saturday, August 29, I'll have 12 hours to turn an idea into a real product alongside 300 hackers building simultaneously across five Latin American cities.\n\nOne day to create, test, and take an idea all the way.\n\nSee you at the hackathon.\n\n#TheNextCraft",
@@ -884,6 +887,12 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
                   className="text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-[var(--text)]"
                 >
                   {t.open}
+                </Link>
+                <Link
+                  href={galleryPath(locale)}
+                  className="text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-[var(--text)]"
+                >
+                  {t.gallery}
                 </Link>
                 <a
                   href={completedBadgeImageUrl ?? undefined}
