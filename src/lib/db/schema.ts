@@ -119,7 +119,8 @@ export const badgeParticipants = pgTable(
     fullName: text("full_name").notNull(),
     vehiclePlate: text("vehicle_plate"),
     documentType: documentType("document_type").notNull(),
-    encryptedDocument: text("encrypted_document").notNull(),
+    documentNumber: text("document_number"),
+    encryptedDocument: text("encrypted_document"),
     termsVersion: text("terms_version").notNull(),
     termsAcceptedAt: timestamp("terms_accepted_at", {
       withTimezone: true,

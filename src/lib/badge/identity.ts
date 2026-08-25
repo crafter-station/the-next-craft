@@ -1,21 +1,34 @@
-import { createCipheriv, createHash, randomBytes } from "node:crypto";
+import { createDecipheriv, createHash } from "node:crypto";
 
-export function encryptIdentityDocument(value: string): string {
+function identityKey() {
   const secret = process.env.BADGE_PII_ENCRYPTION_KEY;
   if (!secret) throw new Error("BADGE_PII_ENCRYPTION_KEY is required");
 
-  const key = createHash("sha256").update(secret).digest();
-  const iv = randomBytes(12);
-  const cipher = createCipheriv("aes-256-gcm", key, iv);
-  const encrypted = Buffer.concat([
-    cipher.update(value, "utf8"),
-    cipher.final(),
-  ]);
-  const tag = cipher.getAuthTag();
+  return createHash("sha256").update(secret).digest();
+}
 
-  return ["v1", iv, tag, encrypted]
-    .map((part) =>
-      typeof part === "string" ? part : part.toString("base64url"),
-    )
-    .join(".");
+export function decryptIdentityDocument(value: string): string {
+  const [version, encodedIv, encodedTag, encodedDocument, extra] =
+    value.split(".");
+  if (
+    version !== "v1" ||
+    !encodedIv ||
+    !encodedTag ||
+    !encodedDocument ||
+    extra !== undefined
+  ) {
+    throw new Error("Invalid encrypted identity document");
+  }
+
+  const decipher = createDecipheriv(
+    "aes-256-gcm",
+    identityKey(),
+    Buffer.from(encodedIv, "base64url"),
+  );
+  decipher.setAuthTag(Buffer.from(encodedTag, "base64url"));
+
+  return Buffer.concat([
+    decipher.update(Buffer.from(encodedDocument, "base64url")),
+    decipher.final(),
+  ]).toString("utf8");
 }
