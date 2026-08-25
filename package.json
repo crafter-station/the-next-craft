@@ -18,6 +18,7 @@
     "generate:visagente-loop-luma-cover": "node scripts/generate-visagente-loop-luma-cover.mjs",
     "generate:role-social": "node scripts/generate-role-social.mjs",
     "generate:sponsor-assets": "node scripts/generate-sponsor-assets.mjs",
+    "generate:yalo-track-social": "node scripts/generate-yalo-track-social.mjs",
     "generate:vapi-luma-banner": "node scripts/generate-vapi-luma-banner.mjs",
     "simulate": "bun scripts/simulate.ts",
     "db:generate": "drizzle-kit generate",

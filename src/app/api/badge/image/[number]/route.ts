@@ -4,6 +4,8 @@ import { parseParticipantNumber } from "@/lib/badge/profile";
 import { db } from "@/lib/db";
 import { badgeAttempts, participantProfiles } from "@/lib/db/schema";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _request: Request,
   context: RouteContext<"/api/badge/image/[number]">,

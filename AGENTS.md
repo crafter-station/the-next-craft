@@ -100,7 +100,7 @@ No `.env` file is committed. Required variables include:
 - `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY_B64` (base64 one-line), `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_NAME`
 - `RESEND_API_KEY`, `EMAIL_FROM`
 - `CRON_SECRET`
-- Badge generator: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BADGE_PII_ENCRYPTION_KEY`, `LUMA_API_KEY`, `AI_GATEWAY_API_KEY`, `TRIGGER_PROJECT_REF`, `TRIGGER_SECRET_KEY`
+- Badge generator: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BADGE_PII_ENCRYPTION_KEY`, `LUMA_API_KEY`, `AI_GATEWAY_API_KEY`, `TRIGGER_SECRET_KEY`
 - Build-time public vars: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER`
 
 `GOOGLE_PRIVATE_KEY_B64` must be base64-encoded on a single line — the newline-escaped version breaks Dokploy's `.env` parser.
