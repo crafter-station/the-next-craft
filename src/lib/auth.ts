@@ -8,8 +8,6 @@ import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { db } from "@/lib/db";
 import { schema } from "@/lib/db/schema";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", schema }),
   secret: process.env.BETTER_AUTH_SECRET,
@@ -42,6 +40,7 @@ export const auth = betterAuth({
         }
         if (!guest) return;
 
+        const resend = new Resend(process.env.RESEND_API_KEY);
         const { error } = await resend.emails.send({
           from: process.env.EMAIL_FROM ?? "The Next Craft <hello@cueva.io>",
           to: email,
