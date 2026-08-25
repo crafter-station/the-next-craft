@@ -2,42 +2,19 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
 
-import { and, desc, eq, isNotNull } from "drizzle-orm";
 import { setRequestLocale } from "next-intl/server";
 
 import {
+  findPublishedParticipant,
   formatParticipantNumber,
   parseParticipantNumber,
+  participantBadgeImagePath,
   participantProfilePath,
 } from "@/lib/badge/profile";
-import { db } from "@/lib/db";
-import { badgeAttempts, participantProfiles } from "@/lib/db/schema";
 
-const findParticipant = cache(async (participantNumber: number) => {
-  const [participant] = await db
-    .select({
-      participantNumber: participantProfiles.participantNumber,
-      displayName: participantProfiles.displayName,
-      bio: participantProfiles.bio,
-      links: participantProfiles.links,
-      updatedAt: participantProfiles.updatedAt,
-    })
-    .from(participantProfiles)
-    .innerJoin(
-      badgeAttempts,
-      eq(badgeAttempts.participantId, participantProfiles.participantId),
-    )
-    .where(
-      and(
-        eq(participantProfiles.participantNumber, participantNumber),
-        isNotNull(participantProfiles.publishedAt),
-        eq(badgeAttempts.status, "completed"),
-      ),
-    )
-    .orderBy(desc(badgeAttempts.completedAt))
-    .limit(1);
-  return participant;
-});
+import { Link } from "@/i18n/navigation";
+
+const findParticipant = cache(findPublishedParticipant);
 
 export async function generateMetadata({
   params,
@@ -49,7 +26,10 @@ export async function generateMetadata({
   if (!participant) return {};
 
   const formattedNumber = formatParticipantNumber(participantNumber);
-  const imageUrl = `/api/badge/image/${formattedNumber}?v=${participant.updatedAt.getTime()}`;
+  const imageUrl = participantBadgeImagePath(
+    participantNumber,
+    participant.updatedAt,
+  );
   const title = `${participant.displayName} · #${formattedNumber}`;
   const description =
     participant.bio ||
@@ -91,7 +71,10 @@ export default async function ParticipantPage({
 
   const participant = await findParticipant(participantNumber);
   if (!participant) notFound();
-  const imageUrl = `/api/badge/image/${formattedNumber}?v=${participant.updatedAt.getTime()}`;
+  const imageUrl = participantBadgeImagePath(
+    participantNumber,
+    participant.updatedAt,
+  );
 
   return (
     <main
@@ -101,6 +84,12 @@ export default async function ParticipantPage({
       <div className="grid-bg" aria-hidden="true" />
       <div className="relative z-10 mx-auto grid max-w-5xl gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
         <section className="lg:sticky lg:top-16">
+          <Link
+            href="/gallery"
+            className="nav-link mb-6 inline-flex font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-dim)]"
+          >
+            {locale === "en" ? "← All badges" : "← Todos los badges"}
+          </Link>
           <p className="section-label">
             THE NEXT CRAFT · {locale === "en" ? "PARTICIPANT" : "PARTICIPANTE"}
           </p>
