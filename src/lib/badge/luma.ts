@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { LUMA_EVENT_ID } from "./constants";
+import { LUMA_EVENT_IDS } from "./constants";
 
 const guestSchema = z.object({
   id: z.string(),
@@ -25,18 +25,16 @@ export type ApprovedLumaGuest = {
 
 export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
-export async function lookupApprovedGuest(
+async function lookupApprovedGuestInEvent(
   email: string,
+  eventId: string,
+  apiKey: string,
 ): Promise<ApprovedLumaGuest | null> {
-  const apiKey = process.env.LUMA_API_KEY;
-  if (!apiKey) throw new Error("LUMA_API_KEY is required");
-
-  const normalizedEmail = normalizeEmail(email);
   let cursor: string | undefined;
 
   for (let page = 0; page < 20; page += 1) {
     const url = new URL("https://public-api.luma.com/v1/events/guests/list");
-    url.searchParams.set("event_id", LUMA_EVENT_ID);
+    url.searchParams.set("event_id", eventId);
     url.searchParams.set("approval_status", "approved");
     url.searchParams.set("pagination_limit", "200");
     if (cursor) url.searchParams.set("pagination_cursor", cursor);
@@ -46,11 +44,13 @@ export async function lookupApprovedGuest(
       cache: "no-store",
     });
     if (!response.ok)
-      throw new Error(`Luma guest lookup failed (${response.status})`);
+      throw new Error(
+        `Luma guest lookup failed for ${eventId} (${response.status})`,
+      );
 
     const data = guestListSchema.parse(await response.json());
     const guest = data.entries.find(
-      (entry) => normalizeEmail(entry.user_email) === normalizedEmail,
+      (entry) => normalizeEmail(entry.user_email) === email,
     );
     if (guest?.approval_status === "approved") {
       const displayName =
@@ -59,12 +59,38 @@ export async function lookupApprovedGuest(
           .filter(Boolean)
           .join(" ") ||
           null);
-      return { id: guest.id, email: normalizedEmail, displayName };
+      return { id: guest.id, email, displayName };
     }
 
     if (!data.has_more || !data.next_cursor) return null;
     cursor = data.next_cursor;
   }
+
+  return null;
+}
+
+export async function lookupApprovedGuest(
+  email: string,
+): Promise<ApprovedLumaGuest | null> {
+  const apiKey = process.env.LUMA_API_KEY;
+  if (!apiKey) throw new Error("LUMA_API_KEY is required");
+
+  const normalizedEmail = normalizeEmail(email);
+  const results = await Promise.allSettled(
+    LUMA_EVENT_IDS.map((eventId) =>
+      lookupApprovedGuestInEvent(normalizedEmail, eventId, apiKey),
+    ),
+  );
+  const approvedGuest = results.find(
+    (result): result is PromiseFulfilledResult<ApprovedLumaGuest> =>
+      result.status === "fulfilled" && result.value !== null,
+  );
+  if (approvedGuest) return approvedGuest.value;
+
+  const failedLookup = results.find(
+    (result): result is PromiseRejectedResult => result.status === "rejected",
+  );
+  if (failedLookup) throw failedLookup.reason;
 
   return null;
 }
