@@ -24,6 +24,7 @@ export function SmoothScroll() {
     if (reduced) return;
 
     const lenis = new Lenis({
+      content: document.body,
       duration: 1.1,
       easing: (t) => 1 - (1 - t) ** 3, // ease-out cúbico
       smoothWheel: true,
