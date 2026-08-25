@@ -47,6 +47,7 @@ const copy = {
     fullName: "Nombre completo legal",
     documentType: "Tipo de documento",
     document: "Numero de documento",
+    documentEditHelp: "Dejalo en blanco para conservar el numero actual.",
     terms: "Acepto los terminos y condiciones del hackathon.",
     saveInitial: "Guardar y continuar",
     saveEdit: "Guardar cambios",
@@ -70,6 +71,7 @@ const copy = {
     fullName: "Full legal name",
     documentType: "Document type",
     document: "Document number",
+    documentEditHelp: "Leave blank to keep your current number.",
     terms: "I accept the hackathon terms and conditions.",
     saveInitial: "Save and continue",
     saveEdit: "Save changes",
@@ -111,9 +113,8 @@ export function ProfileForm({
         documentType === "ce"
           ? documentType
           : undefined,
-      documentNumber: editing
-        ? undefined
-        : String(form.get("documentNumber") ?? ""),
+      documentNumber:
+        String(form.get("documentNumber") ?? "").trim() || undefined,
       acceptsTerms: editing ? undefined : form.get("acceptsTerms") === "on",
     });
   }
@@ -251,56 +252,63 @@ export function ProfileForm({
             className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
           />
         </label>
-        {!editing ? (
-          <>
-            <div className="grid gap-5 sm:grid-cols-[0.75fr_1.25fr]">
-              <label className="block">
-                <span className="text-sm text-[var(--text-dim)]">
-                  {t.documentType}
-                </span>
-                <select
-                  name="documentType"
-                  required
-                  className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
-                >
-                  <option value="dni">DNI / National ID</option>
-                  <option value="passport">Passport</option>
-                  <option value="ce">CE</option>
-                </select>
-              </label>
-              <label className="block">
-                <span className="text-sm text-[var(--text-dim)]">
-                  {t.document}
-                </span>
-                <input
-                  name="documentNumber"
-                  required
-                  minLength={5}
-                  maxLength={40}
-                  autoComplete="off"
-                  className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
-                />
-              </label>
-            </div>
-            <label className="flex cursor-pointer items-start gap-3 py-1">
-              <input
-                name="acceptsTerms"
-                type="checkbox"
-                required
-                className="mt-1 size-4 accent-[var(--bright)]"
-              />
-              <span className="text-sm leading-relaxed">
-                {t.terms}{" "}
-                <Link
-                  href={`/${locale}/terms`}
-                  target="_blank"
-                  className="underline decoration-[var(--line)] underline-offset-4 hover:decoration-[var(--bright)]"
-                >
-                  {locale === "en" ? "Read terms." : "Leer terminos."}
-                </Link>
+        <div className="grid gap-5 sm:grid-cols-[0.75fr_1.25fr]">
+          {!editing ? (
+            <label className="block">
+              <span className="text-sm text-[var(--text-dim)]">
+                {t.documentType}
               </span>
+              <select
+                name="documentType"
+                required
+                className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
+              >
+                <option value="dni">DNI / National ID</option>
+                <option value="passport">Passport</option>
+                <option value="ce">CE</option>
+              </select>
             </label>
-          </>
+          ) : null}
+          <label className={editing ? "block sm:col-span-2" : "block"}>
+            <span className="text-sm text-[var(--text-dim)]">{t.document}</span>
+            <input
+              name="documentNumber"
+              required={!editing}
+              minLength={5}
+              maxLength={40}
+              autoComplete="off"
+              aria-describedby={editing ? "document-edit-help" : undefined}
+              className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
+            />
+            {editing ? (
+              <span
+                id="document-edit-help"
+                className="mt-2 block text-xs text-[var(--text-dim)]"
+              >
+                {t.documentEditHelp}
+              </span>
+            ) : null}
+          </label>
+        </div>
+        {!editing ? (
+          <label className="flex cursor-pointer items-start gap-3 py-1">
+            <input
+              name="acceptsTerms"
+              type="checkbox"
+              required
+              className="mt-1 size-4 accent-[var(--bright)]"
+            />
+            <span className="text-sm leading-relaxed">
+              {t.terms}{" "}
+              <Link
+                href={`/${locale}/terms`}
+                target="_blank"
+                className="underline decoration-[var(--line)] underline-offset-4 hover:decoration-[var(--bright)]"
+              >
+                {locale === "en" ? "Read terms." : "Leer terminos."}
+              </Link>
+            </span>
+          </label>
         ) : null}
       </section>
 
