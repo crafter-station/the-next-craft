@@ -17,7 +17,13 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/deck/[slug]": ["./src/content/decks/**/*"],
+    "/api/badge/image/[number]": ["./assets/fonts/**/*", "./assets/brand/**/*"],
   },
+  serverExternalPackages: [
+    "@takumi-rs/core",
+    "@takumi-rs/image-response",
+    "sharp",
+  ],
   experimental: {
     viewTransition: true,
   },
