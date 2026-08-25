@@ -1,10 +1,13 @@
 import { useTranslations } from "next-intl";
 
+import { Link } from "@/i18n/navigation";
+
 const EVENT_LINKS = [
   { key: "about", href: "#que-es" },
   { key: "tracks", href: "#tracks" },
   { key: "schedule", href: "#agenda" },
   { key: "prizes", href: "#premios" },
+  { key: "gallery", href: "/gallery" },
   { key: "faq", href: "#faq" },
 ] as const;
 
@@ -89,12 +92,21 @@ export function Footer() {
           <ul className="flex flex-col gap-2 list-none m-0 p-0">
             {EVENT_LINKS.map(({ key, href }) => (
               <li key={href}>
-                <a
-                  href={href}
-                  className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
-                >
-                  {t(`links.${key}`)}
-                </a>
+                {href.startsWith("/") ? (
+                  <Link
+                    href={href}
+                    className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
+                  >
+                    {t(`links.${key}`)}
+                  </Link>
+                ) : (
+                  <a
+                    href={href}
+                    className="font-mono text-xs text-[var(--text-dim)] hover:text-[var(--bright)] transition-colors duration-150 py-1 inline-block"
+                  >
+                    {t(`links.${key}`)}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
