@@ -1,15 +1,9 @@
 import { additionalFiles } from "@trigger.dev/build/extensions/core";
 import { pythonExtension } from "@trigger.dev/python/extension";
 import { defineConfig } from "@trigger.dev/sdk";
-import { config } from "dotenv";
-
-config({ path: ".env.local", quiet: true });
-
-const project = process.env.TRIGGER_PROJECT_REF;
-if (!project) throw new Error("TRIGGER_PROJECT_REF is required");
 
 export default defineConfig({
-  project,
+  project: "proj_hmocyjfdufxyfnxiaixa",
   runtime: "node",
   dirs: ["./src/trigger"],
   maxDuration: 1800,
@@ -29,7 +23,7 @@ export default defineConfig({
       additionalFiles({ files: ["./assets/**"] }),
       pythonExtension({
         devPythonBinaryPath: "python3",
-        requirementsFile: "./python/requirements.txt",
+        requirements: ["Pillow==11.3.0"],
         scripts: ["./python/**/*.py"],
       }),
     ],
