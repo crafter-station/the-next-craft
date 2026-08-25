@@ -5,12 +5,12 @@ import { cache } from "react";
 import { setRequestLocale } from "next-intl/server";
 
 import {
-  findPublishedParticipant,
   formatParticipantNumber,
   parseParticipantNumber,
   participantBadgeImagePath,
   participantProfilePath,
 } from "@/lib/badge/profile";
+import { findPublishedParticipant } from "@/lib/badge/published";
 
 import { Link } from "@/i18n/navigation";
 

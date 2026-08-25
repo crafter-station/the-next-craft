@@ -58,12 +58,6 @@ export function Nav() {
         </ul>
 
         <div className="flex items-stretch gap-2 shrink-0">
-          <Link
-            href="/gallery"
-            className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3 md:hidden"
-          >
-            {t("links.gallery")}
-          </Link>
           <LanguageToggle />
 
           {/* CTA — keycap beige. Abre el selector de sede: el registro son 5
@@ -73,6 +67,16 @@ export function Nav() {
           </CityPicker>
         </div>
       </nav>
+      <div className="border-t border-[var(--line)]/40 md:hidden">
+        <div className="mx-auto flex h-10 max-w-7xl items-center px-6">
+          <Link
+            href="/gallery"
+            className="nav-link py-2 font-mono text-[11px] uppercase leading-[1.4] tracking-[0.14em]"
+          >
+            {t("links.gallery")}
+          </Link>
+        </div>
+      </div>
     </header>
   );
 }

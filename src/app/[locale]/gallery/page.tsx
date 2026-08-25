@@ -3,7 +3,7 @@ import { connection } from "next/server";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { listPublishedParticipants } from "@/lib/badge/profile";
+import { listPublishedParticipants } from "@/lib/badge/published";
 
 import { BadgeGallery } from "@/components/badge/badge-gallery";
 import { LanguageToggle } from "@/components/landing/language-toggle";
