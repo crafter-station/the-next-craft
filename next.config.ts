@@ -17,6 +17,21 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingIncludes: {
     "/deck/[slug]": ["./src/content/decks/**/*"],
+    "/api/badge/generate": [
+      "./node_modules/sharp/**/*",
+      "./node_modules/@img/**/*",
+    ],
+    "/api/badge/profile": [
+      "./node_modules/sharp/**/*",
+      "./node_modules/@img/**/*",
+      "./node_modules/@takumi-rs/**/*",
+      "./assets/fonts/**/*",
+      "./assets/brand/**/*",
+    ],
+    "/api/badge/portrait/[number]": [
+      "./node_modules/sharp/**/*",
+      "./node_modules/@img/**/*",
+    ],
     "/api/badge/image/[number]": ["./assets/fonts/**/*", "./assets/brand/**/*"],
   },
   serverExternalPackages: [
