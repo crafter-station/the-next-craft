@@ -8,6 +8,7 @@ import type { ParticipantProfileLink } from "@/lib/db/schema";
 
 export type ProfileFormValue = {
   fullName: string;
+  vehiclePlate: string;
   displayName: string;
   bio: string;
   links: ParticipantProfileLink[];
@@ -19,6 +20,7 @@ export type ProfileFormValue = {
 type Props = {
   locale: "es" | "en";
   fullName: string | null;
+  vehiclePlate: string | null;
   profile?: PublicParticipantProfile;
   pending: boolean;
   onCancel?: () => void;
@@ -48,6 +50,8 @@ const copy = {
     documentType: "Tipo de documento",
     document: "Numero de documento",
     documentEditHelp: "Dejalo en blanco para conservar el numero actual.",
+    vehiclePlate: "Placa del vehiculo",
+    vehiclePlateHelp: "Solo si vienes al evento en auto.",
     terms: "Acepto los terminos y condiciones del hackathon.",
     saveInitial: "Guardar y continuar",
     saveEdit: "Guardar cambios",
@@ -72,6 +76,8 @@ const copy = {
     documentType: "Document type",
     document: "Document number",
     documentEditHelp: "Leave blank to keep your current number.",
+    vehiclePlate: "Vehicle license plate",
+    vehiclePlateHelp: "Only if you are driving to the event.",
     terms: "I accept the hackathon terms and conditions.",
     saveInitial: "Save and continue",
     saveEdit: "Save changes",
@@ -82,6 +88,7 @@ const copy = {
 export function ProfileForm({
   locale,
   fullName,
+  vehiclePlate,
   profile,
   pending,
   onCancel,
@@ -104,6 +111,9 @@ export function ProfileForm({
     const documentType = form.get("documentType");
     onSubmit({
       fullName: String(form.get("fullName") ?? ""),
+      vehiclePlate: String(form.get("vehiclePlate") ?? "")
+        .trim()
+        .toUpperCase(),
       displayName: String(form.get("displayName") ?? ""),
       bio: String(form.get("bio") ?? ""),
       links: links.map(({ label, url }) => ({ label, url })),
@@ -290,6 +300,25 @@ export function ProfileForm({
             ) : null}
           </label>
         </div>
+        <label className="block">
+          <span className="text-sm text-[var(--text-dim)]">
+            {t.vehiclePlate}
+          </span>
+          <input
+            name="vehiclePlate"
+            maxLength={20}
+            defaultValue={vehiclePlate ?? ""}
+            autoComplete="off"
+            aria-describedby="vehicle-plate-help"
+            className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 uppercase outline-none focus:border-[var(--bright)]"
+          />
+          <span
+            id="vehicle-plate-help"
+            className="mt-2 block text-xs text-[var(--text-dim)]"
+          >
+            {t.vehiclePlateHelp}
+          </span>
+        </label>
         {!editing ? (
           <label className="flex cursor-pointer items-start gap-3 py-1">
             <input

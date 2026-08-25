@@ -10,11 +10,16 @@ import {
 
 type ParticipantState = {
   fullName: string;
+  vehiclePlate: string | null;
   profile: PublicParticipantProfile;
 };
 
 export type BadgeStudioState =
-  | { stage: "details"; fullName: string | null }
+  | {
+      stage: "details";
+      fullName: string | null;
+      vehiclePlate: string | null;
+    }
   | (ParticipantState & {
       stage: "upload";
       retryAt: string | null;
@@ -61,14 +66,20 @@ export async function getBadgeStudioState(
     .from(badgeParticipants)
     .where(eq(badgeParticipants.userId, userId))
     .limit(1);
-  if (!participant) return { stage: "details", fullName: null };
+  if (!participant)
+    return { stage: "details", fullName: null, vehiclePlate: null };
 
   const [profile] = await db
     .select()
     .from(participantProfiles)
     .where(eq(participantProfiles.participantId, participant.id))
     .limit(1);
-  if (!profile) return { stage: "details", fullName: participant.fullName };
+  if (!profile)
+    return {
+      stage: "details",
+      fullName: participant.fullName,
+      vehiclePlate: participant.vehiclePlate,
+    };
 
   await expireStaleBadgeAttempts(participant.id);
 
@@ -94,6 +105,7 @@ export async function getBadgeStudioState(
 
   const participantState: ParticipantState = {
     fullName: participant.fullName,
+    vehiclePlate: participant.vehiclePlate,
     profile: {
       participantNumber: profile.participantNumber,
       displayName: profile.displayName,

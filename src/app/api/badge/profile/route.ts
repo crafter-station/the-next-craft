@@ -36,8 +36,15 @@ const publicProfileSchema = z.object({
   links: z.array(linkSchema).max(5),
 });
 
+const vehiclePlateSchema = z
+  .string()
+  .trim()
+  .max(20)
+  .transform((value) => value.toUpperCase());
+
 const createProfileSchema = publicProfileSchema.extend({
   fullName: z.string().trim().min(2).max(80),
+  vehiclePlate: vehiclePlateSchema,
   documentType: z.enum(["dni", "passport", "ce"]),
   documentNumber: z.string().trim().min(5).max(40),
   acceptsTerms: z.literal(true),
@@ -45,6 +52,7 @@ const createProfileSchema = publicProfileSchema.extend({
 
 const updateProfileSchema = publicProfileSchema.extend({
   fullName: z.string().trim().min(2).max(80),
+  vehiclePlate: vehiclePlateSchema,
   documentNumber: z.string().trim().min(5).max(40).optional(),
 });
 
@@ -111,6 +119,7 @@ export async function POST(request: Request) {
       email: guest.email,
       lumaGuestId: guest.id,
       fullName: parsed.data.fullName,
+      vehiclePlate: parsed.data.vehiclePlate || null,
       documentType: parsed.data.documentType,
       encryptedDocument,
       termsVersion: TERMS_VERSION,
@@ -123,6 +132,7 @@ export async function POST(request: Request) {
         email: guest.email,
         lumaGuestId: guest.id,
         fullName: parsed.data.fullName,
+        vehiclePlate: parsed.data.vehiclePlate || null,
         documentType: parsed.data.documentType,
         encryptedDocument,
         termsVersion: TERMS_VERSION,
@@ -215,6 +225,7 @@ export async function PATCH(request: Request) {
     .update(badgeParticipants)
     .set({
       fullName: parsed.data.fullName,
+      vehiclePlate: parsed.data.vehiclePlate || null,
       ...(parsed.data.documentNumber
         ? {
             encryptedDocument: encryptIdentityDocument(
