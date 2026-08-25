@@ -45,6 +45,7 @@ const createProfileSchema = publicProfileSchema.extend({
 
 const updateProfileSchema = publicProfileSchema.extend({
   fullName: z.string().trim().min(2).max(80),
+  documentNumber: z.string().trim().min(5).max(40).optional(),
 });
 
 async function renderExistingBadge(input: {
@@ -212,7 +213,17 @@ export async function PATCH(request: Request) {
         });
   const participantUpdate = db
     .update(badgeParticipants)
-    .set({ fullName: parsed.data.fullName, updatedAt: now })
+    .set({
+      fullName: parsed.data.fullName,
+      ...(parsed.data.documentNumber
+        ? {
+            encryptedDocument: encryptIdentityDocument(
+              parsed.data.documentNumber,
+            ),
+          }
+        : {}),
+      updatedAt: now,
+    })
     .where(eq(badgeParticipants.id, record.participantId));
   const profileUpdate = db
     .update(participantProfiles)
