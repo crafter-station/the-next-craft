@@ -1,5 +1,6 @@
 import { and, desc, eq, inArray, lte } from "drizzle-orm";
 
+import { decryptIdentityDocument } from "@/lib/badge/identity";
 import type { PublicParticipantProfile } from "@/lib/badge/profile";
 import { db } from "@/lib/db";
 import {
@@ -10,6 +11,7 @@ import {
 
 type ParticipantState = {
   fullName: string;
+  documentNumber: string;
   vehiclePlate: string | null;
   profile: PublicParticipantProfile;
 };
@@ -18,6 +20,7 @@ export type BadgeStudioState =
   | {
       stage: "details";
       fullName: string | null;
+      documentNumber: string | null;
       vehiclePlate: string | null;
     }
   | (ParticipantState & {
@@ -67,7 +70,29 @@ export async function getBadgeStudioState(
     .where(eq(badgeParticipants.userId, userId))
     .limit(1);
   if (!participant)
-    return { stage: "details", fullName: null, vehiclePlate: null };
+    return {
+      stage: "details",
+      fullName: null,
+      documentNumber: null,
+      vehiclePlate: null,
+    };
+
+  let documentNumber = participant.documentNumber;
+  if (!documentNumber) {
+    if (!participant.encryptedDocument) {
+      throw new Error("Participant document number is missing");
+    }
+
+    documentNumber = decryptIdentityDocument(participant.encryptedDocument);
+    await db
+      .update(badgeParticipants)
+      .set({
+        documentNumber,
+        encryptedDocument: null,
+        updatedAt: new Date(),
+      })
+      .where(eq(badgeParticipants.id, participant.id));
+  }
 
   const [profile] = await db
     .select()
@@ -78,6 +103,7 @@ export async function getBadgeStudioState(
     return {
       stage: "details",
       fullName: participant.fullName,
+      documentNumber,
       vehiclePlate: participant.vehiclePlate,
     };
 
@@ -105,6 +131,7 @@ export async function getBadgeStudioState(
 
   const participantState: ParticipantState = {
     fullName: participant.fullName,
+    documentNumber,
     vehiclePlate: participant.vehiclePlate,
     profile: {
       participantNumber: profile.participantNumber,

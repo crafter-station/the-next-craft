@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import { auth } from "@/lib/auth";
 import { TERMS_VERSION } from "@/lib/badge/constants";
-import { encryptIdentityDocument } from "@/lib/badge/identity";
 import { renderBadgeImage } from "@/lib/badge/image";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { participantProfilePath } from "@/lib/badge/profile";
@@ -53,7 +52,7 @@ const createProfileSchema = publicProfileSchema.extend({
 const updateProfileSchema = publicProfileSchema.extend({
   fullName: z.string().trim().min(2).max(80),
   vehiclePlate: vehiclePlateSchema,
-  documentNumber: z.string().trim().min(5).max(40).optional(),
+  documentNumber: z.string().trim().min(5).max(40),
 });
 
 async function renderExistingBadge(input: {
@@ -111,7 +110,6 @@ export async function POST(request: Request) {
     );
 
   const now = new Date();
-  const encryptedDocument = encryptIdentityDocument(parsed.data.documentNumber);
   const [participant] = await db
     .insert(badgeParticipants)
     .values({
@@ -121,7 +119,8 @@ export async function POST(request: Request) {
       fullName: parsed.data.fullName,
       vehiclePlate: parsed.data.vehiclePlate || null,
       documentType: parsed.data.documentType,
-      encryptedDocument,
+      documentNumber: parsed.data.documentNumber,
+      encryptedDocument: null,
       termsVersion: TERMS_VERSION,
       termsAcceptedAt: now,
       updatedAt: now,
@@ -134,7 +133,8 @@ export async function POST(request: Request) {
         fullName: parsed.data.fullName,
         vehiclePlate: parsed.data.vehiclePlate || null,
         documentType: parsed.data.documentType,
-        encryptedDocument,
+        documentNumber: parsed.data.documentNumber,
+        encryptedDocument: null,
         termsVersion: TERMS_VERSION,
         termsAcceptedAt: now,
         updatedAt: now,
@@ -226,13 +226,8 @@ export async function PATCH(request: Request) {
     .set({
       fullName: parsed.data.fullName,
       vehiclePlate: parsed.data.vehiclePlate || null,
-      ...(parsed.data.documentNumber
-        ? {
-            encryptedDocument: encryptIdentityDocument(
-              parsed.data.documentNumber,
-            ),
-          }
-        : {}),
+      documentNumber: parsed.data.documentNumber,
+      encryptedDocument: null,
       updatedAt: now,
     })
     .where(eq(badgeParticipants.id, record.participantId));

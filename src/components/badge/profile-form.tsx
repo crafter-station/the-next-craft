@@ -8,18 +8,19 @@ import type { ParticipantProfileLink } from "@/lib/db/schema";
 
 export type ProfileFormValue = {
   fullName: string;
+  documentNumber: string;
   vehiclePlate: string;
   displayName: string;
   bio: string;
   links: ParticipantProfileLink[];
   documentType?: "dni" | "passport" | "ce";
-  documentNumber?: string;
   acceptsTerms?: boolean;
 };
 
 type Props = {
   locale: "es" | "en";
   fullName: string | null;
+  documentNumber: string | null;
   vehiclePlate: string | null;
   profile?: PublicParticipantProfile;
   pending: boolean;
@@ -49,7 +50,6 @@ const copy = {
     fullName: "Nombre completo legal",
     documentType: "Tipo de documento",
     document: "Numero de documento",
-    documentEditHelp: "Dejalo en blanco para conservar el numero actual.",
     vehiclePlate: "Placa del vehiculo",
     vehiclePlateHelp: "Solo si vienes al evento en auto.",
     terms: "Acepto los terminos y condiciones del hackathon.",
@@ -75,7 +75,6 @@ const copy = {
     fullName: "Full legal name",
     documentType: "Document type",
     document: "Document number",
-    documentEditHelp: "Leave blank to keep your current number.",
     vehiclePlate: "Vehicle license plate",
     vehiclePlateHelp: "Only if you are driving to the event.",
     terms: "I accept the hackathon terms and conditions.",
@@ -88,6 +87,7 @@ const copy = {
 export function ProfileForm({
   locale,
   fullName,
+  documentNumber,
   vehiclePlate,
   profile,
   pending,
@@ -123,8 +123,7 @@ export function ProfileForm({
         documentType === "ce"
           ? documentType
           : undefined,
-      documentNumber:
-        String(form.get("documentNumber") ?? "").trim() || undefined,
+      documentNumber: String(form.get("documentNumber") ?? "").trim(),
       acceptsTerms: editing ? undefined : form.get("acceptsTerms") === "on",
     });
   }
@@ -283,21 +282,13 @@ export function ProfileForm({
             <span className="text-sm text-[var(--text-dim)]">{t.document}</span>
             <input
               name="documentNumber"
-              required={!editing}
+              required
               minLength={5}
               maxLength={40}
+              defaultValue={documentNumber ?? ""}
               autoComplete="off"
-              aria-describedby={editing ? "document-edit-help" : undefined}
               className="mt-2 h-12 w-full border border-[var(--line)] bg-[var(--void)] px-4 outline-none focus:border-[var(--bright)]"
             />
-            {editing ? (
-              <span
-                id="document-edit-help"
-                className="mt-2 block text-xs text-[var(--text-dim)]"
-              >
-                {t.documentEditHelp}
-              </span>
-            ) : null}
           </label>
         </div>
         <label className="block">
