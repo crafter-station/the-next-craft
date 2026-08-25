@@ -1,4 +1,5 @@
 import { and, desc, eq, isNotNull } from "drizzle-orm";
+import sharp from "sharp";
 
 import { parseParticipantNumber } from "@/lib/badge/profile";
 import { db } from "@/lib/db";
@@ -6,8 +7,17 @@ import { badgeAttempts, participantProfiles } from "@/lib/db/schema";
 
 export const dynamic = "force-dynamic";
 
+const THUMBNAIL_WIDTHS = new Set([360, 540, 720]);
+
+function parseWidth(value: string | null) {
+  if (!value) return null;
+  const width = Number(value);
+  if (!THUMBNAIL_WIDTHS.has(width)) return null;
+  return width;
+}
+
 export async function GET(
-  _request: Request,
+  request: Request,
   context: RouteContext<"/api/badge/image/[number]">,
 ) {
   const { number } = await context.params;
@@ -32,7 +42,16 @@ export async function GET(
     .limit(1);
 
   if (!record?.image) return new Response("Not found", { status: 404 });
-  return new Response(Buffer.from(record.image, "base64"), {
+
+  const width = parseWidth(new URL(request.url).searchParams.get("w"));
+  const image = width
+    ? await sharp(Buffer.from(record.image, "base64"))
+        .resize({ width, withoutEnlargement: true })
+        .jpeg({ quality: 82 })
+        .toBuffer()
+    : Buffer.from(record.image, "base64");
+
+  return new Response(image, {
     headers: {
       "Content-Type": "image/jpeg",
       "Cache-Control":

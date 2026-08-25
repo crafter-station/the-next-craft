@@ -18,6 +18,7 @@
       "tracks": "Tracks",
       "schedule": "Schedule",
       "prizes": "Prizes",
+      "gallery": "Badges",
       "faq": "FAQ"
     },
     "cta": "Apply"
@@ -384,6 +385,7 @@
       "tracks": "Tracks",
       "schedule": "Schedule",
       "prizes": "Prizes",
+      "gallery": "Badges",
       "faq": "FAQ"
     },
     "sections": {
@@ -394,5 +396,22 @@
     "byline": "Hackathon by\nCrafter Station\nLima · Bogotá · Guatemala · Arequipa · El Salvador · Aug 2026",
     "copyright": "© 2026 Crafter Station · Lima · Bogotá · Guatemala · Arequipa · El Salvador",
     "endLabel": "110 END · "
+  },
+  "gallery": {
+    "title": "Participant badges",
+    "description": "Official The Next Craft 2026 badge gallery. Pixel-art portraits of the people building on August 29.",
+    "navAria": "Gallery navigation",
+    "backHome": "← Home",
+    "label": "PARTICIPANTS",
+    "headline": "BADGES",
+    "intro": "Official portraits of the people who will be building. Each badge is a public profile, rendered in pixel art.",
+    "search": "SEARCH",
+    "searchPlaceholder": "Name or number…",
+    "emptySearch": "No participants match that search.",
+    "count": "{count} PUBLISHED",
+    "badgeAlt": "{name}'s participant badge",
+    "emptyTitle": "No badges published yet",
+    "emptyBody": "When a participant generates a badge, it will show up here. If you are already accepted, you can create yours now.",
+    "emptyCta": "GOTO BADGE STUDIO"
   }
 }
