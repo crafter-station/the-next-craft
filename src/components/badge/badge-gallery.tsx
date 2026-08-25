@@ -68,10 +68,10 @@ export function BadgeGallery({ participants, labels }: BadgeGalleryProps) {
               participant.participantNumber,
             );
             return (
-              <li key={participant.participantNumber}>
+              <li key={participant.participantNumber} className="min-w-0">
                 <Link
                   href={`/participant/${formattedNumber}`}
-                  className="group flex h-full flex-col border-r border-b border-[var(--line)] no-underline transition-colors duration-150 hover:bg-[var(--void)]"
+                  className="group flex h-full min-w-0 flex-col border-r border-b border-[var(--line)] no-underline transition-colors duration-150 hover:bg-[var(--void)]"
                 >
                   {/* biome-ignore lint/performance/noImgElement: dynamic generated badge image. */}
                   <img
@@ -89,11 +89,11 @@ export function BadgeGallery({ participants, labels }: BadgeGalleryProps) {
                     loading="lazy"
                     className="aspect-[4/5] w-full bg-[var(--void)] object-cover"
                   />
-                  <div className="flex flex-col gap-1 px-3 py-3 md:px-4 md:py-4">
+                  <div className="flex min-w-0 flex-col gap-1 px-3 py-3 md:px-4 md:py-4">
                     <p className="font-pixel text-xs text-[var(--bright)] md:text-sm">
                       #{formattedNumber}
                     </p>
-                    <p className="font-mono text-sm leading-snug text-[var(--text)] group-hover:text-[var(--bright)]">
+                    <p className="break-words font-mono text-sm leading-snug text-[var(--text)] group-hover:text-[var(--bright)]">
                       {participant.displayName}
                     </p>
                   </div>
