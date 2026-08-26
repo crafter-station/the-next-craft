@@ -136,6 +136,7 @@ export async function getBadgeStudioState(
     profile: {
       participantNumber: profile.participantNumber,
       displayName: profile.displayName,
+      city: participant.city,
       bio: profile.bio,
       links: profile.links,
       published: Boolean(profile.publishedAt),

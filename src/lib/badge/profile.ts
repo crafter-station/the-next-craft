@@ -1,8 +1,10 @@
 import { and, asc, desc, eq, isNotNull, sql } from "drizzle-orm";
 
+import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   badgeAttempts,
+  badgeParticipants,
   type ParticipantProfileLink,
   participantProfiles,
 } from "@/lib/db/schema";
@@ -10,6 +12,7 @@ import {
 export type PublicParticipantProfile = {
   participantNumber: number;
   displayName: string;
+  city: CityKey | null;
   bio: string | null;
   links: ParticipantProfileLink[];
   published: boolean;
@@ -63,11 +66,16 @@ export async function findPublishedParticipant(participantNumber: number) {
     .select({
       participantNumber: participantProfiles.participantNumber,
       displayName: participantProfiles.displayName,
+      city: badgeParticipants.city,
       bio: participantProfiles.bio,
       links: participantProfiles.links,
       updatedAt: participantProfiles.updatedAt,
     })
     .from(participantProfiles)
+    .innerJoin(
+      badgeParticipants,
+      eq(badgeParticipants.id, participantProfiles.participantId),
+    )
     .innerJoin(
       badgeAttempts,
       eq(badgeAttempts.participantId, participantProfiles.participantId),

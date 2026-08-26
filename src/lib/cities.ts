@@ -13,3 +13,15 @@ export const CITIES = [
 ] as const;
 
 export type CityKey = (typeof CITIES)[number]["key"];
+
+const CITY_NAMES: Record<CityKey, Record<"es" | "en", string>> = {
+  lima: { es: "Lima", en: "Lima" },
+  bogota: { es: "Bogotá", en: "Bogotá" },
+  guatemala: { es: "Ciudad de Guatemala", en: "Guatemala City" },
+  arequipa: { es: "Arequipa", en: "Arequipa" },
+  salvador: { es: "El Salvador", en: "El Salvador" },
+};
+
+export function cityName(city: CityKey, locale: string) {
+  return CITY_NAMES[city][locale === "en" ? "en" : "es"];
+}
