@@ -44,3 +44,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Salidas de gran formato. Los generadores en scripts/generate-*.mjs son
+# deterministas, así que se rehacen con un comando y no vale la pena cargar
+# decenas de MB al repo. La excepción es el PDF que se manda a imprenta.
+public/brand-assets/print/**
+!public/brand-assets/print/the-next-craft-photocall-300x220.pdf
