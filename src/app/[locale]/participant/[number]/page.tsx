@@ -11,6 +11,7 @@ import {
   participantBadgeImagePath,
   participantProfilePath,
 } from "@/lib/badge/profile";
+import { cityName } from "@/lib/cities";
 
 import { Link } from "@/i18n/navigation";
 
@@ -96,6 +97,11 @@ export default async function ParticipantPage({
           <p className="mt-5 font-pixel text-5xl text-[var(--text-dim)]">
             #{formattedNumber}
           </p>
+          {participant.city ? (
+            <p className="mt-4 inline-flex w-fit border border-[var(--bright)] px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--bright)]">
+              {cityName(participant.city, locale)}
+            </p>
+          ) : null}
           <h1 className="mt-4 font-pixel text-3xl uppercase leading-tight md:text-5xl">
             {participant.displayName}
           </h1>

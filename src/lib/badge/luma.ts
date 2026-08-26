@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-import { LUMA_EVENT_IDS } from "./constants";
+import type { CityKey } from "@/lib/cities";
+
+import { LUMA_EVENT_CITIES } from "./constants";
 
 const guestSchema = z.object({
   id: z.string(),
@@ -21,13 +23,38 @@ export type ApprovedLumaGuest = {
   id: string;
   email: string;
   displayName: string | null;
+  city: CityKey;
 };
 
 export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
+async function fetchGuestPage(url: URL, apiKey: string) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const response = await fetch(url, {
+      headers: { "x-luma-api-key": apiKey },
+      cache: "no-store",
+    });
+    if (response.ok) return guestListSchema.parse(await response.json());
+    if (response.status !== 429 || attempt === 2) {
+      throw new Error(
+        `Luma guest lookup failed for ${url.searchParams.get("event_id")} (${response.status})`,
+      );
+    }
+
+    const retryAfter = Number(response.headers.get("retry-after"));
+    const delayMs = Number.isFinite(retryAfter)
+      ? retryAfter * 1000
+      : 1000 * 2 ** attempt;
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+  }
+
+  throw new Error("Luma guest lookup failed");
+}
+
 async function lookupApprovedGuestInEvent(
   email: string,
   eventId: string,
+  city: CityKey,
   apiKey: string,
 ): Promise<ApprovedLumaGuest | null> {
   let cursor: string | undefined;
@@ -39,16 +66,7 @@ async function lookupApprovedGuestInEvent(
     url.searchParams.set("pagination_limit", "200");
     if (cursor) url.searchParams.set("pagination_cursor", cursor);
 
-    const response = await fetch(url, {
-      headers: { "x-luma-api-key": apiKey },
-      cache: "no-store",
-    });
-    if (!response.ok)
-      throw new Error(
-        `Luma guest lookup failed for ${eventId} (${response.status})`,
-      );
-
-    const data = guestListSchema.parse(await response.json());
+    const data = await fetchGuestPage(url, apiKey);
     const guest = data.entries.find(
       (entry) => normalizeEmail(entry.user_email) === email,
     );
@@ -59,7 +77,7 @@ async function lookupApprovedGuestInEvent(
           .filter(Boolean)
           .join(" ") ||
           null);
-      return { id: guest.id, email, displayName };
+      return { id: guest.id, email, displayName, city };
     }
 
     if (!data.has_more || !data.next_cursor) return null;
@@ -67,6 +85,37 @@ async function lookupApprovedGuestInEvent(
   }
 
   return null;
+}
+
+export async function listApprovedLumaGuests() {
+  const apiKey = process.env.LUMA_API_KEY;
+  if (!apiKey) throw new Error("LUMA_API_KEY is required");
+
+  const guests: ApprovedLumaGuest[] = [];
+  for (const [eventId, city] of Object.entries(LUMA_EVENT_CITIES)) {
+    let cursor: string | undefined;
+    for (let page = 0; page < 20; page += 1) {
+      const url = new URL("https://public-api.luma.com/v1/events/guests/list");
+      url.searchParams.set("event_id", eventId);
+      url.searchParams.set("approval_status", "approved");
+      url.searchParams.set("pagination_limit", "200");
+      if (cursor) url.searchParams.set("pagination_cursor", cursor);
+
+      const data = await fetchGuestPage(url, apiKey);
+      guests.push(
+        ...data.entries.map((guest) => ({
+          id: guest.id,
+          email: normalizeEmail(guest.user_email),
+          displayName: guest.user_name ?? null,
+          city,
+        })),
+      );
+      if (!data.has_more || !data.next_cursor) break;
+      cursor = data.next_cursor;
+    }
+  }
+
+  return guests;
 }
 
 export async function lookupApprovedGuest(
@@ -77,8 +126,8 @@ export async function lookupApprovedGuest(
 
   const normalizedEmail = normalizeEmail(email);
   const results = await Promise.allSettled(
-    LUMA_EVENT_IDS.map((eventId) =>
-      lookupApprovedGuestInEvent(normalizedEmail, eventId, apiKey),
+    Object.entries(LUMA_EVENT_CITIES).map(([eventId, city]) =>
+      lookupApprovedGuestInEvent(normalizedEmail, eventId, city, apiKey),
     ),
   );
   const approvedGuest = results.find(

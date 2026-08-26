@@ -116,6 +116,7 @@ export async function POST(request: Request) {
       userId: session.user.id,
       email: guest.email,
       lumaGuestId: guest.id,
+      city: guest.city,
       fullName: parsed.data.fullName,
       vehiclePlate: parsed.data.vehiclePlate || null,
       documentType: parsed.data.documentType,
@@ -130,6 +131,7 @@ export async function POST(request: Request) {
       set: {
         email: guest.email,
         lumaGuestId: guest.id,
+        city: guest.city,
         fullName: parsed.data.fullName,
         vehiclePlate: parsed.data.vehiclePlate || null,
         documentType: parsed.data.documentType,

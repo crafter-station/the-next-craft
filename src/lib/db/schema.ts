@@ -12,6 +12,8 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+import type { CityKey } from "@/lib/cities";
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -116,6 +118,7 @@ export const badgeParticipants = pgTable(
       .references(() => user.id, { onDelete: "cascade" }),
     email: text("email").notNull(),
     lumaGuestId: text("luma_guest_id").notNull(),
+    city: text("city").$type<CityKey>(),
     fullName: text("full_name").notNull(),
     vehiclePlate: text("vehicle_plate"),
     documentType: documentType("document_type").notNull(),
