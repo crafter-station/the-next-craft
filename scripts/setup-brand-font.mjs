@@ -37,6 +37,12 @@ const fonts = [
       "c845473330b94c2079ce9af01c51ac8ba2d99c24f4d14c039843bbb8e642ebd8",
   },
   {
+    fileName: "ArchivoBlack-Regular.ttf",
+    url: `https://raw.githubusercontent.com/google/fonts/${googleFontsCommit}/ofl/archivoblack/ArchivoBlack-Regular.ttf`,
+    checksum:
+      "dd9a89a019b4849f66ab75455fe7bdf931311042cbb0f0f97acc061539703180",
+  },
+  {
     fileName: "Silkscreen-Bold.ttf",
     url: `https://raw.githubusercontent.com/google/fonts/${googleFontsCommit}/ofl/silkscreen/Silkscreen-Bold.ttf`,
     checksum:
@@ -122,6 +128,17 @@ if (!resolvedPixelFamily.split(",").includes("Silkscreen")) {
   );
 }
 
+/* La sans no la usa el sitio: es solo para el muro tipográfico impreso. */
+const resolvedSansFamily = execFileSync("fc-match", [
+  "--format=%{family}",
+  "Archivo Black",
+]).toString();
+if (!resolvedSansFamily.split(",").includes("Archivo Black")) {
+  throw new Error(
+    `Font setup completed, but fontconfig resolved ${resolvedSansFamily}.`,
+  );
+}
+
 console.log(
-  "IBM Plex Mono, Borel, and Silkscreen are ready for brand asset generation.",
+  "IBM Plex Mono, Borel, Silkscreen, and Archivo Black are ready for brand asset generation.",
 );
