@@ -89,7 +89,7 @@ Entry points:
 - Boarding pass image: `src/app/api/boarding-pass/[code]/route.ts`.
 - Approval cron: `src/app/api/cron/approvals/route.ts`.
 
-Database schema: `scripts/schema.sql`.
+Registration schema: `scripts/schema.sql`. Better Auth and badge generator schema: `src/lib/db/schema.ts`, migrated through checked-in Drizzle migrations with `bun run db:generate` and `bun run db:migrate` (never `push`).
 
 ## Environment variables
 
@@ -100,6 +100,13 @@ No `.env` file is committed. Required variables include:
 - `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY_B64` (base64 one-line), `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_NAME`
 - `RESEND_API_KEY`, `EMAIL_FROM`
 - `CRON_SECRET`
+- Badge generator: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BADGE_PII_ENCRYPTION_KEY`, `LUMA_API_KEY`, `AI_GATEWAY_API_KEY`, `TRIGGER_SECRET_KEY`
 - Build-time public vars: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER`
 
 `GOOGLE_PRIVATE_KEY_B64` must be base64-encoded on a single line — the newline-escaped version breaks Dokploy's `.env` parser.
+
+<!-- TRIGGER.DEV SKILLS START -->
+## Trigger.dev agent skills
+
+This project has Trigger.dev agent skills installed in `.agents/skills/`. Before writing or changing Trigger.dev code (background tasks, scheduled tasks, realtime, or chat.agent AI agents), load the most relevant skill: `trigger-realtime-and-frontend`, `trigger-cost-savings`, `trigger-getting-started`.
+<!-- TRIGGER.DEV SKILLS END -->

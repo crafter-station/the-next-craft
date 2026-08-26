@@ -1,0 +1,1 @@
+ALTER TABLE "badge_participants" ADD COLUMN "vehicle_plate" text;

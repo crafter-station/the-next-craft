@@ -1,0 +1,2 @@
+ALTER TABLE "badge_participants" ADD COLUMN "share_token" text DEFAULT gen_random_uuid()::text NOT NULL;--> statement-breakpoint
+CREATE UNIQUE INDEX "badge_participants_share_token_idx" ON "badge_participants" USING btree ("share_token");

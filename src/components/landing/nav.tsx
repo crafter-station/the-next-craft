@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { key: "tracks", href: "#tracks" },
   { key: "schedule", href: "#agenda" },
   { key: "prizes", href: "#premios" },
+  { key: "gallery", href: "/gallery" },
   { key: "faq", href: "#faq" },
 ] as const;
 
@@ -37,17 +38,32 @@ export function Nav() {
                 nav-link: color → lavanda bright en hover + subrayado
                 1px que crece de izquierda a derecha (scaleX).
               */}
-              <a
-                href={href}
-                className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3"
-              >
-                {t(`links.${key}`)}
-              </a>
+              {href.startsWith("/") ? (
+                <Link
+                  href={href}
+                  className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3"
+                >
+                  {t(`links.${key}`)}
+                </Link>
+              ) : (
+                <a
+                  href={href}
+                  className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3"
+                >
+                  {t(`links.${key}`)}
+                </a>
+              )}
             </li>
           ))}
         </ul>
 
         <div className="flex items-stretch gap-2 shrink-0">
+          <Link
+            href="/gallery"
+            className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3 md:hidden"
+          >
+            {t("links.gallery")}
+          </Link>
           <LanguageToggle />
 
           {/* CTA — keycap beige. Abre el selector de sede: el registro son 5
