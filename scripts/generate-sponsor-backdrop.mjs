@@ -19,7 +19,13 @@ import sharp from "sharp";
 const root = process.cwd();
 const outputDirectory = path.join(root, "public", "brand-assets", "print");
 const sponsorDirectory = path.join(root, "public", "sponsors");
-const logosDirectory = path.join(root, "public", "brand-assets", "source", "logos");
+const logosDirectory = path.join(
+  root,
+  "public",
+  "brand-assets",
+  "source",
+  "logos",
+);
 const organizerDirectory = path.join(root, "public", "organizadores");
 const manifestPath = path.join(root, "public", "brand-assets", "assets.json");
 
@@ -142,7 +148,13 @@ const REFERENCE_ASPECT = 3.6;
  * 80 % — así que sin recortar, la altura pedida no guarda relación con el
  * tamaño que se ve y la fila queda despareja.
  */
-async function paintedLogo(file, baseHeightMm, color, tune = 1, baseDir = sponsorDirectory) {
+async function paintedLogo(
+  file,
+  baseHeightMm,
+  color,
+  tune = 1,
+  baseDir = sponsorDirectory,
+) {
   const nominal = px(baseHeightMm);
 
   const trimmed = await sharp(path.join(baseDir, file), { density: 600 })
@@ -185,7 +197,13 @@ async function layoutRow(row, color, marginMm) {
   const logos = [];
   for (const item of row.items) {
     logos.push(
-      await paintedLogo(item.file, row.h, color, item.k ?? 1, item.dir ?? sponsorDirectory),
+      await paintedLogo(
+        item.file,
+        row.h,
+        color,
+        item.k ?? 1,
+        item.dir ?? sponsorDirectory,
+      ),
     );
   }
 
@@ -260,7 +278,7 @@ function binaryField() {
   for (let row = 0; row < lines; row += 1) {
     let bits = "";
     for (let col = 0; col < columns; col += 1) bits += next() < 0.5 ? "0" : "1";
-    const opacity = (0.046 + next() * 0.020).toFixed(3);
+    const opacity = (0.046 + next() * 0.02).toFixed(3);
     const y = 30 + row * lineHeight;
     rows.push(`<text x="-20" y="${y}" opacity="${opacity}">${bits}</text>`);
   }

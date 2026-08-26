@@ -114,7 +114,9 @@ async function buildMachine() {
     sharp(base)
       .composite([
         {
-          input: { create: { width: w, height: h, channels: 3, background: hex } },
+          input: {
+            create: { width: w, height: h, channels: 3, background: hex },
+          },
           blend: "multiply",
         },
       ])
@@ -122,8 +124,14 @@ async function buildMachine() {
       .toBuffer();
 
   const phosphor = await colorize(colors.phosphor);
-  const red = await sharp(await colorize(colors.bleedRed)).linear(0.42, 0).png().toBuffer();
-  const cyan = await sharp(await colorize(colors.bleedCyan)).linear(0.42, 0).png().toBuffer();
+  const red = await sharp(await colorize(colors.bleedRed))
+    .linear(0.42, 0)
+    .png()
+    .toBuffer();
+  const cyan = await sharp(await colorize(colors.bleedCyan))
+    .linear(0.42, 0)
+    .png()
+    .toBuffer();
   const bleed = px(1.4);
 
   const composed = await sharp({
@@ -144,7 +152,10 @@ async function buildMachine() {
   // contra el fondo. dest-in conserva el resultado solo donde el render
   // original es opaco, así que sobrevive la silueta de la máquina.
   const silhouette = await sharp(computerPath)
-    .resize(w, h, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(w, h, {
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .png()
     .toBuffer();
 

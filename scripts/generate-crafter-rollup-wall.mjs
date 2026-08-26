@@ -99,7 +99,10 @@ async function machine({ size, dim, blur, hue = colors.teal }) {
   const s = px(size);
 
   let pipeline = sharp(computerPath)
-    .resize(s, s, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(s, s, {
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .greyscale()
     .normalise();
 
@@ -111,7 +114,9 @@ async function machine({ size, dim, blur, hue = colors.teal }) {
   const tinted = await sharp(grey)
     .composite([
       {
-        input: { create: { width: s, height: s, channels: 3, background: hue } },
+        input: {
+          create: { width: s, height: s, channels: 3, background: hue },
+        },
         blend: "multiply",
       },
     ])
@@ -126,7 +131,10 @@ async function machine({ size, dim, blur, hue = colors.teal }) {
   // Las scanlines se pintan sobre todo el cuadro, así que hay que volver a
   // recortar por la silueta o reaparece el rectángulo de fondo.
   const silhouette = await sharp(computerPath)
-    .resize(s, s, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize(s, s, {
+      fit: "contain",
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    })
     .png()
     .toBuffer();
 
@@ -139,7 +147,7 @@ async function machine({ size, dim, blur, hue = colors.teal }) {
 const wallLayers = [];
 for (const [index, cell] of wall.entries()) {
   // Las filas de arriba quedan más apagadas: da profundidad al muro.
-  const depth = 0.30 + 0.05 * Math.min(index % 5, 3);
+  const depth = 0.3 + 0.05 * Math.min(index % 5, 3);
   wallLayers.push({
     input: await machine({ size: cell.size, dim: depth, blur: 1.1 * scale }),
     left: px(cell.x),
@@ -148,7 +156,12 @@ for (const [index, cell] of wall.entries()) {
 }
 
 const heroLayer = {
-  input: await machine({ size: hero.size, dim: 1.3, blur: 0, hue: colors.tealBright }),
+  input: await machine({
+    size: hero.size,
+    dim: 1.3,
+    blur: 0,
+    hue: colors.tealBright,
+  }),
   left: px(hero.x),
   top: px(hero.y),
 };

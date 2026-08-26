@@ -59,9 +59,33 @@ for (const family of [fontFamily, pixelFontFamily, scriptFontFamily]) {
 
 /** Paneles: foto, caja en mm y cuánto se pixela antes de tirar el umbral. */
 const panels = [
-  { file: "she-ships-lima-01-upright.jpg", x: 55, y: 205, w: 740, h: 410, blocks: 330, threshold: 108 },
-  { file: "she-ships-lima-02.jpg", x: 55, y: 745, w: 740, h: 410, blocks: 320, threshold: 116 },
-  { file: "she-ships-lima-04.jpg", x: 55, y: 1250, w: 740, h: 310, blocks: 330, threshold: 84 },
+  {
+    file: "she-ships-lima-01-upright.jpg",
+    x: 55,
+    y: 205,
+    w: 740,
+    h: 410,
+    blocks: 330,
+    threshold: 108,
+  },
+  {
+    file: "she-ships-lima-02.jpg",
+    x: 55,
+    y: 745,
+    w: 740,
+    h: 410,
+    blocks: 320,
+    threshold: 116,
+  },
+  {
+    file: "she-ships-lima-04.jpg",
+    x: 55,
+    y: 1250,
+    w: 740,
+    h: 310,
+    blocks: 330,
+    threshold: 84,
+  },
 ];
 
 /** Scanlines + grilla vertical, del tamaño exacto del panel. */
@@ -85,7 +109,7 @@ function crtMask(w, h) {
 }
 
 /** Rebanadas desplazadas: el glitch de cinta que arrastra una franja. */
-function tearSlices(w, h, seed) {
+function tearSlices(h, seed) {
   const slices = [];
   let cursor = seed % 37;
   for (let i = 0; i < 5; i += 1) {
@@ -121,7 +145,9 @@ async function buildPanel(panel) {
     sharp(base)
       .composite([
         {
-          input: { create: { width: w, height: h, channels: 3, background: hex } },
+          input: {
+            create: { width: w, height: h, channels: 3, background: hex },
+          },
           blend: "multiply",
         },
       ])
@@ -132,8 +158,14 @@ async function buildPanel(panel) {
   // que las copias corridas van atenuadas: el relleno queda azul y el color
   // sobrevive solo en los bordes, que es donde sangra un CRT de verdad.
   const phosphor = await colorize(colors.phosphor);
-  const red = await sharp(await colorize(colors.bleedRed)).linear(0.42, 0).png().toBuffer();
-  const cyan = await sharp(await colorize(colors.bleedCyan)).linear(0.42, 0).png().toBuffer();
+  const red = await sharp(await colorize(colors.bleedRed))
+    .linear(0.42, 0)
+    .png()
+    .toBuffer();
+  const cyan = await sharp(await colorize(colors.bleedCyan))
+    .linear(0.42, 0)
+    .png()
+    .toBuffer();
   const bleed = px(1.4);
 
   let composed = await sharp({
@@ -149,7 +181,7 @@ async function buildPanel(panel) {
     .toBuffer();
 
   // Franjas arrastradas encima del panel ya compuesto.
-  const slices = tearSlices(w, h, panel.threshold);
+  const slices = tearSlices(h, panel.threshold);
   const overlays = [];
   for (const slice of slices) {
     const strip = await sharp(composed)
