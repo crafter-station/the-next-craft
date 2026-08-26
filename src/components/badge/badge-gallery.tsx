@@ -7,6 +7,7 @@ import {
   type PublishedParticipantCard,
   participantBadgeImagePath,
 } from "@/lib/badge/profile";
+import type { CityKey } from "@/lib/cities";
 
 import { Link } from "@/i18n/navigation";
 
@@ -18,16 +19,35 @@ type BadgeGalleryProps = {
     emptySearch: string;
     count: string;
     badgeAlt: string;
+    cityFilter: string;
+    allCities: string;
   };
+  cities: { key: CityKey; label: string }[];
 };
 
-export function BadgeGallery({ participants, labels }: BadgeGalleryProps) {
+export function BadgeGallery({
+  participants,
+  labels,
+  cities,
+}: BadgeGalleryProps) {
   const [query, setQuery] = useState("");
+  const [activeCity, setActiveCity] = useState<CityKey | "all">("all");
+
+  const cityCounts = useMemo(() => {
+    const counts = new Map<CityKey, number>();
+    for (const participant of participants) {
+      if (participant.city) {
+        counts.set(participant.city, (counts.get(participant.city) ?? 0) + 1);
+      }
+    }
+    return counts;
+  }, [participants]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (!needle) return participants;
     return participants.filter((participant) => {
+      if (activeCity !== "all" && participant.city !== activeCity) return false;
+      if (!needle) return true;
       const number = formatParticipantNumber(participant.participantNumber);
       return (
         participant.displayName.toLowerCase().includes(needle) ||
@@ -35,15 +55,44 @@ export function BadgeGallery({ participants, labels }: BadgeGalleryProps) {
         `#${number}`.includes(needle)
       );
     });
-  }, [participants, query]);
+  }, [activeCity, participants, query]);
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--text-dim)]">
-          {labels.count.replace("{count}", String(filtered.length))}
-        </p>
-        <label className="flex min-w-0 flex-1 flex-col gap-2 md:max-w-md">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,28rem)] lg:items-end">
+        <fieldset className="min-w-0">
+          <legend className="mb-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--bright)]">
+            {labels.cityFilter}
+          </legend>
+          <div className="flex w-fit max-w-full flex-wrap border-t border-l border-[var(--line)]">
+            <button
+              type="button"
+              aria-pressed={activeCity === "all"}
+              onClick={() => setActiveCity("all")}
+              className="flex h-12 items-center gap-3 border-r border-b border-[var(--line)] px-4 font-mono text-xs uppercase tracking-[0.12em] transition-colors hover:bg-[var(--screen-dim)] aria-pressed:bg-[var(--bright)] aria-pressed:text-[var(--void)]"
+            >
+              <span>{labels.allCities}</span>
+              <span className="font-semibold tabular-nums">
+                {participants.length}
+              </span>
+            </button>
+            {cities.map((city) => (
+              <button
+                key={city.key}
+                type="button"
+                aria-pressed={activeCity === city.key}
+                onClick={() => setActiveCity(city.key)}
+                className="flex h-12 items-center gap-3 border-r border-b border-[var(--line)] px-4 font-mono text-xs uppercase tracking-[0.12em] transition-colors hover:bg-[var(--screen-dim)] aria-pressed:bg-[var(--bright)] aria-pressed:text-[var(--void)]"
+              >
+                <span>{city.label}</span>
+                <span className="font-semibold tabular-nums">
+                  {cityCounts.get(city.key) ?? 0}
+                </span>
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        <label className="flex min-w-0 flex-col gap-2">
           <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--bright)]">
             {labels.search}
           </span>
@@ -52,10 +101,13 @@ export function BadgeGallery({ participants, labels }: BadgeGalleryProps) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={labels.searchPlaceholder}
-            className="min-h-12 border border-[var(--line)] bg-[var(--screen-dim)] px-4 font-mono text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-dim)] focus:border-[var(--bright)]"
+            className="h-12 border border-[var(--line)] bg-[var(--screen-dim)] px-4 font-mono text-sm text-[var(--text)] outline-none placeholder:text-[var(--text-dim)] focus:border-[var(--bright)]"
           />
         </label>
       </div>
+      <p className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--text-dim)]">
+        {labels.count.replace("{count}", String(filtered.length))}
+      </p>
 
       {filtered.length === 0 ? (
         <p className="border border-[var(--line)] bg-[var(--screen-dim)] px-5 py-8 font-mono text-sm text-[var(--text-dim)]">

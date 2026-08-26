@@ -406,6 +406,8 @@
     "headline": "BADGES",
     "intro": "Los retratos oficiales de quienes van a construir. Cada badge es un perfil público, generado en pixel art.",
     "search": "BUSCAR",
+    "cityFilter": "FILTRAR POR SEDE",
+    "allCities": "TODAS",
     "searchPlaceholder": "Nombre o número…",
     "emptySearch": "Ningún participante coincide con esa búsqueda.",
     "count": "{count} PUBLICADOS",

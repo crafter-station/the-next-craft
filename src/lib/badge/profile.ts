@@ -22,6 +22,7 @@ export type PublicParticipantProfile = {
 export type PublishedParticipantCard = {
   participantNumber: number;
   displayName: string;
+  city: CityKey | null;
   updatedAt: string;
 };
 
@@ -101,9 +102,14 @@ export async function listPublishedParticipants(): Promise<
     .select({
       participantNumber: participantProfiles.participantNumber,
       displayName: participantProfiles.displayName,
+      city: badgeParticipants.city,
       updatedAt: participantProfiles.updatedAt,
     })
     .from(participantProfiles)
+    .innerJoin(
+      badgeParticipants,
+      eq(badgeParticipants.id, participantProfiles.participantId),
+    )
     .where(
       and(
         isNotNull(participantProfiles.publishedAt),

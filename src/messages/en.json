@@ -406,6 +406,8 @@
     "headline": "BADGES",
     "intro": "Official portraits of the people who will be building. Each badge is a public profile, rendered in pixel art.",
     "search": "SEARCH",
+    "cityFilter": "FILTER BY CITY",
+    "allCities": "ALL",
     "searchPlaceholder": "Name or number…",
     "emptySearch": "No participants match that search.",
     "count": "{count} PUBLISHED",
