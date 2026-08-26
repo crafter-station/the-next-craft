@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { listPublishedParticipants } from "@/lib/badge/profile";
+import { CITIES } from "@/lib/cities";
 
 import { BadgeGallery } from "@/components/badge/badge-gallery";
 import { LanguageToggle } from "@/components/landing/language-toggle";
@@ -47,8 +48,11 @@ export default async function GalleryPage({
   setRequestLocale(locale);
   await connection();
 
-  const t = await getTranslations({ locale, namespace: "gallery" });
-  const participants = await listPublishedParticipants();
+  const [t, tCities, participants] = await Promise.all([
+    getTranslations({ locale, namespace: "gallery" }),
+    getTranslations({ locale, namespace: "cities" }),
+    listPublishedParticipants(),
+  ]);
 
   return (
     <>
@@ -115,12 +119,15 @@ export default async function GalleryPage({
           ) : (
             <BadgeGallery
               participants={participants}
+              cities={CITIES.map(({ key }) => ({ key, label: tCities(key) }))}
               labels={{
                 search: t("search"),
                 searchPlaceholder: t("searchPlaceholder"),
                 emptySearch: t("emptySearch"),
                 count: String(t.raw("count")),
                 badgeAlt: String(t.raw("badgeAlt")),
+                cityFilter: t("cityFilter"),
+                allCities: t("allCities"),
               }}
             />
           )}
