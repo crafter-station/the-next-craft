@@ -6,7 +6,6 @@ import { headers } from "next/headers";
 import { and, eq, sql } from "drizzle-orm";
 
 import { auth } from "@/lib/auth";
-import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import { dashboardTeamMembers, dashboardTeams } from "@/lib/db/schema";
 
