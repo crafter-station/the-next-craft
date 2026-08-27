@@ -98,12 +98,35 @@ type RegistrationRow = {
   created_at: string;
 };
 
-const { rows } = (await db.execute(sql`
-  select email, name, city, role, team_status, team_name, created_at
-  from registrations
-  where status = 'approved'
-  order by created_at asc
-`)) as unknown as { rows: RegistrationRow[] };
+let rows: RegistrationRow[];
+try {
+  const result = (await db.execute(sql`
+    select email, name, city, role, team_status, team_name, created_at
+    from registrations
+    where status = 'approved'
+    order by created_at asc
+  `)) as unknown as { rows: RegistrationRow[] };
+  rows = result.rows;
+} catch (error) {
+  // 42P01 = undefined_table. Drizzle envuelve el error del driver en
+  // DrizzleQueryError, así que el código del postgres vive en `cause`.
+  // La tabla `registrations` la crea scripts/schema.sql y la llena el bot de
+  // WhatsApp; puede vivir en otra base de datos distinta a la del badge.
+  const pgCode =
+    (error as { code?: string }).code ??
+    (error as { cause?: { code?: string } }).cause?.code;
+  if (pgCode === "42P01") {
+    console.error(
+      "\nLa tabla `registrations` no existe en esta base de datos.\n" +
+        "De ahí salen los nombres de equipo que declaró cada aspirante por WhatsApp.\n\n" +
+        "Comprueba dos cosas:\n" +
+        "  1. Que el DATABASE_URL es el de la base donde corre el bot de registro.\n" +
+        "  2. Que se aplicó scripts/schema.sql en esa base.\n",
+    );
+    process.exit(1);
+  }
+  throw error;
+}
 
 console.log(`\nRegistros aprobados: ${rows.length}`);
 
