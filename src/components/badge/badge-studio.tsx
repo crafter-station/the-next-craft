@@ -29,7 +29,7 @@ import {
 import type { generateParticipantBadge } from "@/trigger/generate-participant-badge";
 
 type Locale = "es" | "en";
-type DashboardMode = "preview" | "edit" | "photo";
+type DashboardMode = "preview" | "edit";
 type CopyStatus = "idle" | "copied" | "error";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.org";
@@ -41,8 +41,11 @@ const copy = {
     manageTitle: "Administra tu perfil de participante.",
     intro:
       "Valida tu correo de Luma, completa tus datos y genera un retrato pixel art unico.",
-    manageIntro:
-      "Actualiza tu nombre publico, bio, enlaces o la foto de tu badge.",
+    manageIntro: "Actualiza tu nombre publico, bio o enlaces.",
+    closedTitle: "El registro de badges ha cerrado.",
+    closedIntro:
+      "Ya no se pueden crear badges nuevos. Si ya tienes uno, inicia sesion para administrarlo.",
+    closedNotice: "El onboarding y la generacion de badges han finalizado.",
     email: "Correo usado en Luma",
     send: "Enviar codigo",
     sent: "Si tu registro esta aceptado, recibiras un codigo en tu correo.",
@@ -108,7 +111,11 @@ const copy = {
     manageTitle: "Manage your participant profile.",
     intro:
       "Verify your Luma email, complete your details, and generate a unique pixel-art portrait.",
-    manageIntro: "Update your public name, bio, links, or badge photo.",
+    manageIntro: "Update your public name, bio, or links.",
+    closedTitle: "Badge registration is closed.",
+    closedIntro:
+      "New badges can no longer be created. If you already have one, sign in to manage it.",
+    closedNotice: "Badge onboarding and generation have ended.",
     email: "Email used on Luma",
     send: "Send code",
     sent: "If your registration is accepted, a code will arrive in your inbox.",
@@ -407,8 +414,6 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
   const [otpSent, setOtpSent] = useState(false);
   const [code, setCode] = useState("");
   const [state, setState] = useState<BadgeStudioState | null>(initialState);
-  const [photo, setPhoto] = useState<File | null>(null);
-  const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [dashboardMode, setDashboardMode] = useState<DashboardMode>("preview");
   const sessionUserId = session?.user.id ?? null;
@@ -463,15 +468,9 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
   });
 
   const saveProfileMutation = useMutation({
-    mutationFn: async ({
-      value,
-      method,
-    }: {
-      value: ProfileFormValue;
-      method: "POST" | "PATCH";
-    }) => {
+    mutationFn: async (value: ProfileFormValue) => {
       const response = await fetch("/api/badge/profile", {
-        method,
+        method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(value),
       });
@@ -479,41 +478,8 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
     },
     onMutate: () => setError(null),
     onError: () => setError(t.genericError),
-    onSuccess: async (_, { method }) => {
-      await refreshStatus();
-      if (method === "PATCH") setDashboardMode("preview");
-    },
-  });
-
-  const generateBadgeMutation = useMutation({
-    mutationFn: async (selectedPhoto: File) => {
-      const body = new FormData();
-      body.set("photo", selectedPhoto);
-      const response = await fetch("/api/badge/generate", {
-        method: "POST",
-        body,
-      });
-      if (!response.ok) throw new BadgeRequestError(response.status);
-    },
-    onMutate: () => setError(null),
-    onError: async (mutationError) => {
-      if (
-        mutationError instanceof BadgeRequestError &&
-        mutationError.status === 429
-      ) {
-        setError(t.rate);
-      } else if (
-        mutationError instanceof BadgeRequestError &&
-        mutationError.status === 409
-      ) {
-        await refreshStatus();
-      } else {
-        setError(t.genericError);
-      }
-    },
     onSuccess: async () => {
       await refreshStatus();
-      setPhoto(null);
       setDashboardMode("preview");
     },
   });
@@ -529,7 +495,6 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
       setState(null);
       setOtpSent(false);
       setCode("");
-      setPhoto(null);
       setDashboardMode("preview");
     },
   });
@@ -538,7 +503,6 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
     requestOtpMutation.isPending ||
     verifyOtpMutation.isPending ||
     saveProfileMutation.isPending ||
-    generateBadgeMutation.isPending ||
     signOutMutation.isPending;
 
   useEffect(() => {
@@ -560,17 +524,6 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
     };
   }, [sessionUserId, state, t.genericError]);
 
-  useEffect(() => {
-    if (!photo) {
-      setPhotoPreviewUrl(null);
-      return;
-    }
-
-    const previewUrl = URL.createObjectURL(photo);
-    setPhotoPreviewUrl(previewUrl);
-    return () => URL.revokeObjectURL(previewUrl);
-  }, [photo]);
-
   function requestOtp(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     requestOtpMutation.mutate(email.trim());
@@ -584,45 +537,33 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
     });
   }
 
-  function createProfile(value: ProfileFormValue) {
-    saveProfileMutation.mutate({ value, method: "POST" });
-  }
-
   function updateProfile(value: ProfileFormValue) {
-    saveProfileMutation.mutate({ value, method: "PATCH" });
-  }
-
-  function generateBadge(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!photo) return;
-    generateBadgeMutation.mutate(photo);
+    saveProfileMutation.mutate(value);
   }
 
   const completedState = state?.stage === "completed" ? state : null;
   const completedProfile = completedState?.profile ?? null;
-  const isUploadStage = state?.stage === "upload";
-  const showPhotoForm =
-    isUploadStage ||
-    (state?.stage === "completed" && dashboardMode === "photo");
+  const onboardingClosed =
+    !authenticated || state?.stage === "details" || state?.stage === "upload";
   const managingExistingBadge =
     state?.stage === "completed" ||
     (state?.stage === "generating" && state.hasCurrentBadge);
   const showingCompletedBadge = Boolean(
     completedProfile && dashboardMode === "preview",
   );
-  const pageTitle = showingCompletedBadge
-    ? t.complete
-    : showPhotoForm
-      ? t.photoTitle
+  const pageTitle = onboardingClosed
+    ? t.closedTitle
+    : showingCompletedBadge
+      ? t.complete
       : state?.stage === "generating"
         ? t.generating
         : managingExistingBadge
           ? t.manageTitle
           : t.title;
-  const pageIntro = showingCompletedBadge
-    ? `${completedProfile?.displayName} / ${t.participant} #${formatParticipantNumber(completedProfile?.participantNumber ?? 0)}`
-    : showPhotoForm
-      ? t.photoHelp
+  const pageIntro = onboardingClosed
+    ? t.closedIntro
+    : showingCompletedBadge
+      ? `${completedProfile?.displayName} / ${t.participant} #${formatParticipantNumber(completedProfile?.participantNumber ?? 0)}`
       : managingExistingBadge
         ? t.manageIntro
         : t.intro;
@@ -745,93 +686,11 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
           </div>
         ) : null}
 
-        {authenticated && state?.stage === "details" ? (
-          <ProfileForm
-            locale={locale}
-            fullName={state.fullName}
-            documentNumber={state.documentNumber}
-            vehiclePlate={state.vehiclePlate}
-            pending={isPending}
-            onSubmit={createProfile}
-          />
-        ) : null}
-
-        {authenticated && showPhotoForm ? (
-          <form onSubmit={generateBadge} className="space-y-6">
-            {state.stage === "upload" && state.error === "rejected" ? (
-              <p className="border-l-2 border-red-400 pl-4 text-sm">
-                {t.rejected}
-              </p>
-            ) : null}
-            {state.stage === "upload" && state.error === "failed" ? (
-              <p className="border-l-2 border-red-400 pl-4 text-sm">
-                {t.failed}
-              </p>
-            ) : null}
-            <label className="grid min-h-48 cursor-pointer place-items-center overflow-hidden border border-dashed border-[var(--line)] bg-[var(--void)] p-3 text-center hover:border-[var(--bright)] focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[var(--bright)]">
-              <input
-                type="file"
-                name="photo"
-                required
-                accept="image/jpeg,image/png,image/webp"
-                className="sr-only"
-                onChange={(event) => {
-                  const selected = event.target.files?.[0] ?? null;
-                  if (selected && selected.size > 8 * 1024 * 1024) {
-                    setPhoto(null);
-                    setError(t.photoHelp);
-                    event.target.value = "";
-                    return;
-                  }
-                  setError(null);
-                  setPhoto(selected);
-                }}
-              />
-              {photo && photoPreviewUrl ? (
-                <span className="grid w-full gap-3">
-                  {/* biome-ignore lint/performance/noImgElement: local object URL selected by the user. */}
-                  <img
-                    src={photoPreviewUrl}
-                    alt={t.photoPreview}
-                    className="max-h-96 w-full object-contain"
-                  />
-                  <span className="break-all font-pixel text-xs uppercase text-[var(--text-dim)]">
-                    {photo.name}
-                  </span>
-                </span>
-              ) : (
-                <span className="p-3 font-pixel text-sm uppercase text-[var(--text-dim)]">
-                  SELECT PHOTO_
-                </span>
-              )}
-            </label>
-            <p className="text-xs text-[var(--text-dim)]">{t.rate}</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <button
-                type="submit"
-                disabled={isPending || !photo}
-                className="keycap min-h-12 px-5 font-pixel text-sm uppercase disabled:opacity-50"
-              >
-                {state.stage === "completed"
-                  ? t.replacePhoto
-                  : state.error
-                    ? t.retry
-                    : t.generate}
-              </button>
-              {state.stage === "completed" ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPhoto(null);
-                    setDashboardMode("preview");
-                  }}
-                  className="keycap-ghost min-h-12 px-5 font-pixel text-sm uppercase"
-                >
-                  {t.cancel}
-                </button>
-              ) : null}
-            </div>
-          </form>
+        {authenticated &&
+        (state?.stage === "details" || state?.stage === "upload") ? (
+          <p className="border-l-2 border-[var(--bright)] pl-4 text-sm text-[var(--text-dim)]">
+            {t.closedNotice}
+          </p>
         ) : null}
 
         {authenticated && state?.stage === "generating" ? (
@@ -912,13 +771,6 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
                 >
                   {t.downloadPortrait}
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setDashboardMode("photo")}
-                  className="text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-[var(--text)]"
-                >
-                  {t.replacePhoto}
-                </button>
               </div>
             </div>
             {completedBadgeImageUrl ? (
