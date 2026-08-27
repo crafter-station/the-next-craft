@@ -8,6 +8,7 @@ import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
 
 import { BadgeStudio } from "@/components/badge/badge-studio";
+import { DashboardNavLink } from "@/components/dashboard/dashboard-nav-link";
 import { QueryProvider } from "@/components/providers/query-provider";
 
 export const metadata: Metadata = {
@@ -35,6 +36,10 @@ export default async function BadgePage({
       className="relative min-h-screen overflow-x-hidden px-5 py-8 md:px-10 md:py-12"
     >
       <div className="grid-bg" aria-hidden="true" />
+      {/* Quien ya está acreditado tiene su panel del día del evento aquí. */}
+      <div className="relative mb-6 flex justify-end">
+        <DashboardNavLink className="keycap-ghost px-3 py-2" />
+      </div>
       <QueryProvider>
         <BadgeStudio
           key={studioKey}

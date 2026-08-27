@@ -10,7 +10,6 @@ import { db } from "@/lib/db";
 import {
   dashboardAgendaSaves,
   dashboardMentorSlots,
-  dashboardMentorTables,
   dashboardPartnerRedemptions,
   dashboardTeams,
 } from "@/lib/db/schema";
@@ -284,69 +283,4 @@ export async function toggleAgendaBlock(
 
   refreshDashboard();
   return { ok: true };
-}
-
-/** Sembrado idempotente de las mesas de mentoría y sus turnos. */
-export async function seedMentorTables() {
-  const existing = await db
-    .select({ id: dashboardMentorTables.id })
-    .from(dashboardMentorTables)
-    .limit(1);
-  if (existing.length > 0) return { ok: true as const, seeded: false };
-
-  const tables = [
-    {
-      slug: "crafter-station",
-      org: "Crafter Station",
-      role: "product",
-      expertise: ["producto", "distribución", "demo"],
-      sortOrder: 0,
-    },
-    {
-      slug: "ai-labs",
-      org: "AI Labs",
-      role: "models",
-      expertise: ["LLMs", "agentes", "evals"],
-      sortOrder: 1,
-    },
-    {
-      slug: "nucleo-labs",
-      org: "Nucleo Labs",
-      role: "engineering",
-      expertise: ["backend", "infra", "tiempo real"],
-      sortOrder: 2,
-    },
-    {
-      slug: "open2",
-      org: "Open2",
-      role: "interface",
-      expertise: ["frontend", "interfaz", "pitch"],
-      sortOrder: 3,
-    },
-  ];
-
-  const inserted = await db
-    .insert(dashboardMentorTables)
-    .values(tables)
-    .returning({ id: dashboardMentorTables.id });
-
-  // El bloque de mentorías canónico es 11:00–13:00: cuatro turnos de 25 min.
-  const windows = [
-    ["11:00", "11:25"],
-    ["11:30", "11:55"],
-    ["12:00", "12:25"],
-    ["12:30", "12:55"],
-  ];
-
-  await db.insert(dashboardMentorSlots).values(
-    inserted.flatMap((table) =>
-      windows.map(([startsAt, endsAt]) => ({
-        mentorTableId: table.id,
-        startsAt,
-        endsAt,
-      })),
-    ),
-  );
-
-  return { ok: true as const, seeded: true };
 }
