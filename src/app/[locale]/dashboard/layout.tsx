@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
 import { PARTNERS, SUBMISSION_DEADLINE } from "@/lib/dashboard/content";
+import { currentStaffEmail } from "@/lib/dashboard/staff";
 import {
   findParticipantByUserId,
   findTeamForParticipant,
@@ -59,7 +60,10 @@ export default async function DashboardLayout({
     );
   }
 
-  const team = await findTeamForParticipant(participant.id);
+  const [team, staffEmail] = await Promise.all([
+    findTeamForParticipant(participant.id),
+    currentStaffEmail(),
+  ]);
   const { now, anchored } = resolveNow();
 
   return (
@@ -68,6 +72,7 @@ export default async function DashboardLayout({
         name={participant.fullName}
         tableNumber={team?.tableNumber ?? null}
         partners={PARTNERS.map((p) => ({ key: p.key, name: p.name }))}
+        isStaff={Boolean(staffEmail)}
       />
       <div className="min-w-0 flex-1">
         <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-[var(--void)]/95 backdrop-blur-[2px]">

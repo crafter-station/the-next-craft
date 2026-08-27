@@ -450,7 +450,9 @@
       "menu": "Menu",
       "close": "Close",
       "skipToContent": "Skip to content",
-      "badge": "Badge"
+      "badge": "Badge",
+      "staff": "Staff",
+      "groupStaff": "DOOR"
     },
     "shell": {
       "betweenBlocks": "between blocks",
@@ -796,6 +798,28 @@
       "includedTitle": "{count} MEALS INCLUDED",
       "includedSwag": "Official event swag, when you arrive at your hub.",
       "includedCommunity": "Access to the Crafter Station community."
+    },
+    "staff": {
+      "label": "STAFF · DOOR",
+      "headline": "HUB CHECK-IN",
+      "lede": "Search by name or email, mark arrival and hand out merch. Every mark records who made it.",
+      "denied": "This screen is staff only. Sign in with your organization email.",
+      "allHubs": "all",
+      "searchPlaceholder": "Name or email",
+      "search": "Search",
+      "empty": "Nobody matches that search.",
+      "withBadge": "has badge",
+      "noBadge": "no badge",
+      "markArrival": "Mark arrival",
+      "arrived": "Arrived",
+      "markMerch": "Hand merch",
+      "merchDone": "Merch ✓",
+      "statArrived": "ARRIVED",
+      "statMerch": "MERCH HANDED",
+      "statBadge": "WITH BADGE",
+      "statBadgeHint": "confirmed attendance",
+      "statPending": "NOT ARRIVED",
+      "footer": "{shown} of {total} shown"
     }
   }
 }
