@@ -252,6 +252,12 @@ export const dashboardTeams = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     slug: text("slug").notNull(),
     name: text("name").notNull(),
+    /**
+     * Código corto que se comparte para entrar al equipo. Los equipos se forman
+     * en el kickoff, en persona: es más rápido dictar seis caracteres que
+     * buscar a alguien en una lista.
+     */
+    joinCode: text("join_code").notNull(),
     city: text("city").$type<CityKey>(),
     tableNumber: text("table_number"),
     pitch: text("pitch"),
@@ -272,6 +278,7 @@ export const dashboardTeams = pgTable(
   },
   (table) => [
     uniqueIndex("dashboard_teams_slug_idx").on(table.slug),
+    uniqueIndex("dashboard_teams_join_code_idx").on(table.joinCode),
     index("dashboard_teams_track_idx").on(table.track),
   ],
 );

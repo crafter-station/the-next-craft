@@ -452,7 +452,8 @@
       "skipToContent": "Skip to content",
       "badge": "Badge",
       "staff": "Staff",
-      "groupStaff": "DOOR"
+      "groupStaff": "DOOR",
+      "team": "Team"
     },
     "shell": {
       "betweenBlocks": "between blocks",
@@ -553,7 +554,9 @@
       "goCredits": "Redeem",
       "goOverview": "View",
       "goBadge": "Badge",
-      "badge": "Badge generated"
+      "badge": "Badge generated",
+      "team": "Team formed",
+      "goTeam": "Form"
     },
     "agenda": {
       "label": "SCHEDULE · 12 HOURS",
@@ -820,6 +823,60 @@
       "statBadgeHint": "confirmed attendance",
       "statPending": "NOT ARRIVED",
       "footer": "{shown} of {total} shown"
+    },
+    "team": {
+      "label": "TEAM",
+      "headlineEmpty": "YOU DON'T HAVE A TEAM YET",
+      "ledeEmpty": "Teams are {min} to {max} people and form at the kickoff. Create one and read out the code, or join with someone else's.",
+      "ledeTeam": "Share the code so the others can join. Up to {max} people.",
+      "inCity": "{count} teams at your hub",
+      "size": "{count}/{max} people",
+      "createLabel": "CREATE TEAM",
+      "createTitle": "START ONE",
+      "createBody": "Name it and we'll give you a six-character code for the others to join with.",
+      "nameLabel": "TEAM NAME",
+      "namePlaceholder": "Terminal Velocity",
+      "createCta": "Create team",
+      "joinLabel": "JOIN ONE",
+      "joinTitle": "I HAVE A CODE",
+      "joinBody": "Ask whoever created the team for the code. Six characters, case-insensitive.",
+      "codeLabel": "CODE",
+      "joinCta": "Join team",
+      "shareLabel": "TEAM CODE",
+      "shareTitle": "FOR THEM TO JOIN",
+      "shareBody": "Read it out loud. Up to {max} people per team.",
+      "copy": "copy",
+      "copied": "copied",
+      "membersLabel": "MEMBERS",
+      "captain": "(captain)",
+      "hub": "hub",
+      "table": "table",
+      "shortLabel": "TEAM INCOMPLETE",
+      "shortBody": "The minimum is {min} people. You can carry on, but tell staff if you won't reach it.",
+      "detailsLabel": "YOUR PROJECT",
+      "detailsTitle": "WHAT THE JUDGES SEE",
+      "pitchLabel": "IN ONE LINE",
+      "pitchPlaceholder": "What it does and for whom. No adjectives.",
+      "repoLabel": "REPOSITORY",
+      "demoLabel": "LIVE DEMO",
+      "save": "Save",
+      "saved": "saved",
+      "unsaved": "unsaved",
+      "clean": "up to date",
+      "leave": "Leave team",
+      "leaveConfirm": "If you're the last one, the team is deleted and the code stops working.",
+      "leaveYes": "Yes, leave",
+      "cancel": "Cancel",
+      "errors": {
+        "unauthenticated": "Your session expired. Sign in again.",
+        "no-participant": "We couldn't find your accreditation.",
+        "already-in-team": "You're already on a team. Leave it first.",
+        "not-in-team": "You're not on a team.",
+        "name-too-short": "The name needs at least two characters.",
+        "code-not-found": "That code doesn't exist. Check it with whoever created the team.",
+        "team-full": "That team is already full.",
+        "invalid-url": "Links must start with https://"
+      }
     }
   }
 }

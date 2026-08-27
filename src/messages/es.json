@@ -452,7 +452,8 @@
       "skipToContent": "Ir al contenido",
       "badge": "Badge",
       "staff": "Staff",
-      "groupStaff": "PUERTA"
+      "groupStaff": "PUERTA",
+      "team": "Equipo"
     },
     "shell": {
       "betweenBlocks": "entre bloques",
@@ -553,7 +554,9 @@
       "goCredits": "Canjear",
       "goOverview": "Ver",
       "goBadge": "Credencial",
-      "badge": "Badge generado"
+      "badge": "Badge generado",
+      "team": "Equipo formado",
+      "goTeam": "Formar"
     },
     "agenda": {
       "label": "AGENDA · 12 HORAS",
@@ -820,6 +823,60 @@
       "statBadgeHint": "confirmaron asistencia",
       "statPending": "SIN LLEGAR",
       "footer": "{shown} de {total} en pantalla"
+    },
+    "team": {
+      "label": "EQUIPO",
+      "headlineEmpty": "AÚN NO TIENES EQUIPO",
+      "ledeEmpty": "Los equipos son de {min} a {max} personas y se forman en el kickoff. Crea uno y dicta el código, o entra con el de alguien más.",
+      "ledeTeam": "Comparte el código para que entren los demás. Hasta {max} personas.",
+      "inCity": "{count} equipos en tu sede",
+      "size": "{count}/{max} personas",
+      "createLabel": "CREAR EQUIPO",
+      "createTitle": "EMPIEZA UNO",
+      "createBody": "Le pones nombre y te devolvemos un código de seis caracteres para que los demás entren.",
+      "nameLabel": "NOMBRE DEL EQUIPO",
+      "namePlaceholder": "Terminal Velocity",
+      "createCta": "Crear equipo",
+      "joinLabel": "ENTRAR A UNO",
+      "joinTitle": "TENGO UN CÓDIGO",
+      "joinBody": "Pide el código a quien creó el equipo. Son seis caracteres, sin distinguir mayúsculas.",
+      "codeLabel": "CÓDIGO",
+      "joinCta": "Entrar al equipo",
+      "shareLabel": "CÓDIGO DEL EQUIPO",
+      "shareTitle": "PARA QUE ENTREN",
+      "shareBody": "Dícta­lo en voz alta. Hasta {max} personas por equipo.",
+      "copy": "copiar",
+      "copied": "copiado",
+      "membersLabel": "INTEGRANTES",
+      "captain": "(capitán)",
+      "hub": "sede",
+      "table": "mesa",
+      "shortLabel": "EQUIPO INCOMPLETO",
+      "shortBody": "El mínimo son {min} personas. Puedes seguir, pero avisa al staff si no vas a llegar al mínimo.",
+      "detailsLabel": "TU PROYECTO",
+      "detailsTitle": "LO QUE VE EL JURADO",
+      "pitchLabel": "EN UNA FRASE",
+      "pitchPlaceholder": "Qué hace y para quién. Sin adjetivos.",
+      "repoLabel": "REPOSITORIO",
+      "demoLabel": "DEMO EN VIVO",
+      "save": "Guardar",
+      "saved": "guardado",
+      "unsaved": "sin guardar",
+      "clean": "al día",
+      "leave": "Salir del equipo",
+      "leaveConfirm": "Si eres el último, el equipo se borra y el código deja de servir.",
+      "leaveYes": "Sí, salir",
+      "cancel": "Cancelar",
+      "errors": {
+        "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",
+        "no-participant": "No encontramos tu acreditación.",
+        "already-in-team": "Ya estás en un equipo. Sal primero.",
+        "not-in-team": "No estás en ningún equipo.",
+        "name-too-short": "El nombre necesita al menos dos caracteres.",
+        "code-not-found": "Ese código no existe. Revísalo con quien creó el equipo.",
+        "team-full": "Ese equipo ya está completo.",
+        "invalid-url": "Los links tienen que empezar por https://"
+      }
     }
   }
 }
