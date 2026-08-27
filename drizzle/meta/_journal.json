@@ -50,6 +50,13 @@
       "when": 1787808850357,
       "tag": "0006_certain_jean_grey",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1787844647123,
+      "tag": "0007_peaceful_sugar_man",
+      "breakpoints": true
     }
   ]
 }

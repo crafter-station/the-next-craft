@@ -1,5 +1,6 @@
 import { and, asc, eq, inArray, sql } from "drizzle-orm";
 
+import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   badgeParticipants,
@@ -19,7 +20,7 @@ export type DashboardParticipant = {
   userId: string;
   email: string;
   fullName: string;
-  city: string | null;
+  city: CityKey | null;
   shareToken: string;
   participantNumber: number | null;
 };
@@ -28,6 +29,7 @@ export type DashboardTeam = {
   id: string;
   slug: string;
   name: string;
+  joinCode: string;
   tableNumber: string | null;
   pitch: string | null;
   repoUrl: string | null;
@@ -251,4 +253,14 @@ export async function hasBookingAt(teamId: string, startsAt: string) {
     )
     .limit(1);
   return Boolean(row);
+}
+
+/** Cuántos equipos hay en la sede, para el contador de la página de equipo. */
+export async function countTeamsInCity(city: CityKey | null) {
+  if (!city) return 0;
+  const [row] = await db
+    .select({ n: sql<number>`count(*)::int` })
+    .from(dashboardTeams)
+    .where(eq(dashboardTeams.city, city));
+  return row?.n ?? 0;
 }

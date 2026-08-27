@@ -32,6 +32,7 @@ import {
   Cell,
   Empty,
   Kv,
+  keyClass,
   keyGhostClass,
   PageHeader,
   Panel,
@@ -95,6 +96,12 @@ export default async function DashboardOverview({
 
   const checks = [
     {
+      done: Boolean(team),
+      label: t("checklist.team"),
+      href: "/dashboard/team",
+      cta: t("checklist.goTeam"),
+    },
+    {
       done: hasBadge,
       label: t("checklist.badge"),
       href: "/dashboard/badge",
@@ -121,14 +128,14 @@ export default async function DashboardOverview({
     {
       done: Boolean(team?.repoUrl),
       label: t("checklist.repo"),
-      href: "/dashboard",
-      cta: t("checklist.goOverview"),
+      href: "/dashboard/team",
+      cta: t("checklist.goTeam"),
     },
     {
       done: Boolean(team?.demoUrl),
       label: t("checklist.demo"),
-      href: "/dashboard",
-      cta: t("checklist.goOverview"),
+      href: "/dashboard/team",
+      cta: t("checklist.goTeam"),
     },
     {
       done: redeemed.size >= 3,
@@ -300,7 +307,17 @@ export default async function DashboardOverview({
               </div>
             </>
           ) : (
-            <Empty>{t("overview.noTeamBody")}</Empty>
+            <div className="px-4 py-5">
+              <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+                {t("overview.noTeamBody")}
+              </p>
+              <Link
+                href="/dashboard/team"
+                className={`${keyClass} mt-4 w-full`}
+              >
+                {t("nav.team")} →
+              </Link>
+            </div>
           )}
         </Panel>
       </div>
