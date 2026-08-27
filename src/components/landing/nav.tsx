@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import { DashboardNavLink } from "@/components/dashboard/dashboard-nav-link";
+import { AccessLink } from "@/components/dashboard/access-link";
 
 import { Link } from "@/i18n/navigation";
 import { CityPicker } from "./city-picker";
@@ -60,7 +60,7 @@ export function Nav() {
         </ul>
 
         <div className="flex items-stretch gap-2 shrink-0">
-          <DashboardNavLink className="px-2.5 py-3" />
+          <AccessLink className="keycap-ghost px-3 py-2 font-semibold" />
           <Link
             href="/gallery"
             className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3 md:hidden"

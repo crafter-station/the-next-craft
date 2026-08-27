@@ -877,6 +877,10 @@
         "team-full": "Ese equipo ya está completo.",
         "invalid-url": "Los links tienen que empezar por https://"
       }
+    },
+    "access": {
+      "signIn": "Entrar",
+      "dashboard": "Mi panel"
     }
   }
 }
