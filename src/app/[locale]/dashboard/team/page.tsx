@@ -82,7 +82,7 @@ export default async function TeamPage({
         <Panel className="mb-5">
           <div className="px-4 py-3.5">
             <p className="font-mono text-[11px] leading-none tracking-[0.14em] uppercase text-[var(--text-dim)]">
-              <span className="text-[var(--bright)]">33</span> PRINT &quot;
+              <span className="text-[var(--bright)]">33 </span>PRINT &quot;
               {t("team.shortLabel")}&quot;
             </p>
             <p className="mt-2.5 font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">

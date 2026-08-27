@@ -25,7 +25,7 @@ export function Basic({
         className,
       )}
     >
-      <span className="text-[var(--bright)]">{n}</span> PRINT &quot;
+      <span className="text-[var(--bright)]">{n} </span>PRINT &quot;
       {children.toUpperCase()}&quot;
     </p>
   );
