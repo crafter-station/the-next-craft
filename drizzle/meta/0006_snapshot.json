@@ -1,5 +1,5 @@
 {
-  "id": "adcc75a3-1e32-4c3e-887c-0da8d746621f",
+  "id": "5269092b-c995-4865-9c2d-ff9bac9d0c24",
   "prevId": "8caa2a8a-835c-4f91-8a5c-55d9500853d1",
   "version": "7",
   "dialect": "postgresql",
@@ -494,6 +494,70 @@
         "dashboard_agenda_saves_participant_id_badge_participants_id_fk": {
           "name": "dashboard_agenda_saves_participant_id_badge_participants_id_fk",
           "tableFrom": "dashboard_agenda_saves",
+          "tableTo": "badge_participants",
+          "columnsFrom": [
+            "participant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.dashboard_checkins": {
+      "name": "dashboard_checkins",
+      "schema": "",
+      "columns": {
+        "participant_id": {
+          "name": "participant_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "arrived_at": {
+          "name": "arrived_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "arrived_by_email": {
+          "name": "arrived_by_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "merch_delivered_at": {
+          "name": "merch_delivered_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "merch_by_email": {
+          "name": "merch_by_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "dashboard_checkins_participant_id_badge_participants_id_fk": {
+          "name": "dashboard_checkins_participant_id_badge_participants_id_fk",
+          "tableFrom": "dashboard_checkins",
           "tableTo": "badge_participants",
           "columnsFrom": [
             "participant_id"

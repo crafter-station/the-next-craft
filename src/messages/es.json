@@ -450,7 +450,9 @@
       "menu": "Menú",
       "close": "Cerrar",
       "skipToContent": "Ir al contenido",
-      "badge": "Badge"
+      "badge": "Badge",
+      "staff": "Staff",
+      "groupStaff": "PUERTA"
     },
     "shell": {
       "betweenBlocks": "entre bloques",
@@ -796,6 +798,28 @@
       "includedTitle": "{count} COMIDAS INCLUIDAS",
       "includedSwag": "Swag oficial del evento, al llegar a tu sede.",
       "includedCommunity": "Acceso a la comunidad de Crafter Station."
+    },
+    "staff": {
+      "label": "STAFF · PUERTA",
+      "headline": "CHECK-IN DE SEDE",
+      "lede": "Busca por nombre o correo, marca la llegada y entrega el merch. Cada marca guarda quién la hizo.",
+      "denied": "Esta pantalla es solo para staff. Entra con tu correo de la organización.",
+      "allHubs": "todas",
+      "searchPlaceholder": "Nombre o correo",
+      "search": "Buscar",
+      "empty": "Nadie con esa búsqueda.",
+      "withBadge": "con badge",
+      "noBadge": "sin badge",
+      "markArrival": "Marcar llegada",
+      "arrived": "Llegó",
+      "markMerch": "Entregar merch",
+      "merchDone": "Merch ✓",
+      "statArrived": "LLEGADOS",
+      "statMerch": "MERCH ENTREGADO",
+      "statBadge": "CON BADGE",
+      "statBadgeHint": "confirmaron asistencia",
+      "statPending": "SIN LLEGAR",
+      "footer": "{shown} de {total} en pantalla"
     }
   }
 }

@@ -368,6 +368,24 @@ export const dashboardAgendaSaves = pgTable(
   ],
 );
 
+/**
+ * Check-in de sede: lo marca el staff en la puerta, no el participante.
+ * Se guarda quién lo marcó porque en cinco sedes simultáneas hace falta poder
+ * preguntar después.
+ */
+export const dashboardCheckins = pgTable("dashboard_checkins", {
+  participantId: uuid("participant_id")
+    .primaryKey()
+    .references(() => badgeParticipants.id, { onDelete: "cascade" }),
+  arrivedAt: timestamp("arrived_at", { withTimezone: true }),
+  arrivedByEmail: text("arrived_by_email"),
+  merchDeliveredAt: timestamp("merch_delivered_at", { withTimezone: true }),
+  merchByEmail: text("merch_by_email"),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
 export const schema = {
   user,
   session,
@@ -382,4 +400,5 @@ export const schema = {
   dashboardMentorSlots,
   dashboardPartnerRedemptions,
   dashboardAgendaSaves,
+  dashboardCheckins,
 };
