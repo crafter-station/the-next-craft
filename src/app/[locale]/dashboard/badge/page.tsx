@@ -10,7 +10,6 @@ import {
 import { getBadgeStudioState } from "@/lib/badge/state";
 import { buildAgenda, type ScheduleMessage } from "@/lib/dashboard/agenda";
 import { findParticipantByUserId } from "@/lib/dashboard/state";
-import { resolveNow, statusOf } from "@/lib/dashboard/time";
 
 import {
   Empty,
@@ -67,10 +66,11 @@ export default async function BadgePage({
     ? `${SITE_URL}${participantProfilePath(profile.participantNumber, locale)}`
     : null;
 
-  const { now } = resolveNow();
-  const meals = buildAgenda(tSchedule.raw("events") as ScheduleMessage[])
-    .filter((b) => b.kind === "meal")
-    .map((b) => ({ ...b, used: statusOf(b.time, b.end, now) === "past" }));
+  // Las comidas se listan como lo que incluye la entrada. No llevan estado
+  // de «usada»: el control en sede es manual y nada lo registra todavía.
+  const meals = buildAgenda(
+    tSchedule.raw("events") as ScheduleMessage[],
+  ).filter((b) => b.kind === "meal");
 
   return (
     <>
@@ -177,23 +177,13 @@ export default async function BadgePage({
             <PanelHead
               n={23}
               label={t("badge.includedLabel")}
-              title={t("badge.includedTitle", {
-                count: meals.filter((m) => !m.used).length,
-              })}
+              title={t("badge.includedTitle", { count: meals.length })}
             />
             <ul>
               {meals.map((m) => (
-                <Row key={m.time} marker={m.used ? "✓" : "→"}>
+                <Row key={m.time} marker="→">
                   <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                    <span
-                      className={
-                        m.used
-                          ? "line-through decoration-[var(--line)]"
-                          : "text-[var(--text)]"
-                      }
-                    >
-                      {m.description}
-                    </span>
+                    <span className="text-[var(--text)]">{m.description}</span>
                     <span className="text-[11px]">
                       {m.time}–{m.end}
                     </span>

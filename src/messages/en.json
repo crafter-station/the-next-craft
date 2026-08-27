@@ -793,7 +793,7 @@
       "email": "email",
       "hub": "hub",
       "includedLabel": "INCLUDED WITH YOUR TICKET",
-      "includedTitle": "{count} MEALS LEFT",
+      "includedTitle": "{count} MEALS INCLUDED",
       "includedSwag": "Official event swag, when you arrive at your hub.",
       "includedCommunity": "Access to the Crafter Station community."
     }
