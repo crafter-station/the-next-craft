@@ -227,12 +227,6 @@ export const dashboardTrack = pgEnum("dashboard_track", [
   "learning-by-shipping",
 ]);
 
-export const dashboardQrTargetMode = pgEnum("dashboard_qr_target_mode", [
-  "site",
-  "profile",
-  "custom",
-]);
-
 export const dashboardTeams = pgTable(
   "dashboard_teams",
   {
@@ -371,21 +365,6 @@ export const dashboardAgendaSaves = pgTable(
   ],
 );
 
-/**
- * A dónde apunta el QR de la credencial impresa. El cartón no cambia: el QR
- * va a un redireccionador y aquí se guarda el destino final.
- */
-export const dashboardQrTargets = pgTable("dashboard_qr_targets", {
-  participantId: uuid("participant_id")
-    .primaryKey()
-    .references(() => badgeParticipants.id, { onDelete: "cascade" }),
-  mode: dashboardQrTargetMode("mode").notNull().default("site"),
-  customUrl: text("custom_url"),
-  updatedAt: timestamp("updated_at", { withTimezone: true })
-    .notNull()
-    .defaultNow(),
-});
-
 export const schema = {
   user,
   session,
@@ -400,5 +379,4 @@ export const schema = {
   dashboardMentorSlots,
   dashboardPartnerRedemptions,
   dashboardAgendaSaves,
-  dashboardQrTargets,
 };

@@ -12,10 +12,9 @@ import {
   dashboardMentorSlots,
   dashboardMentorTables,
   dashboardPartnerRedemptions,
-  dashboardQrTargets,
   dashboardTeams,
 } from "@/lib/db/schema";
-import type { QrTargetMode, TrackKey } from "@/lib/db/schema-types";
+import type { TrackKey } from "@/lib/db/schema-types";
 
 import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
 import {
@@ -42,8 +41,7 @@ export type DashboardError =
   | "topic-too-short"
   | "table-full"
   | "unknown-partner"
-  | "unknown-block"
-  | "invalid-url";
+  | "unknown-block";
 
 type HackerContext =
   | { error: DashboardError }
@@ -283,48 +281,6 @@ export async function toggleAgendaBlock(
       .values({ participantId: ctx.participant.id, eventTime })
       .onConflictDoNothing();
   }
-
-  refreshDashboard();
-  return { ok: true };
-}
-
-/* ── Destino del QR de la credencial ───────────────────────── */
-
-export async function setQrTarget(
-  mode: QrTargetMode,
-  customUrl: string,
-): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-
-  const url = customUrl.trim();
-  if (mode === "custom") {
-    let parsed: URL;
-    try {
-      parsed = new URL(url);
-    } catch {
-      return { ok: false, error: "invalid-url" };
-    }
-    if (parsed.protocol !== "https:")
-      return { ok: false, error: "invalid-url" };
-  }
-
-  await db
-    .insert(dashboardQrTargets)
-    .values({
-      participantId: ctx.participant.id,
-      mode,
-      customUrl: mode === "custom" ? url : null,
-      updatedAt: new Date(),
-    })
-    .onConflictDoUpdate({
-      target: dashboardQrTargets.participantId,
-      set: {
-        mode,
-        customUrl: mode === "custom" ? url : null,
-        updatedAt: new Date(),
-      },
-    });
 
   refreshDashboard();
   return { ok: true };

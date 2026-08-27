@@ -1,4 +1,3 @@
-CREATE TYPE "public"."dashboard_qr_target_mode" AS ENUM('site', 'profile', 'custom');--> statement-breakpoint
 CREATE TYPE "public"."dashboard_track" AS ENUM('content-machine', 'out-of-the-box', 'learning-by-shipping');--> statement-breakpoint
 CREATE TABLE "dashboard_agenda_saves" (
 	"participant_id" uuid NOT NULL,
@@ -33,13 +32,6 @@ CREATE TABLE "dashboard_partner_redemptions" (
 	"redeemed_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "dashboard_qr_targets" (
-	"participant_id" uuid PRIMARY KEY NOT NULL,
-	"mode" "dashboard_qr_target_mode" DEFAULT 'site' NOT NULL,
-	"custom_url" text,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
-);
---> statement-breakpoint
 CREATE TABLE "dashboard_team_members" (
 	"team_id" uuid NOT NULL,
 	"participant_id" uuid NOT NULL,
@@ -68,7 +60,6 @@ ALTER TABLE "dashboard_agenda_saves" ADD CONSTRAINT "dashboard_agenda_saves_part
 ALTER TABLE "dashboard_mentor_slots" ADD CONSTRAINT "dashboard_mentor_slots_mentor_table_id_dashboard_mentor_tables_id_fk" FOREIGN KEY ("mentor_table_id") REFERENCES "public"."dashboard_mentor_tables"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "dashboard_mentor_slots" ADD CONSTRAINT "dashboard_mentor_slots_team_id_dashboard_teams_id_fk" FOREIGN KEY ("team_id") REFERENCES "public"."dashboard_teams"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "dashboard_partner_redemptions" ADD CONSTRAINT "dashboard_partner_redemptions_participant_id_badge_participants_id_fk" FOREIGN KEY ("participant_id") REFERENCES "public"."badge_participants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "dashboard_qr_targets" ADD CONSTRAINT "dashboard_qr_targets_participant_id_badge_participants_id_fk" FOREIGN KEY ("participant_id") REFERENCES "public"."badge_participants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "dashboard_team_members" ADD CONSTRAINT "dashboard_team_members_team_id_dashboard_teams_id_fk" FOREIGN KEY ("team_id") REFERENCES "public"."dashboard_teams"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "dashboard_team_members" ADD CONSTRAINT "dashboard_team_members_participant_id_badge_participants_id_fk" FOREIGN KEY ("participant_id") REFERENCES "public"."badge_participants"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 CREATE UNIQUE INDEX "dashboard_agenda_saves_idx" ON "dashboard_agenda_saves" USING btree ("participant_id","event_time");--> statement-breakpoint

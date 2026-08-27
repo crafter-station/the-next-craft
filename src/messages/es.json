@@ -441,7 +441,6 @@
     "nav": {
       "overview": "Dashboard",
       "agenda": "Agenda",
-      "credential": "Credencial",
       "tracks": "Tracks",
       "mentors": "Mentorías",
       "credits": "Créditos",
@@ -450,7 +449,8 @@
       "groupResources": "RECURSOS",
       "menu": "Menú",
       "close": "Cerrar",
-      "skipToContent": "Ir al contenido"
+      "skipToContent": "Ir al contenido",
+      "badge": "Badge"
     },
     "shell": {
       "betweenBlocks": "entre bloques",
@@ -540,18 +540,18 @@
       "faqCta": "FAQ del evento"
     },
     "checklist": {
-      "accredited": "Acreditación en tu sede",
       "track": "Track confirmado",
       "mentorTable": "Mesa de mentoría asignada",
       "booking": "Turno de 25 min reservado",
       "repo": "Repositorio enlazado",
       "demo": "Link del demo en vivo",
       "credits": "Créditos de partners canjeados",
-      "goCredential": "Credencial",
       "goTracks": "Elegir",
       "goMentors": "Reservar",
       "goCredits": "Canjear",
-      "goOverview": "Ver"
+      "goOverview": "Ver",
+      "goBadge": "Credencial",
+      "badge": "Badge generado"
     },
     "agenda": {
       "label": "AGENDA · 12 HORAS",
@@ -571,46 +571,6 @@
       "empty": "Nada con esos filtros. Vuelve a «todos».",
       "footer": "{shown} de {total} bloques · America/Bogota (GMT-5) · registro 08:30 · code freeze 20:00 · demos 20:15",
       "clockLabel": "RELOJ"
-    },
-    "credential": {
-      "label": "CREDENCIAL · ACCESO",
-      "headline": "TU PASE AL EVENTO",
-      "lede": "Esta es la credencial que se imprimió para ti. El QR es tu identidad durante las 12 horas: acreditación, comida y registro de mentorías. Puedes elegir a dónde apunta.",
-      "accredited": "acreditado",
-      "pending": "sin acreditar",
-      "scanMode": "Modo escaneo — pantalla completa",
-      "scanHint": "muestra esta pantalla al staff",
-      "scanClose": "Cerrar · esc",
-      "warning": "No compartas capturas de este QR. Si pierdes el cartón, pide uno nuevo en tu sede y el anterior se invalida.",
-      "team": "equipo",
-      "table": "mesa",
-      "track": "track",
-      "qrLabel": "A DÓNDE APUNTA TU QR",
-      "qrTitle": "REDIRIGE TU CREDENCIAL",
-      "qrBody": "El cartón ya está impreso, pero el QR pasa por un redireccionador nuestro. Cambia el destino cuantas veces quieras.",
-      "qrModeSite": "Página del hackathon (por defecto)",
-      "qrModeSiteHint": "Quien escanee tu credencial llega a la portada del evento.",
-      "qrModeProfile": "Tu perfil público",
-      "qrModeProfileHint": "Tu badge, tu bio y tus links. Nada de correo ni documento.",
-      "qrModeProfileMissing": "Publica tu perfil en el Badge Studio para poder usar esta opción.",
-      "qrModeCustom": "URL personalizada",
-      "qrModeCustomHint": "Tu LinkedIn, tu portafolio, el repo del proyecto. Lo que quieras.",
-      "qrDestination": "DESTINO",
-      "qrSave": "Guardar destino",
-      "qrSaved": "guardado",
-      "qrDirty": "sin guardar",
-      "qrClean": "al día",
-      "statusLabel": "ESTADO DEL ACCESO",
-      "statusIn": "DENTRO DE LA SEDE",
-      "statusOut": "AÚN NO REGISTRADO",
-      "accreditedAt": "acreditación",
-      "code": "código",
-      "email": "correo",
-      "hub": "sede",
-      "includedLabel": "INCLUIDO EN LA CREDENCIAL",
-      "includedTitle": "{count} COMIDAS POR USAR",
-      "includedSwag": "Swag oficial del evento, al acreditarte.",
-      "includedCommunity": "Acceso a la comunidad de Crafter Station."
     },
     "tracks": {
       "label": "TRACKS",
@@ -803,8 +763,39 @@
       "topic-too-short": "Escribe al menos una frase sobre tu duda.",
       "table-full": "Esa mesa ya tiene todos sus equipos.",
       "unknown-partner": "Ese partner no existe.",
-      "unknown-block": "Ese bloque no está en la agenda.",
-      "invalid-url": "Esa URL no es válida. Tiene que empezar por https://"
+      "unknown-block": "Ese bloque no está en la agenda."
+    },
+    "badge": {
+      "label": "BADGE · TU IDENTIDAD",
+      "headline": "TU BADGE OFICIAL",
+      "lede": "El badge lo generas en el Badge Studio a partir de tu foto. Su QR lleva a tu perfil público, que es lo que ve quien lo escanea.",
+      "ready": "generado",
+      "generating": "generando",
+      "missing": "sin generar",
+      "imageAlt": "Tu badge de The Next Craft",
+      "generatingBody": "Tu badge se está generando. Tarda un par de minutos; esta página se actualiza al recargar.",
+      "missingBody": "Todavía no tienes badge. Se crea en el Badge Studio con una foto tuya.",
+      "create": "Crear mi badge",
+      "replace": "Reemplazar badge",
+      "note": "El badge se genera una vez y puedes reemplazarlo. El QR se reescribe con cada versión, así que usa siempre la última.",
+      "qrLabel": "A DÓNDE LLEVA TU QR",
+      "qrTitle": "TU PERFIL PÚBLICO",
+      "qrBody": "El QR del badge apunta a tu perfil de participante. Quien lo escanee ve tu nombre, tu bio y tus links — nada de correo ni documento.",
+      "qrMissing": "Tendrás URL de perfil cuando generes el badge.",
+      "number": "número",
+      "displayName": "nombre visible",
+      "published": "perfil",
+      "public": "público",
+      "private": "sin publicar",
+      "identityLabel": "TU ACREDITACIÓN",
+      "identityTitle": "DATOS DE REGISTRO",
+      "fullName": "nombre",
+      "email": "correo",
+      "hub": "sede",
+      "includedLabel": "INCLUIDO EN TU ENTRADA",
+      "includedTitle": "{count} COMIDAS POR USAR",
+      "includedSwag": "Swag oficial del evento, al llegar a tu sede.",
+      "includedCommunity": "Acceso a la comunidad de Crafter Station."
     }
   }
 }
