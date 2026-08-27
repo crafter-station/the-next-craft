@@ -227,6 +227,25 @@ export const dashboardTrack = pgEnum("dashboard_track", [
   "learning-by-shipping",
 ]);
 
+/** Mesas de mentoría: una por comunidad organizadora, no por persona. */
+export const dashboardMentorTables = pgTable(
+  "dashboard_mentor_tables",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    slug: text("slug").notNull(),
+    org: text("org").notNull(),
+    role: text("role").notNull(),
+    bio: text("bio"),
+    expertise: jsonb("expertise")
+      .$type<string[]>()
+      .notNull()
+      .default(sql`'[]'::jsonb`),
+    teamCapacity: integer("team_capacity").notNull().default(6),
+    sortOrder: integer("sort_order").notNull().default(0),
+  },
+  (table) => [uniqueIndex("dashboard_mentor_tables_slug_idx").on(table.slug)],
+);
+
 export const dashboardTeams = pgTable(
   "dashboard_teams",
   {
@@ -240,7 +259,10 @@ export const dashboardTeams = pgTable(
     demoUrl: text("demo_url"),
     track: dashboardTrack("track"),
     trackConfirmedAt: timestamp("track_confirmed_at", { withTimezone: true }),
-    mentorTableId: uuid("mentor_table_id"),
+    mentorTableId: uuid("mentor_table_id").references(
+      () => dashboardMentorTables.id,
+      { onDelete: "set null" },
+    ),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -276,25 +298,6 @@ export const dashboardTeamMembers = pgTable(
     ),
     index("dashboard_team_members_team_idx").on(table.teamId),
   ],
-);
-
-/** Mesas de mentoría: una por comunidad organizadora, no por persona. */
-export const dashboardMentorTables = pgTable(
-  "dashboard_mentor_tables",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    slug: text("slug").notNull(),
-    org: text("org").notNull(),
-    role: text("role").notNull(),
-    bio: text("bio"),
-    expertise: jsonb("expertise")
-      .$type<string[]>()
-      .notNull()
-      .default(sql`'[]'::jsonb`),
-    teamCapacity: integer("team_capacity").notNull().default(6),
-    sortOrder: integer("sort_order").notNull().default(0),
-  },
-  (table) => [uniqueIndex("dashboard_mentor_tables_slug_idx").on(table.slug)],
 );
 
 /** Turnos de 25 minutos dentro del bloque de mentorías (11:00–13:00). */
