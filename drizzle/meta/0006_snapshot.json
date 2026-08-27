@@ -1,5 +1,5 @@
 {
-  "id": "8b3cc9b6-91ed-478f-b51d-6dd1e460cd06",
+  "id": "77ac17b4-ccb7-41dc-9294-43a7b830b128",
   "prevId": "8caa2a8a-835c-4f91-8a5c-55d9500853d1",
   "version": "7",
   "dialect": "postgresql",
@@ -787,60 +787,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.dashboard_qr_targets": {
-      "name": "dashboard_qr_targets",
-      "schema": "",
-      "columns": {
-        "participant_id": {
-          "name": "participant_id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "mode": {
-          "name": "mode",
-          "type": "dashboard_qr_target_mode",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'site'"
-        },
-        "custom_url": {
-          "name": "custom_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "dashboard_qr_targets_participant_id_badge_participants_id_fk": {
-          "name": "dashboard_qr_targets_participant_id_badge_participants_id_fk",
-          "tableFrom": "dashboard_qr_targets",
-          "tableTo": "badge_participants",
-          "columnsFrom": [
-            "participant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.dashboard_team_members": {
       "name": "dashboard_team_members",
       "schema": "",
@@ -1420,15 +1366,6 @@
         "completed",
         "failed",
         "rejected"
-      ]
-    },
-    "public.dashboard_qr_target_mode": {
-      "name": "dashboard_qr_target_mode",
-      "schema": "public",
-      "values": [
-        "site",
-        "profile",
-        "custom"
       ]
     },
     "public.dashboard_track": {

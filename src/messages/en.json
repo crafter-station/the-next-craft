@@ -441,7 +441,6 @@
     "nav": {
       "overview": "Dashboard",
       "agenda": "Schedule",
-      "credential": "Badge",
       "tracks": "Tracks",
       "mentors": "Mentoring",
       "credits": "Credits",
@@ -450,7 +449,8 @@
       "groupResources": "RESOURCES",
       "menu": "Menu",
       "close": "Close",
-      "skipToContent": "Skip to content"
+      "skipToContent": "Skip to content",
+      "badge": "Badge"
     },
     "shell": {
       "betweenBlocks": "between blocks",
@@ -540,18 +540,18 @@
       "faqCta": "Event FAQ"
     },
     "checklist": {
-      "accredited": "Accreditation at your hub",
       "track": "Track confirmed",
       "mentorTable": "Mentoring table assigned",
       "booking": "25-min slot booked",
       "repo": "Repository linked",
       "demo": "Live demo link",
       "credits": "Partner credits redeemed",
-      "goCredential": "Badge",
       "goTracks": "Pick",
       "goMentors": "Book",
       "goCredits": "Redeem",
-      "goOverview": "View"
+      "goOverview": "View",
+      "goBadge": "Badge",
+      "badge": "Badge generated"
     },
     "agenda": {
       "label": "SCHEDULE · 12 HOURS",
@@ -571,46 +571,6 @@
       "empty": "Nothing with those filters. Go back to «all».",
       "footer": "{shown} of {total} blocks · America/Bogota (GMT-5) · check-in 08:30 · code freeze 20:00 · demos 20:15",
       "clockLabel": "CLOCK"
-    },
-    "credential": {
-      "label": "BADGE · ACCESS",
-      "headline": "YOUR PASS TO THE EVENT",
-      "lede": "This is the badge printed for you. The QR is your identity for the 12 hours: accreditation, food and mentoring check-in. You choose where it points.",
-      "accredited": "accredited",
-      "pending": "not accredited",
-      "scanMode": "Scan mode — full screen",
-      "scanHint": "show this screen to staff",
-      "scanClose": "Close · esc",
-      "warning": "Don't share screenshots of this QR. If you lose the card, ask for a new one at your hub and the old one is void.",
-      "team": "team",
-      "table": "table",
-      "track": "track",
-      "qrLabel": "WHERE YOUR QR POINTS",
-      "qrTitle": "REDIRECT YOUR BADGE",
-      "qrBody": "The card is already printed, but the QR goes through our redirector. Change the destination as often as you like.",
-      "qrModeSite": "Hackathon page (default)",
-      "qrModeSiteHint": "Whoever scans your badge lands on the event homepage.",
-      "qrModeProfile": "Your public profile",
-      "qrModeProfileHint": "Your badge, bio and links. No email, no document.",
-      "qrModeProfileMissing": "Publish your profile in Badge Studio to use this option.",
-      "qrModeCustom": "Custom URL",
-      "qrModeCustomHint": "Your LinkedIn, your portfolio, the project repo. Whatever you want.",
-      "qrDestination": "DESTINATION",
-      "qrSave": "Save destination",
-      "qrSaved": "saved",
-      "qrDirty": "unsaved",
-      "qrClean": "up to date",
-      "statusLabel": "ACCESS STATUS",
-      "statusIn": "INSIDE THE HUB",
-      "statusOut": "NOT CHECKED IN",
-      "accreditedAt": "accreditation",
-      "code": "code",
-      "email": "email",
-      "hub": "hub",
-      "includedLabel": "INCLUDED WITH THE BADGE",
-      "includedTitle": "{count} MEALS LEFT",
-      "includedSwag": "Official event swag, when you check in.",
-      "includedCommunity": "Access to the Crafter Station community."
     },
     "tracks": {
       "label": "TRACKS",
@@ -803,8 +763,39 @@
       "topic-too-short": "Write at least one sentence about your question.",
       "table-full": "That table already has all its teams.",
       "unknown-partner": "That partner doesn't exist.",
-      "unknown-block": "That block isn't on the schedule.",
-      "invalid-url": "That URL isn't valid. It must start with https://"
+      "unknown-block": "That block isn't on the schedule."
+    },
+    "badge": {
+      "label": "BADGE · YOUR IDENTITY",
+      "headline": "YOUR OFFICIAL BADGE",
+      "lede": "You generate the badge in Badge Studio from your photo. Its QR leads to your public profile, which is what whoever scans it sees.",
+      "ready": "generated",
+      "generating": "generating",
+      "missing": "not generated",
+      "imageAlt": "Your The Next Craft badge",
+      "generatingBody": "Your badge is being generated. It takes a couple of minutes; reload this page to see it.",
+      "missingBody": "You don't have a badge yet. It's created in Badge Studio from a photo of you.",
+      "create": "Create my badge",
+      "replace": "Replace badge",
+      "note": "The badge is generated once and you can replace it. The QR is rewritten with each version, so always use the latest.",
+      "qrLabel": "WHERE YOUR QR LEADS",
+      "qrTitle": "YOUR PUBLIC PROFILE",
+      "qrBody": "The badge QR points to your participant profile. Whoever scans it sees your name, bio and links — no email, no document.",
+      "qrMissing": "You'll get a profile URL once you generate the badge.",
+      "number": "number",
+      "displayName": "display name",
+      "published": "profile",
+      "public": "public",
+      "private": "unpublished",
+      "identityLabel": "YOUR ACCREDITATION",
+      "identityTitle": "REGISTRATION DETAILS",
+      "fullName": "name",
+      "email": "email",
+      "hub": "hub",
+      "includedLabel": "INCLUDED WITH YOUR TICKET",
+      "includedTitle": "{count} MEALS LEFT",
+      "includedSwag": "Official event swag, when you arrive at your hub.",
+      "includedCommunity": "Access to the Crafter Station community."
     }
   }
 }

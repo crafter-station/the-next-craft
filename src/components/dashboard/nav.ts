@@ -2,7 +2,7 @@
 export const DASHBOARD_NAV = [
   { key: "overview", href: "/dashboard", group: "event" },
   { key: "agenda", href: "/dashboard/agenda", group: "event" },
-  { key: "credential", href: "/dashboard/credential", group: "event" },
+  { key: "badge", href: "/dashboard/badge", group: "event" },
   { key: "tracks", href: "/dashboard/tracks", group: "event" },
   { key: "mentors", href: "/dashboard/mentors", group: "resources" },
   { key: "credits", href: "/dashboard/credits", group: "resources" },

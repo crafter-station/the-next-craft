@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
+import { getBadgeStudioState } from "@/lib/badge/state";
 import { buildAgenda, type ScheduleMessage } from "@/lib/dashboard/agenda";
 import {
   PARTNERS,
@@ -57,16 +58,18 @@ export default async function DashboardOverview({
   const tTracks = await getTranslations("tracks");
 
   const session = await auth.api.getSession({ headers: await headers() });
-  const participant = session
-    ? await findParticipantByUserId(session.user.id)
-    : null;
-  if (!participant) return null; // el layout ya muestra la puerta
+  if (!session) return null; // el layout ya muestra la puerta
+  const userId = session.user.id;
+  const participant = await findParticipantByUserId(userId);
+  if (!participant) return null;
 
-  const [team, redeemed, trackCounts] = await Promise.all([
+  const [team, redeemed, trackCounts, studio] = await Promise.all([
     findTeamForParticipant(participant.id),
     listRedeemedPartners(participant.id),
     countTeamsByTrack(),
+    getBadgeStudioState(userId),
   ]);
+  const hasBadge = studio.stage === "completed";
   const bookings = await listMyBookings(team?.id ?? null);
 
   const { now } = resolveNow();
@@ -92,10 +95,10 @@ export default async function DashboardOverview({
 
   const checks = [
     {
-      done: true,
-      label: t("checklist.accredited"),
-      href: "/dashboard/credential",
-      cta: t("checklist.goCredential"),
+      done: hasBadge,
+      label: t("checklist.badge"),
+      href: "/dashboard/badge",
+      cta: t("checklist.goBadge"),
     },
     {
       done: confirmed,
@@ -159,7 +162,9 @@ export default async function DashboardOverview({
         }
         aside={
           <div className="flex flex-wrap gap-1.5">
-            <Tag strong>{t("credential.accredited")}</Tag>
+            <Tag strong={hasBadge}>
+              {hasBadge ? t("badge.ready") : t("badge.missing")}
+            </Tag>
             <Tag strong={confirmed}>
               {confirmed
                 ? t("overview.trackConfirmed")

@@ -1,5 +1,4 @@
-import type { dashboardQrTargetMode, dashboardTrack } from "./schema";
+import type { dashboardTrack } from "./schema";
 
-/** Alias legibles de los enums del esquema, para no arrastrar todo el schema. */
+/** Alias legible del enum del esquema, para no arrastrar todo el schema. */
 export type TrackKey = (typeof dashboardTrack.enumValues)[number];
-export type QrTargetMode = (typeof dashboardQrTargetMode.enumValues)[number];

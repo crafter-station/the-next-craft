@@ -7,11 +7,10 @@ import {
   dashboardMentorSlots,
   dashboardMentorTables,
   dashboardPartnerRedemptions,
-  dashboardQrTargets,
   dashboardTeamMembers,
   dashboardTeams,
 } from "@/lib/db/schema";
-import type { QrTargetMode, TrackKey } from "@/lib/db/schema-types";
+import type { TrackKey } from "@/lib/db/schema-types";
 
 import { PARTNERS, TRACKS } from "./content";
 
@@ -237,17 +236,6 @@ export async function listSavedAgenda(participantId: string) {
     .from(dashboardAgendaSaves)
     .where(eq(dashboardAgendaSaves.participantId, participantId));
   return new Set(rows.map((r) => r.eventTime));
-}
-
-export async function getQrTarget(
-  participantId: string,
-): Promise<{ mode: QrTargetMode; customUrl: string }> {
-  const [row] = await db
-    .select()
-    .from(dashboardQrTargets)
-    .where(eq(dashboardQrTargets.participantId, participantId))
-    .limit(1);
-  return { mode: row?.mode ?? "site", customUrl: row?.customUrl ?? "" };
 }
 
 /** ¿El turno pedido choca con otro que el equipo ya tiene a la misma hora? */
