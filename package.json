@@ -22,6 +22,7 @@
     "generate:vapi-luma-banner": "node scripts/generate-vapi-luma-banner.mjs",
     "simulate": "bun scripts/simulate.ts",
     "participants:backfill-cities": "bun scripts/backfill-participant-cities.ts",
+    "teams:derive": "bun scripts/derive-teams.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "trigger:dev": "trigger dev"
