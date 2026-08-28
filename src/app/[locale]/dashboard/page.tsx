@@ -238,7 +238,7 @@ export default async function DashboardOverview({
                     <span className="text-[11px]">
                       {t(`places.${b.place}`)}
                     </span>
-                    {b.mandatory && <Tag strong>{t("agenda.mandatory")}</Tag>}
+                    {b.mandatory && <Tag strong>{t("overview.mandatory")}</Tag>}
                   </div>
                 </Row>
               ))

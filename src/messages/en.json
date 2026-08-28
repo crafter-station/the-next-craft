@@ -553,7 +553,8 @@
       "logisticsLabel": "LOGISTICS",
       "logisticsTitle": "HUB DETAILS",
       "faqCta": "Event FAQ",
-      "seeAgenda": "See the agenda"
+      "seeAgenda": "See the agenda",
+      "mandatory": "mandatory"
     },
     "checklist": {
       "track": "Track confirmed",
@@ -703,7 +704,8 @@
       "track-locked": "The track is already confirmed. Release it first.",
       "unknown-track": "That track doesn't exist.",
       "unknown-partner": "That partner doesn't exist.",
-      "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams."
+      "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams.",
+      "perks-locked": "You can't redeem yet: you need a confirmed badge and in-person check-in."
     },
     "badge": {
       "label": "BADGE · YOUR IDENTITY",
