@@ -71,10 +71,14 @@ export function GithubPanel({
     if (!needsSync && !hasPending) return;
     synced.current = true;
     start(async () => {
-      if (needsSync) await syncGithubLink();
-      else await refreshRepoInvites();
+      // Se muestra el error: si la cuenta de GitHub ya está en otra
+      // acreditación, esto falla en cada carga y hay que enterarse.
+      const res = needsSync
+        ? await syncGithubLink()
+        : await refreshRepoInvites();
+      if (!res.ok) setError(tErrors(res.error));
     });
-  }, [needsSync, hasPending]);
+  }, [needsSync, hasPending, tErrors]);
 
   const linkGithub = () => {
     setError(null);
@@ -84,8 +88,10 @@ export function GithubPanel({
         callbackURL: window.location.pathname,
       });
       const url = res.data && "url" in res.data ? res.data.url : null;
+      // Con `redirect` el cliente de better-auth ya nos manda a GitHub; este
+      // salto manual cubre el caso en que devuelva la URL sin navegar.
       if (url) window.location.href = url;
-      else setError(tErrors("github-failed"));
+      else if (res.error) setError(tErrors("github-failed"));
     });
   };
 
@@ -156,10 +162,10 @@ export function GithubPanel({
             <button
               type="button"
               className={`${keyClass} ${repo ? "mt-3" : ""}`}
-              disabled={pending || !linked || repo?.status === "pending"}
+              disabled={pending || !linked}
               onClick={() => run(() => provisionTeamRepo())}
             >
-              {repo?.status === "failed" ? t("retry") : t("create")} →
+              {repo ? t("retry") : t("create")} →
             </button>
           ) : (
             <p className="font-mono text-[12px] text-[var(--text-dim)]">

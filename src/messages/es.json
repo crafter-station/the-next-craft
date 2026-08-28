@@ -821,7 +821,11 @@
       "statBadge": "CON BADGE",
       "statBadgeHint": "confirmaron asistencia",
       "statPending": "SIN LLEGAR",
-      "footer": "{shown} de {total} en pantalla"
+      "footer": "{shown} de {total} en pantalla",
+      "reposLabel": "REPOS",
+      "reposTitle": "PROYECTOS DE LOS EQUIPOS",
+      "reposEmpty": "Todavía ningún equipo pidió su repo.",
+      "reposMissing": "sin repo"
     },
     "team": {
       "label": "EQUIPO",

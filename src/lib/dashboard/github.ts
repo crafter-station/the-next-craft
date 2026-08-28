@@ -11,7 +11,7 @@
   la propia fila del equipo.
 */
 
-import { and, eq, isNull, or, sql } from "drizzle-orm";
+import { and, eq, isNull, lt, or, sql } from "drizzle-orm";
 
 import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
@@ -233,6 +233,9 @@ export async function provisionRepo(
     return { ok: true };
   }
 
+  // Un `pending` viejo es un intento que murió a media llamada (se cayó el
+  // proceso, rotó el deploy). Pasados dos minutos se puede volver a reclamar.
+  const stale = new Date(Date.now() - 2 * 60 * 1000);
   const claimed = await db
     .update(dashboardTeams)
     .set({
@@ -246,6 +249,10 @@ export async function provisionRepo(
         or(
           isNull(dashboardTeams.githubRepoStatus),
           eq(dashboardTeams.githubRepoStatus, "failed"),
+          and(
+            eq(dashboardTeams.githubRepoStatus, "pending"),
+            lt(dashboardTeams.updatedAt, stale),
+          ),
         ),
       ),
     )
