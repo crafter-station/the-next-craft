@@ -24,8 +24,12 @@ export type TrackCard = {
   ideas: string[];
   why: string;
   teams: number;
-  /** Equipos que admite este track en la sede del hacker; `null` si no hay tope. */
-  capacity: number | null;
+  /**
+   * Techo de ahora mismo en la sede del hacker. No es un cupo fijo: sale del
+   * reparto equitativo de los equipos ya confirmados allí, así que sube según
+   * entra gente. `null` cuando el equipo no tiene sede y no se equilibra nada.
+   */
+  limit: number | null;
 };
 
 export function TrackDeck({
@@ -115,30 +119,25 @@ export function TrackDeck({
               </div>
 
               <div className="flex items-center justify-between gap-3 border-t border-[var(--line)] px-4 py-3.5">
-                {/* El cupo se enseña aquí y no al confirmar: enterarte de que
-                    el track está lleno después de elegirlo es el peor momento
-                    posible, y el kickoff dura media hora. */}
+                {/* El estado se enseña aquí y no al confirmar: enterarte de
+                    que el track va desbordado después de elegirlo es el peor
+                    momento posible, y el kickoff dura media hora. */}
                 <span className="font-mono text-[11px] text-[var(--text-dim)]">
-                  {track.capacity === null
-                    ? t("tracks.teams", { count: track.teams })
-                    : t("tracks.capacity", {
-                        taken: track.teams,
-                        capacity: track.capacity,
-                      })}
-                  {track.capacity !== null && (
+                  {t("tracks.teams", { count: track.teams })}
+                  {track.limit !== null && (
                     <span
                       className={cn(
                         "ml-2",
-                        track.teams >= track.capacity
+                        track.teams >= track.limit
                           ? "text-[var(--bright)]"
                           : undefined,
                       )}
                     >
                       ·{" "}
-                      {track.teams >= track.capacity
-                        ? t("tracks.capacityFull")
-                        : t("tracks.capacityLeft", {
-                            count: track.capacity - track.teams,
+                      {track.teams >= track.limit
+                        ? t("tracks.balanceFull")
+                        : t("tracks.balanceRoom", {
+                            count: track.limit - track.teams,
                           })}
                     </span>
                   )}
@@ -146,14 +145,15 @@ export function TrackDeck({
                 <button
                   type="button"
                   className={isSelected ? keyClass : keyGhostClass}
-                  // Un track lleno se sigue viendo, pero no se puede elegir:
-                  // deshabilitarlo dice más que dejar que falle al confirmar.
+                  // Un track desbordado se sigue viendo, pero no se puede
+                  // elegir: deshabilitarlo dice más que dejar que falle al
+                  // confirmar.
                   disabled={
                     pending ||
                     confirmed ||
                     (!isSelected &&
-                      track.capacity !== null &&
-                      track.teams >= track.capacity)
+                      track.limit !== null &&
+                      track.teams >= track.limit)
                   }
                   onClick={() => run(() => selectTrack(track.key))}
                 >
