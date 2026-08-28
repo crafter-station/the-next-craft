@@ -1,0 +1,36 @@
+---
+title: Jurado
+---
+
+<p className="k-eyebrow">05 · Jurado</p>
+
+<h2 className="k-title">Quién decide.</h2>
+
+<div className="k-people" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(8rem, 1fr))' }}>
+  {[
+    ['arturo-barrantes', 'Arturo Barrantes'],
+    ['daniel-lesage', 'Daniel Lesage'],
+    ['duvan-salcedo', 'Duvan Salcedo'],
+    ['fausto-rolandi', 'Fausto Rolandi'],
+    ['josue-hernandez', 'Josué Hernández'],
+    ['terry-cruz', 'Terry Cruz'],
+  ].map(([slug, name]) => (
+    <figure key={slug} className="m-0">
+      <img className="k-face" src={`/deck/kickoff/people/judges/${slug}.webp`} alt={name} width="320" height="320" />
+      <figcaption className="k-name">{name}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<div className="grid gap-3 md:grid-cols-3">
+  {[
+    ['3 minutos', 'por equipo'],
+    ['En vivo', 'nada de video'],
+    ['Sin slides', 'el producto es el pitch'],
+  ].map(([title, copy]) => (
+    <div key={title} className="k-card k-card-soft">
+      <span className="text-xl font-semibold">{title}</span>
+      <p className="k-copy">{copy}</p>
+    </div>
+  ))}
+</div>

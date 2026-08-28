@@ -1,0 +1,29 @@
+---
+title: Perks
+---
+
+<p className="k-eyebrow">08 · Para todos</p>
+
+<h2 className="k-title">Créditos, ganes o no.</h2>
+
+<div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+  {[
+    ['Tavily', '1,000 créditos'],
+    ['Exa', '$50'],
+    ['Vapi', '$50'],
+    ['Apify', '$50'],
+    ['Cursor', '$20'],
+    ['ElevenLabs', 'Créditos'],
+    ['n8n', 'Cloud Pro'],
+    ['Replit', 'Core + $20'],
+  ].map(([partner, perk]) => (
+    <div key={partner} className="k-card k-card-soft">
+      <span className="text-lg font-semibold">{partner}</span>
+      <span className="k-copy">{perk}</span>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Se redimen en el dashboard, en Perks.</p>
+
+<p className="k-copy">Organizan Crafter Station · AI Labs · Nucleo Labs · Open2 · INNICIA UCSM · UCSM · Cayetano Heredia</p>

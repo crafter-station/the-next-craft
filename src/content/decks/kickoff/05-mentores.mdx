@@ -1,0 +1,45 @@
+---
+title: Mentores
+---
+
+<p className="k-eyebrow">04 · Mentores</p>
+
+<h2 className="k-title">13 mentores.</h2>
+
+<div className="grid gap-5 md:grid-cols-[5fr_7fr_2fr] md:gap-4">
+  {[
+    ['Lima', [
+      ['arturo-barrantes', 'Arturo Barrantes'],
+      ['danitza-rosas', 'Danitza Rosas'],
+      ['fiorella-cisneros', 'Fiorella Cisneros'],
+      ['maria-cristina-ruelas', 'María Cristina Ruelas'],
+      ['victor-galvez', 'Víctor Gálvez'],
+    ]],
+    ['Bogotá', [
+      ['cesar-duenas', 'Cesar Dueñas'],
+      ['ellin-orjuela', 'Ellin Orjuela'],
+      ['emmy-pardo', 'Emmy Pardo'],
+      ['juan-ortega', 'Juan Ortega'],
+      ['nicolas-vargas', 'Nicolás Vargas'],
+      ['sandra-carrillo', 'Sandra Carrillo'],
+      ['yesica-qu', 'Yesica Qu'],
+    ]],
+    ['Arequipa', [
+      ['ignacio-velasquez', 'Ignacio Velásquez'],
+    ]],
+  ].map(([hub, people]) => (
+    <div key={hub} className="flex flex-col gap-2">
+      <span className="k-label">{hub} · {people.length}</span>
+      <div className="k-people k-people-sm">
+        {people.map(([slug, name]) => (
+          <figure key={slug} className="m-0">
+            <img className="k-face" src={`/deck/kickoff/people/mentors/${slug}.webp`} alt={name} width="320" height="320" />
+            <figcaption className="k-name">{name}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Los de tu sede, de 11:00 a 13:00. Sin reserva.</p>
