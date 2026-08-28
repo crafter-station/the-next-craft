@@ -10,6 +10,7 @@ import {
   findParticipantByUserId,
   findTeamForParticipant,
 } from "@/lib/dashboard/state";
+import { STAFF_HOME_PATH } from "@/lib/staff/constants";
 import {
   cityClockLabel,
   cityTimeZone,
@@ -22,7 +23,7 @@ import { Countdown } from "@/components/dashboard/countdown";
 import { Basic, keyClass, Pixel, Tag } from "@/components/dashboard/kit";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 
-import { Link } from "@/i18n/navigation";
+import { Link, redirect } from "@/i18n/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -56,6 +57,9 @@ export default async function DashboardLayout({
 
   const participant = await findParticipantByUserId(session.user.id);
   if (!participant) {
+    const staffEmail = await currentStaffEmail();
+    if (staffEmail) redirect({ href: STAFF_HOME_PATH, locale });
+
     return (
       <Gate
         title={t("gate.noParticipantTitle")}
@@ -66,10 +70,7 @@ export default async function DashboardLayout({
     );
   }
 
-  const [team, staffEmail] = await Promise.all([
-    findTeamForParticipant(participant.id),
-    currentStaffEmail(),
-  ]);
+  const team = await findTeamForParticipant(participant.id);
   // Todo el reloj del panel corre en la hora de la sede del participante.
   const city = participant.city;
   const { now, anchored, phase } = resolveNow(city);
@@ -80,7 +81,6 @@ export default async function DashboardLayout({
         name={participant.fullName}
         tableNumber={team?.tableNumber ?? null}
         partners={PARTNERS.map((p) => ({ key: p.key, name: p.name }))}
-        isStaff={Boolean(staffEmail)}
       />
       <div className="min-w-0 flex-1">
         <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-[var(--void)]/95 backdrop-blur-[2px]">
