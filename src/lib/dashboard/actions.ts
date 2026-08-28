@@ -7,10 +7,7 @@ import { and, eq, isNull, sql } from "drizzle-orm";
 
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import {
-  dashboardPartnerRedemptions,
-  dashboardTeams,
-} from "@/lib/db/schema";
+import { dashboardPartnerRedemptions, dashboardTeams } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
 import { balanceApplies, TRACK_BALANCE_SLACK } from "./capacity";
