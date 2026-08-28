@@ -633,7 +633,7 @@
     "credits": {
       "label": "PARTNER CREDITS",
       "headline": "CREDITS THAT ARE ALREADY YOURS",
-      "lede": "Everyone who gets in takes these credits, win or not. The code is issued in your name when you redeem and can't be transferred.",
+      "lede": "Everyone who gets in takes these credits, win or not. You can only reveal your code with a confirmed badge and in-person check-in at your hub.",
       "claimed": "${claimed} of ${total}",
       "redeemedCount": "{done}/{total} redeemed",
       "statTotal": "TOTAL VALUE",
@@ -652,8 +652,15 @@
       "rule2": "Revealing the code counts as redeeming: the partner sees it in their panel.",
       "rule3": "Use an account with some history. Brand-new accounts sometimes trip the partner's antifraud.",
       "rule4": "If a code fails, message us on WhatsApp with the code and the exact error.",
+      "rule5": "Redemption unlocks at the door: completed badge and arrival marked by your hub's staff.",
+      "badgeRequiredLabel": "BADGE PENDING",
+      "badgeRequiredBody": "Generate and confirm your badge before redeeming. It signals you're attending.",
+      "checkInRequiredLabel": "REDEEM ON SITE",
+      "checkInRequiredBody": "Your code is already assigned. Check in at the door so staff can mark your arrival and unlock it.",
       "howLabel": "HOW TO REDEEM",
       "codeHidden": "CODE HIDDEN",
+      "codePendingLabel": "COMING SOON",
+      "codePendingBody": "Your code will be assigned before the event. Check back once the team publishes it from admin.",
       "yourCode": "YOUR CODE",
       "redeem": "Redeem credit",
       "copy": "copy",
@@ -875,12 +882,57 @@
         "name-too-short": "The name needs at least two characters.",
         "code-not-found": "That code doesn't exist. Check it with whoever created the team.",
         "team-full": "That team is already full.",
-        "invalid-url": "Links must start with https://"
+        "invalid-url": "Links must start with https://",
+        "perks-locked": "You can't redeem yet: you need a confirmed badge and in-person check-in."
       }
     },
     "access": {
       "signIn": "Sign in",
       "dashboard": "My panel"
+    }
+  },
+  "admin": {
+    "gate": {
+      "title": "ORGANIZERS ONLY",
+      "body": "Sign in with your organization email to manage perks and operations.",
+      "cta": "Sign in",
+      "denied": "This area is for the organizing team only."
+    },
+    "shell": {
+      "title": "OPERATIONS",
+      "dashboard": "Dashboard"
+    },
+    "nav": {
+      "perks": "Perks"
+    },
+    "perks": {
+      "label": "ADMIN · PERKS",
+      "headline": "PARTNER CODES",
+      "lede": "Upload sponsor codes. Without email they assign in order to participants with a completed badge; with email they go directly to that person.",
+      "assignedTag": "{assigned}/{total} assigned",
+      "statConfirmed": "CONFIRMED",
+      "statConfirmedHint": "badge completed",
+      "statAssigned": "ASSIGNED",
+      "statAssignedHint": "codes in DB",
+      "statPartners": "PARTNERS",
+      "statPartnersHint": "in catalog",
+      "statPending": "MISSING",
+      "statPendingHint": "slots without code",
+      "uploadLabel": "UPLOAD",
+      "uploadTitle": "UPLOAD CSV",
+      "uploadBody": "Columns partner_key,code for auto-assignment, or email,partner_key,code to target someone specific.",
+      "csvExample": "partner_key,code\ncursor,CRSR-ABC123\n\nemail,partner_key,code\nhacker@mail.com,vapi,VAPI-XYZ789",
+      "uploadCta": "Upload and assign",
+      "uploading": "Uploading…",
+      "resultSummary": "{assigned} assigned · {skipped} skipped",
+      "tablePartner": "Partner",
+      "tableAssigned": "Assigned",
+      "tableConfirmed": "Confirmed",
+      "tableMissing": "Missing",
+      "errors": {
+        "not-staff": "You don't have organizer access.",
+        "empty": "The CSV is empty or has no valid rows."
+      }
     }
   }
 }

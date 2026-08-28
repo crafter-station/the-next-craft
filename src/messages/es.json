@@ -633,7 +633,7 @@
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
       "headline": "CRÉDITOS QUE YA SON TUYOS",
-      "lede": "Todo el que entra se lleva estos créditos, gane o no. El código se emite a tu nombre al canjear y no se transfiere.",
+      "lede": "Todo el que entra se lleva estos créditos, gane o no. Solo puedes revelar el código con badge confirmado y check-in presencial en tu sede.",
       "claimed": "${claimed} de ${total}",
       "redeemedCount": "{done}/{total} canjeados",
       "statTotal": "VALOR TOTAL",
@@ -652,8 +652,15 @@
       "rule2": "Revelar el código cuenta como canje: el partner lo ve en su panel.",
       "rule3": "Usa una cuenta con algo de antigüedad. Las cuentas recién creadas a veces disparan el antifraude del partner.",
       "rule4": "Si un código falla, escríbenos por WhatsApp con el código y el error exacto.",
+      "rule5": "El canje se desbloquea en la puerta: badge completado y llegada marcada por el staff de tu sede.",
+      "badgeRequiredLabel": "BADGE PENDIENTE",
+      "badgeRequiredBody": "Genera y confirma tu badge antes de canjear. Es la señal de que vas a asistir.",
+      "checkInRequiredLabel": "CANJE EN SEDE",
+      "checkInRequiredBody": "Tu código ya está asignado. Pasa por la puerta y pide que marquen tu llegada para revelarlo.",
       "howLabel": "CÓMO SE REDIME",
       "codeHidden": "CÓDIGO OCULTO",
+      "codePendingLabel": "PRÓXIMAMENTE",
+      "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin.",
       "yourCode": "TU CÓDIGO",
       "redeem": "Canjear crédito",
       "copy": "copiar",
@@ -875,12 +882,57 @@
         "name-too-short": "El nombre necesita al menos dos caracteres.",
         "code-not-found": "Ese código no existe. Revísalo con quien creó el equipo.",
         "team-full": "Ese equipo ya está completo.",
-        "invalid-url": "Los links tienen que empezar por https://"
+        "invalid-url": "Los links tienen que empezar por https://",
+        "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
       }
     },
     "access": {
       "signIn": "Entrar",
       "dashboard": "Mi panel"
+    }
+  },
+  "admin": {
+    "gate": {
+      "title": "SOLO ORGANIZACIÓN",
+      "body": "Entra con tu correo de la organización para gestionar perks y operaciones.",
+      "cta": "Entrar",
+      "denied": "Esta zona es solo para el equipo organizador."
+    },
+    "shell": {
+      "title": "OPERACIONES",
+      "dashboard": "Dashboard"
+    },
+    "nav": {
+      "perks": "Perks"
+    },
+    "perks": {
+      "label": "ADMIN · PERKS",
+      "headline": "CÓDIGOS DE PARTNERS",
+      "lede": "Sube los códigos que te manden los sponsors. Sin correo se asignan en orden a participantes con badge; con correo van directo a esa persona.",
+      "assignedTag": "{assigned}/{total} asignados",
+      "statConfirmed": "CONFIRMADOS",
+      "statConfirmedHint": "badge completado",
+      "statAssigned": "ASIGNADOS",
+      "statAssignedHint": "códigos en DB",
+      "statPartners": "PARTNERS",
+      "statPartnersHint": "en el catálogo",
+      "statPending": "FALTANTES",
+      "statPendingHint": "slots sin código",
+      "uploadLabel": "CARGA",
+      "uploadTitle": "SUBIR CSV",
+      "uploadBody": "Columnas partner_key,code para asignación automática, o email,partner_key,code para asignar a alguien concreto.",
+      "csvExample": "partner_key,code\ncursor,CRSR-ABC123\n\nemail,partner_key,code\nhacker@mail.com,vapi,VAPI-XYZ789",
+      "uploadCta": "Subir y asignar",
+      "uploading": "Subiendo…",
+      "resultSummary": "{assigned} asignados · {skipped} omitidos",
+      "tablePartner": "Partner",
+      "tableAssigned": "Asignados",
+      "tableConfirmed": "Confirmados",
+      "tableMissing": "Faltan",
+      "errors": {
+        "not-staff": "No tienes acceso de organizador.",
+        "empty": "El CSV está vacío o no tiene filas válidas."
+      }
     }
   }
 }
