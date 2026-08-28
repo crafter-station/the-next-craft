@@ -9,8 +9,12 @@ const DECKS_DIR = join(process.cwd(), "src", "content", "decks");
  * `style: "plain"` activa la variante tipográfica plana del deck: una sola
  * fuente (IBM Plex Mono) en vez del par pixel/mono, y listas sin recuadros.
  * Se opta por deck desde su deck.json; el resto mantiene el look C64.
+ *
+ * `style: "clean"` va más lejos: sale del look de marca por completo —fondo
+ * claro, sans, sin pixel ni monoespaciada— para los decks que se proyectan en
+ * sala iluminada y tienen que leerse desde la última fila.
  */
-export type DeckStyle = "plain" | "editorial";
+export type DeckStyle = "plain" | "editorial" | "clean";
 
 export type DeckMeta = {
   title: string;

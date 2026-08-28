@@ -1,0 +1,20 @@
+---
+title: Qué es
+---
+
+<p className="k-eyebrow">01 · Qué es</p>
+
+<h2 className="k-title">No es un evento.<br />Son 12 horas de construir.</h2>
+
+<div className="grid gap-3 pt-2 md:grid-cols-3">
+  {[
+    ['Gratis', 'Comida y café incluidos'],
+    ['La PI es tuya', '100% del equipo'],
+    ['Se escribe hoy', 'IA sí, código viejo no'],
+  ].map(([title, copy]) => (
+    <div key={title} className="k-card k-card-soft">
+      <span className="text-xl font-semibold">{title}</span>
+      <p className="k-copy">{copy}</p>
+    </div>
+  ))}
+</div>

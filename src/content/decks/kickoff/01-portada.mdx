@@ -1,0 +1,24 @@
+---
+title: Portada
+---
+
+<div className="flex flex-col gap-5">
+  <p className="k-eyebrow">Kickoff · 29 agosto 2026</p>
+  <h1 className="k-display">The Next Craft</h1>
+  <p className="k-lead">12 horas. Cinco sedes. Un producto que funcione.</p>
+</div>
+
+<div className="grid grid-cols-3 gap-x-6 gap-y-6 pt-4 md:grid-cols-5">
+  {[
+    ['174', 'Hackers'],
+    ['5', 'Sedes'],
+    ['13', 'Mentores'],
+    ['6', 'Jurado'],
+    ['3', 'Tracks'],
+  ].map(([value, label]) => (
+    <div key={label} className="flex flex-col gap-1">
+      <span className="k-num">{value}</span>
+      <span className="k-label">{label}</span>
+    </div>
+  ))}
+</div>
