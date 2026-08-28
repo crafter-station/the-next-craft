@@ -464,8 +464,6 @@
       "close": "Cerrar",
       "skipToContent": "Ir al contenido",
       "badge": "Badge",
-      "staff": "Staff",
-      "groupStaff": "PUERTA",
       "team": "Equipo"
     },
     "shell": {
@@ -483,22 +481,6 @@
       "noParticipantTitle": "AÚN NO ESTÁS EN LA LISTA",
       "noParticipantBody": "Tu cuenta existe pero no encontramos tu acreditación. Escríbenos por WhatsApp y lo revisamos."
     },
-    "places": {
-      "entrance": "Entrada de tu sede",
-      "stage": "Escenario de tu sede",
-      "table": "Tu mesa",
-      "mentoring": "Zona de mentorías",
-      "food": "Zona de comida",
-      "platform": "Plataforma"
-    },
-    "kinds": {
-      "ceremony": "ceremonia",
-      "hacking": "hacking",
-      "mentoring": "mentoría",
-      "meal": "comida",
-      "deadline": "deadline",
-      "demo": "demo"
-    },
     "audience": {
       "hackers": "hackers",
       "mentors": "mentores",
@@ -515,10 +497,6 @@
       "statChecklist": "CHECKLIST",
       "statCredits": "CRÉDITOS CANJEADOS",
       "creditsHint": "de ${total} disponibles",
-      "nextLabel": "LO QUE SIGUE",
-      "nextTitle": "PRÓXIMOS BLOQUES",
-      "liveLabel": "EN CURSO",
-      "nothingLeft": "No queda nada por delante. Suerte en los demos.",
       "teamLabel": "TU EQUIPO",
       "noTeamTitle": "SIN EQUIPO",
       "noTeamBody": "Los equipos son de 3 a 5 personas y se cierran en el kickoff. Pide ayuda por WhatsApp para que te emparejen.",
@@ -544,17 +522,8 @@
       "trackConfirmed": "confirmado",
       "trackTeams": "EQUIPOS",
       "trackTeamsValue": "{count} en este track",
-      "mentorLabel": "TU MENTORÍA",
-      "mentorNone": "SIN MESA",
-      "mentorEmpty": "Las mentorías son de 11:00 a 13:00. Elige mesa antes de que se llene.",
-      "mentorSlots": "TURNOS",
       "checklistLabel": "CHECKLIST",
-      "checklistTitle": "{done} DE {total}",
-      "logisticsLabel": "LOGÍSTICA",
-      "logisticsTitle": "DATOS DE SEDE",
-      "faqCta": "FAQ del evento",
-      "seeAgenda": "Ver la agenda",
-      "mandatory": "obligatorio"
+      "checklistTitle": "{done} DE {total}"
     },
     "checklist": {
       "track": "Track confirmado",
