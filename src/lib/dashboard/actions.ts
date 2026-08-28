@@ -6,7 +6,6 @@ import { headers } from "next/headers";
 import { and, eq, isNull, sql } from "drizzle-orm";
 
 import { auth } from "@/lib/auth";
-import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   dashboardAgendaSaves,
@@ -15,7 +14,7 @@ import {
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
-import { trackCapacity } from "./capacity";
+import { balanceApplies, TRACK_BALANCE_SLACK } from "./capacity";
 import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
 import {
   findParticipantByUserId,
@@ -91,12 +90,17 @@ export async function selectTrack(track: TrackKey): Promise<ActionResult> {
 }
 
 /**
- * Confirmar cierra el track del equipo y ocupa una plaza del cupo de la sede.
+ * Confirmar cierra el track del equipo y cuenta para el equilibrio de su sede.
  *
- * El recuento va **dentro** del UPDATE, no en un `select` previo: en el
- * kickoff hay decenas de equipos confirmando a la vez y entre leer el contador
- * y escribir la confirmación caben varios. Así la comprobación y la escritura
- * son la misma sentencia y el cupo no se puede pasar.
+ * No hay cupo total —cuántos equipos habrá no se sabe hasta que se forman, en
+ * el propio kickoff—, así que el freno es relativo: un track se cierra cuando
+ * va más de `TRACK_BALANCE_SLACK` por encima del reparto equitativo de los
+ * equipos que ya confirmaron en esa sede. El techo sube solo según entra gente.
+ *
+ * Todo el cálculo va **dentro** del UPDATE, no en un `select` previo: en el
+ * kickoff confirman decenas a la vez, y entre leer los contadores y escribir la
+ * confirmación caben varios equipos. Aquí comprobación y escritura son la misma
+ * sentencia, así que el desequilibrio no se puede colar por una carrera.
  */
 export async function confirmTrack(): Promise<ActionResult> {
   const ctx = await currentHacker();
@@ -105,57 +109,66 @@ export async function confirmTrack(): Promise<ActionResult> {
 
   const track = ctx.team.track;
   if (!track) return { ok: false, error: "track-locked" };
+  const city = ctx.team.city;
 
-  const capacity = trackCapacity(ctx.team.city, track);
-
-  // Sin sede no hay cupo contra el que medir. Es el caso de un equipo cuyo
-  // capitán se registró sin ciudad: preferimos dejarlo confirmar a bloquearlo
-  // por un dato que él no controla.
-  const updated =
-    capacity === null
-      ? await db
-          .update(dashboardTeams)
-          .set({ trackConfirmedAt: new Date(), updatedAt: new Date() })
-          .where(
-            and(
-              eq(dashboardTeams.id, ctx.team.id),
-              isNull(dashboardTeams.trackConfirmedAt),
-              sql`${dashboardTeams.track} is not null`,
-            ),
-          )
-          .returning({ id: dashboardTeams.id })
-      : ((
-          await db.execute(sql`
-            update dashboard_teams
-               set track_confirmed_at = now(), updated_at = now()
-             where id = ${ctx.team.id}
-               and track_confirmed_at is null
-               and track is not null
-               and (
-                 select count(*) from dashboard_teams t
-                  where t.city = ${ctx.team.city}
-                    and t.track = ${track}::dashboard_track
-                    and t.track_confirmed_at is not null
-               ) < ${capacity}
-            returning id
-          `)
-        ).rows ?? []);
+  // Sin sede no hay grupo contra el que equilibrar. Es el caso de un equipo
+  // cuyo capitán se registró sin ciudad: preferimos dejarlo confirmar antes que
+  // bloquearlo por un dato que él no controla.
+  const updated = !balanceApplies(city)
+    ? await db
+        .update(dashboardTeams)
+        .set({ trackConfirmedAt: new Date(), updatedAt: new Date() })
+        .where(
+          and(
+            eq(dashboardTeams.id, ctx.team.id),
+            isNull(dashboardTeams.trackConfirmedAt),
+            sql`${dashboardTeams.track} is not null`,
+          ),
+        )
+        .returning({ id: dashboardTeams.id })
+    : ((
+        await db.execute(sql`
+          update dashboard_teams
+             set track_confirmed_at = now(), updated_at = now()
+           where id = ${ctx.team.id}
+             and track_confirmed_at is null
+             and track is not null
+             and (
+               select count(*) from dashboard_teams t
+                where t.city = ${city}
+                  and t.track = ${track}::dashboard_track
+                  and t.track_confirmed_at is not null
+             ) < (
+               ceil((
+                 (select count(*) from dashboard_teams t
+                   where t.city = ${city}
+                     and t.track_confirmed_at is not null) + 1
+               )::numeric / ${TRACKS.length}) + ${TRACK_BALANCE_SLACK}
+             )
+          returning id
+        `)
+      ).rows ?? []);
 
   if (updated.length === 0) {
-    // Distinguimos «lleno» de «ya confirmado» para poder decir cuál de las dos
-    // cosas pasó: en el kickoff son dos mensajes muy distintos.
-    if (capacity !== null) {
-      const taken = await db
-        .select({ total: sql<number>`count(*)::int` })
+    // Distinguir «desequilibrado» de «ya confirmado»: en el kickoff son dos
+    // mensajes muy distintos y el hacker tiene que saber cuál le toca.
+    if (balanceApplies(city)) {
+      const [row] = await db
+        .select({
+          inTrack: sql<number>`count(*) filter (where ${dashboardTeams.track} = ${track})::int`,
+          inHub: sql<number>`count(*)::int`,
+        })
         .from(dashboardTeams)
         .where(
           and(
-            eq(dashboardTeams.city, ctx.team.city as CityKey),
-            eq(dashboardTeams.track, track),
+            eq(dashboardTeams.city, city),
             sql`${dashboardTeams.trackConfirmedAt} is not null`,
           ),
         );
-      if ((taken[0]?.total ?? 0) >= capacity) {
+      const limit =
+        Math.ceil(((row?.inHub ?? 0) + 1) / TRACKS.length) +
+        TRACK_BALANCE_SLACK;
+      if ((row?.inTrack ?? 0) >= limit) {
         return { ok: false, error: "track-full" };
       }
     }

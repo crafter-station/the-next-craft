@@ -608,10 +608,8 @@
       "windowClosedLabel": "WINDOW CLOSED",
       "windowClosedBody": "The kickoff is over. You can still pick, but tell us on WhatsApp so staff can record the change.",
       "closesAt": "closes {time}",
-      "capacity": "{taken}/{capacity} teams",
-      "capacityFull": "full",
-      "capacityLeft": "{count} left",
-      "capacityLabel": "CAPACITY AT YOUR HUB"
+      "balanceFull": "well ahead",
+      "balanceRoom": "room for {count} more"
     },
     "mentors": {
       "label": "MENTORING",
@@ -770,7 +768,7 @@
       "unknown-track": "That track doesn't exist.",
       "unknown-partner": "That partner doesn't exist.",
       "unknown-block": "That block isn't on the schedule.",
-      "track-full": "That track is full at your hub. Pick another one."
+      "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams."
     },
     "badge": {
       "label": "BADGE · YOUR IDENTITY",

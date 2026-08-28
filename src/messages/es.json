@@ -608,10 +608,8 @@
       "windowClosedLabel": "VENTANA CERRADA",
       "windowClosedBody": "El kickoff ya terminó. Puedes seguir eligiendo, pero avisa por WhatsApp para que el staff registre el cambio.",
       "closesAt": "cierra {time}",
-      "capacity": "{taken}/{capacity} equipos",
-      "capacityFull": "cupo lleno",
-      "capacityLeft": "quedan {count}",
-      "capacityLabel": "CUPO EN TU SEDE"
+      "balanceFull": "muy por encima",
+      "balanceRoom": "caben {count} más"
     },
     "mentors": {
       "label": "MENTORÍAS",
@@ -770,7 +768,7 @@
       "unknown-track": "Ese track no existe.",
       "unknown-partner": "Ese partner no existe.",
       "unknown-block": "Ese bloque no está en la agenda.",
-      "track-full": "Ese track ya llenó su cupo en tu sede. Elige otro."
+      "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos."
     },
     "badge": {
       "label": "BADGE · TU IDENTIDAD",

@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
-import { trackCapacities } from "@/lib/dashboard/capacity";
+import { trackBalance } from "@/lib/dashboard/capacity";
 import { TRACKS, trackIndex } from "@/lib/dashboard/content";
 import {
   countTeamsByTrack,
@@ -45,7 +45,9 @@ export default async function TracksPage({
     findTeamForParticipant(participant.id),
     countTeamsByTrack(participant.city),
   ]);
-  const capacities = trackCapacities(participant.city);
+  // El techo no es un número fijo: sale del reparto equitativo de los equipos
+  // que ya confirmaron en esta sede, así que sube solo según entra gente.
+  const balance = trackBalance(counts);
 
   const items = tTracks.raw("items") as TrackMessage[];
   const cards: TrackCard[] = TRACKS.map((track) => {
@@ -59,7 +61,7 @@ export default async function TracksPage({
       ideas: message.ideas,
       why: message.why,
       teams: counts.get(track.key) ?? 0,
-      capacity: capacities.get(track.key) ?? null,
+      limit: participant.city ? (balance.get(track.key)?.limit ?? null) : null,
     };
   });
 
