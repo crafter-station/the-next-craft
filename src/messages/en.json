@@ -872,7 +872,9 @@
     },
     "access": {
       "signIn": "Sign in",
-      "dashboard": "My panel"
+      "continue": "Continue",
+      "dashboard": "My panel",
+      "admin": "Admin"
     },
     "perks": {
       "label": "PRIZES & PERKS",
@@ -892,9 +894,10 @@
     },
     "shell": {
       "title": "OPERATIONS",
-      "dashboard": "Dashboard"
+      "home": "Home"
     },
     "nav": {
+      "staff": "Door",
       "perks": "Perks"
     },
     "perks": {
