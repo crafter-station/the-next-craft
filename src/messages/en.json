@@ -897,7 +897,10 @@
         "stateQueued": "not invited yet",
         "statePending": "invite sent",
         "stateAccepted": "in",
-        "stateFailed": "invite failed"
+        "stateFailed": "invite failed",
+        "pushFresh": "STARTING FROM SCRATCH",
+        "pushExisting": "ALREADY HAVE LOCAL CODE",
+        "pushAccept": "Accept the invite before pushing — without it GitHub answers 403. The second block replaces the starter content with yours."
       },
       "errors": {
         "unauthenticated": "Your session expired. Sign in again.",
