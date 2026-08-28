@@ -437,6 +437,21 @@
     "emptyBody": "Cuando un participante genere su badge, aparecerá aquí. Si ya fuiste aceptado, puedes crear el tuyo ahora.",
     "emptyCta": "GOTO BADGE STUDIO"
   },
+  "roleGallery": {
+    "title": "Imágenes de mentores y jurado",
+    "description": "Galería de piezas oficiales generadas para mentores y miembros del jurado de The Next Craft.",
+    "navAria": "Navegación de imágenes de mentores y jurado",
+    "backHome": "← Inicio",
+    "label": "ASSETS DE ROLES",
+    "headline": "MENTORES + JURADO",
+    "intro": "Revisa las piezas oficiales generadas para LinkedIn y descarga los archivos PNG en resolución completa.",
+    "mentors": "Mentores",
+    "judges": "Jurado",
+    "count": "{count} IMÁGENES",
+    "imageAlt": "Pieza oficial de {name}, {role}",
+    "download": "Descargar",
+    "downloadFor": "Descargar imagen de {name}"
+  },
   "dashboard": {
     "nav": {
       "overview": "Dashboard",
@@ -601,18 +616,18 @@
     "mentors": {
       "label": "MENTORÍAS",
       "headline": "QUIÉN TE ACOMPAÑA EN TU SEDE",
-      "lede": "Las comunidades organizadoras están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
-      "roles": {
-        "product": "Mesa de producto y distribución",
-        "models": "Mesa de modelos y agentes",
-        "engineering": "Mesa de ingeniería e infra",
-        "interface": "Mesa de interfaz y experiencia"
-      },
+      "lede": "Los mentores están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
       "window": "11:00–13:00",
       "howLabel": "CÓMO FUNCIONA",
       "howTitle": "TE ACERCAS Y YA",
       "howBody": "No hay turnos ni lista de espera. Durante el bloque de mentorías busca la mesa que te sirva y preséntate con una pregunta concreta: media hora bien usada cambia el demo, y llevas doce horas de reloj.",
-      "noneInHub": "Todavía no hay mentores confirmados para tu sede."
+      "noneInHub": "Todavía no hay mentores asignados a tu sede.",
+      "hubLabel": "EN TU SEDE",
+      "hubTitle": "MENTORES EN {hub}",
+      "hubTitleUnknown": "MENTORES CONFIRMADOS",
+      "pendingLabel": "SEDE POR CONFIRMAR",
+      "pendingTitle": "{count} MENTORES MÁS",
+      "pendingBody": "Están en el evento pero aún no sabemos en qué sede. Pregunta al staff si buscas a alguien en concreto."
     },
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
@@ -636,15 +651,8 @@
       "rule2": "Revelar el código cuenta como canje: el partner lo ve en su panel.",
       "rule3": "Usa una cuenta con algo de antigüedad. Las cuentas recién creadas a veces disparan el antifraude del partner.",
       "rule4": "Si un código falla, escríbenos por WhatsApp con el código y el error exacto.",
-      "rule5": "El canje se desbloquea en la puerta: badge completado y llegada marcada por el staff de tu sede.",
-      "badgeRequiredLabel": "BADGE PENDIENTE",
-      "badgeRequiredBody": "Genera y confirma tu badge antes de canjear. Es la señal de que vas a asistir.",
-      "checkInRequiredLabel": "CANJE EN SEDE",
-      "checkInRequiredBody": "Tu código ya está asignado. Pasa por la puerta y pide que marquen tu llegada para revelarlo.",
       "howLabel": "CÓMO SE REDIME",
       "codeHidden": "CÓDIGO OCULTO",
-      "codePendingLabel": "PRÓXIMAMENTE",
-      "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin.",
       "yourCode": "TU CÓDIGO",
       "redeem": "Canjear crédito",
       "copy": "copiar",
@@ -720,7 +728,14 @@
             "El crédito de desarrollo aparece aparte del plan"
           ]
         }
-      }
+      },
+      "rule5": "El canje se desbloquea en la puerta: badge completado y llegada marcada por el staff de tu sede.",
+      "badgeRequiredLabel": "BADGE PENDIENTE",
+      "badgeRequiredBody": "Genera y confirma tu badge antes de canjear. Es la señal de que vas a asistir.",
+      "checkInRequiredLabel": "CANJE EN SEDE",
+      "checkInRequiredBody": "Tu código ya está asignado. Pasa por la puerta y pide que marquen tu llegada para revelarlo.",
+      "codePendingLabel": "PRÓXIMAMENTE",
+      "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin."
     },
     "support": {
       "label": "SOPORTE",
@@ -813,7 +828,11 @@
       "statBadge": "CON BADGE",
       "statBadgeHint": "confirmaron asistencia",
       "statPending": "SIN LLEGAR",
-      "footer": "{shown} de {total} en pantalla"
+      "footer": "{shown} de {total} en pantalla",
+      "reposLabel": "REPOS",
+      "reposTitle": "PROYECTOS DE LOS EQUIPOS",
+      "reposEmpty": "Todavía ningún equipo pidió su repo.",
+      "reposMissing": "sin repo"
     },
     "team": {
       "label": "EQUIPO",
@@ -858,6 +877,28 @@
       "leaveConfirm": "Si eres el último, el equipo se borra y el código deja de servir.",
       "leaveYes": "Sí, salir",
       "cancel": "Cancelar",
+      "github": {
+        "label": "REPO DEL EQUIPO",
+        "title": "GITHUB",
+        "body": "Cada equipo recibe un repositorio en la organización, copiado del template del hackathon. Vincula tu GitHub y te llega la invitación.",
+        "link": "Vincular GitHub",
+        "linkedAs": "vinculado como",
+        "repoLabel": "REPOSITORIO DEL EQUIPO",
+        "repoBody": "Clónalo y trabaja ahí. Los mentores lo encuentran desde la organización.",
+        "create": "Crear el repo",
+        "retry": "Reintentar",
+        "creating": "Creándolo en GitHub…",
+        "failed": "No se pudo crear el repo.",
+        "waitCaptain": "Lo crea quien fundó el equipo. Vincula tu GitHub y te invita.",
+        "captainNeedsLink": "Vincula tu GitHub primero: quedas como admin del repo.",
+        "accept": "aceptar",
+        "refresh": "Actualizar invitaciones",
+        "stateUnlinked": "sin vincular",
+        "stateQueued": "sin invitar",
+        "statePending": "invitación enviada",
+        "stateAccepted": "dentro",
+        "stateFailed": "falló la invitación"
+      },
       "errors": {
         "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",
         "no-participant": "No encontramos tu acreditación.",
@@ -867,6 +908,12 @@
         "code-not-found": "Ese código no existe. Revísalo con quien creó el equipo.",
         "team-full": "Ese equipo ya está completo.",
         "invalid-url": "Los links tienen que empezar por https://",
+        "not-captain": "Solo quien fundó el equipo puede crear el repo.",
+        "github-not-configured": "La organización todavía no configuró GitHub. Avisa al staff.",
+        "github-not-linked": "Vincula tu cuenta de GitHub primero.",
+        "github-taken": "Esa cuenta de GitHub ya está vinculada a otra acreditación.",
+        "github-failed": "GitHub no respondió bien. Reintenta en un momento.",
+        "repo-in-progress": "Ya se está creando el repo. Recarga en unos segundos.",
         "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
       }
     },

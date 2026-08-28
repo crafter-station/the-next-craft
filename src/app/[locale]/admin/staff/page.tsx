@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { CITIES, type CityKey } from "@/lib/cities";
+import { githubEnabled, listTeamRepos } from "@/lib/dashboard/github";
 import { currentStaffEmail } from "@/lib/dashboard/staff";
 import { listRoster, rosterTotals } from "@/lib/dashboard/staff-roster";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,8 @@ import {
   Empty,
   PageHeader,
   Panel,
+  PanelHead,
+  Row,
   Stat,
   Table,
   Tag,
@@ -39,9 +42,10 @@ export default async function AdminStaffPage({
     : null;
   const search = typeof sp.q === "string" ? sp.q : "";
 
-  const [roster, totals] = await Promise.all([
+  const [roster, totals, repos] = await Promise.all([
     listRoster({ city, search }),
     rosterTotals(city),
+    githubEnabled() ? listTeamRepos(city) : Promise.resolve([]),
   ]);
 
   const href = (over: { city?: string; q?: string }) => {
@@ -144,6 +148,46 @@ export default async function AdminStaffPage({
       <p className="mt-4 font-mono text-[11px] text-[var(--text-dim)]">
         {t("staff.footer", { shown: roster.length, total: totals.expected })}
       </p>
+
+      {githubEnabled() && (
+        <Panel className="mt-5">
+          <PanelHead
+            n={91}
+            label={t("staff.reposLabel")}
+            title={t("staff.reposTitle")}
+          />
+          {repos.length === 0 ? (
+            <Empty>{t("staff.reposEmpty")}</Empty>
+          ) : (
+            <ul>
+              {repos.map((repo) => (
+                <Row key={repo.teamId} marker="▸">
+                  <span className="text-[var(--text)]">{repo.name}</span>
+                  {repo.city && (
+                    <span className="ml-2 text-[11px] uppercase">
+                      {tCities(repo.city)}
+                    </span>
+                  )}
+                  {repo.url ? (
+                    <a
+                      href={repo.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-2 text-[11px] text-[var(--bright)] underline underline-offset-4"
+                    >
+                      {repo.fullName}
+                    </a>
+                  ) : (
+                    <span className="ml-2 text-[11px]">
+                      {t("staff.reposMissing")}
+                    </span>
+                  )}
+                </Row>
+              ))}
+            </ul>
+          )}
+        </Panel>
+      )}
     </>
   );
 }

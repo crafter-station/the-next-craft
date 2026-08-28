@@ -1,5 +1,8 @@
+import { headers } from "next/headers";
+
 import { and, asc, eq, sql } from "drizzle-orm";
 
+import { auth } from "@/lib/auth";
 import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
@@ -9,6 +12,8 @@ import {
   dashboardPartnerRedemptions,
   dashboardTeamMembers,
   dashboardTeams,
+  type GithubInviteState,
+  participantGithub,
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
@@ -37,11 +42,19 @@ export type DashboardTeam = {
   demoUrl: string | null;
   track: TrackKey | null;
   trackConfirmedAt: Date | null;
+  /** Repo entregado por la organización. Ver `dashboard/github.ts`. */
+  githubRepoFullName: string | null;
+  githubRepoUrl: string | null;
+  githubRepoStatus: "pending" | "ready" | "failed" | null;
+  githubRepoError: string | null;
+  githubRepoCreatedAt: Date | null;
   members: {
     participantId: string;
     fullName: string;
     role: string | null;
     isCaptain: boolean;
+    githubLogin: string | null;
+    githubInviteState: GithubInviteState | null;
   }[];
 };
 
@@ -126,11 +139,17 @@ export async function findTeamForParticipant(
       role: dashboardTeamMembers.role,
       isCaptain: dashboardTeamMembers.isCaptain,
       fullName: badgeParticipants.fullName,
+      githubLogin: participantGithub.login,
+      githubInviteState: dashboardTeamMembers.githubInviteState,
     })
     .from(dashboardTeamMembers)
     .innerJoin(
       badgeParticipants,
       eq(badgeParticipants.id, dashboardTeamMembers.participantId),
+    )
+    .leftJoin(
+      participantGithub,
+      eq(participantGithub.participantId, dashboardTeamMembers.participantId),
     )
     .where(eq(dashboardTeamMembers.teamId, teamId))
     .orderBy(asc(dashboardTeamMembers.joinedAt));
@@ -199,4 +218,25 @@ export async function countTeamsInCity(city: CityKey | null) {
     .from(dashboardTeams)
     .where(eq(dashboardTeams.city, city));
   return row?.n ?? 0;
+}
+
+/**
+ * El hacker detrás de la petición: sesión, acreditación y equipo. Lo comparten
+ * todas las server actions del dashboard, que empiezan igual.
+ */
+export type HackerContext =
+  | { error: "unauthenticated" | "no-participant" }
+  | {
+      error?: undefined;
+      participant: DashboardParticipant;
+      team: DashboardTeam | null;
+    };
+
+export async function currentHacker(): Promise<HackerContext> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return { error: "unauthenticated" };
+  const participant = await findParticipantByUserId(session.user.id);
+  if (!participant) return { error: "no-participant" };
+  const team = await findTeamForParticipant(participant.id);
+  return { participant, team };
 }
