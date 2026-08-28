@@ -807,7 +807,13 @@ export function Wordmark({
   );
 }
 
-export function LimaSponsorWall() {
+/*
+  Muro de sponsors del kickoff. Los partners son los mismos en las cinco
+  sedes, así que el componente no recibe ciudad: un solo muro para todos los
+  decks de kickoff. Los archivos siguen bajo `lima-kickoff/` porque es donde
+  entraron; el deck que los use no cambia nada.
+*/
+export function KickoffSponsorWall() {
   const smallLogos = [
     ["Tavily", "/deck/brand-assets/lima-kickoff/tavily.svg"],
     ["ElevenLabs", "/deck/brand-assets/lima-kickoff/elevenlabs.svg"],
