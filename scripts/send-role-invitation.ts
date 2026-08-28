@@ -45,6 +45,16 @@ const recipients = {
     socialImage:
       "public/brand-assets/social/roles/judges/daniel-lesage-linkedin-4x5.png",
   },
+  nahuel: {
+    fullName: "Nahuel Alberti",
+    firstName: "Nahuel",
+    role: "judge",
+    slug: "nahuel-alberti",
+    to: ["nahue@paisanos.io"],
+    cc: ["shiara@crafterstation.com", "anthony@crafterstation.com"],
+    personalization:
+      "Tu experiencia liderando producto e ingeniería en Paisanos, construyendo y escalando equipos y llevando productos digitales a millones de usuarios, te da una perspectiva excepcional para reconocer proyectos con criterio técnico, intención de producto y una ejecución que realmente llegue hasta el final.",
+  },
 } as const satisfies Record<string, InvitationRecipient>;
 
 function argument(name: string) {

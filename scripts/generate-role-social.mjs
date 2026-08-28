@@ -55,6 +55,24 @@ const roleConfigs = {
         lastName: "GALVEZ",
         slug: "victor-galvez",
       },
+      {
+        firstName: "DANITZA",
+        image: "danitza-rosas.png",
+        lastName: "ROSAS",
+        slug: "danitza-rosas",
+      },
+      {
+        firstName: "FIORELLA",
+        image: "fiorella-cisneros.png",
+        lastName: "CISNEROS",
+        slug: "fiorella-cisneros",
+      },
+      {
+        firstName: "ELLIN",
+        image: "ellin.png",
+        lastName: "ORJUELA",
+        slug: "ellin-orjuela",
+      },
     ],
   },
   judges: {
@@ -107,6 +125,18 @@ const roleConfigs = {
         image: "yakko-majuri.png",
         lastName: "MAJURI",
         slug: "yakko-majuri",
+      },
+      {
+        firstName: "DUVAN",
+        image: "duvan-salcedo.png",
+        lastName: "SALCEDO",
+        slug: "duvan-salcedo",
+      },
+      {
+        firstName: "TERRY",
+        image: "terry-cruz.png",
+        lastName: "CRUZ MELO",
+        slug: "terry-cruz",
       },
     ],
   },
