@@ -821,7 +821,11 @@
       "statBadge": "WITH BADGE",
       "statBadgeHint": "confirmed attendance",
       "statPending": "NOT ARRIVED",
-      "footer": "{shown} of {total} shown"
+      "footer": "{shown} of {total} shown",
+      "reposLabel": "REPOS",
+      "reposTitle": "TEAM PROJECTS",
+      "reposEmpty": "No team has claimed a repo yet.",
+      "reposMissing": "no repo"
     },
     "team": {
       "label": "TEAM",
