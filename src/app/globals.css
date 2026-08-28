@@ -63,33 +63,50 @@
   /* Paleta B&N vintage — negro cálido tipo Apple '99 */
   --void: #1a1a17;
   --screen: #1a1a17;
-  --screen-dim: #161613;
-  --line: #8c8a82;
+  /*
+    El panel va por ENCIMA del fondo, no por debajo. Antes era #161613 —más
+    oscuro que --void— y separaba a 1.04:1, o sea nada: todo el trabajo de
+    delimitar caía en el borde, y por eso la página se leía como una reja.
+  */
+  --screen-dim: #24231f;
+  /*
+    Filete, no contenido. #8c8a82 daba 5.04:1 contra el fondo, el 76% del peso
+    de --text-dim: la estructura sonaba tan fuerte como el texto. A 1.36:1
+    delimita sin competir. Para los pocos bordes que sí deben verse —teclas,
+    foco, elemento activo— está --line-strong.
+  */
+  --line: #33322d;
+  --line-strong: #55534b;
   --bright: #e9e7de;
   --text: #f2f0e9;
   --text-dim: #a2a096;
   --bone: #e6e3d8;
   --key-shadow: #8c8a82;
 
-  /* Tokens shadcn mapeados a la paleta */
-  --background: #1a1a17;
-  --foreground: #f2f0e9;
-  --card: #161613;
-  --card-foreground: #f2f0e9;
-  --popover: #161613;
-  --popover-foreground: #f2f0e9;
-  --primary: #e6e3d8;
-  --primary-foreground: #1a1a17;
-  --secondary: #161613;
-  --secondary-foreground: #f2f0e9;
-  --muted: #161613;
-  --muted-foreground: #a2a096;
-  --accent: #161613;
-  --accent-foreground: #f2f0e9;
+  /*
+    Tokens shadcn mapeados a la paleta. Apuntan a los tokens, no a hex sueltos:
+    antes repetían los valores viejos a mano y cualquier ajuste de la paleta
+    dejaba los componentes de shadcn con el contraste anterior.
+  */
+  --background: var(--void);
+  --foreground: var(--text);
+  --card: var(--screen-dim);
+  --card-foreground: var(--text);
+  --popover: var(--screen-dim);
+  --popover-foreground: var(--text);
+  --primary: var(--bone);
+  --primary-foreground: var(--void);
+  --secondary: var(--screen-dim);
+  --secondary-foreground: var(--text);
+  --muted: var(--screen-dim);
+  --muted-foreground: var(--text-dim);
+  --accent: var(--screen-dim);
+  --accent-foreground: var(--text);
   --destructive: #f87171;
-  --border: rgb(140 138 130 / 45%);
-  --input: rgb(140 138 130 / 30%);
-  --ring: #e9e7de;
+  --border: var(--line);
+  /* Un campo hay que encontrarlo: filete fuerte, no hairline. */
+  --input: var(--line-strong);
+  --ring: var(--bright);
   --radius: 0.5rem;
 
   /* Charts — escala de grises cálidos */
@@ -100,14 +117,14 @@
   --chart-5: #e6e3d8;
 
   /* Sidebar */
-  --sidebar: #161613;
-  --sidebar-foreground: #f2f0e9;
-  --sidebar-primary: #e6e3d8;
-  --sidebar-primary-foreground: #1a1a17;
-  --sidebar-accent: #161613;
-  --sidebar-accent-foreground: #f2f0e9;
-  --sidebar-border: rgb(140 138 130 / 35%);
-  --sidebar-ring: #e9e7de;
+  --sidebar: var(--screen-dim);
+  --sidebar-foreground: var(--text);
+  --sidebar-primary: var(--bone);
+  --sidebar-primary-foreground: var(--void);
+  --sidebar-accent: var(--screen-dim);
+  --sidebar-accent-foreground: var(--text);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--bright);
 }
 
 @layer base {
@@ -206,9 +223,9 @@
 .keycap-ghost {
   background-color: transparent;
   color: var(--text);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 0.5rem;
-  box-shadow: 0 3px 0 var(--line);
+  box-shadow: 0 3px 0 var(--line-strong);
   transform: translateY(0);
 }
 
@@ -220,7 +237,7 @@
 
 .keycap-ghost:active {
   transform: translateY(3px);
-  box-shadow: 0 0 0 var(--line);
+  box-shadow: 0 0 0 var(--line-strong);
 }
 
 /* Panel de sección: card sobre void */

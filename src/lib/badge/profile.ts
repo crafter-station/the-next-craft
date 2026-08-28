@@ -62,6 +62,21 @@ export function participantBadgeImagePath(
   return `/api/badge/image/${formattedNumber}?${params.toString()}`;
 }
 
+/**
+ * El retrato suelto (PNG con fondo transparente), sin la plantilla del badge.
+ * Misma versión que la imagen del badge para que el navegador no sirva el
+ * retrato viejo tras un reemplazo.
+ */
+export function participantPortraitPath(
+  participantNumber: number,
+  updatedAt: Date | string,
+) {
+  const formattedNumber = formatParticipantNumber(participantNumber);
+  const version =
+    updatedAt instanceof Date ? updatedAt.getTime() : Date.parse(updatedAt);
+  return `/api/badge/portrait/${formattedNumber}?v=${version}`;
+}
+
 export async function findPublishedParticipant(participantNumber: number) {
   const [participant] = await db
     .select({

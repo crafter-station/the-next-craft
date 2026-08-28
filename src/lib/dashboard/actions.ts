@@ -6,21 +6,18 @@ import { headers } from "next/headers";
 import { and, eq, isNull, sql } from "drizzle-orm";
 
 import { auth } from "@/lib/auth";
+import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   dashboardAgendaSaves,
-  dashboardMentorSlots,
   dashboardPartnerRedemptions,
   dashboardTeams,
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
+import { trackCapacity } from "./capacity";
 import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
-import {
-  findParticipantByUserId,
-  findTeamForParticipant,
-  hasBookingAt,
-} from "./state";
+import { findParticipantByUserId, findTeamForParticipant } from "./state";
 
 type ActionResult = { ok: true } | { ok: false; error: DashboardError };
 
@@ -34,11 +31,7 @@ export type DashboardError =
   | "no-team"
   | "track-locked"
   | "unknown-track"
-  | "slot-taken"
-  | "slot-missing"
-  | "time-clash"
-  | "topic-too-short"
-  | "table-full"
+  | "track-full"
   | "unknown-partner"
   | "unknown-block";
 
@@ -92,24 +85,78 @@ export async function selectTrack(track: TrackKey): Promise<ActionResult> {
   return { ok: true };
 }
 
+/**
+ * Confirmar cierra el track del equipo y ocupa una plaza del cupo de la sede.
+ *
+ * El recuento va **dentro** del UPDATE, no en un `select` previo: en el
+ * kickoff hay decenas de equipos confirmando a la vez y entre leer el contador
+ * y escribir la confirmación caben varios. Así la comprobación y la escritura
+ * son la misma sentencia y el cupo no se puede pasar.
+ */
 export async function confirmTrack(): Promise<ActionResult> {
   const ctx = await currentHacker();
   if (ctx.error) return { ok: false, error: ctx.error };
   if (!ctx.team) return { ok: false, error: "no-team" };
 
-  const updated = await db
-    .update(dashboardTeams)
-    .set({ trackConfirmedAt: new Date(), updatedAt: new Date() })
-    .where(
-      and(
-        eq(dashboardTeams.id, ctx.team.id),
-        isNull(dashboardTeams.trackConfirmedAt),
-        sql`${dashboardTeams.track} is not null`,
-      ),
-    )
-    .returning({ id: dashboardTeams.id });
+  const track = ctx.team.track;
+  if (!track) return { ok: false, error: "track-locked" };
 
-  if (updated.length === 0) return { ok: false, error: "track-locked" };
+  const capacity = trackCapacity(ctx.team.city, track);
+
+  // Sin sede no hay cupo contra el que medir. Es el caso de un equipo cuyo
+  // capitán se registró sin ciudad: preferimos dejarlo confirmar a bloquearlo
+  // por un dato que él no controla.
+  const updated =
+    capacity === null
+      ? await db
+          .update(dashboardTeams)
+          .set({ trackConfirmedAt: new Date(), updatedAt: new Date() })
+          .where(
+            and(
+              eq(dashboardTeams.id, ctx.team.id),
+              isNull(dashboardTeams.trackConfirmedAt),
+              sql`${dashboardTeams.track} is not null`,
+            ),
+          )
+          .returning({ id: dashboardTeams.id })
+      : ((
+          await db.execute(sql`
+            update dashboard_teams
+               set track_confirmed_at = now(), updated_at = now()
+             where id = ${ctx.team.id}
+               and track_confirmed_at is null
+               and track is not null
+               and (
+                 select count(*) from dashboard_teams t
+                  where t.city = ${ctx.team.city}
+                    and t.track = ${track}::dashboard_track
+                    and t.track_confirmed_at is not null
+               ) < ${capacity}
+            returning id
+          `)
+        ).rows ?? []);
+
+  if (updated.length === 0) {
+    // Distinguimos «lleno» de «ya confirmado» para poder decir cuál de las dos
+    // cosas pasó: en el kickoff son dos mensajes muy distintos.
+    if (capacity !== null) {
+      const taken = await db
+        .select({ total: sql<number>`count(*)::int` })
+        .from(dashboardTeams)
+        .where(
+          and(
+            eq(dashboardTeams.city, ctx.team.city as CityKey),
+            eq(dashboardTeams.track, track),
+            sql`${dashboardTeams.trackConfirmedAt} is not null`,
+          ),
+        );
+      if ((taken[0]?.total ?? 0) >= capacity) {
+        return { ok: false, error: "track-full" };
+      }
+    }
+    return { ok: false, error: "track-locked" };
+  }
+
   refreshDashboard();
   return { ok: true };
 }
@@ -123,113 +170,6 @@ export async function releaseTrack(): Promise<ActionResult> {
     .update(dashboardTeams)
     .set({ track: null, trackConfirmedAt: null, updatedAt: new Date() })
     .where(eq(dashboardTeams.id, ctx.team.id));
-
-  refreshDashboard();
-  return { ok: true };
-}
-
-/* ── Mesa de mentoría del equipo ───────────────────────────── */
-
-export async function assignMentorTable(
-  mentorTableId: string,
-): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-  if (!ctx.team) return { ok: false, error: "no-team" };
-
-  // Cupo comprobado dentro del UPDATE: sin transacciones (neon-http), esta es
-  // la forma de que dos equipos no entren a la vez en la última plaza.
-  const updated = await db
-    .update(dashboardTeams)
-    .set({ mentorTableId, updatedAt: new Date() })
-    .where(
-      and(
-        eq(dashboardTeams.id, ctx.team.id),
-        sql`(
-          select count(*) from dashboard_teams t
-          where t.mentor_table_id = ${mentorTableId} and t.id <> ${ctx.team.id}
-        ) < (
-          select team_capacity from dashboard_mentor_tables
-          where id = ${mentorTableId}
-        )`,
-      ),
-    )
-    .returning({ id: dashboardTeams.id });
-
-  if (updated.length === 0) return { ok: false, error: "table-full" };
-  refreshDashboard();
-  return { ok: true };
-}
-
-export async function releaseMentorTable(): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-  if (!ctx.team) return { ok: false, error: "no-team" };
-
-  await db
-    .update(dashboardTeams)
-    .set({ mentorTableId: null, updatedAt: new Date() })
-    .where(eq(dashboardTeams.id, ctx.team.id));
-
-  refreshDashboard();
-  return { ok: true };
-}
-
-/* ── Turnos de mentoría ────────────────────────────────────── */
-
-export async function bookMentorSlot(
-  slotId: string,
-  topic: string,
-): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-  if (!ctx.team) return { ok: false, error: "no-team" };
-
-  const trimmed = topic.trim();
-  if (trimmed.length < 10) return { ok: false, error: "topic-too-short" };
-
-  const [slot] = await db
-    .select({ startsAt: dashboardMentorSlots.startsAt })
-    .from(dashboardMentorSlots)
-    .where(eq(dashboardMentorSlots.id, slotId))
-    .limit(1);
-  if (!slot) return { ok: false, error: "slot-missing" };
-
-  if (await hasBookingAt(ctx.team.id, slot.startsAt)) {
-    return { ok: false, error: "time-clash" };
-  }
-
-  // `where team_id is null` hace la reserva atómica.
-  const taken = await db
-    .update(dashboardMentorSlots)
-    .set({ teamId: ctx.team.id, topic: trimmed, bookedAt: new Date() })
-    .where(
-      and(
-        eq(dashboardMentorSlots.id, slotId),
-        isNull(dashboardMentorSlots.teamId),
-      ),
-    )
-    .returning({ id: dashboardMentorSlots.id });
-
-  if (taken.length === 0) return { ok: false, error: "slot-taken" };
-  refreshDashboard();
-  return { ok: true };
-}
-
-export async function cancelMentorSlot(slotId: string): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-  if (!ctx.team) return { ok: false, error: "no-team" };
-
-  await db
-    .update(dashboardMentorSlots)
-    .set({ teamId: null, topic: null, bookedAt: null })
-    .where(
-      and(
-        eq(dashboardMentorSlots.id, slotId),
-        eq(dashboardMentorSlots.teamId, ctx.team.id),
-      ),
-    );
 
   refreshDashboard();
   return { ok: true };
