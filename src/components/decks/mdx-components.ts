@@ -15,6 +15,7 @@ import {
   FlowMap,
   Keycap,
   Lead,
+  LimaSponsorWall,
   Logo,
   LogoWall,
   MdxA,
@@ -57,6 +58,7 @@ import {
 export const mdxComponents = {
   SlideTitle,
   Lead,
+  LimaSponsorWall,
   ContrastGrid,
   FlowMap,
   BarStack,
