@@ -7,6 +7,7 @@ import { Resend } from "resend";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { db } from "@/lib/db";
 import { schema } from "@/lib/db/schema";
+import { isStaffEmail } from "@/lib/staff-domains";
 
 /** Sin credenciales no se registra el proveedor: en local nadie las tiene. */
 function githubProvider() {
@@ -63,7 +64,7 @@ export const auth = betterAuth({
             error,
           );
         }
-        if (!guest) return;
+        if (!guest && !isStaffEmail(email)) return;
 
         const resend = new Resend(process.env.RESEND_API_KEY);
         const { error } = await resend.emails.send({
