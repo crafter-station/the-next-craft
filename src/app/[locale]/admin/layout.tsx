@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { auth } from "@/lib/auth";
 import { currentStaffEmail } from "@/lib/dashboard/staff";
 
+import { AdminNav } from "@/components/admin/admin-nav";
 import { Basic, Empty, Panel, Pixel, Tag } from "@/components/dashboard/kit";
 
 import { Link } from "@/i18n/navigation";
@@ -60,21 +61,14 @@ export default async function AdminLayout({
           <div className="flex shrink-0 items-center gap-3">
             <Tag strong>{staffEmail}</Tag>
             <Link
-              href="/dashboard"
+              href="/admin/staff"
               className="font-mono text-[11px] text-[var(--text-dim)] hover:text-[var(--bright)]"
             >
-              {t("shell.dashboard")} →
+              {t("shell.home")} →
             </Link>
           </div>
         </div>
-        <nav className="mx-auto flex max-w-[1140px] gap-1 border-t border-[var(--line)] px-4 py-2 sm:px-6">
-          <Link
-            href="/admin/perks"
-            className="border border-[var(--bone)] bg-[var(--bone)] px-2.5 py-1 font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--void)]"
-          >
-            {t("nav.perks")}
-          </Link>
-        </nav>
+        <AdminNav />
       </header>
       <main
         id="main-content"

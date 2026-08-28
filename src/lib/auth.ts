@@ -7,7 +7,7 @@ import { Resend } from "resend";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { db } from "@/lib/db";
 import { schema } from "@/lib/db/schema";
-import { isStaffEmail } from "@/lib/staff-domains";
+import { isStaffEmail } from "@/lib/staff/domains.server";
 
 /** Sin credenciales no se registra el proveedor: en local nadie las tiene. */
 function githubProvider() {

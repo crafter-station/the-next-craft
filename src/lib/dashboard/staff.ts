@@ -1,16 +1,17 @@
 import { headers } from "next/headers";
 
 import { auth } from "@/lib/auth";
-import { isStaffEmail, staffDomains } from "@/lib/staff-domains";
+import { isStaffEmail } from "@/lib/staff/domains.server";
 
-export { isStaffEmail, staffDomains };
+export { isStaffEmail };
+export { staffDomains } from "@/lib/staff/domains.server";
 
 /**
  * Staff = quien inicia sesión con un correo del dominio de la organización.
  *
  * El correo sale de la sesión de better-auth, que se verificó por OTP: no es
- * un dato que el navegador pueda inventar. Aun así, el dominio es una señal
- * gruesa — cualquiera con correo de la casa entra al panel de staff.
+ * un dato que el navegador pueda inventar. El dominio permitido vive solo en
+ * `STAFF_EMAIL_DOMAINS` del servidor.
  */
 
 /** Devuelve el correo del staff en sesión, o null si no lo es. */

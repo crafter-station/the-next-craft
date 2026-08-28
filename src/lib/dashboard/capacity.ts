@@ -1,56 +1,50 @@
 import type { CityKey } from "@/lib/cities";
 import type { TrackKey } from "@/lib/db/schema-types";
 
-import { TRACKS, trackIndex } from "./content";
+import { TRACKS } from "./content";
 
 /**
- * Cuántos equipos admite cada sede en el reto.
+ * Cuántos equipos puede llevar un track por encima del reparto perfecto antes
+ * de cerrarse.
  *
- * ⚠️ CIFRAS PROVISIONALES. Son un marcador de posición mientras se define el
- * aforo real de cada sede — 20 sale de repartir los ~300 asistentes entre las
- * cinco sedes y agruparlos de 3 a 5. Lima y El Salvador no tienen el mismo
- * tamaño, así que casi seguro estos números hay que tocarlos uno a uno.
- *
- * Cambiar aquí es suficiente: el reparto por track y el bloqueo al confirmar
- * salen de este objeto.
+ * Es la única perilla de todo esto. A 0 el reparto sería un turno rotatorio
+ * estricto —el segundo equipo de la sede ya no podría repetir track— y eso se
+ * vive como arbitrario cuando en la sala hay cuatro equipos. A 2 los primeros
+ * pueden agruparse donde quieran y el freno solo aprieta cuando ya hay
+ * suficientes equipos para que el desequilibrio importe.
  */
-export const HUB_TEAM_CAPACITY: Record<CityKey, number> = {
-  lima: 20,
-  bogota: 20,
-  guatemala: 20,
-  arequipa: 20,
-  salvador: 20,
-};
-
-/** Cupo total de la sede. `null` cuando el equipo no tiene sede asignada. */
-export function hubCapacity(city: CityKey | null): number | null {
-  return city ? HUB_TEAM_CAPACITY[city] : null;
-}
+export const TRACK_BALANCE_SLACK = 2;
 
 /**
- * El cupo de una sede repartido entre los tres tracks.
+ * El techo de un track en su sede, dado cuántos equipos llevan track
+ * confirmado allí.
  *
- * El resto se reparte de uno en uno empezando por el primer track, no con un
- * redondeo: así los tres sumandos suman exactamente el cupo de la sede. Con 20
- * salen 7, 7 y 6 — con `Math.ceil` saldrían 7, 7 y 7, que son 21 y dejan
- * entrar a un equipo de más; con `Math.floor`, 6, 6 y 6, que dejan dos plazas
- * inalcanzables.
+ * No hay cupo total: cuántos equipos habrá no se sabe hasta que se forman, y
+ * los equipos se forman durante el propio kickoff. Así que el límite no es un
+ * número puesto a mano, sino el reparto equitativo de lo que exista **en ese
+ * momento**, más el margen de arriba. Crece solo según entra gente.
+ *
+ * Se cuenta `confirmados + 1` porque el equipo que está confirmando ahora
+ * todavía no está en el recuento y sí ocupa sitio en el reparto.
  */
-export function trackCapacity(
-  city: CityKey | null,
-  track: TrackKey,
-): number | null {
-  const total = hubCapacity(city);
-  if (total === null) return null;
-
-  const base = Math.floor(total / TRACKS.length);
-  const remainder = total % TRACKS.length;
-  return base + (trackIndex(track) < remainder ? 1 : 0);
+export function trackLimit(confirmedInHub: number): number {
+  return (
+    Math.ceil((confirmedInHub + 1) / TRACKS.length) + TRACK_BALANCE_SLACK
+  );
 }
 
-/** El cupo de los tres tracks de una sede, en el orden de `TRACKS`. */
-export function trackCapacities(
-  city: CityKey | null,
-): Map<TrackKey, number | null> {
-  return new Map(TRACKS.map((t) => [t.key, trackCapacity(city, t.key)]));
+/** Los tres tracks de una sede con su recuento y su techo de ahora mismo. */
+export function trackBalance(
+  counts: Map<TrackKey, number>,
+): Map<TrackKey, { teams: number; limit: number }> {
+  const confirmedInHub = [...counts.values()].reduce((a, b) => a + b, 0);
+  const limit = trackLimit(confirmedInHub);
+  return new Map(
+    TRACKS.map((t) => [t.key, { teams: counts.get(t.key) ?? 0, limit }]),
+  );
+}
+
+/** Sin sede no hay contra qué equilibrar, y no bloqueamos por eso. */
+export function balanceApplies(city: CityKey | null): city is CityKey {
+  return city !== null;
 }
