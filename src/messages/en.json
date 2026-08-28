@@ -601,18 +601,18 @@
     "mentors": {
       "label": "MENTORING",
       "headline": "WHO IS WITH YOU AT YOUR HUB",
-      "lede": "The organizing communities are in the room from 11:00 to 13:00. Nothing to book: get up and walk over.",
-      "roles": {
-        "product": "Product and distribution table",
-        "models": "Models and agents table",
-        "engineering": "Engineering and infra table",
-        "interface": "Interface and experience table"
-      },
+      "lede": "Mentors are in the room from 11:00 to 13:00. Nothing to book: get up and walk over.",
       "window": "11:00–13:00",
       "howLabel": "HOW IT WORKS",
       "howTitle": "JUST WALK OVER",
       "howBody": "No slots, no waiting list. During the mentoring block find the table you need and show up with a specific question: half an hour used well changes the demo, and you are on a twelve-hour clock.",
-      "noneInHub": "No mentors confirmed for your hub yet."
+      "noneInHub": "No mentors assigned to your hub yet.",
+      "hubLabel": "AT YOUR HUB",
+      "hubTitle": "MENTORS IN {hub}",
+      "hubTitleUnknown": "CONFIRMED MENTORS",
+      "pendingLabel": "HUB TO BE CONFIRMED",
+      "pendingTitle": "{count} MORE MENTORS",
+      "pendingBody": "They're at the event but we don't know which hub yet. Ask staff if you're looking for someone specific."
     },
     "credits": {
       "label": "PARTNER CREDITS",

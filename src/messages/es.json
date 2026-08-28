@@ -601,18 +601,18 @@
     "mentors": {
       "label": "MENTORÍAS",
       "headline": "QUIÉN TE ACOMPAÑA EN TU SEDE",
-      "lede": "Las comunidades organizadoras están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
-      "roles": {
-        "product": "Mesa de producto y distribución",
-        "models": "Mesa de modelos y agentes",
-        "engineering": "Mesa de ingeniería e infra",
-        "interface": "Mesa de interfaz y experiencia"
-      },
+      "lede": "Los mentores están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
       "window": "11:00–13:00",
       "howLabel": "CÓMO FUNCIONA",
       "howTitle": "TE ACERCAS Y YA",
       "howBody": "No hay turnos ni lista de espera. Durante el bloque de mentorías busca la mesa que te sirva y preséntate con una pregunta concreta: media hora bien usada cambia el demo, y llevas doce horas de reloj.",
-      "noneInHub": "Todavía no hay mentores confirmados para tu sede."
+      "noneInHub": "Todavía no hay mentores asignados a tu sede.",
+      "hubLabel": "EN TU SEDE",
+      "hubTitle": "MENTORES EN {hub}",
+      "hubTitleUnknown": "MENTORES CONFIRMADOS",
+      "pendingLabel": "SEDE POR CONFIRMAR",
+      "pendingTitle": "{count} MENTORES MÁS",
+      "pendingBody": "Están en el evento pero aún no sabemos en qué sede. Pregunta al staff si buscas a alguien en concreto."
     },
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",

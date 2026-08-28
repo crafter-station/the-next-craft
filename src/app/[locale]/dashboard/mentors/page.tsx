@@ -4,16 +4,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
 import { cityName } from "@/lib/cities";
-import { mentorsInCity } from "@/lib/dashboard/content";
+import { type Mentor, mentorsByHub } from "@/lib/dashboard/content";
 import { findParticipantByUserId } from "@/lib/dashboard/state";
 
 import {
-  Basic,
   Empty,
   PageHeader,
   Panel,
   PanelHead,
-  Pixel,
+  Row,
   Tag,
 } from "@/components/dashboard/kit";
 
@@ -35,8 +34,8 @@ export default async function MentorsPage({
     : null;
   if (!participant) return null;
 
-  const mentors = mentorsInCity(participant.city);
-  const hub = participant.city ? cityName(participant.city, locale) : null;
+  const { hub, unassigned } = mentorsByHub(participant.city);
+  const hubName = participant.city ? cityName(participant.city, locale) : null;
 
   return (
     <>
@@ -48,7 +47,7 @@ export default async function MentorsPage({
         aside={
           <div className="flex flex-wrap gap-1.5">
             <Tag strong>{t("mentors.window")}</Tag>
-            {hub && <Tag>{hub}</Tag>}
+            {hubName && <Tag>{hubName}</Tag>}
           </div>
         }
       />
@@ -66,29 +65,55 @@ export default async function MentorsPage({
         </div>
       </Panel>
 
-      {mentors.length === 0 ? (
-        <Panel>
+      <Panel className="mb-5">
+        <PanelHead
+          n={52}
+          label={t("mentors.hubLabel")}
+          title={
+            hubName
+              ? t("mentors.hubTitle", { hub: hubName.toUpperCase() })
+              : t("mentors.hubTitleUnknown")
+          }
+          aside={<Tag strong={hub.length > 0}>{hub.length}</Tag>}
+        />
+        {hub.length === 0 ? (
           <Empty>{t("mentors.noneInHub")}</Empty>
+        ) : (
+          <MentorRows mentors={hub} />
+        )}
+      </Panel>
+
+      {/* Callarse a los que aún no tienen sede sería enseñar una lista corta
+          como si estuviera completa, justo el día que alguien decide si vale
+          la pena levantarse a buscar a un mentor. */}
+      {unassigned.length > 0 && (
+        <Panel>
+          <PanelHead
+            n={53}
+            label={t("mentors.pendingLabel")}
+            title={t("mentors.pendingTitle", { count: unassigned.length })}
+            aside={<Tag>{unassigned.length}</Tag>}
+          />
+          <div className="border-b border-[var(--line)] px-4 py-3.5">
+            <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+              {t("mentors.pendingBody")}
+            </p>
+          </div>
+          <MentorRows mentors={unassigned} />
         </Panel>
-      ) : (
-        <div className="grid items-start gap-5 lg:grid-cols-2">
-          {mentors.map((mentor, i) => (
-            <Panel key={mentor.key} as="article">
-              <header className="border-b border-[var(--line)] px-4 py-3.5">
-                <Basic n={52 + i}>{t(`mentors.roles.${mentor.role}`)}</Basic>
-                <Pixel size="lg" className="mt-2.5">
-                  {mentor.org}
-                </Pixel>
-              </header>
-              <div className="flex flex-wrap gap-1.5 px-4 py-3.5">
-                {mentor.expertise.map((skill) => (
-                  <Tag key={skill}>{skill}</Tag>
-                ))}
-              </div>
-            </Panel>
-          ))}
-        </div>
       )}
     </>
+  );
+}
+
+function MentorRows({ mentors }: { mentors: Mentor[] }) {
+  return (
+    <ul>
+      {mentors.map((mentor) => (
+        <Row key={mentor.slug} marker="→">
+          <span className="text-[var(--text)]">{mentor.name}</span>
+        </Row>
+      ))}
+    </ul>
   );
 }
