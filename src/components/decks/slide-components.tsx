@@ -7,6 +7,10 @@ import ElevenLabsLogo from "@lobehub/icons/es/ElevenLabs/components/Combine";
 import LovableMark from "@lobehub/icons/es/Lovable/components/Mono";
 import LovableWordmark from "@lobehub/icons/es/Lovable/components/Text";
 import N8nLogo from "@lobehub/icons/es/N8n/components/Combine";
+import N8nMark from "@lobehub/icons/es/N8n/components/Mono";
+import N8nWordmark from "@lobehub/icons/es/N8n/components/Text";
+import ReplitMark from "@lobehub/icons/es/Replit/components/Mono";
+import ReplitWordmark from "@lobehub/icons/es/Replit/components/Text";
 import V0Logo from "@lobehub/icons/es/V0/components/Mono";
 
 import { cn } from "@/lib/utils";
@@ -786,14 +790,115 @@ export function Ready() {
   );
 }
 
-export function Wordmark({ className = "" }: { className?: string }) {
+export function Wordmark({
+  className = "",
+  size = "clamp(2rem, 7vw, 4rem)",
+}: {
+  className?: string;
+  size?: string;
+}) {
   return (
     <span
       className={`font-script text-[var(--bright)] leading-none pt-2 inline-block ${className}`}
-      style={{ fontSize: "clamp(2rem, 7vw, 4rem)" }}
+      style={{ fontSize: size }}
     >
       the next craft
     </span>
+  );
+}
+
+export function LimaSponsorWall() {
+  const smallLogos = [
+    ["Tavily", "/deck/brand-assets/lima-kickoff/tavily.svg"],
+    ["ElevenLabs", "/deck/brand-assets/lima-kickoff/elevenlabs.svg"],
+    ["3DevLabs", "/deck/brand-assets/lima-kickoff/3DevLabs.svg"],
+    ["Exa", "/deck/brand-assets/lima-kickoff/exa.svg"],
+    ["Vapi", "/deck/brand-assets/lima-kickoff/vapi.svg"],
+    ["Apify", "/deck/brand-assets/lima-kickoff/apify.svg"],
+    ["INNICIA UCSM", "/deck/brand-assets/lima-kickoff/innicia-ucsm.png"],
+    [
+      "Universidad Católica de Santa María",
+      "/deck/brand-assets/lima-kickoff/ucsm.png",
+    ],
+    [
+      "Universidad Peruana Cayetano Heredia",
+      "/deck/brand-assets/lima-kickoff/upch.svg",
+    ],
+  ] as const;
+
+  return (
+    <div className="flex flex-col items-center gap-8 md:gap-10">
+      <Image
+        src="/deck/brand-assets/lima-kickoff/convex.svg"
+        alt="Convex"
+        width={382}
+        height={146}
+        className="-my-10 h-auto w-full max-w-[18rem] grayscale opacity-80 md:-my-14 md:max-w-[24rem]"
+      />
+
+      <Image
+        src="/deck/brand-assets/lima-kickoff/yalo.svg"
+        alt="Yalo"
+        width={76}
+        height={36}
+        className="h-auto w-full max-w-20 grayscale opacity-80 md:max-w-28"
+      />
+
+      <div className="flex w-full items-center justify-center gap-14 md:gap-24">
+        <Image
+          src="/deck/brand-assets/lima-kickoff/clerk.svg"
+          alt="Clerk"
+          width={441}
+          height={128}
+          className="h-auto w-full max-w-28 grayscale opacity-80 md:max-w-36"
+        />
+        <Image
+          src="/deck/brand-assets/lima-kickoff/cloudforge.svg"
+          alt="CloudForge AI"
+          width={120}
+          height={32}
+          className="h-auto w-full max-w-32 grayscale brightness-0 invert opacity-80 md:max-w-44"
+        />
+      </div>
+
+      <div className="flex w-full flex-wrap items-center justify-center gap-x-8 gap-y-4 md:gap-x-10">
+        {smallLogos.map(([name, src]) => (
+          <Image
+            key={name}
+            src={src}
+            alt={name}
+            width={160}
+            height={48}
+            className="max-h-5 w-auto max-w-24 object-contain grayscale opacity-70 md:max-h-7 md:max-w-28"
+          />
+        ))}
+        <span className="inline-flex items-center gap-2 text-[var(--text)] opacity-70">
+          <Image
+            src="/deck/brand-assets/lima-kickoff/visagente.svg"
+            alt=""
+            aria-hidden="true"
+            width={79}
+            height={32}
+            className="h-5 w-auto grayscale"
+          />
+          <span className="font-sans text-base font-bold leading-none tracking-tight">
+            visagente
+          </span>
+        </span>
+        <span className="inline-flex items-center gap-2 text-[var(--text)] opacity-70">
+          <CursorMark size={20} />
+          <CursorWordmark size={17} />
+        </span>
+        <span className="inline-flex items-center gap-2 text-[var(--text)] opacity-70">
+          <ReplitMark size={20} />
+          <ReplitWordmark size={17} />
+        </span>
+        <span className="inline-flex items-center gap-2 text-[var(--text)] opacity-70">
+          <N8nMark size={20} />
+          <N8nWordmark size={17} />
+        </span>
+      </div>
+    </div>
   );
 }
 

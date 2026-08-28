@@ -1,0 +1,21 @@
+---
+title: Tracks
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-10">
+  <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">3 tracks</h1>
+  <div className="grid gap-4 md:grid-cols-3">
+    {[
+      ['Content Machine', 'Crear · publicar · distribuir'],
+      ['Out of the Box', 'Raro · experimental · inclasificable'],
+      ['Learning by Shipping', 'Aprender haciendo · no mirando'],
+    ].map(([title, copy]) => (
+      <div key={title} className="flex min-h-56 flex-col items-center justify-center bg-[var(--screen-dim)] p-6 text-center">
+        <div className="flex min-h-28 flex-col justify-center">
+          <h2 className="font-mono text-xl font-semibold uppercase leading-tight tracking-[-0.04em] text-[var(--text)] md:text-2xl">{title}</h2>
+          <p className="mt-3 font-mono text-xs uppercase leading-relaxed tracking-[0.08em] text-[var(--text-dim)]">{copy}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
