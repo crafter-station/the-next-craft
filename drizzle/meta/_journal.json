@@ -57,6 +57,13 @@
       "when": 1787844647123,
       "tag": "0007_peaceful_sugar_man",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1787892759108,
+      "tag": "0008_cool_joshua_kane",
+      "breakpoints": true
     }
   ]
 }
