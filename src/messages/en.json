@@ -204,7 +204,8 @@
         "description": "Demos — 3 minutes per team, live product",
         "highlight": true
       }
-    ]
+    ],
+    "now": "NOW"
   },
   "prizes": {
     "label": "PRIZES",
@@ -455,11 +456,8 @@
   "dashboard": {
     "nav": {
       "overview": "Dashboard",
-      "agenda": "Schedule",
       "tracks": "Tracks",
-      "mentors": "Mentoring",
       "credits": "Credits",
-      "support": "Support",
       "groupEvent": "YOUR EVENT",
       "groupResources": "RESOURCES",
       "menu": "Menu",
@@ -468,8 +466,7 @@
       "badge": "Badge",
       "staff": "Staff",
       "groupStaff": "DOOR",
-      "team": "Team",
-      "perks": "Prizes & perks"
+      "team": "Team"
     },
     "shell": {
       "betweenBlocks": "between blocks",
@@ -553,12 +550,10 @@
       "mentorSlots": "SLOTS",
       "checklistLabel": "CHECKLIST",
       "checklistTitle": "{done} OF {total}",
-      "hubsLabel": "FIVE HUBS",
-      "hubsTitle": "ON THE SAME CLOCK",
-      "yourHub": "YOUR HUB",
       "logisticsLabel": "LOGISTICS",
       "logisticsTitle": "HUB DETAILS",
-      "faqCta": "Event FAQ"
+      "faqCta": "Event FAQ",
+      "seeAgenda": "See the agenda"
     },
     "checklist": {
       "track": "Track confirmed",
@@ -572,24 +567,6 @@
       "badge": "Badge generated",
       "team": "Team formed",
       "goTeam": "Form"
-    },
-    "agenda": {
-      "label": "SCHEDULE · 12 HOURS",
-      "headline": "ONE DAY. TWELVE HOURS.",
-      "lede": "Saturday 29 August 2026, 09:00 to 21:00 in your hub's own time. Guatemala and El Salvador run an hour behind Lima, Bogotá and Arequipa: each hub runs its own twelve-hour day.",
-      "saved": "{count} in your schedule",
-      "past": "{done}/{total} past",
-      "filter": "FILTER",
-      "all": "all",
-      "viewList": "list",
-      "viewClock": "clock",
-      "now": "now",
-      "mandatory": "required",
-      "save": "save",
-      "unsave": "saved",
-      "empty": "Nothing with those filters. Go back to «all».",
-      "footer": "{shown} of {total} blocks · {zone} · check-in 08:30 · code freeze 20:00 · demos 20:15",
-      "clockLabel": "CLOCK"
     },
     "tracks": {
       "label": "TRACKS",
@@ -610,22 +587,6 @@
       "closesAt": "closes {time}",
       "balanceFull": "well ahead",
       "balanceRoom": "room for {count} more"
-    },
-    "mentors": {
-      "label": "MENTORING",
-      "headline": "WHO IS WITH YOU AT YOUR HUB",
-      "lede": "Mentors are in the room from 11:00 to 13:00. Nothing to book: get up and walk over.",
-      "window": "11:00–13:00",
-      "howLabel": "HOW IT WORKS",
-      "howTitle": "JUST WALK OVER",
-      "howBody": "No slots, no waiting list. During the mentoring block find the table you need and show up with a specific question: half an hour used well changes the demo, and you are on a twelve-hour clock.",
-      "noneInHub": "No mentors assigned to your hub yet.",
-      "hubLabel": "AT YOUR HUB",
-      "hubTitle": "MENTORS IN {hub}",
-      "hubTitleUnknown": "CONFIRMED MENTORS",
-      "pendingLabel": "HUB TO BE CONFIRMED",
-      "pendingTitle": "{count} MORE MENTORS",
-      "pendingBody": "They're at the event but we don't know which hub yet. Ask staff if you're looking for someone specific."
     },
     "credits": {
       "label": "PARTNER CREDITS",
@@ -735,31 +696,6 @@
       "codePendingLabel": "COMING SOON",
       "codePendingBody": "Your code will be assigned before the event. Check back once the team publishes it from admin."
     },
-    "support": {
-      "label": "SUPPORT",
-      "headline": "EVERYTHING ELSE HAPPENS HERE",
-      "lede": "The official channel is WhatsApp: your hub's staff, the mentoring tables and any partner code that fails. With five hubs across two time zones, it's what keeps them coordinated.",
-      "openWhatsapp": "Message on WhatsApp",
-      "responseLabel": "STAFF REPLIES",
-      "responseValue": "< 10 min",
-      "mentorsLabel": "MENTORS ONLINE",
-      "mentorsValue": "11:00 – 13:00",
-      "hubsLabel": "HUBS",
-      "hubsValue": "five, two time zones",
-      "etiquetteLabel": "HOW TO ASK FOR HELP",
-      "etiquetteTitle": "FIVE RULES",
-      "rule1": "Paste the error as text, not a screenshot. Nobody can search inside an image.",
-      "rule2": "One complete message instead of five lines in a row.",
-      "rule3": "Say your hub and table number: staff is different in each city.",
-      "rule4": "For anything long, book a mentoring slot instead of typing.",
-      "rule5": "When you fix something, say so. It's the cheapest contribution you can make in twelve hours.",
-      "templateLabel": "TEMPLATE",
-      "templateTitle": "SUPPORT TEMPLATE",
-      "templateBody": "With these five fields you usually get an answer on the first try.",
-      "copyTemplate": "copy template",
-      "copied": "copied",
-      "template": "What I'm trying to do: …\nWhat I expected: …\nWhat happens instead: (exact error, pasted as text)\nWhat I already tried: …\nContext: hub {hub} · table {table} · {track}"
-    },
     "errors": {
       "unauthenticated": "Your session expired. Sign in again.",
       "no-participant": "We couldn't find your accreditation.",
@@ -767,7 +703,6 @@
       "track-locked": "The track is already confirmed. Release it first.",
       "unknown-track": "That track doesn't exist.",
       "unknown-partner": "That partner doesn't exist.",
-      "unknown-block": "That block isn't on the schedule.",
       "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams."
     },
     "badge": {
@@ -920,14 +855,6 @@
       "continue": "Continue",
       "dashboard": "My panel",
       "admin": "Admin"
-    },
-    "perks": {
-      "label": "PRIZES & PERKS",
-      "headline": "WHAT YOU GET",
-      "lede": "What your ticket includes, and what the top three take home. Partner credits are redeemed in the credits section.",
-      "prizesLabel": "FOR THE WINNERS",
-      "includedLabel": "FOR EVERYONE WHO SHOWS UP",
-      "includedTitle": "{count} THINGS INCLUDED"
     }
   },
   "admin": {

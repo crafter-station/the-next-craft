@@ -1,4 +1,4 @@
-import { AGENDA_META, type AgendaMeta, agendaMetaByTime } from "./content";
+import { AGENDA_META, type AgendaMeta } from "./content";
 
 /** Forma de `schedule.events[]` en src/messages/{es,en}.json. */
 export type ScheduleMessage = {
@@ -30,8 +30,4 @@ export function buildAgenda(events: ScheduleMessage[]): AgendaBlock[] {
     });
   }
   return blocks;
-}
-
-export function isKnownBlock(time: string) {
-  return agendaMetaByTime.has(time);
 }

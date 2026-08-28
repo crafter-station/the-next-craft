@@ -8,14 +8,13 @@ import { and, eq, isNull, sql } from "drizzle-orm";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
-  dashboardAgendaSaves,
   dashboardPartnerRedemptions,
   dashboardTeams,
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
 import { balanceApplies, TRACK_BALANCE_SLACK } from "./capacity";
-import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
+import { PARTNERS, TRACKS } from "./content";
 import {
   findParticipantByUserId,
   findTeamForParticipant,
@@ -36,7 +35,6 @@ export type DashboardError =
   | "unknown-track"
   | "track-full"
   | "unknown-partner"
-  | "unknown-block"
   | "perks-locked";
 
 type HackerContext =
@@ -211,38 +209,6 @@ export async function redeemPartner(partnerKey: string): Promise<ActionResult> {
     .insert(dashboardPartnerRedemptions)
     .values({ participantId: ctx.participant.id, partnerKey })
     .onConflictDoNothing();
-
-  refreshDashboard();
-  return { ok: true };
-}
-
-/* ── Mi agenda ─────────────────────────────────────────────── */
-
-export async function toggleAgendaBlock(
-  eventTime: string,
-): Promise<ActionResult> {
-  const ctx = await currentHacker();
-  if (ctx.error) return { ok: false, error: ctx.error };
-  if (!agendaMetaByTime.has(eventTime)) {
-    return { ok: false, error: "unknown-block" };
-  }
-
-  const removed = await db
-    .delete(dashboardAgendaSaves)
-    .where(
-      and(
-        eq(dashboardAgendaSaves.participantId, ctx.participant.id),
-        eq(dashboardAgendaSaves.eventTime, eventTime),
-      ),
-    )
-    .returning({ eventTime: dashboardAgendaSaves.eventTime });
-
-  if (removed.length === 0) {
-    await db
-      .insert(dashboardAgendaSaves)
-      .values({ participantId: ctx.participant.id, eventTime })
-      .onConflictDoNothing();
-  }
 
   refreshDashboard();
   return { ok: true };
