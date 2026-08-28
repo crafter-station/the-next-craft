@@ -1,0 +1,39 @@
+---
+title: Agenda
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-7">
+  <h1 className="font-mono text-[clamp(2.25rem,6vw,5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">Agenda</h1>
+
+  <div className="grid gap-x-12 gap-y-3 md:grid-cols-2">
+    <div className="flex flex-col gap-3">
+      {[
+        ['08:30–09:00', 'Check-in'],
+        ['09:00–09:30', 'Bienvenida · Reglas · Agenda'],
+        ['09:30', 'Desayuno · Empieza el hacking'],
+        ['13:00', 'Almuerzo'],
+        ['18:00', 'Cierra la entrega'],
+        ['18:00–18:15', 'Pizza'],
+      ].map(([time, event]) => (
+        <div key={time} className={event === 'Cierra la entrega' ? 'grid grid-cols-[7.5rem_1fr] gap-4 bg-[var(--bone)] px-4 py-3 font-mono text-sm text-[var(--void)]' : 'grid grid-cols-[7.5rem_1fr] gap-4 bg-[var(--screen-dim)] px-4 py-3 font-mono text-sm'}>
+          <span className={event === 'Cierra la entrega' ? 'font-semibold tabular-nums text-[var(--void)]' : 'font-semibold tabular-nums text-[var(--bright)]'}>{time}</span>
+          <span className={event === 'Cierra la entrega' ? 'font-semibold text-[var(--void)]' : 'text-[var(--text)]'}>{event}</span>
+        </div>
+      ))}
+    </div>
+    <div className="flex flex-col gap-3">
+      {[
+        ['18:15–19:15', 'Los equipos presentan a mentores'],
+        ['19:15–19:30', 'Mentores eligen el top 2 de El Salvador · Anuncio'],
+        ['19:30–20:30', 'Top 6 presentan al jurado · Jurado remoto'],
+        ['20:30–20:45', 'El jurado elige a los ganadores'],
+        ['20:45–21:00', 'Anuncio de ganadores · Cierre'],
+      ].map(([time, event]) => (
+        <div key={time} className="grid grid-cols-[7.5rem_1fr] gap-4 bg-[var(--screen-dim)] px-4 py-3 font-mono text-sm">
+          <span className="font-semibold tabular-nums text-[var(--bright)]">{time}</span>
+          <span className="text-[var(--text)]">{event}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
