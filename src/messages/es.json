@@ -453,13 +453,16 @@
       "badge": "Badge",
       "staff": "Staff",
       "groupStaff": "PUERTA",
-      "team": "Equipo"
+      "team": "Equipo",
+      "perks": "Premios y perks"
     },
     "shell": {
       "betweenBlocks": "entre bloques",
       "toFreeze": "al freeze",
       "demoClock": "reloj del evento",
-      "hub": "SEDE"
+      "hub": "SEDE",
+      "beforeEvent": "aún no empieza",
+      "afterEvent": "evento terminado"
     },
     "gate": {
       "title": "SOLO PARA ACREDITADOS",
@@ -544,13 +547,10 @@
     },
     "checklist": {
       "track": "Track confirmado",
-      "mentorTable": "Mesa de mentoría asignada",
-      "booking": "Turno de 25 min reservado",
       "repo": "Repositorio enlazado",
       "demo": "Link del demo en vivo",
       "credits": "Créditos de partners canjeados",
       "goTracks": "Elegir",
-      "goMentors": "Reservar",
       "goCredits": "Canjear",
       "goOverview": "Ver",
       "goBadge": "Credencial",
@@ -561,20 +561,19 @@
     "agenda": {
       "label": "AGENDA · 12 HORAS",
       "headline": "UN DÍA. DOCE HORAS.",
-      "lede": "Sábado 29 de agosto de 2026, de 09:00 a 21:00. Las cinco sedes corren al mismo reloj: el code freeze y los demos son simultáneos.",
+      "lede": "Sábado 29 de agosto de 2026, de 09:00 a 21:00 en la hora de tu sede. Guatemala y El Salvador van una hora por detrás de Lima, Bogotá y Arequipa: cada sede corre su propio día de doce horas.",
       "saved": "{count} en tu agenda",
       "past": "{done}/{total} pasados",
       "filter": "FILTRAR",
       "all": "todos",
       "viewList": "lista",
       "viewClock": "reloj",
-      "onlyMine": "solo mi agenda",
       "now": "ahora",
       "mandatory": "obligatorio",
       "save": "guardar",
       "unsave": "en agenda",
       "empty": "Nada con esos filtros. Vuelve a «todos».",
-      "footer": "{shown} de {total} bloques · America/Bogota (GMT-5) · registro 08:30 · code freeze 20:00 · demos 20:15",
+      "footer": "{shown} de {total} bloques · {zone} · registro 08:30 · code freeze 20:00 · demos 20:15",
       "clockLabel": "RELOJ"
     },
     "tracks": {
@@ -594,41 +593,26 @@
       "windowClosedLabel": "VENTANA CERRADA",
       "windowClosedBody": "El kickoff ya terminó. Puedes seguir eligiendo, pero avisa por WhatsApp para que el staff registre el cambio.",
       "closesAt": "cierra {time}",
-      "prizesLabel": "PREMIOS",
-      "perksLabel": "PARA TODOS LOS QUE ENTRAN",
-      "perksTitle": "INCLUIDO"
+      "capacity": "{taken}/{capacity} equipos",
+      "capacityFull": "cupo lleno",
+      "capacityLeft": "quedan {count}",
+      "capacityLabel": "CUPO EN TU SEDE"
     },
     "mentors": {
       "label": "MENTORÍAS",
-      "headline": "MENTORÍAS CON CRAFTER STATION",
-      "lede": "Cuatro mesas de las comunidades organizadoras, de 11:00 a 13:00. Elige la mesa que acompaña a tu equipo y reserva turnos de 25 minutos.",
-      "freeSlots": "{count} turnos libres",
-      "tables": "{count} mesas",
-      "myTable": "tu mesa",
-      "chooseTable": "Elegir mesa",
-      "releaseTable": "Liberar mesa",
-      "tableFull": "Mesa llena",
-      "teamsAssigned": "{assigned}/{capacity} equipos acompañados",
-      "slotsLabel": "TURNOS DE 25 MIN · 11:00–13:00",
-      "noSlots": "sin turnos",
-      "freeCount": "{count} libres",
-      "topicLabel": "¿SOBRE QUÉ QUIERES HABLAR?",
-      "topicPlaceholder": "Sé específico: «los cortes salen bien pero no sabemos medir si el clip conecta».",
-      "topicHint": "Escribe al menos una frase. La mesa la lee antes de sentarse contigo.",
-      "chars": "{count} caracteres",
-      "book": "Reservar",
-      "cancel": "Cancelar",
-      "release": "Liberar",
-      "myBookingsLabel": "MIS MENTORÍAS",
-      "myBookingsTitle": "{count} TURNOS",
-      "noBookingsTitle": "SIN TURNOS",
-      "noBookings": "Las mentorías son de 11:00 a 13:00. Con doce horas de reloj, media hora bien usada cambia el demo.",
+      "headline": "QUIÉN TE ACOMPAÑA EN TU SEDE",
+      "lede": "Las comunidades organizadoras están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
       "roles": {
         "product": "Mesa de producto y distribución",
         "models": "Mesa de modelos y agentes",
         "engineering": "Mesa de ingeniería e infra",
         "interface": "Mesa de interfaz y experiencia"
-      }
+      },
+      "window": "11:00–13:00",
+      "howLabel": "CÓMO FUNCIONA",
+      "howTitle": "TE ACERCAS Y YA",
+      "howBody": "No hay turnos ni lista de espera. Durante el bloque de mentorías busca la mesa que te sirva y preséntate con una pregunta concreta: media hora bien usada cambia el demo, y llevas doce horas de reloj.",
+      "noneInHub": "Todavía no hay mentores confirmados para tu sede."
     },
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
@@ -734,14 +718,14 @@
     "support": {
       "label": "SOPORTE",
       "headline": "AQUÍ PASA TODO LO DEMÁS",
-      "lede": "El canal oficial del evento es WhatsApp: staff de tu sede, las cuatro mesas de mentoría y los códigos de partners que fallan. Con cinco sedes al mismo reloj, es lo que las mantiene sincronizadas.",
+      "lede": "El canal oficial del evento es WhatsApp: staff de tu sede, las mesas de mentoría y los códigos de partners que fallan. Con cinco sedes en dos husos horarios, es lo que las mantiene coordinadas.",
       "openWhatsapp": "Escribir por WhatsApp",
       "responseLabel": "STAFF RESPONDE",
       "responseValue": "< 10 min",
       "mentorsLabel": "MENTORÍAS EN LÍNEA",
       "mentorsValue": "11:00 – 13:00",
       "hubsLabel": "SEDES",
-      "hubsValue": "cinco, al mismo reloj",
+      "hubsValue": "cinco, en dos husos",
       "etiquetteLabel": "CÓMO PEDIR AYUDA",
       "etiquetteTitle": "CINCO REGLAS",
       "rule1": "Pega el error como texto, no como captura. Nadie puede buscar dentro de una imagen.",
@@ -762,13 +746,9 @@
       "no-team": "Necesitas un equipo para esto.",
       "track-locked": "El track ya está confirmado. Libéralo primero.",
       "unknown-track": "Ese track no existe.",
-      "slot-taken": "Alguien tomó ese turno antes que tú.",
-      "slot-missing": "Ese turno ya no existe.",
-      "time-clash": "Ya tienes una mentoría a esa hora.",
-      "topic-too-short": "Escribe al menos una frase sobre tu duda.",
-      "table-full": "Esa mesa ya tiene todos sus equipos.",
       "unknown-partner": "Ese partner no existe.",
-      "unknown-block": "Ese bloque no está en la agenda."
+      "unknown-block": "Ese bloque no está en la agenda.",
+      "track-full": "Ese track ya llenó su cupo en tu sede. Elige otro."
     },
     "badge": {
       "label": "BADGE · TU IDENTIDAD",
@@ -800,7 +780,11 @@
       "includedLabel": "INCLUIDO EN TU ENTRADA",
       "includedTitle": "{count} COMIDAS INCLUIDAS",
       "includedSwag": "Swag oficial del evento, al llegar a tu sede.",
-      "includedCommunity": "Acceso a la comunidad de Crafter Station."
+      "includedCommunity": "Acceso a la comunidad de Crafter Station.",
+      "download": "Descargar badge",
+      "downloadPortrait": "Descargar retrato",
+      "editProfile": "Editar perfil",
+      "gallery": "Ver la galería de participantes"
     },
     "staff": {
       "label": "STAFF · PUERTA",
@@ -881,6 +865,14 @@
     "access": {
       "signIn": "Entrar",
       "dashboard": "Mi panel"
+    },
+    "perks": {
+      "label": "PREMIOS Y PERKS",
+      "headline": "LO QUE TE LLEVAS",
+      "lede": "Lo que incluye tu entrada, y lo que se llevan los tres primeros. Los créditos de partners se canjean en la sección de créditos.",
+      "prizesLabel": "PARA QUIEN GANA",
+      "includedLabel": "PARA TODOS LOS QUE ENTRAN",
+      "includedTitle": "{count} COSAS INCLUIDAS"
     }
   }
 }
