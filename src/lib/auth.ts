@@ -7,7 +7,7 @@ import { Resend } from "resend";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { db } from "@/lib/db";
 import { schema } from "@/lib/db/schema";
-import { isStaffEmail } from "@/lib/staff-domains";
+import { isStaffEmail } from "@/lib/staff/domains.server";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", schema }),

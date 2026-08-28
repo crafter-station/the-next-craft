@@ -100,6 +100,7 @@ No `.env` file is committed. Required variables include:
 - `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY_B64` (base64 one-line), `GOOGLE_SHEET_ID`, `GOOGLE_SHEET_NAME`
 - `RESEND_API_KEY`, `EMAIL_FROM`
 - `CRON_SECRET`
+- `STAFF_EMAIL_DOMAINS` — dominios de correo con acceso staff/admin (coma-separado, sin `@`; solo servidor)
 - Badge generator: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BADGE_PII_ENCRYPTION_KEY`, `LUMA_API_KEY`, `AI_GATEWAY_API_KEY`, `TRIGGER_SECRET_KEY`
 - Build-time public vars: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER`
 
