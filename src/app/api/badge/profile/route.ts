@@ -2,7 +2,9 @@ import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { auth } from "@/lib/auth";
+import { TERMS_VERSION } from "@/lib/badge/constants";
 import { renderBadgeImage } from "@/lib/badge/image";
+import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { participantProfilePath } from "@/lib/badge/profile";
 import { db } from "@/lib/db";
 import {
@@ -38,6 +40,14 @@ const vehiclePlateSchema = z
   .trim()
   .max(20)
   .transform((value) => value.toUpperCase());
+
+const createProfileSchema = publicProfileSchema.extend({
+  fullName: z.string().trim().min(2).max(80),
+  vehiclePlate: vehiclePlateSchema,
+  documentType: z.enum(["dni", "passport", "ce"]),
+  documentNumber: z.string().trim().min(5).max(40),
+  acceptsTerms: z.literal(true),
+});
 
 const updateProfileSchema = publicProfileSchema.extend({
   fullName: z.string().trim().min(2).max(80),
@@ -79,11 +89,108 @@ async function renderExistingBadge(input: {
   return { attemptId: attempt.id, badgeImageBase64: badge.toString("base64") };
 }
 
-export function POST() {
-  return Response.json(
-    { error: "Badge onboarding is closed" },
-    { status: 410 },
-  );
+export async function POST(request: Request) {
+  const session = await auth.api.getSession({ headers: request.headers });
+  if (!session)
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+
+  const parsed = createProfileSchema.safeParse(await request.json());
+  if (!parsed.success) {
+    return Response.json(
+      { error: "Invalid participant details" },
+      { status: 400 },
+    );
+  }
+
+  const guest = await lookupApprovedGuest(session.user.email);
+  if (!guest)
+    return Response.json(
+      { error: "Registration is not approved" },
+      { status: 403 },
+    );
+  if (guest.city === "lima")
+    return Response.json(
+      { error: "Badge onboarding is closed in Lima" },
+      { status: 410 },
+    );
+
+  const now = new Date();
+  const [participant] = await db
+    .insert(badgeParticipants)
+    .values({
+      userId: session.user.id,
+      email: guest.email,
+      lumaGuestId: guest.id,
+      city: guest.city,
+      fullName: parsed.data.fullName,
+      vehiclePlate: parsed.data.vehiclePlate || null,
+      documentType: parsed.data.documentType,
+      documentNumber: parsed.data.documentNumber,
+      encryptedDocument: null,
+      termsVersion: TERMS_VERSION,
+      termsAcceptedAt: now,
+      updatedAt: now,
+    })
+    .onConflictDoUpdate({
+      target: badgeParticipants.userId,
+      set: {
+        email: guest.email,
+        lumaGuestId: guest.id,
+        city: guest.city,
+        fullName: parsed.data.fullName,
+        vehiclePlate: parsed.data.vehiclePlate || null,
+        documentType: parsed.data.documentType,
+        documentNumber: parsed.data.documentNumber,
+        encryptedDocument: null,
+        termsVersion: TERMS_VERSION,
+        termsAcceptedAt: now,
+        updatedAt: now,
+      },
+    })
+    .returning({ id: badgeParticipants.id });
+
+  const [profile] = await db
+    .insert(participantProfiles)
+    .values({
+      participantId: participant.id,
+      displayName: parsed.data.displayName,
+      bio: parsed.data.bio || null,
+      links: parsed.data.links,
+      updatedAt: now,
+    })
+    .onConflictDoUpdate({
+      target: participantProfiles.participantId,
+      set: {
+        displayName: parsed.data.displayName,
+        bio: parsed.data.bio || null,
+        links: parsed.data.links,
+        updatedAt: now,
+      },
+    })
+    .returning({ participantNumber: participantProfiles.participantNumber });
+
+  const existingBadge = await renderExistingBadge({
+    participantId: participant.id,
+    participantNumber: profile.participantNumber,
+    displayName: parsed.data.displayName,
+  });
+  if (existingBadge) {
+    await db.batch([
+      db
+        .update(badgeAttempts)
+        .set({
+          badgeImageBase64: existingBadge.badgeImageBase64,
+          updatedAt: now,
+        })
+        .where(eq(badgeAttempts.id, existingBadge.attemptId)),
+      db
+        .update(participantProfiles)
+        .set({ publishedAt: now, updatedAt: now })
+        .where(eq(participantProfiles.participantId, participant.id)),
+    ]);
+  }
+
+  return Response.json({ ok: true });
 }
 
 export async function PATCH(request: Request) {
