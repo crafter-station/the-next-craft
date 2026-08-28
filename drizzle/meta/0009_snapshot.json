@@ -1,5 +1,5 @@
 {
-  "id": "a85dec51-4e05-4da3-8869-026e722ebe52",
+  "id": "819c845f-e296-4486-862e-b2099c7b2879",
   "prevId": "da32098e-c730-423d-a4ce-cd533136772d",
   "version": "7",
   "dialect": "postgresql",
@@ -678,24 +678,6 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        },
-        "github_invite_id": {
-          "name": "github_invite_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_invite_state": {
-          "name": "github_invite_state",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_invited_at": {
-          "name": "github_invited_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {
@@ -836,37 +818,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "github_repo_full_name": {
-          "name": "github_repo_full_name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_repo_url": {
-          "name": "github_repo_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_repo_status": {
-          "name": "github_repo_status",
-          "type": "dashboard_repo_status",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_repo_error": {
-          "name": "github_repo_error",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "github_repo_created_at": {
-          "name": "github_repo_created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp with time zone",
@@ -927,21 +878,6 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
-        },
-        "dashboard_teams_github_repo_idx": {
-          "name": "dashboard_teams_github_repo_idx",
-          "columns": [
-            {
-              "expression": "github_repo_full_name",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
         }
       },
       "foreignKeys": {},
@@ -951,43 +887,36 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.participant_github": {
-      "name": "participant_github",
+    "public.participant_partner_codes": {
+      "name": "participant_partner_codes",
       "schema": "",
       "columns": {
         "participant_id": {
           "name": "participant_id",
           "type": "uuid",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true
         },
-        "github_user_id": {
-          "name": "github_user_id",
+        "partner_key": {
+          "name": "partner_key",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "login": {
-          "name": "login",
+        "code": {
+          "name": "code",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "avatar_url": {
-          "name": "avatar_url",
+        "assigned_by_email": {
+          "name": "assigned_by_email",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "linked_at": {
-          "name": "linked_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
+        "assigned_at": {
+          "name": "assigned_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -995,11 +924,38 @@
         }
       },
       "indexes": {
-        "participant_github_user_id_idx": {
-          "name": "participant_github_user_id_idx",
+        "participant_partner_codes_participant_partner_idx": {
+          "name": "participant_partner_codes_participant_partner_idx",
           "columns": [
             {
-              "expression": "github_user_id",
+              "expression": "participant_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "partner_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "participant_partner_codes_partner_code_idx": {
+          "name": "participant_partner_codes_partner_code_idx",
+          "columns": [
+            {
+              "expression": "partner_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "code",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1012,9 +968,9 @@
         }
       },
       "foreignKeys": {
-        "participant_github_participant_id_badge_participants_id_fk": {
-          "name": "participant_github_participant_id_badge_participants_id_fk",
-          "tableFrom": "participant_github",
+        "participant_partner_codes_participant_id_badge_participants_id_fk": {
+          "name": "participant_partner_codes_participant_id_badge_participants_id_fk",
+          "tableFrom": "participant_partner_codes",
           "tableTo": "badge_participants",
           "columnsFrom": [
             "participant_id"
@@ -1382,15 +1338,6 @@
         "completed",
         "failed",
         "rejected"
-      ]
-    },
-    "public.dashboard_repo_status": {
-      "name": "dashboard_repo_status",
-      "schema": "public",
-      "values": [
-        "pending",
-        "ready",
-        "failed"
       ]
     },
     "public.dashboard_track": {
