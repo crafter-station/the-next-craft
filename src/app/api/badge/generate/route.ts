@@ -69,6 +69,12 @@ export async function POST(request: Request) {
       { status: 403 },
     );
   }
+  if (guest.city === "lima") {
+    return Response.json(
+      { error: "Badge generation is closed in Lima" },
+      { status: 410 },
+    );
+  }
 
   let formData: FormData;
   try {
