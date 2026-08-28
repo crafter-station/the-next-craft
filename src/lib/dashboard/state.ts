@@ -7,7 +7,6 @@ import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   badgeParticipants,
-  dashboardAgendaSaves,
   dashboardCheckins,
   dashboardPartnerRedemptions,
   dashboardTeamMembers,
@@ -202,15 +201,6 @@ export async function listRedeemedPartners(participantId: string) {
   );
 }
 
-export async function listSavedAgenda(participantId: string) {
-  const rows = await db
-    .select({ eventTime: dashboardAgendaSaves.eventTime })
-    .from(dashboardAgendaSaves)
-    .where(eq(dashboardAgendaSaves.participantId, participantId));
-  return new Set(rows.map((r) => r.eventTime));
-}
-
-/** Cuántos equipos hay en la sede, para el contador de la página de equipo. */
 export async function countTeamsInCity(city: CityKey | null) {
   if (!city) return 0;
   const [row] = await db

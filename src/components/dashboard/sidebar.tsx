@@ -12,19 +12,16 @@ import { DASHBOARD_NAV } from "./nav";
 const GROUPS = [
   { key: "event", labelKey: "groupEvent", n: 10 },
   { key: "resources", labelKey: "groupResources", n: 20 },
-  { key: "staff", labelKey: "groupStaff", n: 30 },
 ] as const;
 
 export function DashboardSidebar({
   name,
   tableNumber,
   partners,
-  isStaff,
 }: {
   name: string;
   tableNumber: string | null;
   partners: { key: string; name: string }[];
-  isStaff: boolean;
 }) {
   const t = useTranslations("dashboard.nav");
   const pathname = usePathname();
@@ -68,9 +65,8 @@ export function DashboardSidebar({
         </div>
 
         <nav className="flex-1 overflow-y-auto p-3">
-          {GROUPS.filter((group) => group.key !== "staff" || isStaff).map(
-            (group) => (
-              <div key={group.key} className="mb-5">
+          {GROUPS.map((group) => (
+            <div key={group.key} className="mb-5">
                 <p className="px-1.5 pb-2.5 font-mono text-[11px] leading-none tracking-[0.14em] uppercase text-[var(--text-dim)]">
                   <span className="text-[var(--bright)]">{group.n}</span>{" "}
                   {t(group.labelKey)}
@@ -134,10 +130,9 @@ export function DashboardSidebar({
                       );
                     },
                   )}
-                </ul>
-              </div>
-            ),
-          )}
+              </ul>
+            </div>
+          ))}
         </nav>
 
         <div className="border-t border-[var(--line)] p-3">
