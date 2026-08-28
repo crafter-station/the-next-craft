@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
 import { type BadgeStudioIntent, parseStudioIntent } from "@/lib/badge/intent";
+import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
 
@@ -26,15 +27,22 @@ export default async function BadgePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await auth.api.getSession({ headers: await headers() });
-  const initialState = session
-    ? await withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id))
-    : null;
+  const [initialState, guest] = session
+    ? await Promise.all([
+        withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id)),
+        lookupApprovedGuest(session.user.email),
+      ])
+    : [null, null];
 
   // El estudio es el taller: se entra a crear o a reemplazar. El badge ya
   // hecho vive en el panel, así que quien vuelve aquí con uno generado sigue
   // hasta ahí. La excepción es llegar con intención declarada (`?edit=`), que
   // es justo el enlace de vuelta desde el panel; sin ella no habría forma de
   // editar nada y el redirect sería un callejón.
+  //
+  // Va antes del cierre de Lima a propósito: tener el registro cerrado impide
+  // crear o reemplazar, no ver lo que ya tienes. Quien ya generó su badge sigue
+  // al panel; el cierre lo encuentra solo si vuelve aquí a cambiar algo.
   const intent: BadgeStudioIntent = parseStudioIntent(
     (await searchParams).edit,
   );
@@ -63,6 +71,7 @@ export default async function BadgePage({
           initialSession={session}
           initialState={initialState}
           intent={intent}
+          onboardingClosed={guest?.city === "lima"}
         />
       </QueryProvider>
     </main>
