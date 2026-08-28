@@ -11,6 +11,7 @@ import {
   syncGithubLink,
 } from "@/lib/dashboard/github-actions";
 
+import { CopyBlock } from "./copy-block";
 import { keyClass, keyGhostClass, Panel, PanelHead, Row } from "./kit";
 
 export type GithubMemberView = {
@@ -46,6 +47,7 @@ export function GithubPanel({
   members,
 }: GithubPanelProps) {
   const t = useTranslations("dashboard.team.github");
+  const tTeam = useTranslations("dashboard.team");
   const tErrors = useTranslations("dashboard.team.errors");
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
@@ -143,6 +145,30 @@ export function GithubPanel({
           </a>
           <p className="mt-2 font-mono text-[11px] leading-relaxed text-[var(--text-dim)]">
             {t("repoBody")}
+          </p>
+
+          {/*
+            A las 2am nadie se acuerda de `git remote add`. El segundo bloque
+            fuerza a propósito: el equipo que ya empezó en local tiene una
+            historia sin relación con la del template y un push normal se
+            rechaza — y lo que se pisa es el starter, que es desechable.
+          */}
+          <div className="mt-4 flex flex-col gap-3.5">
+            <CopyBlock
+              label={t("pushFresh")}
+              text={`git clone ${repo.url}.git\ncd ${repo.fullName.split("/")[1] ?? ""}`}
+              copyLabel={tTeam("copy")}
+              copiedLabel={tTeam("copied")}
+            />
+            <CopyBlock
+              label={t("pushExisting")}
+              text={`git remote add origin ${repo.url}.git\ngit branch -M main\ngit push -u --force origin main`}
+              copyLabel={tTeam("copy")}
+              copiedLabel={tTeam("copied")}
+            />
+          </div>
+          <p className="mt-3 font-mono text-[11px] leading-relaxed text-[var(--bright)]">
+            {t("pushAccept")}
           </p>
         </div>
       ) : (

@@ -897,7 +897,10 @@
         "stateQueued": "sin invitar",
         "statePending": "invitación enviada",
         "stateAccepted": "dentro",
-        "stateFailed": "falló la invitación"
+        "stateFailed": "falló la invitación",
+        "pushFresh": "SI EMPIEZAN DE CERO",
+        "pushExisting": "SI YA TIENEN CÓDIGO EN LOCAL",
+        "pushAccept": "Acepta la invitación antes de empujar: sin aceptarla GitHub responde 403. El segundo bloque reemplaza el contenido del starter por el suyo."
       },
       "errors": {
         "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",

@@ -7,7 +7,7 @@ import { and, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { dashboardTeamMembers, dashboardTeams } from "@/lib/db/schema";
 
-import { inviteParticipant, revokeParticipant } from "./github";
+import { inviteParticipant, promoteCaptain, revokeParticipant } from "./github";
 import { currentHacker } from "./state";
 import { MAX_TEAM_SIZE } from "./team-limits";
 
@@ -169,6 +169,8 @@ export async function leaveTeam(): Promise<Result> {
             eq(dashboardTeamMembers.participantId, rest[0].participantId),
           ),
         );
+      // El ascenso también vale en GitHub: si no, el repo se queda sin admin.
+      await promoteCaptain(teamId, rest[0].participantId);
     }
   }
 

@@ -17,6 +17,7 @@ import type { TrackKey } from "@/lib/db/schema-types";
 
 import { trackCapacity } from "./capacity";
 import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
+import { refreshRepoTopics } from "./github";
 import {
   findParticipantByUserId,
   findTeamForParticipant,
@@ -162,6 +163,10 @@ export async function confirmTrack(): Promise<ActionResult> {
     return { ok: false, error: "track-locked" };
   }
 
+  // `tnc26-<track>` es como los mentores filtran la org, y el track se confirma
+  // después de crear el repo tan a menudo como antes.
+  await refreshRepoTopics(ctx.team.id);
+
   refreshDashboard();
   return { ok: true };
 }
@@ -175,6 +180,8 @@ export async function releaseTrack(): Promise<ActionResult> {
     .update(dashboardTeams)
     .set({ track: null, trackConfirmedAt: null, updatedAt: new Date() })
     .where(eq(dashboardTeams.id, ctx.team.id));
+
+  await refreshRepoTopics(ctx.team.id);
 
   refreshDashboard();
   return { ok: true };
