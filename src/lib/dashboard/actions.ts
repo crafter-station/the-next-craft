@@ -19,6 +19,7 @@ import { agendaMetaByTime, PARTNERS, TRACKS } from "./content";
 import {
   findParticipantByUserId,
   findTeamForParticipant,
+  getParticipantPerkEligibility,
   hasBookingAt,
 } from "./state";
 
@@ -40,7 +41,8 @@ export type DashboardError =
   | "topic-too-short"
   | "table-full"
   | "unknown-partner"
-  | "unknown-block";
+  | "unknown-block"
+  | "perks-locked";
 
 type HackerContext =
   | { error: DashboardError }
@@ -242,6 +244,11 @@ export async function redeemPartner(partnerKey: string): Promise<ActionResult> {
   if (ctx.error) return { ok: false, error: ctx.error };
   if (!PARTNERS.some((p) => p.key === partnerKey)) {
     return { ok: false, error: "unknown-partner" };
+  }
+
+  const eligibility = await getParticipantPerkEligibility(ctx.participant.id);
+  if (!eligibility.canRedeem) {
+    return { ok: false, error: "perks-locked" };
   }
 
   await db
