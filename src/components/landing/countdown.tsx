@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { cityForTimeZone, cityUtcOffset, DEFAULT_CITY } from "@/lib/cities";
+import { cityUtcOffset, DEFAULT_CITY, viewerCity } from "@/lib/cities";
 import { EVENT_DAY, EVENT_OPENS as EVENT_START } from "@/lib/dashboard/content";
 
 /*
@@ -20,20 +20,10 @@ import { EVENT_DAY, EVENT_OPENS as EVENT_START } from "@/lib/dashboard/content";
   que es el comportamiento de siempre.
 */
 function resolveDeadline(): number {
-  const fallback = new Date(
-    `${EVENT_DAY}T${EVENT_START}:00${cityUtcOffset(DEFAULT_CITY)}`,
+  const city = viewerCity() ?? DEFAULT_CITY;
+  return new Date(
+    `${EVENT_DAY}T${EVENT_START}:00${cityUtcOffset(city)}`,
   ).getTime();
-
-  try {
-    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const city = cityForTimeZone(zone);
-    if (!city) return fallback;
-    return new Date(
-      `${EVENT_DAY}T${EVENT_START}:00${cityUtcOffset(city)}`,
-    ).getTime();
-  } catch {
-    return fallback;
-  }
 }
 
 type TimeLeft = {

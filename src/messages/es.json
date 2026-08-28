@@ -204,7 +204,8 @@
         "description": "Demos — 3 minutos por equipo, producto en vivo",
         "highlight": true
       }
-    ]
+    ],
+    "now": "AHORA"
   },
   "prizes": {
     "label": "PREMIOS",
@@ -455,11 +456,8 @@
   "dashboard": {
     "nav": {
       "overview": "Dashboard",
-      "agenda": "Agenda",
       "tracks": "Tracks",
-      "mentors": "Mentorías",
       "credits": "Créditos",
-      "support": "Soporte",
       "groupEvent": "TU EVENTO",
       "groupResources": "RECURSOS",
       "menu": "Menú",
@@ -468,8 +466,7 @@
       "badge": "Badge",
       "staff": "Staff",
       "groupStaff": "PUERTA",
-      "team": "Equipo",
-      "perks": "Premios y perks"
+      "team": "Equipo"
     },
     "shell": {
       "betweenBlocks": "entre bloques",
@@ -553,12 +550,10 @@
       "mentorSlots": "TURNOS",
       "checklistLabel": "CHECKLIST",
       "checklistTitle": "{done} DE {total}",
-      "hubsLabel": "CINCO SEDES",
-      "hubsTitle": "AL MISMO RELOJ",
-      "yourHub": "TU SEDE",
       "logisticsLabel": "LOGÍSTICA",
       "logisticsTitle": "DATOS DE SEDE",
-      "faqCta": "FAQ del evento"
+      "faqCta": "FAQ del evento",
+      "seeAgenda": "Ver la agenda"
     },
     "checklist": {
       "track": "Track confirmado",
@@ -572,24 +567,6 @@
       "badge": "Badge generado",
       "team": "Equipo formado",
       "goTeam": "Formar"
-    },
-    "agenda": {
-      "label": "AGENDA · 12 HORAS",
-      "headline": "UN DÍA. DOCE HORAS.",
-      "lede": "Sábado 29 de agosto de 2026, de 09:00 a 21:00 en la hora de tu sede. Guatemala y El Salvador van una hora por detrás de Lima, Bogotá y Arequipa: cada sede corre su propio día de doce horas.",
-      "saved": "{count} en tu agenda",
-      "past": "{done}/{total} pasados",
-      "filter": "FILTRAR",
-      "all": "todos",
-      "viewList": "lista",
-      "viewClock": "reloj",
-      "now": "ahora",
-      "mandatory": "obligatorio",
-      "save": "guardar",
-      "unsave": "en agenda",
-      "empty": "Nada con esos filtros. Vuelve a «todos».",
-      "footer": "{shown} de {total} bloques · {zone} · registro 08:30 · code freeze 20:00 · demos 20:15",
-      "clockLabel": "RELOJ"
     },
     "tracks": {
       "label": "TRACKS",
@@ -610,22 +587,6 @@
       "closesAt": "cierra {time}",
       "balanceFull": "muy por encima",
       "balanceRoom": "caben {count} más"
-    },
-    "mentors": {
-      "label": "MENTORÍAS",
-      "headline": "QUIÉN TE ACOMPAÑA EN TU SEDE",
-      "lede": "Los mentores están en la sala de 11:00 a 13:00. No hay que reservar nada: te levantas y te acercas.",
-      "window": "11:00–13:00",
-      "howLabel": "CÓMO FUNCIONA",
-      "howTitle": "TE ACERCAS Y YA",
-      "howBody": "No hay turnos ni lista de espera. Durante el bloque de mentorías busca la mesa que te sirva y preséntate con una pregunta concreta: media hora bien usada cambia el demo, y llevas doce horas de reloj.",
-      "noneInHub": "Todavía no hay mentores asignados a tu sede.",
-      "hubLabel": "EN TU SEDE",
-      "hubTitle": "MENTORES EN {hub}",
-      "hubTitleUnknown": "MENTORES CONFIRMADOS",
-      "pendingLabel": "SEDE POR CONFIRMAR",
-      "pendingTitle": "{count} MENTORES MÁS",
-      "pendingBody": "Están en el evento pero aún no sabemos en qué sede. Pregunta al staff si buscas a alguien en concreto."
     },
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
@@ -735,31 +696,6 @@
       "codePendingLabel": "PRÓXIMAMENTE",
       "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin."
     },
-    "support": {
-      "label": "SOPORTE",
-      "headline": "AQUÍ PASA TODO LO DEMÁS",
-      "lede": "El canal oficial del evento es WhatsApp: staff de tu sede, las mesas de mentoría y los códigos de partners que fallan. Con cinco sedes en dos husos horarios, es lo que las mantiene coordinadas.",
-      "openWhatsapp": "Escribir por WhatsApp",
-      "responseLabel": "STAFF RESPONDE",
-      "responseValue": "< 10 min",
-      "mentorsLabel": "MENTORÍAS EN LÍNEA",
-      "mentorsValue": "11:00 – 13:00",
-      "hubsLabel": "SEDES",
-      "hubsValue": "cinco, en dos husos",
-      "etiquetteLabel": "CÓMO PEDIR AYUDA",
-      "etiquetteTitle": "CINCO REGLAS",
-      "rule1": "Pega el error como texto, no como captura. Nadie puede buscar dentro de una imagen.",
-      "rule2": "Un mensaje completo en vez de cinco líneas seguidas.",
-      "rule3": "Di tu sede y tu número de mesa: el staff es distinto en cada ciudad.",
-      "rule4": "Para algo largo, reserva un turno de mentoría en vez de escribir.",
-      "rule5": "Cuando resuelvas algo, cuéntalo. Es el aporte más barato que puedes hacer en doce horas.",
-      "templateLabel": "PLANTILLA",
-      "templateTitle": "PLANTILLA DE SOPORTE",
-      "templateBody": "Con estos cinco campos casi siempre te responden en el primer intento.",
-      "copyTemplate": "copiar plantilla",
-      "copied": "copiado",
-      "template": "Qué intento hacer: …\nQué esperaba: …\nQué pasa en cambio: (error exacto, pegado como texto)\nQué ya probé: …\nContexto: sede {hub} · mesa {table} · {track}"
-    },
     "errors": {
       "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",
       "no-participant": "No encontramos tu acreditación.",
@@ -767,7 +703,6 @@
       "track-locked": "El track ya está confirmado. Libéralo primero.",
       "unknown-track": "Ese track no existe.",
       "unknown-partner": "Ese partner no existe.",
-      "unknown-block": "Ese bloque no está en la agenda.",
       "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos."
     },
     "badge": {
@@ -920,14 +855,6 @@
       "continue": "Continuar",
       "dashboard": "Mi panel",
       "admin": "Admin"
-    },
-    "perks": {
-      "label": "PREMIOS Y PERKS",
-      "headline": "LO QUE TE LLEVAS",
-      "lede": "Lo que incluye tu entrada, y lo que se llevan los tres primeros. Los créditos de partners se canjean en la sección de créditos.",
-      "prizesLabel": "PARA QUIEN GANA",
-      "includedLabel": "PARA TODOS LOS QUE ENTRAN",
-      "includedTitle": "{count} COSAS INCLUIDAS"
     }
   },
   "admin": {

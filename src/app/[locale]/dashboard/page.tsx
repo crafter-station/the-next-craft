@@ -28,7 +28,6 @@ import {
 
 import {
   Basic,
-  Cell,
   Empty,
   Kv,
   keyClass,
@@ -36,7 +35,6 @@ import {
   PageHeader,
   Panel,
   PanelHead,
-  Pixel,
   Row,
   Stat,
   Table,
@@ -196,10 +194,12 @@ export default async function DashboardOverview({
             n={20}
             label={t("overview.nextLabel")}
             title={live[0]?.description ?? t("overview.nextTitle")}
+            // La agenda completa vive en la landing: allí ya se marca sola qué
+            // bloque corre ahora, y no hacía falta una segunda copia.
             aside={
-              <Link href="/dashboard/agenda" className={keyGhostClass}>
-                {t("nav.agenda")} →
-              </Link>
+              <a href={`/${locale}#agenda`} className={keyGhostClass}>
+                {t("overview.seeAgenda")} →
+              </a>
             }
           />
           {live.length > 0 && (
@@ -249,67 +249,41 @@ export default async function DashboardOverview({
         <Panel>
           <PanelHead
             n={30}
-            label={t("overview.teamLabel")}
-            title={team?.name ?? t("overview.noTeamTitle")}
+            label={t("overview.checklistLabel")}
+            title={t("overview.checklistTitle", {
+              done,
+              total: checks.length,
+            })}
           />
-          {team ? (
-            <>
-              {team.pitch && (
-                <div className="border-b border-[var(--line)] px-4 py-3.5">
-                  <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
-                    {team.pitch}
-                  </p>
-                </div>
-              )}
-              <ul>
-                {team.members.map((m) => (
-                  <Row key={m.participantId}>
-                    <span className="text-[var(--text)]">{m.fullName}</span>
-                    {m.participantId === participant.id && (
-                      <span className="ml-2 text-[11px] text-[var(--bright)]">
-                        {t("overview.you")}
-                      </span>
-                    )}
-                    {m.role && (
-                      <span className="mt-0.5 block text-[11px]">{m.role}</span>
-                    )}
-                  </Row>
-                ))}
-              </ul>
-              <div className="border-t border-[var(--line)] px-4 py-3.5">
-                <Kv k={t("overview.table")}>{team.tableNumber ?? "—"}</Kv>
-                <Kv k={t("overview.size")}>
-                  {t("overview.sizeValue", { count: team.members.length })}
-                </Kv>
-                <Kv k={t("overview.repo")}>
-                  {team.repoUrl ? (
-                    <a
-                      href={team.repoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="underline decoration-[var(--line)] underline-offset-4 hover:decoration-[var(--bright)]"
-                    >
-                      {team.repoUrl.replace("https://github.com/", "")}
-                    </a>
-                  ) : (
-                    t("overview.noRepo")
-                  )}
-                </Kv>
-              </div>
-            </>
-          ) : (
-            <div className="px-4 py-5">
-              <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
-                {t("overview.noTeamBody")}
-              </p>
-              <Link
-                href="/dashboard/team"
-                className={`${keyClass} mt-4 w-full`}
+          <ul>
+            {checks.map((c) => (
+              <li
+                key={c.label}
+                className="flex items-center gap-3 border-b border-[var(--line)] px-4 py-2.5 last:border-b-0"
               >
-                {t("nav.team")} →
-              </Link>
-            </div>
-          )}
+                <span className="w-3 shrink-0 font-mono text-[12px] text-[var(--bright)]">
+                  {c.done ? "✓" : "·"}
+                </span>
+                <span
+                  className={
+                    c.done
+                      ? "flex-1 font-mono text-[12px] text-[var(--text-dim)] line-through decoration-[var(--line)]"
+                      : "flex-1 font-mono text-[12px] text-[var(--text)]"
+                  }
+                >
+                  {c.label}
+                </span>
+                {!c.done && (
+                  <Link
+                    href={c.href}
+                    className="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] hover:text-[var(--bright)]"
+                  >
+                    {c.cta} →
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
         </Panel>
       </div>
 
@@ -386,65 +360,70 @@ export default async function DashboardOverview({
         <Panel>
           <PanelHead
             n={60}
-            label={t("overview.checklistLabel")}
-            title={t("overview.checklistTitle", {
-              done,
-              total: checks.length,
-            })}
+            label={t("overview.teamLabel")}
+            title={team?.name ?? t("overview.noTeamTitle")}
           />
-          <ul>
-            {checks.map((c) => (
-              <li
-                key={c.label}
-                className="flex items-center gap-3 border-b border-[var(--line)] px-4 py-2.5 last:border-b-0"
+          {team ? (
+            <>
+              {team.pitch && (
+                <div className="border-b border-[var(--line)] px-4 py-3.5">
+                  <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+                    {team.pitch}
+                  </p>
+                </div>
+              )}
+              <ul>
+                {team.members.map((m) => (
+                  <Row key={m.participantId}>
+                    <span className="text-[var(--text)]">{m.fullName}</span>
+                    {m.participantId === participant.id && (
+                      <span className="ml-2 text-[11px] text-[var(--bright)]">
+                        {t("overview.you")}
+                      </span>
+                    )}
+                    {m.role && (
+                      <span className="mt-0.5 block text-[11px]">{m.role}</span>
+                    )}
+                  </Row>
+                ))}
+              </ul>
+              <div className="border-t border-[var(--line)] px-4 py-3.5">
+                <Kv k={t("overview.table")}>{team.tableNumber ?? "—"}</Kv>
+                <Kv k={t("overview.size")}>
+                  {t("overview.sizeValue", { count: team.members.length })}
+                </Kv>
+                <Kv k={t("overview.repo")}>
+                  {team.repoUrl ? (
+                    <a
+                      href={team.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline decoration-[var(--line)] underline-offset-4 hover:decoration-[var(--bright)]"
+                    >
+                      {team.repoUrl.replace("https://github.com/", "")}
+                    </a>
+                  ) : (
+                    t("overview.noRepo")
+                  )}
+                </Kv>
+              </div>
+            </>
+          ) : (
+            <div className="px-4 py-5">
+              <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+                {t("overview.noTeamBody")}
+              </p>
+              <Link
+                href="/dashboard/team"
+                className={`${keyClass} mt-4 w-full`}
               >
-                <span className="w-3 shrink-0 font-mono text-[12px] text-[var(--bright)]">
-                  {c.done ? "✓" : "·"}
-                </span>
-                <span
-                  className={
-                    c.done
-                      ? "flex-1 font-mono text-[12px] text-[var(--text-dim)] line-through decoration-[var(--line)]"
-                      : "flex-1 font-mono text-[12px] text-[var(--text)]"
-                  }
-                >
-                  {c.label}
-                </span>
-                {!c.done && (
-                  <Link
-                    href={c.href}
-                    className="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] hover:text-[var(--bright)]"
-                  >
-                    {c.cta} →
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
+                {t("nav.team")} →
+              </Link>
+            </div>
+          )}
         </Panel>
       </div>
 
-      <Panel className="mt-5">
-        <PanelHead
-          n={80}
-          label={t("overview.hubsLabel")}
-          title={t("overview.hubsTitle")}
-        />
-        <Table className="grid grid-cols-2 sm:grid-cols-5">
-          {(
-            ["lima", "bogota", "guatemala", "arequipa", "salvador"] as const
-          ).map((city) => (
-            <Cell key={city}>
-              <Pixel size="sm">{city}</Pixel>
-              {participant.city === city && (
-                <p className="mt-1.5 font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--bright)]">
-                  {t("overview.yourHub")}
-                </p>
-              )}
-            </Cell>
-          ))}
-        </Table>
-      </Panel>
     </>
   );
 }
