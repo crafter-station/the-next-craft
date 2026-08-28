@@ -4,13 +4,19 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
-import { PARTNERS, SUBMISSION_DEADLINE } from "@/lib/dashboard/content";
+import { PARTNERS } from "@/lib/dashboard/content";
 import { currentStaffEmail } from "@/lib/dashboard/staff";
 import {
   findParticipantByUserId,
   findTeamForParticipant,
 } from "@/lib/dashboard/state";
-import { formatClock, resolveNow } from "@/lib/dashboard/time";
+import {
+  cityClockLabel,
+  cityTimeZone,
+  formatClock,
+  resolveNow,
+  submissionDeadline,
+} from "@/lib/dashboard/time";
 
 import { Countdown } from "@/components/dashboard/countdown";
 import { Basic, keyClass, Pixel, Tag } from "@/components/dashboard/kit";
@@ -64,7 +70,9 @@ export default async function DashboardLayout({
     findTeamForParticipant(participant.id),
     currentStaffEmail(),
   ]);
-  const { now, anchored } = resolveNow();
+  // Todo el reloj del panel corre en la hora de la sede del participante.
+  const city = participant.city;
+  const { now, anchored, phase } = resolveNow(city);
 
   return (
     <div className="lg:flex">
@@ -81,12 +89,26 @@ export default async function DashboardLayout({
               {t("shell.hub")} {(participant.city ?? "").toUpperCase()}
             </span>
             <div className="ml-auto flex shrink-0 items-center gap-4">
+              {/* Fuera de la ventana ya no fingimos una hora: se dice en qué
+                  lado del evento estamos. El día antes, que es cuando la gente
+                  entra a hacerse el badge, esto evita enseñar el evento medio
+                  consumido. */}
               {anchored && <Tag>{t("shell.demoClock")}</Tag>}
+              {!anchored && phase !== "during" && (
+                <Tag>
+                  {phase === "before"
+                    ? t("shell.beforeEvent")
+                    : t("shell.afterEvent")}
+                </Tag>
+              )}
               <Countdown
-                deadlineIso={new Date(SUBMISSION_DEADLINE).toISOString()}
-                fallbackClock={formatClock(now, locale)}
+                deadlineIso={submissionDeadline(city).toISOString()}
+                fallbackClock={formatClock(now, locale, city)}
                 anchored={anchored}
                 freezeLabel={t("shell.toFreeze")}
+                timeZone={cityTimeZone(city)}
+                offsetLabel={cityClockLabel(city)}
+                locale={locale}
               />
             </div>
           </div>

@@ -7,6 +7,7 @@ export const DASHBOARD_NAV = [
   { key: "tracks", href: "/dashboard/tracks", group: "event" },
   { key: "mentors", href: "/dashboard/mentors", group: "resources" },
   { key: "credits", href: "/dashboard/credits", group: "resources" },
+  { key: "perks", href: "/dashboard/perks", group: "resources" },
   { key: "support", href: "/dashboard/support", group: "resources" },
   // Solo se pinta para staff; ver `DashboardSidebar`.
   { key: "staff", href: "/dashboard/staff", group: "staff" },

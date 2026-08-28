@@ -7,7 +7,6 @@ import { getBadgeStudioState } from "@/lib/badge/state";
 import { buildAgenda, type ScheduleMessage } from "@/lib/dashboard/agenda";
 import {
   PARTNERS,
-  SUBMISSION_DEADLINE,
   TOTAL_PARTNER_VALUE_USD,
   TRACKS,
   trackIndex,
@@ -16,7 +15,6 @@ import {
   countTeamsByTrack,
   findParticipantByUserId,
   findTeamForParticipant,
-  listMyBookings,
   listRedeemedPartners,
 } from "@/lib/dashboard/state";
 import {
@@ -25,6 +23,7 @@ import {
   formatDateTime,
   resolveNow,
   statusOf,
+  submissionDeadline,
 } from "@/lib/dashboard/time";
 
 import {
@@ -67,20 +66,24 @@ export default async function DashboardOverview({
   const [team, redeemed, trackCounts, studio] = await Promise.all([
     findTeamForParticipant(participant.id),
     listRedeemedPartners(participant.id),
-    countTeamsByTrack(),
+    countTeamsByTrack(participant.city),
     getBadgeStudioState(userId),
   ]);
   const hasBadge = studio.stage === "completed";
-  const bookings = await listMyBookings(team?.id ?? null);
 
-  const { now } = resolveNow();
-  const left = countdown(new Date(SUBMISSION_DEADLINE), now);
-  const pct = Math.round(eventProgress(now));
+  // Hora de la sede del participante, no una global: el día de 12 horas de
+  // Guatemala empieza y termina una hora después que el de Lima.
+  const city = participant.city;
+  const { now } = resolveNow(city);
+  const left = countdown(submissionDeadline(city), now);
+  const pct = Math.round(eventProgress(now, city));
 
   const agenda = buildAgenda(tSchedule.raw("events") as ScheduleMessage[]);
-  const live = agenda.filter((b) => statusOf(b.time, b.end, now) === "now");
+  const live = agenda.filter(
+    (b) => statusOf(b.time, b.end, now, city) === "now",
+  );
   const upcoming = agenda
-    .filter((b) => statusOf(b.time, b.end, now) === "next")
+    .filter((b) => statusOf(b.time, b.end, now, city) === "next")
     .slice(0, 4);
 
   const trackKey = team?.track ?? null;
@@ -112,18 +115,6 @@ export default async function DashboardOverview({
       label: t("checklist.track"),
       href: "/dashboard/tracks",
       cta: t("checklist.goTracks"),
-    },
-    {
-      done: Boolean(team?.mentorTableId),
-      label: t("checklist.mentorTable"),
-      href: "/dashboard/mentors",
-      cta: t("checklist.goMentors"),
-    },
-    {
-      done: bookings.length > 0,
-      label: t("checklist.booking"),
-      href: "/dashboard/mentors",
-      cta: t("checklist.goMentors"),
     },
     {
       done: Boolean(team?.repoUrl),
@@ -185,7 +176,7 @@ export default async function DashboardOverview({
         <Stat
           value={`${pad(left.hrs)}:${pad(left.min)}`}
           label={t("overview.statFreeze")}
-          hint={formatDateTime(new Date(SUBMISSION_DEADLINE), locale)}
+          hint={formatDateTime(submissionDeadline(city), locale, city)}
         />
         <Stat value={`${pct}%`} label={t("overview.statProgress")} />
         <Stat

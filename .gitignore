@@ -44,3 +44,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Salidas del script de previsualización de retratos (regenerables, ~50 MB)
+/reports/

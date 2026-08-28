@@ -1,6 +1,6 @@
 {
-  "id": "da32098e-c730-423d-a4ce-cd533136772d",
-  "prevId": "f8d0ea57-d639-4c07-a487-9c9abb8de4bd",
+  "id": "819c845f-e296-4486-862e-b2099c7b2879",
+  "prevId": "da32098e-c730-423d-a4ce-cd533136772d",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -881,6 +881,107 @@
         }
       },
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.participant_partner_codes": {
+      "name": "participant_partner_codes",
+      "schema": "",
+      "columns": {
+        "participant_id": {
+          "name": "participant_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "partner_key": {
+          "name": "partner_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "assigned_by_email": {
+          "name": "assigned_by_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "assigned_at": {
+          "name": "assigned_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "participant_partner_codes_participant_partner_idx": {
+          "name": "participant_partner_codes_participant_partner_idx",
+          "columns": [
+            {
+              "expression": "participant_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "partner_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "participant_partner_codes_partner_code_idx": {
+          "name": "participant_partner_codes_partner_code_idx",
+          "columns": [
+            {
+              "expression": "partner_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "code",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "participant_partner_codes_participant_id_badge_participants_id_fk": {
+          "name": "participant_partner_codes_participant_id_badge_participants_id_fk",
+          "tableFrom": "participant_partner_codes",
+          "tableTo": "badge_participants",
+          "columnsFrom": [
+            "participant_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

@@ -3,8 +3,12 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
+import { badgeStudioPath } from "@/lib/badge/intent";
 import {
+  formatParticipantNumber,
+  galleryPath,
   participantBadgeImagePath,
+  participantPortraitPath,
   participantProfilePath,
 } from "@/lib/badge/profile";
 import { getBadgeStudioState } from "@/lib/badge/state";
@@ -28,9 +32,10 @@ import { Link } from "@/i18n/navigation";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thenextcraft.org";
 
 /**
- * El badge no es un cartón impreso: lo genera el Badge Studio y su QR ya
- * apunta al perfil público. Aquí no se genera nada — se muestra el que existe
- * y se manda al estudio para crearlo o reemplazarlo.
+ * Donde vive el badge una vez hecho. El estudio es el taller —se entra a
+ * crearlo o a cambiarlo y se sale— y de hecho redirige aquí a quien llega con
+ * uno ya generado, así que esta página tiene que bastarse: verlo, descargarlo,
+ * saber a dónde lleva su QR y volver al estudio con una intención concreta.
  */
 export default async function BadgePage({
   params,
@@ -54,6 +59,9 @@ export default async function BadgePage({
   const generating = studio.stage === "generating";
   const profile = "profile" in studio ? studio.profile : null;
 
+  const formattedNumber = profile
+    ? formatParticipantNumber(profile.participantNumber)
+    : null;
   const badgeSrc =
     ready && profile
       ? participantBadgeImagePath(
@@ -65,6 +73,16 @@ export default async function BadgePage({
   const profileUrl = profile
     ? `${SITE_URL}${participantProfilePath(profile.participantNumber, locale)}`
     : null;
+  const portraitSrc =
+    ready && profile
+      ? participantPortraitPath(profile.participantNumber, profile.updatedAt)
+      : null;
+  // Sin el `?w=`: la descarga debe ser el badge a resolución completa, no la
+  // versión reducida que se pinta arriba.
+  const badgeDownloadSrc =
+    ready && profile
+      ? participantBadgeImagePath(profile.participantNumber, profile.updatedAt)
+      : null;
 
   // Las comidas se listan como lo que incluye la entrada. No llevan estado
   // de «usada»: el control en sede es manual y nada lo registra todavía.
@@ -109,16 +127,59 @@ export default async function BadgePage({
             )}
           </Panel>
 
-          <Link
-            href="/badge"
-            className={`${ready ? keyGhostClass : keyClass} mt-3 w-full`}
-          >
-            {ready ? t("badge.replace") : t("badge.create")} →
-          </Link>
+          {/* El badge se genera en el estudio y se consulta aquí, así que
+              cada acción que necesite el estudio entra con su intención
+              declarada: sin ella el estudio devuelve a esta misma página. */}
+          {ready ? (
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <a
+                href={badgeDownloadSrc ?? undefined}
+                download={`the-next-craft-${formattedNumber}.jpg`}
+                className={`${keyClass} w-full`}
+              >
+                {t("badge.download")}
+              </a>
+              <a
+                href={portraitSrc ?? undefined}
+                download={`the-next-craft-portrait-${formattedNumber}.png`}
+                className={`${keyGhostClass} w-full`}
+              >
+                {t("badge.downloadPortrait")}
+              </a>
+              <Link
+                href={badgeStudioPath("profile")}
+                className={`${keyGhostClass} w-full`}
+              >
+                {t("badge.editProfile")}
+              </Link>
+              <Link
+                href={badgeStudioPath("photo")}
+                className={`${keyGhostClass} w-full`}
+              >
+                {t("badge.replace")}
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href={badgeStudioPath(null)}
+              className={`${keyClass} mt-3 w-full`}
+            >
+              {t("badge.create")} →
+            </Link>
+          )}
 
           <p className="mt-3 font-mono text-[10px] leading-relaxed text-[var(--text-dim)]">
             {t("badge.note")}
           </p>
+
+          {ready && (
+            <Link
+              href={galleryPath(locale)}
+              className="mt-3 inline-block font-mono text-[11px] text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 hover:text-[var(--text)]"
+            >
+              → {t("badge.gallery")}
+            </Link>
+          )}
         </div>
 
         <div className="grid gap-5">
@@ -149,9 +210,7 @@ export default async function BadgePage({
             </div>
             {profile && (
               <div className="border-t border-[var(--line)] px-4 py-3.5">
-                <Kv k={t("badge.number")}>
-                  #{String(profile.participantNumber).padStart(3, "0")}
-                </Kv>
+                <Kv k={t("badge.number")}>#{formattedNumber}</Kv>
                 <Kv k={t("badge.displayName")}>{profile.displayName}</Kv>
                 <Kv k={t("badge.published")}>
                   {profile.published ? t("badge.public") : t("badge.private")}
