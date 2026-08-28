@@ -703,12 +703,7 @@
       "fullName": "name",
       "email": "email",
       "hub": "hub",
-      "includedLabel": "INCLUDED WITH YOUR TICKET",
-      "includedTitle": "{count} MEALS INCLUDED",
-      "includedSwag": "Official event swag, when you arrive at your hub.",
-      "includedCommunity": "Access to the Crafter Station community.",
       "download": "Download badge",
-      "downloadPortrait": "Download portrait",
       "editProfile": "Edit profile",
       "gallery": "View the participant gallery"
     },

@@ -703,12 +703,7 @@
       "fullName": "nombre",
       "email": "correo",
       "hub": "sede",
-      "includedLabel": "INCLUIDO EN TU ENTRADA",
-      "includedTitle": "{count} COMIDAS INCLUIDAS",
-      "includedSwag": "Swag oficial del evento, al llegar a tu sede.",
-      "includedCommunity": "Acceso a la comunidad de Crafter Station.",
       "download": "Descargar badge",
-      "downloadPortrait": "Descargar retrato",
       "editProfile": "Editar perfil",
       "gallery": "Ver la galería de participantes"
     },

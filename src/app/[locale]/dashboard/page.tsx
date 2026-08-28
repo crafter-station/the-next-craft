@@ -144,18 +144,6 @@ export default async function DashboardOverview({
             ? t("overview.ledeConfirmed", { track: trackName })
             : t("overview.ledePending")
         }
-        aside={
-          <div className="flex flex-wrap gap-1.5">
-            <Tag strong={hasBadge}>
-              {hasBadge ? t("badge.ready") : t("badge.missing")}
-            </Tag>
-            <Tag strong={confirmed}>
-              {confirmed
-                ? t("overview.trackConfirmed")
-                : t("overview.trackDraft")}
-            </Tag>
-          </div>
-        }
       />
 
       <Table className="mb-5 grid grid-cols-2 sm:grid-cols-4">
