@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { listAssignedCodesForParticipant } from "@/lib/admin/perks";
 import { auth } from "@/lib/auth";
-import { PARTNERS, partnerRedemptionCode } from "@/lib/dashboard/content";
+import { PARTNERS } from "@/lib/dashboard/content";
 import {
   findParticipantByUserId,
+  getParticipantPerkEligibility,
   listRedeemedPartners,
 } from "@/lib/dashboard/state";
 
@@ -40,6 +42,9 @@ export default async function PartnerPage({
   if (!participant) return null;
 
   const redeemed = await listRedeemedPartners(participant.id);
+  const assignedCodes = await listAssignedCodesForParticipant(participant.id);
+  const perkEligibility = await getParticipantPerkEligibility(participant.id);
+  const code = assignedCodes.get(partner.key) ?? null;
 
   return (
     <>
@@ -51,9 +56,15 @@ export default async function PartnerPage({
         aside={
           <div className="flex flex-col items-start gap-2 sm:items-end">
             <Tag strong={redeemed.has(partner.key)}>
-              {redeemed.has(partner.key)
-                ? t("credits.yourCode")
-                : t("credits.codeHidden")}
+              {!code
+                ? t("credits.codePendingLabel")
+                : redeemed.has(partner.key)
+                  ? t("credits.yourCode")
+                  : !perkEligibility.canRedeem
+                    ? !perkEligibility.hasBadge
+                      ? t("credits.badgeRequiredLabel")
+                      : t("credits.checkInRequiredLabel")
+                    : t("credits.codeHidden")}
             </Tag>
             <Link
               href="/dashboard/credits"
@@ -69,8 +80,10 @@ export default async function PartnerPage({
         <PartnerCard
           partner={partner}
           index={index + 1}
-          code={partnerRedemptionCode(partner.key, participant.id)}
+          code={code}
           redeemed={redeemed.has(partner.key)}
+          canRedeem={perkEligibility.canRedeem}
+          perkEligibility={perkEligibility}
           detailed
         />
 
@@ -85,6 +98,7 @@ export default async function PartnerPage({
             <Row marker="02">{t("credits.rule2")}</Row>
             <Row marker="03">{t("credits.rule3")}</Row>
             <Row marker="04">{t("credits.rule4")}</Row>
+            <Row marker="05">{t("credits.rule5")}</Row>
           </ul>
         </Panel>
       </div>
