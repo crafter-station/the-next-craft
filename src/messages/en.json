@@ -866,6 +866,28 @@
       "leaveConfirm": "If you're the last one, the team is deleted and the code stops working.",
       "leaveYes": "Yes, leave",
       "cancel": "Cancel",
+      "github": {
+        "label": "TEAM REPO",
+        "title": "GITHUB",
+        "body": "Every team gets a repository in the organization, generated from the hackathon template. Link your GitHub and the invite lands in your inbox.",
+        "link": "Link GitHub",
+        "linkedAs": "linked as",
+        "repoLabel": "TEAM REPOSITORY",
+        "repoBody": "Clone it and work there. Mentors find it from the organization.",
+        "create": "Create the repo",
+        "retry": "Retry",
+        "creating": "Creating it on GitHub…",
+        "failed": "The repo could not be created.",
+        "waitCaptain": "Whoever started the team creates it. Link your GitHub and they'll invite you.",
+        "captainNeedsLink": "Link your GitHub first: you become the repo admin.",
+        "accept": "accept",
+        "refresh": "Refresh invites",
+        "stateUnlinked": "not linked",
+        "stateQueued": "not invited yet",
+        "statePending": "invite sent",
+        "stateAccepted": "in",
+        "stateFailed": "invite failed"
+      },
       "errors": {
         "unauthenticated": "Your session expired. Sign in again.",
         "no-participant": "We couldn't find your accreditation.",
@@ -874,7 +896,13 @@
         "name-too-short": "The name needs at least two characters.",
         "code-not-found": "That code doesn't exist. Check it with whoever created the team.",
         "team-full": "That team is already full.",
-        "invalid-url": "Links must start with https://"
+        "invalid-url": "Links must start with https://",
+        "not-captain": "Only whoever started the team can create the repo.",
+        "github-not-configured": "The organization hasn't set up GitHub yet. Ping the staff.",
+        "github-not-linked": "Link your GitHub account first.",
+        "github-taken": "That GitHub account is already linked to another registration.",
+        "github-failed": "GitHub didn't answer properly. Try again in a moment.",
+        "repo-in-progress": "The repo is already being created. Reload in a few seconds."
       }
     },
     "access": {

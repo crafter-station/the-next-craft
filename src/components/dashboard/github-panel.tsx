@@ -186,7 +186,7 @@ export function GithubPanel({
             <span className="ml-2 text-[11px] text-[var(--bright)]">
               {!member.login
                 ? t("stateUnlinked")
-                : !repo || repo.status !== "ready"
+                : repo?.status !== "ready"
                   ? ""
                   : member.inviteState === "accepted"
                     ? t("stateAccepted")

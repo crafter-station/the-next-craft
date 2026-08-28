@@ -16,6 +16,7 @@ import {
 import { MAX_TEAM_SIZE, MIN_TEAM_SIZE } from "@/lib/dashboard/team-limits";
 import { invitationsUrl } from "@/lib/github/api";
 
+import { GithubPanel } from "@/components/dashboard/github-panel";
 import {
   Kv,
   PageHeader,
@@ -24,7 +25,6 @@ import {
   Row,
   Tag,
 } from "@/components/dashboard/kit";
-import { GithubPanel } from "@/components/dashboard/github-panel";
 import {
   JoinCode,
   LeaveTeamButton,

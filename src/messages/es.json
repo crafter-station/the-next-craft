@@ -866,6 +866,28 @@
       "leaveConfirm": "Si eres el último, el equipo se borra y el código deja de servir.",
       "leaveYes": "Sí, salir",
       "cancel": "Cancelar",
+      "github": {
+        "label": "REPO DEL EQUIPO",
+        "title": "GITHUB",
+        "body": "Cada equipo recibe un repositorio en la organización, copiado del template del hackathon. Vincula tu GitHub y te llega la invitación.",
+        "link": "Vincular GitHub",
+        "linkedAs": "vinculado como",
+        "repoLabel": "REPOSITORIO DEL EQUIPO",
+        "repoBody": "Clónalo y trabaja ahí. Los mentores lo encuentran desde la organización.",
+        "create": "Crear el repo",
+        "retry": "Reintentar",
+        "creating": "Creándolo en GitHub…",
+        "failed": "No se pudo crear el repo.",
+        "waitCaptain": "Lo crea quien fundó el equipo. Vincula tu GitHub y te invita.",
+        "captainNeedsLink": "Vincula tu GitHub primero: quedas como admin del repo.",
+        "accept": "aceptar",
+        "refresh": "Actualizar invitaciones",
+        "stateUnlinked": "sin vincular",
+        "stateQueued": "sin invitar",
+        "statePending": "invitación enviada",
+        "stateAccepted": "dentro",
+        "stateFailed": "falló la invitación"
+      },
       "errors": {
         "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",
         "no-participant": "No encontramos tu acreditación.",
@@ -874,7 +896,13 @@
         "name-too-short": "El nombre necesita al menos dos caracteres.",
         "code-not-found": "Ese código no existe. Revísalo con quien creó el equipo.",
         "team-full": "Ese equipo ya está completo.",
-        "invalid-url": "Los links tienen que empezar por https://"
+        "invalid-url": "Los links tienen que empezar por https://",
+        "not-captain": "Solo quien fundó el equipo puede crear el repo.",
+        "github-not-configured": "La organización todavía no configuró GitHub. Avisa al staff.",
+        "github-not-linked": "Vincula tu cuenta de GitHub primero.",
+        "github-taken": "Esa cuenta de GitHub ya está vinculada a otra acreditación.",
+        "github-failed": "GitHub no respondió bien. Reintenta en un momento.",
+        "repo-in-progress": "Ya se está creando el repo. Recarga en unos segundos."
       }
     },
     "access": {
