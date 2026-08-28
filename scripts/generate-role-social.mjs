@@ -73,6 +73,30 @@ const roleConfigs = {
         lastName: "ORJUELA",
         slug: "ellin-orjuela",
       },
+      {
+        firstName: "NICOLAS",
+        image: "nicolas.png",
+        lastName: "VARGAS",
+        slug: "nicolas-vargas",
+      },
+      {
+        firstName: "SANDRA",
+        image: "sandra.png",
+        lastName: "CARRILLO",
+        slug: "sandra-carrillo",
+      },
+      {
+        firstName: "YESICA",
+        image: "yesica.png",
+        lastName: "QU",
+        slug: "yesica-qu",
+      },
+      {
+        firstName: "CESAR",
+        image: "cesar.png",
+        lastName: "DUENAS",
+        slug: "cesar-duenas",
+      },
     ],
   },
   judges: {
