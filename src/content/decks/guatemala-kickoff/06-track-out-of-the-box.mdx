@@ -1,0 +1,33 @@
+---
+title: Out of the Box
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-9">
+  <div className="flex flex-col gap-3">
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--bright)]">Track 02 · ≈13 cupos</p>
+    <h1 className="font-mono text-[clamp(2rem,5.5vw,4.25rem)] font-semibold uppercase leading-[0.95] tracking-[-0.06em] text-[var(--text)]">Out of the Box</h1>
+    <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--text-dim)] md:text-sm">Raro · experimental · inclasificable</p>
+  </div>
+
+  <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+    <div className="flex flex-col gap-4">
+      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">Qué esperamos</h2>
+      <p className="font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Construye algo raro, experimental o inclasificable — pero con su chispa técnica. Tiempo real, interfaces nuevas, generativo, hardware. La regla: que haga reaccionar a la gente.</p>
+      <p className="border-l-2 border-[var(--bright)] pl-4 font-mono text-sm leading-relaxed text-[var(--text-dim)]">De aquí salen los proyectos virales. Permiso para experimentar en vez de hacer otro SaaS — pero que esté bien hecho.</p>
+    </div>
+    <div className="flex flex-col gap-4">
+      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">Ideas para arrancar</h2>
+      <div className="flex flex-col gap-2">
+        {[
+          'Una interfaz de voz que responde al instante',
+          'Algo generativo en vivo que reacciona a quien lo usa',
+          'Un juego con personajes que de verdad piensan',
+          'Algo que mezcle hardware o sensores con IA',
+          'Una extensión que hace algo inesperado con la página'
+        ].map((idea) => (
+          <div key={idea} className="bg-[var(--screen-dim)] px-4 py-3 font-mono text-sm leading-snug text-[var(--text)]">{idea}</div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
