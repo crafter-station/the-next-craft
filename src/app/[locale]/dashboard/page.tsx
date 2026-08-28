@@ -4,7 +4,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
 import { getBadgeStudioState } from "@/lib/badge/state";
-import { buildAgenda, type ScheduleMessage } from "@/lib/dashboard/agenda";
 import {
   PARTNERS,
   TOTAL_PARTNER_VALUE_USD,
@@ -22,12 +21,10 @@ import {
   eventProgress,
   formatDateTime,
   resolveNow,
-  statusOf,
   submissionDeadline,
 } from "@/lib/dashboard/time";
 
 import {
-  Basic,
   Empty,
   Kv,
   keyClass,
@@ -52,7 +49,6 @@ export default async function DashboardOverview({
   setRequestLocale(locale);
 
   const t = await getTranslations("dashboard");
-  const tSchedule = await getTranslations("schedule");
   const tTracks = await getTranslations("tracks");
 
   const session = await auth.api.getSession({ headers: await headers() });
@@ -75,14 +71,6 @@ export default async function DashboardOverview({
   const { now } = resolveNow(city);
   const left = countdown(submissionDeadline(city), now);
   const pct = Math.round(eventProgress(now, city));
-
-  const agenda = buildAgenda(tSchedule.raw("events") as ScheduleMessage[]);
-  const live = agenda.filter(
-    (b) => statusOf(b.time, b.end, now, city) === "now",
-  );
-  const upcoming = agenda
-    .filter((b) => statusOf(b.time, b.end, now, city) === "next")
-    .slice(0, 4);
 
   const trackKey = team?.track ?? null;
   const confirmed = Boolean(team?.trackConfirmedAt);
@@ -188,67 +176,13 @@ export default async function DashboardOverview({
         />
       </Table>
 
-      <div className="grid items-start gap-5 lg:grid-cols-3">
-        <Panel className="lg:col-span-2" screen>
-          <PanelHead
-            n={20}
-            label={t("overview.nextLabel")}
-            title={live[0]?.description ?? t("overview.nextTitle")}
-            // La agenda completa vive en la landing: allí ya se marca sola qué
-            // bloque corre ahora, y no hacía falta una segunda copia.
-            aside={
-              <a href={`/${locale}#agenda`} className={keyGhostClass}>
-                {t("overview.seeAgenda")} →
-              </a>
-            }
-          />
-          {live.length > 0 && (
-            <div className="border-b border-[var(--line)] px-4 py-3.5">
-              <Basic n={21}>{t("overview.liveLabel")}</Basic>
-              {live.map((b) => (
-                <div
-                  key={b.time}
-                  className="mt-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1"
-                >
-                  <span className="font-mono text-[13px] text-[var(--bright)]">
-                    {b.time}–{b.end}
-                  </span>
-                  <span className="font-mono text-[13px] text-[var(--text)]">
-                    {b.description}
-                  </span>
-                  <span className="font-mono text-[11px] text-[var(--text-dim)]">
-                    {t(`places.${b.place}`)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-          <ul>
-            {upcoming.length === 0 ? (
-              <Empty>{t("overview.nothingLeft")}</Empty>
-            ) : (
-              upcoming.map((b) => (
-                <Row key={b.time}>
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                    <span className="text-[var(--text)]">{b.description}</span>
-                    <span className="text-[11px]">{b.time}</span>
-                  </div>
-                  <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                    <Tag>{t(`kinds.${b.kind}`)}</Tag>
-                    <span className="text-[11px]">
-                      {t(`places.${b.place}`)}
-                    </span>
-                    {b.mandatory && <Tag strong>{t("overview.mandatory")}</Tag>}
-                  </div>
-                </Row>
-              ))
-            )}
-          </ul>
-        </Panel>
+      {/* Cuatro paneles: en dos columnas caben 2x2 sin dejar ninguno suelto,
+          que es lo que pasaba al quitar «lo que sigue» de una rejilla de tres. */}
+      <div className="grid items-start gap-5 lg:grid-cols-2">
 
         <Panel>
           <PanelHead
-            n={30}
+            n={20}
             label={t("overview.checklistLabel")}
             title={t("overview.checklistTitle", {
               done,
@@ -285,12 +219,10 @@ export default async function DashboardOverview({
             ))}
           </ul>
         </Panel>
-      </div>
 
-      <div className="mt-5 grid items-start gap-5 lg:grid-cols-3">
         <Panel>
           <PanelHead
-            n={40}
+            n={30}
             label={t("overview.submissionLabel")}
             title={
               submissionValid
@@ -322,7 +254,7 @@ export default async function DashboardOverview({
 
         <Panel>
           <PanelHead
-            n={50}
+            n={40}
             label={t("overview.trackLabel")}
             title={trackName ?? t("overview.trackNone")}
             aside={
@@ -359,7 +291,7 @@ export default async function DashboardOverview({
 
         <Panel>
           <PanelHead
-            n={60}
+            n={50}
             label={t("overview.teamLabel")}
             title={team?.name ?? t("overview.noTeamTitle")}
           />
