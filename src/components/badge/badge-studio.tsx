@@ -9,6 +9,7 @@ import { useRealtimeRun } from "@trigger.dev/react-hooks";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 import { authClient } from "@/lib/auth-client";
+import type { BadgeStudioIntent } from "@/lib/badge/intent";
 import {
   formatParticipantNumber,
   galleryPath,
@@ -71,6 +72,7 @@ const copy = {
     reconnect: "Reconectar estado",
     complete: "Tu badge esta listo.",
     participant: "PARTICIPANTE",
+    goDashboard: "Ir a mi panel",
     editProfile: "Editar perfil",
     replacePhoto: "Cambiar foto",
     cancel: "Cancelar",
@@ -137,6 +139,7 @@ const copy = {
     reconnect: "Reconnect status",
     complete: "Your badge is ready.",
     participant: "PARTICIPANT",
+    goDashboard: "Go to my dashboard",
     editProfile: "Edit profile",
     replacePhoto: "Replace photo",
     cancel: "Cancel",
@@ -252,6 +255,8 @@ type Props = {
   locale: Locale;
   initialSession: typeof authClient.$Infer.Session | null;
   initialState: BadgeStudioState | null;
+  /** Con qué se entró teniendo ya un badge; ver `@/lib/badge/intent`. */
+  intent: BadgeStudioIntent;
 };
 
 async function getBadgeStatus() {
@@ -390,7 +395,12 @@ function SocialSharePanel({
   );
 }
 
-export function BadgeStudio({ locale, initialSession, initialState }: Props) {
+export function BadgeStudio({
+  locale,
+  initialSession,
+  initialState,
+  intent,
+}: Props) {
   authClient.hydrateSession(initialSession);
   const {
     data: clientSession,
@@ -403,6 +413,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
   const authenticated = Boolean(session);
   const t = copy[locale];
   const router = useRouter();
+  const dashboardBadgeHref = `/${locale}/dashboard/badge`;
   const [email, setEmail] = useState(initialSession?.user.email ?? "");
   const [otpSent, setOtpSent] = useState(false);
   const [code, setCode] = useState("");
@@ -410,14 +421,31 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [dashboardMode, setDashboardMode] = useState<DashboardMode>("preview");
+  // Se entra al estudio con un badge hecho solo para cambiar algo, y la URL
+  // dice qué: abrimos directamente en ese formulario en vez de en la vista del
+  // badge, que es lo que el panel ya muestra.
+  const [dashboardMode, setDashboardMode] = useState<DashboardMode>(
+    intent === "profile" ? "edit" : intent === "photo" ? "photo" : "preview",
+  );
   const sessionUserId = session?.user.id ?? null;
 
   async function refreshStatus() {
     const nextState = await getBadgeStatus();
     if (!nextState) return;
     setState(nextState);
-    if (nextState.stage === "completed") router.refresh();
+  }
+
+  /**
+   * Salir de un formulario del estudio. Quien vino desde el panel a cambiar
+   * algo vuelve al panel: quedarse aquí en la vista del badge sería devolverlo
+   * a una copia peor de la pantalla de la que salió.
+   */
+  function closeEditor() {
+    if (intent) {
+      router.push(dashboardBadgeHref);
+      return;
+    }
+    setDashboardMode("preview");
   }
 
   const requestOtpMutation = useMutation({
@@ -481,7 +509,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
     onError: () => setError(t.genericError),
     onSuccess: async (_, { method }) => {
       await refreshStatus();
-      if (method === "PATCH") setDashboardMode("preview");
+      if (method === "PATCH") closeEditor();
     },
   });
 
@@ -823,7 +851,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
                   type="button"
                   onClick={() => {
                     setPhoto(null);
-                    setDashboardMode("preview");
+                    closeEditor();
                   }}
                   className="keycap-ghost min-h-12 px-5 font-pixel text-sm uppercase"
                 >
@@ -855,7 +883,7 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
             profile={state.profile}
             pending={isPending}
             onSubmit={updateProfile}
-            onCancel={() => setDashboardMode("preview")}
+            onCancel={closeEditor}
           />
         ) : null}
 
@@ -875,13 +903,24 @@ export function BadgeStudio({ locale, initialSession, initialState }: Props) {
               className="aspect-[4/5] w-full"
             />
             <div className="grid gap-6 md:sticky md:top-10">
-              <button
-                type="button"
-                onClick={() => setDashboardMode("edit")}
-                className="keycap min-h-12 px-4 text-center font-pixel text-xs uppercase"
-              >
-                {t.editProfile}
-              </button>
+              {/* A partir de aquí el badge vive en el panel: esta pantalla es
+                  el momento de celebrarlo y compartirlo, no donde se consulta
+                  cada vez. */}
+              <div className="grid gap-3">
+                <Link
+                  href={dashboardBadgeHref}
+                  className="keycap inline-flex min-h-12 items-center justify-center px-4 text-center font-pixel text-xs uppercase"
+                >
+                  {t.goDashboard}
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setDashboardMode("edit")}
+                  className="keycap-ghost min-h-12 px-4 text-center font-pixel text-xs uppercase"
+                >
+                  {t.editProfile}
+                </button>
+              </div>
               <div className="grid justify-items-start gap-4 text-sm">
                 <Link
                   href={participantProfilePath(

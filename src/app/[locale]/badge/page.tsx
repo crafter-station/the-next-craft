@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
+import { type BadgeStudioIntent, parseStudioIntent } from "@/lib/badge/intent";
 import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
 
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
 
 export default async function BadgePage({
   params,
+  searchParams,
 }: PageProps<"/[locale]/badge">) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -26,6 +29,19 @@ export default async function BadgePage({
   const initialState = session
     ? await withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id))
     : null;
+
+  // El estudio es el taller: se entra a crear o a reemplazar. El badge ya
+  // hecho vive en el panel, así que quien vuelve aquí con uno generado sigue
+  // hasta ahí. La excepción es llegar con intención declarada (`?edit=`), que
+  // es justo el enlace de vuelta desde el panel; sin ella no habría forma de
+  // editar nada y el redirect sería un callejón.
+  const intent: BadgeStudioIntent = parseStudioIntent(
+    (await searchParams).edit,
+  );
+  if (initialState?.stage === "completed" && !intent) {
+    redirect(`/${locale}/dashboard/badge`);
+  }
+
   const studioKey = session
     ? `${session.user.id}:${initialState?.stage}:${initialState && "profile" in initialState ? initialState.profile.updatedAt : ""}`
     : "anonymous";
@@ -46,6 +62,7 @@ export default async function BadgePage({
           locale={locale === "en" ? "en" : "es"}
           initialSession={session}
           initialState={initialState}
+          intent={intent}
         />
       </QueryProvider>
     </main>

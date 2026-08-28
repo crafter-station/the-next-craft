@@ -1,4 +1,4 @@
-import { and, asc, eq, inArray, sql } from "drizzle-orm";
+import { and, asc, eq, sql } from "drizzle-orm";
 
 import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
@@ -6,8 +6,6 @@ import {
   badgeParticipants,
   dashboardAgendaSaves,
   dashboardCheckins,
-  dashboardMentorSlots,
-  dashboardMentorTables,
   dashboardPartnerRedemptions,
   dashboardTeamMembers,
   dashboardTeams,
@@ -31,37 +29,19 @@ export type DashboardTeam = {
   slug: string;
   name: string;
   joinCode: string;
+  /** La sede del equipo: de ella sale el cupo de track. */
+  city: CityKey | null;
   tableNumber: string | null;
   pitch: string | null;
   repoUrl: string | null;
   demoUrl: string | null;
   track: TrackKey | null;
   trackConfirmedAt: Date | null;
-  mentorTableId: string | null;
   members: {
     participantId: string;
     fullName: string;
     role: string | null;
     isCaptain: boolean;
-  }[];
-};
-
-export type MentorTableView = {
-  id: string;
-  slug: string;
-  org: string;
-  role: string;
-  bio: string | null;
-  expertise: string[];
-  teamCapacity: number;
-  teamsAssigned: number;
-  slots: {
-    id: string;
-    startsAt: string;
-    endsAt: string;
-    takenByMyTeam: boolean;
-    taken: boolean;
-    topic: string | null;
   }[];
 };
 
@@ -158,94 +138,32 @@ export async function findTeamForParticipant(
   return { ...team, members };
 }
 
-/** Equipos inscritos por track, para el contador de la página de tracks. */
-export async function countTeamsByTrack() {
+/**
+ * Equipos con track confirmado, contados **dentro de una sede**.
+ *
+ * El cupo es por sede: que Lima llene «Content Machine» no puede cerrarle el
+ * track a Bogotá. Sin sede no hay contra qué contar y devolvemos ceros, que es
+ * lo mismo que decir «sin límite» aguas arriba.
+ */
+export async function countTeamsByTrack(city: CityKey | null) {
+  const counts = new Map<TrackKey, number>(TRACKS.map((t) => [t.key, 0]));
+  if (!city) return counts;
+
   const rows = await db
     .select({ track: dashboardTeams.track, total: sql<number>`count(*)::int` })
     .from(dashboardTeams)
-    .where(sql`${dashboardTeams.trackConfirmedAt} is not null`)
+    .where(
+      and(
+        eq(dashboardTeams.city, city),
+        sql`${dashboardTeams.trackConfirmedAt} is not null`,
+      ),
+    )
     .groupBy(dashboardTeams.track);
 
-  const counts = new Map<TrackKey, number>(TRACKS.map((t) => [t.key, 0]));
   for (const row of rows) {
     if (row.track) counts.set(row.track, row.total);
   }
   return counts;
-}
-
-export async function listMentorTables(
-  myTeamId: string | null,
-): Promise<MentorTableView[]> {
-  const tables = await db
-    .select()
-    .from(dashboardMentorTables)
-    .orderBy(
-      asc(dashboardMentorTables.sortOrder),
-      asc(dashboardMentorTables.org),
-    );
-  if (tables.length === 0) return [];
-
-  const ids = tables.map((t) => t.id);
-
-  const slots = await db
-    .select()
-    .from(dashboardMentorSlots)
-    .where(inArray(dashboardMentorSlots.mentorTableId, ids))
-    .orderBy(asc(dashboardMentorSlots.startsAt));
-
-  const assigned = await db
-    .select({
-      mentorTableId: dashboardTeams.mentorTableId,
-      total: sql<number>`count(*)::int`,
-    })
-    .from(dashboardTeams)
-    .where(inArray(dashboardTeams.mentorTableId, ids))
-    .groupBy(dashboardTeams.mentorTableId);
-
-  const assignedByTable = new Map(
-    assigned.map((a) => [a.mentorTableId as string, a.total]),
-  );
-
-  return tables.map((t) => ({
-    id: t.id,
-    slug: t.slug,
-    org: t.org,
-    role: t.role,
-    bio: t.bio,
-    expertise: t.expertise,
-    teamCapacity: t.teamCapacity,
-    teamsAssigned: assignedByTable.get(t.id) ?? 0,
-    slots: slots
-      .filter((s) => s.mentorTableId === t.id)
-      .map((s) => ({
-        id: s.id,
-        startsAt: s.startsAt,
-        endsAt: s.endsAt,
-        taken: s.teamId !== null,
-        takenByMyTeam: Boolean(myTeamId) && s.teamId === myTeamId,
-        topic: s.teamId === myTeamId ? s.topic : null,
-      })),
-  }));
-}
-
-export async function listMyBookings(teamId: string | null) {
-  if (!teamId) return [];
-  return db
-    .select({
-      slotId: dashboardMentorSlots.id,
-      startsAt: dashboardMentorSlots.startsAt,
-      endsAt: dashboardMentorSlots.endsAt,
-      topic: dashboardMentorSlots.topic,
-      org: dashboardMentorTables.org,
-      role: dashboardMentorTables.role,
-    })
-    .from(dashboardMentorSlots)
-    .innerJoin(
-      dashboardMentorTables,
-      eq(dashboardMentorTables.id, dashboardMentorSlots.mentorTableId),
-    )
-    .where(eq(dashboardMentorSlots.teamId, teamId))
-    .orderBy(asc(dashboardMentorSlots.startsAt));
 }
 
 export async function listRedeemedPartners(participantId: string) {
@@ -271,21 +189,6 @@ export async function listSavedAgenda(participantId: string) {
     .from(dashboardAgendaSaves)
     .where(eq(dashboardAgendaSaves.participantId, participantId));
   return new Set(rows.map((r) => r.eventTime));
-}
-
-/** ¿El turno pedido choca con otro que el equipo ya tiene a la misma hora? */
-export async function hasBookingAt(teamId: string, startsAt: string) {
-  const [row] = await db
-    .select({ id: dashboardMentorSlots.id })
-    .from(dashboardMentorSlots)
-    .where(
-      and(
-        eq(dashboardMentorSlots.teamId, teamId),
-        eq(dashboardMentorSlots.startsAt, startsAt),
-      ),
-    )
-    .limit(1);
-  return Boolean(row);
 }
 
 /** Cuántos equipos hay en la sede, para el contador de la página de equipo. */
