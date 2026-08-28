@@ -4,10 +4,10 @@ import { revalidatePath } from "next/cache";
 
 import {
   githubEnabled,
+  inviteParticipant,
   provisionRepo,
   syncGithubIdentity,
   syncInvites,
-  inviteParticipant,
 } from "./github";
 import { currentHacker } from "./state";
 

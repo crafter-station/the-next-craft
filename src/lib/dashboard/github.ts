@@ -26,8 +26,8 @@ import {
   createRepoFromTemplate,
   deleteInvitation,
   fetchGithubUserById,
-  type GithubConfig,
   GithubApiError,
+  type GithubConfig,
   githubConfig,
   inviteCollaborator,
   listPendingInvitations,
@@ -86,7 +86,9 @@ export async function findGithubAccountId(userId: string) {
 export async function syncGithubIdentity(participant: {
   id: string;
   userId: string;
-}): Promise<{ ok: true; identity: GithubIdentity } | { ok: false; error: GithubError }> {
+}): Promise<
+  { ok: true; identity: GithubIdentity } | { ok: false; error: GithubError }
+> {
   const config = githubConfig();
   if (!config) return { ok: false, error: "github-not-configured" };
 
@@ -233,7 +235,11 @@ export async function provisionRepo(
 
   const claimed = await db
     .update(dashboardTeams)
-    .set({ githubRepoStatus: "pending", githubRepoError: null, updatedAt: new Date() })
+    .set({
+      githubRepoStatus: "pending",
+      githubRepoError: null,
+      updatedAt: new Date(),
+    })
     .where(
       and(
         eq(dashboardTeams.id, teamId),
@@ -302,7 +308,11 @@ export async function provisionRepo(
 
   // Los topics son cosmética para los mentores: si fallan, el repo ya existe.
   try {
-    await setRepoTopics(config, created.fullName, topicsFor(team, config.prefix));
+    await setRepoTopics(
+      config,
+      created.fullName,
+      topicsFor(team, config.prefix),
+    );
   } catch (error) {
     console.error("GitHub topics failed", error);
   }
@@ -347,7 +357,8 @@ export async function syncInvites(teamId: string) {
 
   const pendingIds = new Set(pending.map((invitation) => invitation.id));
   for (const member of members) {
-    if (member.githubInviteState !== "pending" || !member.githubInviteId) continue;
+    if (member.githubInviteState !== "pending" || !member.githubInviteId)
+      continue;
     if (pendingIds.has(member.githubInviteId)) continue;
     await db
       .update(dashboardTeamMembers)
