@@ -553,7 +553,8 @@
       "logisticsLabel": "LOGÍSTICA",
       "logisticsTitle": "DATOS DE SEDE",
       "faqCta": "FAQ del evento",
-      "seeAgenda": "Ver la agenda"
+      "seeAgenda": "Ver la agenda",
+      "mandatory": "obligatorio"
     },
     "checklist": {
       "track": "Track confirmado",
@@ -703,7 +704,8 @@
       "track-locked": "El track ya está confirmado. Libéralo primero.",
       "unknown-track": "Ese track no existe.",
       "unknown-partner": "Ese partner no existe.",
-      "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos."
+      "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos.",
+      "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
     },
     "badge": {
       "label": "BADGE · TU IDENTIDAD",
