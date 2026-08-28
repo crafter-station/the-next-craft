@@ -8,6 +8,8 @@ import { auth } from "@/lib/auth";
 import { type BadgeStudioIntent, parseStudioIntent } from "@/lib/badge/intent";
 import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
+import { STAFF_HOME_PATH } from "@/lib/staff/constants";
+import { isStaffEmail } from "@/lib/staff/domains.server";
 
 import { BadgeStudio } from "@/components/badge/badge-studio";
 import { AccessLink } from "@/components/dashboard/access-link";
@@ -26,6 +28,11 @@ export default async function BadgePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await auth.api.getSession({ headers: await headers() });
+
+  if (session?.user.email && isStaffEmail(session.user.email)) {
+    redirect(`/${locale}${STAFF_HOME_PATH}`);
+  }
+
   const initialState = session
     ? await withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id))
     : null;
