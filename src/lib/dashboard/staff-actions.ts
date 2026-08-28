@@ -12,7 +12,7 @@ import { currentStaffEmail } from "./staff";
 type Result = { ok: true } | { ok: false; error: "not-staff" };
 
 function refresh() {
-  revalidatePath("/[locale]/dashboard/staff", "page");
+  revalidatePath("/[locale]/admin/staff", "page");
 }
 
 /** Marca o desmarca la llegada. Guarda quién lo hizo. */

@@ -917,7 +917,9 @@
     },
     "access": {
       "signIn": "Entrar",
-      "dashboard": "Mi panel"
+      "continue": "Continuar",
+      "dashboard": "Mi panel",
+      "admin": "Admin"
     },
     "perks": {
       "label": "PREMIOS Y PERKS",
@@ -937,9 +939,10 @@
     },
     "shell": {
       "title": "OPERACIONES",
-      "dashboard": "Dashboard"
+      "home": "Inicio"
     },
     "nav": {
+      "staff": "Puerta",
       "perks": "Perks"
     },
     "perks": {

@@ -16,6 +16,7 @@ import {
   participantProfilePath,
 } from "@/lib/badge/profile";
 import type { BadgeStudioState } from "@/lib/badge/state";
+import { AUTH_CONTINUE_PATH } from "@/lib/staff/constants";
 
 import {
   ProfileForm,
@@ -499,7 +500,7 @@ export function BadgeStudio({
     onError: () => setError(t.genericError),
     onSuccess: async () => {
       await refetchSession();
-      router.refresh();
+      router.push(`/${locale}${AUTH_CONTINUE_PATH}`);
     },
   });
 
