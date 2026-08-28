@@ -1,7 +1,5 @@
-import { CITIES, type CityKey } from "@/lib/cities";
+import type { CityKey } from "@/lib/cities";
 import type { TrackKey } from "@/lib/db/schema-types";
-
-const ALL_CITIES = CITIES.map((c) => c.key);
 
 /* ─────────────────────────────────────────────────────────────
    Contenido del dashboard que NO vive en la base de datos.
@@ -148,58 +146,57 @@ export function trackIndex(key: TrackKey) {
  *
  * Por eso es contenido estático y no una tabla: no hay nada que reservar, ni
  * cupo, ni estado que guardar.
+ *
+ * Los nombres salen de `public/brand-assets/social/roles/mentors/`, que es la
+ * misma fuente que usa la galería pública de /mentors-and-judges. Van sin
+ * tildes porque así están ahí y así se publican; no los "corrijo" desde aquí.
  */
-export type MentorOrg = {
-  key: string;
-  org: string;
-  /** Clave de traducción: `dashboard.mentors.roles.<role>`. */
-  role: string;
-  expertise: string[];
-  /** En qué sedes está presente esta comunidad. */
+export type Mentor = {
+  /** Coincide con el nombre del asset, para poder enlazar su tarjeta. */
+  slug: string;
+  name: string;
+  /**
+   * Sedes donde estará. Vacío = todavía sin confirmar, y la interfaz lo dice
+   * en vez de esconderlo o de fingir que está en todas.
+   */
   cities: CityKey[];
 };
 
 /**
- * ⚠️ EL REPARTO POR SEDE ES PROVISIONAL. Las cuatro comunidades son las
- * reales, pero no tengo el dato de quién va a qué sede, así que están todas en
- * todas. Hay que ajustar `cities` de cada una antes del evento: es justo lo
- * que la página promete responder.
+ * ⚠️ FALTA EL REPARTO POR SEDE. Los trece nombres son los reales, pero ni la
+ * galería pública ni el repo dicen quién va a qué sede, así que `cities` está
+ * vacío en todos. Rellenar aquí es lo único que hace falta: la página ya los
+ * agrupa por sede sola.
  */
-export const MENTOR_ORGS: MentorOrg[] = [
-  {
-    key: "crafter-station",
-    org: "Crafter Station",
-    role: "product",
-    expertise: ["producto", "distribución", "demo"],
-    cities: ALL_CITIES,
-  },
-  {
-    key: "ai-labs",
-    org: "AI Labs",
-    role: "models",
-    expertise: ["LLMs", "agentes", "evals"],
-    cities: ALL_CITIES,
-  },
-  {
-    key: "nucleo-labs",
-    org: "Nucleo Labs",
-    role: "engineering",
-    expertise: ["backend", "infra", "tiempo real"],
-    cities: ALL_CITIES,
-  },
-  {
-    key: "open2",
-    org: "Open2",
-    role: "interface",
-    expertise: ["frontend", "interfaz", "pitch"],
-    cities: ALL_CITIES,
-  },
+export const MENTORS: Mentor[] = [
+  { slug: "arturo-barrantes", name: "Arturo Barrantes", cities: [] },
+  { slug: "cesar-duenas", name: "Cesar Duenas", cities: [] },
+  { slug: "danitza-rosas", name: "Danitza Rosas", cities: [] },
+  { slug: "ellin-orjuela", name: "Ellin Orjuela", cities: [] },
+  { slug: "emmy-pardo", name: "Emmy Pardo", cities: [] },
+  { slug: "fiorella-cisneros", name: "Fiorella Cisneros", cities: [] },
+  { slug: "ignacio-velasquez", name: "Ignacio Velasquez", cities: [] },
+  { slug: "juan-ortega", name: "Juan Ortega", cities: [] },
+  { slug: "maria-cristina-ruelas", name: "Maria Cristina Ruelas", cities: [] },
+  { slug: "nicolas-vargas", name: "Nicolas Vargas", cities: [] },
+  { slug: "sandra-carrillo", name: "Sandra Carrillo", cities: [] },
+  { slug: "victor-galvez", name: "Victor Galvez", cities: [] },
+  { slug: "yesica-qu", name: "Yesica Qu", cities: [] },
 ];
 
-/** Las comunidades presentes en una sede. Sin sede, todas. */
-export function mentorsInCity(city: CityKey | null): MentorOrg[] {
-  if (!city) return MENTOR_ORGS;
-  return MENTOR_ORGS.filter((m) => m.cities.includes(city));
+/**
+ * Los mentores de una sede, y aparte los que aún no tienen sede.
+ *
+ * Se devuelven los dos grupos porque callarse los segundos sería enseñar una
+ * lista corta como si estuviera completa, justo el día que el hacker decide si
+ * levantarse de la silla a buscar a alguien.
+ */
+export function mentorsByHub(city: CityKey | null) {
+  const assigned = MENTORS.filter((m) => m.cities.length > 0);
+  return {
+    hub: city ? assigned.filter((m) => m.cities.includes(city)) : assigned,
+    unassigned: MENTORS.filter((m) => m.cities.length === 0),
+  };
 }
 
 /**

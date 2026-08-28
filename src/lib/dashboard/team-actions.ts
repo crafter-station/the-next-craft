@@ -1,15 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { headers } from "next/headers";
 
 import { and, eq, sql } from "drizzle-orm";
 
-import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { dashboardTeamMembers, dashboardTeams } from "@/lib/db/schema";
 
-import { findParticipantByUserId, findTeamForParticipant } from "./state";
+import { inviteParticipant, revokeParticipant } from "./github";
+import { currentHacker } from "./state";
 import { MAX_TEAM_SIZE } from "./team-limits";
 
 export type TeamError =
@@ -46,23 +45,6 @@ function slugify(value: string) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
     .slice(0, 40);
-}
-
-type HackerContext =
-  | { error: TeamError }
-  | {
-      error?: undefined;
-      participant: Awaited<ReturnType<typeof findParticipantByUserId>> & object;
-      team: Awaited<ReturnType<typeof findTeamForParticipant>>;
-    };
-
-async function currentHacker(): Promise<HackerContext> {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) return { error: "unauthenticated" };
-  const participant = await findParticipantByUserId(session.user.id);
-  if (!participant) return { error: "no-participant" };
-  const team = await findTeamForParticipant(participant.id);
-  return { participant, team };
 }
 
 function refresh() {
@@ -138,6 +120,10 @@ export async function joinTeam(rawCode: string): Promise<Result> {
   const rows = (inserted as unknown as { rows: unknown[] }).rows ?? [];
   if (rows.length === 0) return { ok: false, error: "team-full" };
 
+  // Si el equipo ya tiene repo, la invitación sale sola: nadie tiene que
+  // acordarse de pedírsela al capitán.
+  await inviteParticipant(team.id, ctx.participant.id);
+
   refresh();
   return { ok: true };
 }
@@ -148,6 +134,8 @@ export async function leaveTeam(): Promise<Result> {
   if (!ctx.team) return { ok: false, error: "not-in-team" };
 
   const teamId = ctx.team.id;
+  // Antes de borrar la fila: la revocación necesita el id de la invitación.
+  await revokeParticipant(teamId, ctx.participant.id);
   await db
     .delete(dashboardTeamMembers)
     .where(eq(dashboardTeamMembers.participantId, ctx.participant.id));
