@@ -20,12 +20,6 @@ const roleConfigs = {
         slug: "arturo-barrantes",
       },
       {
-        firstName: "DAVID",
-        image: "david-morales-norato.png",
-        lastName: "MORALES NORATO",
-        slug: "david-morales-norato",
-      },
-      {
         firstName: "EMMY",
         image: "emmy-pardo.png",
         lastName: "PARDO",
@@ -103,12 +97,6 @@ const roleConfigs = {
     label: "JURADO OFICIAL",
     people: [
       {
-        firstName: "ADALIA",
-        image: "adalia-zhao.png",
-        lastName: "ZHAO",
-        slug: "adalia-zhao",
-      },
-      {
         firstName: "ARTURO",
         image: "arturo-barrantes.png",
         lastName: "BARRANTES",
@@ -127,28 +115,10 @@ const roleConfigs = {
         slug: "fausto-rolandi",
       },
       {
-        firstName: "JOSE LUIS",
-        image: "jose-luis-koller.png",
-        lastName: "KOLLER",
-        slug: "jose-luis-koller",
-      },
-      {
         firstName: "JOSUE",
         image: "josue-hernandez.png",
         lastName: "HERNANDEZ",
         slug: "josue-hernandez",
-      },
-      {
-        firstName: "NAHUEL",
-        image: "nahuel-alberti.png",
-        lastName: "ALBERTI",
-        slug: "nahuel-alberti",
-      },
-      {
-        firstName: "YAKKO",
-        image: "yakko-majuri.png",
-        lastName: "MAJURI",
-        slug: "yakko-majuri",
       },
       {
         firstName: "DUVAN",
