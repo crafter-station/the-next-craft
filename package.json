@@ -12,6 +12,7 @@
     "email:fausto:dry": "bun scripts/send-role-invitation.ts --recipient fausto",
     "email:daniel:dry": "bun scripts/send-role-invitation.ts --recipient daniel",
     "email:terry:dry": "bun scripts/send-role-invitation.ts --recipient terry",
+    "email:nahuel:dry": "bun scripts/send-role-invitation.ts --recipient nahuel",
     "invitation:generate": "bun scripts/generate-role-invitation.tsx",
     "generate:clerk-luma-banner": "node scripts/generate-clerk-luma-banner.mjs",
     "generate:cloudforge-luma-banner": "node scripts/generate-cloudforge-luma-banner.mjs",
