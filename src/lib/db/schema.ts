@@ -227,6 +227,17 @@ export const dashboardTrack = pgEnum("dashboard_track", [
   "learning-by-shipping",
 ]);
 
+/**
+ * Estado del repo que la organización le entrega al equipo. `null` = todavía no
+ * se pidió. `pending` es además el cerrojo: se escribe con un UPDATE
+ * condicional para que dos clics del capitán no creen dos repos.
+ */
+export const dashboardRepoStatus = pgEnum("dashboard_repo_status", [
+  "pending",
+  "ready",
+  "failed",
+]);
+
 export const dashboardTeams = pgTable(
   "dashboard_teams",
   {
@@ -246,6 +257,18 @@ export const dashboardTeams = pgTable(
     demoUrl: text("demo_url"),
     track: dashboardTrack("track"),
     trackConfirmedAt: timestamp("track_confirmed_at", { withTimezone: true }),
+    /**
+     * Repo generado desde el template de la organización: `org/nombre`. Es
+     * distinto de `repoUrl`, que el equipo puede sobreescribir a mano si al
+     * final trabaja en otro lado.
+     */
+    githubRepoFullName: text("github_repo_full_name"),
+    githubRepoUrl: text("github_repo_url"),
+    githubRepoStatus: dashboardRepoStatus("github_repo_status"),
+    githubRepoError: text("github_repo_error"),
+    githubRepoCreatedAt: timestamp("github_repo_created_at", {
+      withTimezone: true,
+    }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -257,6 +280,7 @@ export const dashboardTeams = pgTable(
     uniqueIndex("dashboard_teams_slug_idx").on(table.slug),
     uniqueIndex("dashboard_teams_join_code_idx").on(table.joinCode),
     index("dashboard_teams_track_idx").on(table.track),
+    uniqueIndex("dashboard_teams_github_repo_idx").on(table.githubRepoFullName),
   ],
 );
 
@@ -274,6 +298,14 @@ export const dashboardTeamMembers = pgTable(
     joinedAt: timestamp("joined_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
+    /**
+     * Invitación de colaborador al repo del equipo. GitHub la manda por correo
+     * y hay que aceptarla: `pending` hasta que desaparece de la lista de
+     * invitaciones del repo. El id sirve para revocarla si se va del equipo.
+     */
+    githubInviteId: text("github_invite_id"),
+    githubInviteState: text("github_invite_state").$type<GithubInviteState>(),
+    githubInvitedAt: timestamp("github_invited_at", { withTimezone: true }),
   },
   (table) => [
     // Un participante pertenece a un solo equipo.
@@ -281,6 +313,38 @@ export const dashboardTeamMembers = pgTable(
       table.participantId,
     ),
     index("dashboard_team_members_team_idx").on(table.teamId),
+  ],
+);
+
+export type GithubInviteState = "pending" | "accepted" | "failed";
+
+/**
+ * La cuenta de GitHub que el hacker vinculó por OAuth. El `login` cambia si
+ * alguien se renombra en GitHub, así que la clave dura es `githubUserId` (el id
+ * numérico) y el login se refresca en cada sincronización.
+ *
+ * Vive aparte de `account` (better-auth) porque ahí solo queda el id numérico y
+ * lo que necesitamos para invitar es el login.
+ */
+export const participantGithub = pgTable(
+  "participant_github",
+  {
+    participantId: uuid("participant_id")
+      .primaryKey()
+      .references(() => badgeParticipants.id, { onDelete: "cascade" }),
+    githubUserId: text("github_user_id").notNull(),
+    login: text("login").notNull(),
+    avatarUrl: text("avatar_url"),
+    linkedAt: timestamp("linked_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    // Una cuenta de GitHub no puede estar en dos acreditaciones.
+    uniqueIndex("participant_github_user_id_idx").on(table.githubUserId),
   ],
 );
 
@@ -352,6 +416,7 @@ export const schema = {
   badgeAttempts,
   dashboardTeams,
   dashboardTeamMembers,
+  participantGithub,
   dashboardPartnerRedemptions,
   dashboardAgendaSaves,
   dashboardCheckins,
