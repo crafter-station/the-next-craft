@@ -1,0 +1,25 @@
+---
+title: Premios
+---
+
+<p className="k-eyebrow">07 · Premios</p>
+
+<h2 className="k-title">$1,500 en efectivo.</h2>
+
+<div className="grid gap-3 md:grid-cols-3">
+  {[
+    ['Primero', '$1,000', 'Tavily · Exa · n8n Cloud Pro', true],
+    ['Segundo', '$500', 'Tavily · Exa · swag n8n', false],
+    ['Tercero', 'Créditos', 'Tavily · Exa · swag n8n', false],
+  ].map(([place, amount, extra, ink]) => (
+    <div key={place} className={ink ? 'k-card k-card-ink justify-between gap-6 py-6' : 'k-card justify-between gap-6 py-6'}>
+      <span className="k-label">{place}</span>
+      <div className="flex flex-col gap-2">
+        <span className="k-num">{amount}</span>
+        <span className="k-copy">{extra}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">La propiedad intelectual es del equipo, gane o no.</p>

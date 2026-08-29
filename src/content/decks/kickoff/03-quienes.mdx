@@ -1,0 +1,25 @@
+---
+title: Quiénes estamos
+---
+
+<p className="k-eyebrow">02 · Quiénes estamos</p>
+
+<h2 className="k-title">174 hackers, cinco ciudades.</h2>
+
+<div className="k-rows">
+  {[
+    ['Lima', 115],
+    ['Bogotá', 20],
+    ['Arequipa', 15],
+    ['El Salvador', 13],
+    ['Guatemala', 11],
+  ].map(([city, count]) => (
+    <div key={city} className="k-row" style={{ gridTemplateColumns: 'minmax(7rem, 11rem) 1fr auto' }}>
+      <span className="text-lg font-medium">{city}</span>
+      <span className="k-bar-track"><span className="k-bar block" style={{ width: `${(count / 115) * 100}%` }} /></span>
+      <span className="text-lg font-semibold tabular-nums">{count}</span>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Equipos de 3 a 5. Se cierran hoy.</p>

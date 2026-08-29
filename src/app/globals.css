@@ -2013,3 +2013,203 @@
     overflow: hidden;
   }
 }
+
+/* ─── Deck «clean»: tema claro, para proyectar en sala iluminada ──────
+   Los otros dos estilos son variantes tipográficas del look C64. Este sale de
+   la marca entero: fondo blanco, Inter, sin pixel ni monoespaciada. Redefinir
+   los tokens dentro del subárbol basta para que el chrome del pager —topbar,
+   teclas, índice— se aclare solo, porque todo el chrome los lee por variable.
+   ──────────────────────────────────────────────────────────────────── */
+.deck-pager[data-deck-style="clean"] {
+  --void: #ffffff;
+  --screen: #ffffff;
+  --screen-dim: #f5f4f1;
+  --line: #e4e2dc;
+  --line-strong: #c6c3ba;
+  --text: #17171a;
+  --text-dim: #6d6b64;
+  --bright: #17171a;
+  /* La tecla se invierte: negra sobre blanco. */
+  --bone: #17171a;
+  --key-shadow: #c6c3ba;
+  --border: var(--line);
+  --font-mono: var(--font-ui);
+  --font-pixel: var(--font-ui);
+  color-scheme: light;
+  background-color: var(--void);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-variant-numeric: tabular-nums;
+}
+
+/* El backdrop del índice es el único color literal del chrome. */
+.deck-pager[data-deck-style="clean"] .deck-index-backdrop {
+  background-color: rgb(255 255 255 / 94%);
+}
+
+.deck-pager[data-deck-style="clean"] .deck-slide-content {
+  max-width: 1120px;
+  gap: clamp(1rem, 2.4svh, 1.75rem);
+}
+
+/* Tipografía ──────────────────────────────────────────────────────── */
+.deck-pager[data-deck-style="clean"] .k-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.deck-pager[data-deck-style="clean"] .k-title {
+  font-size: clamp(2.3rem, 5.6vw, 3.9rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.03;
+  text-wrap: balance;
+}
+
+.deck-pager[data-deck-style="clean"] .k-display {
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.deck-pager[data-deck-style="clean"] .k-lead {
+  font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--text-dim);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.deck-pager[data-deck-style="clean"] .k-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.deck-pager[data-deck-style="clean"] .k-num {
+  font-size: clamp(2rem, 4.8vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* Bloques ─────────────────────────────────────────────────────────── */
+.deck-pager[data-deck-style="clean"] .k-card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(0.9rem, 2vw, 1.35rem);
+  background: var(--void);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.deck-pager[data-deck-style="clean"] .k-card-soft {
+  background: var(--screen-dim);
+  border-color: transparent;
+}
+
+.deck-pager[data-deck-style="clean"] .k-copy {
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+  text-wrap: pretty;
+}
+
+.deck-pager[data-deck-style="clean"] .k-card-ink {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--void);
+}
+
+/* Va después de .k-copy: al revés era una regla de especificidad descendente. */
+.deck-pager[data-deck-style="clean"] .k-card-ink .k-label,
+.deck-pager[data-deck-style="clean"] .k-card-ink .k-copy {
+  color: rgb(255 255 255 / 0.68);
+}
+
+.deck-pager[data-deck-style="clean"] .k-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Filas de datos con un filete de separación, sin caja. */
+.deck-pager[data-deck-style="clean"] .k-rows {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.deck-pager[data-deck-style="clean"] .k-row {
+  display: grid;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Barras: la sede se lee por longitud antes que por número. */
+.deck-pager[data-deck-style="clean"] .k-bar {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--text);
+}
+
+.deck-pager[data-deck-style="clean"] .k-bar-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--screen-dim);
+  overflow: hidden;
+}
+
+/* Personas ────────────────────────────────────────────────────────── */
+.deck-pager[data-deck-style="clean"] .k-people {
+  display: grid;
+  gap: clamp(0.5rem, 1.5vw, 1rem) clamp(0.4rem, 1vw, 0.75rem);
+  grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
+}
+
+.deck-pager[data-deck-style="clean"] .k-face {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  object-fit: cover;
+  object-position: top;
+  background: var(--screen-dim);
+  display: block;
+}
+
+.deck-pager[data-deck-style="clean"] .k-name {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Nueve filas de agenda no caben en una laptop de 13" con el padding normal. */
+.deck-pager[data-deck-style="clean"] .k-rows-tight .k-row {
+  padding: 0.4rem 0;
+}
+
+/*
+  Caras más chicas cuando la slide reparte a la gente en varios grupos. El
+  máximo es fijo a propósito: con 1fr, un grupo de una sola persona —Arequipa—
+  estiraba su retrato al ancho entero de la columna y quedaba del doble que el
+  resto.
+*/
+.deck-pager[data-deck-style="clean"] .k-people-sm {
+  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 5.25rem));
+  justify-content: start;
+}
+
+.deck-pager[data-deck-style="clean"] .k-people-sm .k-name {
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+}

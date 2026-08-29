@@ -1,0 +1,25 @@
+---
+title: Tracks
+---
+
+<p className="k-eyebrow">03 · Tracks</p>
+
+<h2 className="k-title">Tres tracks. Elige uno.</h2>
+
+<div className="grid gap-3 md:grid-cols-3">
+  {[
+    ['01', 'Content Machine', 'Crear · publicar · distribuir'],
+    ['02', 'Out of the Box', 'Raro · experimental · inclasificable'],
+    ['03', 'Learning by Shipping', 'Aprender haciendo · no mirando'],
+  ].map(([id, name, tagline]) => (
+    <div key={id} className="k-card flex-col justify-between gap-6 py-6">
+      <span className="k-label">Track {id}</span>
+      <div className="flex flex-col gap-2">
+        <span className="text-2xl font-semibold leading-tight">{name}</span>
+        <span className="k-copy">{tagline}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Se declara al crear el equipo. No se cambia.</p>

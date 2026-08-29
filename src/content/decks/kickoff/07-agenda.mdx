@@ -1,0 +1,28 @@
+---
+title: Agenda
+---
+
+<p className="k-eyebrow">06 · Agenda</p>
+
+<h2 className="k-title">El día.</h2>
+
+<div className="k-rows k-rows-tight">
+  {[
+    ['08:30', 'Registro', false],
+    ['09:00', 'Kickoff', true],
+    ['09:30', 'Empieza el hacking', true],
+    ['11:00', 'Mentorías', false],
+    ['13:00', 'Almuerzo', false],
+    ['16:00', 'Check-in', false],
+    ['18:30', 'Merienda', false],
+    ['20:00', 'Code freeze', true],
+    ['20:15', 'Demos', true],
+  ].map(([time, label, strong]) => (
+    <div key={time} className="k-row" style={{ gridTemplateColumns: '6rem 1fr' }}>
+      <span className={strong ? 'text-base font-semibold tabular-nums' : 'text-base tabular-nums text-[var(--text-dim)]'}>{time}</span>
+      <span className={strong ? 'text-base font-semibold' : 'text-base text-[var(--text-dim)]'}>{label}</span>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Hora local de tu sede. A las 20:00 no hay prórroga.</p>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Borel, IBM_Plex_Mono, Silkscreen } from "next/font/google";
+import { Borel, IBM_Plex_Mono, Inter, Silkscreen } from "next/font/google";
 import Script from "next/script";
 
 import "../globals.css";
@@ -15,6 +15,15 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/* Los decks con `style: "clean"` no usan ninguna de las tres de arriba: son
+   para proyectar, no para sostener el look C64. Inter es la única sans del
+   proyecto y solo la cargan esos decks. */
+const inter = Inter({
+  variable: "--font-ui",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -47,7 +56,7 @@ export default function DeckRootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${silkscreen.variable} ${ibmPlexMono.variable} ${borel.variable} deck-no-js h-full antialiased`}
+      className={`${silkscreen.variable} ${ibmPlexMono.variable} ${inter.variable} ${borel.variable} deck-no-js h-full antialiased`}
     >
       <body className="min-h-full bg-[var(--void)] text-[var(--text)]">
         {children}
