@@ -182,10 +182,10 @@ export const PARTNERS: Partner[] = [
   {
     key: "apify",
     name: "Apify",
-    url: "https://apify.com",
+    url: "https://console.apify.com/billing",
     valueUsd: 50,
     perParticipant: true,
-    steps: 3,
+    steps: 4,
   },
   {
     key: "cursor",

@@ -622,9 +622,10 @@
           "perk": "50 USD in credits per participant",
           "about": "Scraping and web data automation, with ready-made actors.",
           "steps": [
-            "Create the account",
-            "Billing → Redeem voucher",
-            "Credit lands instantly"
+            "Create an account or sign in to Apify Console",
+            "Open Billing in the sidebar",
+            "Go to the Subscription tab",
+            "Click + Add a promo code, paste the code, and confirm"
           ]
         },
         "cursor": {
