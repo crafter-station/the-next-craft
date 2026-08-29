@@ -15,12 +15,16 @@ export function PartnerCard({
   index,
   code,
   redeemed,
+  canRedeem,
+  perkEligibility,
   detailed = false,
 }: {
   partner: Partner;
   index: number;
-  code: string;
+  code: string | null;
   redeemed: boolean;
+  canRedeem: boolean;
+  perkEligibility: { hasBadge: boolean; arrived: boolean };
   detailed?: boolean;
 }) {
   const t = useTranslations("dashboard");
@@ -28,11 +32,24 @@ export function PartnerCard({
   const [copied, setCopied] = useState(false);
   const [pending, start] = useTransition();
 
+  const [redeemError, setRedeemError] = useState<string | null>(null);
+
+  const lockedMessage = !perkEligibility.hasBadge
+    ? t("credits.badgeRequiredBody")
+    : !perkEligibility.arrived
+      ? t("credits.checkInRequiredBody")
+      : null;
+
+  const lockedLabel = !perkEligibility.hasBadge
+    ? t("credits.badgeRequiredLabel")
+    : t("credits.checkInRequiredLabel");
+
   const steps = Array.from({ length: partner.steps }, (_, i) =>
     t(`credits.partners.${partner.key}.steps.${i}`),
   );
 
   const copy = async () => {
+    if (!code) return;
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
@@ -96,7 +113,14 @@ export function PartnerCard({
       </div>
 
       <div className="border-t border-[var(--line)] px-4 py-3.5">
-        {revealed ? (
+        {!code ? (
+          <>
+            <Basic n={79}>{t("credits.codePendingLabel")}</Basic>
+            <p className="mt-2.5 font-mono text-[12px] leading-relaxed text-[var(--text-dim)]">
+              {t("credits.codePendingBody")}
+            </p>
+          </>
+        ) : revealed ? (
           <>
             <Basic n={79}>{t("credits.yourCode")}</Basic>
             <button
@@ -112,6 +136,13 @@ export function PartnerCard({
               </span>
             </button>
           </>
+        ) : !canRedeem ? (
+          <>
+            <Basic n={79}>{lockedLabel}</Basic>
+            <p className="mt-2.5 font-mono text-[12px] leading-relaxed text-[var(--text-dim)]">
+              {lockedMessage}
+            </p>
+          </>
         ) : (
           <>
             <Basic n={79}>{t("credits.codeHidden")}</Basic>
@@ -121,13 +152,23 @@ export function PartnerCard({
               disabled={pending}
               onClick={() =>
                 start(async () => {
-                  await redeemPartner(partner.key);
+                  setRedeemError(null);
+                  const result = await redeemPartner(partner.key);
+                  if (!result.ok) {
+                    setRedeemError(t(`errors.${result.error}`));
+                    return;
+                  }
                   setRevealed(true);
                 })
               }
             >
               {t("credits.redeem")} →
             </button>
+            {redeemError && (
+              <p className="mt-2 font-mono text-[11px] text-[var(--text-dim)]">
+                {redeemError}
+              </p>
+            )}
           </>
         )}
       </div>

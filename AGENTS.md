@@ -101,9 +101,44 @@ No `.env` file is committed. Required variables include:
 - `RESEND_API_KEY`, `EMAIL_FROM`
 - `CRON_SECRET`
 - Badge generator: `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `BADGE_PII_ENCRYPTION_KEY`, `LUMA_API_KEY`, `AI_GATEWAY_API_KEY`, `TRIGGER_SECRET_KEY`
+- Team repos (see below): `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GITHUB_TOKEN`, `GITHUB_TEMPLATE_REPO`, optional `GITHUB_TEAM_REPO_OWNER`, `GITHUB_TEAM_REPO_PREFIX`
 - Build-time public vars: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER`
 
 `GOOGLE_PRIVATE_KEY_B64` must be base64-encoded on a single line — the newline-escaped version breaks Dokploy's `.env` parser.
+
+## Team repos on GitHub
+
+Each team gets its own repository in the org, generated from a **template
+repo** (`POST /repos/{owner}/{repo}/generate`) — not a fork: GitHub won't let
+one account hold many forks of the same repo, and a generated repo starts with
+clean history. Mentors find them by org + topics (`tnc26`, `tnc26-<city>`,
+`tnc26-<track>`), and staff sees the full list at `/dashboard/staff`.
+
+Code map:
+
+- `src/lib/github/api.ts` — hand-rolled REST client (no Octokit).
+- `src/lib/dashboard/github.ts` — identity sync, provisioning, invites. Every
+  effect is idempotent; provisioning is locked through
+  `dashboard_teams.github_repo_status`.
+- `src/lib/dashboard/github-actions.ts` — server actions (session + permissions).
+- `src/components/dashboard/github-panel.tsx` — the panel in `/dashboard/team`.
+
+Flow: the hacker links GitHub with Better Auth account linking (OAuth is
+**linking only** — `disableSignUp: true` keeps the Luma-approved OTP as the
+single door in), the captain presses «Crear el repo», and everyone with a
+linked account gets a collaborator invite (captain as `admin`, the rest as
+`push`). Whoever joins later is invited on join; whoever leaves is revoked.
+
+Setup checklist for a new edition:
+
+1. Create the starter repo in the org and tick **Template repository** in its
+   settings.
+2. Create an OAuth App (`Settings → Developer settings`) with callback
+   `${BETTER_AUTH_URL}/api/auth/callback/github` → `GITHUB_CLIENT_ID` /
+   `GITHUB_CLIENT_SECRET`.
+3. Issue a PAT for a machine account that can create repos in the org →
+   `GITHUB_TOKEN`. Set `GITHUB_TEMPLATE_REPO=<org>/<starter>`.
+4. Without these vars the panel simply doesn't render: local dev keeps working.
 
 <!-- TRIGGER.DEV SKILLS START -->
 ## Trigger.dev agent skills

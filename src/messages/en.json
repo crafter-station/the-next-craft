@@ -439,6 +439,21 @@
     "emptyBody": "When a participant generates a badge, it will show up here. If you are already accepted, you can create yours now.",
     "emptyCta": "GOTO BADGE STUDIO"
   },
+  "roleGallery": {
+    "title": "Mentor and judge images",
+    "description": "Gallery of official assets generated for The Next Craft mentors and judges.",
+    "navAria": "Mentor and judge image navigation",
+    "backHome": "← Home",
+    "label": "ROLE ASSETS",
+    "headline": "MENTORS + JUDGES",
+    "intro": "Review the official LinkedIn assets and download the full-resolution PNG files.",
+    "mentors": "Mentors",
+    "judges": "Judges",
+    "count": "{count} IMAGES",
+    "imageAlt": "Official asset for {name}, {role}",
+    "download": "Download",
+    "downloadFor": "Download image for {name}"
+  },
   "dashboard": {
     "nav": {
       "overview": "Dashboard",
@@ -619,7 +634,7 @@
     "credits": {
       "label": "PARTNER CREDITS",
       "headline": "CREDITS THAT ARE ALREADY YOURS",
-      "lede": "Everyone who gets in takes these credits, win or not. The code is issued in your name when you redeem and can't be transferred.",
+      "lede": "Everyone who gets in takes these credits, win or not. You can only reveal your code with a confirmed badge and in-person check-in at your hub.",
       "claimed": "${claimed} of ${total}",
       "redeemedCount": "{done}/{total} redeemed",
       "statTotal": "TOTAL VALUE",
@@ -715,7 +730,14 @@
             "The dev credit shows up separately from the plan"
           ]
         }
-      }
+      },
+      "rule5": "Redemption unlocks at the door: completed badge and arrival marked by your hub's staff.",
+      "badgeRequiredLabel": "BADGE PENDING",
+      "badgeRequiredBody": "Generate and confirm your badge before redeeming. It signals you're attending.",
+      "checkInRequiredLabel": "REDEEM ON SITE",
+      "checkInRequiredBody": "Your code is already assigned. Check in at the door so staff can mark your arrival and unlock it.",
+      "codePendingLabel": "COMING SOON",
+      "codePendingBody": "Your code will be assigned before the event. Check back once the team publishes it from admin."
     },
     "support": {
       "label": "SUPPORT",
@@ -808,7 +830,11 @@
       "statBadge": "WITH BADGE",
       "statBadgeHint": "confirmed attendance",
       "statPending": "NOT ARRIVED",
-      "footer": "{shown} of {total} shown"
+      "footer": "{shown} of {total} shown",
+      "reposLabel": "REPOS",
+      "reposTitle": "TEAM PROJECTS",
+      "reposEmpty": "No team has claimed a repo yet.",
+      "reposMissing": "no repo"
     },
     "team": {
       "label": "TEAM",
@@ -853,6 +879,28 @@
       "leaveConfirm": "If you're the last one, the team is deleted and the code stops working.",
       "leaveYes": "Yes, leave",
       "cancel": "Cancel",
+      "github": {
+        "label": "TEAM REPO",
+        "title": "GITHUB",
+        "body": "Every team gets a repository in the organization, generated from the hackathon template. Link your GitHub and the invite lands in your inbox.",
+        "link": "Link GitHub",
+        "linkedAs": "linked as",
+        "repoLabel": "TEAM REPOSITORY",
+        "repoBody": "Clone it and work there. Mentors find it from the organization.",
+        "create": "Create the repo",
+        "retry": "Retry",
+        "creating": "Creating it on GitHub…",
+        "failed": "The repo could not be created.",
+        "waitCaptain": "Whoever started the team creates it. Link your GitHub and they'll invite you.",
+        "captainNeedsLink": "Link your GitHub first: you become the repo admin.",
+        "accept": "accept",
+        "refresh": "Refresh invites",
+        "stateUnlinked": "not linked",
+        "stateQueued": "not invited yet",
+        "statePending": "invite sent",
+        "stateAccepted": "in",
+        "stateFailed": "invite failed"
+      },
       "errors": {
         "unauthenticated": "Your session expired. Sign in again.",
         "no-participant": "We couldn't find your accreditation.",
@@ -861,7 +909,14 @@
         "name-too-short": "The name needs at least two characters.",
         "code-not-found": "That code doesn't exist. Check it with whoever created the team.",
         "team-full": "That team is already full.",
-        "invalid-url": "Links must start with https://"
+        "invalid-url": "Links must start with https://",
+        "not-captain": "Only whoever started the team can create the repo.",
+        "github-not-configured": "The organization hasn't set up GitHub yet. Ping the staff.",
+        "github-not-linked": "Link your GitHub account first.",
+        "github-taken": "That GitHub account is already linked to another registration.",
+        "github-failed": "GitHub didn't answer properly. Try again in a moment.",
+        "repo-in-progress": "The repo is already being created. Reload in a few seconds.",
+        "perks-locked": "You can't redeem yet: you need a confirmed badge and in-person check-in."
       }
     },
     "access": {
@@ -877,19 +932,48 @@
       "includedTitle": "{count} THINGS INCLUDED"
     }
   },
-  "roleGallery": {
-    "title": "Mentor and judge images",
-    "description": "Gallery of official assets generated for The Next Craft mentors and judges.",
-    "navAria": "Mentor and judge image navigation",
-    "backHome": "← Home",
-    "label": "ROLE ASSETS",
-    "headline": "MENTORS + JUDGES",
-    "intro": "Review the official LinkedIn assets and download the full-resolution PNG files.",
-    "mentors": "Mentors",
-    "judges": "Judges",
-    "count": "{count} IMAGES",
-    "imageAlt": "Official asset for {name}, {role}",
-    "download": "Download",
-    "downloadFor": "Download image for {name}"
+  "admin": {
+    "gate": {
+      "title": "ORGANIZERS ONLY",
+      "body": "Sign in with your organization email to manage perks and operations.",
+      "cta": "Sign in",
+      "denied": "This area is for the organizing team only."
+    },
+    "shell": {
+      "title": "OPERATIONS",
+      "dashboard": "Dashboard"
+    },
+    "nav": {
+      "perks": "Perks"
+    },
+    "perks": {
+      "label": "ADMIN · PERKS",
+      "headline": "PARTNER CODES",
+      "lede": "Upload sponsor codes. Without email they assign in order to participants with a completed badge; with email they go directly to that person.",
+      "assignedTag": "{assigned}/{total} assigned",
+      "statConfirmed": "CONFIRMED",
+      "statConfirmedHint": "badge completed",
+      "statAssigned": "ASSIGNED",
+      "statAssignedHint": "codes in DB",
+      "statPartners": "PARTNERS",
+      "statPartnersHint": "in catalog",
+      "statPending": "MISSING",
+      "statPendingHint": "slots without code",
+      "uploadLabel": "UPLOAD",
+      "uploadTitle": "UPLOAD CSV",
+      "uploadBody": "Columns partner_key,code for auto-assignment, or email,partner_key,code to target someone specific.",
+      "csvExample": "partner_key,code\ncursor,CRSR-ABC123\n\nemail,partner_key,code\nhacker@mail.com,vapi,VAPI-XYZ789",
+      "uploadCta": "Upload and assign",
+      "uploading": "Uploading…",
+      "resultSummary": "{assigned} assigned · {skipped} skipped",
+      "tablePartner": "Partner",
+      "tableAssigned": "Assigned",
+      "tableConfirmed": "Confirmed",
+      "tableMissing": "Missing",
+      "errors": {
+        "not-staff": "You don't have organizer access.",
+        "empty": "The CSV is empty or has no valid rows."
+      }
+    }
   }
 }

@@ -289,16 +289,3 @@ export const TOTAL_PARTNER_VALUE_USD = PARTNERS.reduce(
   (sum, p) => sum + p.valueUsd,
   0,
 );
-
-/**
- * Código de canje para un participante. En producción lo emite la API del
- * partner; hasta entonces es determinista y por persona, para que el mismo
- * hacker vea siempre el mismo código.
- */
-export function partnerRedemptionCode(
-  partnerKey: string,
-  participantId: string,
-) {
-  const short = participantId.replace(/-/g, "").slice(0, 6).toUpperCase();
-  return `TNC26-${partnerKey.toUpperCase()}-${short}`;
-}

@@ -64,6 +64,20 @@
       "when": 1787894614418,
       "tag": "0008_redundant_iceman",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1787896322470,
+      "tag": "0009_clammy_purifiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1787897530698,
+      "tag": "0010_harsh_spirit",
+      "breakpoints": true
     }
   ]
 }

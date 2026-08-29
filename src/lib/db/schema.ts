@@ -348,6 +348,35 @@ export const participantGithub = pgTable(
   ],
 );
 
+/**
+ * Código real de un partner asignado a un participante (subida masiva desde
+ * /admin/perks). Sustituye el placeholder determinista del dashboard.
+ */
+export const participantPartnerCodes = pgTable(
+  "participant_partner_codes",
+  {
+    participantId: uuid("participant_id")
+      .notNull()
+      .references(() => badgeParticipants.id, { onDelete: "cascade" }),
+    partnerKey: text("partner_key").notNull(),
+    code: text("code").notNull(),
+    assignedByEmail: text("assigned_by_email"),
+    assignedAt: timestamp("assigned_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("participant_partner_codes_participant_partner_idx").on(
+      table.participantId,
+      table.partnerKey,
+    ),
+    uniqueIndex("participant_partner_codes_partner_code_idx").on(
+      table.partnerKey,
+      table.code,
+    ),
+  ],
+);
+
 /** Canje de créditos de partners. La clave del partner vive en content.ts. */
 export const dashboardPartnerRedemptions = pgTable(
   "dashboard_partner_redemptions",
@@ -417,6 +446,7 @@ export const schema = {
   dashboardTeams,
   dashboardTeamMembers,
   participantGithub,
+  participantPartnerCodes,
   dashboardPartnerRedemptions,
   dashboardAgendaSaves,
   dashboardCheckins,

@@ -4,12 +4,19 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
 import {
+  findGithubAccountId,
+  findGithubIdentity,
+  githubEnabled,
+} from "@/lib/dashboard/github";
+import {
   countTeamsInCity,
   findParticipantByUserId,
   findTeamForParticipant,
 } from "@/lib/dashboard/state";
 import { MAX_TEAM_SIZE, MIN_TEAM_SIZE } from "@/lib/dashboard/team-limits";
+import { invitationsUrl } from "@/lib/github/api";
 
+import { GithubPanel } from "@/components/dashboard/github-panel";
 import {
   Kv,
   PageHeader,
@@ -57,6 +64,26 @@ export default async function TeamPage({
   }
 
   const short = team.members.length < MIN_TEAM_SIZE;
+
+  // El panel de repos solo existe si la organización configuró GitHub.
+  const github = githubEnabled()
+    ? {
+        linked: await findGithubIdentity(participant.id),
+        accountId: await findGithubAccountId(participant.userId),
+      }
+    : null;
+  const me = team.members.find((m) => m.participantId === participant.id);
+  const repoView = team.githubRepoStatus
+    ? {
+        fullName: team.githubRepoFullName ?? "",
+        url: team.githubRepoUrl ?? "",
+        status: team.githubRepoStatus,
+        error: team.githubRepoError,
+        invitationsUrl: team.githubRepoFullName
+          ? invitationsUrl(team.githubRepoFullName)
+          : "",
+      }
+    : null;
 
   return (
     <>
@@ -151,6 +178,23 @@ export default async function TeamPage({
           />
         </Panel>
       </div>
+
+      {github && (
+        <GithubPanel
+          linked={github.linked}
+          needsSync={Boolean(github.accountId) && !github.linked}
+          isCaptain={Boolean(me?.isCaptain)}
+          repo={repoView}
+          members={team.members.map((m) => ({
+            participantId: m.participantId,
+            fullName: m.fullName,
+            login: m.githubLogin,
+            inviteState: m.githubInviteState,
+            isCaptain: m.isCaptain,
+            isYou: m.participantId === participant.id,
+          }))}
+        />
+      )}
     </>
   );
 }
