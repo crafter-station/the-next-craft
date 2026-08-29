@@ -21,7 +21,7 @@ const SHARED_PARTNER_CODES = new Map([
   ["tavily", "TVLY-4XBA8FDS"],
   ["apify", "NEXT_CRAFT_LATAM"],
   ["vapi", "thenextcraftperuvapi"],
-  ["replit", "IALABS"],
+  ["replit", "MASTER-DEV-VIBES"],
   ["n8n", "2026-COMMUNITY-HACKATHON-LATAM-144E6300"],
 ]);
 
