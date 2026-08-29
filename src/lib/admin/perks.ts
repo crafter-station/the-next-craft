@@ -22,6 +22,7 @@ const SHARED_PARTNER_CODES = new Map([
   ["apify", "NEXT_CRAFT_LATAM"],
   ["vapi", "thenextcraftperuvapi"],
   ["replit", "IALABS"],
+  ["n8n", "2026-COMMUNITY-HACKATHON-LATAM-144E6300"],
 ]);
 
 /** Participantes con badge completado (confirmaron asistencia). */

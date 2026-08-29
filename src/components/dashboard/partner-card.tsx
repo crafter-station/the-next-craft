@@ -152,18 +152,30 @@ export function PartnerCard({
         )}
       </div>
 
-      <div className="flex items-center justify-between gap-3 border-t border-[var(--line)] px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] px-4 py-3">
         <span className="font-mono text-[10px] text-[var(--text-dim)]">
           {t("credits.expires")}
         </span>
-        <a
-          href={partner.url}
-          target="_blank"
-          rel="noreferrer"
-          className={keyGhostClass}
-        >
-          {t("credits.openPanel")} →
-        </a>
+        <div className="flex flex-wrap gap-2">
+          {partner.guideUrl ? (
+            <a
+              href={partner.guideUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={keyGhostClass}
+            >
+              {t("credits.openGuide")} →
+            </a>
+          ) : null}
+          <a
+            href={partner.url}
+            target="_blank"
+            rel="noreferrer"
+            className={keyGhostClass}
+          >
+            {t("credits.openPanel")} →
+          </a>
+        </div>
       </div>
     </Panel>
   );
