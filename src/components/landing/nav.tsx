@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { key: "tracks", href: "#tracks" },
   { key: "schedule", href: "#agenda" },
   { key: "prizes", href: "#premios" },
+  { key: "rubric", href: "#rubrica" },
   { key: "gallery", href: "/gallery" },
   { key: "faq", href: "#faq" },
 ] as const;
