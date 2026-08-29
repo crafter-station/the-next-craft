@@ -8,11 +8,9 @@ import {
   formatParticipantNumber,
   galleryPath,
   participantBadgeImagePath,
-  participantPortraitPath,
   participantProfilePath,
 } from "@/lib/badge/profile";
 import { getBadgeStudioState } from "@/lib/badge/state";
-import { buildAgenda, type ScheduleMessage } from "@/lib/dashboard/agenda";
 import { findParticipantByUserId } from "@/lib/dashboard/state";
 
 import {
@@ -23,7 +21,6 @@ import {
   PageHeader,
   Panel,
   PanelHead,
-  Row,
   Tag,
 } from "@/components/dashboard/kit";
 
@@ -44,7 +41,6 @@ export default async function BadgePage({
   setRequestLocale(locale);
 
   const t = await getTranslations("dashboard");
-  const tSchedule = await getTranslations("schedule");
 
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) return null;
@@ -73,22 +69,12 @@ export default async function BadgePage({
   const profileUrl = profile
     ? `${SITE_URL}${participantProfilePath(profile.participantNumber, locale)}`
     : null;
-  const portraitSrc =
-    ready && profile
-      ? participantPortraitPath(profile.participantNumber, profile.updatedAt)
-      : null;
   // Sin el `?w=`: la descarga debe ser el badge a resolución completa, no la
   // versión reducida que se pinta arriba.
   const badgeDownloadSrc =
     ready && profile
       ? participantBadgeImagePath(profile.participantNumber, profile.updatedAt)
       : null;
-
-  // Las comidas se listan como lo que incluye la entrada. No llevan estado
-  // de «usada»: el control en sede es manual y nada lo registra todavía.
-  const meals = buildAgenda(
-    tSchedule.raw("events") as ScheduleMessage[],
-  ).filter((b) => b.kind === "meal");
 
   return (
     <>
@@ -138,13 +124,6 @@ export default async function BadgePage({
                 className={`${keyClass} w-full`}
               >
                 {t("badge.download")}
-              </a>
-              <a
-                href={portraitSrc ?? undefined}
-                download={`the-next-craft-portrait-${formattedNumber}.png`}
-                className={`${keyGhostClass} w-full`}
-              >
-                {t("badge.downloadPortrait")}
               </a>
               <Link
                 href={badgeStudioPath("profile")}
@@ -230,28 +209,6 @@ export default async function BadgePage({
               <Kv k={t("badge.email")}>{participant.email}</Kv>
               <Kv k={t("badge.hub")}>{participant.city ?? "—"}</Kv>
             </div>
-          </Panel>
-
-          <Panel>
-            <PanelHead
-              n={23}
-              label={t("badge.includedLabel")}
-              title={t("badge.includedTitle", { count: meals.length })}
-            />
-            <ul>
-              {meals.map((m) => (
-                <Row key={m.time} marker="→">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-                    <span className="text-[var(--text)]">{m.description}</span>
-                    <span className="text-[11px]">
-                      {m.time}–{m.end}
-                    </span>
-                  </div>
-                </Row>
-              ))}
-              <Row marker="→">{t("badge.includedSwag")}</Row>
-              <Row marker="→">{t("badge.includedCommunity")}</Row>
-            </ul>
           </Panel>
         </div>
       </div>

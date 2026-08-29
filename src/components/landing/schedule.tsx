@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useTranslations } from "next-intl";
+
+import { cityUtcOffset, DEFAULT_CITY, viewerCity } from "@/lib/cities";
+import { agendaMetaByTime, EVENT_DAY } from "@/lib/dashboard/content";
 
 type EventItem = {
   time: string;
@@ -10,6 +13,38 @@ type EventItem = {
   mono?: string;
   highlight?: boolean;
 };
+
+type BlockStatus = "past" | "now" | "next";
+
+/**
+ * En qué punto del día está cada bloque, ahora mismo.
+ *
+ * Las horas de la agenda son horas de pared de cada sede: las 09:00 de
+ * Guatemala no son las 09:00 de Lima. Aquí no hay sesión, así que la sede se
+ * deduce del reloj del navegador; quien mire desde fuera ve la de la sede por
+ * defecto.
+ *
+ * El fin de cada bloque sale de `AGENDA_META`, que es donde ya vivía. Si algún
+ * día se añade una fila al copy sin metadatos, se le da media hora en vez de
+ * romper la sección.
+ */
+function statusByTime(times: readonly string[]): Map<string, BlockStatus> {
+  const offset = cityUtcOffset(viewerCity() ?? DEFAULT_CITY);
+  const at = (hhmm: string) => Date.parse(`${EVENT_DAY}T${hhmm}:00${offset}`);
+  const now = Date.now();
+
+  return new Map(
+    times.map((time) => {
+      const start = at(time);
+      const meta = agendaMetaByTime.get(time);
+      const end = meta ? at(meta.end) : start + 30 * 60_000;
+      return [
+        time,
+        now >= end ? "past" : now >= start ? "now" : "next",
+      ] as const;
+    }),
+  );
+}
 
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const ramp = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
@@ -43,6 +78,23 @@ export function Schedule() {
   const t = useTranslations("schedule");
   const events = t.raw("events") as readonly EventItem[];
   const wallWord = t("headline");
+
+  /*
+    Null hasta que hidrata: el estado depende del reloj y de la zona del
+    navegador, así que en servidor no se puede saber y pintarlo llevaría a un
+    desajuste de hidratación. Antes de montar, la agenda se ve como siempre.
+  */
+  const [status, setStatus] = useState<Map<string, BlockStatus> | null>(null);
+
+  useEffect(() => {
+    const times = events.map((e) => e.time);
+    const tick = () => setStatus(statusByTime(times));
+    tick();
+    // Medio minuto: los bloques duran de 25 minutos para arriba, así que basta
+    // para que el marcador nunca se vea más de medio minuto desfasado.
+    const id = setInterval(tick, 30_000);
+    return () => clearInterval(id);
+  }, [events]);
 
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -182,19 +234,41 @@ export function Schedule() {
             </p>
 
             <ul className="agenda-list" aria-label={t("ariaLabel")}>
-              {events.map((event) => (
-                <li key={event.time} className="agenda-row">
+              {events.map((event) => {
+                const state = status?.get(event.time);
+                const isNow = state === "now";
+                const isPast = state === "past";
+                return (
+                <li
+                  key={event.time}
+                  className="agenda-row"
+                  // Lo pasado se atenúa y lo que corre ahora se marca. El
+                  // atributo va aparte de las clases para que el lector de
+                  // pantalla y cualquier test lo puedan leer sin mirar estilos.
+                  data-state={state}
+                  style={isPast ? { opacity: 0.45 } : undefined}
+                  aria-current={isNow ? "time" : undefined}
+                >
                   <span className="agenda-node" aria-hidden="true" />
-                  <span className="agenda-time font-mono text-sm font-medium tabular-nums text-[var(--bright)]">
+                  <span
+                    className={`agenda-time font-mono text-sm font-medium tabular-nums ${
+                      isNow ? "text-[var(--text)]" : "text-[var(--bright)]"
+                    }`}
+                  >
                     {event.time}
                   </span>
                   <span
                     className={
-                      event.highlight
+                      event.highlight || isNow
                         ? "font-sans text-sm font-semibold leading-snug text-[var(--text)]"
                         : "font-sans text-sm leading-snug text-[var(--text-dim)]"
                     }
                   >
+                    {isNow && (
+                      <span className="mr-2 inline-block border border-[var(--bright)] px-1.5 py-0.5 align-middle font-mono text-[10px] font-bold tracking-[0.14em] uppercase text-[var(--bright)]">
+                        {t("now")}
+                      </span>
+                    )}
                     {event.description}
                     {event.mono && (
                       <>
@@ -206,7 +280,8 @@ export function Schedule() {
                     )}
                   </span>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </div>
         </div>

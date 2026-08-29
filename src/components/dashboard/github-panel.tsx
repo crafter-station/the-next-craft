@@ -13,6 +13,53 @@ import {
 
 import { keyClass, keyGhostClass, Panel, PanelHead, Row } from "./kit";
 
+/**
+ * Bloque de comandos con botón de copiar. Vivía en `copy-block.tsx` hasta que
+ * la limpieza del dashboard se llevó ese componente por delante; como aquí es
+ * el único sitio que lo usa, se queda dentro del panel.
+ */
+function CopyBlock({
+  label,
+  text,
+  copyLabel,
+  copiedLabel,
+}: {
+  label: string;
+  text: string;
+  copyLabel: string;
+  copiedLabel: string;
+}) {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-3">
+        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-[var(--text-dim)]">
+          {label}
+        </span>
+        <button
+          type="button"
+          onClick={async () => {
+            try {
+              await navigator.clipboard.writeText(text);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1800);
+            } catch {
+              setCopied(false);
+            }
+          }}
+          className="font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--text-dim)] hover:text-[var(--bright)]"
+        >
+          {copied ? copiedLabel : copyLabel}
+        </button>
+      </div>
+      <pre className="mt-2.5 overflow-x-auto border border-[var(--line)] bg-[var(--void)] px-3.5 py-3 font-mono text-[12px] leading-relaxed whitespace-pre-wrap text-[var(--text-dim)]">
+        {text}
+      </pre>
+    </div>
+  );
+}
+
 export type GithubMemberView = {
   participantId: string;
   fullName: string;
@@ -46,6 +93,7 @@ export function GithubPanel({
   members,
 }: GithubPanelProps) {
   const t = useTranslations("dashboard.team.github");
+  const tTeam = useTranslations("dashboard.team");
   const tErrors = useTranslations("dashboard.team.errors");
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
@@ -143,6 +191,30 @@ export function GithubPanel({
           </a>
           <p className="mt-2 font-mono text-[11px] leading-relaxed text-[var(--text-dim)]">
             {t("repoBody")}
+          </p>
+
+          {/*
+            A las 2am nadie se acuerda de `git remote add`. El segundo bloque
+            fuerza a propósito: el equipo que ya empezó en local tiene una
+            historia sin relación con la del template y un push normal se
+            rechaza — y lo que se pisa es el starter, que es desechable.
+          */}
+          <div className="mt-4 flex flex-col gap-3.5">
+            <CopyBlock
+              label={t("pushFresh")}
+              text={`git clone ${repo.url}.git\ncd ${repo.fullName.split("/")[1] ?? ""}`}
+              copyLabel={tTeam("copy")}
+              copiedLabel={tTeam("copied")}
+            />
+            <CopyBlock
+              label={t("pushExisting")}
+              text={`git remote add origin ${repo.url}.git\ngit branch -M main\ngit push -u --force origin main`}
+              copyLabel={tTeam("copy")}
+              copiedLabel={tTeam("copied")}
+            />
+          </div>
+          <p className="mt-3 font-mono text-[11px] leading-relaxed text-[var(--bright)]">
+            {t("pushAccept")}
           </p>
         </div>
       ) : (

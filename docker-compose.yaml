@@ -34,6 +34,14 @@ services:
       EMAIL_FROM: ${EMAIL_FROM}
       CRON_SECRET: ${CRON_SECRET}
       RESEND_API_KEY: ${RESEND_API_KEY:-}
+      # Repos de equipo. Sin estas cuatro el panel de GitHub no se pinta y el
+      # resto del dashboard funciona igual; ver «Team repos on GitHub».
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_TEMPLATE_REPO: ${GITHUB_TEMPLATE_REPO:-}
+      GITHUB_TEAM_REPO_OWNER: ${GITHUB_TEAM_REPO_OWNER:-}
+      GITHUB_TEAM_REPO_PREFIX: ${GITHUB_TEAM_REPO_PREFIX:-}
       NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
       NEXT_PUBLIC_WHATSAPP_NUMBER: ${NEXT_PUBLIC_WHATSAPP_NUMBER}
     expose:
