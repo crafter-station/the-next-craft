@@ -1,8 +1,7 @@
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 
 import { and, asc, eq, isNotNull, sql } from "drizzle-orm";
 
-import { auth } from "@/lib/auth";
 import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
+import { PANELIST_COOKIE, readSession } from "./access";
 import { normalizePanel, type PanelResult, type ScoreEntry } from "./normalize";
 import { CRITERION_KEYS, type CriterionKey, isValidScore } from "./rubric";
 
@@ -54,18 +54,15 @@ export type JudgeableTeam = {
 /**
  * El panelista en sesión, o null.
  *
- * La lista blanca vive en `dashboard_panelists` y la mantiene el staff: ni
- * mentores ni jurados son participantes de Luma ni llevan correo de la
- * organización, así que no entran por ninguna de las otras dos puertas.
- *
- * `userId` se enlaza aquí, la primera vez que la persona entra: el correo de la
- * sesión ya pasó por el OTP, así que es un dato que el navegador no inventa.
+ * Sale de la cookie firmada, no de Better Auth: el panel entra por código y no
+ * por correo (ver `access.ts`). Se vuelve a leer la fila en cada petición en
+ * vez de confiar en lo que diga el token, porque una baja tiene que surtir
+ * efecto en el momento y no cuando caduque la cookie una semana después.
  */
 export async function currentPanelist(): Promise<Panelist | null> {
-  const session = await auth.api.getSession({ headers: await headers() });
-  const email = session?.user.email?.trim().toLowerCase();
-  if (!session || !email) return null;
-  const userId = session.user.id;
+  const store = await cookies();
+  const panelistId = readSession(store.get(PANELIST_COOKIE)?.value);
+  if (!panelistId) return null;
 
   const [row] = await db
     .select({
@@ -74,21 +71,13 @@ export async function currentPanelist(): Promise<Panelist | null> {
       fullName: dashboardPanelists.fullName,
       role: dashboardPanelists.role,
       city: dashboardPanelists.city,
-      userId: dashboardPanelists.userId,
       revokedAt: dashboardPanelists.revokedAt,
     })
     .from(dashboardPanelists)
-    .where(eq(dashboardPanelists.email, email))
+    .where(eq(dashboardPanelists.id, panelistId))
     .limit(1);
 
   if (!row || row.revokedAt) return null;
-
-  if (row.userId !== userId) {
-    await db
-      .update(dashboardPanelists)
-      .set({ userId })
-      .where(eq(dashboardPanelists.id, row.id));
-  }
 
   return {
     id: row.id,
@@ -316,6 +305,7 @@ export async function listPanelists() {
       fullName: dashboardPanelists.fullName,
       role: dashboardPanelists.role,
       city: dashboardPanelists.city,
+      accessCode: dashboardPanelists.accessCode,
       revokedAt: dashboardPanelists.revokedAt,
       scored: sql<number>`(
         select count(*) from dashboard_scores s
@@ -326,5 +316,3 @@ export async function listPanelists() {
     .from(dashboardPanelists)
     .orderBy(asc(dashboardPanelists.role), asc(dashboardPanelists.fullName));
 }
-
-export { isPanelistEmail } from "./panelists.server";

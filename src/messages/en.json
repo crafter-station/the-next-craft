@@ -975,7 +975,10 @@
         "content-machine": "CONTENT MACHINE",
         "out-of-the-box": "OUT OF THE BOX",
         "learning-by-shipping": "LEARNING BY SHIPPING"
-      }
+      },
+      "rosterCopy": "COPY",
+      "rosterRegenerate": "NEW CODE",
+      "rosterNote": "The code is what gets dictated to sign in — no email involved. It can be re-read and copied here as often as needed. “New code” invalidates the old one immediately — use it only if it leaked; sessions already open stay alive."
     },
     "projects": {
       "label": "PROJECTS",
@@ -1006,10 +1009,17 @@
   },
   "judging": {
     "gate": {
-      "title": "JUDGING PANEL",
-      "body": "Sign in with the email you gave us. A six-digit code arrives; there's no password to remember.",
-      "cta": "REQUEST CODE",
-      "denied": "That email isn't on this edition's panel. Ask your hub staff to add you."
+      "title": "ENTER YOUR CODE",
+      "body": "Your hub staff gave you an eight-character code. No email, no password: type it and you're in.",
+      "label": "ACCESS CODE",
+      "cta": "ENTER",
+      "checking": "CHECKING…",
+      "help": "No code, or it isn't working? Ask your hub staff — they can reissue it on the spot.",
+      "errors": {
+        "bad-code": "That code isn't valid. Check you copied it in full — it has no O or zero, no I or one.",
+        "too-many-attempts": "Too many tries in a row. Wait a minute and try again.",
+        "not-a-panelist": "Your session expired. Type your code again."
+      }
     },
     "role": {
       "mentor": "MENTOR",
@@ -1017,7 +1027,8 @@
     },
     "shell": {
       "title": "JUDGING",
-      "hub": "HUB {city}"
+      "hub": "HUB {city}",
+      "signOut": "SIGN OUT"
     },
     "queue": {
       "label": "YOUR PROJECTS",

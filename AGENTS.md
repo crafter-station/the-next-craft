@@ -123,8 +123,7 @@ Code map:
   **conectado** (union-find sobre equipos que comparten panelista); un panel
   desconectado no se puede publicar.
 - `src/lib/judging/state.ts` — sesión del panelista, alcance por rol, resultados.
-- `src/lib/judging/panelists.server.ts` — lista blanca. Vive aparte porque
-  `lib/auth.ts` la consume y `state.ts` importa `auth`: juntarlas cierra el ciclo.
+- `src/lib/judging/access.ts` — el código de acceso y la sesión firmada.
 - `src/lib/judging/actions.ts` — server actions.
 - `src/app/[locale]/judge/**` — el área del panelista, con su propia puerta.
   Fuera de `/dashboard` a propósito: aquel shell es del hacker y exige ser
@@ -136,9 +135,24 @@ Code map:
 - `src/app/[locale]/admin/judging` — el tablero del comité: proyectos, ranking
   normalizado, banderas de cobertura y el interruptor de finalista.
 
-Alta de panelistas: `dashboard_panelists` es lista blanca de correos que
-mantiene el staff, y es además la tercera puerta del OTP (`lib/auth.ts`) — sin
-ella un mentor no puede ni pedir el código.
+**El panel no entra por correo.** Cada panelista tiene un `access_code` de ocho
+caracteres que el staff le dicta, y con eso entra: sin OTP, sin contraseña y
+sin Better Auth. El OTP se descartó porque fallaba en silencio —solo se envía a
+direcciones dadas de alta, así que quien tecleaba otra no recibía nada ni sabía
+por qué—, y un mentor de pie en una sala con ruido no tiene margen para eso.
+
+El código es una credencial al portador y se guarda **en claro**: el staff
+necesita releérselo a quien pierda el papel, que es lo que de verdad pasa. Se
+sostiene porque vive un día y solo abre la calificación. La sesión es una
+cookie firmada con HMAC sobre `BETTER_AUTH_SECRET`, sin tabla de sesiones. La
+fila se relee en cada petición para que una baja surta efecto en el momento y
+no cuando caduque la cookie.
+
+`access_code` lleva un `DEFAULT` en la base que no es el camino normal —la app
+siempre escribe el suyo— sino una red: las migraciones se aplican **a mano y
+por separado del despliegue** (`CMD ["node", "server.js"]` no las corre), así
+que existe una ventana en la que el código viejo puede insertar una fila sin
+saber de la columna.
 
 El ranking del tablero es del panel (la sede), pero además muestra la posición
 **dentro de cada track**, que es donde se reparten los premios — igual que la

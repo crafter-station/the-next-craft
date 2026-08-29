@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { auth } from "@/lib/auth";
 import { currentPanelist } from "@/lib/judging/state";
 
-import { Basic, Empty, Panel, Pixel, Tag } from "@/components/dashboard/kit";
+import { Basic, Pixel, Tag } from "@/components/dashboard/kit";
+import { CodeGate } from "@/components/judging/code-gate";
+import { SignOut } from "@/components/judging/sign-out";
 
 import { Link } from "@/i18n/navigation";
 
@@ -24,8 +24,11 @@ export const dynamic = "force-dynamic";
  * lateral con tracks, agenda y cuenta atrás para entregar— y su puerta exige
  * ser participante acreditado en Luma. Un mentor no es participante, y
  * ablandar esa puerta para dejarlo pasar rompería la garantía de que al
- * dashboard solo entra quien está inscrito. Así que el panel tiene su propia
- * puerta, contra `dashboard_panelists`.
+ * dashboard solo entra quien está inscrito.
+ *
+ * Su puerta tampoco es el OTP al correo. Ese fallaba en silencio: el código
+ * solo se envía a direcciones dadas de alta, así que quien tecleaba otra no
+ * recibía nada ni sabía por qué. Aquí el staff dicta un código y se entra.
  */
 export default async function JudgeLayout({
   children,
@@ -35,46 +38,8 @@ export default async function JudgeLayout({
   setRequestLocale(locale);
 
   const t = await getTranslations("judging");
-  const session = await auth.api.getSession({ headers: await headers() });
-
-  if (!session) {
-    return (
-      <main
-        id="main-content"
-        className="mx-auto max-w-[640px] px-4 py-16 sm:px-6"
-      >
-        <Panel className="scanlines px-6 py-8">
-          <Basic n={10}>ACCESO</Basic>
-          <Pixel size="lg" className="mt-3">
-            {t("gate.title")}
-          </Pixel>
-          <p className="mt-4 font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
-            {t("gate.body")}
-          </p>
-          <Link
-            href="/badge"
-            className="mt-6 inline-block font-mono text-[11px] tracking-[0.12em] uppercase text-[var(--bright)] underline underline-offset-4"
-          >
-            {t("gate.cta")} →
-          </Link>
-        </Panel>
-      </main>
-    );
-  }
-
   const panelist = await currentPanelist();
-  if (!panelist) {
-    return (
-      <main
-        id="main-content"
-        className="mx-auto max-w-[640px] px-4 py-16 sm:px-6"
-      >
-        <Panel className="scanlines px-6 py-8">
-          <Empty>{t("gate.denied")}</Empty>
-        </Panel>
-      </main>
-    );
-  }
+  if (!panelist) return <CodeGate />;
 
   return (
     <div className="min-h-svh bg-[var(--void)]">
@@ -91,6 +56,7 @@ export default async function JudgeLayout({
               <Tag>{t("shell.hub", { city: panelist.city.toUpperCase() })}</Tag>
             )}
             <Tag strong>{panelist.fullName}</Tag>
+            <SignOut />
           </div>
         </div>
       </header>
