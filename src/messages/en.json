@@ -314,35 +314,36 @@
   },
   "rubric": {
     "label": "RUBRIC",
-    "intro": "One rubric for both stages and all three tracks. Each criterion is scored 0 to 5; the weights don't change by track or by city.",
+    "intro": "One rubric for both stages and all three tracks: each criterion is scored 0 to 5 and the weights don't change by city.",
     "criteriaAria": "Judging criteria and their weight",
     "items": [
       {
         "weight": "30%",
         "name": "CLOSED DEMO",
-        "desc": "The flow runs end to end and finishes. No half-finished paths."
+        "desc": "The flow runs end to end and finishes, with no half-finished paths."
       },
       {
         "weight": "25%",
         "name": "VALIDATED USE",
-        "desc": "A specific user, a real problem, and data collected today to back it."
+        "desc": "A specific user, a real problem and data collected today to back it."
       },
       {
         "weight": "20%",
         "name": "TECHNICAL CRAFT",
-        "desc": "How well built what they showed is — not how big the challenge was."
+        "desc": "How well built what they showed is, not how big the challenge was."
       },
       {
         "weight": "15%",
         "name": "AMBITION",
-        "desc": "How they took on the complexity: what they took on and how they cut it to fit 12 hours."
+        "desc": "How they cut a complex problem down to fit 12 hours."
       },
       {
         "weight": "10%",
         "name": "CLEAR PITCH",
-        "desc": "What it solves, which track it competes in, and within the agreed time. Not a minute more."
+        "desc": "What it solves and which track it's in: 3 minutes to tell it, 3 to defend it."
       }
-    ]
+    ],
+    "note": "A requirement, not a criterion: every project uses Convex —the main sponsor— and registers on Vibe Apps before submissions close."
   },
   "sponsors": {
     "label": "ORGANIZERS",

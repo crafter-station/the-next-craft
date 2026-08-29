@@ -314,13 +314,13 @@
   },
   "rubric": {
     "label": "RÚBRICA",
-    "intro": "Una sola rúbrica para las dos fases y para los tres tracks. Cada criterio se puntúa de 0 a 5; los pesos no cambian por track ni por sede.",
+    "intro": "Una sola rúbrica para las dos fases y los tres tracks: cada criterio se puntúa de 0 a 5 y los pesos no cambian por sede.",
     "criteriaAria": "Criterios de evaluación y su peso",
     "items": [
       {
         "weight": "30%",
         "name": "DEMO CERRADA",
-        "desc": "El flujo se recorre entero y termina. Nada de caminos a medias."
+        "desc": "El flujo se recorre entero y termina, sin caminos a medias."
       },
       {
         "weight": "25%",
@@ -335,14 +335,15 @@
       {
         "weight": "15%",
         "name": "AMBICIÓN",
-        "desc": "Cómo abordaron la complejidad: qué se echaron encima y cómo lo partieron para que entrara en 12 horas."
+        "desc": "Cómo partieron un problema complejo para que entrara en 12 horas."
       },
       {
         "weight": "10%",
         "name": "PITCH CLARO",
-        "desc": "Qué resuelve, en qué track compite, y dentro del tiempo acordado. Ni un minuto más."
+        "desc": "Qué resuelve y en qué track compite: 3 minutos para contarlo, 3 para defenderlo."
       }
-    ]
+    ],
+    "note": "Requisito, no criterio: todos los proyectos usan Convex —el sponsor principal— y se registran en Vibe Apps antes del cierre."
   },
   "sponsors": {
     "label": "ORGANIZADORES",

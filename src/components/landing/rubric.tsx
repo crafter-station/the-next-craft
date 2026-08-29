@@ -62,6 +62,11 @@ export function Rubric() {
             </li>
           ))}
         </ul>
+
+        {/* Convex y Vibe Apps no son criterios: se cumplen o no se compite. */}
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.6] text-[var(--text-dim)]">
+          {t("note")}
+        </p>
       </div>
     </section>
   );
