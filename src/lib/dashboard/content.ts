@@ -206,10 +206,10 @@ export const PARTNERS: Partner[] = [
   {
     key: "replit",
     name: "Replit",
-    url: "https://replit.com",
+    url: "https://replit.com/checkout",
     valueUsd: 45,
     perParticipant: true,
-    steps: 2,
+    steps: 5,
   },
 ];
 

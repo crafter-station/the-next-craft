@@ -644,10 +644,13 @@
         },
         "replit": {
           "perk": "Plan Core + 20 USD en créditos",
-          "about": "Entorno de desarrollo y despliegue en el navegador. Sirve para tener el demo en vivo antes de las 20:00.",
+          "about": "Entorno de desarrollo y despliegue en el navegador. El cupón aplica a una suscripción Core mensual nueva, que puede renovarse al precio normal.",
           "steps": [
-            "Account → Redeem code",
-            "El crédito de desarrollo aparece aparte del plan"
+            "Crea una cuenta o inicia sesión en Replit",
+            "Abre checkout y pulsa Join Replit Core",
+            "Elige Core Monthly, no el plan anual",
+            "Abre Add promotion code, ingresa el código y pulsa Apply",
+            "Verifica el descuento, agrega un método de pago y confirma"
           ]
         }
       },
