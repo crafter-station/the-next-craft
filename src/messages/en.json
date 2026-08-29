@@ -588,6 +588,7 @@
       "copy": "copy",
       "copied": "copied",
       "openPanel": "Open panel",
+      "openGuide": "Open guide",
       "expires": "expires when the event closes",
       "sponsorCta": "Want to sponsor? → {email}",
       "partners": {
@@ -638,8 +639,10 @@
           "perk": "One month of Cloud Pro per participant",
           "about": "Visual automation. The top three also get a swag box for every team member.",
           "steps": [
-            "Create the workspace on n8n Cloud",
-            "Admin → Plans → Apply coupon"
+            "Create a 14-day trial or sign in, then click Upgrade now",
+            "Choose the Pro plan with the Monthly billing cycle",
+            "Select the plan, check the order summary, and click Add discount",
+            "Paste the code, click Apply, verify the discount, and continue"
           ]
         },
         "replit": {

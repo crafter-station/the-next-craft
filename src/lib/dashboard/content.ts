@@ -146,6 +146,7 @@ export type Partner = {
   key: string;
   name: string;
   url: string;
+  guideUrl?: string;
   /** Valor aproximado en USD, para el contador. */
   valueUsd: number;
   /** El crédito es por persona, no por equipo. */
@@ -199,9 +200,10 @@ export const PARTNERS: Partner[] = [
     key: "n8n",
     name: "n8n",
     url: "https://n8n.io",
+    guideUrl: "https://n8n.notion.site/voucher-code",
     valueUsd: 50,
     perParticipant: true,
-    steps: 2,
+    steps: 4,
   },
   {
     key: "replit",
