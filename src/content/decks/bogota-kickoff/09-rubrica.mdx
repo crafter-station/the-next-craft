@@ -1,0 +1,28 @@
+---
+title: Rúbrica
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-8">
+  <div className="flex flex-col gap-4">
+    <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">La rúbrica</h1>
+    <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Una sola rúbrica para las dos fases y los tres tracks: cada criterio se puntúa de 0 a 5 y los pesos no cambian por sede.</p>
+  </div>
+
+  <div className="flex flex-col border-t border-[var(--line)]">
+    {[
+      ['30%', 'Demo cerrada', 'El flujo se recorre entero y termina, sin caminos a medias.'],
+      ['25%', 'Uso validado', 'Usuario concreto, problema real y data recogida hoy que lo demuestre.'],
+      ['20%', 'Craft técnico', 'Qué tan bien resuelto está lo que enseñaron, no qué tan grande era el reto.'],
+      ['15%', 'Ambición', 'Cómo partieron un problema complejo para que entrara en 12 horas.'],
+      ['10%', 'Pitch claro', 'Qué resuelve y en qué track compite: 3 minutos para contarlo, 3 para defenderlo.'],
+    ].map(([weight, name, desc]) => (
+      <div key={name} className="grid grid-cols-[4.5rem_1fr] items-baseline gap-x-5 gap-y-1 border-b border-[var(--line)] px-1 py-4 md:grid-cols-[6rem_14rem_1fr]">
+        <span className="font-mono text-[clamp(1.125rem,2.2vw,1.5rem)] font-semibold leading-none tabular-nums text-[var(--bright)]">{weight}</span>
+        <span className="font-mono text-sm font-semibold uppercase tracking-[0.1em] text-[var(--text)]">{name}</span>
+        <span className="col-span-2 font-mono text-sm leading-snug text-[var(--text-dim)] md:col-span-1">{desc}</span>
+      </div>
+    ))}
+  </div>
+
+  <p className="font-mono text-xs leading-relaxed tracking-[0.05em] text-[var(--text-dim)] md:text-sm">Requisito, no criterio: todos los proyectos usan Convex —el sponsor principal— y se registran en Vibe Apps antes del cierre.</p>
+</div>
