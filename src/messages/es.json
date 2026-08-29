@@ -872,7 +872,8 @@
     },
     "nav": {
       "staff": "Puerta",
-      "perks": "Perks"
+      "perks": "Perks",
+      "judging": "Calificación"
     },
     "perks": {
       "label": "ADMIN · PERKS",
@@ -902,6 +903,251 @@
         "not-staff": "No tienes acceso de organizador.",
         "empty": "El CSV está vacío o no tiene filas válidas."
       }
+    },
+    "judging": {
+      "label": "CALIFICACIÓN",
+      "headline": "RANKING\nNORMALIZADO",
+      "lede": "Un panel a la vez. Los puntajes de dos sedes distintas no son comparables —no comparten mentores ni equipos, así que no hay nada que los ponga en la misma escala—: la comparación entre sedes sale de la fase final, no de aquí.",
+      "designComplete": "PANEL COMPLETO",
+      "designPartial": "PANEL PARCIAL",
+      "scopeFinal": "FINAL",
+      "yes": "SÍ",
+      "no": "NO",
+      "disconnectedTitle": "ESTE PANEL NO SE PUEDE PUBLICAR",
+      "disconnectedBody": "El reparto quedó partido en {groups} grupos que no comparten ningún panelista. No hay cadena que conecte a unos equipos con otros, así que sus notas están en escalas distintas y ninguna fórmula las junta. Hace falta que alguien califique equipos de los dos grupos.",
+      "statTeams": "EQUIPOS",
+      "statPanelists": "PANELISTAS",
+      "statFlagged": "CON BANDERA",
+      "statFlaggedHint": "Menos de {min} panelistas.",
+      "statComplete": "TODOS VEN A TODOS",
+      "statCompleteHint": "Si sí, la severidad se cancela sola.",
+      "rankingLabel": "RESULTADO",
+      "rankingTitle": "ORDEN DEL PANEL",
+      "rankingEmpty": "Todavía no hay calificaciones enviadas en este panel.",
+      "colTeam": "EQUIPO",
+      "colIndex": "ÍNDICE",
+      "colRaw": "CRUDO",
+      "colPanelists": "VOTOS",
+      "colSpread": "DISPERSIÓN",
+      "colFinalist": "FINALISTA",
+      "flagFewPanelists": "MENOS DE {min}",
+      "rankingNote": "El índice es el puntaje normalizado llevado a una escala legible: 50 es el promedio de este panel, 65 es una desviación y media por encima. «Crudo» es el total ponderado sin normalizar, de 0 a 5, y es el que se le devuelve al equipo. «Dispersión» alta = equipo que dividió al panel. «/100» es el crudo llevado a la escala de la hoja de evaluación (total × 20). El «#» junto al track es la posición dentro de ese track, que es donde se reparten los premios.",
+      "panelLabel": "CONTROL",
+      "panelTitle": "CÓMO PUNTUÓ CADA UNO",
+      "panelEmpty": "Nadie ha enviado calificaciones en este panel.",
+      "panelTeams": "{count} equipos",
+      "panelStats": "media {mean} · σ {sigma} · concordancia {agreement}",
+      "panelNote": "Esto es para el comité, no para el panel. Una bandera no invalida a nadie: se conversa antes de anunciar, no se borra.",
+      "flag": {
+        "few-teams": "MENOS DE {min} EQUIPOS",
+        "flat": "NO DISCRIMINÓ",
+        "discordant": "DISCORDANTE"
+      },
+      "finalistYes": "FINALISTA",
+      "finalistNo": "MARCAR",
+      "rosterLabel": "ALTAS",
+      "rosterTitle": "MENTORES Y JURADOS",
+      "fieldName": "NOMBRE",
+      "fieldNamePlaceholder": "Nombre y apellido",
+      "fieldEmail": "CORREO",
+      "fieldRole": "ROL",
+      "fieldCity": "SEDE",
+      "roleMentor": "MENTOR",
+      "roleJudge": "JURADO",
+      "rosterAdd": "DAR DE ALTA",
+      "rosterEmpty": "Todavía no hay nadie en el panel.",
+      "rosterScored": "{count} enviadas",
+      "rosterRevoke": "DAR DE BAJA",
+      "errors": {
+        "not-a-panelist": "Tu sesión no está en el panel. Vuelve a entrar con el correo que le diste al staff.",
+        "team-out-of-scope": "Ese equipo no está en tu lista.",
+        "invalid-score": "Las notas van de 0 a 5, enteros.",
+        "missing-scores": "Faltan criterios por puntuar. Para enviar tienen que estar los cinco.",
+        "missing-evidence": "Falta la frase de evidencia en demo cerrada o en uso validado.",
+        "already-submitted": "Esta calificación ya se envió y no se puede reabrir.",
+        "not-staff": "Esto solo lo puede hacer el staff.",
+        "invalid-email": "Ese correo no tiene forma de correo.",
+        "mentor-needs-city": "Un mentor necesita sede: sin ella no vería ningún equipo."
+      },
+      "colTrack": "TRACK",
+      "colHundred": "/100",
+      "track": {
+        "content-machine": "CONTENT MACHINE",
+        "out-of-the-box": "OUT OF THE BOX",
+        "learning-by-shipping": "LEARNING BY SHIPPING"
+      }
+    },
+    "projects": {
+      "label": "PROYECTOS",
+      "title": "QUÉ SE CALIFICA",
+      "allReady": "{count} calificables",
+      "someIncomplete": "{count} sin sede o track",
+      "fieldName": "NOMBRE",
+      "fieldNamePlaceholder": "Nombre del proyecto",
+      "fieldCity": "SEDE",
+      "fieldTrack": "TRACK",
+      "fieldTable": "MESA",
+      "add": "AÑADIR",
+      "empty": "Todavía no hay proyectos. Añádelos arriba o espera a que los equipos se formen en su dashboard.",
+      "colName": "PROYECTO",
+      "colCity": "SEDE",
+      "colTrack": "TRACK",
+      "colTable": "MESA",
+      "colScores": "NOTAS",
+      "notScorable": "NO CALIFICABLE",
+      "finalist": "FINALISTA",
+      "note": "Sin sede ningún mentor lo ve, y sin track no compite en nada: los proyectos marcados en rojo no le aparecen a nadie. Los campos guardan al salir del campo, sin botón. Los equipos que se formaron en su dashboard salen aquí solos; los demás se escriben a mano.",
+      "errors": {
+        "not-staff": "Esto solo lo puede hacer el staff.",
+        "name-too-short": "El nombre necesita al menos dos caracteres.",
+        "project-needs-city-and-track": "Sede y track son obligatorios: sin ellos no lo ve ningún mentor."
+      }
+    }
+  },
+  "judging": {
+    "gate": {
+      "title": "PANEL DE CALIFICACIÓN",
+      "body": "Entra con el correo que nos diste. Te llega un código de seis dígitos y no hay contraseña que recordar.",
+      "cta": "PEDIR CÓDIGO",
+      "denied": "Ese correo no está en el panel de esta edición. Escríbele al staff de tu sede para que te dé de alta."
+    },
+    "role": {
+      "mentor": "MENTOR",
+      "judge": "JURADO"
+    },
+    "shell": {
+      "title": "CALIFICACIÓN",
+      "hub": "SEDE {city}"
+    },
+    "queue": {
+      "label": "TUS PROYECTOS",
+      "title": "QUÉ TE TOCA\nCALIFICAR",
+      "lede": {
+        "mentor": "Los equipos de tu sede. Califica a todos: cuando el panel entero ve a todos los equipos, que uno puntúe más duro que otro deja de mover el resultado.",
+        "judge": "Los finalistas de las cinco sedes. Los ven todos los jurados a la vez, que es lo único que hace comparable a Lima con Guatemala."
+      },
+      "progress": "ENVIADAS",
+      "table": "MESA {number}",
+      "empty": {
+        "mentor": "Todavía no hay equipos con track confirmado en tu sede.",
+        "judge": "Todavía no hay finalistas marcados. El comité los define al cerrar la fase de sede."
+      }
+    },
+    "status": {
+      "submitted": "ENVIADA",
+      "draft": "BORRADOR",
+      "pending": "PENDIENTE"
+    },
+    "track": {
+      "content-machine": "CONTENT MACHINE",
+      "out-of-the-box": "OUT OF THE BOX",
+      "learning-by-shipping": "LEARNING BY SHIPPING"
+    },
+    "rubric": {
+      "title": "LA RÚBRICA · MISMA PARA LAS DOS FASES Y LOS TRES TRACKS"
+    },
+    "criteria": {
+      "demo": {
+        "name": "DEMO CERRADA",
+        "desc": "El flujo se recorre entero y termina, sin caminos a medias.",
+        "levels": [
+          "0 — No presentado: no hay nada evaluable.",
+          "1 — La demo se rompe o depende de explicar lo que falta.",
+          "2 — Se ve la idea, pero el flujo queda a medias.",
+          "3 — El flujo principal se recorre completo.",
+          "4 — El flujo corre entero y aguanta algún caso borde.",
+          "5 — Punta a punta impecable, incluidos casos borde."
+        ]
+      },
+      "usage": {
+        "name": "USO VALIDADO",
+        "desc": "Usuario concreto, problema real y data recogida hoy que lo demuestre.",
+        "levels": [
+          "0 — No presentado: no hay nada evaluable.",
+          "1 — Usuario hipotético, sin evidencia.",
+          "2 — Hablaron con alguien, pero nadie ha usado lo que construyeron.",
+          "3 — Usuario identificado y data recogida hoy.",
+          "4 — Varios usuarios reales lo usaron hoy y enseñan qué pasó.",
+          "5 — Usuarios reales usándolo durante el evento."
+        ]
+      },
+      "craft": {
+        "name": "CRAFT TÉCNICO",
+        "desc": "Qué tan bien resuelto está lo que enseñaron, no qué tan grande era el reto.",
+        "levels": [
+          "0 — No presentado: no hay nada evaluable.",
+          "1 — Frágil, pegado con cinta.",
+          "2 — Funciona el camino feliz y nada más.",
+          "3 — Implementación sólida y coherente.",
+          "4 — Bien resuelto: maneja errores y decisiones defendibles.",
+          "5 — Ejecución elegante, detalle fino, nada sobra."
+        ]
+      },
+      "ambition": {
+        "name": "AMBICIÓN",
+        "desc": "Cómo partieron un problema complejo para que entrara en 12 horas.",
+        "levels": [
+          "0 — No presentado: no hay nada evaluable.",
+          "1 — Alcance trivial o recorte sin criterio.",
+          "2 — Problema real, pero el recorte no se pensó.",
+          "3 — Recorte inteligente de un problema grande.",
+          "4 — Problema difícil, partido con criterio en algo entregable hoy.",
+          "5 — Corte quirúrgico al núcleo difícil, y cerrado."
+        ]
+      },
+      "pitch": {
+        "name": "PITCH CLARO",
+        "desc": "Qué resuelve y en qué track compite: 3 minutos para contarlo, 3 para defenderlo.",
+        "levels": [
+          "0 — No presentado: no hubo pitch.",
+          "1 — No se entiende qué resuelve.",
+          "2 — Se entiende el qué, no el para quién.",
+          "3 — Pitch claro en 3 min y buena defensa.",
+          "4 — Claro, en tiempo, y defienden bien las preguntas.",
+          "5 — Pitch memorable, defensa que sostiene cada afirmación."
+        ]
+      }
+    },
+    "score": {
+      "label": "CALIFICAR",
+      "back": "VOLVER A LA LISTA",
+      "track": "TRACK",
+      "table": "MESA",
+      "demo": "DEMO",
+      "repo": "REPO",
+      "state": "ESTADO"
+    },
+    "form": {
+      "pickLevel": "Elige un nivel para ver qué significa.",
+      "evidenceRequired": "QUÉ VISTE (OBLIGATORIO)",
+      "evidenceOptional": "QUÉ VISTE (OPCIONAL)",
+      "evidencePlaceholder": "Una frase de lo que viste. Esto es el feedback que le llega al equipo.",
+      "total": "TOTAL PONDERADO",
+      "saveDraft": "GUARDAR BORRADOR",
+      "submit": "ENVIAR",
+      "savedNote": "Guardado.",
+      "lockedNote": "Ya enviaste esta calificación. No se puede reabrir.",
+      "submitWarning": "Al enviar se cierra: califica lo que acabas de ver. Volver atrás al final de la tarde es justo como se cuela el ajuste hacia el resultado que uno quería.",
+      "between": "Entre «{lower}» y «{upper}»."
+    },
+    "errors": {
+      "not-a-panelist": "Tu sesión no está en el panel. Vuelve a entrar con el correo que le diste al staff.",
+      "team-out-of-scope": "Ese equipo no está en tu lista.",
+      "invalid-score": "Las notas van de 0 a 5, enteros.",
+      "missing-scores": "Faltan criterios por puntuar. Para enviar tienen que estar los cinco.",
+      "missing-evidence": "Falta la frase de evidencia en demo cerrada o en uso validado.",
+      "already-submitted": "Esta calificación ya se envió y no se puede reabrir.",
+      "not-staff": "Esto solo lo puede hacer el staff.",
+      "invalid-email": "Ese correo no tiene forma de correo.",
+      "mentor-needs-city": "Un mentor necesita sede: sin ella no vería ningún equipo."
+    },
+    "scale": {
+      "0": "No presentado",
+      "1": "Muy por debajo",
+      "2": "Por debajo",
+      "3": "Cumple",
+      "4": "Sobresale",
+      "5": "Excepcional"
     }
   }
 }

@@ -872,7 +872,8 @@
     },
     "nav": {
       "staff": "Door",
-      "perks": "Perks"
+      "perks": "Perks",
+      "judging": "Judging"
     },
     "perks": {
       "label": "ADMIN · PERKS",
@@ -902,6 +903,251 @@
         "not-staff": "You don't have organizer access.",
         "empty": "The CSV is empty or has no valid rows."
       }
+    },
+    "judging": {
+      "label": "JUDGING",
+      "headline": "NORMALIZED\nRANKING",
+      "lede": "One panel at a time. Scores from two different hubs are not comparable — they share no mentors and no teams, so nothing puts them on the same scale. Cross-hub comparison comes from the final phase, not from here.",
+      "designComplete": "COMPLETE PANEL",
+      "designPartial": "PARTIAL PANEL",
+      "scopeFinal": "FINAL",
+      "yes": "YES",
+      "no": "NO",
+      "disconnectedTitle": "THIS PANEL CAN'T BE PUBLISHED",
+      "disconnectedBody": "The assignment split into {groups} groups that share no panelist. There's no chain connecting one set of teams to the other, so their scores sit on different scales and no formula joins them. Someone needs to score teams from both groups.",
+      "statTeams": "TEAMS",
+      "statPanelists": "PANELISTS",
+      "statFlagged": "FLAGGED",
+      "statFlaggedHint": "Fewer than {min} panelists.",
+      "statComplete": "EVERYONE SEES EVERYONE",
+      "statCompleteHint": "If yes, severity cancels itself out.",
+      "rankingLabel": "RESULT",
+      "rankingTitle": "PANEL ORDER",
+      "rankingEmpty": "No submitted scores in this panel yet.",
+      "colTeam": "TEAM",
+      "colIndex": "INDEX",
+      "colRaw": "RAW",
+      "colPanelists": "VOTES",
+      "colSpread": "SPREAD",
+      "colFinalist": "FINALIST",
+      "flagFewPanelists": "FEWER THAN {min}",
+      "rankingNote": "The index is the normalized score on a readable scale: 50 is this panel's average, 65 is one and a half deviations above. \"Raw\" is the un-normalized weighted total, 0 to 5, and it's what goes back to the team. High \"spread\" = a team that split the panel. “/100” is the raw total on the evaluation sheet's scale (total × 20). The “#” next to the track is the position within that track, which is where prizes are awarded.",
+      "panelLabel": "CONTROL",
+      "panelTitle": "HOW EACH PERSON SCORED",
+      "panelEmpty": "Nobody has submitted scores in this panel.",
+      "panelTeams": "{count} teams",
+      "panelStats": "mean {mean} · σ {sigma} · agreement {agreement}",
+      "panelNote": "This is for the committee, not the panel. A flag doesn't invalidate anyone: it gets discussed before announcing, not deleted.",
+      "flag": {
+        "few-teams": "FEWER THAN {min} TEAMS",
+        "flat": "DIDN'T DISCRIMINATE",
+        "discordant": "DISCORDANT"
+      },
+      "finalistYes": "FINALIST",
+      "finalistNo": "MARK",
+      "rosterLabel": "ROSTER",
+      "rosterTitle": "MENTORS AND JUDGES",
+      "fieldName": "NAME",
+      "fieldNamePlaceholder": "First and last name",
+      "fieldEmail": "EMAIL",
+      "fieldRole": "ROLE",
+      "fieldCity": "HUB",
+      "roleMentor": "MENTOR",
+      "roleJudge": "JUDGE",
+      "rosterAdd": "ADD",
+      "rosterEmpty": "Nobody on the panel yet.",
+      "rosterScored": "{count} submitted",
+      "rosterRevoke": "REVOKE",
+      "errors": {
+        "not-a-panelist": "Your session isn't on the panel. Sign in again with the email you gave staff.",
+        "team-out-of-scope": "That team isn't on your list.",
+        "invalid-score": "Scores are whole numbers from 0 to 5.",
+        "missing-scores": "Criteria still unscored. All five are needed to submit.",
+        "missing-evidence": "Missing the evidence line on closed demo or validated use.",
+        "already-submitted": "This score was already submitted and can't be reopened.",
+        "not-staff": "Only staff can do this.",
+        "invalid-email": "That doesn't look like an email address.",
+        "mentor-needs-city": "A mentor needs a hub: without one they'd see no teams."
+      },
+      "colTrack": "TRACK",
+      "colHundred": "/100",
+      "track": {
+        "content-machine": "CONTENT MACHINE",
+        "out-of-the-box": "OUT OF THE BOX",
+        "learning-by-shipping": "LEARNING BY SHIPPING"
+      }
+    },
+    "projects": {
+      "label": "PROJECTS",
+      "title": "WHAT GETS SCORED",
+      "allReady": "{count} scorable",
+      "someIncomplete": "{count} missing hub or track",
+      "fieldName": "NAME",
+      "fieldNamePlaceholder": "Project name",
+      "fieldCity": "HUB",
+      "fieldTrack": "TRACK",
+      "fieldTable": "TABLE",
+      "add": "ADD",
+      "empty": "No projects yet. Add them above, or wait for teams to form in their dashboard.",
+      "colName": "PROJECT",
+      "colCity": "HUB",
+      "colTrack": "TRACK",
+      "colTable": "TABLE",
+      "colScores": "SCORES",
+      "notScorable": "NOT SCORABLE",
+      "finalist": "FINALIST",
+      "note": "Without a hub no mentor sees it, and without a track it competes in nothing: projects marked red show up for nobody. Fields save on blur, no button. Teams formed in their own dashboard appear here automatically; the rest get typed in.",
+      "errors": {
+        "not-staff": "Only staff can do this.",
+        "name-too-short": "The name needs at least two characters.",
+        "project-needs-city-and-track": "Hub and track are required: without them no mentor sees it."
+      }
+    }
+  },
+  "judging": {
+    "gate": {
+      "title": "JUDGING PANEL",
+      "body": "Sign in with the email you gave us. A six-digit code arrives; there's no password to remember.",
+      "cta": "REQUEST CODE",
+      "denied": "That email isn't on this edition's panel. Ask your hub staff to add you."
+    },
+    "role": {
+      "mentor": "MENTOR",
+      "judge": "JUDGE"
+    },
+    "shell": {
+      "title": "JUDGING",
+      "hub": "HUB {city}"
+    },
+    "queue": {
+      "label": "YOUR PROJECTS",
+      "title": "WHAT YOU'RE\nSCORING",
+      "lede": {
+        "mentor": "The teams at your hub. Score all of them: when the whole panel sees every team, one person scoring harder than another stops moving the result.",
+        "judge": "The finalists from all five hubs. Every judge sees all of them, which is the only thing that makes Lima comparable to Guatemala."
+      },
+      "progress": "SUBMITTED",
+      "table": "TABLE {number}",
+      "empty": {
+        "mentor": "No teams with a confirmed track at your hub yet.",
+        "judge": "No finalists marked yet. The committee picks them when the hub phase closes."
+      }
+    },
+    "status": {
+      "submitted": "SUBMITTED",
+      "draft": "DRAFT",
+      "pending": "PENDING"
+    },
+    "track": {
+      "content-machine": "CONTENT MACHINE",
+      "out-of-the-box": "OUT OF THE BOX",
+      "learning-by-shipping": "LEARNING BY SHIPPING"
+    },
+    "rubric": {
+      "title": "THE RUBRIC · SAME FOR BOTH PHASES AND ALL THREE TRACKS"
+    },
+    "criteria": {
+      "demo": {
+        "name": "CLOSED DEMO",
+        "desc": "The flow runs end to end and finishes, with no half-paths.",
+        "levels": [
+          "0 — Not presented: nothing to evaluate.",
+          "1 — The demo breaks, or leans on explaining what's missing.",
+          "2 — The idea shows, but the flow stops halfway.",
+          "3 — The main flow runs end to end.",
+          "4 — The whole flow runs and survives an edge case.",
+          "5 — Flawless end to end, edge cases included."
+        ]
+      },
+      "usage": {
+        "name": "VALIDATED USE",
+        "desc": "A concrete user, a real problem, and data gathered today that proves it.",
+        "levels": [
+          "0 — Not presented: nothing to evaluate.",
+          "1 — Hypothetical user, no evidence.",
+          "2 — They talked to someone, but nobody has used what they built.",
+          "3 — User identified and data gathered today.",
+          "4 — Several real users used it today and they show what happened.",
+          "5 — Real users using it during the event."
+        ]
+      },
+      "craft": {
+        "name": "TECHNICAL CRAFT",
+        "desc": "How well solved what they showed is — not how big the challenge was.",
+        "levels": [
+          "0 — Not presented: nothing to evaluate.",
+          "1 — Fragile, held together with tape.",
+          "2 — The happy path works and nothing else.",
+          "3 — Solid, coherent implementation.",
+          "4 — Well solved: handles errors, defensible decisions.",
+          "5 — Elegant execution, fine detail, nothing spare."
+        ]
+      },
+      "ambition": {
+        "name": "AMBITION",
+        "desc": "How they cut a complex problem down to fit in 12 hours.",
+        "levels": [
+          "0 — Not presented: nothing to evaluate.",
+          "1 — Trivial scope, or scoping without judgment.",
+          "2 — Real problem, but the scoping wasn't thought through.",
+          "3 — Smart scoping of a big problem.",
+          "4 — Hard problem, cut with judgment into something shippable today.",
+          "5 — Surgical cut to the hard core, and closed."
+        ]
+      },
+      "pitch": {
+        "name": "CLEAR PITCH",
+        "desc": "What it solves and which track it competes in: 3 minutes to tell it, 3 to defend it.",
+        "levels": [
+          "0 — Not presented: there was no pitch.",
+          "1 — It's not clear what it solves.",
+          "2 — The what lands, the who doesn't.",
+          "3 — Clear pitch in 3 min and a good defence.",
+          "4 — Clear, on time, and they defend the questions well.",
+          "5 — Memorable pitch, a defence that holds up every claim."
+        ]
+      }
+    },
+    "score": {
+      "label": "SCORE",
+      "back": "BACK TO LIST",
+      "track": "TRACK",
+      "table": "TABLE",
+      "demo": "DEMO",
+      "repo": "REPO",
+      "state": "STATE"
+    },
+    "form": {
+      "pickLevel": "Pick a level to see what it means.",
+      "evidenceRequired": "WHAT YOU SAW (REQUIRED)",
+      "evidenceOptional": "WHAT YOU SAW (OPTIONAL)",
+      "evidencePlaceholder": "One sentence about what you saw. This is the feedback the team gets.",
+      "total": "WEIGHTED TOTAL",
+      "saveDraft": "SAVE DRAFT",
+      "submit": "SUBMIT",
+      "savedNote": "Saved.",
+      "lockedNote": "You already submitted this score. It can't be reopened.",
+      "submitWarning": "Submitting closes it: score what you just saw. Going back late in the day is exactly how drift toward the result you wanted creeps in.",
+      "between": "Between “{lower}” and “{upper}”."
+    },
+    "errors": {
+      "not-a-panelist": "Your session isn't on the panel. Sign in again with the email you gave staff.",
+      "team-out-of-scope": "That team isn't on your list.",
+      "invalid-score": "Scores are whole numbers from 0 to 5.",
+      "missing-scores": "Criteria still unscored. All five are needed to submit.",
+      "missing-evidence": "Missing the evidence line on closed demo or validated use.",
+      "already-submitted": "This score was already submitted and can't be reopened.",
+      "not-staff": "Only staff can do this.",
+      "invalid-email": "That doesn't look like an email address.",
+      "mentor-needs-city": "A mentor needs a hub: without one they'd see no teams."
+    },
+    "scale": {
+      "0": "Not presented",
+      "1": "Well below",
+      "2": "Below",
+      "3": "Meets",
+      "4": "Stands out",
+      "5": "Exceptional"
     }
   }
 }

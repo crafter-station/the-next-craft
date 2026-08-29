@@ -9,6 +9,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 const LINKS = [
   { key: "staff", href: "/admin/staff" },
   { key: "perks", href: "/admin/perks" },
+  { key: "judging", href: "/admin/judging" },
 ] as const;
 
 export function AdminNav() {
