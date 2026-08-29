@@ -43,6 +43,20 @@
       "when": 1787758864630,
       "tag": "0005_parallel_bill_hollister",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1787808850357,
+      "tag": "0006_certain_jean_grey",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1787844647123,
+      "tag": "0007_peaceful_sugar_man",
+      "breakpoints": true
     }
   ]
 }
