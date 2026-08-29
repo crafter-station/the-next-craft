@@ -3,12 +3,9 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
-import {
-  findParticipantByUserId,
-  findTeamForParticipant,
-  listMentorTables,
-  listMyBookings,
-} from "@/lib/dashboard/state";
+import { cityName } from "@/lib/cities";
+import { type Mentor, mentorsByHub } from "@/lib/dashboard/content";
+import { findParticipantByUserId } from "@/lib/dashboard/state";
 
 import {
   Empty,
@@ -18,8 +15,11 @@ import {
   Row,
   Tag,
 } from "@/components/dashboard/kit";
-import { MentorCard } from "@/components/dashboard/mentor-card";
 
+/**
+ * Directorio, no agenda. Las mentorías funcionan acercándose a la mesa durante
+ * el bloque de 11:00 a 13:00; aquí solo se responde a quién tienes en tu sede.
+ */
 export default async function MentorsPage({
   params,
 }: PageProps<"/[locale]/dashboard/mentors">) {
@@ -34,16 +34,8 @@ export default async function MentorsPage({
     : null;
   if (!participant) return null;
 
-  const team = await findTeamForParticipant(participant.id);
-  const [tables, bookings] = await Promise.all([
-    listMentorTables(team?.id ?? null),
-    listMyBookings(team?.id ?? null),
-  ]);
-
-  const freeSlots = tables.reduce(
-    (n, table) => n + table.slots.filter((s) => !s.taken).length,
-    0,
-  );
+  const { hub, unassigned } = mentorsByHub(participant.city);
+  const hubName = participant.city ? cityName(participant.city, locale) : null;
 
   return (
     <>
@@ -54,65 +46,74 @@ export default async function MentorsPage({
         lede={t("mentors.lede")}
         aside={
           <div className="flex flex-wrap gap-1.5">
-            <Tag strong={freeSlots > 0}>
-              {t("mentors.freeSlots", { count: freeSlots })}
-            </Tag>
-            <Tag>{t("mentors.tables", { count: tables.length })}</Tag>
+            <Tag strong>{t("mentors.window")}</Tag>
+            {hubName && <Tag>{hubName}</Tag>}
           </div>
         }
       />
 
       <Panel className="mb-5">
         <PanelHead
-          n={45}
-          label={t("mentors.myBookingsLabel")}
-          title={
-            bookings.length
-              ? t("mentors.myBookingsTitle", { count: bookings.length })
-              : t("mentors.noBookingsTitle")
-          }
+          n={51}
+          label={t("mentors.howLabel")}
+          title={t("mentors.howTitle")}
         />
-        {bookings.length === 0 ? (
-          <Empty>{t("mentors.noBookings")}</Empty>
+        <div className="px-4 py-3.5">
+          <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+            {t("mentors.howBody")}
+          </p>
+        </div>
+      </Panel>
+
+      <Panel className="mb-5">
+        <PanelHead
+          n={52}
+          label={t("mentors.hubLabel")}
+          title={
+            hubName
+              ? t("mentors.hubTitle", { hub: hubName.toUpperCase() })
+              : t("mentors.hubTitleUnknown")
+          }
+          aside={<Tag strong={hub.length > 0}>{hub.length}</Tag>}
+        />
+        {hub.length === 0 ? (
+          <Empty>{t("mentors.noneInHub")}</Empty>
         ) : (
-          <ul>
-            {bookings.map((b) => (
-              <Row key={b.slotId} marker="→">
-                <span className="text-[var(--text)]">{b.org}</span>
-                <span className="ml-2 text-[11px]">
-                  {t(`mentors.roles.${b.role}`)}
-                </span>
-                <span className="mt-1 block text-[12px] text-[var(--bright)]">
-                  {b.startsAt}–{b.endsAt}
-                </span>
-                {b.topic && (
-                  <span className="mt-2 block max-w-xl text-[12px] leading-relaxed">
-                    {b.topic}
-                  </span>
-                )}
-              </Row>
-            ))}
-          </ul>
+          <MentorRows mentors={hub} />
         )}
       </Panel>
 
-      {tables.length === 0 ? (
+      {/* Callarse a los que aún no tienen sede sería enseñar una lista corta
+          como si estuviera completa, justo el día que alguien decide si vale
+          la pena levantarse a buscar a un mentor. */}
+      {unassigned.length > 0 && (
         <Panel>
-          <Empty>{t("mentors.noSlots")}</Empty>
+          <PanelHead
+            n={53}
+            label={t("mentors.pendingLabel")}
+            title={t("mentors.pendingTitle", { count: unassigned.length })}
+            aside={<Tag>{unassigned.length}</Tag>}
+          />
+          <div className="border-b border-[var(--line)] px-4 py-3.5">
+            <p className="font-mono text-[13px] leading-relaxed text-[var(--text-dim)]">
+              {t("mentors.pendingBody")}
+            </p>
+          </div>
+          <MentorRows mentors={unassigned} />
         </Panel>
-      ) : (
-        <div className="grid items-start gap-5 lg:grid-cols-2">
-          {tables.map((table, i) => (
-            <MentorCard
-              key={table.id}
-              table={table}
-              index={i + 1}
-              isMyTable={team?.mentorTableId === table.id}
-              hasTeam={Boolean(team)}
-            />
-          ))}
-        </div>
       )}
     </>
+  );
+}
+
+function MentorRows({ mentors }: { mentors: Mentor[] }) {
+  return (
+    <ul>
+      {mentors.map((mentor) => (
+        <Row key={mentor.slug} marker="→">
+          <span className="text-[var(--text)]">{mentor.name}</span>
+        </Row>
+      ))}
+    </ul>
   );
 }

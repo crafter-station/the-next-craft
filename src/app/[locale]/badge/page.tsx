@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
+import { type BadgeStudioIntent, parseStudioIntent } from "@/lib/badge/intent";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
@@ -20,16 +22,35 @@ export const metadata: Metadata = {
 
 export default async function BadgePage({
   params,
+  searchParams,
 }: PageProps<"/[locale]/badge">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await auth.api.getSession({ headers: await headers() });
+
   const [initialState, guest] = session
     ? await Promise.all([
         withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id)),
         lookupApprovedGuest(session.user.email),
       ])
     : [null, null];
+
+  // El estudio es el taller: se entra a crear o a reemplazar. El badge ya
+  // hecho vive en el panel, así que quien vuelve aquí con uno generado sigue
+  // hasta ahí. La excepción es llegar con intención declarada (`?edit=`), que
+  // es justo el enlace de vuelta desde el panel; sin ella no habría forma de
+  // editar nada y el redirect sería un callejón.
+  //
+  // Va antes del cierre de Lima a propósito: tener el registro cerrado impide
+  // crear o reemplazar, no ver lo que ya tienes. Quien ya generó su badge sigue
+  // al panel; el cierre lo encuentra solo si vuelve aquí a cambiar algo.
+  const intent: BadgeStudioIntent = parseStudioIntent(
+    (await searchParams).edit,
+  );
+  if (initialState?.stage === "completed" && !intent) {
+    redirect(`/${locale}/dashboard/badge`);
+  }
+
   const studioKey = session
     ? `${session.user.id}:${initialState?.stage}:${initialState && "profile" in initialState ? initialState.profile.updatedAt : ""}`
     : "anonymous";
@@ -50,6 +71,7 @@ export default async function BadgePage({
           locale={locale === "en" ? "en" : "es"}
           initialSession={session}
           initialState={initialState}
+          intent={intent}
           onboardingClosed={guest?.city === "lima"}
         />
       </QueryProvider>

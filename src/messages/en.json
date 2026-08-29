@@ -455,13 +455,16 @@
       "badge": "Badge",
       "staff": "Staff",
       "groupStaff": "DOOR",
-      "team": "Team"
+      "team": "Team",
+      "perks": "Prizes & perks"
     },
     "shell": {
       "betweenBlocks": "between blocks",
       "toFreeze": "to freeze",
       "demoClock": "event clock",
-      "hub": "HUB"
+      "hub": "HUB",
+      "beforeEvent": "not started yet",
+      "afterEvent": "event over"
     },
     "gate": {
       "title": "ACCREDITED ONLY",
@@ -546,13 +549,10 @@
     },
     "checklist": {
       "track": "Track confirmed",
-      "mentorTable": "Mentoring table assigned",
-      "booking": "25-min slot booked",
       "repo": "Repository linked",
       "demo": "Live demo link",
       "credits": "Partner credits redeemed",
       "goTracks": "Pick",
-      "goMentors": "Book",
       "goCredits": "Redeem",
       "goOverview": "View",
       "goBadge": "Badge",
@@ -563,20 +563,19 @@
     "agenda": {
       "label": "SCHEDULE · 12 HOURS",
       "headline": "ONE DAY. TWELVE HOURS.",
-      "lede": "Saturday 29 August 2026, 09:00 to 21:00. All five hubs run on the same clock: code freeze and demos are simultaneous.",
+      "lede": "Saturday 29 August 2026, 09:00 to 21:00 in your hub's own time. Guatemala and El Salvador run an hour behind Lima, Bogotá and Arequipa: each hub runs its own twelve-hour day.",
       "saved": "{count} in your schedule",
       "past": "{done}/{total} past",
       "filter": "FILTER",
       "all": "all",
       "viewList": "list",
       "viewClock": "clock",
-      "onlyMine": "only mine",
       "now": "now",
       "mandatory": "required",
       "save": "save",
       "unsave": "saved",
       "empty": "Nothing with those filters. Go back to «all».",
-      "footer": "{shown} of {total} blocks · America/Bogota (GMT-5) · check-in 08:30 · code freeze 20:00 · demos 20:15",
+      "footer": "{shown} of {total} blocks · {zone} · check-in 08:30 · code freeze 20:00 · demos 20:15",
       "clockLabel": "CLOCK"
     },
     "tracks": {
@@ -596,41 +595,26 @@
       "windowClosedLabel": "WINDOW CLOSED",
       "windowClosedBody": "The kickoff is over. You can still pick, but tell us on WhatsApp so staff can record the change.",
       "closesAt": "closes {time}",
-      "prizesLabel": "PRIZES",
-      "perksLabel": "FOR EVERYONE WHO GETS IN",
-      "perksTitle": "INCLUDED"
+      "capacity": "{taken}/{capacity} teams",
+      "capacityFull": "full",
+      "capacityLeft": "{count} left",
+      "capacityLabel": "CAPACITY AT YOUR HUB"
     },
     "mentors": {
       "label": "MENTORING",
-      "headline": "MENTORING WITH CRAFTER STATION",
-      "lede": "Four tables from the organizing communities, 11:00 to 13:00. Pick the table that follows your team and book 25-minute slots.",
-      "freeSlots": "{count} slots free",
-      "tables": "{count} tables",
-      "myTable": "your table",
-      "chooseTable": "Pick table",
-      "releaseTable": "Release table",
-      "tableFull": "Table full",
-      "teamsAssigned": "{assigned}/{capacity} teams covered",
-      "slotsLabel": "25-MIN SLOTS · 11:00–13:00",
-      "noSlots": "no slots",
-      "freeCount": "{count} free",
-      "topicLabel": "WHAT DO YOU WANT TO TALK ABOUT?",
-      "topicPlaceholder": "Be specific: «the cuts look right but we can't measure whether the clip lands».",
-      "topicHint": "Write at least one sentence. The table reads it before sitting with you.",
-      "chars": "{count} characters",
-      "book": "Book",
-      "cancel": "Cancel",
-      "release": "Release",
-      "myBookingsLabel": "MY MENTORING",
-      "myBookingsTitle": "{count} SLOTS",
-      "noBookingsTitle": "NO SLOTS",
-      "noBookings": "Mentoring runs 11:00 to 13:00. On a twelve-hour clock, a well-used half hour changes the demo.",
-      "roles": {
-        "product": "Product and distribution table",
-        "models": "Models and agents table",
-        "engineering": "Engineering and infra table",
-        "interface": "Interface and experience table"
-      }
+      "headline": "WHO IS WITH YOU AT YOUR HUB",
+      "lede": "Mentors are in the room from 11:00 to 13:00. Nothing to book: get up and walk over.",
+      "window": "11:00–13:00",
+      "howLabel": "HOW IT WORKS",
+      "howTitle": "JUST WALK OVER",
+      "howBody": "No slots, no waiting list. During the mentoring block find the table you need and show up with a specific question: half an hour used well changes the demo, and you are on a twelve-hour clock.",
+      "noneInHub": "No mentors assigned to your hub yet.",
+      "hubLabel": "AT YOUR HUB",
+      "hubTitle": "MENTORS IN {hub}",
+      "hubTitleUnknown": "CONFIRMED MENTORS",
+      "pendingLabel": "HUB TO BE CONFIRMED",
+      "pendingTitle": "{count} MORE MENTORS",
+      "pendingBody": "They're at the event but we don't know which hub yet. Ask staff if you're looking for someone specific."
     },
     "credits": {
       "label": "PARTNER CREDITS",
@@ -736,14 +720,14 @@
     "support": {
       "label": "SUPPORT",
       "headline": "EVERYTHING ELSE HAPPENS HERE",
-      "lede": "The official channel is WhatsApp: your hub's staff, the four mentoring tables and any partner code that fails. With five hubs on the same clock, it's what keeps them in sync.",
+      "lede": "The official channel is WhatsApp: your hub's staff, the mentoring tables and any partner code that fails. With five hubs across two time zones, it's what keeps them coordinated.",
       "openWhatsapp": "Message on WhatsApp",
       "responseLabel": "STAFF REPLIES",
       "responseValue": "< 10 min",
       "mentorsLabel": "MENTORS ONLINE",
       "mentorsValue": "11:00 – 13:00",
       "hubsLabel": "HUBS",
-      "hubsValue": "five, same clock",
+      "hubsValue": "five, two time zones",
       "etiquetteLabel": "HOW TO ASK FOR HELP",
       "etiquetteTitle": "FIVE RULES",
       "rule1": "Paste the error as text, not a screenshot. Nobody can search inside an image.",
@@ -764,13 +748,9 @@
       "no-team": "You need a team for this.",
       "track-locked": "The track is already confirmed. Release it first.",
       "unknown-track": "That track doesn't exist.",
-      "slot-taken": "Someone took that slot before you.",
-      "slot-missing": "That slot no longer exists.",
-      "time-clash": "You already have mentoring at that time.",
-      "topic-too-short": "Write at least one sentence about your question.",
-      "table-full": "That table already has all its teams.",
       "unknown-partner": "That partner doesn't exist.",
-      "unknown-block": "That block isn't on the schedule."
+      "unknown-block": "That block isn't on the schedule.",
+      "track-full": "That track is full at your hub. Pick another one."
     },
     "badge": {
       "label": "BADGE · YOUR IDENTITY",
@@ -802,7 +782,11 @@
       "includedLabel": "INCLUDED WITH YOUR TICKET",
       "includedTitle": "{count} MEALS INCLUDED",
       "includedSwag": "Official event swag, when you arrive at your hub.",
-      "includedCommunity": "Access to the Crafter Station community."
+      "includedCommunity": "Access to the Crafter Station community.",
+      "download": "Download badge",
+      "downloadPortrait": "Download portrait",
+      "editProfile": "Edit profile",
+      "gallery": "View the participant gallery"
     },
     "staff": {
       "label": "STAFF · DOOR",
@@ -883,6 +867,14 @@
     "access": {
       "signIn": "Sign in",
       "dashboard": "My panel"
+    },
+    "perks": {
+      "label": "PRIZES & PERKS",
+      "headline": "WHAT YOU GET",
+      "lede": "What your ticket includes, and what the top three take home. Partner credits are redeemed in the credits section.",
+      "prizesLabel": "FOR THE WINNERS",
+      "includedLabel": "FOR EVERYONE WHO SHOWS UP",
+      "includedTitle": "{count} THINGS INCLUDED"
     }
   },
   "roleGallery": {

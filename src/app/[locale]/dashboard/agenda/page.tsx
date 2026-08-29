@@ -8,7 +8,12 @@ import {
   findParticipantByUserId,
   listSavedAgenda,
 } from "@/lib/dashboard/state";
-import { resolveNow, statusOf } from "@/lib/dashboard/time";
+import {
+  cityClockLabel,
+  cityTimeZone,
+  resolveNow,
+  statusOf,
+} from "@/lib/dashboard/time";
 import { cn } from "@/lib/utils";
 
 import { AgendaToggle } from "@/components/dashboard/agenda-toggle";
@@ -44,25 +49,20 @@ export default async function AgendaPage({
   if (!participant) return null;
 
   const saved = await listSavedAgenda(participant.id);
-  const { now } = resolveNow();
+  const { now } = resolveNow(participant.city);
 
   const rawKind = typeof sp.kind === "string" ? sp.kind : "all";
   const kind = (KINDS as readonly string[]).includes(rawKind) ? rawKind : "all";
-  const onlyMine = sp.mine === "1";
-
   const all = buildAgenda(tSchedule.raw("events") as ScheduleMessage[]);
-  const blocks = all
-    .filter((b) => (kind === "all" ? true : b.kind === kind))
-    .filter((b) => (onlyMine ? saved.has(b.time) : true));
+  const blocks = all.filter((b) => (kind === "all" ? true : b.kind === kind));
 
   const past = all.filter(
-    (b) => statusOf(b.time, b.end, now) === "past",
+    (b) => statusOf(b.time, b.end, now, participant.city) === "past",
   ).length;
 
   const href = (over: Record<string, string | undefined>) => {
     const merged: Record<string, string | undefined> = {
       kind: kind === "all" ? undefined : kind,
-      mine: onlyMine ? "1" : undefined,
       ...over,
     };
     const query = Object.fromEntries(
@@ -104,17 +104,6 @@ export default async function AgendaPage({
             {k === "all" ? t("agenda.all") : t(`kinds.${k}`)}
           </Link>
         ))}
-        <Link
-          href={href({ mine: onlyMine ? undefined : "1" })}
-          className={cn(
-            "ml-auto border px-2 py-1 font-mono text-[10px] tracking-[0.1em] uppercase transition-colors",
-            onlyMine
-              ? "border-[var(--bone)] bg-[var(--bone)] text-[var(--void)]"
-              : "border-[var(--line)] text-[var(--text-dim)] hover:text-[var(--bright)]",
-          )}
-        >
-          {t("agenda.onlyMine")}
-        </Link>
       </div>
 
       <Panel screen>
@@ -123,7 +112,7 @@ export default async function AgendaPage({
         ) : (
           <ul>
             {blocks.map((b) => {
-              const status = statusOf(b.time, b.end, now);
+              const status = statusOf(b.time, b.end, now, participant.city);
               return (
                 <li
                   key={b.time}
@@ -195,7 +184,13 @@ export default async function AgendaPage({
       </Panel>
 
       <p className="mt-4 font-mono text-[11px] text-[var(--text-dim)]">
-        {t("agenda.footer", { shown: blocks.length, total: all.length })}
+        {t("agenda.footer", {
+          shown: blocks.length,
+          total: all.length,
+          // La zona ya no es un literal en el copy: Guatemala y El Salvador no
+          // están en America/Bogota y el pie se lo afirmaba a la cara.
+          zone: `${cityTimeZone(participant.city)} (${cityClockLabel(participant.city)})`,
+        })}
       </p>
     </>
   );
