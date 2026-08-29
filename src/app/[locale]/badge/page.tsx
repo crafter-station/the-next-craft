@@ -27,6 +27,7 @@ export default async function BadgePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await auth.api.getSession({ headers: await headers() });
+
   const [initialState, guest] = session
     ? await Promise.all([
         withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id)),

@@ -19,7 +19,9 @@
       "schedule": "Schedule",
       "prizes": "Prizes",
       "gallery": "Badges",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "bingo": "Bingo",
+      "game": "Game"
     },
     "cta": "Apply"
   },

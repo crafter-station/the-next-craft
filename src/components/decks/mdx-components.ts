@@ -14,6 +14,7 @@ import {
   DataGrid,
   FlowMap,
   Keycap,
+  KickoffSponsorWall,
   Lead,
   Logo,
   LogoWall,
@@ -57,6 +58,7 @@ import {
 export const mdxComponents = {
   SlideTitle,
   Lead,
+  KickoffSponsorWall,
   ContrastGrid,
   FlowMap,
   BarStack,
