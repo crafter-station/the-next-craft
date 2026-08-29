@@ -19,7 +19,9 @@
       "schedule": "Agenda",
       "prizes": "Premios",
       "gallery": "Badges",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "bingo": "Bingo",
+      "game": "Juego"
     },
     "cta": "Postular"
   },
@@ -874,5 +876,20 @@
       "includedLabel": "PARA TODOS LOS QUE ENTRAN",
       "includedTitle": "{count} COSAS INCLUIDAS"
     }
+  },
+  "roleGallery": {
+    "title": "Imágenes de mentores y jurado",
+    "description": "Galería de piezas oficiales generadas para mentores y miembros del jurado de The Next Craft.",
+    "navAria": "Navegación de imágenes de mentores y jurado",
+    "backHome": "← Inicio",
+    "label": "ASSETS DE ROLES",
+    "headline": "MENTORES + JURADO",
+    "intro": "Revisa las piezas oficiales generadas para LinkedIn y descarga los archivos PNG en resolución completa.",
+    "mentors": "Mentores",
+    "judges": "Jurado",
+    "count": "{count} IMÁGENES",
+    "imageAlt": "Pieza oficial de {name}, {role}",
+    "download": "Descargar",
+    "downloadFor": "Descargar imagen de {name}"
   }
 }

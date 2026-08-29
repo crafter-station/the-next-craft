@@ -44,6 +44,10 @@ const copy = {
       "Valida tu correo de Luma, completa tus datos y genera un retrato pixel art unico.",
     manageIntro:
       "Actualiza tu nombre publico, bio, enlaces o la foto de tu badge.",
+    closedTitle: "El registro de badges ha cerrado en Lima.",
+    closedIntro:
+      "La generacion de badges para Lima ha finalizado. Las demas ciudades siguen habilitadas.",
+    closedNotice: "El onboarding y la generacion de badges cerraron en Lima.",
     email: "Correo usado en Luma",
     send: "Enviar codigo",
     sent: "Si tu registro esta aceptado, recibiras un codigo en tu correo.",
@@ -111,6 +115,10 @@ const copy = {
     intro:
       "Verify your Luma email, complete your details, and generate a unique pixel-art portrait.",
     manageIntro: "Update your public name, bio, links, or badge photo.",
+    closedTitle: "Badge registration is closed in Lima.",
+    closedIntro:
+      "Badge generation has ended for Lima. All other cities remain open.",
+    closedNotice: "Badge onboarding and generation are closed in Lima.",
     email: "Email used on Luma",
     send: "Send code",
     sent: "If your registration is accepted, a code will arrive in your inbox.",
@@ -257,6 +265,7 @@ type Props = {
   initialState: BadgeStudioState | null;
   /** Con qué se entró teniendo ya un badge; ver `@/lib/badge/intent`. */
   intent: BadgeStudioIntent;
+  onboardingClosed: boolean;
 };
 
 async function getBadgeStatus() {
@@ -400,6 +409,7 @@ export function BadgeStudio({
   initialSession,
   initialState,
   intent,
+  onboardingClosed,
 }: Props) {
   authClient.hydrateSession(initialSession);
   const {
@@ -487,7 +497,10 @@ export function BadgeStudio({
     },
     onMutate: () => setError(null),
     onError: () => setError(t.genericError),
-    onSuccess: () => refetchSession(),
+    onSuccess: async () => {
+      await refetchSession();
+      router.refresh();
+    },
   });
 
   const saveProfileMutation = useMutation({
@@ -506,7 +519,13 @@ export function BadgeStudio({
       if (!response.ok) throw new BadgeRequestError(response.status);
     },
     onMutate: () => setError(null),
-    onError: () => setError(t.genericError),
+    onError: (mutationError) =>
+      setError(
+        mutationError instanceof BadgeRequestError &&
+          mutationError.status === 410
+          ? t.closedNotice
+          : t.genericError,
+      ),
     onSuccess: async (_, { method }) => {
       await refreshStatus();
       if (method === "PATCH") closeEditor();
@@ -535,6 +554,11 @@ export function BadgeStudio({
         mutationError.status === 409
       ) {
         await refreshStatus();
+      } else if (
+        mutationError instanceof BadgeRequestError &&
+        mutationError.status === 410
+      ) {
+        setError(t.closedNotice);
       } else {
         setError(t.genericError);
       }
@@ -630,30 +654,38 @@ export function BadgeStudio({
   const completedProfile = completedState?.profile ?? null;
   const isUploadStage = state?.stage === "upload";
   const showPhotoForm =
-    isUploadStage ||
-    (state?.stage === "completed" && dashboardMode === "photo");
+    !onboardingClosed &&
+    (isUploadStage ||
+      (state?.stage === "completed" && dashboardMode === "photo"));
+  const showClosedOnboarding =
+    onboardingClosed &&
+    (state?.stage === "details" || state?.stage === "upload");
   const managingExistingBadge =
     state?.stage === "completed" ||
     (state?.stage === "generating" && state.hasCurrentBadge);
   const showingCompletedBadge = Boolean(
     completedProfile && dashboardMode === "preview",
   );
-  const pageTitle = showingCompletedBadge
-    ? t.complete
-    : showPhotoForm
-      ? t.photoTitle
-      : state?.stage === "generating"
-        ? t.generating
+  const pageTitle = showClosedOnboarding
+    ? t.closedTitle
+    : showingCompletedBadge
+      ? t.complete
+      : showPhotoForm
+        ? t.photoTitle
+        : state?.stage === "generating"
+          ? t.generating
+          : managingExistingBadge
+            ? t.manageTitle
+            : t.title;
+  const pageIntro = showClosedOnboarding
+    ? t.closedIntro
+    : showingCompletedBadge
+      ? `${completedProfile?.displayName} / ${t.participant} #${formatParticipantNumber(completedProfile?.participantNumber ?? 0)}`
+      : showPhotoForm
+        ? t.photoHelp
         : managingExistingBadge
-          ? t.manageTitle
-          : t.title;
-  const pageIntro = showingCompletedBadge
-    ? `${completedProfile?.displayName} / ${t.participant} #${formatParticipantNumber(completedProfile?.participantNumber ?? 0)}`
-    : showPhotoForm
-      ? t.photoHelp
-      : managingExistingBadge
-        ? t.manageIntro
-        : t.intro;
+          ? t.manageIntro
+          : t.intro;
   const completedBadgeImageUrl = completedProfile
     ? `/api/badge/image/${formatParticipantNumber(completedProfile.participantNumber)}?v=${encodeURIComponent(completedProfile.updatedAt)}`
     : null;
@@ -773,7 +805,7 @@ export function BadgeStudio({
           </div>
         ) : null}
 
-        {authenticated && state?.stage === "details" ? (
+        {authenticated && state?.stage === "details" && !onboardingClosed ? (
           <ProfileForm
             locale={locale}
             fullName={state.fullName}
@@ -782,6 +814,12 @@ export function BadgeStudio({
             pending={isPending}
             onSubmit={createProfile}
           />
+        ) : null}
+
+        {authenticated && showClosedOnboarding ? (
+          <p className="border-l-2 border-[var(--bright)] pl-4 text-sm text-[var(--text-dim)]">
+            {t.closedNotice}
+          </p>
         ) : null}
 
         {authenticated && showPhotoForm ? (
@@ -951,13 +989,15 @@ export function BadgeStudio({
                 >
                   {t.downloadPortrait}
                 </a>
-                <button
-                  type="button"
-                  onClick={() => setDashboardMode("photo")}
-                  className="text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-[var(--text)]"
-                >
-                  {t.replacePhoto}
-                </button>
+                {!onboardingClosed ? (
+                  <button
+                    type="button"
+                    onClick={() => setDashboardMode("photo")}
+                    className="text-[var(--text-dim)] underline decoration-[var(--line)] underline-offset-4 transition-colors hover:text-[var(--text)]"
+                  >
+                    {t.replacePhoto}
+                  </button>
+                ) : null}
               </div>
             </div>
             {completedBadgeImageUrl ? (
