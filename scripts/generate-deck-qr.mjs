@@ -22,6 +22,10 @@ const CODES = [
     name: "bogota-jam",
     url: "https://spotify.link/c3zgBo84Z5b",
   },
+  {
+    name: "dashboard",
+    url: "https://thenextcraft.org/es/dashboard",
+  },
 ];
 
 async function main() {
