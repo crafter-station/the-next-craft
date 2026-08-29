@@ -7,7 +7,6 @@ import { auth } from "@/lib/auth";
 import { PARTNERS, TOTAL_PARTNER_VALUE_USD } from "@/lib/dashboard/content";
 import {
   findParticipantByUserId,
-  getParticipantPerkEligibility,
   listRedeemedPartners,
 } from "@/lib/dashboard/state";
 
@@ -38,7 +37,6 @@ export default async function CreditsPage({
 
   const redeemed = await listRedeemedPartners(participant.id);
   const assignedCodes = await listAssignedCodesForParticipant(participant.id);
-  const perkEligibility = await getParticipantPerkEligibility(participant.id);
   const claimed = PARTNERS.filter((p) => redeemed.has(p.key)).reduce(
     (sum, p) => sum + p.valueUsd,
     0,
@@ -104,7 +102,6 @@ export default async function CreditsPage({
           <Row marker="02">{t("credits.rule2")}</Row>
           <Row marker="03">{t("credits.rule3")}</Row>
           <Row marker="04">{t("credits.rule4")}</Row>
-          <Row marker="05">{t("credits.rule5")}</Row>
         </ul>
       </Panel>
 
@@ -116,8 +113,6 @@ export default async function CreditsPage({
             index={i + 1}
             code={assignedCodes.get(partner.key) ?? null}
             redeemed={redeemed.has(partner.key)}
-            canRedeem={perkEligibility.canRedeem}
-            perkEligibility={perkEligibility}
           />
         ))}
       </div>

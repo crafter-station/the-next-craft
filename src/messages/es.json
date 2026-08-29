@@ -563,7 +563,7 @@
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
       "headline": "CRÉDITOS QUE YA SON TUYOS",
-      "lede": "Todo el que entra se lleva estos créditos, gane o no. Solo puedes revelar el código con badge confirmado y check-in presencial en tu sede.",
+      "lede": "Todo el que entra se lleva estos créditos, gane o no. Revela y canjea cada código disponible desde tu dashboard de participante.",
       "claimed": "${claimed} de ${total}",
       "redeemedCount": "{done}/{total} canjeados",
       "statTotal": "VALOR TOTAL",
@@ -660,11 +660,6 @@
           ]
         }
       },
-      "rule5": "El canje se desbloquea en la puerta: badge completado y llegada marcada por el staff de tu sede.",
-      "badgeRequiredLabel": "BADGE PENDIENTE",
-      "badgeRequiredBody": "Genera y confirma tu badge antes de canjear. Es la señal de que vas a asistir.",
-      "checkInRequiredLabel": "CANJE EN SEDE",
-      "checkInRequiredBody": "Tu código ya está asignado. Pasa por la puerta y pide que marquen tu llegada para revelarlo.",
       "codePendingLabel": "PRÓXIMAMENTE",
       "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin."
     },
@@ -675,8 +670,7 @@
       "track-locked": "El track ya está confirmado. Libéralo primero.",
       "unknown-track": "Ese track no existe.",
       "unknown-partner": "Ese partner no existe.",
-      "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos.",
-      "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
+      "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos."
     },
     "badge": {
       "label": "BADGE · TU IDENTIDAD",
@@ -817,8 +811,7 @@
         "github-not-linked": "Vincula tu cuenta de GitHub primero.",
         "github-taken": "Esa cuenta de GitHub ya está vinculada a otra acreditación.",
         "github-failed": "GitHub no respondió bien. Reintenta en un momento.",
-        "repo-in-progress": "Ya se está creando el repo. Recarga en unos segundos.",
-        "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
+        "repo-in-progress": "Ya se está creando el repo. Recarga en unos segundos."
       }
     },
     "access": {

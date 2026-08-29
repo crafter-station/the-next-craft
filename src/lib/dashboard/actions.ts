@@ -13,11 +13,7 @@ import type { TrackKey } from "@/lib/db/schema-types";
 import { balanceApplies, TRACK_BALANCE_SLACK } from "./capacity";
 import { PARTNERS, TRACKS } from "./content";
 import { refreshRepoTopics } from "./github";
-import {
-  findParticipantByUserId,
-  findTeamForParticipant,
-  getParticipantPerkEligibility,
-} from "./state";
+import { findParticipantByUserId, findTeamForParticipant } from "./state";
 
 type ActionResult = { ok: true } | { ok: false; error: DashboardError };
 
@@ -32,8 +28,7 @@ export type DashboardError =
   | "track-locked"
   | "unknown-track"
   | "track-full"
-  | "unknown-partner"
-  | "perks-locked";
+  | "unknown-partner";
 
 type HackerContext =
   | { error: DashboardError }
@@ -202,11 +197,6 @@ export async function redeemPartner(partnerKey: string): Promise<ActionResult> {
   if (ctx.error) return { ok: false, error: ctx.error };
   if (!PARTNERS.some((p) => p.key === partnerKey)) {
     return { ok: false, error: "unknown-partner" };
-  }
-
-  const eligibility = await getParticipantPerkEligibility(ctx.participant.id);
-  if (!eligibility.canRedeem) {
-    return { ok: false, error: "perks-locked" };
   }
 
   await db

@@ -563,7 +563,7 @@
     "credits": {
       "label": "PARTNER CREDITS",
       "headline": "CREDITS THAT ARE ALREADY YOURS",
-      "lede": "Everyone who gets in takes these credits, win or not. You can only reveal your code with a confirmed badge and in-person check-in at your hub.",
+      "lede": "Everyone who gets in takes these credits, win or not. Reveal and redeem each available code from your participant dashboard.",
       "claimed": "${claimed} of ${total}",
       "redeemedCount": "{done}/{total} redeemed",
       "statTotal": "TOTAL VALUE",
@@ -660,11 +660,6 @@
           ]
         }
       },
-      "rule5": "Redemption unlocks at the door: completed badge and arrival marked by your hub's staff.",
-      "badgeRequiredLabel": "BADGE PENDING",
-      "badgeRequiredBody": "Generate and confirm your badge before redeeming. It signals you're attending.",
-      "checkInRequiredLabel": "REDEEM ON SITE",
-      "checkInRequiredBody": "Your code is already assigned. Check in at the door so staff can mark your arrival and unlock it.",
       "codePendingLabel": "COMING SOON",
       "codePendingBody": "Your code will be assigned before the event. Check back once the team publishes it from admin."
     },
@@ -675,8 +670,7 @@
       "track-locked": "The track is already confirmed. Release it first.",
       "unknown-track": "That track doesn't exist.",
       "unknown-partner": "That partner doesn't exist.",
-      "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams.",
-      "perks-locked": "You can't redeem yet: you need a confirmed badge and in-person check-in."
+      "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams."
     },
     "badge": {
       "label": "BADGE · YOUR IDENTITY",
@@ -817,8 +811,7 @@
         "github-not-linked": "Link your GitHub account first.",
         "github-taken": "That GitHub account is already linked to another registration.",
         "github-failed": "GitHub didn't answer properly. Try again in a moment.",
-        "repo-in-progress": "The repo is already being created. Reload in a few seconds.",
-        "perks-locked": "You can't redeem yet: you need a confirmed badge and in-person check-in."
+        "repo-in-progress": "The repo is already being created. Reload in a few seconds."
       }
     },
     "access": {
