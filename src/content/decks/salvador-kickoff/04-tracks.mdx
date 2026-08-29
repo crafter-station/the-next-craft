@@ -1,0 +1,26 @@
+---
+title: Tracks
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-8">
+  <div className="flex flex-col gap-4">
+    <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">3 tracks</h1>
+    <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text-dim)] md:text-base">La vara sigue siendo una sola: que lo que construyas lo use alguien de verdad antes de que suene la campana.</p>
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--bright)]">40 cupos · equipos de 3 a 5 · los tres tracks se reparten por igual</p>
+  </div>
+  <div className="grid gap-4 md:grid-cols-3">
+    {[
+      ['Content Machine', 'Crear · publicar · distribuir', '≈13 cupos'],
+      ['Out of the Box', 'Raro · experimental · inclasificable', '≈13 cupos'],
+      ['Learning by Shipping', 'Aprender haciendo · no mirando', '≈13 cupos']
+    ].map(([title, copy, slots]) => (
+      <div key={title} className="flex min-h-56 flex-col items-center justify-center bg-[var(--screen-dim)] p-6 text-center">
+        <div className="flex min-h-28 flex-col justify-center">
+          <h2 className="font-mono text-xl font-semibold uppercase leading-tight tracking-[-0.04em] text-[var(--text)] md:text-2xl">{title}</h2>
+          <p className="mt-3 font-mono text-xs uppercase leading-relaxed tracking-[0.08em] text-[var(--text-dim)]">{copy}</p>
+        </div>
+        <p className="mt-4 font-mono text-sm font-semibold text-[var(--bright)]">{slots}</p>
+      </div>
+    ))}
+  </div>
+</div>

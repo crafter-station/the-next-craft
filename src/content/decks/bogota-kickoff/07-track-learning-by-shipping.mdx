@@ -1,0 +1,33 @@
+---
+title: Learning by Shipping
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-9">
+  <div className="flex flex-col gap-3">
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--bright)]">Track 03 · 20 cupos</p>
+    <h1 className="font-mono text-[clamp(2rem,5.5vw,4.25rem)] font-semibold uppercase leading-[0.95] tracking-[-0.06em] text-[var(--text)]">Learning by Shipping</h1>
+    <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--text-dim)] md:text-sm">Aprender haciendo · no mirando</p>
+  </div>
+
+  <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+    <div className="flex flex-col gap-4">
+      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">Qué esperamos</h2>
+      <p className="font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Construye herramientas para aprender haciendo: que se adapten, den feedback real y evalúen tu trabajo. Nada de educación pasiva — el producto tiene que hacerte hacer.</p>
+      <p className="border-l-2 border-[var(--bright)] pl-4 font-mono text-sm leading-relaxed text-[var(--text-dim)]">El track de educación, pero con mejor ángulo: menos escuela, más hacer.</p>
+    </div>
+    <div className="flex flex-col gap-4">
+      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">Ideas para arrancar</h2>
+      <div className="flex flex-col gap-2">
+        {[
+          'Un tutor que te enseña con proyectos y te da feedback real',
+          'Feedback que se adapta a lo que ya sabes y lo que te falta',
+          'Práctica que se ajusta a lo que sueles olvidar',
+          'Entrevistas de práctica que te evalúan de verdad',
+          'Un entorno que corre y prueba tu código mientras aprendes'
+        ].map((idea) => (
+          <div key={idea} className="bg-[var(--screen-dim)] px-4 py-3 font-mono text-sm leading-snug text-[var(--text)]">{idea}</div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
