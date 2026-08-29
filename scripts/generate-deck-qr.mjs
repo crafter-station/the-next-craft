@@ -23,8 +23,8 @@ const CODES = [
     url: "https://spotify.link/c3zgBo84Z5b",
   },
   {
-    name: "dashboard",
-    url: "https://thenextcraft.org/es/dashboard",
+    name: "badge",
+    url: "https://thenextcraft.org/es/badge",
   },
 ];
 
