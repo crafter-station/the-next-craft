@@ -17,7 +17,10 @@ export type PartnerCodeStats = {
   unassigned: number;
 };
 
-const SHARED_PARTNER_CODES = new Map([["tavily", "TVLY-4XBA8FDS"]]);
+const SHARED_PARTNER_CODES = new Map([
+  ["tavily", "TVLY-4XBA8FDS"],
+  ["apify", "NEXT_CRAFT_LATAM"],
+]);
 
 /** Participantes con badge completado (confirmaron asistencia). */
 export async function countConfirmedParticipants() {
