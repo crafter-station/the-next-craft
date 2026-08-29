@@ -623,6 +623,9 @@
       "copied": "copiado",
       "openPanel": "Abrir panel",
       "openGuide": "Abrir guía",
+      "openDiscord": "Abrir Discord",
+      "externalRedemption": "CANJE EXTERNO",
+      "startRedemption": "Iniciar canje",
       "expires": "vence al cerrar el evento",
       "sponsorCta": "¿Quieres ser sponsor? → {email}",
       "partners": {
@@ -663,10 +666,12 @@
         },
         "elevenlabs": {
           "perk": "Créditos por participante",
-          "about": "Voz sintética y doblaje. Si tu producto habla, esto es lo que suena.",
+          "about": "Voz sintética y doblaje. ElevenLabs entrega cada cupón único mediante su bot de Discord usando tu correo de registro en Luma.",
           "steps": [
-            "Crea la cuenta con tu correo de registro",
-            "Subscription → Redeem code"
+            "Únete al servidor de Discord de ElevenLabs",
+            "Abre el canal #🎟️│coupon-codes y pulsa Start Redemption",
+            "Elige The Next Craft e ingresa el correo que usaste en Luma",
+            "El bot te enviará tu código de cupón único"
           ]
         },
         "n8n": {
