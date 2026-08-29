@@ -9,6 +9,7 @@ import { Hero } from "@/components/landing/hero";
 import { Nav } from "@/components/landing/nav";
 import { Partners } from "@/components/landing/partners";
 import { Prizes } from "@/components/landing/prizes";
+import { Rubric } from "@/components/landing/rubric";
 import { Schedule } from "@/components/landing/schedule";
 import { SectionTitle } from "@/components/landing/section-title";
 import { Sponsors } from "@/components/landing/sponsors";
@@ -113,6 +114,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
         <Schedule />
         <SectionTitle line="50" name={tSections("prizes")} />
         <Prizes />
+        <Rubric />
         <Sponsors />
         <Faq />
         <FinalCta />
