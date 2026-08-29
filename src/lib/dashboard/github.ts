@@ -441,6 +441,47 @@ export async function inviteParticipant(teamId: string, participantId: string) {
 }
 
 /**
+ * Sube al nuevo capitán a admin del repo.
+ *
+ * Cuando el capitán fundador se va, `leaveTeam` asciende a alguien para no
+ * dejar el equipo sin cabeza — pero en GitHub ese ascenso no existía: el nuevo
+ * capitán se quedaba con `push` y el repo sin ningún admin del equipo. Se llama
+ * después de escribir el ascenso en la base, que es de donde sale el permiso.
+ */
+export async function promoteCaptain(teamId: string, participantId: string) {
+  const config = githubConfig();
+  if (!config) return;
+
+  const team = await loadTeam(teamId);
+  const fullName = team?.githubRepoFullName;
+  if (!team || !fullName || team.githubRepoStatus !== "ready") return;
+
+  const members = await loadMembers(teamId);
+  const member = members.find((m) => m.participantId === participantId);
+  if (!member?.login || !member.isCaptain) return;
+
+  // Sin el filtro de `accepted` de `inviteParticipant`: aquí lo que cambia es
+  // el permiso de alguien que probablemente ya está dentro.
+  await inviteMember(config, fullName, teamId, member);
+}
+
+/** Los topics son el índice de los mentores y el track puede llegar después. */
+export async function refreshRepoTopics(teamId: string) {
+  const config = githubConfig();
+  if (!config) return;
+
+  const team = await loadTeam(teamId);
+  const fullName = team?.githubRepoFullName;
+  if (!team || !fullName || team.githubRepoStatus !== "ready") return;
+
+  try {
+    await setRepoTopics(config, fullName, topicsFor(team, config.prefix));
+  } catch (error) {
+    console.error("GitHub topics refresh failed", error);
+  }
+}
+
+/**
  * Saca a alguien del repo al salir del equipo. Best effort: si GitHub falla,
  * el hacker igual sale del equipo — el acceso se limpia a mano.
  */

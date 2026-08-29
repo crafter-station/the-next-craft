@@ -84,6 +84,23 @@ export function cityForTimeZone(timeZone: string): CityKey | null {
   return CITIES.find((c) => c.timeZone === timeZone)?.key ?? null;
 }
 
+/**
+ * La sede que sugiere el reloj de quien mira. Solo sirve en cliente.
+ *
+ * En la landing no hay sesión, así que no se sabe la sede de nadie; pero el
+ * evento arranca a las 09:00 LOCALES de cada una y Guatemala y El Salvador van
+ * una hora por detrás. Si la zona del navegador es la de una sede, contamos
+ * contra esa; si no —alguien mirando desde Madrid—, `null` y se usa la sede
+ * por defecto.
+ */
+export function viewerCity(): CityKey | null {
+  try {
+    return cityForTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  } catch {
+    return null;
+  }
+}
+
 const CITY_NAMES: Record<CityKey, Record<"es" | "en", string>> = {
   lima: { es: "Lima", en: "Lima" },
   bogota: { es: "Bogotá", en: "Bogotá" },

@@ -26,6 +26,7 @@
     "simulate": "bun scripts/simulate.ts",
     "preview:portrait": "bun scripts/preview-badge-portrait.ts",
     "participants:backfill-cities": "bun scripts/backfill-participant-cities.ts",
+    "github:check": "bun scripts/check-github-setup.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "trigger:dev": "trigger dev"
