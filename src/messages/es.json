@@ -19,7 +19,9 @@
       "schedule": "Agenda",
       "prizes": "Premios",
       "gallery": "Badges",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "bingo": "Bingo",
+      "game": "Juego"
     },
     "cta": "Postular"
   },

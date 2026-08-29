@@ -1,3 +1,4 @@
+import { Gamepad2, Grid3x3 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
@@ -11,6 +12,23 @@ const NAV_LINKS = [
   { key: "prizes", href: "#premios" },
   { key: "gallery", href: "/gallery" },
   { key: "faq", href: "#faq" },
+] as const;
+
+/*
+  Apps externas (subdominios propios): el bingo y el juego de catch. Van
+  como iconos siempre visibles — en desktop acompañados del label.
+*/
+const APP_LINKS = [
+  {
+    key: "bingo",
+    href: "https://bingo.thenextcraft.crafter.run",
+    Icon: Grid3x3,
+  },
+  {
+    key: "game",
+    href: "https://catch.thenextcraft.crafter.run",
+    Icon: Gamepad2,
+  },
 ] as const;
 
 export function Nav() {
@@ -55,6 +73,19 @@ export function Nav() {
               )}
             </li>
           ))}
+          {APP_LINKS.map(({ key, href, Icon }) => (
+            <li key={href}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-link font-mono text-[11px] uppercase tracking-[0.14em] leading-[1.4] px-2.5 py-3 inline-flex items-center gap-1.5"
+              >
+                <Icon aria-hidden="true" className="size-3.5" />
+                {t(`links.${key}`)}
+              </a>
+            </li>
+          ))}
         </ul>
 
         <div className="flex items-stretch gap-2 shrink-0">
@@ -64,6 +95,19 @@ export function Nav() {
           >
             {t("links.gallery")}
           </Link>
+          {APP_LINKS.map(({ key, href, Icon }) => (
+            <a
+              key={href}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t(`links.${key}`)}
+              title={t(`links.${key}`)}
+              className="nav-link flex items-center px-2 py-3 md:hidden"
+            >
+              <Icon aria-hidden="true" className="size-4" />
+            </a>
+          ))}
           <LanguageToggle />
 
           {/* CTA — keycap beige. Abre el selector de sede: el registro son 5
