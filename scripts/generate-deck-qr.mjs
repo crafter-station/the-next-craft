@@ -20,7 +20,7 @@ const LIGHT = "#f2f0e9"; // --text
 const CODES = [
   {
     name: "bogota-jam",
-    url: "https://spotify.link/c3zgBo84Z5b",
+    url: "https://open.spotify.com/socialsession/2m7qp5iO9BayJXfg0Ie60A?si=mD_9DHTISiuag0tiP5fJYQ",
   },
   {
     name: "badge",
