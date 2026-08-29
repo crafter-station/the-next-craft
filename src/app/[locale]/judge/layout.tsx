@@ -2,11 +2,16 @@ import type { Metadata } from "next";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { currentPanelist } from "@/lib/judging/state";
+import {
+  currentPanelist,
+  passedGate,
+  rosterForPicker,
+} from "@/lib/judging/state";
 
 import { Basic, Pixel, Tag } from "@/components/dashboard/kit";
 import { CodeGate } from "@/components/judging/code-gate";
 import { SignOut } from "@/components/judging/sign-out";
+import { WhoAreYou } from "@/components/judging/who-are-you";
 
 import { Link } from "@/i18n/navigation";
 
@@ -28,7 +33,11 @@ export const dynamic = "force-dynamic";
  *
  * Su puerta tampoco es el OTP al correo. Ese fallaba en silencio: el código
  * solo se envía a direcciones dadas de alta, así que quien tecleaba otra no
- * recibía nada ni sabía por qué. Aquí el staff dicta un código y se entra.
+ * recibía nada ni sabía por qué.
+ *
+ * Se entra en dos pantallas: un código común a todo el panel, y luego el
+ * nombre. La segunda no es un trámite —sin saber quién puso cada nota no hay
+ * nada que normalizar—, pero se paga una sola vez por dispositivo.
  */
 export default async function JudgeLayout({
   children,
@@ -39,7 +48,13 @@ export default async function JudgeLayout({
 
   const t = await getTranslations("judging");
   const panelist = await currentPanelist();
-  if (!panelist) return <CodeGate />;
+  if (!panelist) {
+    // Quien ya acertó el código solo tiene que decir quién es; hacerle teclear
+    // el código otra vez sería castigarlo por cambiar de pantalla.
+    if (await passedGate())
+      return <WhoAreYou people={await rosterForPicker()} />;
+    return <CodeGate />;
+  }
 
   return (
     <div className="min-h-svh bg-[var(--void)]">

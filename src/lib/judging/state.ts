@@ -7,11 +7,19 @@ import { db } from "@/lib/db";
 import {
   dashboardPanelists,
   dashboardScores,
+  dashboardSettings,
   dashboardTeams,
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
-import { PANELIST_COOKIE, readSession } from "./access";
+import {
+  ACCESS_CODE_KEY,
+  GATE_COOKIE,
+  GATE_SUBJECT,
+  newAccessCode,
+  PANELIST_COOKIE,
+  readSession,
+} from "./access";
 import { normalizePanel, type PanelResult, type ScoreEntry } from "./normalize";
 import { CRITERION_KEYS, type CriterionKey, isValidScore } from "./rubric";
 
@@ -50,6 +58,61 @@ export type JudgeableTeam = {
   /** Lo que este panelista lleva puesto sobre este equipo. */
   own: ScoreDraft | null;
 };
+
+/**
+ * El código con el que entra todo el panel.
+ *
+ * Se crea solo la primera vez que alguien lo pide, para que el tablero nunca
+ * aparezca sin código que dictar. `onConflictDoNothing` es el candado: dos
+ * peticiones simultáneas en el arranque no pueden dejar dos códigos distintos.
+ */
+export async function sharedAccessCode(): Promise<string> {
+  const [existing] = await db
+    .select({ value: dashboardSettings.value })
+    .from(dashboardSettings)
+    .where(eq(dashboardSettings.key, ACCESS_CODE_KEY))
+    .limit(1);
+  if (existing) return existing.value;
+
+  await db
+    .insert(dashboardSettings)
+    .values({ key: ACCESS_CODE_KEY, value: newAccessCode() })
+    .onConflictDoNothing();
+
+  const [created] = await db
+    .select({ value: dashboardSettings.value })
+    .from(dashboardSettings)
+    .where(eq(dashboardSettings.key, ACCESS_CODE_KEY))
+    .limit(1);
+  return created.value;
+}
+
+/** ¿Acertó el código, aunque todavía no haya dicho quién es? */
+export async function passedGate(): Promise<boolean> {
+  const store = await cookies();
+  return readSession(store.get(GATE_COOKIE)?.value) === GATE_SUBJECT;
+}
+
+/**
+ * Quién puede elegirse en la pantalla de «¿quién eres?».
+ *
+ * Se enseña el panel entero y no solo una sede: con un código común no hay
+ * forma de saber desde qué sede entra alguien hasta que lo dice él.
+ */
+export async function rosterForPicker(): Promise<
+  { id: string; fullName: string; role: PanelRole; city: CityKey | null }[]
+> {
+  return db
+    .select({
+      id: dashboardPanelists.id,
+      fullName: dashboardPanelists.fullName,
+      role: dashboardPanelists.role,
+      city: dashboardPanelists.city,
+    })
+    .from(dashboardPanelists)
+    .where(sql`${dashboardPanelists.revokedAt} is null`)
+    .orderBy(asc(dashboardPanelists.role), asc(dashboardPanelists.fullName));
+}
 
 /**
  * El panelista en sesión, o null.
@@ -305,7 +368,6 @@ export async function listPanelists() {
       fullName: dashboardPanelists.fullName,
       role: dashboardPanelists.role,
       city: dashboardPanelists.city,
-      accessCode: dashboardPanelists.accessCode,
       revokedAt: dashboardPanelists.revokedAt,
       scored: sql<number>`(
         select count(*) from dashboard_scores s

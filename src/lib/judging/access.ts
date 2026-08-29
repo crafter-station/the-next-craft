@@ -11,22 +11,41 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
   error—. En una sala con ruido y la ronda corriendo, eso es un mentor parado
   esperando un correo que nunca va a llegar.
 
-  Aquí la credencial es un código que el staff dicta. Quien lo tiene es ese
-  panelista: no hay segundo factor y no pretendemos que lo haya. Es una entrada
-  a un evento de un día, no una cuenta.
+  Se entra en dos pasos, y el segundo no es burocracia:
 
-  La sesión es una cookie firmada con HMAC sobre `BETTER_AUTH_SECRET`. Se firma
-  y no se guarda en base a propósito: no hace falta una tabla de sesiones para
-  algo que dura lo que dura el evento, y una cookie firmada no se puede
-  falsificar sin el secreto.
+  1. UN código, el mismo para todo el panel. El staff lo dice una vez a toda la
+     sala en vez de repartir veinte papeles distintos.
+  2. Cada quien toca su nombre en la lista.
+
+  El paso 2 existe porque sin él el sistema no sabría quién es quién, y de eso
+  vive todo el cálculo: corregir que un mentor puntúe más duro que otro exige
+  saber qué notas puso cada uno. Con una sola identidad compartida, las notas
+  del panel entero caerían en el mismo saco y el ranking volvería a ser una
+  suma cruda.
+
+  Lo que esto NO es: una comprobación de identidad. Quien tenga el código puede
+  elegir cualquier nombre de la lista. Para un panel de gente que el staff
+  conoce y que está en la misma sala, es el intercambio correcto; para algo
+  donde suplantar tenga premio, no lo sería.
+
+  Las dos sesiones son cookies firmadas con HMAC sobre `BETTER_AUTH_SECRET`. Se
+  firman y no se guardan en base a propósito: no hace falta una tabla de
+  sesiones para algo que dura lo que dura el evento, y una cookie firmada no se
+  puede falsificar sin el secreto.
 */
 
 /** Sin O/0 ni I/1/L: el código se dicta en voz alta en una sala llena. */
 const ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const CODE_LENGTH = 8;
 
+/** Pasó el código, todavía sin nombre. */
+export const GATE_COOKIE = "tnc_gate";
+/** Ya eligió quién es. */
 export const PANELIST_COOKIE = "tnc_panel";
 const SESSION_DAYS = 7;
+
+/** Nombre del ajuste que guarda el código del panel. */
+export const ACCESS_CODE_KEY = "judging_access_code";
 
 /**
  * Un código nuevo.
@@ -34,6 +53,10 @@ const SESSION_DAYS = 7;
  * Ocho caracteres sobre 31 símbolos son ~8·10¹¹ combinaciones. No es para
  * resistir a un atacante con tiempo infinito —para eso está el límite de
  * intentos—, es para que nadie acierte uno por casualidad probando a mano.
+ *
+ * Al ser compartido por todo el panel importa más que sea largo, no menos: un
+ * único código en circulación toda la tarde es más fácil de ver por encima del
+ * hombro que veinte, y lo único que lo compensa es que adivinarlo sea inútil.
  *
  * `randomBytes` y no `Math.random`: el sesgo del módulo sobre 256 con un
  * alfabeto de 31 es despreciable aquí, pero un generador predecible no lo
@@ -70,18 +93,26 @@ function sign(payload: string): string {
   return createHmac("sha256", secret()).update(payload).digest("base64url");
 }
 
-/** Token de sesión: a quién identifica, hasta cuándo vale, y la firma. */
-export function issueSession(panelistId: string): {
+/**
+ * Token de sesión: a quién identifica, hasta cuándo vale, y la firma.
+ *
+ * `subject` es el id del panelista una vez elegido, o `gate` mientras solo se
+ * ha acertado el código. Van en cookies distintas, así que no se confunden.
+ */
+export function issueSession(subject: string): {
   token: string;
   expires: Date;
 } {
   const expires = new Date(Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000);
-  const payload = `${panelistId}.${expires.getTime()}`;
+  const payload = `${subject}.${expires.getTime()}`;
   return { token: `${payload}.${sign(payload)}`, expires };
 }
 
+/** Lo que se guarda en la cookie de paso: no identifica a nadie. */
+export const GATE_SUBJECT = "gate";
+
 /**
- * El panelista que firma este token, o `null`.
+ * El sujeto que firma este token, o `null`.
  *
  * La comparación es en tiempo constante: comparar firmas con `===` filtra, por
  * el tiempo que tarda en fallar, cuántos bytes iniciales acertaste, y con eso
@@ -99,11 +130,11 @@ export function readSession(token: string | undefined): string | null {
   if (given.length !== expected.length) return null;
   if (!timingSafeEqual(given, expected)) return null;
 
-  const [panelistId, expiresAt] = payload.split(".");
-  if (!panelistId || !expiresAt) return null;
+  const [subject, expiresAt] = payload.split(".");
+  if (!subject || !expiresAt) return null;
   if (Number(expiresAt) < Date.now()) return null;
 
-  return panelistId;
+  return subject;
 }
 
 /*

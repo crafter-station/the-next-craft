@@ -123,7 +123,7 @@ Code map:
   **conectado** (union-find sobre equipos que comparten panelista); un panel
   desconectado no se puede publicar.
 - `src/lib/judging/state.ts` — sesión del panelista, alcance por rol, resultados.
-- `src/lib/judging/access.ts` — el código de acceso y la sesión firmada.
+- `src/lib/judging/access.ts` — el código del panel y las dos sesiones firmadas.
 - `src/lib/judging/actions.ts` — server actions.
 - `src/app/[locale]/judge/**` — el área del panelista, con su propia puerta.
   Fuera de `/dashboard` a propósito: aquel shell es del hacker y exige ser
@@ -135,24 +135,38 @@ Code map:
 - `src/app/[locale]/admin/judging` — el tablero del comité: proyectos, ranking
   normalizado, banderas de cobertura y el interruptor de finalista.
 
-**El panel no entra por correo.** Cada panelista tiene un `access_code` de ocho
-caracteres que el staff le dicta, y con eso entra: sin OTP, sin contraseña y
-sin Better Auth. El OTP se descartó porque fallaba en silencio —solo se envía a
+**El panel no entra por correo.** Se entra en dos pantallas: **un código común
+a todo el panel** que el staff dice en voz alta, y luego **cada quien toca su
+nombre**. El OTP se descartó porque fallaba en silencio —solo se envía a
 direcciones dadas de alta, así que quien tecleaba otra no recibía nada ni sabía
 por qué—, y un mentor de pie en una sala con ruido no tiene margen para eso.
 
-El código es una credencial al portador y se guarda **en claro**: el staff
-necesita releérselo a quien pierda el papel, que es lo que de verdad pasa. Se
-sostiene porque vive un día y solo abre la calificación. La sesión es una
-cookie firmada con HMAC sobre `BETTER_AUTH_SECRET`, sin tabla de sesiones. La
-fila se relee en cada petición para que una baja surta efecto en el momento y
-no cuando caduque la cookie.
+La segunda pantalla no es un trámite: **de ella vive todo el cálculo**. Corregir
+que un mentor puntúe más duro que otro exige saber qué notas puso cada uno, y
+con una identidad compartida el panel entero caería en el mismo saco y el
+ranking volvería a ser una suma cruda. Se paga una vez por dispositivo.
 
-`access_code` lleva un `DEFAULT` en la base que no es el camino normal —la app
-siempre escribe el suyo— sino una red: las migraciones se aplican **a mano y
-por separado del despliegue** (`CMD ["node", "server.js"]` no las corre), así
-que existe una ventana en la que el código viejo puede insertar una fila sin
-saber de la columna.
+Lo que esto **no** es: una comprobación de identidad. Quien tenga el código
+puede elegir cualquier nombre de la lista. Para gente que el staff conoce y que
+está en la misma sala es el intercambio correcto; para algo donde suplantar
+tenga premio, no lo sería.
+
+El código vive en `dashboard_settings` y no en una variable de entorno, porque
+rotarlo tiene que ser un botón del tablero y no un redeploy en mitad de un
+evento. Rotar no expulsa a quien ya está dentro: su cookie va firmada contra su
+id, no contra el código, y tumbar a los mentores que están calificando sería
+peor que el problema que resuelve.
+
+Las dos sesiones son cookies firmadas con HMAC sobre `BETTER_AUTH_SECRET`, sin
+tabla de sesiones: `tnc_gate` (acertó el código) y `tnc_panel` (ya dijo quién
+es). La fila del panelista se relee en cada petición para que una baja surta
+efecto en el momento y no cuando caduque la cookie.
+
+Las migraciones se aplican **a mano y por separado del despliegue** (el
+contenedor arranca con `node server.js` y no las corre), así que el orden
+importa y hay que pensarlo en cada cambio: si una migración borra algo que el
+código desplegado todavía lee, va después del deploy; si añade algo que el
+código nuevo necesita, va antes.
 
 El ranking del tablero es del panel (la sede), pero además muestra la posición
 **dentro de cada track**, que es donde se reparten los premios — igual que la

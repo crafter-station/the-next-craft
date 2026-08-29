@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 
 import { useTranslations } from "next-intl";
 
-import { signInWithCode } from "@/lib/judging/actions";
+import { enterWithCode } from "@/lib/judging/actions";
 import { cn } from "@/lib/utils";
 
 import { Basic, keyClass, Panel, Pixel } from "@/components/dashboard/kit";
@@ -14,11 +14,15 @@ import { useRouter } from "@/i18n/navigation";
 /**
  * La puerta del panel: un campo y un botón.
  *
+ * Es el mismo código para todo el panel: el staff lo dice una vez a la sala en
+ * vez de repartir veinte papeles. Acertarlo no identifica a nadie —eso pasa en
+ * la pantalla siguiente—, solo abre la puerta.
+ *
  * El código se escribe en mayúsculas y con el guion puesto mientras se teclea,
- * porque así es como está impreso en el papel que le dieron. Lo que se manda
- * al servidor va normalizado, de modo que el guion, los espacios y las
- * minúsculas dan igual — el alfabeto no tiene O ni 0 ni I ni 1, así que no hay
- * carácter ambiguo que corregir.
+ * porque así es como está escrito en la pizarra. Lo que se manda al servidor va
+ * normalizado, de modo que el guion, los espacios y las minúsculas dan igual —
+ * el alfabeto no tiene O ni 0 ni I ni 1, así que no hay carácter ambiguo que
+ * corregir.
  */
 export function CodeGate() {
   const t = useTranslations("judging.gate");
@@ -41,7 +45,7 @@ export function CodeGate() {
   function submit() {
     setError(null);
     startTransition(async () => {
-      const result = await signInWithCode(code);
+      const result = await enterWithCode(code);
       if (result.ok) {
         router.refresh();
         return;
