@@ -20,6 +20,7 @@ export type PartnerCodeStats = {
 const SHARED_PARTNER_CODES = new Map([
   ["tavily", "TVLY-4XBA8FDS"],
   ["apify", "NEXT_CRAFT_LATAM"],
+  ["vapi", "thenextcraftperuvapi"],
 ]);
 
 /** Participantes con badge completado (confirmaron asistencia). */
