@@ -24,7 +24,8 @@ export function PartnerCard({
   detailed?: boolean;
 }) {
   const t = useTranslations("dashboard");
-  const [revealed, setRevealed] = useState(redeemed);
+  const [activeCode, setActiveCode] = useState(code);
+  const [revealed, setRevealed] = useState(redeemed && Boolean(code));
   const [copied, setCopied] = useState(false);
   const [pending, start] = useTransition();
 
@@ -35,9 +36,9 @@ export function PartnerCard({
   );
 
   const copy = async () => {
-    if (!code) return;
+    if (!activeCode) return;
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(activeCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
@@ -99,14 +100,14 @@ export function PartnerCard({
       </div>
 
       <div className="border-t border-[var(--line)] px-4 py-3.5">
-        {!code ? (
+        {!activeCode && !partner.assignOnDemand ? (
           <>
             <Basic n={79}>{t("credits.codePendingLabel")}</Basic>
             <p className="mt-2.5 font-mono text-[12px] leading-relaxed text-[var(--text-dim)]">
               {t("credits.codePendingBody")}
             </p>
           </>
-        ) : revealed ? (
+        ) : revealed && activeCode ? (
           <>
             <Basic n={79}>{t("credits.yourCode")}</Basic>
             <button
@@ -115,7 +116,7 @@ export function PartnerCard({
               className="mt-2.5 flex w-full items-center justify-between gap-3 border border-dashed border-[var(--line)] px-3 py-3 text-left transition-colors hover:border-[var(--bright)]"
             >
               <span className="truncate font-mono text-[13px] tracking-[0.08em] text-[var(--bright)]">
-                {code}
+                {activeCode}
               </span>
               <span className="shrink-0 font-mono text-[10px] tracking-[0.12em] uppercase text-[var(--text-dim)]">
                 {copied ? t("credits.copied") : t("credits.copy")}
@@ -137,6 +138,7 @@ export function PartnerCard({
                     setRedeemError(t(`errors.${result.error}`));
                     return;
                   }
+                  if (result.code) setActiveCode(result.code);
                   setRevealed(true);
                 })
               }

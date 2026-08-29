@@ -54,7 +54,7 @@ export default async function PartnerPage({
         aside={
           <div className="flex flex-col items-start gap-2 sm:items-end">
             <Tag strong={redeemed.has(partner.key)}>
-              {!code
+              {!code && !partner.assignOnDemand
                 ? t("credits.codePendingLabel")
                 : redeemed.has(partner.key)
                   ? t("credits.yourCode")

@@ -1,4 +1,3 @@
-import type { CityKey } from "@/lib/cities";
 import type { TrackKey } from "@/lib/db/schema-types";
 
 /* ─────────────────────────────────────────────────────────────
@@ -147,6 +146,8 @@ export type Partner = {
   name: string;
   url: string;
   guideUrl?: string;
+  /** El código se reserva del pool al pulsar canjear. */
+  assignOnDemand?: boolean;
   /** Valor aproximado en USD, para el contador. */
   valueUsd: number;
   /** El crédito es por persona, no por equipo. */
@@ -186,6 +187,7 @@ export const PARTNERS: Partner[] = [
     url: "https://cursor.com",
     valueUsd: 20,
     perParticipant: true,
+    assignOnDemand: true,
     steps: 2,
   },
   {

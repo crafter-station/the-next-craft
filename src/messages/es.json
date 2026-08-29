@@ -655,10 +655,10 @@
         },
         "cursor": {
           "perk": "20 USD en créditos por participante",
-          "about": "El editor. Veinte dólares alcanzan justo para las doce horas si no dejas el agente suelto.",
+          "about": "El editor. Revela tu crédito para reservar uno de los enlaces de referido disponibles exclusivamente para tu cuenta.",
           "steps": [
-            "Settings → Billing → Redeem",
-            "Un código por persona, no por equipo"
+            "Revela el crédito para reservar un enlace de referido",
+            "Copia y abre el enlace; luego inicia sesión o crea tu cuenta de Cursor"
           ]
         },
         "elevenlabs": {
@@ -701,6 +701,7 @@
       "track-locked": "El track ya está confirmado. Libéralo primero.",
       "unknown-track": "Ese track no existe.",
       "unknown-partner": "Ese partner no existe.",
+      "codes-exhausted": "Ya se asignaron todos los códigos disponibles.",
       "track-full": "Ese track va muy por encima de los otros en tu sede. Elige uno con menos equipos."
     },
     "badge": {
