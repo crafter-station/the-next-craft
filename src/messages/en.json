@@ -70,7 +70,11 @@
   "tldr": {
     "ariaLabel": "Event specifications",
     "specs": {
-      "date": { "label": "DATE", "value": "29 AUG 2026", "sub": "" },
+      "date": {
+        "label": "DATE",
+        "value": "29 AUG 2026",
+        "sub": ""
+      },
       "place": {
         "label": "PLACE",
         "value": "Lima · Bogotá · Guatemala · Arequipa · El Salvador",
@@ -81,8 +85,16 @@
         "value": "12 hours in-person",
         "sub": ""
       },
-      "seats": { "label": "SEATS", "value": "300", "sub": "" },
-      "teams": { "label": "TEAMS", "value": "3–5 people", "sub": "" },
+      "seats": {
+        "label": "SEATS",
+        "value": "300",
+        "sub": ""
+      },
+      "teams": {
+        "label": "TEAMS",
+        "value": "3–5 people",
+        "sub": ""
+      },
       "deadline": {
         "label": "DEADLINE",
         "value": "20 AUG 2026",
@@ -152,7 +164,10 @@
     "printLineSub": "12 HOURS",
     "ariaLabel": "Day schedule",
     "events": [
-      { "time": "08:30", "description": "Registration and check-in" },
+      {
+        "time": "08:30",
+        "description": "Registration and check-in"
+      },
       {
         "time": "09:00",
         "description": "Kickoff — rules and team formation",
@@ -167,13 +182,19 @@
         "time": "11:00",
         "description": "Mentorship with Crafter Station"
       },
-      { "time": "13:00", "description": "Lunch" },
+      {
+        "time": "13:00",
+        "description": "Lunch"
+      },
       {
         "time": "16:00",
         "description": "Progress check-in",
         "mono": "git status"
       },
-      { "time": "18:30", "description": "Snack break — 3 hours left" },
+      {
+        "time": "18:30",
+        "description": "Snack break — 3 hours left"
+      },
       {
         "time": "20:00",
         "description": "Code freeze + submit",
@@ -417,6 +438,452 @@
     "emptyTitle": "No badges published yet",
     "emptyBody": "When a participant generates a badge, it will show up here. If you are already accepted, you can create yours now.",
     "emptyCta": "GOTO BADGE STUDIO"
+  },
+  "dashboard": {
+    "nav": {
+      "overview": "Dashboard",
+      "agenda": "Schedule",
+      "tracks": "Tracks",
+      "mentors": "Mentoring",
+      "credits": "Credits",
+      "support": "Support",
+      "groupEvent": "YOUR EVENT",
+      "groupResources": "RESOURCES",
+      "menu": "Menu",
+      "close": "Close",
+      "skipToContent": "Skip to content",
+      "badge": "Badge",
+      "staff": "Staff",
+      "groupStaff": "DOOR",
+      "team": "Team"
+    },
+    "shell": {
+      "betweenBlocks": "between blocks",
+      "toFreeze": "to freeze",
+      "demoClock": "event clock",
+      "hub": "HUB"
+    },
+    "gate": {
+      "title": "ACCREDITED ONLY",
+      "body": "Sign in with the email you were accepted with. Access is checked against the guest list.",
+      "cta": "Sign in",
+      "noParticipantTitle": "NOT ON THE LIST YET",
+      "noParticipantBody": "Your account exists but we couldn't find your accreditation. Message us on WhatsApp and we'll check."
+    },
+    "places": {
+      "entrance": "Your hub entrance",
+      "stage": "Your hub stage",
+      "table": "Your table",
+      "mentoring": "Mentoring area",
+      "food": "Food area",
+      "platform": "Platform"
+    },
+    "kinds": {
+      "ceremony": "ceremony",
+      "hacking": "hacking",
+      "mentoring": "mentoring",
+      "meal": "food",
+      "deadline": "deadline",
+      "demo": "demo"
+    },
+    "audience": {
+      "hackers": "hackers",
+      "mentors": "mentors",
+      "sponsors": "sponsors",
+      "judges": "judges"
+    },
+    "overview": {
+      "label": "DASHBOARD",
+      "greeting": "HELLO, {name}",
+      "ledeConfirmed": "You're in {track}. Code freeze is at 20:00 and demos start at 20:15.",
+      "ledePending": "You haven't confirmed your track. Twelve hours, one day: the track sets the criteria the judges use on you.",
+      "statFreeze": "TO CODE FREEZE",
+      "statProgress": "OF THE 12 HOURS",
+      "statChecklist": "CHECKLIST",
+      "statCredits": "CREDITS REDEEMED",
+      "creditsHint": "of ${total} available",
+      "nextLabel": "WHAT'S NEXT",
+      "nextTitle": "UPCOMING BLOCKS",
+      "liveLabel": "IN PROGRESS",
+      "nothingLeft": "Nothing left ahead. Good luck at the demos.",
+      "teamLabel": "YOUR TEAM",
+      "noTeamTitle": "NO TEAM",
+      "noTeamBody": "Teams are 3 to 5 people and close at the kickoff. Ask on WhatsApp to get matched.",
+      "you": "(you)",
+      "table": "TABLE",
+      "repo": "REPO",
+      "noRepo": "not linked",
+      "size": "SIZE",
+      "sizeValue": "{count} of 3–5 people",
+      "submissionLabel": "YOUR PROJECT",
+      "submissionValid": "VALID SUBMISSION",
+      "submissionInvalid": "INCOMPLETE SUBMISSION",
+      "checkRepo": "Repository linked",
+      "checkDemo": "Live demo link",
+      "checkTrack": "Track confirmed",
+      "checkPitch": "One-line pitch",
+      "submissionNote": "The validator checks your repo every hour. A failure at 20:00 isn't a warning: it's missing the demos.",
+      "trackLabel": "YOUR TRACK",
+      "trackNone": "NOT CHOSEN",
+      "trackChoose": "Pick a track",
+      "trackView": "View",
+      "trackDraft": "draft",
+      "trackConfirmed": "confirmed",
+      "trackTeams": "TEAMS",
+      "trackTeamsValue": "{count} in this track",
+      "mentorLabel": "YOUR MENTORING",
+      "mentorNone": "NO TABLE",
+      "mentorEmpty": "Mentoring runs 11:00 to 13:00. Pick a table before it fills up.",
+      "mentorSlots": "SLOTS",
+      "checklistLabel": "CHECKLIST",
+      "checklistTitle": "{done} OF {total}",
+      "hubsLabel": "FIVE HUBS",
+      "hubsTitle": "ON THE SAME CLOCK",
+      "yourHub": "YOUR HUB",
+      "logisticsLabel": "LOGISTICS",
+      "logisticsTitle": "HUB DETAILS",
+      "faqCta": "Event FAQ"
+    },
+    "checklist": {
+      "track": "Track confirmed",
+      "mentorTable": "Mentoring table assigned",
+      "booking": "25-min slot booked",
+      "repo": "Repository linked",
+      "demo": "Live demo link",
+      "credits": "Partner credits redeemed",
+      "goTracks": "Pick",
+      "goMentors": "Book",
+      "goCredits": "Redeem",
+      "goOverview": "View",
+      "goBadge": "Badge",
+      "badge": "Badge generated",
+      "team": "Team formed",
+      "goTeam": "Form"
+    },
+    "agenda": {
+      "label": "SCHEDULE · 12 HOURS",
+      "headline": "ONE DAY. TWELVE HOURS.",
+      "lede": "Saturday 29 August 2026, 09:00 to 21:00. All five hubs run on the same clock: code freeze and demos are simultaneous.",
+      "saved": "{count} in your schedule",
+      "past": "{done}/{total} past",
+      "filter": "FILTER",
+      "all": "all",
+      "viewList": "list",
+      "viewClock": "clock",
+      "onlyMine": "only mine",
+      "now": "now",
+      "mandatory": "required",
+      "save": "save",
+      "unsave": "saved",
+      "empty": "Nothing with those filters. Go back to «all».",
+      "footer": "{shown} of {total} blocks · America/Bogota (GMT-5) · check-in 08:30 · code freeze 20:00 · demos 20:15",
+      "clockLabel": "CLOCK"
+    },
+    "tracks": {
+      "label": "TRACKS",
+      "headline": "3 TRACKS. PICK YOUR WEAPON.",
+      "choose": "Pick",
+      "chosen": "Picked",
+      "confirmedBadge": "Your track",
+      "teams": "{count} teams",
+      "confirm": "Confirm",
+      "clear": "Clear",
+      "release": "Release",
+      "barDraft": "NOT CONFIRMED",
+      "barConfirmed": "TRACK CONFIRMED",
+      "barDraftHint": "Confirming registers it for the whole team.",
+      "barConfirmedHint": "You present to this track's judges.",
+      "windowClosedLabel": "WINDOW CLOSED",
+      "windowClosedBody": "The kickoff is over. You can still pick, but tell us on WhatsApp so staff can record the change.",
+      "closesAt": "closes {time}",
+      "prizesLabel": "PRIZES",
+      "perksLabel": "FOR EVERYONE WHO GETS IN",
+      "perksTitle": "INCLUDED"
+    },
+    "mentors": {
+      "label": "MENTORING",
+      "headline": "MENTORING WITH CRAFTER STATION",
+      "lede": "Four tables from the organizing communities, 11:00 to 13:00. Pick the table that follows your team and book 25-minute slots.",
+      "freeSlots": "{count} slots free",
+      "tables": "{count} tables",
+      "myTable": "your table",
+      "chooseTable": "Pick table",
+      "releaseTable": "Release table",
+      "tableFull": "Table full",
+      "teamsAssigned": "{assigned}/{capacity} teams covered",
+      "slotsLabel": "25-MIN SLOTS · 11:00–13:00",
+      "noSlots": "no slots",
+      "freeCount": "{count} free",
+      "topicLabel": "WHAT DO YOU WANT TO TALK ABOUT?",
+      "topicPlaceholder": "Be specific: «the cuts look right but we can't measure whether the clip lands».",
+      "topicHint": "Write at least one sentence. The table reads it before sitting with you.",
+      "chars": "{count} characters",
+      "book": "Book",
+      "cancel": "Cancel",
+      "release": "Release",
+      "myBookingsLabel": "MY MENTORING",
+      "myBookingsTitle": "{count} SLOTS",
+      "noBookingsTitle": "NO SLOTS",
+      "noBookings": "Mentoring runs 11:00 to 13:00. On a twelve-hour clock, a well-used half hour changes the demo.",
+      "roles": {
+        "product": "Product and distribution table",
+        "models": "Models and agents table",
+        "engineering": "Engineering and infra table",
+        "interface": "Interface and experience table"
+      }
+    },
+    "credits": {
+      "label": "PARTNER CREDITS",
+      "headline": "CREDITS THAT ARE ALREADY YOURS",
+      "lede": "Everyone who gets in takes these credits, win or not. The code is issued in your name when you redeem and can't be transferred.",
+      "claimed": "${claimed} of ${total}",
+      "redeemedCount": "{done}/{total} redeemed",
+      "statTotal": "TOTAL VALUE",
+      "statClaimed": "REDEEMED",
+      "statPending": "UNCLAIMED",
+      "statPerPerson": "PER PARTICIPANT",
+      "partnersHint": "{count} partners",
+      "pctHint": "{pct}% of total",
+      "expiryHint": "expire at close",
+      "perPersonHint": "one per person, not per team",
+      "perParticipant": "per participant",
+      "perTeam": "per team",
+      "rulesLabel": "BEFORE YOU REDEEM",
+      "rulesTitle": "FOUR RULES",
+      "rule1": "Credits marked per participant are redeemed with each member's own account, not once per team.",
+      "rule2": "Revealing the code counts as redeeming: the partner sees it in their panel.",
+      "rule3": "Use an account with some history. Brand-new accounts sometimes trip the partner's antifraud.",
+      "rule4": "If a code fails, message us on WhatsApp with the code and the exact error.",
+      "howLabel": "HOW TO REDEEM",
+      "codeHidden": "CODE HIDDEN",
+      "yourCode": "YOUR CODE",
+      "redeem": "Redeem credit",
+      "copy": "copy",
+      "copied": "copied",
+      "openPanel": "Open panel",
+      "expires": "expires when the event closes",
+      "sponsorCta": "Want to sponsor? → {email}",
+      "partners": {
+        "tavily": {
+          "perk": "1,000 search credits",
+          "about": "Web search for agents. Credits land on the account you sign up with.",
+          "steps": [
+            "Create the account with your registration email",
+            "Go to Billing → Redeem code",
+            "Paste the code and confirm"
+          ]
+        },
+        "exa": {
+          "perk": "50 USD in credits",
+          "about": "Semantic search to build on top of the web. Winners get an extra 500 USD.",
+          "steps": [
+            "Sign up on the dashboard",
+            "Settings → Credits → Redeem",
+            "Apply the code before code freeze"
+          ]
+        },
+        "vapi": {
+          "perk": "50 USD in credits per participant",
+          "about": "Real-time voice. Extra useful if you go OUT OF THE BOX with a voice interface.",
+          "steps": [
+            "Each member redeems with their own account",
+            "Dashboard → Billing → Promo code"
+          ]
+        },
+        "apify": {
+          "perk": "50 USD in credits per participant",
+          "about": "Scraping and web data automation, with ready-made actors.",
+          "steps": [
+            "Create the account",
+            "Billing → Redeem voucher",
+            "Credit lands instantly"
+          ]
+        },
+        "cursor": {
+          "perk": "20 USD in credits per participant",
+          "about": "The editor. Twenty dollars just about covers twelve hours if you don't let the agent run loose.",
+          "steps": [
+            "Settings → Billing → Redeem",
+            "One code per person, not per team"
+          ]
+        },
+        "elevenlabs": {
+          "perk": "Credits per participant",
+          "about": "Synthetic voice and dubbing. If your product talks, this is what it sounds like.",
+          "steps": [
+            "Create the account with your registration email",
+            "Subscription → Redeem code"
+          ]
+        },
+        "n8n": {
+          "perk": "One month of Cloud Pro per participant",
+          "about": "Visual automation. The top three also get a swag box for every team member.",
+          "steps": [
+            "Create the workspace on n8n Cloud",
+            "Admin → Plans → Apply coupon"
+          ]
+        },
+        "replit": {
+          "perk": "Core plan + 20 USD in credits",
+          "about": "Browser dev and deploy environment. Useful for having the live demo up before 20:00.",
+          "steps": [
+            "Account → Redeem code",
+            "The dev credit shows up separately from the plan"
+          ]
+        }
+      }
+    },
+    "support": {
+      "label": "SUPPORT",
+      "headline": "EVERYTHING ELSE HAPPENS HERE",
+      "lede": "The official channel is WhatsApp: your hub's staff, the four mentoring tables and any partner code that fails. With five hubs on the same clock, it's what keeps them in sync.",
+      "openWhatsapp": "Message on WhatsApp",
+      "responseLabel": "STAFF REPLIES",
+      "responseValue": "< 10 min",
+      "mentorsLabel": "MENTORS ONLINE",
+      "mentorsValue": "11:00 – 13:00",
+      "hubsLabel": "HUBS",
+      "hubsValue": "five, same clock",
+      "etiquetteLabel": "HOW TO ASK FOR HELP",
+      "etiquetteTitle": "FIVE RULES",
+      "rule1": "Paste the error as text, not a screenshot. Nobody can search inside an image.",
+      "rule2": "One complete message instead of five lines in a row.",
+      "rule3": "Say your hub and table number: staff is different in each city.",
+      "rule4": "For anything long, book a mentoring slot instead of typing.",
+      "rule5": "When you fix something, say so. It's the cheapest contribution you can make in twelve hours.",
+      "templateLabel": "TEMPLATE",
+      "templateTitle": "SUPPORT TEMPLATE",
+      "templateBody": "With these five fields you usually get an answer on the first try.",
+      "copyTemplate": "copy template",
+      "copied": "copied",
+      "template": "What I'm trying to do: …\nWhat I expected: …\nWhat happens instead: (exact error, pasted as text)\nWhat I already tried: …\nContext: hub {hub} · table {table} · {track}"
+    },
+    "errors": {
+      "unauthenticated": "Your session expired. Sign in again.",
+      "no-participant": "We couldn't find your accreditation.",
+      "no-team": "You need a team for this.",
+      "track-locked": "The track is already confirmed. Release it first.",
+      "unknown-track": "That track doesn't exist.",
+      "slot-taken": "Someone took that slot before you.",
+      "slot-missing": "That slot no longer exists.",
+      "time-clash": "You already have mentoring at that time.",
+      "topic-too-short": "Write at least one sentence about your question.",
+      "table-full": "That table already has all its teams.",
+      "unknown-partner": "That partner doesn't exist.",
+      "unknown-block": "That block isn't on the schedule."
+    },
+    "badge": {
+      "label": "BADGE · YOUR IDENTITY",
+      "headline": "YOUR OFFICIAL BADGE",
+      "lede": "You generate the badge in Badge Studio from your photo. Its QR leads to your public profile, which is what whoever scans it sees.",
+      "ready": "generated",
+      "generating": "generating",
+      "missing": "not generated",
+      "imageAlt": "Your The Next Craft badge",
+      "generatingBody": "Your badge is being generated. It takes a couple of minutes; reload this page to see it.",
+      "missingBody": "You don't have a badge yet. It's created in Badge Studio from a photo of you.",
+      "create": "Create my badge",
+      "replace": "Replace badge",
+      "note": "The badge is generated once and you can replace it. The QR is rewritten with each version, so always use the latest.",
+      "qrLabel": "WHERE YOUR QR LEADS",
+      "qrTitle": "YOUR PUBLIC PROFILE",
+      "qrBody": "The badge QR points to your participant profile. Whoever scans it sees your name, bio and links — no email, no document.",
+      "qrMissing": "You'll get a profile URL once you generate the badge.",
+      "number": "number",
+      "displayName": "display name",
+      "published": "profile",
+      "public": "public",
+      "private": "unpublished",
+      "identityLabel": "YOUR ACCREDITATION",
+      "identityTitle": "REGISTRATION DETAILS",
+      "fullName": "name",
+      "email": "email",
+      "hub": "hub",
+      "includedLabel": "INCLUDED WITH YOUR TICKET",
+      "includedTitle": "{count} MEALS INCLUDED",
+      "includedSwag": "Official event swag, when you arrive at your hub.",
+      "includedCommunity": "Access to the Crafter Station community."
+    },
+    "staff": {
+      "label": "STAFF · DOOR",
+      "headline": "HUB CHECK-IN",
+      "lede": "Search by name or email, mark arrival and hand out merch. Every mark records who made it.",
+      "denied": "This screen is staff only. Sign in with your organization email.",
+      "allHubs": "all",
+      "searchPlaceholder": "Name or email",
+      "search": "Search",
+      "empty": "Nobody matches that search.",
+      "withBadge": "has badge",
+      "noBadge": "no badge",
+      "markArrival": "Mark arrival",
+      "arrived": "Arrived",
+      "markMerch": "Hand merch",
+      "merchDone": "Merch ✓",
+      "statArrived": "ARRIVED",
+      "statMerch": "MERCH HANDED",
+      "statBadge": "WITH BADGE",
+      "statBadgeHint": "confirmed attendance",
+      "statPending": "NOT ARRIVED",
+      "footer": "{shown} of {total} shown"
+    },
+    "team": {
+      "label": "TEAM",
+      "headlineEmpty": "YOU DON'T HAVE A TEAM YET",
+      "ledeEmpty": "Teams are {min} to {max} people and form at the kickoff. Create one and read out the code, or join with someone else's.",
+      "ledeTeam": "Share the code so the others can join. Up to {max} people.",
+      "inCity": "{count} teams at your hub",
+      "size": "{count}/{max} people",
+      "createLabel": "CREATE TEAM",
+      "createTitle": "START ONE",
+      "createBody": "Name it and we'll give you a six-character code for the others to join with.",
+      "nameLabel": "TEAM NAME",
+      "namePlaceholder": "Terminal Velocity",
+      "createCta": "Create team",
+      "joinLabel": "JOIN ONE",
+      "joinTitle": "I HAVE A CODE",
+      "joinBody": "Ask whoever created the team for the code. Six characters, case-insensitive.",
+      "codeLabel": "CODE",
+      "joinCta": "Join team",
+      "shareLabel": "TEAM CODE",
+      "shareTitle": "FOR THEM TO JOIN",
+      "shareBody": "Read it out loud. Up to {max} people per team.",
+      "copy": "copy",
+      "copied": "copied",
+      "membersLabel": "MEMBERS",
+      "captain": "(captain)",
+      "hub": "hub",
+      "table": "table",
+      "shortLabel": "TEAM INCOMPLETE",
+      "shortBody": "The minimum is {min} people. You can carry on, but tell staff if you won't reach it.",
+      "detailsLabel": "YOUR PROJECT",
+      "detailsTitle": "WHAT THE JUDGES SEE",
+      "pitchLabel": "IN ONE LINE",
+      "pitchPlaceholder": "What it does and for whom. No adjectives.",
+      "repoLabel": "REPOSITORY",
+      "demoLabel": "LIVE DEMO",
+      "save": "Save",
+      "saved": "saved",
+      "unsaved": "unsaved",
+      "clean": "up to date",
+      "leave": "Leave team",
+      "leaveConfirm": "If you're the last one, the team is deleted and the code stops working.",
+      "leaveYes": "Yes, leave",
+      "cancel": "Cancel",
+      "errors": {
+        "unauthenticated": "Your session expired. Sign in again.",
+        "no-participant": "We couldn't find your accreditation.",
+        "already-in-team": "You're already on a team. Leave it first.",
+        "not-in-team": "You're not on a team.",
+        "name-too-short": "The name needs at least two characters.",
+        "code-not-found": "That code doesn't exist. Check it with whoever created the team.",
+        "team-full": "That team is already full.",
+        "invalid-url": "Links must start with https://"
+      }
+    },
+    "access": {
+      "signIn": "Sign in",
+      "dashboard": "My panel"
+    }
   },
   "roleGallery": {
     "title": "Mentor and judge images",
