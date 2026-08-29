@@ -1449,6 +1449,15 @@
   height: 100svh;
 }
 
+/* Pantalla completa (tecla F o boton FULL). El UA pinta el fondo del elemento
+   en blanco por defecto, y 100svh no aplica dentro del modo fullscreen. */
+.deck-pager:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: var(--void);
+}
+
 /*
   Variante "plain" (opt-in por deck vía `"style": "plain"` en deck.json).
   Una sola familia en todo el deck: redefinir --font-pixel dentro del subárbol
@@ -1754,6 +1763,12 @@
 
 .deck-topbar > * {
   pointer-events: auto;
+}
+
+.deck-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .deck-deck-title {

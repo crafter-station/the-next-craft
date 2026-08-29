@@ -49,6 +49,7 @@ export function DeckPager({
   const [activeIndex, setActiveIndex] = useState(0);
   const [indexOpen, setIndexOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStart = useRef<{ x: number; y: number; t: number } | null>(null);
   const wheelDelta = useRef(0);
@@ -69,8 +70,30 @@ export function DeckPager({
     setActiveIndex((current) => clampSlideIndex(current + 1, slides.length));
   }, [slides.length]);
 
+  const toggleFullscreen = useCallback(() => {
+    const element = containerRef.current;
+    if (!element) return;
+
+    if (document.fullscreenElement) {
+      void document.exitFullscreen().catch(() => {});
+      return;
+    }
+
+    void element.requestFullscreen().catch(() => {});
+  }, []);
+
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    function onFullscreenChange() {
+      setFullscreen(document.fullscreenElement === containerRef.current);
+    }
+
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () =>
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
   }, []);
 
   useEffect(() => {
@@ -105,6 +128,11 @@ export function DeckPager({
           goTo(slides.length - 1);
           event.preventDefault();
           break;
+        case "f":
+        case "F":
+          toggleFullscreen();
+          event.preventDefault();
+          break;
         case "g":
         case "G":
           setIndexOpen(true);
@@ -119,7 +147,7 @@ export function DeckPager({
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [goTo, next, prev, slides.length, indexOpen]);
+  }, [goTo, next, prev, slides.length, indexOpen, toggleFullscreen]);
 
   function onTouchStart(event: React.TouchEvent) {
     const t = event.touches[0];
@@ -178,6 +206,7 @@ export function DeckPager({
       className="deck-pager"
       data-mounted={mounted}
       data-index-open={indexOpen}
+      data-fullscreen={fullscreen}
       data-deck-style={deckStyle}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -195,15 +224,29 @@ export function DeckPager({
           <span className="deck-deck-title font-mono text-[11px] tracking-[0.14em] uppercase text-[var(--text-dim)] truncate">
             {title}
           </span>
-          <button
-            type="button"
-            onClick={() => setIndexOpen((v) => !v)}
-            aria-expanded={indexOpen}
-            aria-controls="deck-index"
-            className="keycap keycap-sm font-mono text-[10px] font-semibold tracking-[0.14em] uppercase px-3 py-1.5"
-          >
-            INDEX
-          </button>
+          <div className="deck-topbar-actions">
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              aria-pressed={fullscreen}
+              aria-label={
+                fullscreen ? "Salir de pantalla completa" : "Pantalla completa"
+              }
+              title="Pantalla completa (F)"
+              className="keycap keycap-sm font-mono text-[10px] font-semibold tracking-[0.14em] uppercase px-3 py-1.5"
+            >
+              {fullscreen ? "EXIT" : "FULL"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIndexOpen((v) => !v)}
+              aria-expanded={indexOpen}
+              aria-controls="deck-index"
+              className="keycap keycap-sm font-mono text-[10px] font-semibold tracking-[0.14em] uppercase px-3 py-1.5"
+            >
+              INDEX
+            </button>
+          </div>
         </div>
       </header>
 
