@@ -91,6 +91,70 @@ Entry points:
 
 Registration schema: `scripts/schema.sql`. Better Auth and badge generator schema: `src/lib/db/schema.ts`, migrated through checked-in Drizzle migrations with `bun run db:generate` and `bun run db:migrate` (never `push`).
 
+## Calificación del jurado
+
+Dos capas, y la distinción es de cálculo, no de nombre:
+
+- **Fase 1 (`sede`)** — los **mentores** de cada sede califican, en persona, a
+  los equipos de esa sede. De ahí salen los finalistas.
+- **Fase 2 (`final`)** — los **jurados** califican en línea a los finalistas de
+  las cinco sedes a la vez.
+
+Los puntajes de dos sedes **no se comparan entre sí**: no comparten mentores ni
+equipos, así que no hay nada que los ponga en la misma escala. Por eso la fase 2
+es un panel único sobre todos los finalistas —al ver todos a todos, la
+comparación vuelve a ser válida— y `panelResults()` se llama una vez por panel,
+nunca sobre las cinco sedes juntas.
+
+Rúbrica cerrada y publicada: 5 criterios de 0 a 5 **en pasos de medio punto**,
+con pesos 30/25/20/15/10, iguales en las dos fases y los tres tracks. El medio
+punto viene de la hoja de evaluación oficial (`decimal between 0 and 5`, formato
+`0.0`), no de un capricho: un jurado que venga de la hoja tiene que poder
+transcribir su 4.5. Por eso las columnas de nota son `real` y no `integer`. **Se pondera sobre la nota cruda y se
+normaliza el compuesto** — normalizar criterio por criterio dejaría cada uno con
+varianza 1 y el peso efectivo pasaría a ser 1/σ, borrando los pesos publicados.
+
+Code map:
+
+- `src/lib/judging/rubric.ts` — criterios, pesos, desempate. Fuente de verdad.
+- `src/lib/judging/normalize.ts` — la matemática, pura y sin red: total
+  ponderado → μ/σ por panelista con la desviación encogida hacia el panel → z →
+  promedio. Además detecta si el panel es completo y si el reparto está
+  **conectado** (union-find sobre equipos que comparten panelista); un panel
+  desconectado no se puede publicar.
+- `src/lib/judging/state.ts` — sesión del panelista, alcance por rol, resultados.
+- `src/lib/judging/panelists.server.ts` — lista blanca. Vive aparte porque
+  `lib/auth.ts` la consume y `state.ts` importa `auth`: juntarlas cierra el ciclo.
+- `src/lib/judging/actions.ts` — server actions.
+- `src/app/[locale]/judge/**` — el área del panelista, con su propia puerta.
+  Fuera de `/dashboard` a propósito: aquel shell es del hacker y exige ser
+  participante acreditado en Luma, y un mentor no lo es.
+- `src/lib/judging/projects.ts` — la lista de lo que se califica, escribible por
+  el staff. Normalmente los equipos salen de `/dashboard/team`, pero el sistema
+  se usa como herramienta de consignación: el staff tiene que poder escribir la
+  fila del equipo que se formó en la sala y nunca abrió la app.
+- `src/app/[locale]/admin/judging` — el tablero del comité: proyectos, ranking
+  normalizado, banderas de cobertura y el interruptor de finalista.
+
+Alta de panelistas: `dashboard_panelists` es lista blanca de correos que
+mantiene el staff, y es además la tercera puerta del OTP (`lib/auth.ts`) — sin
+ella un mentor no puede ni pedir el código.
+
+El ranking del tablero es del panel (la sede), pero además muestra la posición
+**dentro de cada track**, que es donde se reparten los premios — igual que la
+columna «Rank track» de la hoja. Y junto al índice normalizado enseña el
+`/100` (crudo × 20), que es la escala que el jurado ya conoce de la hoja.
+
+Un proyecto sin sede o sin track **no lo ve ningún panelista**: la sede decide
+qué mentores lo alcanzan y el track en qué compite. El tablero los marca en
+rojo en vez de esconderlos, porque el momento de descubrir el hueco es antes de
+que el mentor no encuentre al equipo.
+
+Nada de esto depende de un sistema externo. Los equipos entregan en Vibe Apps,
+pero traer esos datos por API se descartó (hace falta un key de admin de su
+grupo que no tenemos): el enlace de la demo se escribe a mano o lo pone el
+capitán en `/dashboard/team`.
+
 ## Environment variables
 
 No `.env` file is committed. Required variables include:
