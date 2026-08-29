@@ -37,9 +37,10 @@ type VapiCountdownProps = {
 
 type EventCountdownProps = {
   target: string;
-  eyebrow: string;
+  eyebrow?: string;
   locale: string;
   eventName: string;
+  heading?: string;
 };
 
 export function EventCountdown({
@@ -47,6 +48,7 @@ export function EventCountdown({
   eyebrow,
   locale,
   eventName,
+  heading,
 }: EventCountdownProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
   const targetTime = new Date(target).getTime();
@@ -86,12 +88,9 @@ export function EventCountdown({
 
   return (
     <div className="flex flex-col items-start">
-      <p className="section-label">{eyebrow}</p>
-      <p
-        className="pixel-heading mt-4 text-[clamp(2rem,5vw,5.5rem)]"
-        role="status"
-      >
-        {isLive ? copy.live : copy.heading}
+      {eyebrow ? <p className="section-label">{eyebrow}</p> : null}
+      <p className="pixel-heading text-[clamp(2rem,5vw,5.5rem)]" role="status">
+        {isLive ? copy.live : (heading ?? copy.heading)}
       </p>
 
       {isLive ? null : (

@@ -108,6 +108,11 @@ export async function POST(request: Request) {
       { error: "Registration is not approved" },
       { status: 403 },
     );
+  if (guest.city === "lima")
+    return Response.json(
+      { error: "Badge onboarding is closed in Lima" },
+      { status: 410 },
+    );
 
   const now = new Date();
   const [participant] = await db
