@@ -644,10 +644,13 @@
         },
         "replit": {
           "perk": "Core plan + 20 USD in credits",
-          "about": "Browser dev and deploy environment. Useful for having the live demo up before 20:00.",
+          "about": "Browser dev and deploy environment. The coupon applies to a new monthly Core subscription, which may renew at the regular price.",
           "steps": [
-            "Account → Redeem code",
-            "The dev credit shows up separately from the plan"
+            "Create an account or sign in to Replit",
+            "Open checkout and click Join Replit Core",
+            "Choose Core Monthly, not the annual plan",
+            "Open Add promotion code, enter the code, and click Apply",
+            "Verify the discount, add a payment method, and confirm"
           ]
         }
       },
