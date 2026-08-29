@@ -1,0 +1,27 @@
+---
+title: Finalistas
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-9">
+  <div className="flex flex-col gap-4">
+    <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">6 finalistas</h1>
+    <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Al cierre del día, los mentores de cada sede eligen a su campeón. Lima elige dos, por ser la sede más grande. Los seis suben ante el mismo jurado y de ahí salen los ganadores.</p>
+  </div>
+
+  <div className="grid gap-3 md:grid-cols-5">
+    {[
+      ['Lima', '2'],
+      ['Bogotá', '1'],
+      ['Arequipa', '1'],
+      ['Guatemala', '1'],
+      ['El Salvador', '1'],
+    ].map(([city, count]) => (
+      <div key={city} className={city === 'Bogotá' ? 'flex flex-col items-center justify-center gap-2 bg-[var(--bone)] p-5 text-center' : 'flex flex-col items-center justify-center gap-2 bg-[var(--screen-dim)] p-5 text-center'}>
+        <span className={city === 'Bogotá' ? 'font-mono text-[clamp(2rem,4vw,3rem)] font-semibold leading-none text-[var(--void)]' : 'font-mono text-[clamp(2rem,4vw,3rem)] font-semibold leading-none text-[var(--bright)]'}>{count}</span>
+        <span className={city === 'Bogotá' ? 'font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[var(--void)]' : 'font-mono text-xs uppercase tracking-[0.12em] text-[var(--text-dim)]'}>{city}</span>
+      </div>
+    ))}
+  </div>
+
+  <p className="font-mono text-sm font-semibold uppercase tracking-[0.14em] text-[var(--bright)] md:text-base">De esta sala sale 1 equipo a la final.</p>
+</div>
