@@ -6,6 +6,7 @@ import {
   jsonb,
   pgEnum,
   pgTable,
+  real,
   text,
   timestamp,
   uniqueIndex,
@@ -258,6 +259,13 @@ export const dashboardTeams = pgTable(
     track: dashboardTrack("track"),
     trackConfirmedAt: timestamp("track_confirmed_at", { withTimezone: true }),
     /**
+     * Pasó la fase de sede. Lo marca el staff desde el tablero de calificación,
+     * mirando el ranking normalizado: el corte es una decisión del comité, no
+     * un umbral automático, porque el número de finalistas por sede depende de
+     * cuántos equipos hubo allí.
+     */
+    finalistAt: timestamp("finalist_at", { withTimezone: true }),
+    /**
      * Repo generado desde el template de la organización: `org/nombre`. Es
      * distinto de `repoUrl`, que el equipo puede sobreescribir a mano si al
      * final trabaja en otro lado.
@@ -454,6 +462,120 @@ export const dashboardCheckins = pgTable("dashboard_checkins", {
     .defaultNow(),
 });
 
+/**
+ * Las dos capas de evaluación. No son dos nombres para lo mismo:
+ *
+ * - `mentor` califica en su sede, en persona, durante la fase 1. Su alcance son
+ *   los equipos de esa sede y de ahí salen los finalistas.
+ * - `judge` califica en línea, en la fase 2, a los finalistas de las cinco
+ *   sedes a la vez.
+ *
+ * La distinción importa para el cálculo: dentro de una sede los puntajes se
+ * normalizan entre mentores, pero los de sedes distintas NO se comparan entre
+ * sí —no comparten ni mentores ni equipos, así que no hay nada que los ponga en
+ * la misma escala—. Por eso la fase 2 es un panel único sobre todos los
+ * finalistas: al ver todos a todos, la comparación vuelve a ser válida.
+ */
+export const dashboardPanelRole = pgEnum("dashboard_panel_role", [
+  "mentor",
+  "judge",
+]);
+
+/**
+ * Quién puede calificar. Es una lista blanca de correos que mantiene el staff:
+ * mentores y jurados no salen de Luma (no son participantes) ni del dominio de
+ * la organización, así que necesitan su propia puerta para recibir el OTP.
+ *
+ * `userId` se rellena solo, la primera vez que la persona inicia sesión.
+ */
+export const dashboardPanelists = pgTable(
+  "dashboard_panelists",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    email: text("email").notNull(),
+    fullName: text("full_name").notNull(),
+    role: dashboardPanelRole("role").notNull(),
+    /** Sede que le toca al mentor. Los jurados de fase 2 no llevan sede. */
+    city: text("city").$type<CityKey>(),
+    userId: text("user_id").references(() => user.id, {
+      onDelete: "set null",
+    }),
+    invitedByEmail: text("invited_by_email"),
+    /** Baja sin borrar: los puntajes que ya emitió siguen siendo válidos. */
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("dashboard_panelists_email_idx").on(table.email),
+    index("dashboard_panelists_role_city_idx").on(table.role, table.city),
+  ],
+);
+
+export const dashboardScorePhase = pgEnum("dashboard_score_phase", [
+  "sede",
+  "final",
+]);
+
+/**
+ * Un puntaje = un panelista, un equipo, una fase. Los cinco criterios van en
+ * columnas propias y no en un jsonb: la rúbrica está cerrada y publicada, y
+ * tenerlos como columnas deja que el promedio y la desviación por panelista se
+ * calculen en SQL.
+ *
+ * Las notas son enteros 0–5 tal cual los pone el panelista. Los pesos
+ * (30/25/20/15/10) se aplican al leer, nunca al guardar: si algo se recalcula
+ * después, se recalcula sobre el dato crudo.
+ *
+ * `submittedAt` nulo = borrador. Un borrador no entra en ningún cálculo, porque
+ * una fila a medias sesga la media del panelista.
+ */
+export const dashboardScores = pgTable(
+  "dashboard_scores",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    panelistId: uuid("panelist_id")
+      .notNull()
+      .references(() => dashboardPanelists.id, { onDelete: "cascade" }),
+    teamId: uuid("team_id")
+      .notNull()
+      .references(() => dashboardTeams.id, { onDelete: "cascade" }),
+    phase: dashboardScorePhase("phase").notNull(),
+    /*
+      0–5 en pasos de media. `real` y no `integer` porque la hoja de evaluación
+      oficial valida `decimal between 0 and 5` y su fila de ejemplo usa 4.5: un
+      jurado que venga de la hoja tiene que poder transcribir lo que puso.
+
+      Los medios puntos además matan casi todos los empates, que con cinco
+      criterios enteros salían a cada rato. Medio punto es exactamente
+      representable en binario, así que `real` no introduce error.
+    */
+    demo: real("demo"),
+    usage: real("usage"),
+    craft: real("craft"),
+    ambition: real("ambition"),
+    pitch: real("pitch"),
+    /** Una frase de lo que se vio, por criterio. Es el feedback del equipo. */
+    evidence: jsonb("evidence").$type<Record<string, string>>(),
+    submittedAt: timestamp("submitted_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("dashboard_scores_panelist_team_phase_idx").on(
+      table.panelistId,
+      table.teamId,
+      table.phase,
+    ),
+    index("dashboard_scores_phase_team_idx").on(table.phase, table.teamId),
+  ],
+);
+
 export const schema = {
   user,
   session,
@@ -469,4 +591,6 @@ export const schema = {
   dashboardPartnerRedemptions,
   dashboardAgendaSaves,
   dashboardCheckins,
+  dashboardPanelists,
+  dashboardScores,
 };
