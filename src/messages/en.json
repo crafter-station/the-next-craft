@@ -623,6 +623,9 @@
       "copied": "copied",
       "openPanel": "Open panel",
       "openGuide": "Open guide",
+      "openDiscord": "Open Discord",
+      "externalRedemption": "EXTERNAL REDEMPTION",
+      "startRedemption": "Start redemption",
       "expires": "expires when the event closes",
       "sponsorCta": "Want to sponsor? → {email}",
       "partners": {
@@ -663,10 +666,12 @@
         },
         "elevenlabs": {
           "perk": "Credits per participant",
-          "about": "Synthetic voice and dubbing. If your product talks, this is what it sounds like.",
+          "about": "Synthetic voice and dubbing. ElevenLabs issues each unique coupon through its Discord bot using your Luma registration email.",
           "steps": [
-            "Create the account with your registration email",
-            "Subscription → Redeem code"
+            "Join the ElevenLabs Discord server",
+            "Open the #🎟️│coupon-codes channel and click Start Redemption",
+            "Select The Next Craft and enter the email used for Luma registration",
+            "The bot will send your unique coupon code"
           ]
         },
         "n8n": {

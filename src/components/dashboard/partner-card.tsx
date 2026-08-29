@@ -100,7 +100,19 @@ export function PartnerCard({
       </div>
 
       <div className="border-t border-[var(--line)] px-4 py-3.5">
-        {!activeCode && !partner.assignOnDemand ? (
+        {partner.externalRedemption && !activeCode ? (
+          <>
+            <Basic n={79}>{t("credits.externalRedemption")}</Basic>
+            <a
+              href={partner.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`${keyClass} mt-2.5 block w-full text-center`}
+            >
+              {t("credits.startRedemption")} →
+            </a>
+          </>
+        ) : !activeCode && !partner.assignOnDemand ? (
           <>
             <Basic n={79}>{t("credits.codePendingLabel")}</Basic>
             <p className="mt-2.5 font-mono text-[12px] leading-relaxed text-[var(--text-dim)]">
@@ -175,7 +187,10 @@ export function PartnerCard({
             rel="noreferrer"
             className={keyGhostClass}
           >
-            {t("credits.openPanel")} →
+            {partner.externalRedemption
+              ? t("credits.openDiscord")
+              : t("credits.openPanel")}{" "}
+            {"→"}
           </a>
         </div>
       </div>

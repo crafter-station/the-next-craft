@@ -148,6 +148,8 @@ export type Partner = {
   guideUrl?: string;
   /** El código se reserva del pool al pulsar canjear. */
   assignOnDemand?: boolean;
+  /** El partner entrega el código fuera del dashboard. */
+  externalRedemption?: boolean;
   /** Valor aproximado en USD, para el contador. */
   valueUsd: number;
   /** El crédito es por persona, no por equipo. */
@@ -193,10 +195,11 @@ export const PARTNERS: Partner[] = [
   {
     key: "elevenlabs",
     name: "ElevenLabs",
-    url: "https://elevenlabs.io",
+    url: "https://discord.com/invite/VnBvbbcdEC",
     valueUsd: 22,
     perParticipant: true,
-    steps: 2,
+    externalRedemption: true,
+    steps: 4,
   },
   {
     key: "n8n",
