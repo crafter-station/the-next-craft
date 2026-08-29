@@ -5,8 +5,6 @@ import { parseParticipantNumber } from "@/lib/badge/profile";
 import { db } from "@/lib/db";
 import { badgeAttempts, participantProfiles } from "@/lib/db/schema";
 
-export const dynamic = "force-dynamic";
-
 const THUMBNAIL_WIDTHS = new Set([360, 540, 720]);
 
 function parseWidth(value: string | null) {

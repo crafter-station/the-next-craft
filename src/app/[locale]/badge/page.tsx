@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { setRequestLocale } from "next-intl/server";
 
 import { auth } from "@/lib/auth";
+import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { withBadgeRealtimeAccess } from "@/lib/badge/realtime";
 import { getBadgeStudioState } from "@/lib/badge/state";
 
@@ -23,9 +24,12 @@ export default async function BadgePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const session = await auth.api.getSession({ headers: await headers() });
-  const initialState = session
-    ? await withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id))
-    : null;
+  const [initialState, guest] = session
+    ? await Promise.all([
+        withBadgeRealtimeAccess(await getBadgeStudioState(session.user.id)),
+        lookupApprovedGuest(session.user.email),
+      ])
+    : [null, null];
   const studioKey = session
     ? `${session.user.id}:${initialState?.stage}:${initialState && "profile" in initialState ? initialState.profile.updatedAt : ""}`
     : "anonymous";
@@ -46,6 +50,7 @@ export default async function BadgePage({
           locale={locale === "en" ? "en" : "es"}
           initialSession={session}
           initialState={initialState}
+          onboardingClosed={guest?.city === "lima"}
         />
       </QueryProvider>
     </main>

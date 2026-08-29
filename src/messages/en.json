@@ -19,7 +19,9 @@
       "schedule": "Schedule",
       "prizes": "Prizes",
       "gallery": "Badges",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "bingo": "Bingo",
+      "game": "Game"
     },
     "cta": "Apply"
   },
@@ -882,5 +884,20 @@
       "signIn": "Sign in",
       "dashboard": "My panel"
     }
+  },
+  "roleGallery": {
+    "title": "Mentor and judge images",
+    "description": "Gallery of official assets generated for The Next Craft mentors and judges.",
+    "navAria": "Mentor and judge image navigation",
+    "backHome": "← Home",
+    "label": "ROLE ASSETS",
+    "headline": "MENTORS + JUDGES",
+    "intro": "Review the official LinkedIn assets and download the full-resolution PNG files.",
+    "mentors": "Mentors",
+    "judges": "Judges",
+    "count": "{count} IMAGES",
+    "imageAlt": "Official asset for {name}, {role}",
+    "download": "Download",
+    "downloadFor": "Download image for {name}"
   }
 }

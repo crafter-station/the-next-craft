@@ -1,0 +1,21 @@
+---
+title: Premios
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-10">
+  <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">Premios</h1>
+
+  <div className="grid gap-4 md:grid-cols-3">
+    {[
+      ['Primer lugar', '$1,000 USD', 'Efectivo + créditos de partners'],
+      ['Segundo lugar', '$500 USD', 'Efectivo + créditos de partners'],
+      ['Tercer lugar', 'Créditos', 'Premios de nuestros partners'],
+    ].map(([place, amount, detail]) => (
+      <div key={place} className="flex min-h-56 flex-col items-center justify-center bg-[var(--screen-dim)] p-6 text-center">
+        <div className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">{place}</div>
+        <div className="mt-5 font-mono text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-none tracking-[-0.06em] text-[var(--text)]">{amount}</div>
+        <div className="mt-4 font-mono text-sm text-[var(--text-dim)]">{detail}</div>
+      </div>
+    ))}
+  </div>
+</div>
