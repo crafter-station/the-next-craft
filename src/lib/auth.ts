@@ -7,7 +7,6 @@ import { Resend } from "resend";
 import { lookupApprovedGuest } from "@/lib/badge/luma";
 import { db } from "@/lib/db";
 import { schema } from "@/lib/db/schema";
-import { isPanelistEmail } from "@/lib/judging/panelists.server";
 import { isStaffEmail } from "@/lib/staff/domains.server";
 
 /** Sin credenciales no se registra el proveedor: en local nadie las tiene. */
@@ -65,16 +64,7 @@ export const auth = betterAuth({
             error,
           );
         }
-        /*
-          Tres puertas, no una: invitado aprobado en Luma (el hacker), correo
-          del dominio de la organización (el staff), o lista blanca de panel
-          (mentores y jurados). Los panelistas no son ninguna de las dos
-          primeras cosas —no se registraron al evento y no llevan nuestro
-          correo—, así que sin esta tercera comprobación no podrían ni pedir el
-          código para entrar a calificar.
-        */
-        const panelist = guest ? false : await isPanelistEmail(email);
-        if (!guest && !isStaffEmail(email) && !panelist) return;
+        if (!guest && !isStaffEmail(email)) return;
 
         const resend = new Resend(process.env.RESEND_API_KEY);
         const { error } = await resend.emails.send({
