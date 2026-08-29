@@ -18,6 +18,7 @@
       "tracks": "Tracks",
       "schedule": "Schedule",
       "prizes": "Prizes",
+      "rubric": "Rubric",
       "gallery": "Badges",
       "faq": "FAQ",
       "bingo": "Bingo",
@@ -59,6 +60,7 @@
     "tracks": "TRACKS",
     "schedule": "SCHEDULE",
     "prizes": "PRIZES",
+    "rubric": "RUBRIC",
     "sponsors": "SPONSORS",
     "faq": "FAQ"
   },
@@ -308,7 +310,39 @@
         ]
       }
     ],
-    "note": "Jury evaluates with live demo + pitch. We'll publish the rubric soon."
+    "note": "Jury evaluates with live demo + pitch, following the rubric below."
+  },
+  "rubric": {
+    "label": "RUBRIC",
+    "intro": "One rubric for both stages and all three tracks. Each criterion is scored 0 to 5; the weights don't change by track or by city.",
+    "criteriaAria": "Judging criteria and their weight",
+    "items": [
+      {
+        "weight": "30%",
+        "name": "CLOSED DEMO",
+        "desc": "The flow runs end to end and finishes. No half-finished paths."
+      },
+      {
+        "weight": "25%",
+        "name": "VALIDATED USE",
+        "desc": "A specific user, a real problem, and data collected today to back it."
+      },
+      {
+        "weight": "20%",
+        "name": "TECHNICAL CRAFT",
+        "desc": "How well built what they showed is — not how big the challenge was."
+      },
+      {
+        "weight": "15%",
+        "name": "AMBITION",
+        "desc": "How they took on the complexity: what they took on and how they cut it to fit 12 hours."
+      },
+      {
+        "weight": "10%",
+        "name": "CLEAR PITCH",
+        "desc": "What it solves, which track it competes in, and within the agreed time. Not a minute more."
+      }
+    ]
   },
   "sponsors": {
     "label": "ORGANIZERS",
@@ -357,7 +391,7 @@
       {
         "id": "Q08",
         "question": "How does the jury evaluate?",
-        "answer": "Live demo + pitch. We'll publish the rubric soon."
+        "answer": "Live demo + pitch, with the rubric published on this same page: closed demo (30%), validated use (25%), technical craft (20%), ambition (15%) and clear pitch (10%)."
       }
     ]
   },

@@ -18,6 +18,7 @@
       "tracks": "Tracks",
       "schedule": "Agenda",
       "prizes": "Premios",
+      "rubric": "Rúbrica",
       "gallery": "Badges",
       "faq": "FAQ",
       "bingo": "Bingo",
@@ -59,6 +60,7 @@
     "tracks": "TRACKS",
     "schedule": "AGENDA",
     "prizes": "PREMIOS",
+    "rubric": "RÚBRICA",
     "sponsors": "SPONSORS",
     "faq": "FAQ"
   },
@@ -308,7 +310,39 @@
         ]
       }
     ],
-    "note": "El jurado evalúa con demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
+    "note": "El jurado evalúa con demo en vivo + pitch, según la rúbrica de abajo."
+  },
+  "rubric": {
+    "label": "RÚBRICA",
+    "intro": "Una sola rúbrica para las dos fases y para los tres tracks. Cada criterio se puntúa de 0 a 5; los pesos no cambian por track ni por sede.",
+    "criteriaAria": "Criterios de evaluación y su peso",
+    "items": [
+      {
+        "weight": "30%",
+        "name": "DEMO CERRADA",
+        "desc": "El flujo se recorre entero y termina. Nada de caminos a medias."
+      },
+      {
+        "weight": "25%",
+        "name": "USO VALIDADO",
+        "desc": "Usuario concreto, problema real y data recogida hoy que lo demuestre."
+      },
+      {
+        "weight": "20%",
+        "name": "CRAFT TÉCNICO",
+        "desc": "Qué tan bien resuelto está lo que enseñaron, no qué tan grande era el reto."
+      },
+      {
+        "weight": "15%",
+        "name": "AMBICIÓN",
+        "desc": "Cómo abordaron la complejidad: qué se echaron encima y cómo lo partieron para que entrara en 12 horas."
+      },
+      {
+        "weight": "10%",
+        "name": "PITCH CLARO",
+        "desc": "Qué resuelve, en qué track compite, y dentro del tiempo acordado. Ni un minuto más."
+      }
+    ]
   },
   "sponsors": {
     "label": "ORGANIZADORES",
@@ -357,7 +391,7 @@
       {
         "id": "Q08",
         "question": "¿Cómo evalúa el jurado?",
-        "answer": "Demo en vivo + pitch. Dentro de poco estaremos subiendo la rúbrica."
+        "answer": "Demo en vivo + pitch, con la rúbrica publicada en esta misma página: demo cerrada (30%), uso validado (25%), craft técnico (20%), ambición (15%) y pitch claro (10%)."
       }
     ]
   },
