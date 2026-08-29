@@ -221,7 +221,6 @@
       "Official event swag",
       "Access to the Crafter Station community",
       "1,000 Tavily credits",
-      "50 USD in Exa partner credits",
       "50 USD in Vapi credits per participant",
       "50 USD in Apify credits per participant",
       "20 USD in Cursor credits per participant",
@@ -601,21 +600,12 @@
             "Open Add Promotion Code, paste the code, and confirm"
           ]
         },
-        "exa": {
-          "perk": "50 USD in credits",
-          "about": "Semantic search to build on top of the web. Winners get an extra 500 USD.",
-          "steps": [
-            "Sign up on the dashboard",
-            "Settings → Credits → Redeem",
-            "Apply the code before code freeze"
-          ]
-        },
         "vapi": {
           "perk": "50 USD in credits per participant",
           "about": "Real-time voice. Extra useful if you go OUT OF THE BOX with a voice interface.",
           "steps": [
-            "Each member redeems with their own account",
-            "Dashboard → Billing → Promo code"
+            "Each member opens the redemption link with their own account",
+            "Sign in or create an account and confirm the coupon is applied"
           ]
         },
         "apify": {

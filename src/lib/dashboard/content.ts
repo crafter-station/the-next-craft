@@ -164,17 +164,9 @@ export const PARTNERS: Partner[] = [
     steps: 3,
   },
   {
-    key: "exa",
-    name: "Exa",
-    url: "https://exa.ai",
-    valueUsd: 50,
-    perParticipant: false,
-    steps: 3,
-  },
-  {
     key: "vapi",
     name: "Vapi",
-    url: "https://vapi.ai",
+    url: "https://dashboard.vapi.ai/?coupon-code=thenextcraftperuvapi",
     valueUsd: 50,
     perParticipant: true,
     steps: 2,

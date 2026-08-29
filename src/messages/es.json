@@ -221,7 +221,6 @@
       "Swag oficial del evento",
       "Acceso a la comunidad de Crafter Station",
       "1,000 créditos de Tavily",
-      "50 USD en créditos de Exa",
       "50 USD en créditos de Vapi por participante",
       "50 USD en créditos de Apify por participante",
       "20 USD en créditos de Cursor por participante",
@@ -601,21 +600,12 @@
             "Abre Add Promotion Code, pega el código y confirma"
           ]
         },
-        "exa": {
-          "perk": "50 USD en créditos",
-          "about": "Búsqueda semántica para construir sobre la web. Los ganadores se llevan 500 USD adicionales.",
-          "steps": [
-            "Regístrate en el dashboard",
-            "Settings → Credits → Redeem",
-            "Aplica el código antes del code freeze"
-          ]
-        },
         "vapi": {
           "perk": "50 USD en créditos por participante",
           "about": "Voz en tiempo real. Útil de más si vas por OUT OF THE BOX con una interfaz de voz.",
           "steps": [
-            "Cada integrante redime con su propia cuenta",
-            "Dashboard → Billing → Promo code"
+            "Cada integrante abre el enlace de canje con su propia cuenta",
+            "Inicia sesión o crea una cuenta y confirma que se aplicó el cupón"
           ]
         },
         "apify": {
