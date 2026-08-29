@@ -11,12 +11,16 @@ import { db } from "@/lib/db";
 import {
   dashboardPanelists,
   dashboardScores,
+  dashboardSettings,
   dashboardTeams,
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
 import {
+  ACCESS_CODE_KEY,
   clearAttempts,
+  GATE_COOKIE,
+  GATE_SUBJECT,
   issueSession,
   newAccessCode,
   normalizeCode,
@@ -25,7 +29,12 @@ import {
 } from "./access";
 import { createProject, updateProject } from "./projects";
 import { CRITERIA, type CriterionKey, isValidScore } from "./rubric";
-import { currentPanelist, phaseOf } from "./state";
+import {
+  currentPanelist,
+  passedGate,
+  phaseOf,
+  sharedAccessCode,
+} from "./state";
 
 export type JudgingError =
   | "not-a-panelist"
@@ -246,7 +255,6 @@ export async function addPanelist(input: {
       fullName,
       role: input.role,
       city: input.role === "mentor" ? input.city : null,
-      accessCode: newAccessCode(),
       invitedByEmail: staff,
     })
     // Reinvitar a alguien que ya estaba lo reactiva en vez de fallar: en la
@@ -339,17 +347,16 @@ export async function updateProjectAction(
 }
 
 /**
- * Entrar con el código.
+ * Paso 1: acertar el código del panel.
  *
- * El límite de intentos se cuenta por IP y no por código: contar por código
- * dejaría que cualquiera bloquease a un jurado concreto machacando su casilla,
- * que es peor que el problema que resuelve.
+ * El código es el mismo para todos, así que esto no identifica a nadie —solo
+ * abre la puerta—. Quién es cada quien se decide en `identifyAs`.
  *
- * El mensaje de error es el mismo tanto si el código no existe como si existe
- * pero está dado de baja. Distinguirlos le confirmaría a quien prueba códigos
- * cuáles son reales.
+ * El límite de intentos se cuenta por IP y no sobre el código: siendo uno
+ * compartido, contar sobre él dejaría que un solo torpe con el teclado
+ * bloqueara a todo el panel a la vez.
  */
-export async function signInWithCode(rawCode: string): Promise<Result> {
+export async function enterWithCode(rawCode: string): Promise<Result> {
   const requestHeaders = await headers();
   const ip =
     requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -360,27 +367,17 @@ export async function signInWithCode(rawCode: string): Promise<Result> {
     return { ok: false, error: "too-many-attempts" };
   }
 
-  const code = normalizeCode(rawCode);
-  if (!code) return { ok: false, error: "bad-code" };
-
-  const [panelist] = await db
-    .select({
-      id: dashboardPanelists.id,
-      revokedAt: dashboardPanelists.revokedAt,
-    })
-    .from(dashboardPanelists)
-    .where(eq(dashboardPanelists.accessCode, code))
-    .limit(1);
-
-  if (!panelist || panelist.revokedAt) {
+  const given = normalizeCode(rawCode);
+  const expected = await sharedAccessCode();
+  if (!given || given !== expected) {
     return { ok: false, error: "bad-code" };
   }
 
   clearAttempts(ip);
 
-  const { token, expires } = issueSession(panelist.id);
+  const { token, expires } = issueSession(GATE_SUBJECT);
   const store = await cookies();
-  store.set(PANELIST_COOKIE, token, {
+  store.set(GATE_COOKIE, token, {
     httpOnly: true,
     // En local no hay HTTPS y una cookie `secure` no se guardaría.
     secure: process.env.NODE_ENV === "production",
@@ -392,29 +389,85 @@ export async function signInWithCode(rawCode: string): Promise<Result> {
   return { ok: true };
 }
 
-/** Salir. Solo borra la cookie: no hay sesión guardada que invalidar. */
+/**
+ * Paso 2: decir quién eres.
+ *
+ * Exige haber pasado el código antes; si no, cualquiera podría hacerse pasar
+ * por un panelista llamando a esta acción directamente, sin saber nada.
+ *
+ * No comprueba identidad y no pretende hacerlo: con un código común, quien lo
+ * tenga puede elegir cualquier nombre de la lista. Para gente que el staff
+ * conoce y que está en la misma sala es el intercambio correcto.
+ */
+export async function identifyAs(panelistId: string): Promise<Result> {
+  if (!(await passedGate())) return { ok: false, error: "bad-code" };
+
+  const [panelist] = await db
+    .select({
+      id: dashboardPanelists.id,
+      revokedAt: dashboardPanelists.revokedAt,
+    })
+    .from(dashboardPanelists)
+    .where(eq(dashboardPanelists.id, panelistId))
+    .limit(1);
+
+  if (!panelist || panelist.revokedAt) {
+    return { ok: false, error: "not-a-panelist" };
+  }
+
+  const { token, expires } = issueSession(panelist.id);
+  const store = await cookies();
+  store.set(PANELIST_COOKIE, token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    expires,
+  });
+
+  return { ok: true };
+}
+
+/**
+ * Salir.
+ *
+ * Solo borra el nombre, no el código: en una sede es normal que dos mentores
+ * se turnen el mismo teléfono, y hacerle teclear el código otra vez al segundo
+ * sería castigar el caso para el que existe el botón.
+ */
 export async function signOutPanelist(): Promise<Result> {
   const store = await cookies();
   store.delete(PANELIST_COOKIE);
   return { ok: true };
 }
 
+/** Salir del todo, código incluido. Para cuando se devuelve un equipo prestado. */
+export async function forgetDevice(): Promise<Result> {
+  const store = await cookies();
+  store.delete(PANELIST_COOKIE);
+  store.delete(GATE_COOKIE);
+  return { ok: true };
+}
+
 /**
- * Volver a emitir el código de alguien. Solo staff.
+ * Rotar el código del panel. Solo staff.
  *
- * Es lo que se hace cuando un código se filtró o se perdió sin remedio. El
- * anterior deja de servir en el acto, pero las sesiones ya abiertas siguen
- * vivas hasta que caduquen: la cookie va firmada contra el id del panelista,
- * no contra el código.
+ * Para cuando se filtró y hay que cortar. Quien no haya entrado todavía
+ * necesitará el nuevo; quien ya esté dentro sigue trabajando, porque su cookie
+ * va firmada contra su id y no contra el código. Eso es a propósito: rotar en
+ * mitad de una ronda no debería tumbar a los mentores que están calificando.
  */
-export async function regenerateCode(panelistId: string): Promise<Result> {
+export async function rotateAccessCode(): Promise<Result> {
   const staff = await currentStaffEmail();
   if (!staff) return { ok: false, error: "not-staff" };
 
   await db
-    .update(dashboardPanelists)
-    .set({ accessCode: newAccessCode() })
-    .where(eq(dashboardPanelists.id, panelistId));
+    .insert(dashboardSettings)
+    .values({ key: ACCESS_CODE_KEY, value: newAccessCode() })
+    .onConflictDoUpdate({
+      target: dashboardSettings.key,
+      set: { value: newAccessCode(), updatedAt: new Date() },
+    });
 
   refresh();
   return { ok: true };

@@ -976,9 +976,13 @@
         "out-of-the-box": "OUT OF THE BOX",
         "learning-by-shipping": "LEARNING BY SHIPPING"
       },
-      "rosterCopy": "COPY",
-      "rosterRegenerate": "NEW CODE",
-      "rosterNote": "The code is what gets dictated to sign in — no email involved. It can be re-read and copied here as often as needed. “New code” invalidates the old one immediately — use it only if it leaked; sessions already open stay alive."
+      "rosterNote": "Being on this list is what lets someone pick themselves on the “who are you?” screen. The entry code is shared and lives above; this is only about who exists.",
+      "codeLabel": "ACCESS",
+      "codeTitle": "PANEL CODE",
+      "codeCopy": "COPY",
+      "codeCopied": "COPIED",
+      "codeRotate": "ROTATE",
+      "codeNote": "One code for the whole panel: read it to the room or leave it on the board. On entering, each person taps their name — that's what makes it possible to correct for one scoring harder than another. “Rotate” is only needed if it leaked; anyone already inside keeps working."
     },
     "projects": {
       "label": "PROJECTS",
@@ -1009,16 +1013,16 @@
   },
   "judging": {
     "gate": {
-      "title": "ENTER YOUR CODE",
-      "body": "Your hub staff gave you an eight-character code. No email, no password: type it and you're in.",
-      "label": "ACCESS CODE",
+      "title": "ENTER THE CODE",
+      "body": "It's the same for the whole panel: your hub staff reads it out or writes it up. No email, no password.",
+      "label": "PANEL CODE",
       "cta": "ENTER",
       "checking": "CHECKING…",
-      "help": "No code, or it isn't working? Ask your hub staff — they can reissue it on the spot.",
+      "help": "Don't have it, or it isn't working? Ask your hub staff.",
       "errors": {
-        "bad-code": "That code isn't valid. Check you copied it in full — it has no O or zero, no I or one.",
+        "bad-code": "That code isn't valid. Check it's complete — it has no O or zero, no I or one.",
         "too-many-attempts": "Too many tries in a row. Wait a minute and try again.",
-        "not-a-panelist": "Your session expired. Type your code again."
+        "not-a-panelist": "Your session expired. Sign in again."
       }
     },
     "role": {
@@ -1159,6 +1163,16 @@
       "3": "Meets",
       "4": "Stands out",
       "5": "Exceptional"
+    },
+    "who": {
+      "title": "WHO ARE YOU?",
+      "body": "Tap your name. It's what keeps your scores yours instead of mixed in with the rest of the panel's.",
+      "search": "Type to find yourself…",
+      "empty": "Nobody has been added to the panel yet. Tell your hub staff.",
+      "noMatch": "No name matches. Try fewer letters, or ask staff.",
+      "mentor": "MENTOR",
+      "judge": "JUDGE",
+      "notMe": "NOT THIS DEVICE — SIGN OUT COMPLETELY"
     }
   }
 }

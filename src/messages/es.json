@@ -976,9 +976,13 @@
         "out-of-the-box": "OUT OF THE BOX",
         "learning-by-shipping": "LEARNING BY SHIPPING"
       },
-      "rosterCopy": "COPIAR",
-      "rosterRegenerate": "NUEVO CÓDIGO",
-      "rosterNote": "El código es lo que se dicta para entrar: no hay correo de por medio. Se puede releer y copiar aquí las veces que haga falta. «Nuevo código» invalida el anterior en el acto —úsalo solo si se filtró—; las sesiones ya abiertas siguen vivas."
+      "rosterNote": "El alta es lo que le permite elegirse en la pantalla de «¿quién eres?». El código de entrada es común y vive arriba; aquí solo se decide quién existe.",
+      "codeLabel": "ACCESO",
+      "codeTitle": "CÓDIGO DEL PANEL",
+      "codeCopy": "COPIAR",
+      "codeCopied": "COPIADO",
+      "codeRotate": "ROTAR",
+      "codeNote": "Uno solo para todo el panel: dícelo a la sala o déjalo en la pizarra. Al entrar, cada quien toca su nombre —eso es lo que permite corregir que uno puntúe más duro que otro—. «Rotar» solo hace falta si se filtró; quien ya esté dentro sigue trabajando."
     },
     "projects": {
       "label": "PROYECTOS",
@@ -1009,16 +1013,16 @@
   },
   "judging": {
     "gate": {
-      "title": "ENTRA CON TU CÓDIGO",
-      "body": "El staff de tu sede te dio un código de ocho caracteres. No hay correo ni contraseña: escríbelo y entras.",
-      "label": "CÓDIGO DE ACCESO",
+      "title": "ENTRA CON EL CÓDIGO",
+      "body": "Es el mismo para todo el panel: el staff de tu sede lo dice en voz alta o lo deja escrito. Sin correo y sin contraseña.",
+      "label": "CÓDIGO DEL PANEL",
       "cta": "ENTRAR",
       "checking": "COMPROBANDO…",
-      "help": "¿Sin código o no te funciona? Pídeselo al staff de tu sede. Pueden volver a emitirlo en el momento.",
+      "help": "¿No lo tienes o no funciona? Pídeselo al staff de tu sede.",
       "errors": {
-        "bad-code": "Ese código no vale. Revisa que lo copiaste entero — no lleva ni O ni cero, ni I ni uno.",
+        "bad-code": "Ese código no vale. Revisa que esté entero — no lleva ni O ni cero, ni I ni uno.",
         "too-many-attempts": "Demasiados intentos seguidos. Espera un minuto y vuelve a probar.",
-        "not-a-panelist": "Tu sesión caducó. Vuelve a escribir tu código."
+        "not-a-panelist": "Tu sesión caducó. Vuelve a entrar."
       }
     },
     "role": {
@@ -1159,6 +1163,16 @@
       "3": "Cumple",
       "4": "Sobresale",
       "5": "Excepcional"
+    },
+    "who": {
+      "title": "¿QUIÉN ERES?",
+      "body": "Toca tu nombre. Hace falta para que tus notas queden a tu nombre y no mezcladas con las del resto del panel.",
+      "search": "Escribe para buscarte…",
+      "empty": "Todavía no hay nadie dado de alta en el panel. Avisa al staff de tu sede.",
+      "noMatch": "Ningún nombre coincide. Prueba con menos letras, o avisa al staff.",
+      "mentor": "MENTOR",
+      "judge": "JURADO",
+      "notMe": "NO ES ESTE DISPOSITIVO — SALIR DEL TODO"
     }
   }
 }
