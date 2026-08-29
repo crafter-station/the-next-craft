@@ -1,3 +1,4 @@
+import type { CityKey } from "@/lib/cities";
 import type { TrackKey } from "@/lib/db/schema-types";
 
 /* ─────────────────────────────────────────────────────────────
@@ -13,11 +14,19 @@ import type { TrackKey } from "@/lib/db/schema-types";
    ───────────────────────────────────────────────────────────── */
 
 export const EVENT_DAY = "2026-08-29";
-export const EVENT_TZ_OFFSET = "-05:00";
-export const EVENT_OPENS_AT = `${EVENT_DAY}T09:00:00${EVENT_TZ_OFFSET}`;
-export const EVENT_CLOSES_AT = `${EVENT_DAY}T21:00:00${EVENT_TZ_OFFSET}`;
+
+/*
+  Horas de pared, no instantes. Cada sede corre su propio día de 12 horas en su
+  hora local: las 09:00 de Guatemala ocurren una hora después que las de Lima.
+  Convertirlas a un momento concreto es trabajo de `time.ts`, que necesita saber
+  la sede; fijar aquí un offset —como se hacía— daba por hecho que las cinco
+  sedes están en UTC-5 y adelantaba una hora entera la agenda de Guatemala y
+  El Salvador.
+*/
+export const EVENT_OPENS = "09:00";
+export const EVENT_CLOSES = "21:00";
 /** Code freeze: el repo y el formulario de entrega se cierran aquí. */
-export const SUBMISSION_DEADLINE = `${EVENT_DAY}T20:00:00${EVENT_TZ_OFFSET}`;
+export const SUBMISSION_TIME = "20:00";
 
 export type AgendaKind =
   | "ceremony"
@@ -126,6 +135,68 @@ export const TRACKS: { key: TrackKey; id: string }[] = [
 
 export function trackIndex(key: TrackKey) {
   return TRACKS.findIndex((t) => t.key === key);
+}
+
+/* ── Mentorías ─────────────────────────────────────────────── */
+
+/**
+ * Las mentorías no se reservan: durante el bloque de 11:00 a 13:00 los mentores
+ * están en la sala y el equipo se les acerca. Esta lista existe solo para que
+ * cada hacker sepa a quién tiene en **su** sede antes de levantarse de la mesa.
+ *
+ * Por eso es contenido estático y no una tabla: no hay nada que reservar, ni
+ * cupo, ni estado que guardar.
+ *
+ * Los nombres salen de `public/brand-assets/social/roles/mentors/`, que es la
+ * misma fuente que usa la galería pública de /mentors-and-judges. Van sin
+ * tildes porque así están ahí y así se publican; no los "corrijo" desde aquí.
+ */
+export type Mentor = {
+  /** Coincide con el nombre del asset, para poder enlazar su tarjeta. */
+  slug: string;
+  name: string;
+  /**
+   * Sedes donde estará. Vacío = todavía sin confirmar, y la interfaz lo dice
+   * en vez de esconderlo o de fingir que está en todas.
+   */
+  cities: CityKey[];
+};
+
+/**
+ * ⚠️ FALTA EL REPARTO POR SEDE. Los trece nombres son los reales, pero ni la
+ * galería pública ni el repo dicen quién va a qué sede, así que `cities` está
+ * vacío en todos. Rellenar aquí es lo único que hace falta: la página ya los
+ * agrupa por sede sola.
+ */
+export const MENTORS: Mentor[] = [
+  { slug: "arturo-barrantes", name: "Arturo Barrantes", cities: [] },
+  { slug: "cesar-duenas", name: "Cesar Duenas", cities: [] },
+  { slug: "danitza-rosas", name: "Danitza Rosas", cities: [] },
+  { slug: "ellin-orjuela", name: "Ellin Orjuela", cities: [] },
+  { slug: "emmy-pardo", name: "Emmy Pardo", cities: [] },
+  { slug: "fiorella-cisneros", name: "Fiorella Cisneros", cities: [] },
+  { slug: "ignacio-velasquez", name: "Ignacio Velasquez", cities: [] },
+  { slug: "juan-ortega", name: "Juan Ortega", cities: [] },
+  { slug: "maria-cristina-ruelas", name: "Maria Cristina Ruelas", cities: [] },
+  { slug: "nicolas-vargas", name: "Nicolas Vargas", cities: [] },
+  { slug: "sandra-carrillo", name: "Sandra Carrillo", cities: [] },
+  { slug: "victor-galvez", name: "Victor Galvez", cities: [] },
+  { slug: "yesica-qu", name: "Yesica Qu", cities: [] },
+];
+
+/**
+ * Los mentores de una sede, y aparte los que aún no tienen sede.
+ *
+ * Se devuelven los dos grupos porque callarse los segundos sería enseñar una
+ * lista corta como si estuviera completa, justo el día que el hacker decide si
+ * levantarse de la silla a buscar a alguien.
+ */
+export function mentorsByHub(city: CityKey | null) {
+  const assigned = MENTORS.filter((m) => m.cities.length > 0);
+  return {
+    hub: city ? assigned.filter((m) => m.cities.includes(city)) : assigned,
+    unassigned: MENTORS.filter((m) => m.cities.length === 0),
+  };
 }
 
 /**

@@ -63,6 +63,36 @@ def connected_background_mask(image: Image.Image) -> bytearray:
     return mask
 
 
+# Ancho de la rejilla del retrato. El modelo devuelve el grano que le da la
+# gana -- entre tiradas con la misma foto y el mismo prompt hemos visto desde
+# pixel art grueso hasta ilustracion casi lisa -- y en una galeria de 300
+# badges esa mezcla se lee como falta de unidad. Fijarla aqui garantiza el
+# mismo grano en todos sin depender del modelo.
+#
+# 128 divide 1024 en 8 exacto, asi que cada celda cae sobre 8 pixeles de origen
+# y al volver a escalar queda un cuadrado nitido, sin bordes intermedios.
+GRID_WIDTH = 128
+
+
+def snap_to_grid(image: Image.Image) -> Image.Image:
+    """Cuantiza el retrato a una rejilla de pixeles fija.
+
+    Bajamos y subimos con NEAREST a proposito: cualquier otro filtro promedia
+    los bordes de la silueta contra el fondo transparente y deja un halo
+    oscuro, ademas de romper el alfa binario que espera el badge.
+    """
+    width, height = image.size
+    factor = max(1, round(width / GRID_WIDTH))
+    if factor == 1:
+        return image
+
+    small = image.resize(
+        (max(1, width // factor), max(1, height // factor)),
+        Image.NEAREST,
+    )
+    return small.resize((width, height), Image.NEAREST)
+
+
 def remove_green_background(input_path: str, output_path: str) -> None:
     image = Image.open(input_path).convert("RGBA")
     output = Image.new("RGBA", image.size)
@@ -91,7 +121,7 @@ def remove_green_background(input_path: str, output_path: str) -> None:
         cleaned_pixels.append((gray, gray, gray, 255))
 
     output.putdata(cleaned_pixels)
-    output.save(output_path, format="PNG", optimize=False)
+    snap_to_grid(output).save(output_path, format="PNG", optimize=False)
 
 
 if __name__ == "__main__":

@@ -57,6 +57,13 @@
       "when": 1787844647123,
       "tag": "0007_peaceful_sugar_man",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1787894614418,
+      "tag": "0008_redundant_iceman",
+      "breakpoints": true
     }
   ]
 }

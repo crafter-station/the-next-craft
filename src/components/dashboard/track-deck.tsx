@@ -24,6 +24,8 @@ export type TrackCard = {
   ideas: string[];
   why: string;
   teams: number;
+  /** Equipos que admite este track en la sede del hacker; `null` si no hay tope. */
+  capacity: number | null;
 };
 
 export function TrackDeck({
@@ -113,13 +115,46 @@ export function TrackDeck({
               </div>
 
               <div className="flex items-center justify-between gap-3 border-t border-[var(--line)] px-4 py-3.5">
+                {/* El cupo se enseña aquí y no al confirmar: enterarte de que
+                    el track está lleno después de elegirlo es el peor momento
+                    posible, y el kickoff dura media hora. */}
                 <span className="font-mono text-[11px] text-[var(--text-dim)]">
-                  {t("tracks.teams", { count: track.teams })}
+                  {track.capacity === null
+                    ? t("tracks.teams", { count: track.teams })
+                    : t("tracks.capacity", {
+                        taken: track.teams,
+                        capacity: track.capacity,
+                      })}
+                  {track.capacity !== null && (
+                    <span
+                      className={cn(
+                        "ml-2",
+                        track.teams >= track.capacity
+                          ? "text-[var(--bright)]"
+                          : undefined,
+                      )}
+                    >
+                      ·{" "}
+                      {track.teams >= track.capacity
+                        ? t("tracks.capacityFull")
+                        : t("tracks.capacityLeft", {
+                            count: track.capacity - track.teams,
+                          })}
+                    </span>
+                  )}
                 </span>
                 <button
                   type="button"
                   className={isSelected ? keyClass : keyGhostClass}
-                  disabled={pending || confirmed}
+                  // Un track lleno se sigue viendo, pero no se puede elegir:
+                  // deshabilitarlo dice más que dejar que falle al confirmar.
+                  disabled={
+                    pending ||
+                    confirmed ||
+                    (!isSelected &&
+                      track.capacity !== null &&
+                      track.teams >= track.capacity)
+                  }
                   onClick={() => run(() => selectTrack(track.key))}
                 >
                   {isSelected ? t("tracks.chosen") : t("tracks.choose")}
