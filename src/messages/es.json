@@ -594,11 +594,11 @@
       "partners": {
         "tavily": {
           "perk": "1.000 créditos de búsqueda",
-          "about": "Búsqueda web para agentes. Los créditos entran a la cuenta con la que te registres.",
+          "about": "Búsqueda web para agentes. Cada participante puede aplicar el cupón en su propia cuenta.",
           "steps": [
-            "Crea la cuenta con tu correo de registro",
-            "Ve a Billing → Redeem code",
-            "Pega el código y confirma"
+            "Crea una cuenta o inicia sesión en Tavily",
+            "En Billing, elige Upgrade en el plan Project",
+            "Abre Add Promotion Code, pega el código y confirma"
           ]
         },
         "exa": {

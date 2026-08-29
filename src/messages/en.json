@@ -594,11 +594,11 @@
       "partners": {
         "tavily": {
           "perk": "1,000 search credits",
-          "about": "Web search for agents. Credits land on the account you sign up with.",
+          "about": "Web search for agents. Each participant can apply the coupon to their own account.",
           "steps": [
-            "Create the account with your registration email",
-            "Go to Billing → Redeem code",
-            "Paste the code and confirm"
+            "Create an account or sign in to Tavily",
+            "In Billing, choose Upgrade under the Project plan",
+            "Open Add Promotion Code, paste the code, and confirm"
           ]
         },
         "exa": {

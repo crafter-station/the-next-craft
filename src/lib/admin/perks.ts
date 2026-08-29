@@ -17,6 +17,8 @@ export type PartnerCodeStats = {
   unassigned: number;
 };
 
+const SHARED_PARTNER_CODES = new Map([["tavily", "TVLY-4XBA8FDS"]]);
+
 /** Participantes con badge completado (confirmaron asistencia). */
 export async function countConfirmedParticipants() {
   const [row] = await db
@@ -48,7 +50,9 @@ export async function partnerCodeStats(): Promise<PartnerCodeStats[]> {
   );
 
   return PARTNERS.map((partner) => {
-    const assigned = assignedByPartner.get(partner.key) ?? 0;
+    const assigned = SHARED_PARTNER_CODES.has(partner.key)
+      ? confirmed
+      : (assignedByPartner.get(partner.key) ?? 0);
     return {
       partnerKey: partner.key,
       partnerName: partner.name,
@@ -68,7 +72,10 @@ export async function listAssignedCodesForParticipant(participantId: string) {
     .from(participantPartnerCodes)
     .where(eq(participantPartnerCodes.participantId, participantId));
 
-  return new Map(rows.map((row) => [row.partnerKey, row.code]));
+  return new Map([
+    ...rows.map((row) => [row.partnerKey, row.code] as const),
+    ...SHARED_PARTNER_CODES,
+  ]);
 }
 
 export async function findParticipantIdByEmail(email: string) {
