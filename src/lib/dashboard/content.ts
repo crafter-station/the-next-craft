@@ -158,9 +158,9 @@ export const PARTNERS: Partner[] = [
   {
     key: "tavily",
     name: "Tavily",
-    url: "https://tavily.com",
+    url: "https://app.tavily.com/billing",
     valueUsd: 8,
-    perParticipant: false,
+    perParticipant: true,
     steps: 3,
   },
   {
