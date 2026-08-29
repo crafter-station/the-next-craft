@@ -42,10 +42,12 @@ export function Rubric() {
               key={name}
               className="grid grid-cols-[4.5rem_1fr] md:grid-cols-[6rem_14rem_1fr] gap-x-5 gap-y-2 items-baseline border-b border-[var(--line)] px-1 py-5"
             >
+              {/* En mono, no en pixel: el glifo «%» de la pixel se lee como
+                  un borrón a este tamaño. */}
               <span
-                className="font-pixel font-bold leading-none text-[var(--bright)] tabular-nums"
+                className="font-mono font-semibold leading-none tracking-[-0.02em] text-[var(--bright)] tabular-nums"
                 style={{
-                  fontSize: "clamp(1.125rem, 2.4vw, 1.5rem)",
+                  fontSize: "clamp(1.125rem, 2.2vw, 1.375rem)",
                   fontVariantNumeric: "tabular-nums",
                 }}
               >
@@ -60,6 +62,11 @@ export function Rubric() {
             </li>
           ))}
         </ul>
+
+        {/* Convex y Vibe Apps no son criterios: se cumplen o no se compite. */}
+        <p className="font-mono text-xs tracking-[0.05em] leading-[1.6] text-[var(--text-dim)]">
+          {t("note")}
+        </p>
       </div>
     </section>
   );
