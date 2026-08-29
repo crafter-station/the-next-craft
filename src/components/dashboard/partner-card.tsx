@@ -15,16 +15,12 @@ export function PartnerCard({
   index,
   code,
   redeemed,
-  canRedeem,
-  perkEligibility,
   detailed = false,
 }: {
   partner: Partner;
   index: number;
   code: string | null;
   redeemed: boolean;
-  canRedeem: boolean;
-  perkEligibility: { hasBadge: boolean; arrived: boolean };
   detailed?: boolean;
 }) {
   const t = useTranslations("dashboard");
@@ -33,16 +29,6 @@ export function PartnerCard({
   const [pending, start] = useTransition();
 
   const [redeemError, setRedeemError] = useState<string | null>(null);
-
-  const lockedMessage = !perkEligibility.hasBadge
-    ? t("credits.badgeRequiredBody")
-    : !perkEligibility.arrived
-      ? t("credits.checkInRequiredBody")
-      : null;
-
-  const lockedLabel = !perkEligibility.hasBadge
-    ? t("credits.badgeRequiredLabel")
-    : t("credits.checkInRequiredLabel");
 
   const steps = Array.from({ length: partner.steps }, (_, i) =>
     t(`credits.partners.${partner.key}.steps.${i}`),
@@ -135,13 +121,6 @@ export function PartnerCard({
                 {copied ? t("credits.copied") : t("credits.copy")}
               </span>
             </button>
-          </>
-        ) : !canRedeem ? (
-          <>
-            <Basic n={79}>{lockedLabel}</Basic>
-            <p className="mt-2.5 font-mono text-[12px] leading-relaxed text-[var(--text-dim)]">
-              {lockedMessage}
-            </p>
           </>
         ) : (
           <>

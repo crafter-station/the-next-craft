@@ -7,7 +7,6 @@ import type { CityKey } from "@/lib/cities";
 import { db } from "@/lib/db";
 import {
   badgeParticipants,
-  dashboardCheckins,
   dashboardPartnerRedemptions,
   dashboardTeamMembers,
   dashboardTeams,
@@ -79,38 +78,6 @@ export async function findParticipantByUserId(
     .limit(1);
 
   return rows[0] ?? null;
-}
-
-export type PerkEligibility = {
-  hasBadge: boolean;
-  arrived: boolean;
-  canRedeem: boolean;
-};
-
-/** Perks solo se canjean con badge completado y check-in presencial en sede. */
-export async function getParticipantPerkEligibility(
-  participantId: string,
-): Promise<PerkEligibility> {
-  const [row] = await db
-    .select({
-      hasBadge: sql<boolean>`exists (
-        select 1 from badge_attempts a
-        where a.participant_id = ${participantId}
-          and a.status = 'completed'
-      )`,
-      arrivedAt: dashboardCheckins.arrivedAt,
-    })
-    .from(badgeParticipants)
-    .leftJoin(
-      dashboardCheckins,
-      eq(dashboardCheckins.participantId, badgeParticipants.id),
-    )
-    .where(eq(badgeParticipants.id, participantId))
-    .limit(1);
-
-  const hasBadge = row?.hasBadge ?? false;
-  const arrived = Boolean(row?.arrivedAt);
-  return { hasBadge, arrived, canRedeem: hasBadge && arrived };
 }
 
 export async function findTeamForParticipant(

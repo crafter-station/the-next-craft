@@ -8,7 +8,6 @@ import { auth } from "@/lib/auth";
 import { PARTNERS } from "@/lib/dashboard/content";
 import {
   findParticipantByUserId,
-  getParticipantPerkEligibility,
   listRedeemedPartners,
 } from "@/lib/dashboard/state";
 
@@ -43,7 +42,6 @@ export default async function PartnerPage({
 
   const redeemed = await listRedeemedPartners(participant.id);
   const assignedCodes = await listAssignedCodesForParticipant(participant.id);
-  const perkEligibility = await getParticipantPerkEligibility(participant.id);
   const code = assignedCodes.get(partner.key) ?? null;
 
   return (
@@ -60,11 +58,7 @@ export default async function PartnerPage({
                 ? t("credits.codePendingLabel")
                 : redeemed.has(partner.key)
                   ? t("credits.yourCode")
-                  : !perkEligibility.canRedeem
-                    ? !perkEligibility.hasBadge
-                      ? t("credits.badgeRequiredLabel")
-                      : t("credits.checkInRequiredLabel")
-                    : t("credits.codeHidden")}
+                  : t("credits.codeHidden")}
             </Tag>
             <Link
               href="/dashboard/credits"
@@ -82,8 +76,6 @@ export default async function PartnerPage({
           index={index + 1}
           code={code}
           redeemed={redeemed.has(partner.key)}
-          canRedeem={perkEligibility.canRedeem}
-          perkEligibility={perkEligibility}
           detailed
         />
 
@@ -98,7 +90,6 @@ export default async function PartnerPage({
             <Row marker="02">{t("credits.rule2")}</Row>
             <Row marker="03">{t("credits.rule3")}</Row>
             <Row marker="04">{t("credits.rule4")}</Row>
-            <Row marker="05">{t("credits.rule5")}</Row>
           </ul>
         </Panel>
       </div>
