@@ -9,6 +9,9 @@ import { SectionHeader } from "./section-header";
   Los pesos suman 100 y no cambian por track ni por sede.
 */
 
+/** Repositorio oficial de entregas del hackathon (plataforma de Convex). */
+const SUBMISSION_URL = "https://vibeapps.dev/judging/next-craft-hackathon/join";
+
 type Criterion = {
   weight: string;
   name: string;
@@ -63,9 +66,22 @@ export function Rubric() {
           ))}
         </ul>
 
-        {/* Convex y Vibe Apps no son criterios: se cumplen o no se compite. */}
+        {/* Convex y Vibe Apps no son criterios: se cumplen o no se compite.
+            Vibe Apps lleva al formulario de entrega — es la acción que más
+            se les olvida a los equipos el día del evento. */}
         <p className="font-mono text-xs tracking-[0.05em] leading-[1.6] text-[var(--text-dim)]">
-          {t("note")}
+          {t.rich("note", {
+            link: (chunks) => (
+              <a
+                href={SUBMISSION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text)] underline decoration-[var(--line)] underline-offset-4 transition-colors duration-150 hover:text-[var(--bright)] hover:decoration-[var(--bright)]"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
         </p>
       </div>
     </section>
