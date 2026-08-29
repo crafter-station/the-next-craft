@@ -7,9 +7,15 @@ import {
   MIN_TEAMS_PER_PANELIST,
 } from "@/lib/judging/normalize";
 import { listProjects } from "@/lib/judging/projects";
-import { listPanelists, type Phase, panelResults } from "@/lib/judging/state";
+import {
+  listPanelists,
+  type Phase,
+  panelResults,
+  sharedAccessCode,
+} from "@/lib/judging/state";
 import { cn } from "@/lib/utils";
 
+import { AccessCodePanel } from "@/components/admin/access-code-panel";
 import { FinalistToggle } from "@/components/admin/finalist-toggle";
 import { PanelistManager } from "@/components/admin/panelist-manager";
 import { ProjectManager } from "@/components/admin/project-manager";
@@ -61,10 +67,11 @@ export default async function AdminJudgingPage({
   const { phase, city } = parseScope(scopeParam);
 
   const t = await getTranslations("admin.judging");
-  const [summary, panelists, projects] = await Promise.all([
+  const [summary, panelists, projects, accessCode] = await Promise.all([
     panelResults(phase, city),
     listPanelists(),
     listProjects(),
+    sharedAccessCode(),
   ]);
 
   const { result } = summary;
@@ -157,6 +164,8 @@ export default async function AdminJudgingPage({
           hint={t("statCompleteHint")}
         />
       </Table>
+
+      <AccessCodePanel code={accessCode} />
 
       <ProjectManager
         projects={projects}

@@ -476,6 +476,21 @@ export const dashboardCheckins = pgTable("dashboard_checkins", {
  * la misma escala—. Por eso la fase 2 es un panel único sobre todos los
  * finalistas: al ver todos a todos, la comparación vuelve a ser válida.
  */
+/**
+ * Ajustes que el staff cambia en caliente, sin pasar por un despliegue.
+ *
+ * Hoy guarda una sola cosa —el código con el que entra el panel— y aun así va
+ * en tabla y no en variable de entorno: rotarlo tiene que ser un botón en el
+ * tablero, no un redeploy en mitad de un evento.
+ */
+export const dashboardSettings = pgTable("dashboard_settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});
+
 export const dashboardPanelRole = pgEnum("dashboard_panel_role", [
   "mentor",
   "judge",
@@ -497,33 +512,6 @@ export const dashboardPanelists = pgTable(
     role: dashboardPanelRole("role").notNull(),
     /** Sede que le toca al mentor. Los jurados de fase 2 no llevan sede. */
     city: text("city").$type<CityKey>(),
-    /**
-     * Con lo que entra. Es una credencial al portador: quien lo tenga es este
-     * panelista, sin correo ni contraseña de por medio.
-     *
-     * Se eligió así porque el correo fallaba justo donde más duele. Un mentor
-     * de pie en una sala con ruido no siempre tiene su bandeja a mano, y si
-     * escribía una dirección distinta a la que el staff dio de alta no pasaba
-     * nada —ni error ni código—, porque el OTP solo se envía a correos
-     * conocidos. Con un código, el staff se lo dicta y entra.
-     *
-     * Se guarda en claro, no hasheado, y es deliberado: el staff necesita
-     * poder releérselo a quien pierda el papel, que es lo que de verdad pasa
-     * en un evento. El intercambio se sostiene porque el código vive un día y
-     * solo abre la calificación; para una credencial permanente no valdría.
-     *
-     * El `default` no es el camino normal —la app siempre escribe el suyo, con
-     * más entropía— sino una red: las migraciones se aplican a mano y por
-     * separado del despliegue, así que existe una ventana en la que el código
-     * viejo puede insertar un panelista sin saber de esta columna. Con default
-     * esa fila nace utilizable en vez de romper el alta. `random()` es volátil,
-     * de modo que Postgres lo evalúa por fila y el índice único aguanta.
-     */
-    accessCode: text("access_code")
-      .notNull()
-      .default(
-        sql`translate(upper(substr(md5(random()::text), 1, 8)), '01', 'XY')`,
-      ),
     invitedByEmail: text("invited_by_email"),
     /** Baja sin borrar: los puntajes que ya emitió siguen siendo válidos. */
     revokedAt: timestamp("revoked_at", { withTimezone: true }),
@@ -533,7 +521,6 @@ export const dashboardPanelists = pgTable(
   },
   (table) => [
     uniqueIndex("dashboard_panelists_email_idx").on(table.email),
-    uniqueIndex("dashboard_panelists_code_idx").on(table.accessCode),
     index("dashboard_panelists_role_city_idx").on(table.role, table.city),
   ],
 );
@@ -618,4 +605,5 @@ export const schema = {
   dashboardCheckins,
   dashboardPanelists,
   dashboardScores,
+  dashboardSettings,
 };
