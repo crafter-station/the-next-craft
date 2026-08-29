@@ -2,13 +2,21 @@
 title: Empezamos en breve
 ---
 
-<div className="flex min-h-[64svh] items-center">
+<div className="flex min-h-[64svh] flex-col justify-center gap-10">
   <div className="w-full max-w-5xl">
     <EventCountdown
       target="2026-08-29T09:00:00-05:00"
       heading="Empezamos en breve"
       locale="es"
       eventName="The Next Craft Bogotá"
+    />
+  </div>
+  <div className="w-full max-w-md">
+    <QrCard
+      src="/deck/qr/bogota-jam.svg"
+      label="MIENTRAS TANTO"
+      title="Entra a la Jam"
+      caption="Escanea y pon la música del kickoff en Spotify."
     />
   </div>
 </div>

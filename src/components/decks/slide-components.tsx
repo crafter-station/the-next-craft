@@ -427,6 +427,48 @@ export function PhotoCard({
   );
 }
 
+/* ── QR de deck: el SVG se genera en build-time con
+      scripts/generate-deck-qr.mjs y vive en public/deck/qr. El modulo va en
+      --void sobre --text para que escanee bien con luz de proyector. ── */
+export function QrCard({
+  src,
+  label,
+  title,
+  caption,
+  size = 168,
+}: {
+  src: string;
+  label: string;
+  title: string;
+  caption?: string;
+  size?: number;
+}) {
+  return (
+    <div className="flex items-center gap-4 border border-[var(--line)] bg-[var(--screen-dim)] p-3 md:gap-6 md:p-4">
+      <Image
+        src={src}
+        alt={`Codigo QR: ${title}`}
+        width={size}
+        height={size}
+        unoptimized
+        className="shrink-0 border border-[var(--line)] bg-[var(--text)] p-2"
+        style={{ width: size, height: size }}
+      />
+      <div className="flex flex-col gap-2">
+        <span className="section-label">{label}</span>
+        <p className="font-pixel text-lg font-bold uppercase leading-tight text-[var(--text)] md:text-xl">
+          {title}
+        </p>
+        {caption ? (
+          <p className="font-mono text-xs leading-snug text-[var(--text-dim)] md:text-sm">
+            {caption}
+          </p>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 type HackathonPhoto = {
   src: string;
   alt: string;
