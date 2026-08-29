@@ -439,6 +439,21 @@
     "emptyBody": "Cuando un participante genere su badge, aparecerá aquí. Si ya fuiste aceptado, puedes crear el tuyo ahora.",
     "emptyCta": "GOTO BADGE STUDIO"
   },
+  "roleGallery": {
+    "title": "Imágenes de mentores y jurado",
+    "description": "Galería de piezas oficiales generadas para mentores y miembros del jurado de The Next Craft.",
+    "navAria": "Navegación de imágenes de mentores y jurado",
+    "backHome": "← Inicio",
+    "label": "ASSETS DE ROLES",
+    "headline": "MENTORES + JURADO",
+    "intro": "Revisa las piezas oficiales generadas para LinkedIn y descarga los archivos PNG en resolución completa.",
+    "mentors": "Mentores",
+    "judges": "Jurado",
+    "count": "{count} IMÁGENES",
+    "imageAlt": "Pieza oficial de {name}, {role}",
+    "download": "Descargar",
+    "downloadFor": "Descargar imagen de {name}"
+  },
   "dashboard": {
     "nav": {
       "overview": "Dashboard",
@@ -619,7 +634,7 @@
     "credits": {
       "label": "CRÉDITOS DE PARTNERS",
       "headline": "CRÉDITOS QUE YA SON TUYOS",
-      "lede": "Todo el que entra se lleva estos créditos, gane o no. El código se emite a tu nombre al canjear y no se transfiere.",
+      "lede": "Todo el que entra se lleva estos créditos, gane o no. Solo puedes revelar el código con badge confirmado y check-in presencial en tu sede.",
       "claimed": "${claimed} de ${total}",
       "redeemedCount": "{done}/{total} canjeados",
       "statTotal": "VALOR TOTAL",
@@ -715,7 +730,14 @@
             "El crédito de desarrollo aparece aparte del plan"
           ]
         }
-      }
+      },
+      "rule5": "El canje se desbloquea en la puerta: badge completado y llegada marcada por el staff de tu sede.",
+      "badgeRequiredLabel": "BADGE PENDIENTE",
+      "badgeRequiredBody": "Genera y confirma tu badge antes de canjear. Es la señal de que vas a asistir.",
+      "checkInRequiredLabel": "CANJE EN SEDE",
+      "checkInRequiredBody": "Tu código ya está asignado. Pasa por la puerta y pide que marquen tu llegada para revelarlo.",
+      "codePendingLabel": "PRÓXIMAMENTE",
+      "codePendingBody": "Tu código se asignará antes del evento. Vuelve cuando el equipo lo publique desde admin."
     },
     "support": {
       "label": "SOPORTE",
@@ -808,7 +830,11 @@
       "statBadge": "CON BADGE",
       "statBadgeHint": "confirmaron asistencia",
       "statPending": "SIN LLEGAR",
-      "footer": "{shown} de {total} en pantalla"
+      "footer": "{shown} de {total} en pantalla",
+      "reposLabel": "REPOS",
+      "reposTitle": "PROYECTOS DE LOS EQUIPOS",
+      "reposEmpty": "Todavía ningún equipo pidió su repo.",
+      "reposMissing": "sin repo"
     },
     "team": {
       "label": "EQUIPO",
@@ -853,6 +879,28 @@
       "leaveConfirm": "Si eres el último, el equipo se borra y el código deja de servir.",
       "leaveYes": "Sí, salir",
       "cancel": "Cancelar",
+      "github": {
+        "label": "REPO DEL EQUIPO",
+        "title": "GITHUB",
+        "body": "Cada equipo recibe un repositorio en la organización, copiado del template del hackathon. Vincula tu GitHub y te llega la invitación.",
+        "link": "Vincular GitHub",
+        "linkedAs": "vinculado como",
+        "repoLabel": "REPOSITORIO DEL EQUIPO",
+        "repoBody": "Clónalo y trabaja ahí. Los mentores lo encuentran desde la organización.",
+        "create": "Crear el repo",
+        "retry": "Reintentar",
+        "creating": "Creándolo en GitHub…",
+        "failed": "No se pudo crear el repo.",
+        "waitCaptain": "Lo crea quien fundó el equipo. Vincula tu GitHub y te invita.",
+        "captainNeedsLink": "Vincula tu GitHub primero: quedas como admin del repo.",
+        "accept": "aceptar",
+        "refresh": "Actualizar invitaciones",
+        "stateUnlinked": "sin vincular",
+        "stateQueued": "sin invitar",
+        "statePending": "invitación enviada",
+        "stateAccepted": "dentro",
+        "stateFailed": "falló la invitación"
+      },
       "errors": {
         "unauthenticated": "Tu sesión expiró. Vuelve a entrar.",
         "no-participant": "No encontramos tu acreditación.",
@@ -861,7 +909,14 @@
         "name-too-short": "El nombre necesita al menos dos caracteres.",
         "code-not-found": "Ese código no existe. Revísalo con quien creó el equipo.",
         "team-full": "Ese equipo ya está completo.",
-        "invalid-url": "Los links tienen que empezar por https://"
+        "invalid-url": "Los links tienen que empezar por https://",
+        "not-captain": "Solo quien fundó el equipo puede crear el repo.",
+        "github-not-configured": "La organización todavía no configuró GitHub. Avisa al staff.",
+        "github-not-linked": "Vincula tu cuenta de GitHub primero.",
+        "github-taken": "Esa cuenta de GitHub ya está vinculada a otra acreditación.",
+        "github-failed": "GitHub no respondió bien. Reintenta en un momento.",
+        "repo-in-progress": "Ya se está creando el repo. Recarga en unos segundos.",
+        "perks-locked": "Aún no puedes canjear: necesitas badge confirmado y check-in en sede."
       }
     },
     "access": {
@@ -877,19 +932,48 @@
       "includedTitle": "{count} COSAS INCLUIDAS"
     }
   },
-  "roleGallery": {
-    "title": "Imágenes de mentores y jurado",
-    "description": "Galería de piezas oficiales generadas para mentores y miembros del jurado de The Next Craft.",
-    "navAria": "Navegación de imágenes de mentores y jurado",
-    "backHome": "← Inicio",
-    "label": "ASSETS DE ROLES",
-    "headline": "MENTORES + JURADO",
-    "intro": "Revisa las piezas oficiales generadas para LinkedIn y descarga los archivos PNG en resolución completa.",
-    "mentors": "Mentores",
-    "judges": "Jurado",
-    "count": "{count} IMÁGENES",
-    "imageAlt": "Pieza oficial de {name}, {role}",
-    "download": "Descargar",
-    "downloadFor": "Descargar imagen de {name}"
+  "admin": {
+    "gate": {
+      "title": "SOLO ORGANIZACIÓN",
+      "body": "Entra con tu correo de la organización para gestionar perks y operaciones.",
+      "cta": "Entrar",
+      "denied": "Esta zona es solo para el equipo organizador."
+    },
+    "shell": {
+      "title": "OPERACIONES",
+      "dashboard": "Dashboard"
+    },
+    "nav": {
+      "perks": "Perks"
+    },
+    "perks": {
+      "label": "ADMIN · PERKS",
+      "headline": "CÓDIGOS DE PARTNERS",
+      "lede": "Sube los códigos que te manden los sponsors. Sin correo se asignan en orden a participantes con badge; con correo van directo a esa persona.",
+      "assignedTag": "{assigned}/{total} asignados",
+      "statConfirmed": "CONFIRMADOS",
+      "statConfirmedHint": "badge completado",
+      "statAssigned": "ASIGNADOS",
+      "statAssignedHint": "códigos en DB",
+      "statPartners": "PARTNERS",
+      "statPartnersHint": "en el catálogo",
+      "statPending": "FALTANTES",
+      "statPendingHint": "slots sin código",
+      "uploadLabel": "CARGA",
+      "uploadTitle": "SUBIR CSV",
+      "uploadBody": "Columnas partner_key,code para asignación automática, o email,partner_key,code para asignar a alguien concreto.",
+      "csvExample": "partner_key,code\ncursor,CRSR-ABC123\n\nemail,partner_key,code\nhacker@mail.com,vapi,VAPI-XYZ789",
+      "uploadCta": "Subir y asignar",
+      "uploading": "Subiendo…",
+      "resultSummary": "{assigned} asignados · {skipped} omitidos",
+      "tablePartner": "Partner",
+      "tableAssigned": "Asignados",
+      "tableConfirmed": "Confirmados",
+      "tableMissing": "Faltan",
+      "errors": {
+        "not-staff": "No tienes acceso de organizador.",
+        "empty": "El CSV está vacío o no tiene filas válidas."
+      }
+    }
   }
 }
