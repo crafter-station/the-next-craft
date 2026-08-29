@@ -1,0 +1,2 @@
+ALTER TABLE "dashboard_panelists" ADD COLUMN "access_code" text DEFAULT translate(upper(substr(md5(random()::text), 1, 8)), '01', 'XY') NOT NULL;--> statement-breakpoint
+CREATE UNIQUE INDEX "dashboard_panelists_code_idx" ON "dashboard_panelists" USING btree ("access_code");

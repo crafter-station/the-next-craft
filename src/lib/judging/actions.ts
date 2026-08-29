@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies, headers } from "next/headers";
 
 import { and, eq, isNotNull, sql } from "drizzle-orm";
 
@@ -14,12 +15,22 @@ import {
 } from "@/lib/db/schema";
 import type { TrackKey } from "@/lib/db/schema-types";
 
+import {
+  clearAttempts,
+  issueSession,
+  newAccessCode,
+  normalizeCode,
+  PANELIST_COOKIE,
+  tooManyAttempts,
+} from "./access";
 import { createProject, updateProject } from "./projects";
 import { CRITERIA, type CriterionKey, isValidScore } from "./rubric";
 import { currentPanelist, phaseOf } from "./state";
 
 export type JudgingError =
   | "not-a-panelist"
+  | "bad-code"
+  | "too-many-attempts"
   | "team-out-of-scope"
   | "invalid-score"
   | "missing-scores"
@@ -235,12 +246,15 @@ export async function addPanelist(input: {
       fullName,
       role: input.role,
       city: input.role === "mentor" ? input.city : null,
+      accessCode: newAccessCode(),
       invitedByEmail: staff,
     })
     // Reinvitar a alguien que ya estaba lo reactiva en vez de fallar: en la
     // puerta de una sede eso es lo que la persona quiere decir.
     .onConflictDoUpdate({
       target: dashboardPanelists.email,
+      // Reactivar no rota el código: quien lo tenía apuntado sigue entrando,
+      // que es justo lo que el staff quiere decir al volver a darlo de alta.
       set: {
         fullName,
         role: input.role,
@@ -320,6 +334,88 @@ export async function updateProjectAction(
   if (!staff) return { ok: false, error: "not-staff" };
 
   await updateProject(teamId, input);
+  refresh();
+  return { ok: true };
+}
+
+/**
+ * Entrar con el código.
+ *
+ * El límite de intentos se cuenta por IP y no por código: contar por código
+ * dejaría que cualquiera bloquease a un jurado concreto machacando su casilla,
+ * que es peor que el problema que resuelve.
+ *
+ * El mensaje de error es el mismo tanto si el código no existe como si existe
+ * pero está dado de baja. Distinguirlos le confirmaría a quien prueba códigos
+ * cuáles son reales.
+ */
+export async function signInWithCode(rawCode: string): Promise<Result> {
+  const requestHeaders = await headers();
+  const ip =
+    requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    requestHeaders.get("x-real-ip") ||
+    "unknown";
+
+  if (tooManyAttempts(ip)) {
+    return { ok: false, error: "too-many-attempts" };
+  }
+
+  const code = normalizeCode(rawCode);
+  if (!code) return { ok: false, error: "bad-code" };
+
+  const [panelist] = await db
+    .select({
+      id: dashboardPanelists.id,
+      revokedAt: dashboardPanelists.revokedAt,
+    })
+    .from(dashboardPanelists)
+    .where(eq(dashboardPanelists.accessCode, code))
+    .limit(1);
+
+  if (!panelist || panelist.revokedAt) {
+    return { ok: false, error: "bad-code" };
+  }
+
+  clearAttempts(ip);
+
+  const { token, expires } = issueSession(panelist.id);
+  const store = await cookies();
+  store.set(PANELIST_COOKIE, token, {
+    httpOnly: true,
+    // En local no hay HTTPS y una cookie `secure` no se guardaría.
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    expires,
+  });
+
+  return { ok: true };
+}
+
+/** Salir. Solo borra la cookie: no hay sesión guardada que invalidar. */
+export async function signOutPanelist(): Promise<Result> {
+  const store = await cookies();
+  store.delete(PANELIST_COOKIE);
+  return { ok: true };
+}
+
+/**
+ * Volver a emitir el código de alguien. Solo staff.
+ *
+ * Es lo que se hace cuando un código se filtró o se perdió sin remedio. El
+ * anterior deja de servir en el acto, pero las sesiones ya abiertas siguen
+ * vivas hasta que caduquen: la cookie va firmada contra el id del panelista,
+ * no contra el código.
+ */
+export async function regenerateCode(panelistId: string): Promise<Result> {
+  const staff = await currentStaffEmail();
+  if (!staff) return { ok: false, error: "not-staff" };
+
+  await db
+    .update(dashboardPanelists)
+    .set({ accessCode: newAccessCode() })
+    .where(eq(dashboardPanelists.id, panelistId));
+
   refresh();
   return { ok: true };
 }

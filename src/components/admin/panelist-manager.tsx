@@ -5,7 +5,11 @@ import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 
 import type { CityKey } from "@/lib/cities";
-import { addPanelist, revokePanelist } from "@/lib/judging/actions";
+import {
+  addPanelist,
+  regenerateCode,
+  revokePanelist,
+} from "@/lib/judging/actions";
 import { cn } from "@/lib/utils";
 
 import {
@@ -26,6 +30,8 @@ type PanelistRow = {
   fullName: string;
   role: "mentor" | "judge";
   city: CityKey | null;
+  /** Lo que se le dicta para entrar. Ver `lib/judging/access.ts`. */
+  accessCode: string;
   revokedAt: Date | null;
   scored: number;
 };
@@ -158,6 +164,10 @@ export function PanelistManager({
         </p>
       )}
 
+      <p className="border-b border-[var(--line)] px-4 py-2.5 font-mono text-[11px] leading-relaxed text-[var(--text-dim)]">
+        {t("rosterNote")}
+      </p>
+
       {panelists.length === 0 ? (
         <Empty>{t("rosterEmpty")}</Empty>
       ) : (
@@ -192,19 +202,53 @@ export function PanelistManager({
                 </div>
               </div>
               {!row.revokedAt && (
-                <button
-                  type="button"
-                  disabled={pending}
-                  onClick={() =>
-                    startTransition(async () => {
-                      await revokePanelist(row.id);
-                      router.refresh();
-                    })
-                  }
-                  className="mt-3 font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] underline underline-offset-4 hover:text-[var(--destructive)]"
-                >
-                  {t("rosterRevoke")}
-                </button>
+                <>
+                  {/* El código es lo que el staff lee en voz alta, así que va
+                      grande y con el guion puesto, no escondido en un menú. */}
+                  <div className="mt-3 flex items-center justify-between gap-3 border border-[var(--line)] bg-[var(--void)] px-3 py-2">
+                    <code className="font-mono text-[16px] tracking-[0.18em] text-[var(--bright)]">
+                      {row.accessCode.slice(0, 4)}-{row.accessCode.slice(4)}
+                    </code>
+                    <button
+                      type="button"
+                      disabled={pending}
+                      onClick={() =>
+                        navigator.clipboard?.writeText(row.accessCode)
+                      }
+                      className="shrink-0 font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] hover:text-[var(--bright)]"
+                    >
+                      {t("rosterCopy")}
+                    </button>
+                  </div>
+                  <div className="mt-2.5 flex flex-wrap gap-4">
+                    <button
+                      type="button"
+                      disabled={pending}
+                      onClick={() =>
+                        startTransition(async () => {
+                          await regenerateCode(row.id);
+                          router.refresh();
+                        })
+                      }
+                      className="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] underline underline-offset-4 hover:text-[var(--bright)]"
+                    >
+                      {t("rosterRegenerate")}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={pending}
+                      onClick={() =>
+                        startTransition(async () => {
+                          await revokePanelist(row.id);
+                          router.refresh();
+                        })
+                      }
+                      className="font-mono text-[10px] tracking-[0.1em] uppercase text-[var(--text-dim)] underline underline-offset-4 hover:text-[var(--destructive)]"
+                    >
+                      {t("rosterRevoke")}
+                    </button>
+                  </div>
+                </>
               )}
             </Cell>
           ))}
