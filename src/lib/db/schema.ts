@@ -377,6 +377,25 @@ export const participantPartnerCodes = pgTable(
   ],
 );
 
+/** Inventario de códigos que se asignan solo cuando un participante los pide. */
+export const partnerCodePool = pgTable(
+  "partner_code_pool",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    partnerKey: text("partner_key").notNull(),
+    code: text("code").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("partner_code_pool_partner_code_idx").on(
+      table.partnerKey,
+      table.code,
+    ),
+  ],
+);
+
 /** Canje de créditos de partners. La clave del partner vive en content.ts. */
 export const dashboardPartnerRedemptions = pgTable(
   "dashboard_partner_redemptions",

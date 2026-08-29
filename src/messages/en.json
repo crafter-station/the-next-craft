@@ -655,10 +655,10 @@
         },
         "cursor": {
           "perk": "20 USD in credits per participant",
-          "about": "The editor. Twenty dollars just about covers twelve hours if you don't let the agent run loose.",
+          "about": "The editor. Reveal your credit to reserve one of the available referral links exclusively for your account.",
           "steps": [
-            "Settings → Billing → Redeem",
-            "One code per person, not per team"
+            "Reveal the credit to reserve one referral link",
+            "Copy and open the link, then sign in or create your Cursor account"
           ]
         },
         "elevenlabs": {
@@ -701,6 +701,7 @@
       "track-locked": "The track is already confirmed. Release it first.",
       "unknown-track": "That track doesn't exist.",
       "unknown-partner": "That partner doesn't exist.",
+      "codes-exhausted": "All available codes have already been assigned.",
       "track-full": "That track is well ahead of the others at your hub. Pick one with fewer teams."
     },
     "badge": {

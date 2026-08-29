@@ -165,3 +165,53 @@ export async function insertPartnerCode(values: {
     assignedByEmail: values.assignedByEmail,
   });
 }
+
+/** Reserva de forma atómica un código del pool, o devuelve el ya reservado. */
+export async function claimPartnerCode(
+  participantId: string,
+  partnerKey: string,
+) {
+  const result = await db.execute(sql`
+    with participant_lock as materialized (
+      select pg_advisory_xact_lock(
+        hashtextextended(${participantId}::text, 0)
+      )
+    ),
+    existing as materialized (
+      select assigned.code
+      from participant_partner_codes assigned
+      cross join participant_lock
+      where assigned.participant_id = ${participantId}
+        and assigned.partner_key = ${partnerKey}
+      limit 1
+    ),
+    available as materialized (
+      select pool.code
+      from partner_code_pool pool
+      cross join participant_lock
+      left join participant_partner_codes assigned
+        on assigned.partner_key = pool.partner_key
+        and assigned.code = pool.code
+      where pool.partner_key = ${partnerKey}
+        and assigned.code is null
+        and not exists (select 1 from existing)
+      order by pool.code
+      for update of pool skip locked
+      limit 1
+    ),
+    inserted as (
+      insert into participant_partner_codes (participant_id, partner_key, code)
+      select ${participantId}, ${partnerKey}, available.code
+      from available
+      on conflict do nothing
+      returning code
+    )
+    select code from existing
+    union all
+    select code from inserted
+    limit 1
+  `);
+
+  const rows = (result as unknown as { rows: { code: string }[] }).rows ?? [];
+  return rows[0]?.code ?? null;
+}

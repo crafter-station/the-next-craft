@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 
 import { and, eq, isNull, sql } from "drizzle-orm";
 
+import { claimPartnerCode } from "@/lib/admin/perks";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { dashboardPartnerRedemptions, dashboardTeams } from "@/lib/db/schema";
@@ -15,7 +16,9 @@ import { PARTNERS, TRACKS } from "./content";
 import { refreshRepoTopics } from "./github";
 import { findParticipantByUserId, findTeamForParticipant } from "./state";
 
-type ActionResult = { ok: true } | { ok: false; error: DashboardError };
+type ActionResult =
+  | { ok: true; code?: string }
+  | { ok: false; error: DashboardError };
 
 /**
  * Códigos de error, no frases: el texto lo traduce la interfaz con
@@ -28,7 +31,8 @@ export type DashboardError =
   | "track-locked"
   | "unknown-track"
   | "track-full"
-  | "unknown-partner";
+  | "unknown-partner"
+  | "codes-exhausted";
 
 type HackerContext =
   | { error: DashboardError }
@@ -195,8 +199,16 @@ export async function releaseTrack(): Promise<ActionResult> {
 export async function redeemPartner(partnerKey: string): Promise<ActionResult> {
   const ctx = await currentHacker();
   if (ctx.error) return { ok: false, error: ctx.error };
-  if (!PARTNERS.some((p) => p.key === partnerKey)) {
+  const partner = PARTNERS.find((item) => item.key === partnerKey);
+  if (!partner) {
     return { ok: false, error: "unknown-partner" };
+  }
+
+  const code = partner.assignOnDemand
+    ? await claimPartnerCode(ctx.participant.id, partnerKey)
+    : undefined;
+  if (partner.assignOnDemand && !code) {
+    return { ok: false, error: "codes-exhausted" };
   }
 
   await db
@@ -205,5 +217,5 @@ export async function redeemPartner(partnerKey: string): Promise<ActionResult> {
     .onConflictDoNothing();
 
   refreshDashboard();
-  return { ok: true };
+  return { ok: true, code: code ?? undefined };
 }
