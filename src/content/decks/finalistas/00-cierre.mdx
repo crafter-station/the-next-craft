@@ -1,0 +1,25 @@
+---
+title: Se acabó el tiempo
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-10">
+  <div className="flex flex-col gap-4">
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-dim)]">Fin del hackathon</p>
+    <h1 className="font-mono text-[clamp(2.5rem,8vw,6rem)] font-semibold uppercase leading-[0.95] tracking-[-0.07em] text-[var(--text)]">Se acabó<br />el tiempo</h1>
+  </div>
+
+  <div className="grid gap-3 md:grid-cols-3">
+    {[
+      ['12', 'horas de build'],
+      ['5', 'sedes en simultáneo'],
+      ['37', 'proyectos entregados'],
+    ].map(([value, label]) => (
+      <div key={label} className="flex flex-col items-center justify-center gap-2 bg-[var(--screen-dim)] p-6 text-center">
+        <span className="font-mono text-[clamp(2rem,4vw,3rem)] font-semibold leading-none text-[var(--bright)]">{value}</span>
+        <span className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--text-dim)]">{label}</span>
+      </div>
+    ))}
+  </div>
+
+  <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Todos los que están en esta sala llegaron con una demo que corre. Eso ya es más de lo que la mayoría hace en un mes.</p>
+</div>

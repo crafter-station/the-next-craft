@@ -1,0 +1,34 @@
+---
+title: Campeón · Bogotá
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-7">
+  <div className="flex flex-wrap items-center gap-3">
+    <span className="bg-[var(--bone)] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--void)]">Bogotá</span>
+    <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-dim)]">Campeón de sede</span>
+  </div>
+
+  <div className="grid items-center gap-6 md:grid-cols-[1fr_1fr] md:gap-8">
+    <div className="flex flex-col gap-5">
+      <h1 className="font-mono text-[clamp(2.25rem,6.5vw,4.5rem)] font-semibold uppercase leading-[0.95] tracking-[-0.07em] text-[var(--text)]">Tokengate</h1>
+
+      <div className="flex flex-col gap-2 border-t border-[var(--line)] pt-5">
+        <p className="font-mono text-lg font-semibold uppercase tracking-[-0.02em] text-[var(--bright)] md:text-xl">Tokenpirin</p>
+        <p className="max-w-xl font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Un robot con IA que se habla, no se mira: conversación por voz, con memoria, para que un niño aprenda sin otra pantalla delante.</p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {['Julian Cardenas', 'Cristian Marín', 'Pedro Restrepo'].map((member) => (
+          <span key={member} className="bg-[var(--screen-dim)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text)] md:text-xs">{member}</span>
+        ))}
+      </div>
+
+      <p className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-dim)]">Track · Learning by Shipping · 3 integrantes · ESP32 + Vapi + Convex</p>
+    </div>
+
+    <figure className="flex flex-col gap-2 border border-[var(--line)] bg-[var(--screen-dim)] p-2">
+      <img src="/deck/photos/finalistas/tokenpirin.png" alt="Pantalla de Tokenpirin esperando la voz del usuario" className="w-full border border-[var(--line)] object-cover" />
+      <figcaption className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-dim)]">tokengate.lupia.click</figcaption>
+    </figure>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+---
+title: Los seis
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-8">
+  <div className="flex flex-col gap-4">
+    <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-dim)]">Campeones de sede</p>
+    <h1 className="font-mono text-[clamp(2.25rem,6vw,4.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">Los seis campeones</h1>
+  </div>
+
+  {/* ← una fila por campeón: sede, equipo, track */}
+  <div className="border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+    {[
+      ['Lima', 'EQUIPO POR CONFIRMAR', 'Por confirmar'],
+      ['Lima', 'EQUIPO POR CONFIRMAR', 'Por confirmar'],
+      ['Arequipa', 'Michi Team', 'Learning by Shipping'],
+      ['Bogotá', 'Tokengate', 'Learning by Shipping'],
+      ['El Salvador', 'EQUIPO POR CONFIRMAR', 'Por confirmar'],
+      ['Guatemala', 'Jutiapa Team', 'Content Machine'],
+    ].map(([city, team, track], index) => (
+      <div key={`${city}-${index}`} className="flex flex-col gap-1 border-r border-b border-[var(--line)] px-4 py-4 md:flex-row md:items-baseline md:gap-6 md:px-5">
+        <span className="w-32 shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-dim)]">{city}</span>
+        <span className="flex-1 font-mono text-lg font-semibold uppercase leading-tight tracking-[-0.03em] text-[var(--text)] md:text-2xl">{team}</span>
+        <span className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--bright)]">{track}</span>
+      </div>
+    ))}
+  </div>
+</div>
