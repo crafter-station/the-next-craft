@@ -1,0 +1,27 @@
+---
+title: Campeón · Guatemala
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-7">
+  <div className="flex flex-wrap items-center gap-3">
+    <span className="bg-[var(--bone)] px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--void)]">Guatemala</span>
+    <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-dim)]">Campeón de sede</span>
+  </div>
+
+  <h1 className="font-mono text-[clamp(2.75rem,9vw,7rem)] font-semibold uppercase leading-[0.95] tracking-[-0.07em] text-[var(--text)]">Jutiapa Team</h1>
+
+  <div className="flex flex-col gap-5 border-t border-[var(--line)] pt-6">
+    <div className="flex flex-col gap-2">
+      <p className="font-mono text-lg font-semibold uppercase tracking-[-0.02em] text-[var(--bright)] md:text-xl">Aura Engine</p>
+      <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text)] md:text-base">Tu competidor ya tiene la atención. Y dejó el flanco abierto. Pega su link: Aura encuentra la debilidad del argumento, la puntúa de 0 a 100 y escribe tu respuesta con imagen y voz.</p>
+    </div>
+
+    <div className="flex flex-wrap gap-2">
+      {['Hugo Arias', 'Héctor Martínez', 'Jordi Dimas', 'Josue Roldan', 'Deyane'].map((member) => (
+        <span key={member} className="bg-[var(--screen-dim)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text)] md:text-xs">{member}</span>
+      ))}
+    </div>
+
+    <p className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-dim)]">Track · Content Machine · 5 integrantes · auraengine.xyz</p>
+  </div>
+</div>
