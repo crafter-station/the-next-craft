@@ -1,0 +1,28 @@
+---
+title: Lo que se construyó 4/5
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-6">
+  <div className="flex items-baseline justify-between gap-4">
+    <h1 className="font-mono text-[clamp(1.5rem,4vw,2.75rem)] font-semibold uppercase tracking-[-0.06em] text-[var(--text)]">Lo que se construyó</h1>
+    <span className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-dim)]">4 / 5</span>
+  </div>
+
+  <div className="grid border-t border-l border-[var(--line)] bg-[var(--screen-dim)] sm:grid-cols-2 md:grid-cols-3">
+    {[
+      ['Telos', 'Habla con quien vas a ser. Él ya sabe lo que te falta.', 'Jesus Trujillo'],
+      ['AURA Studio', 'Aprende, crea y publica proyectos 3D en una sola plataforma inmersiva.', 'Sebastian Chavez'],
+      ['aloRAM', '', 'Jhoan'],
+      ['Startly', 'Guía a cada creador desde su idea, según su estilo, audiencia y objetivos.', 'Juan Aquino'],
+      ['The Fran Times', 'Twitter AI daily digest.', 'Matias'],
+      ['VoiceGuardAI', 'Si la voz es falsa, el tiempo es nuestro.', 'Jorge Fabrissio Pino Abril'],
+      ['The Next Ship', 'Consigue trabajo demostrando lo que construyes. Learn by shipping.', 'Esteban Daniel Villagarcia Campos'],
+    ].map(([name, pitch, author]) => (
+      <div key={name} className="flex flex-col gap-1.5 border-r border-b border-[var(--line)] px-4 py-3.5">
+        <span className="font-mono text-sm font-semibold uppercase leading-tight tracking-[-0.02em] text-[var(--text)] md:text-base">{name}</span>
+        {pitch ? <span className="font-mono text-[11px] leading-relaxed text-[var(--text-dim)] md:text-xs">{pitch}</span> : null}
+        {author ? <span className="mt-auto pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--bright)] md:text-[11px]">{author}</span> : null}
+      </div>
+    ))}
+  </div>
+</div>

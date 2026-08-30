@@ -1,0 +1,54 @@
+---
+title: 37 proyectos
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-8">
+  <div className="flex flex-col gap-4">
+    <h1 className="font-mono text-[clamp(2.5rem,7vw,5.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">37 proyectos</h1>
+    <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text-dim)] md:text-base">Todo esto no existía esta mañana. Cada nombre es un equipo que llegó al cierre con algo que corre.</p>
+  </div>
+
+  <div className="flex flex-wrap gap-2">
+    {[
+      'BYD AI Agent Console',
+      'Git to Post',
+      'Red Flag',
+      'Agua SOS',
+      'PR-LOOP',
+      'Provado',
+      'LAURA',
+      'Codazo',
+      'FROGL',
+      'WaveAI',
+      'DentistCraft',
+      'Parchese',
+      'Cyclops Learn',
+      'Tokenpirin',
+      'Chessify',
+      'BuildSignal',
+      'Multix',
+      'Michi',
+      'CRXCE',
+      'Ademán',
+      'Aura Engine',
+      'CRM Prime',
+      'Scale.AR',
+      'Telos',
+      'AURA Studio',
+      'aloRAM',
+      'Startly',
+      'The Fran Times',
+      'VoiceGuardAI',
+      'The Next Ship',
+      'FRAME',
+      'LABORIN',
+      'Sentra',
+      'Atenea',
+      'Presently',
+      'Thally',
+      'FleetCare',
+    ].map((name) => (
+      <span key={name} className="bg-[var(--screen-dim)] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-[0.06em] text-[var(--text)] md:text-sm">{name}</span>
+    ))}
+  </div>
+</div>

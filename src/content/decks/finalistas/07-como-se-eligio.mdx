@@ -1,0 +1,26 @@
+---
+title: Cómo se eligió
+---
+
+<div className="flex min-h-[64svh] flex-col justify-center gap-8">
+  <div className="flex flex-col gap-4">
+    <h1 className="font-mono text-[clamp(2.25rem,6vw,4.5rem)] font-semibold uppercase tracking-[-0.07em] text-[var(--text)]">Cómo se eligió</h1>
+    <p className="max-w-3xl font-mono text-sm leading-relaxed text-[var(--text-dim)] md:text-base">Una sola rúbrica para las dos fases y los tres tracks. Cada criterio se puntúa de 0 a 5 y los pesos no cambian por sede.</p>
+  </div>
+
+  <div className="border-t border-l border-[var(--line)] bg-[var(--screen-dim)]">
+    {[
+      ['30%', 'Demo cerrada', 'El flujo se recorre entero y termina, sin caminos a medias.'],
+      ['25%', 'Uso validado', 'Usuario concreto, problema real y data recogida hoy que lo demuestre.'],
+      ['20%', 'Craft técnico', 'Qué tan bien resuelto está lo que enseñaron, no qué tan grande era el reto.'],
+      ['15%', 'Ambición', 'Cómo partieron un problema complejo para que entrara en 12 horas.'],
+      ['10%', 'Pitch claro', 'Qué resuelve y en qué track compite.'],
+    ].map(([weight, name, desc]) => (
+      <div key={name} className="flex flex-col gap-1 border-r border-b border-[var(--line)] px-4 py-3 md:flex-row md:items-baseline md:gap-6 md:px-5 md:py-4">
+        <span className="w-16 shrink-0 font-mono text-sm font-semibold text-[var(--bright)]">{weight}</span>
+        <span className="w-56 shrink-0 font-mono text-sm font-semibold uppercase tracking-[0.08em] text-[var(--text)]">{name}</span>
+        <span className="font-mono text-xs leading-relaxed text-[var(--text-dim)] md:text-sm">{desc}</span>
+      </div>
+    ))}
+  </div>
+</div>
