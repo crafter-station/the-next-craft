@@ -91,9 +91,9 @@ under the terms of the [LICENSE](./LICENSE).
 This repo is **not** open source. Copying, forking, modifying, redistributing,
 deploying, or using it for commercial **or** non-commercial purposes is not
 allowed without prior written permission from Crafter Station
-(hello@crafterstation.com).
+(hello@crafterstation.com). Third-party material keeps its own license.
 
 Este repo **no** es open source. Copiar, forkear, modificar, redistribuir,
 desplegar o usarlo con fines comerciales **o** no comerciales no está permitido
 sin permiso previo y por escrito de Crafter Station
-(hello@crafterstation.com).
+(hello@crafterstation.com). El material de terceros conserva su propia licencia.
