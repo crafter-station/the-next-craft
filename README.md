@@ -1,40 +1,22 @@
-<!-- ⚠️ NO BORRAR ESTE BANNER / DO NOT REMOVE THIS BANNER ⚠️ -->
+<!-- ⚠️ NO BORRAR ESTE AVISO / DO NOT REMOVE THIS NOTICE ⚠️ -->
 
-<div align="center">
-
-# 🚨🚨🚨
-
-# ⚠️ ALTO AHÍ / HOLD UP ⚠️
-
-# 🚨🚨🚨
-
-</div>
-
-> ## 🇪🇸 ESPAÑOL
+> ## ⚠️ Aviso / Notice
 >
-> # Si van a tomar “inspiración” muy notoria, **pónganle el crédito a la org.**
+> **🇪🇸 Español** — Este repositorio **no es open source**. Si su trabajo toma
+> elementos notoriamente derivados de este proyecto, se requiere atribución
+> expresa y visible a Crafter Station. El incumplimiento podrá dar lugar a la
+> suspensión del acceso y a un señalamiento público por parte de la
+> organización. Consulte la [LICENCIA](./LICENSE) antes de copiar, forkear o
+> desplegar cualquier parte de este código.
 >
-> # Si no, sale su **biri ban** + **funada en público**. Just saying. 🫵
+> **🇬🇧 English** — This repository is **not open source**. If your work takes
+> elements notoriously derived from this project, express and visible
+> attribution to Crafter Station is required. Failure to comply may result in
+> revoked access and a public statement from the organization. Review the
+> [LICENSE](./LICENSE) before copying, forking or deploying any part of this
+> code.
 >
-> Este repo **no es open source**. No es MIT, no es “agarra y usa”.
-> Mira el [LICENSE](./LICENSE) antes de copiar, forkear o desplegar cualquier cosa de acá.
-
-> ## 🇬🇧 ENGLISH
->
-> # If you're going to take *very* obvious “inspiration”, **credit the org.**
->
-> # Otherwise: **instant ban** + **public callout**. Just saying. 🫵
->
-> This repo is **not open source**. Not MIT, not “grab and go”.
-> Read the [LICENSE](./LICENSE) before copying, forking or deploying anything from here.
-
-<div align="center">
-
-### 🏴 **Crafter Station** — [@crafter-station](https://github.com/crafter-station) · [crafterstation.com](https://crafterstation.com) · [@crafterstation](https://twitter.com/crafterstation)
-
-# 🚨🚨🚨
-
-</div>
+> **Crafter Station** — [@crafter-station](https://github.com/crafter-station) · [crafterstation.com](https://crafterstation.com)
 
 ---
 
