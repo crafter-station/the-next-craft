@@ -1,3 +1,43 @@
+<!-- ⚠️ NO BORRAR ESTE BANNER / DO NOT REMOVE THIS BANNER ⚠️ -->
+
+<div align="center">
+
+# 🚨🚨🚨
+
+# ⚠️ ALTO AHÍ / HOLD UP ⚠️
+
+# 🚨🚨🚨
+
+</div>
+
+> ## 🇪🇸 ESPAÑOL
+>
+> # Si van a tomar “inspiración” muy notoria, **pónganle el crédito a la org.**
+>
+> # Si no, sale su **biri ban** + **funada en público**. Just saying. 🫵
+>
+> Este repo **no es open source**. No es MIT, no es “agarra y usa”.
+> Mira el [LICENSE](./LICENSE) antes de copiar, forkear o desplegar cualquier cosa de acá.
+
+> ## 🇬🇧 ENGLISH
+>
+> # If you're going to take *very* obvious “inspiration”, **credit the org.**
+>
+> # Otherwise: **instant ban** + **public callout**. Just saying. 🫵
+>
+> This repo is **not open source**. Not MIT, not “grab and go”.
+> Read the [LICENSE](./LICENSE) before copying, forking or deploying anything from here.
+
+<div align="center">
+
+### 🏴 **Crafter Station** — [@crafter-station](https://github.com/crafter-station) · [crafterstation.com](https://crafterstation.com) · [@crafterstation](https://twitter.com/crafterstation)
+
+# 🚨🚨🚨
+
+</div>
+
+---
+
 <p align="center">
   <a href="https://crafterstation.com" target="_blank">
     <img src="https://raw.githubusercontent.com/Railly/crafter-station/main/public/logo.png" height="64">
@@ -51,12 +91,27 @@ Deployed on [Vercel](https://vercel.com) at [thenextcraft.org](https://thenextcr
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feat/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feat/amazing-feature`)
-5. Open a Pull Request
+Contributions are by invitation, from members of the Crafter Station org.
+If you were invited:
+
+1. Create your feature branch (`git checkout -b feat/amazing-feature`)
+2. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+3. Push to the branch (`git push origin feat/amazing-feature`)
+4. Open a Pull Request
+
+By contributing you agree that your contribution becomes part of the Work
+under the terms of the [LICENSE](./LICENSE).
 
 ## License
 
-MIT
+**Proprietary — All Rights Reserved.** See [LICENSE](./LICENSE).
+
+This repo is **not** open source. Copying, forking, modifying, redistributing,
+deploying, or using it for commercial **or** non-commercial purposes is not
+allowed without prior written permission from Crafter Station
+(hello@crafterstation.com).
+
+Este repo **no** es open source. Copiar, forkear, modificar, redistribuir,
+desplegar o usarlo con fines comerciales **o** no comerciales no está permitido
+sin permiso previo y por escrito de Crafter Station
+(hello@crafterstation.com).
