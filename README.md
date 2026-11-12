@@ -51,7 +51,7 @@ Landing page del hackathon **The Next Craft**, organizado por Crafter Station ×
 ## Getting Started
 
 ```bash
-bun install
+bun install --frozen-lockfile
 bun dev
 ```
 
@@ -66,6 +66,19 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `bun start` | Start production server |
 | `bun lint` | Run Biome linter |
 | `bun format` | Format code with Biome |
+| `bun simulate` | Preview the registration conversation in the terminal |
+
+### Registration flow preview
+
+Run the registration bot locally without a database or WhatsApp connection:
+
+```bash
+bun simulate
+```
+
+Type a message to start. Select numbered options or enter free text when prompted.
+Press Ctrl+C to exit. The simulator keeps registrations in memory for the current
+session.
 
 ## Deployment
 
