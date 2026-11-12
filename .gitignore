@@ -17,6 +17,10 @@
 /.invitation-output/
 /.email-output/
 
+# Personal handwritten signatures
+**/anthony-cueva-signature.*
+**/shiara-arauzo-signature.*
+
 # next.js
 /.next/
 /out/
