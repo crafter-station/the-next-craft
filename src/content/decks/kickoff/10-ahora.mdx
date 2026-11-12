@@ -1,0 +1,22 @@
+---
+title: Ahora
+---
+
+<p className="k-eyebrow">09 · Ahora</p>
+
+<h2 className="k-display">09:30.<br />Empieza el reloj.</h2>
+
+<div className="grid gap-3 md:grid-cols-3">
+  {[
+    ['1', 'Cierra tu equipo'],
+    ['2', 'Elige tu track'],
+    ['3', 'Crea el repo'],
+  ].map(([step, title]) => (
+    <div key={step} className="k-card justify-between gap-6 py-6">
+      <span className="k-label">Paso {step}</span>
+      <span className="text-2xl font-semibold leading-tight">{title}</span>
+    </div>
+  ))}
+</div>
+
+<p className="k-lead">Que alguien lo use antes de que suene la campana.</p>
