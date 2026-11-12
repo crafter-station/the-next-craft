@@ -3,7 +3,6 @@ import path from "node:path";
 import {
   Document,
   Font,
-  Image,
   Link,
   Page,
   StyleSheet,
@@ -33,23 +32,6 @@ const colors = {
   soft: "#f3f3f0",
   paper: "#ffffff",
 } as const;
-
-const signatures: Record<string, string> = {
-  "Shiara Arauzo": path.join(
-    process.cwd(),
-    "documents",
-    "role-invitations",
-    "assets",
-    "shiara-arauzo-signature.png",
-  ),
-  "Anthony Cueva": path.join(
-    process.cwd(),
-    "documents",
-    "role-invitations",
-    "assets",
-    "anthony-cueva-signature.png",
-  ),
-};
 
 const wordmarkFont = path.join(
   process.cwd(),
@@ -157,10 +139,6 @@ export function FormalRoleInvitation({
             <View style={styles.approvalsRow}>
               {organizers.map((organizer) => (
                 <View style={styles.approval} key={organizer.name}>
-                  <Image
-                    src={signatures[organizer.name]}
-                    style={styles.signature}
-                  />
                   <View style={styles.approvalRule} />
                   <Text style={styles.approverName}>{organizer.name}</Text>
                   <Text style={styles.approverMeta}>
@@ -355,12 +333,6 @@ const styles = StyleSheet.create({
     gap: 48,
   },
   approval: { width: 180 },
-  signature: {
-    width: 82,
-    height: 30,
-    objectFit: "contain",
-    objectPosition: "left bottom",
-  },
   approvalRule: {
     borderTopWidth: 1,
     borderTopColor: colors.ink,
